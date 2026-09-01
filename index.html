@@ -42,17 +42,14 @@
 <header class="topo">
   <div class="topo__interno">
 
+    <!-- A logo já traz o nome escrito, então não há texto ao lado:
+         repetir "Hub Totali" em tipo do sistema, colado numa marca
+         que diz a mesma coisa, é ruído. O alt cobre quem não vê a
+         imagem. Se o arquivo faltar, o monograma assume — quem faz
+         a troca é o js/app.js. -->
     <div class="marca">
-      <!-- Troque assets/logo-hub.png pela logo certa da Totali e ela
-           entra aqui sozinha. Enquanto o arquivo não existir, o
-           monograma ao lado assume — o js/app.js faz a troca. -->
-      <img class="marca__logo" id="marca-logo" src="assets/logo-hub.png" alt="" width="38" height="38">
-      <span class="marca__monograma" id="marca-monograma" aria-hidden="true" hidden>T</span>
-
-      <div class="marca__texto">
-        <strong class="marca__nome">Hub Totali</strong>
-        <span class="marca__nota">Todos os sistemas em uma tela</span>
-      </div>
+      <img class="marca__logo" id="marca-logo" src="assets/logo-hub.png" alt="Hub Totali">
+      <span class="marca__monograma" id="marca-monograma" hidden>Hub Totali</span>
     </div>
 
     <p class="relogio" id="relogio">

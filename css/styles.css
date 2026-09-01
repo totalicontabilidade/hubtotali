@@ -123,17 +123,27 @@ code{font-family:var(--mono);font-size:.92em;
   padding:12px 24px;
   display:flex;align-items:center;justify-content:space-between;gap:20px;
 }
-.marca{display:flex;align-items:center;gap:11px;min-width:0}
-.marca__logo{width:38px;height:38px;object-fit:contain;flex:none}
+/* A logo é um conjunto largo, de duas linhas (símbolo + "hub
+   totali" empilhado). Por isso a altura é que manda e a largura
+   segue: fixar largura achataria ou esticaria a marca. 46px de
+   altura deixa cada palavra com uns 18px — o menor tamanho em
+   que essa tipografia ainda se lê sem esforço. */
+.marca{display:flex;align-items:center;gap:12px;min-width:0}
+.marca__logo{height:46px;width:auto;max-width:240px;object-fit:contain;flex:none}
+
+/* Só aparece se o arquivo da logo sumir da pasta. Melhor o nome
+   escrito do que um espaço vazio no alto da página. */
 .marca__monograma{
-  flex:none;width:38px;height:38px;border-radius:11px;
-  display:grid;place-items:center;
-  background:var(--navy);color:var(--gold-2);
-  font-size:19px;font-weight:750;letter-spacing:-.02em;
+  font-size:18px;font-weight:700;letter-spacing:-.024em;color:var(--navy);
 }
-.marca__texto{display:flex;flex-direction:column;line-height:1.25;min-width:0}
-.marca__nome{font-size:18px;font-weight:700;letter-spacing:-.024em;color:var(--navy)}
-.marca__nota{font-size:12.5px;color:var(--txt-3)}
+
+/* Na administração, diz em que página você está. */
+.marca__secao{
+  font-size:12.5px;font-weight:640;color:var(--txt-2);
+  padding:3px 9px;border-radius:999px;
+  background:var(--piso);border:1px solid var(--fio);
+  white-space:nowrap;
+}
 
 /* O relógio, discreto: uma linha só, no corpo do texto de apoio.
    A hora vem em fonte de largura fixa — sem isso, cada minuto
@@ -431,7 +441,9 @@ code{font-family:var(--mono);font-size:.92em;
 }
 @media (max-width:620px){
   .topo__interno{padding:10px 16px;gap:12px}
-  .marca__nota{display:none}
+  /* No celular a logo encolhe para sobrar largura ao relógio. */
+  .marca__logo{height:36px;max-width:150px}
+  .marca__secao{display:none}
   .relogio__hora{font-size:21px}
   .relogio__seg{font-size:12px}
   .pagina{padding:16px 16px 28px}

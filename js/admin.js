@@ -673,6 +673,17 @@
 
   /* ---------- Início ---------- */
 
+  /* Se o arquivo da logo sumir da pasta, mostra o nome escrito em
+     vez do ícone de imagem quebrada. Mesma lógica do Hub. */
+  (function ajustarLogoDaMarca() {
+    var img = $("marca-logo");
+    var monograma = $("marca-monograma");
+    if (!img || !monograma) return;
+    function trocar() { img.hidden = true; monograma.hidden = false; }
+    img.addEventListener("error", trocar);
+    if (img.complete && img.naturalWidth === 0) trocar();
+  })();
+
   /* Quem já entrou nesta aba não precisa entrar de novo a cada
      recarga. O token vale uma hora; depois disso, senha de novo. */
   if (Dados.sessao()) abrirEdicao();
