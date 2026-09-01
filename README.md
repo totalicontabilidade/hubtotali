@@ -34,25 +34,22 @@ aceita escrita de quem entrou como administrador.
 
 ---
 
-## Ligar o banco (uma vez, cinco minutos)
+## O banco
 
-Enquanto isso não for feito, a `admin.html` funciona em **modo de teste**: o que
-você editar fica só no seu navegador e não chega à equipe. Uma faixa amarela
-avisa isso na tela.
+Já está ligado desde 01/09/2026. Projeto Firebase `hubtotali`, Firestore
+Standard em São Paulo, um documento só: `hub/config`.
 
-O passo a passo está escrito dentro de **`js/config-hub.js`** — é só seguir e
-preencher os três campos do fim do arquivo. Em resumo:
-
-1. criar um projeto no console do Firebase (gratuito);
-2. copiar de lá a `apiKey` e o `projectId` para `js/config-hub.js`;
-3. criar o Firestore e colar as regras do arquivo `firestore.rules`;
-4. ligar o login por e-mail/senha e cadastrar o seu usuário;
-5. copiar o UID do usuário para `js/config-hub.js` **e** para as regras.
+As regras estão em `firestore.rules` e dizem duas coisas: qualquer um **lê**
+(é o que faz o Hub abrir para a equipe sem login) e só o administrador
+**escreve**. Todo o resto do banco fica trancado para todo mundo.
 
 Sobre a `apiKey` ficar visível na página: é assim mesmo. No Firebase ela não é
-senha, é o endereço do projeto. Quem protege o banco são as regras — elas
-deixam qualquer um **ler** a lista de links (que é pública de qualquer jeito) e
-só deixam **você escrever**.
+senha, é o endereço do projeto. Quem protege o banco são as regras.
+
+**Trocar de administrador** exige mexer em DOIS lugares com o mesmo UID: o
+`ADMIN_UID` em `js/config-hub.js` e a linha do `request.auth.uid` em
+`firestore.rules` — e republicar as regras no console. Mudar só um deixa a
+pessoa entrando na tela e tomando erro na hora de salvar.
 
 ---
 
@@ -86,13 +83,18 @@ Para baixar os logos de links novos:
 node ferramentas/baixar-logos.js
 ```
 
-Sistema sem logo aparece com as iniciais num quadradinho — não quebra e não
-fica buraco. Também dá para enviar uma imagem pela `admin.html`, que vale mais
-que o arquivo da pasta.
+Sistema **recém-cadastrado** pela tela aponta sozinho para o ícone do próprio
+site, sem ninguém clicar em nada. Esse é o único caso em que o Hub busca uma
+imagem fora, e é temporário: rodar a ferramenta acima traz o ícone para a nossa
+pasta, e a partir daí o arquivo local assume e a busca externa deixa de
+acontecer.
 
-**A logo do cabeçalho** é `assets/logo-hub.png`. O que está lá é um
-lugar-tenente ("T" dourado). Substitua pelo logo certo da Totali, mesmo nome de
-arquivo.
+Sistema sem logo nenhum aparece com as iniciais num quadradinho — não quebra e
+não fica buraco. Também dá para enviar uma imagem pela `admin.html`, que vale
+mais que qualquer uma das outras origens.
+
+A ordem, quando há mais de uma opção: imagem enviada à mão → arquivo em
+`assets/logos/` → ícone do site → iniciais.
 
 ---
 
@@ -109,21 +111,15 @@ máquina; no ar ele não faz falta.
 
 ## Publicar no GitHub Pages
 
-Endereço final: `https://totalicontabilidade.github.io/hub/`.
+Está publicado em **https://totalicontabilidade.github.io/hubtotali/**
 
-1. Crie o repositório `hub` na conta **totalicontabilidade**, público.
-2. Suba o conteúdo desta pasta na raiz:
+Para publicar uma mudança de código:
 
 ```bash
-git init
-git add .
-git commit -m "Hub Totali"
-git branch -M main
-git remote add origin https://github.com/totalicontabilidade/hub.git
-git push -u origin main
+git add -A
+git commit -m "o que mudou"
+git push
 ```
-
-3. **Settings → Pages**, branch `main`, pasta `/ (root)`.
 
 Depois disso, publicar de novo só é preciso quando mudar o código. Acrescentar
 um link passa a ser pela `admin.html`, sem `git` nenhum.
