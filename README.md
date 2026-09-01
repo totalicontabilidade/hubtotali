@@ -96,6 +96,31 @@ mais que qualquer uma das outras origens.
 A ordem, quando há mais de uma opção: imagem enviada à mão → arquivo em
 `assets/logos/` → ícone do site → iniciais.
 
+### A logomarca do Hub
+
+| Arquivo | Onde é usado |
+|---|---|
+| `assets/logo-hub.png` | o cabeçalho (fundo claro) |
+| `assets/logo-hub-escuro.png` | guardado, para uso sobre fundo escuro |
+| `assets/simbolo.png` | o símbolo sozinho, 512 px |
+| `assets/favicon-32.png` | o ícone da aba do navegador |
+| `assets/apple-touch-icon.png` | o ícone quando alguém salva na tela do celular |
+
+Todos saem de **um comando só**, a partir dos arquivos do designer:
+
+```bash
+node ferramentas/tratar-logo.js
+```
+
+A ferramenta tira o fundo chapado (com borda suave, senão fica serrilhado),
+reduz para tamanho de web e acha sozinha onde o símbolo termina e o texto
+começa, para recortar o ícone. Os arquivos como vieram ficam em
+`assets/originais/` — são o único lugar onde a marca existe em tamanho cheio,
+então não apague.
+
+Trocou a marca? Ponha os dois arquivos novos em `assets/` com os mesmos nomes,
+apague `assets/originais/`, e rode o comando de novo.
+
 ---
 
 ## Ver antes de publicar

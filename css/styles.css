@@ -434,6 +434,44 @@ code{font-family:var(--mono);font-size:.92em;
 /* Chip so existe dentro de gaveta: anima quando a gaveta abre. */
 .gaveta[open] .chip{animation:entrar .28s var(--ease-out) both}
 
+/* ---------- 12b. Telas altas ----------
+   Com as gavetas fechadas, o conteúdo ficou curto: num monitor de
+   1080 sobravam 43% de branco embaixo, e página que acaba no meio
+   parece página que não terminou de carregar.
+
+   A saída não é esticar cartão — cartão esticado fica estranho —
+   é dar mais respiro a tudo. E a regra depende da ALTURA da
+   janela, não da largura: num monitor baixo (1366x768, que ainda
+   existe em escritório) esse respiro faria a página passar a
+   exigir rolagem, que é justamente o que não pode acontecer. */
+@media (min-height:900px){
+  .pagina{padding:30px 24px 40px}
+  .coluna-sistemas{gap:26px}
+  .grade{grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:12px}
+  .cartao{padding:14px 14px;gap:13px}
+  .selo{width:40px;height:40px}
+  .selo__img{width:28px;height:28px}
+  .cartao__nome{font-size:14.5px}
+  .cartao__nota{font-size:12px}
+  .setor__cabeca{padding-bottom:10px;margin-bottom:14px}
+  .gaveta__puxador{padding:15px 18px}
+  .gaveta__titulo{font-size:14px}
+  .bloco{padding:18px 19px}
+  .avisos{gap:15px}
+}
+
+/* ---------- 12c. Telas baixas ----------
+   Monitor de 768px de altura ainda existe em escritório, e nele
+   a logomarca (mais alta que o quadradinho que havia antes)
+   empurrava a página 7px além da tela. Sete pixels bastam para
+   nascer uma barra de rolagem — e o ponto desta tela é não ter
+   nenhuma. Então aqui a marca e a margem de baixo encolhem. */
+@media (max-height:820px){
+  .marca__logo{height:40px}
+  .topo__interno{padding:9px 24px}
+  .pagina{padding:18px 24px 22px}
+}
+
 /* ---------- 13. Telas menores ---------- */
 @media (max-width:1080px){
   .colunas{grid-template-columns:minmax(0,1fr)}
