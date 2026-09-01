@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Fora da própria pasta, esta página só fala com dois endereços
+     do Google: o do login e o do banco. Nada de CDN, nada de
+     biblioteca de terceiro, nenhum script de fora. -->
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self';
+  style-src 'self';
+  img-src 'self' data: https://icons.duckduckgo.com;
+  font-src 'self';
+  connect-src https://firestore.googleapis.com https://identitytoolkit.googleapis.com;
+  object-src 'none';
+  base-uri 'none';
+  form-action 'none'">
+<meta name="referrer" content="no-referrer">
+
+<title>Administração · Hub Totali</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light">
+
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body class="admin">
+
+<header class="topo">
+  <div class="topo__interno">
+    <div class="marca">
+      <img class="marca__logo" id="marca-logo" src="assets/logo-hub.png" alt="" width="38" height="38">
+      <div class="marca__texto">
+        <strong class="marca__nome">Hub Totali</strong>
+        <span class="marca__nota">Administração</span>
+      </div>
+    </div>
+
+    <div class="topo__acoes" id="topo-acoes" hidden>
+      <span class="quem" id="quem"></span>
+      <a class="btn btn--fantasma" href="index.html" target="_blank" rel="noopener">Ver o Hub</a>
+      <button class="btn btn--fantasma" type="button" id="btn-sair">Sair</button>
+      <button class="btn btn--principal" type="button" id="btn-salvar" disabled>Salvar</button>
+    </div>
+  </div>
+</header>
+
+<!-- ---------- Entrada ---------- -->
+<main class="entrada" id="tela-entrada" hidden>
+  <form class="entrada__caixa" id="form-entrada" autocomplete="on">
+    <h1 class="entrada__titulo">Administração do Hub</h1>
+    <p class="entrada__nota" id="entrada-nota">
+      Entre com o e-mail e a senha de administrador.
+    </p>
+
+    <label class="campo">
+      <span class="campo__rotulo">E-mail</span>
+      <input class="campo__caixa" type="email" id="entrada-email" autocomplete="username" required>
+    </label>
+
+    <label class="campo">
+      <span class="campo__rotulo">Senha</span>
+      <input class="campo__caixa" type="password" id="entrada-senha" autocomplete="current-password" required>
+    </label>
+
+    <p class="erro" id="entrada-erro" hidden></p>
+
+    <button class="btn btn--principal btn--largo" type="submit" id="btn-entrar">Entrar</button>
+  </form>
+</main>
+
+<!-- ---------- Edição ---------- -->
+<main class="pagina" id="tela-edicao" hidden>
+
+  <p class="faixa faixa--atencao" id="faixa-local" hidden>
+    <strong>Modo de teste.</strong> O arquivo <code>js/config-hub.js</code> ainda está em branco,
+    então o que você editar fica só neste navegador e <strong>não chega à equipe</strong>.
+    As instruções para ligar o banco estão dentro desse arquivo.
+  </p>
+
+  <div class="admin__cabeca">
+    <h1 class="admin__titulo">Sistemas do Hub</h1>
+    <p class="admin__nota">
+      Arraste para reordenar, inclusive de um setor para outro. Nada é gravado até você clicar em Salvar.
+    </p>
+  </div>
+
+  <div id="setores-edicao"></div>
+
+  <div class="admin__rodape-acoes">
+    <button class="btn" type="button" id="btn-novo-setor">Acrescentar setor</button>
+    <button class="btn btn--fantasma" type="button" id="btn-padrao">Voltar ao conteúdo original</button>
+  </div>
+
+  <section class="painel" id="painel-avisos">
+    <div class="painel__cabeca">
+      <h2 class="painel__titulo">Recados e prazos</h2>
+      <span class="painel__nota">A coluna da direita do Hub</span>
+    </div>
+    <div id="avisos-edicao"></div>
+    <div class="painel__acoes">
+      <button class="btn btn--pequeno" type="button" id="btn-novo-aviso">Acrescentar recado</button>
+    </div>
+  </section>
+
+</main>
+
+<div class="aviso-salvo" id="aviso-salvo" hidden role="status"></div>
+
+<script src="js/config-hub.js"></script>
+<script src="js/sistemas.js"></script>
+<script src="js/logos.js"></script>
+<script src="js/dados.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

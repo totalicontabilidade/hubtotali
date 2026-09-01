@@ -1,0 +1,7 @@
+# Lixo do Windows
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Configuração local do Claude Code (não é do projeto)
+.claude/

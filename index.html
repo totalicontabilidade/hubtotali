@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Nenhum script externo, nenhuma CDN, nenhuma fonte remota.
+     A única imagem que pode vir de fora é o ícone de um sistema
+     recém-cadastrado, enquanto ninguém rodou baixar-logos.js para
+     trazê-lo para assets/logos/ — depois disso o arquivo nosso
+     assume e nada mais sai daqui.
+     O "file:" está na lista para o caso de alguém abrir o arquivo
+     com dois cliques, sem servidor — aí o navegador não trata a
+     pasta como origem e 'self' sozinho barraria o próprio CSS. -->
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self' file:;
+  script-src 'self' file:;
+  style-src 'self' file:;
+  img-src 'self' file: data: https://icons.duckduckgo.com;
+  font-src 'self' file:;
+  connect-src https://firestore.googleapis.com;
+  object-src 'none';
+  base-uri 'none';
+  form-action 'none'">
+<meta name="referrer" content="no-referrer">
+
+<title>Hub Totali</title>
+<meta name="description" content="Todos os sistemas da Totali Soluções Contábeis em uma tela só.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light">
+
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<a class="skip-link" href="#conteudo">Ir para os sistemas</a>
+
+<header class="topo">
+  <div class="topo__interno">
+
+    <div class="marca">
+      <!-- Troque assets/logo-hub.png pela logo certa da Totali e ela
+           entra aqui sozinha. Enquanto o arquivo não existir, o
+           monograma ao lado assume — o js/app.js faz a troca. -->
+      <img class="marca__logo" id="marca-logo" src="assets/logo-hub.png" alt="" width="38" height="38">
+      <span class="marca__monograma" id="marca-monograma" aria-hidden="true" hidden>T</span>
+
+      <div class="marca__texto">
+        <strong class="marca__nome">Hub Totali</strong>
+        <span class="marca__nota">Todos os sistemas em uma tela</span>
+      </div>
+    </div>
+
+    <p class="relogio" id="relogio">
+      <span class="relogio__hora" id="relogio-hm">--:--</span>
+      <span class="relogio__sep" aria-hidden="true">·</span>
+      <span class="relogio__data" id="relogio-data"></span>
+    </p>
+
+  </div>
+</header>
+
+<main class="pagina" id="conteudo">
+
+  <div class="colunas">
+
+    <div class="coluna-sistemas">
+
+      <!-- Atalhos marcados por cada pessoa. Some quando não há nenhum. -->
+      <section class="setor setor--cartao" id="secao-atalhos" hidden>
+        <div class="setor__cabeca">
+          <h2 class="setor__titulo">
+            <svg class="setor__estrela" viewBox="0 0 24 24" aria-hidden="true" width="14" height="14">
+              <path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3.1-5.8 3.1 1.1-6.5L2.6 9.4l6.5-.9z"/>
+            </svg>
+            Meus atalhos
+          </h2>
+          <span class="setor__nota">Marque a estrela em qualquer sistema</span>
+        </div>
+        <div class="grade" id="grade-atalhos"></div>
+      </section>
+
+      <!-- Os setores são desenhados aqui pelo js/app.js -->
+      <div id="setores"></div>
+
+    </div>
+
+    <aside class="lateral" aria-label="Recados e prazos">
+      <section class="bloco" id="bloco-avisos" hidden>
+        <h2 class="bloco__titulo">Recados e prazos</h2>
+        <ul class="avisos" id="lista-avisos"></ul>
+      </section>
+    </aside>
+
+  </div>
+
+</main>
+
+<footer class="rodape">
+  <p>Totali Soluções Contábeis · para acrescentar um sistema, edite <code>js/sistemas.js</code></p>
+</footer>
+
+<script src="js/config-hub.js"></script>
+<script src="js/sistemas.js"></script>
+<script src="js/logos.js"></script>
+<script src="js/dados.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

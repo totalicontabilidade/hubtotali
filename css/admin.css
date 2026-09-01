@@ -1,0 +1,192 @@
+/* ============================================================
+   Hub Totali · estilo da página de administração
+   ------------------------------------------------------------
+   Herda os tokens de styles.css. Aqui só entra o que é próprio
+   da edição.
+
+   A tela de edição NÃO tenta parecer o Hub. É uma ferramenta de
+   trabalho: campos à mostra, tudo editável no lugar, sem janela
+   que abre por cima. Quem está aqui veio mexer, não contemplar.
+   ============================================================ */
+
+/* ---------- Topo ---------- */
+.topo__acoes{display:flex;align-items:center;gap:8px}
+.quem{font-size:12.5px;color:var(--txt-3);margin-right:4px}
+
+/* ---------- Botões ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  height:34px;padding:0 14px;
+  border:1px solid var(--fio-2);border-radius:var(--r-sm);
+  background:var(--papel);
+  font-size:13px;font-weight:620;color:var(--txt);
+  transition:background-color .15s var(--ease),border-color .15s var(--ease),
+             color .15s var(--ease),opacity .15s var(--ease);
+}
+.btn:hover{background:var(--piso);border-color:var(--txt-3)}
+.btn--principal{background:var(--navy);border-color:var(--navy);color:#fff}
+.btn--principal:hover{background:#16283a;border-color:#16283a}
+.btn--principal:disabled{opacity:.4;cursor:not-allowed;background:var(--navy);border-color:var(--navy)}
+.btn--fantasma{background:none;border-color:transparent;color:var(--txt-2)}
+.btn--fantasma:hover{background:var(--piso);border-color:var(--fio-2);color:var(--txt)}
+.btn--largo{width:100%;height:40px}
+.btn--pequeno{height:29px;padding:0 11px;font-size:12.5px}
+.btn--perigo:hover{background:#fdeceb;border-color:#e0a9a4;color:#8d2f28}
+
+/* Quando há mudança não salva, o botão passa a chamar. */
+.btn--pendente{background:var(--gold-2);border-color:var(--gold-2);color:#231a05}
+.btn--pendente:hover{background:#9c7c31;border-color:#9c7c31}
+
+/* ---------- Entrada ---------- */
+.entrada{flex:1;display:grid;place-items:center;padding:40px 20px}
+.entrada__caixa{
+  width:100%;max-width:360px;
+  background:var(--papel);border:1px solid var(--fio);
+  border-radius:var(--r-lg);padding:26px 24px;
+}
+.entrada__titulo{font-size:19px;color:var(--navy);margin-bottom:6px}
+.entrada__nota{font-size:13px;color:var(--txt-2);margin-bottom:18px}
+
+.campo{display:block;margin-bottom:13px}
+.campo__rotulo{display:block;font-size:12px;font-weight:660;color:var(--txt-2);margin-bottom:5px}
+.campo__caixa{
+  width:100%;height:38px;padding:0 11px;
+  border:1px solid var(--fio-2);border-radius:var(--r-sm);
+  background:var(--papel);font-size:14px;color:var(--txt);
+  transition:border-color .15s var(--ease),box-shadow .15s var(--ease);
+}
+.campo__caixa:focus{outline:none;border-color:var(--gold-2);box-shadow:0 0 0 3px rgba(176,141,60,.14)}
+
+.erro{
+  font-size:12.5px;color:#8d2f28;background:#fdeceb;
+  border:1px solid #e8c4c0;border-radius:var(--r-sm);
+  padding:8px 10px;margin-bottom:13px;
+}
+
+/* ---------- Faixa de aviso ---------- */
+.faixa{
+  font-size:13px;line-height:1.5;color:var(--txt);
+  border-radius:var(--r);padding:11px 14px;margin-bottom:20px;
+}
+.faixa--atencao{background:#fdf6e6;border:1px solid var(--gold-fio)}
+.faixa code{background:#fff}
+
+/* ---------- Cabeçalho da edição ---------- */
+.admin__cabeca{margin-bottom:18px}
+.admin__titulo{font-size:20px;color:var(--navy)}
+.admin__nota{font-size:13px;color:var(--txt-2);margin-top:3px}
+.admin__rodape-acoes{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+
+/* ---------- Painel de setor ---------- */
+.painel{
+  background:var(--papel);border:1px solid var(--fio);
+  border-radius:var(--r-lg);margin-bottom:14px;overflow:hidden;
+}
+.painel__cabeca{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  padding:12px 14px;border-bottom:1px solid var(--fio);background:var(--papel-2);
+}
+.painel__titulo{font-size:14px;color:var(--navy)}
+.painel__nota{font-size:12.5px;color:var(--txt-3)}
+.painel__acoes{padding:10px 14px;border-top:1px solid var(--fio);display:flex;gap:8px;flex-wrap:wrap}
+
+/* campos do cabeçalho do setor */
+.painel__cabeca .campo__caixa{height:32px;font-size:13.5px}
+.cx-titulo{width:210px;font-weight:660}
+.cx-nota{width:190px}
+.cx-estilo{height:32px;padding:0 8px;border:1px solid var(--fio-2);border-radius:var(--r-sm);
+  background:var(--papel);font-size:13px;color:var(--txt)}
+.painel__cabeca .btn{margin-left:0}
+.painel__cabeca .painel__direita{margin-left:auto;display:flex;gap:6px;align-items:center}
+
+.marca-destaque{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--txt-2);white-space:nowrap}
+
+/* ---------- Linha de sistema ---------- */
+.linhas{display:flex;flex-direction:column}
+.linha{
+  display:flex;align-items:center;gap:9px;
+  padding:9px 14px;
+  border-bottom:1px solid var(--fio);
+  background:var(--papel);
+  transition:background-color .14s var(--ease),opacity .14s var(--ease);
+}
+.linha:last-child{border-bottom:0}
+.linha:hover{background:var(--papel-2)}
+
+.pegador{
+  flex:none;width:22px;height:26px;
+  display:grid;place-items:center;
+  color:#b7c3d1;cursor:grab;border-radius:5px;
+}
+.pegador:hover{color:var(--txt-2);background:var(--piso)}
+.pegador svg{width:14px;height:14px;fill:currentColor}
+
+/* Enquanto arrasta, a linha some de onde estava e o lugar de
+   destino se abre — é o que dá a sensação de estar segurando
+   a coisa, em vez de a tela pular quando você solta. */
+.linha--arrastando{opacity:.35}
+.linha--alvo{box-shadow:inset 0 2px 0 var(--gold-2)}
+.linha--alvo-fim{box-shadow:inset 0 -2px 0 var(--gold-2)}
+
+.linha__logo{
+  flex:none;width:32px;height:32px;border-radius:var(--r-sm);
+  border:1px solid var(--fio);background:#fff;
+  display:grid;place-items:center;overflow:hidden;cursor:pointer;
+  font-size:11px;font-weight:750;color:var(--gold);text-transform:uppercase;
+}
+.linha__logo:hover{border-color:var(--gold-2)}
+.linha__logo img{width:22px;height:22px;object-fit:contain}
+
+.linha .cx-nome{width:190px;flex:none}
+.linha .cx-url{flex:1;min-width:150px;font-size:12.5px;color:var(--txt-2)}
+.linha .cx-legenda{width:190px;flex:none;font-size:12.5px}
+.linha .campo__caixa{height:32px}
+
+.linha__fim{margin-left:auto;display:flex;gap:4px;align-items:center;flex:none}
+
+.marca-conferir{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--txt-3);white-space:nowrap}
+
+.icone-btn{
+  width:28px;height:28px;border-radius:var(--r-sm);
+  display:grid;place-items:center;color:var(--txt-3);
+  border:1px solid transparent;
+}
+.icone-btn:hover{background:var(--piso);border-color:var(--fio-2);color:var(--txt)}
+.icone-btn--perigo:hover{background:#fdeceb;border-color:#e0a9a4;color:#8d2f28}
+.icone-btn svg{width:15px;height:15px}
+
+.vazio{padding:14px;font-size:13px;color:var(--txt-3);text-align:center}
+
+/* ---------- Recados ---------- */
+.aviso-linha{
+  display:flex;align-items:center;gap:9px;
+  padding:9px 14px;border-bottom:1px solid var(--fio);
+}
+.aviso-linha:last-child{border-bottom:0}
+.aviso-linha .cx-aviso-titulo{width:210px;flex:none}
+.aviso-linha .cx-aviso-texto{flex:1;min-width:160px}
+.aviso-linha .campo__caixa{height:32px}
+
+/* ---------- Confirmação de gravação ---------- */
+.aviso-salvo{
+  position:fixed;left:50%;bottom:26px;transform:translateX(-50%);
+  background:var(--navy);color:#fff;
+  padding:10px 18px;border-radius:999px;
+  font-size:13.5px;font-weight:600;
+  box-shadow:0 10px 30px rgba(13,25,38,.28);
+  z-index:60;
+  animation:subir .3s var(--ease-out);
+}
+.aviso-salvo--erro{background:#8d2f28}
+@keyframes subir{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
+
+/* ---------- Telas menores ---------- */
+@media (max-width:900px){
+  .linha{flex-wrap:wrap}
+  .linha .cx-nome,.linha .cx-legenda{width:calc(50% - 30px)}
+  .linha .cx-url{flex:1 1 100%;order:5}
+  .cx-titulo,.cx-nota{width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  .aviso-salvo{animation:none}
+}
