@@ -3,35 +3,126 @@ rules_version = '2';
 // ============================================================
 // Hub Totali · regras do banco
 // ------------------------------------------------------------
-// Cole isto na aba REGRAS do Firestore, no console do Firebase,
-// e clique em Publicar.
+// Cole na aba REGRAS do Firestore, no console do Firebase, e
+// clique em Publicar. Depois de qualquer mudança aqui, é preciso
+// publicar de novo — o arquivo desta pasta é só a cópia.
 //
-// O UID abaixo já é o do administrador do Hub (Raoni), copiado do
-// Authentication → aba Users. Para trocar de administrador, é aqui
-// e em js/config-hub.js — nos dois lugares.
+// ------------------------------------------------------------
+// A IDEIA CENTRAL, EM UMA FRASE
+// ------------------------------------------------------------
+// Ter conta no Firebase não dá acesso a nada. O que dá acesso é
+// estar na LISTA DA EQUIPE, e essa lista só o administrador
+// escreve.
 //
-// O que estas regras dizem, em português:
-//
-//   LER  — qualquer um pode. É proposital: a lista de links do
-//          Hub é pública de qualquer jeito, já que a página fica
-//          no ar aberta. Não há nada aqui que não pudesse estar
-//          escrito num cartaz na parede.
-//
-//   ESCREVER — só o administrador, e só no documento hub/config.
-//          Todo o resto do banco fica trancado para todo mundo.
-//
-// Por isso a regra é a única proteção que importa: se um dia ela
-// for afrouxada, qualquer pessoa na internet passa a poder
-// reescrever a página inicial de toda a equipe.
+// Isso não é preciosismo. Com a chave pública que fica visível
+// na página, qualquer pessoa da internet consegue criar uma
+// conta no projeto — isso não dá para desligar sem servidor
+// próprio. Então a conta não pode valer nada por si só. Quem
+// criar uma por fora entra numa tela vazia: não está na lista,
+// não lê pendência nenhuma, não escreve em lugar nenhum.
 // ============================================================
 
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    // ---------- atalhos ----------
+
+    function autenticado() {
+      return request.auth != null;
+    }
+
+    function ehAdmin() {
+      return autenticado()
+             && request.auth.uid == 'UMBvjqMpw2bEbpvBIZnhE5iwlB23';
+    }
+
+    // A pessoa está na equipe se existe um documento com o uid
+    // dela em /equipe e ele não está marcado como desligado.
+    function daEquipe() {
+      return autenticado()
+             && exists(/databases/$(database)/documents/equipe/$(request.auth.uid))
+             && get(/databases/$(database)/documents/equipe/$(request.auth.uid)).data.ativo == true;
+    }
+
+    function meuUid(uid) {
+      return autenticado() && request.auth.uid == uid;
+    }
+
+    // ---------- a lista de sistemas do Hub ----------
+    // Leitura aberta de propósito: é o que faz o Hub abrir para a
+    // equipe sem login. Não há nada aqui que não pudesse estar
+    // escrito num cartaz na parede.
+
     match /hub/config {
       allow read: if true;
-      allow write: if request.auth != null
-                   && request.auth.uid == 'UMBvjqMpw2bEbpvBIZnhE5iwlB23';
+      allow write: if ehAdmin();
+    }
+
+    // ---------- a equipe ----------
+    // Quem está na equipe vê os colegas: sem isso não daria para
+    // escolher para quem mandar uma pendência. Escrever, só o
+    // administrador — é o cadastro dele que decide quem entra.
+    //
+    // O documento guarda nome, e-mail, setor e ativo. NUNCA
+    // senha: a senha vive no Authentication do Firebase, que é
+    // outro sistema, e nem o administrador consegue lê-la.
+
+    match /equipe/{uid} {
+      allow read: if daEquipe() || ehAdmin();
+      allow write: if ehAdmin();
+    }
+
+    // ---------- pendências ----------
+
+    match /pendencias/{id} {
+
+      // Toda a equipe lê todas. É de propósito: pendência entre
+      // setores só funciona se der para ver o que o setor vizinho
+      // está devendo. Quem vê só a sua parte não coopera, cobra.
+      allow read: if daEquipe();
+
+      // Criar: qualquer um da equipe, desde que assine com o
+      // próprio nome. Sem essa checagem, daria para abrir uma
+      // pendência fingindo ser outra pessoa.
+      allow create: if daEquipe()
+                    && meuUid(request.resource.data.criadoPor)
+                    && request.resource.data.oque is string
+                    && request.resource.data.oque.size() > 2
+                    && request.resource.data.oque.size() < 300
+                    && request.resource.data.responsavel is string
+                    && request.resource.data.situacao in ['aberta', 'fazendo', 'resolvida'];
+
+      // Alterar: só quem pediu e quem é responsável. O colega de
+      // outro setor lê, mas não mexe.
+      //
+      // E dois campos são imutáveis depois de criados: quem criou
+      // e quando. São eles que sustentam a trilha — se pudessem
+      // ser reescritos, o histórico deixaria de ser prova.
+      allow update: if daEquipe()
+                    && (meuUid(resource.data.criadoPor) || meuUid(resource.data.responsavel))
+                    && request.resource.data.criadoPor == resource.data.criadoPor
+                    && request.resource.data.criadoEm == resource.data.criadoEm;
+
+      // Apagar: só quem abriu. Responsável resolve, não some com
+      // a cobrança.
+      allow delete: if daEquipe() && meuUid(resource.data.criadoPor);
+
+      // ---------- a linha do tempo ----------
+      // Cada atualização é um documento novo. NÃO HÁ update nem
+      // delete aqui, para ninguém, nem para o administrador: é
+      // isso que faz a linha do tempo valer como histórico. Quem
+      // errou acrescenta uma correção embaixo, do jeito que se
+      // faz em livro contábil.
+
+      match /andamento/{item} {
+        allow read:   if daEquipe();
+        allow create: if daEquipe()
+                      && meuUid(request.resource.data.autor)
+                      && request.resource.data.texto is string
+                      && request.resource.data.texto.size() > 0
+                      && request.resource.data.texto.size() < 3000;
+        allow update, delete: if false;
+      }
     }
 
     // Nada mais neste banco é acessível por ninguém.

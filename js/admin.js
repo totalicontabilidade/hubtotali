@@ -668,7 +668,155 @@
 
     limparPendente();
     ligarAcoes();
+    ligarAbas();
+    ligarEquipe();
     desenhar();
+  }
+
+  /* ============================================================
+     A EQUIPE
+     ------------------------------------------------------------
+     Ao contrário dos sistemas, aqui cada ação grava na hora. É
+     de propósito: criar uma conta no Authentication não é uma
+     mudança que se possa segurar em memória à espera de um botão
+     Salvar. A conta existe ou não existe.
+     ============================================================ */
+
+  var equipe = [];
+
+  function iniciais(nome) {
+    var p = String(nome || "?").trim().split(/\s+/);
+    if (p.length > 1) return (p[0][0] + p[p.length - 1][0]).toUpperCase();
+    return (p[0] || "?").slice(0, 2).toUpperCase();
+  }
+
+  function desenharEquipe() {
+    var alvo = $("lista-equipe");
+    alvo.textContent = "";
+
+    if (!equipe.length) {
+      alvo.appendChild(elemento("div", "vazio", "Ninguém cadastrado ainda. Comece por você mesmo, acima."));
+      $("equipe-conta").textContent = "";
+      return;
+    }
+
+    var ativos = equipe.filter(function (p) { return p.ativo; }).length;
+    $("equipe-conta").textContent = ativos + " com acesso" +
+      (equipe.length > ativos ? " · " + (equipe.length - ativos) + " desligada(s)" : "");
+
+    equipe.forEach(function (p) {
+      var linha = elemento("div", "pessoa" + (p.ativo ? "" : " pessoa--desligada"));
+      linha.appendChild(elemento("span", "pessoa__ini", iniciais(p.nome)));
+
+      var txt = elemento("div");
+      txt.appendChild(elemento("div", "pessoa__nome", p.nome || "(sem nome)"));
+      txt.appendChild(elemento("div", "pessoa__mail", p.email || ""));
+      linha.appendChild(txt);
+
+      if (p.setor) linha.appendChild(elemento("span", "pessoa__setor", p.setor));
+
+      var fim = elemento("div", "pessoa__fim");
+
+      var senha = elemento("button", "btn btn--pequeno btn--fantasma", "Redefinir senha");
+      senha.type = "button";
+      senha.title = "Manda um e-mail para a pessoa criar uma senha nova";
+      senha.addEventListener("click", function () {
+        if (!window.confirm("Mandar para " + p.email + " um e-mail de redefinição de senha?")) return;
+        Dados.mandarRedefinicaoDeSenha(p.email)
+          .then(function () { recado("E-mail enviado para " + p.email + "."); })
+          .catch(function (e) { recado(e.message, true); });
+      });
+      fim.appendChild(senha);
+
+      var ligar = elemento("button", "btn btn--pequeno" + (p.ativo ? " btn--perigo" : ""),
+                           p.ativo ? "Desligar" : "Religar");
+      ligar.type = "button";
+      ligar.addEventListener("click", function () {
+        var novo = !p.ativo;
+        if (novo === false && !window.confirm("Desligar " + (p.nome || p.email) +
+            "?\n\nO acesso cai na hora. O nome continua no histórico das pendências.")) return;
+        Dados.gravarPessoa(p.uid, {
+          nome: p.nome || "", email: p.email || "", setor: p.setor || "", ativo: novo,
+        }).then(function () {
+          p.ativo = novo;
+          desenharEquipe();
+          recado(novo ? "Acesso devolvido." : "Acesso removido.");
+        }).catch(function (e) { recado(e.message, true); });
+      });
+      fim.appendChild(ligar);
+
+      linha.appendChild(fim);
+      alvo.appendChild(linha);
+    });
+  }
+
+  function carregarEquipe() {
+    Dados.listarEquipe()
+      .then(function (lista) { equipe = lista; desenharEquipe(); })
+      .catch(function (e) {
+        $("lista-equipe").textContent = "";
+        $("lista-equipe").appendChild(elemento("div", "vazio", e.message));
+      });
+  }
+
+  function ligarEquipe() {
+    if (ligarEquipe.pronto) return;
+    ligarEquipe.pronto = true;
+
+    var setor = $("np-setor");
+    Dados.SETORES_DA_CASA.forEach(function (s) {
+      var o = document.createElement("option");
+      o.value = s; o.textContent = s;
+      setor.appendChild(o);
+    });
+
+    $("btn-nova-pessoa").addEventListener("click", function () {
+      var erro = $("np-erro");
+      erro.hidden = true;
+      var b = $("btn-nova-pessoa");
+      b.disabled = true;
+      b.textContent = "Cadastrando…";
+
+      Dados.criarPessoa({
+        nome:  $("np-nome").value.trim(),
+        email: $("np-email").value.trim(),
+        senha: $("np-senha").value,
+        setor: setor.value,
+      }).then(function (pessoa) {
+        equipe.push(pessoa);
+        equipe.sort(function (a, b2) { return (a.nome || "").localeCompare(b2.nome || "", "pt-BR"); });
+        desenharEquipe();
+        ["np-nome", "np-email", "np-senha"].forEach(function (id) { $(id).value = ""; });
+        recado((pessoa.nome || pessoa.email) + " já pode entrar.");
+      }).catch(function (e) {
+        erro.textContent = e.message;
+        erro.hidden = false;
+      }).then(function () {
+        b.disabled = false;
+        b.textContent = "Cadastrar";
+      });
+    });
+  }
+
+  /* ---------- Abas ---------- */
+
+  function ligarAbas() {
+    if (ligarAbas.pronto) return;
+    ligarAbas.pronto = true;
+
+    var abas = $("abas");
+    Array.prototype.forEach.call(abas.children, function (aba) {
+      aba.addEventListener("click", function () {
+        Array.prototype.forEach.call(abas.children, function (o) {
+          o.classList.toggle("on", o === aba);
+          document.getElementById(o.dataset.painel).hidden = (o !== aba);
+        });
+        /* A equipe só é buscada quando alguém abre a aba: não faz
+           sentido pedir a lista ao banco em toda visita a esta
+           página só para mexer num link. */
+        if (aba.dataset.painel === "painel-equipe" && !equipe.length) carregarEquipe();
+      });
+    });
   }
 
   /* ---------- Início ---------- */

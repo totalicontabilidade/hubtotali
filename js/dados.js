@@ -230,6 +230,161 @@ const Dados = (function () {
     try { window.sessionStorage.removeItem(CHAVE_SESSAO); } catch (e) {}
   }
 
+  /* ============================================================
+     A EQUIPE
+     ------------------------------------------------------------
+     Cada pessoa é um documento em /equipe, com o uid do
+     Authentication como identificador. O documento guarda nome,
+     e-mail, setor e se está ativa. NUNCA a senha: a senha vive
+     no Authentication, que é outro sistema, e nem o
+     administrador consegue lê-la de lá.
+
+     Aqui os documentos são gravados campo a campo, e não como um
+     texto só (como é o hub/config). A diferença tem motivo: as
+     REGRAS do banco precisam enxergar o campo "ativo" para
+     decidir quem entra. Regra não lê dentro de um texto.
+     ============================================================ */
+
+  var BASE_DOCS = function () {
+    return "https://firestore.googleapis.com/v1/projects/" + cfg.projectId + "/databases/(default)/documents";
+  };
+
+  /* Firestore guarda o tipo junto com o valor. Estas duas
+     funções traduzem entre o formato dele e um objeto comum. */
+  function paraFirestore(obj) {
+    var f = {};
+    Object.keys(obj).forEach(function (k) {
+      var v = obj[k];
+      if (typeof v === "string") f[k] = { stringValue: v };
+      else if (typeof v === "boolean") f[k] = { booleanValue: v };
+      else if (typeof v === "number") f[k] = { integerValue: String(v) };
+      else if (v instanceof Date) f[k] = { timestampValue: v.toISOString() };
+      else if (v === null || v === undefined) f[k] = { nullValue: null };
+      else f[k] = { stringValue: JSON.stringify(v) };
+    });
+    return f;
+  }
+
+  function deFirestore(fields) {
+    var o = {};
+    Object.keys(fields || {}).forEach(function (k) {
+      var v = fields[k];
+      if ("stringValue" in v) o[k] = v.stringValue;
+      else if ("booleanValue" in v) o[k] = v.booleanValue;
+      else if ("integerValue" in v) o[k] = parseInt(v.integerValue, 10);
+      else if ("timestampValue" in v) o[k] = v.timestampValue;
+      else if ("nullValue" in v) o[k] = null;
+    });
+    return o;
+  }
+
+  function comAutorizacao(extra) {
+    var s = lerSessao();
+    if (!s) throw new Error("Sessão expirada. Entre de novo.");
+    var h = { "Authorization": "Bearer " + s.idToken };
+    Object.keys(extra || {}).forEach(function (k) { h[k] = extra[k]; });
+    return h;
+  }
+
+  function listarEquipe() {
+    if (!temBanco()) return Promise.resolve([]);
+    return fetch(BASE_DOCS() + "/equipe?pageSize=200", { headers: comAutorizacao(), cache: "no-store" })
+      .then(function (r) {
+        if (r.status === 403) throw new Error("Sem permissão para ler a equipe.");
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      })
+      .then(function (j) {
+        return (j.documents || []).map(function (d) {
+          var p = deFirestore(d.fields);
+          p.uid = d.name.split("/").pop();
+          return p;
+        }).sort(function (a, b) { return (a.nome || "").localeCompare(b.nome || "", "pt-BR"); });
+      });
+  }
+
+  /* Cria a conta e põe a pessoa na lista, nessa ordem.
+
+     Detalhe que evita um susto: criar conta no Firebase devolve
+     um token da conta NOVA. Se ele fosse guardado, o
+     administrador seria deslogado e passaria a ser a pessoa que
+     acabou de cadastrar. Por isso o token que volta daqui é
+     descartado — a sessão de quem está cadastrando não é
+     tocada. */
+  function criarPessoa(dados) {
+    if (!temBanco()) return Promise.reject(new Error("O banco não está ligado."));
+    if (!dados.email || !dados.senha) return Promise.reject(new Error("E-mail e senha são obrigatórios."));
+    if (String(dados.senha).length < 6) return Promise.reject(new Error("A senha precisa de pelo menos 6 caracteres."));
+
+    return fetch("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" +
+                 encodeURIComponent(cfg.apiKey), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: dados.email, password: dados.senha, returnSecureToken: false }),
+    })
+    .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+    .then(function (res) {
+      if (!res.ok) {
+        var c = (res.j.error && res.j.error.message) || "";
+        if (/EMAIL_EXISTS/.test(c)) throw new Error("Já existe uma conta com esse e-mail.");
+        if (/WEAK_PASSWORD/.test(c)) throw new Error("Senha fraca demais — use pelo menos 6 caracteres.");
+        if (/INVALID_EMAIL/.test(c)) throw new Error("Esse e-mail não parece válido.");
+        throw new Error(recado(c));
+      }
+      return gravarPessoa(res.j.localId, {
+        nome:  dados.nome || "",
+        email: dados.email,
+        setor: dados.setor || "",
+        ativo: true,
+      });
+    });
+  }
+
+  function gravarPessoa(uid, campos) {
+    return fetch(BASE_DOCS() + "/equipe/" + encodeURIComponent(uid), {
+      method: "PATCH",
+      headers: comAutorizacao({ "Content-Type": "application/json" }),
+      body: JSON.stringify({ fields: paraFirestore(campos) }),
+    }).then(function (r) {
+      if (r.status === 403) throw new Error("Sem permissão para escrever na equipe.");
+      if (!r.ok) throw new Error("Não consegui salvar a pessoa (HTTP " + r.status + ").");
+      return r.json().then(function (d) {
+        var p = deFirestore(d.fields);
+        p.uid = uid;
+        return p;
+      });
+    });
+  }
+
+  /* Não existe "apagar pessoa". Desligar marca ativo:false, e a
+     pessoa perde o acesso na hora — mas o nome dela continua nas
+     pendências que ela abriu e nos comentários que escreveu.
+     Apagar de verdade deixaria buraco no histórico. */
+  function desligarPessoa(uid, pessoa) {
+    return gravarPessoa(uid, {
+      nome: pessoa.nome || "", email: pessoa.email || "",
+      setor: pessoa.setor || "", ativo: false,
+    });
+  }
+
+  /* Trocar a senha de alguém não é possível daqui: a API pública
+     só deixa a própria pessoa trocar a dela. O que dá para fazer
+     é mandar o e-mail de redefinição, que é o caminho normal. */
+  function mandarRedefinicaoDeSenha(email) {
+    if (!temBanco()) return Promise.reject(new Error("O banco não está ligado."));
+    return fetch("https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=" +
+                 encodeURIComponent(cfg.apiKey), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ requestType: "PASSWORD_RESET", email: email }),
+    }).then(function (r) {
+      if (!r.ok) return r.json().then(function (j) {
+        throw new Error(recado((j.error && j.error.message) || ""));
+      });
+      return true;
+    });
+  }
+
   return {
     temBanco: temBanco,
     semente: semente,
@@ -238,6 +393,14 @@ const Dados = (function () {
     entrar: entrar,
     sair: sair,
     sessao: lerSessao,
+
+    listarEquipe: listarEquipe,
+    criarPessoa: criarPessoa,
+    gravarPessoa: gravarPessoa,
+    desligarPessoa: desligarPessoa,
+    mandarRedefinicaoDeSenha: mandarRedefinicaoDeSenha,
+
+    SETORES_DA_CASA: ["Fiscal", "Contábil", "Pessoal", "Legalização", "Financeiro"],
   };
 
 })();

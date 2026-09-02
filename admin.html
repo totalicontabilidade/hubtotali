@@ -81,6 +81,68 @@
     As instruções para ligar o banco estão dentro desse arquivo.
   </p>
 
+  <!-- Duas frentes na mesma página: o que aparece no Hub, e quem
+       pode entrar nele. Abas porque são assuntos que não se
+       misturam — quem veio cadastrar gente não quer tropeçar na
+       lista de links. -->
+  <div class="abas" id="abas">
+    <button class="aba on" type="button" data-painel="painel-sistemas">Sistemas</button>
+    <button class="aba" type="button" data-painel="painel-equipe">Equipe</button>
+  </div>
+
+  <div id="painel-equipe" class="painel-aba" hidden>
+    <div class="admin__cabeca">
+      <h1 class="admin__titulo">Quem pode entrar</h1>
+      <p class="admin__nota">
+        Cadastre a pessoa aqui e ela já entra com o e-mail e a senha que você definir.
+        Ao contrário dos sistemas, <strong>cada cadastro grava na hora</strong> — não há botão Salvar nesta aba.
+      </p>
+    </div>
+
+    <section class="painel">
+      <div class="painel__cabeca">
+        <h2 class="painel__titulo">Nova pessoa</h2>
+        <span class="painel__nota">A senha pode ser trocada por ela depois</span>
+      </div>
+      <div class="nova-pessoa">
+        <label class="campo campo--linha">
+          <span class="campo__rotulo">Nome</span>
+          <input class="campo__caixa" type="text" id="np-nome" placeholder="Como aparece nas pendências">
+        </label>
+        <label class="campo campo--linha">
+          <span class="campo__rotulo">E-mail</span>
+          <input class="campo__caixa" type="email" id="np-email" autocomplete="off" placeholder="nome@totalicontabilidade.com.br">
+        </label>
+        <label class="campo campo--linha">
+          <span class="campo__rotulo">Senha inicial</span>
+          <input class="campo__caixa" type="text" id="np-senha" autocomplete="off" placeholder="mínimo 6 caracteres">
+        </label>
+        <label class="campo campo--linha">
+          <span class="campo__rotulo">Setor</span>
+          <select class="cx-estilo" id="np-setor"></select>
+        </label>
+        <button class="btn btn--principal" type="button" id="btn-nova-pessoa">Cadastrar</button>
+      </div>
+      <p class="erro" id="np-erro" hidden></p>
+    </section>
+
+    <section class="painel">
+      <div class="painel__cabeca">
+        <h2 class="painel__titulo">Equipe</h2>
+        <span class="painel__nota" id="equipe-conta"></span>
+      </div>
+      <div id="lista-equipe"></div>
+    </section>
+
+    <p class="faixa faixa--nota">
+      <strong>Por que não existe “apagar pessoa”.</strong> Desligar tira o acesso na hora,
+      mas mantém o nome nas pendências que ela abriu e nos comentários que escreveu.
+      Apagar de verdade deixaria buraco no histórico — e o histórico é o que faz a
+      pendência valer como combinado.
+    </p>
+  </div>
+
+  <div id="painel-sistemas" class="painel-aba">
   <div class="admin__cabeca">
     <h1 class="admin__titulo">Sistemas do Hub</h1>
     <p class="admin__nota">
@@ -105,6 +167,7 @@
       <button class="btn btn--pequeno" type="button" id="btn-novo-aviso">Acrescentar recado</button>
     </div>
   </section>
+  </div>
 
 </main>
 
