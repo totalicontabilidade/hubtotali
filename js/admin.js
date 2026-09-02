@@ -684,6 +684,13 @@
 
   var equipe = [];
 
+  /* Cadastro antigo tinha "setor" no singular. Esta função lê os
+     dois formatos, para ninguém precisar recadastrar ninguém. */
+  function setoresDe(p) {
+    if (Array.isArray(p.setores)) return p.setores;
+    return p.setor ? [p.setor] : [];
+  }
+
   function iniciais(nome) {
     var p = String(nome || "?").trim().split(/\s+/);
     if (p.length > 1) return (p[0][0] + p[p.length - 1][0]).toUpperCase();
@@ -713,7 +720,12 @@
       txt.appendChild(elemento("div", "pessoa__mail", p.email || ""));
       linha.appendChild(txt);
 
-      if (p.setor) linha.appendChild(elemento("span", "pessoa__setor", p.setor));
+      var setores = setoresDe(p);
+      if (setores.length) {
+        var caixa = elemento("div", "pessoa__setores");
+        setores.forEach(function (s) { caixa.appendChild(elemento("span", "pessoa__setor", s)); });
+        linha.appendChild(caixa);
+      }
 
       var fim = elemento("div", "pessoa__fim");
 
@@ -736,7 +748,8 @@
         if (novo === false && !window.confirm("Desligar " + (p.nome || p.email) +
             "?\n\nO acesso cai na hora. O nome continua no histórico das pendências.")) return;
         Dados.gravarPessoa(p.uid, {
-          nome: p.nome || "", email: p.email || "", setor: p.setor || "", ativo: novo,
+          nome: p.nome || "", email: p.email || "",
+          setores: setoresDe(p), ativo: novo,
         }).then(function () {
           p.ativo = novo;
           desenharEquipe();
@@ -780,23 +793,33 @@
     if (ligarEquipe.pronto) return;
     ligarEquipe.pronto = true;
 
-    var setor = $("np-setor");
+    var caixaSetores = $("np-setores");
     Dados.SETORES_DA_CASA.forEach(function (s) {
-      var o = document.createElement("option");
-      o.value = s; o.textContent = s;
-      setor.appendChild(o);
+      var l = document.createElement("label");
+      var c = document.createElement("input");
+      c.type = "checkbox"; c.value = s;
+      l.appendChild(c);
+      l.appendChild(elemento("span", null, s));
+      caixaSetores.appendChild(l);
     });
+    function setoresMarcados() {
+      return Array.prototype.slice.call(caixaSetores.querySelectorAll("input:checked"))
+        .map(function (c) { return c.value; });
+    }
 
     $("btn-sou-eu").addEventListener("click", function () {
       var s = Dados.sessao();
       if (!s) { recado("Sessão expirada. Entre de novo.", true); return; }
       var nome = window.prompt("Como o seu nome deve aparecer nas pendências?", s.email.split("@")[0]);
       if (nome === null) return;
-      var setor = window.prompt("Seu setor (" + Dados.SETORES_DA_CASA.join(", ") + "):", "Diretoria");
+      var setor = window.prompt("Seus setores, separados por vírgula:\n" +
+                                Dados.SETORES_DA_CASA.join(", "), "Diretoria");
       if (setor === null) return;
 
       Dados.gravarPessoa(s.uid, {
-        nome: nome.trim() || s.email, email: s.email, setor: setor.trim(), ativo: true,
+        nome: nome.trim() || s.email, email: s.email,
+        setores: setor.split(",").map(function (x) { return x.trim(); }).filter(Boolean),
+        ativo: true,
       }).then(function (p) {
         equipe.push(p);
         equipe.sort(function (a, b) { return (a.nome || "").localeCompare(b.nome || "", "pt-BR"); });
@@ -817,12 +840,13 @@
         nome:  $("np-nome").value.trim(),
         email: $("np-email").value.trim(),
         senha: $("np-senha").value,
-        setor: setor.value,
+        setores: setoresMarcados(),
       }).then(function (pessoa) {
         equipe.push(pessoa);
         equipe.sort(function (a, b2) { return (a.nome || "").localeCompare(b2.nome || "", "pt-BR"); });
         desenharEquipe();
         ["np-nome", "np-email", "np-senha"].forEach(function (id) { $(id).value = ""; });
+        Array.prototype.forEach.call(caixaSetores.querySelectorAll("input"), function (c) { c.checked = false; });
         recado((pessoa.nome || pessoa.email) + " já pode entrar.");
       }).catch(function (e) {
         erro.textContent = e.message;

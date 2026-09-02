@@ -10,7 +10,11 @@
      porque      POR QUE precisa ser feito
      comoFazer   COMO fazer
      sugestao    a sugestão de solução de quem pediu
-     responsavel QUEM faz (uid da pessoa)
+     responsavel QUEM faz (uid da pessoa) — o dono da tarefa
+     envolvidos  QUEM MAIS precisa saber (lista de uids). A
+                 pendência aparece na página deles também, mas a
+                 responsabilidade continua sendo de uma pessoa
+                 só: tarefa de dois é tarefa de ninguém.
      prazo       QUANDO (data, aaaa-mm-dd)
      setorOrigem de onde veio
      setorDestino para onde vai
@@ -137,6 +141,7 @@ const Pendencias = (function () {
       comoFazer:    (dados.comoFazer || "").trim(),
       sugestao:     (dados.sugestao || "").trim(),
       responsavel:  dados.responsavel,
+      envolvidos:   Array.isArray(dados.envolvidos) ? dados.envolvidos : [],
       prazo:        dados.prazo || "",
       setorOrigem:  dados.setorOrigem || "",
       setorDestino: dados.setorDestino || "",
@@ -258,6 +263,16 @@ const Pendencias = (function () {
     });
   }
 
+  /* A pendência é minha se eu faço, se eu pedi, ou se me
+     marcaram nela. É esta função que decide o que entra no
+     trilho de cada pessoa. */
+  function ehMinha(p, uid) {
+    if (!uid) return false;
+    if (p.responsavel === uid) return true;
+    if (p.criadoPor === uid) return true;
+    return Array.isArray(p.envolvidos) && p.envolvidos.indexOf(uid) !== -1;
+  }
+
   /* ---------- estado de prazo ----------
      Devolve "atrasada", "hoje" ou "" — é o que pinta a tarja e
      agrupa a lista. Resolvida nunca é atrasada: o que está feito
@@ -286,6 +301,7 @@ const Pendencias = (function () {
     corrigir: corrigir,
     apagar: apagar,
     estado: estado,
+    ehMinha: ehMinha,
   };
 
 })();

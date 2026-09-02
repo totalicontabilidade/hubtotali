@@ -76,9 +76,7 @@ const PendenciasUI = (function () {
     /* O que é meu: o que eu preciso fazer e o que eu cobrei de
        alguém. Pendência de terceiros existe e é visível na lista
        completa, mas não no meu trilho — senão ele vira mural. */
-    var minhas = todas.filter(function (p) {
-      return p.responsavel === eu || p.criadoPor === eu;
-    });
+    var minhas = todas.filter(function (p) { return Pendencias.ehMinha(p, eu); });
 
     var abertas = minhas.filter(function (p) { return p.situacao !== "resolvida"; });
 
@@ -123,9 +121,16 @@ const PendenciasUI = (function () {
     var t = el("div", "pen__txt");
     t.appendChild(el("div", "pen__o", p.oque));
     var eu = meuUid();
-    var quem = (p.responsavel === eu)
-      ? (p.setorOrigem || nomeDe(p.criadoPor)) + " pediu para você"
-      : "você pediu para " + (p.setorDestino || nomeDe(p.responsavel));
+    var quem;
+    if (p.responsavel === eu) {
+      quem = (p.setorOrigem || nomeDe(p.criadoPor)) + " pediu para você";
+    } else if (p.criadoPor === eu) {
+      quem = "você pediu para " + nomeDe(p.responsavel);
+    } else {
+      /* Marcado, não responsável: o cartão diz isso, para a
+         pessoa não achar que a tarefa é dela. */
+      quem = "marcaram você · faz: " + nomeDe(p.responsavel);
+    }
     t.appendChild(el("div", "pen__q", quem));
     b.appendChild(t);
 
@@ -218,6 +223,40 @@ const PendenciasUI = (function () {
     return l;
   }
 
+  /* Marcar gente: uma caixa de nomes com quadradinho. Preferi
+     isso ao seletor múltiplo do navegador porque naquele é
+     preciso segurar Ctrl para escolher dois — e ninguém
+     descobre isso sozinho. */
+  function marcador(rotulo, pessoas, excluir) {
+    var l = el("div", "pd-campo");
+    l.appendChild(el("span", "pd-rot", rotulo));
+    var caixa = el("div", "pd-marcar");
+    var escolhidos = [];
+    pessoas.forEach(function (p) {
+      if (p.uid === excluir) return;
+      var linha = el("label", "pd-marcar__i");
+      var c = document.createElement("input");
+      c.type = "checkbox";
+      c.value = p.uid;
+      c.addEventListener("change", function () {
+        var i = escolhidos.indexOf(p.uid);
+        if (c.checked && i === -1) escolhidos.push(p.uid);
+        if (!c.checked && i !== -1) escolhidos.splice(i, 1);
+      });
+      linha.appendChild(c);
+      linha.appendChild(el("span", "pd-marcar__n", p.nome || p.email));
+      var st = Array.isArray(p.setores) ? p.setores.join(", ") : (p.setor || "");
+      if (st) linha.appendChild(el("span", "pd-marcar__s", st));
+      caixa.appendChild(linha);
+    });
+    if (!caixa.children.length) {
+      caixa.appendChild(el("div", "pd-vazio", "Ninguém mais cadastrado ainda."));
+    }
+    l.appendChild(caixa);
+    l._valores = function () { return escolhidos.slice(); };
+    return l;
+  }
+
   function seletor(rotulo, opcoes, valor) {
     var l = el("label", "pd-campo");
     l.appendChild(el("span", "pd-rot", rotulo));
@@ -291,7 +330,12 @@ const PendenciasUI = (function () {
     var sugestao = area("Sugestão de solução",
       "O que você faria no lugar dele. É este campo que transforma cobrança em ajuda.");
 
-    [oque, porque, quem, quando, destino, como, sugestao].forEach(function (x) { c.appendChild(x); });
+    var ativos = equipe.filter(function (p) { return p.ativo; });
+    var marcar = marcador("Marcar mais alguém", ativos, meuUid());
+    marcar.appendChild(el("div", "pd-dica",
+      "Quem for marcado também vê esta pendência na página dele. A responsabilidade continua sendo de uma pessoa só."));
+
+    [oque, porque, quem, quando, destino, como, sugestao, marcar].forEach(function (x) { c.appendChild(x); });
 
     var msg = erro(""); msg.hidden = true;
     c.appendChild(msg);
@@ -308,8 +352,9 @@ const PendenciasUI = (function () {
         sugestao: sugestao._entrada.value,
         responsavel: quem._entrada.value,
         prazo: quando._entrada.value,
-        setorOrigem: eu.setor || "",
+        setorOrigem: (Array.isArray(eu.setores) ? eu.setores[0] : eu.setor) || "",
         setorDestino: destino._entrada.value,
+        envolvidos: marcar._valores(),
       }).then(function () { fechar(); carregar(); })
         .catch(function (e) {
           msg.textContent = e.message; msg.hidden = false;
@@ -340,6 +385,10 @@ const PendenciasUI = (function () {
     var e = Pendencias.estado(p);
     if (e) meta.appendChild(el("span", "pd-tag pd-tag--" + e, e === "atrasada" ? "Atrasada" : "Vence hoje"));
     meta.appendChild(el("span", "pd-tag", "Aberta por " + nomeDe(p.criadoPor)));
+    meta.appendChild(el("span", "pd-tag", "Faz: " + nomeDe(p.responsavel)));
+    (p.envolvidos || []).forEach(function (uid) {
+      meta.appendChild(el("span", "pd-tag pd-tag--marcado", "@" + nomeDe(uid)));
+    });
     c.appendChild(meta);
 
     [
@@ -467,7 +516,7 @@ const PendenciasUI = (function () {
   function resumo() {
     var eu = meuUid();
     var minhas = todas.filter(function (p) {
-      return (p.responsavel === eu || p.criadoPor === eu) && p.situacao !== "resolvida";
+      return Pendencias.ehMinha(p, eu) && p.situacao !== "resolvida";
     });
     return {
       atrasadas: minhas.filter(function (p) { return Pendencias.estado(p) === "atrasada"; }).length,

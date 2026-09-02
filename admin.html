@@ -25,7 +25,8 @@
 <meta name="color-scheme" content="light">
 
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32">
-<link rel="stylesheet" href="css/styles.css">
+<!-- Só a folha da administração: ela é independente do Hub de
+     propósito, para uma mudança de desenho lá não quebrar aqui. -->
 <link rel="stylesheet" href="css/admin.css">
 </head>
 
@@ -121,10 +122,13 @@
              a pessoa troca depois, sozinha, e nem você fica sabendo
              da nova. Se não pudesse trocar, este rótulo seria uma
              promessa falsa e o campo se chamaria só "Senha". -->
-        <label class="campo campo--linha">
-          <span class="campo__rotulo">Setor</span>
-          <select class="cx-estilo" id="np-setor"></select>
-        </label>
+        <div class="campo campo--linha campo--setores">
+          <span class="campo__rotulo">Setores</span>
+          <!-- Marcação, não seleção única: gente de contabilidade
+               pequena costuma cobrir mais de uma frente, e obrigar
+               a escolher uma só é obrigar a mentir no cadastro. -->
+          <div class="setores-marca" id="np-setores"></div>
+        </div>
         <button class="btn btn--principal" type="button" id="btn-nova-pessoa">Cadastrar</button>
       </div>
       <p class="erro" id="np-erro" hidden></p>
