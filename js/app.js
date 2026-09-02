@@ -84,6 +84,16 @@
      e — só para sistema recém-cadastrado — o ícone do próprio
      site. Rodar baixar-logos.js traz esse último para dentro, e
      a partir daí o arquivo local assume sozinho. */
+  /* De onde uma imagem PODE vir. A política de segurança da
+     página já barra o resto, mas conferir aqui também custa três
+     linhas e protege caso alguém um dia afrouxe a política sem
+     lembrar deste ponto. */
+  function origemPermitida(endereco) {
+    return endereco.indexOf("assets/logos/") === 0
+        || endereco.indexOf("data:image/") === 0
+        || endereco.indexOf("https://icons.duckduckgo.com/") === 0;
+  }
+
   function icone(item) {
     var arquivo = item.logo || LOGOS_IDX[apelido(item.nome || "")];
     var endereco = item.logoDados
@@ -91,6 +101,7 @@
                 || item.logoRemoto
                 || "";
     var caixa = el("span", "ico");
+    if (endereco && !origemPermitida(endereco)) endereco = "";
     if (endereco) {
       var img = document.createElement("img");
       img.src = endereco;

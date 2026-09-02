@@ -32,6 +32,14 @@
 
 <body class="admin">
 
+<!-- Quebra-moldura. O GitHub Pages não permite mandar o cabeçalho
+     X-Frame-Options nem Content-Security-Policy: frame-ancestors —
+     e frame-ancestors dentro de <meta> o navegador ignora. Sem
+     isto, um site qualquer poderia embutir esta página numa
+     moldura invisível e colher cliques do administrador em cima
+     de botões que ele não está vendo. -->
+<script src="js/quebra-moldura.js"></script>
+
 <header class="topo">
   <div class="topo__interno">
     <div class="marca">

@@ -4,8 +4,8 @@ rules_version = '2';
 // Hub Totali · regras do banco
 // ------------------------------------------------------------
 // Cole na aba REGRAS do Firestore, no console do Firebase, e
-// clique em Publicar. Depois de qualquer mudança aqui, é preciso
-// publicar de novo — o arquivo desta pasta é só a cópia.
+// clique em Publicar. Depois de qualquer mudança aqui, publique
+// de novo — o arquivo desta pasta é só a cópia.
 //
 // ------------------------------------------------------------
 // A IDEIA CENTRAL, EM UMA FRASE
@@ -18,8 +18,32 @@ rules_version = '2';
 // na página, qualquer pessoa da internet consegue criar uma
 // conta no projeto — isso não dá para desligar sem servidor
 // próprio. Então a conta não pode valer nada por si só. Quem
-// criar uma por fora entra numa tela vazia: não está na lista,
-// não lê pendência nenhuma, não escreve em lugar nenhum.
+// criar uma por fora entra numa tela vazia.
+//
+// ------------------------------------------------------------
+// O QUE MUDOU NA AUDITORIA DE 02/09/2026
+// ------------------------------------------------------------
+// A versão anterior deixava quatro brechas, todas na alteração
+// de pendência:
+//
+//   1. A SITUAÇÃO NÃO ERA VALIDADA NA ALTERAÇÃO. Era só na
+//      criação. Dava para gravar situação com qualquer texto e
+//      quebrar o agrupamento da tela de todo mundo.
+//
+//   2. O RESPONSÁVEL PODIA TROCAR O RESPONSÁVEL. Ou seja:
+//      empurrar a tarefa para outra pessoa sem ninguém saber.
+//
+//   3. O RESPONSÁVEL PODIA MUDAR O PRÓPRIO PRAZO. Uma pendência
+//      atrasada deixava de estar atrasada por decisão de quem
+//      estava devendo.
+//
+//   4. NÃO HAVIA LIMITE DE TAMANHO nos campos longos. Um
+//      documento de quase um mega por pendência é caro de ler e
+//      lento de abrir para a equipe inteira.
+//
+// A correção segue um princípio: cada pessoa muda o que é do
+// papel dela. Quem faz mexe na SITUAÇÃO, que é o trabalho dela.
+// Quem abriu mexe no PEDIDO, e só nos primeiros quinze minutos.
 // ============================================================
 
 service cloud.firestore {
@@ -36,8 +60,6 @@ service cloud.firestore {
              && request.auth.uid == 'UMBvjqMpw2bEbpvBIZnhE5iwlB23';
     }
 
-    // A pessoa está na equipe se existe um documento com o uid
-    // dela em /equipe e ele não está marcado como desligado.
     function daEquipe() {
       return autenticado()
              && exists(/databases/$(database)/documents/equipe/$(request.auth.uid))
@@ -46,6 +68,18 @@ service cloud.firestore {
 
     function meuUid(uid) {
       return autenticado() && request.auth.uid == uid;
+    }
+
+    // Quais campos a alteração encostou. É o que permite dizer
+    // "esta pessoa só pode mexer NAQUELE campo".
+    function mudou() {
+      return request.resource.data.diff(resource.data).affectedKeys();
+    }
+
+    function textoAte(campo, limite) {
+      return !(campo in request.resource.data)
+             || (request.resource.data[campo] is string
+                 && request.resource.data[campo].size() <= limite);
     }
 
     // ---------- a lista de sistemas do Hub ----------
@@ -61,57 +95,75 @@ service cloud.firestore {
     // ---------- a equipe ----------
     // Quem está na equipe vê os colegas: sem isso não daria para
     // escolher para quem mandar uma pendência. Escrever, só o
-    // administrador — é o cadastro dele que decide quem entra.
+    // administrador.
     //
-    // O documento guarda nome, e-mail, setor e ativo. NUNCA
-    // senha: a senha vive no Authentication do Firebase, que é
-    // outro sistema, e nem o administrador consegue lê-la.
+    // O documento guarda nome, e-mail, setores e ativo. NUNCA
+    // senha: a senha vive no Authentication, que é outro sistema,
+    // e nem o administrador consegue lê-la.
+    //
+    // A validação de forma existe porque o campo "ativo" é o que
+    // a função daEquipe() consulta para liberar TUDO. Se uma
+    // gravação errada trocasse ele por texto, a comparação
+    // silenciosamente viraria falsa e a equipe inteira perderia
+    // acesso sem ninguém entender por quê.
 
     match /equipe/{uid} {
       allow read: if daEquipe() || ehAdmin();
-      allow write: if ehAdmin();
+      allow write: if ehAdmin()
+                   && request.resource.data.ativo is bool
+                   && request.resource.data.nome is string
+                   && request.resource.data.nome.size() <= 120
+                   && request.resource.data.email is string
+                   && request.resource.data.email.size() <= 200;
     }
 
     // ---------- pendências ----------
 
     match /pendencias/{id} {
 
-      // Toda a equipe lê todas. É de propósito: pendência entre
-      // setores só funciona se der para ver o que o setor vizinho
-      // está devendo. Quem vê só a sua parte não coopera, cobra.
       allow read: if daEquipe();
 
-      // Criar: qualquer um da equipe, desde que assine com o
-      // próprio nome. Sem essa checagem, daria para abrir uma
-      // pendência fingindo ser outra pessoa.
       allow create: if daEquipe()
                     && meuUid(request.resource.data.criadoPor)
                     && request.resource.data.oque is string
                     && request.resource.data.oque.size() > 2
-                    && request.resource.data.oque.size() < 300
+                    && request.resource.data.oque.size() <= 300
                     && request.resource.data.responsavel is string
-                    && request.resource.data.situacao in ['aberta', 'fazendo', 'resolvida'];
+                    && request.resource.data.responsavel.size() > 0
+                    && request.resource.data.situacao in ['aberta', 'fazendo', 'resolvida']
+                    && (!('envolvidos' in request.resource.data)
+                        || request.resource.data.envolvidos is list)
+                    && textoAte('porque', 2000)
+                    && textoAte('comoFazer', 2000)
+                    && textoAte('sugestao', 2000)
+                    && textoAte('prazo', 10)
+                    && textoAte('setorOrigem', 60)
+                    && textoAte('setorDestino', 60);
 
-      // Alterar: só quem pediu e quem é responsável. O colega de
-      // outro setor lê, mas não mexe.
+      // Quem criou e quando são imutáveis para sempre: são eles
+      // que sustentam a trilha. Se pudessem ser reescritos, o
+      // histórico deixaria de ser prova.
       //
-      // E dois campos são imutáveis depois de criados: quem criou
-      // e quando. São eles que sustentam a trilha — se pudessem
-      // ser reescritos, o histórico deixaria de ser prova.
-      //
-      // O responsável pode mexer a qualquer momento porque o que
-      // ele muda é a SITUAÇÃO (aberta, fazendo, resolvida) — é o
-      // trabalho dele. Quem abriu tem 15 minutos para corrigir o
-      // enunciado; passado isso, o texto do pedido fica como
-      // ficou, e ajuste vira comentário na linha do tempo.
+      // Depois disso, cada um mexe no que é do papel dele.
       allow update: if daEquipe()
-                    && (meuUid(resource.data.criadoPor) || meuUid(resource.data.responsavel))
                     && request.resource.data.criadoPor == resource.data.criadoPor
                     && request.resource.data.criadoEm == resource.data.criadoEm
+                    && request.resource.data.situacao in ['aberta', 'fazendo', 'resolvida']
                     && (
-                         request.resource.data.oque == resource.data.oque
-                         || (meuUid(resource.data.criadoPor)
-                             && request.time < resource.data.criadoEm + duration.value(15, 'm'))
+                         // QUEM FAZ mexe só na situação. Não troca o
+                         // responsável (empurrar tarefa sem avisar) nem
+                         // o prazo (deixar de estar atrasado por
+                         // decisão de quem está devendo).
+                         (meuUid(resource.data.responsavel) && mudou().hasOnly(['situacao']))
+
+                         // QUEM ABRIU pode fechar a qualquer momento, e
+                         // corrigir o pedido nos primeiros quinze
+                         // minutos — depois disso, ajuste vira
+                         // comentário na linha do tempo.
+                         || (meuUid(resource.data.criadoPor) && (
+                              mudou().hasOnly(['situacao'])
+                              || request.time < resource.data.criadoEm + duration.value(15, 'm')
+                            ))
                        );
 
       // Apagar: só quem abriu. Responsável resolve, não some com
@@ -119,11 +171,6 @@ service cloud.firestore {
       allow delete: if daEquipe() && meuUid(resource.data.criadoPor);
 
       // ---------- a linha do tempo ----------
-      // Cada atualização é um documento novo. NÃO HÁ update nem
-      // delete aqui, para ninguém, nem para o administrador: é
-      // isso que faz a linha do tempo valer como histórico. Quem
-      // errou acrescenta uma correção embaixo, do jeito que se
-      // faz em livro contábil.
 
       match /andamento/{item} {
         allow read:   if daEquipe();
@@ -131,28 +178,26 @@ service cloud.firestore {
                       && meuUid(request.resource.data.autor)
                       && request.resource.data.texto is string
                       && request.resource.data.texto.size() > 0
-                      && request.resource.data.texto.size() < 3000;
+                      && request.resource.data.texto.size() <= 3000
+                      && textoAte('autorNome', 120);
 
-        // JANELA DE ARREPENDIMENTO: 15 minutos para corrigir o
-        // que você mesmo escreveu. Depois disso, fecha para
-        // sempre — inclusive para o administrador.
+        // JANELA DE ARREPENDIMENTO: quinze minutos para corrigir
+        // o que você mesmo escreveu. Depois fecha para sempre,
+        // inclusive para o administrador.
         //
-        // O prazo existe para consertar erro de digitação, não
-        // para reescrever a história depois que o colega leu e
-        // respondeu. Por isso autor e data de criação continuam
-        // travados mesmo dentro da janela: dá para mudar o
-        // texto, não dá para mudar quem escreveu nem quando.
-        //
-        // Quem edita deixa rastro: o campo editadoEm passa a
-        // existir, e a tela mostra "editado".
+        // Autor e data continuam travados mesmo dentro da janela:
+        // dá para mudar o texto, não quem escreveu nem quando. O
+        // prazo serve para erro de digitação, não para reescrever
+        // a história depois que o colega leu e respondeu.
         allow update: if daEquipe()
                       && meuUid(resource.data.autor)
-                      && request.resource.data.autor == resource.data.autor
-                      && request.resource.data.criadoEm == resource.data.criadoEm
+                      && mudou().hasOnly(['texto', 'editadoEm'])
+                      && request.resource.data.texto is string
+                      && request.resource.data.texto.size() > 0
+                      && request.resource.data.texto.size() <= 3000
                       && request.time < resource.data.criadoEm + duration.value(15, 'm');
 
-        // Apagar, nunca. Errou, corrige dentro da janela ou
-        // acrescenta a correção embaixo.
+        // Apagar, nunca.
         allow delete: if false;
       }
     }
