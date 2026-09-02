@@ -752,11 +752,28 @@
 
   function carregarEquipe() {
     Dados.listarEquipe()
-      .then(function (lista) { equipe = lista; desenharEquipe(); })
+      .then(function (lista) {
+        equipe = lista;
+        desenharEquipe();
+        conferirSeEstouNaLista();
+      })
       .catch(function (e) {
         $("lista-equipe").textContent = "";
         $("lista-equipe").appendChild(elemento("div", "vazio", e.message));
       });
+  }
+
+  /* Conta criada antes desta tela existir (a do administrador,
+     por exemplo) está no login mas não na lista — e é a lista que
+     dá acesso. Tentar cadastrá-la de novo esbarra em "já existe
+     uma conta com esse e-mail", que é o beco sem saída. Daí este
+     atalho. Só serve para a própria conta: descobrir o uid de
+     outra pessoa a partir do e-mail exigiria a senha dela. */
+  function conferirSeEstouNaLista() {
+    var s = Dados.sessao();
+    if (!s || !s.uid) return;
+    var jaEstou = equipe.some(function (p) { return p.uid === s.uid; });
+    $("faixa-eu").hidden = jaEstou;
   }
 
   function ligarEquipe() {
@@ -768,6 +785,25 @@
       var o = document.createElement("option");
       o.value = s; o.textContent = s;
       setor.appendChild(o);
+    });
+
+    $("btn-sou-eu").addEventListener("click", function () {
+      var s = Dados.sessao();
+      if (!s) { recado("Sessão expirada. Entre de novo.", true); return; }
+      var nome = window.prompt("Como o seu nome deve aparecer nas pendências?", s.email.split("@")[0]);
+      if (nome === null) return;
+      var setor = window.prompt("Seu setor (" + Dados.SETORES_DA_CASA.join(", ") + "):", "Diretoria");
+      if (setor === null) return;
+
+      Dados.gravarPessoa(s.uid, {
+        nome: nome.trim() || s.email, email: s.email, setor: setor.trim(), ativo: true,
+      }).then(function (p) {
+        equipe.push(p);
+        equipe.sort(function (a, b) { return (a.nome || "").localeCompare(b.nome || "", "pt-BR"); });
+        desenharEquipe();
+        conferirSeEstouNaLista();
+        recado("Pronto — você está na equipe.");
+      }).catch(function (e) { recado(e.message, true); });
     });
 
     $("btn-nova-pessoa").addEventListener("click", function () {

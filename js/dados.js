@@ -400,7 +400,10 @@ const Dados = (function () {
     desligarPessoa: desligarPessoa,
     mandarRedefinicaoDeSenha: mandarRedefinicaoDeSenha,
 
-    SETORES_DA_CASA: ["Fiscal", "Contábil", "Pessoal", "Legalização", "Financeiro"],
+    /* Os setores da casa. Mexer aqui muda o seletor do cadastro e
+       o destino possível de uma pendência. */
+    SETORES_DA_CASA: ["Fiscal", "Contábil", "Pessoal", "Legalização",
+                      "Financeiro", "TI", "Gerência", "Diretoria"],
   };
 
 })();

@@ -98,10 +98,21 @@ service cloud.firestore {
       // E dois campos são imutáveis depois de criados: quem criou
       // e quando. São eles que sustentam a trilha — se pudessem
       // ser reescritos, o histórico deixaria de ser prova.
+      //
+      // O responsável pode mexer a qualquer momento porque o que
+      // ele muda é a SITUAÇÃO (aberta, fazendo, resolvida) — é o
+      // trabalho dele. Quem abriu tem 15 minutos para corrigir o
+      // enunciado; passado isso, o texto do pedido fica como
+      // ficou, e ajuste vira comentário na linha do tempo.
       allow update: if daEquipe()
                     && (meuUid(resource.data.criadoPor) || meuUid(resource.data.responsavel))
                     && request.resource.data.criadoPor == resource.data.criadoPor
-                    && request.resource.data.criadoEm == resource.data.criadoEm;
+                    && request.resource.data.criadoEm == resource.data.criadoEm
+                    && (
+                         request.resource.data.oque == resource.data.oque
+                         || (meuUid(resource.data.criadoPor)
+                             && request.time < resource.data.criadoEm + duration.value(15, 'm'))
+                       );
 
       // Apagar: só quem abriu. Responsável resolve, não some com
       // a cobrança.
@@ -121,7 +132,28 @@ service cloud.firestore {
                       && request.resource.data.texto is string
                       && request.resource.data.texto.size() > 0
                       && request.resource.data.texto.size() < 3000;
-        allow update, delete: if false;
+
+        // JANELA DE ARREPENDIMENTO: 15 minutos para corrigir o
+        // que você mesmo escreveu. Depois disso, fecha para
+        // sempre — inclusive para o administrador.
+        //
+        // O prazo existe para consertar erro de digitação, não
+        // para reescrever a história depois que o colega leu e
+        // respondeu. Por isso autor e data de criação continuam
+        // travados mesmo dentro da janela: dá para mudar o
+        // texto, não dá para mudar quem escreveu nem quando.
+        //
+        // Quem edita deixa rastro: o campo editadoEm passa a
+        // existir, e a tela mostra "editado".
+        allow update: if daEquipe()
+                      && meuUid(resource.data.autor)
+                      && request.resource.data.autor == resource.data.autor
+                      && request.resource.data.criadoEm == resource.data.criadoEm
+                      && request.time < resource.data.criadoEm + duration.value(15, 'm');
+
+        // Apagar, nunca. Errou, corrige dentro da janela ou
+        // acrescenta a correção embaixo.
+        allow delete: if false;
       }
     }
 
