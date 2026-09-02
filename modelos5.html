@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Organização dos aplicativos · Hub Totali</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32">
+<style>
+/* ============================================================
+   RODADA 5 — organização dos aplicativos
+
+   A pele (Ardósia) e a estrutura (Trilho) estão fixas. O que
+   varia aqui é SÓ como os sistemas se arrumam na área principal,
+   que foi o que não agradou.
+
+   O problema da versão anterior, dito com precisão: os ícones
+   eram jogados numa grade que se estica pela largura toda. Em
+   monitor largo isso deixa sete colunas com três itens na última
+   linha, e o olho não tem onde se apoiar — não há coluna, não há
+   alinhamento vertical, cada setor termina num lugar diferente.
+   Grade que se estica é cômoda de programar e ruim de ler.
+
+   As cinco tentativas abaixo atacam isso de cinco jeitos.
+   ============================================================ */
+
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --base:#eef1f6; --zona:#ffffff; --realce:#ffffff;
+  --fio:#dfe5ee; --fio-2:#cdd6e3;
+  --txt:#101a2b; --txt-2:#4a5d78; --txt-3:#78899f;
+  --ouro:#96762b; --alerta:#c0453a;
+}
+body{margin:0;font-family:"Segoe UI Variable Display","Segoe UI",system-ui,sans-serif;
+     background:var(--base);color:var(--txt);min-height:100vh}
+h1,h2,h3,p{margin:0}
+img{display:block;max-width:100%}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+input{font:inherit}
+a{text-decoration:none;color:inherit}
+
+.escolha{position:sticky;top:0;z-index:100;background:#0c1420;border-bottom:1px solid #1d2839;
+         padding:11px 20px;display:flex;align-items:center;gap:13px;flex-wrap:wrap}
+.escolha__t{font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#7f93b3}
+.opcao{padding:8px 15px;border-radius:9px;font-size:13px;font-weight:620;
+       background:#132033;border:1px solid #22304a;color:#a6b9d6;transition:all .16s}
+.opcao:hover{background:#1a2b42;color:#eaf1fa}
+.opcao[aria-pressed="true"]{background:#e0b44c;border-color:#e0b44c;color:#191203}
+.escolha__n{font-size:12px;color:#657ba0;margin-left:auto}
+
+.modelo{display:none;min-height:100vh}
+.modelo.ativo{display:block}
+
+/* ---------- esqueleto fixo ---------- */
+.cab{display:flex;align-items:center;gap:20px;padding:20px 36px}
+.cab__logo{height:42px;width:190px;background:url("assets/logo-hub.png") left center/contain no-repeat}
+.cab__ola{font-size:14.5px;color:var(--txt-2)}
+.cab__ola b{color:var(--txt);font-weight:660}
+.cab__rel{margin-left:auto;text-align:right}
+.cab__hora{font-family:ui-monospace,Consolas,monospace;font-size:16px;font-weight:640}
+.cab__data{font-size:12px;color:var(--txt-3)}
+
+.corpo{display:grid;grid-template-columns:1fr 330px;align-items:start}
+.area{padding:6px 32px 36px;min-width:0}
+.trilho{background:var(--zona);border-radius:18px 0 0 18px;padding:24px;min-height:calc(100vh - 82px)}
+.trilho__t{font-size:13px;font-weight:700;margin-bottom:4px}
+.trilho__n{font-size:12px;color:var(--txt-3);margin-bottom:16px}
+.pen{display:flex;gap:13px;padding:12px 0;align-items:flex-start;border-bottom:1px solid var(--fio)}
+.pen:last-child{border-bottom:0}
+.pen__prazo{flex:none;width:38px;text-align:center;padding-top:1px}
+.pen__dia{font-family:ui-monospace,Consolas,monospace;font-size:16px;font-weight:730;line-height:1;color:var(--txt-2)}
+.pen__mes{font-size:9px;text-transform:uppercase;letter-spacing:.09em;color:var(--txt-3);margin-top:3px}
+.pen__oque{font-size:13.5px;font-weight:620;line-height:1.35}
+.pen__quem{font-size:11.5px;color:var(--txt-3);margin-top:3px}
+.pen--atrasada .pen__dia{color:var(--alerta)}
+.pen--hoje .pen__dia{color:var(--ouro)}
+.rodape{border-top:1px solid var(--fio);padding:18px 36px;display:flex;gap:38px;flex-wrap:wrap}
+.rec{display:flex;gap:10px;align-items:baseline}
+.rec__p{width:6px;height:6px;border-radius:50%;background:var(--ouro);flex:none;position:relative;top:-1px}
+.rec__t{font-size:13px;font-weight:620}
+.rec__x{font-size:12.5px;color:var(--txt-3)}
+
+.rot{font-size:10.5px;font-weight:730;letter-spacing:.14em;text-transform:uppercase;color:var(--txt-3)}
+.ico{border-radius:11px;background:#fff;border:1px solid var(--fio);display:grid;place-items:center;
+     overflow:hidden;flex:none}
+.ico img{object-fit:contain}
+.ico--sigla{background:linear-gradient(150deg,#e6bd5c,#b98a2a);color:#191203;font-weight:780;border:0}
+
+/* ============================================================
+   O1 · COLUNAS
+   Cada setor é uma coluna, lado a lado, e dentro dela os
+   sistemas descem em linha. O olho tem trilho vertical para
+   descer e sabe onde cada setor começa e termina. É o formato
+   de índice — o mesmo do sumário de um livro, que é o objeto
+   mais testado que existe para "achar rápido numa lista".
+   ============================================================ */
+#O1 .colunas{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:26px}
+#O1 .col__rot{margin-bottom:11px;padding-bottom:8px;border-bottom:1px solid var(--fio)}
+#O1 .item{display:flex;align-items:center;gap:10px;padding:7px 8px;border-radius:9px;
+          transition:background .14s}
+#O1 .item:hover{background:var(--zona)}
+#O1 .ico{width:28px;height:28px;border-radius:8px}
+#O1 .ico img{width:19px;height:19px}
+#O1 .ico--sigla{font-size:10px}
+#O1 .item__n{font-size:13px;font-weight:600;color:var(--txt-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#O1 .item:hover .item__n{color:var(--txt)}
+
+/* ============================================================
+   O2 · GRADE ANCORADA
+   O rótulo do setor sai de cima e vai para uma coluna própria à
+   esquerda. Com isso a grade dos ícones começa sempre na mesma
+   linha vertical, em todos os setores — o alinhamento que
+   faltava. E o número de colunas é FIXO, não elástico: sobra
+   espaço à direita, e é esse espaço que dá o alinhamento.
+   ============================================================ */
+#O2 .linha{display:grid;grid-template-columns:130px 1fr;gap:20px;align-items:start;
+           padding:18px 0;border-bottom:1px solid var(--fio)}
+#O2 .linha:last-child{border-bottom:0}
+#O2 .rot{padding-top:12px}
+#O2 .grade{display:grid;grid-template-columns:repeat(6,88px);gap:10px}
+#O2 .item{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;
+          padding:8px 4px;border-radius:12px;transition:background .14s}
+#O2 .item:hover{background:var(--zona)}
+#O2 .ico{width:42px;height:42px;border-radius:13px}
+#O2 .ico img{width:28px;height:28px}
+#O2 .ico--sigla{font-size:14px}
+#O2 .item__n{font-size:11px;font-weight:600;color:var(--txt-2);line-height:1.3}
+
+/* ============================================================
+   O3 · PRIMEIRA FILA
+   Uma fila só, grande, com o que se abre todo dia. Todo o resto
+   desce para uma área de consulta, em texto miúdo e três
+   colunas. Assume que 80% dos cliques vão para 8 sistemas — e
+   dá a esses oito o tamanho que os outros trinta não merecem.
+   ============================================================ */
+#O3 .fila{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:10px;margin-bottom:30px}
+#O3 .grande{display:flex;flex-direction:column;gap:11px;padding:15px;border-radius:15px;
+            background:var(--zona);transition:transform .16s,box-shadow .16s}
+#O3 .grande:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(16,26,43,.13)}
+#O3 .grande .ico{width:40px;height:40px}
+#O3 .grande .ico img{width:27px;height:27px}
+#O3 .grande .ico--sigla{font-size:13px}
+#O3 .grande__n{font-size:13.5px;font-weight:660}
+#O3 .grande__x{font-size:11px;color:var(--txt-3);margin-top:2px}
+#O3 .resto{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:22px}
+#O3 .col__rot{margin-bottom:9px}
+#O3 .item{display:flex;align-items:center;gap:9px;padding:5px 7px;border-radius:8px}
+#O3 .item:hover{background:var(--zona)}
+#O3 .ico{width:22px;height:22px;border-radius:7px}
+#O3 .ico img{width:15px;height:15px}
+#O3 .ico--sigla{font-size:8px}
+#O3 .item__n{font-size:12.5px;font-weight:580;color:var(--txt-2)}
+
+/* ============================================================
+   O4 · BUSCA
+   Um campo no alto, e a lista inteira embaixo sem separação por
+   setor. Quem sabe o que quer digita duas letras e chega lá;
+   quem não sabe, passa o olho. Tira do usuário o trabalho de
+   adivinhar em que setor mora cada sistema — que é justamente
+   onde esse tipo de tela costuma falhar.
+   ============================================================ */
+#O4 .busca{display:flex;align-items:center;gap:10px;background:var(--zona);border:1px solid var(--fio);
+           border-radius:12px;padding:11px 15px;margin-bottom:8px;max-width:460px}
+#O4 .busca input{border:0;outline:0;background:none;flex:1;font-size:14px;color:var(--txt)}
+#O4 .busca__i{width:16px;height:16px;color:var(--txt-3);flex:none}
+#O4 .busca__d{font-size:11.5px;color:var(--txt-3);margin-bottom:22px}
+#O4 .filtros{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+#O4 .filtro{padding:6px 13px;border-radius:99px;font-size:12px;font-weight:600;color:var(--txt-2);
+            background:var(--zona);border:1px solid var(--fio);transition:all .14s}
+#O4 .filtro:hover{border-color:var(--fio-2)}
+#O4 .filtro.on{background:var(--txt);border-color:var(--txt);color:#fff}
+#O4 .grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:8px}
+#O4 .item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:11px;
+          background:var(--zona);transition:box-shadow .14s}
+#O4 .item:hover{box-shadow:0 6px 16px rgba(16,26,43,.10)}
+#O4 .ico{width:30px;height:30px;border-radius:9px}
+#O4 .ico img{width:20px;height:20px}
+#O4 .ico--sigla{font-size:11px}
+#O4 .item__n{font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ============================================================
+   O5 · TABULEIRO
+   Setores em duas colunas largas, e dentro de cada um a grade de
+   ícones com número FIXO de colunas. Junta o alinhamento do O2
+   com o aproveitamento de largura do O1: em monitor grande, dois
+   setores convivem lado a lado em vez de um embaixo do outro.
+   ============================================================ */
+#O5 .tabuleiro{display:grid;grid-template-columns:repeat(auto-fit,minmax(370px,1fr));gap:14px}
+#O5 .quadro{background:var(--zona);border-radius:16px;padding:17px 18px}
+#O5 .quadro--largo{grid-column:1/-1}
+#O5 .col__rot{margin-bottom:13px}
+#O5 .grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:12px 4px}
+#O5 .item{display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;
+          padding:6px 2px;border-radius:11px;transition:background .14s}
+#O5 .item:hover{background:var(--base)}
+#O5 .ico{width:38px;height:38px;border-radius:12px}
+#O5 .ico img{width:26px;height:26px}
+#O5 .ico--sigla{font-size:13px}
+#O5 .item__n{font-size:10.5px;font-weight:600;color:var(--txt-2);line-height:1.3}
+#O5 .tira{display:flex;flex-wrap:wrap;gap:6px}
+#O5 .past{display:inline-flex;align-items:center;gap:7px;padding:6px 11px 6px 7px;border-radius:99px;
+          background:var(--base);transition:filter .14s}
+#O5 .past:hover{filter:brightness(.96)}
+#O5 .past .ico{width:19px;height:19px;border-radius:6px}
+#O5 .past .ico img{width:13px;height:13px}
+#O5 .past .ico--sigla{font-size:7.5px}
+#O5 .past__n{font-size:12px;font-weight:580;color:var(--txt-2);white-space:nowrap}
+</style>
+</head>
+<body>
+
+<div class="escolha">
+  <span class="escolha__t">Organização</span>
+  <div id="botoes" style="display:flex;gap:7px;flex-wrap:wrap"></div>
+  <span class="escolha__n">Pele Ardósia e Trilho fixos · varia só a área dos aplicativos</span>
+</div>
+
+<div id="palco"></div>
+
+<script src="js/sistemas.js"></script>
+<script src="js/logos.js"></script>
+<script src="js/modelos5.js"></script>
+</body>
+</html>
