@@ -195,20 +195,13 @@
   }
 
   /* ---------- pendências ----------
-     A lista de verdade depende de a pessoa estar identificada, e
-     esse pedaço ainda está sendo construído. Enquanto isso, o
-     trilho mostra o estado honesto: o que vai aparecer ali, e o
-     que falta para aparecer. Melhor uma zona que se explica do
-     que uma zona com dado inventado. */
+     Quem desenha o trilho é o js/pendencias-ui.js. Aqui só
+     entrego o elemento e um jeito de avisar o cabeçalho quando a
+     contagem muda. */
   function desenharPendencias() {
     var alvo = document.getElementById("pendencias");
-    alvo.textContent = "";
-    var aviso = el("div", "vazio");
-    aviso.appendChild(el("div", "vazio__t", "Em construção"));
-    aviso.appendChild(el("div", "vazio__x",
-      "Aqui vão aparecer as pendências que a equipe abrir entre os setores, " +
-      "agrupadas por urgência: atrasadas, para hoje e próximos dias."));
-    alvo.appendChild(aviso);
+    if (typeof PendenciasUI === "undefined") return;
+    PendenciasUI.iniciar(alvo, function (r) { pintarResumo(r); });
   }
 
   /* ---------- avisos ---------- */
@@ -325,7 +318,29 @@
       window.setInterval(bater, 60000);
     }, (60 - agora.getSeconds()) * 1000 - agora.getMilliseconds());
 
+    pintarResumo(null);
+  }
+
+  /* O resumo ao lado da saudação: enquanto não há pendência
+     carregada, mostra o tamanho do Hub; com pendência, mostra o
+     que importa — quantas atrasadas e quantas para hoje. */
+  function pintarResumo(r) {
+    var res = document.getElementById("resumo");
+    if (!res) return;
     res.textContent = "";
+    if (r && (r.atrasadas || r.hoje)) {
+      if (r.atrasadas) {
+        res.appendChild(el("b", null, r.atrasadas + (r.atrasadas > 1 ? " atrasadas" : " atrasada")));
+        res.appendChild(document.createTextNode(" · " + r.hoje + " para hoje"));
+      } else {
+        res.appendChild(document.createTextNode(r.hoje + " para hoje"));
+      }
+      return;
+    }
+    if (r && r.abertas === 0) {
+      res.appendChild(document.createTextNode("nenhuma pendência aberta"));
+      return;
+    }
     var total = SETORES_ATUAIS.reduce(function (n, s) { return n + (s.itens || []).length; }, 0);
     res.appendChild(document.createTextNode(total + " sistemas no Hub"));
   }

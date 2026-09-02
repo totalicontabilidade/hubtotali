@@ -281,6 +281,87 @@ a{color:inherit;text-decoration:none}
              text-transform:uppercase;color:var(--txt-3);display:block;margin-bottom:9px}
 
 /* ============================================================
+   5b · Pendências: botão, painel e linha do tempo
+   ============================================================ */
+.btn-nova{width:100%;padding:11px;border-radius:11px;background:var(--marca);color:#fff;
+          font-size:13px;font-weight:660;margin:12px 0 4px;transition:filter .15s}
+.btn-nova:hover{filter:brightness(1.35)}
+
+.pen{width:100%;text-align:left;cursor:pointer}
+.pen__txt{min-width:0;flex:1}
+.pen__sel{margin-left:auto;flex:none;font-size:10px;font-weight:700;text-transform:uppercase;
+          letter-spacing:.06em;padding:3px 8px;border-radius:99px;
+          background:var(--estado-luz);color:var(--estado);align-self:center}
+
+.pd-painel{position:fixed;inset:0;z-index:90;display:none;place-items:center;padding:24px;
+           background:rgba(13,25,38,.45)}
+.pd-painel.on{display:grid}
+.pd-caixa{background:#fff;border-radius:18px;width:100%;max-width:620px;max-height:86vh;
+          display:flex;flex-direction:column;box-shadow:0 30px 70px rgba(13,25,38,.3)}
+.pd-cab{display:flex;align-items:flex-start;gap:12px;padding:20px 22px 14px;border-bottom:1px solid var(--fio)}
+.pd-t{font-size:16.5px;font-weight:730;line-height:1.3;flex:1}
+.pd-x{font-size:24px;line-height:1;color:var(--txt-3);padding:0 4px;flex:none}
+.pd-x:hover{color:var(--txt)}
+.pd-corpo{padding:16px 22px 22px;overflow:auto}
+
+.pd-campo{display:block;margin-bottom:12px}
+.pd-rot{display:block;font-size:11px;font-weight:730;letter-spacing:.08em;text-transform:uppercase;
+        color:var(--txt-3);margin-bottom:5px}
+.pd-rot--secao{margin-top:20px;margin-bottom:10px}
+.pd-caixa-txt{width:100%;padding:9px 11px;border:1px solid var(--fio-2);border-radius:9px;
+              font:inherit;font-size:13.5px;color:var(--txt);background:#fff}
+.pd-caixa-txt:focus{outline:none;border-color:var(--estado);box-shadow:0 0 0 3px rgba(44,90,143,.14)}
+.pd-area{resize:vertical;min-height:52px;line-height:1.45}
+
+.pd-botao{width:100%;padding:11px;border-radius:10px;font-size:13.5px;font-weight:660;
+          border:1px solid var(--fio-2);background:#fff;margin-top:8px;transition:background .15s}
+.pd-botao:hover{background:var(--base)}
+.pd-botao--principal{background:var(--marca);color:#fff;border-color:var(--marca)}
+.pd-botao--principal:hover{filter:brightness(1.35);background:var(--marca)}
+.pd-botao--principal:disabled{opacity:.5;cursor:not-allowed}
+.pd-botao--perigo{color:var(--alerta);border-color:var(--fio)}
+.pd-botao--perigo:hover{background:var(--alerta-luz)}
+
+.pd-erro{font-size:12.5px;color:var(--alerta);background:var(--alerta-luz);
+         border:1px solid #f0cac6;border-radius:9px;padding:9px 11px;margin-bottom:10px}
+
+.pd-meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.pd-tag{font-size:11px;font-weight:620;padding:4px 10px;border-radius:99px;
+        background:var(--base);color:var(--txt-2)}
+.pd-tag--atrasada{background:var(--alerta-luz);color:var(--alerta)}
+.pd-tag--hoje{background:var(--estado-luz);color:var(--estado)}
+
+.pd-linha{margin-bottom:14px}
+.pd-valor{font-size:13.5px;line-height:1.5;color:var(--txt);white-space:pre-wrap}
+
+.pd-situacao{display:flex;gap:6px;margin:18px 0 4px}
+.pd-sit{flex:1;padding:9px;border-radius:9px;border:1px solid var(--fio-2);background:#fff;
+        font-size:12.5px;font-weight:620;color:var(--txt-2);transition:all .15s}
+.pd-sit:hover{border-color:var(--txt-3)}
+.pd-sit.on{background:var(--marca);border-color:var(--marca);color:#fff}
+
+/* A linha do tempo é uma coluna com um fio à esquerda: cada
+   atualização pendura nele, e a ordem no fio é a ordem do que
+   aconteceu. */
+.pd-linha-tempo{border-left:2px solid var(--fio);padding-left:14px;margin-bottom:14px}
+.pd-item{position:relative;padding-bottom:14px}
+.pd-item::before{content:"";position:absolute;left:-19px;top:5px;width:8px;height:8px;
+                 border-radius:50%;background:var(--fio-2);border:2px solid #fff}
+.pd-item:last-child::before{background:var(--estado)}
+.pd-item__cab{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:3px}
+.pd-item__quem{font-size:12.5px;font-weight:660}
+.pd-item__quando{font-size:11px;color:var(--txt-3)}
+.pd-item__editado{font-size:10px;color:var(--txt-3);font-style:italic}
+.pd-item__txt{font-size:13px;line-height:1.5;color:var(--txt-2);white-space:pre-wrap}
+.pd-corrigir{font-size:11px;color:var(--estado);margin-top:4px;text-decoration:underline}
+.pd-vazio{font-size:12.5px;color:var(--txt-3);padding:4px 0}
+
+@media (max-width:520px){
+  .pd-painel{padding:0}
+  .pd-caixa{max-height:100vh;height:100vh;border-radius:0;max-width:none}
+}
+
+/* ============================================================
    6 · Responsivo — mobile first
    ============================================================ */
 @media (max-width:900px){
