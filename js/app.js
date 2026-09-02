@@ -304,7 +304,12 @@
   }
 
   ligarBotao("nav-inicio", function () { return document.querySelector(".cab"); });
-  ligarBotao("nav-pendencias", function () { return document.getElementById("pendencias"); });
+  /* Mira no trilho inteiro, não na lista de dentro dele: mirando
+     na lista, o título "Minhas pendências" ficava 45px acima da
+     borda da tela e a pessoa chegava numa lista sem cabeça. */
+  ligarBotao("nav-pendencias", function () {
+    return document.querySelector(".trilho") || document.getElementById("pendencias");
+  });
   ligarBotao("nav-agenda", function () {
     /* A agenda é redesenhada quando o banco chega, então o
        elemento é procurado na hora do clique, não guardado antes. */
