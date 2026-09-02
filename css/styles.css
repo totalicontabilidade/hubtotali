@@ -105,7 +105,14 @@ a{color:inherit;text-decoration:none}
 /* A logo da Totali fecha o trilho, empurrada para o pé. Some no
    celular: lá o trilho vira barra de navegação e cada pixel de
    largura é para o polegar. */
-.nav__totali{margin-top:auto;width:44px;height:auto;opacity:.75;
+/* A porta da administração fica separada dos quatro botões de
+   navegação por um vão: ela não é "mais uma seção", é outra
+   natureza de coisa — sai do Hub e vai para a tela de quem edita.
+   O vão é o que diz isso sem precisar de rótulo. */
+.nav__b--fim{margin-top:auto;opacity:.6}
+.nav__b--fim:hover{opacity:1}
+
+.nav__totali{margin-top:14px;width:44px;height:auto;opacity:.75;
              transition:opacity .16s}
 .nav__totali:hover{opacity:1}
 
@@ -375,6 +382,10 @@ a{color:inherit;text-decoration:none}
        height:60px;padding:0 8px;z-index:60;box-shadow:0 -2px 16px rgba(13,25,38,.18)}
   .nav__logo,.nav__totali{display:none}
   .nav__b{width:52px;height:44px;border-radius:11px}
+  /* Deitada, a barra distribui os cinco por igual: o vão que
+     separava a administração no computador não existe aqui, e
+     "margin-top:auto" numa linha empurraria o ícone para baixo. */
+  .nav__b--fim{margin-top:0;opacity:.6}
 
   .cab{grid-column:1;grid-row:1;padding:10px 16px;gap:12px;flex-wrap:wrap}
   .cab__logo{height:32px}

@@ -190,6 +190,7 @@
        ela vence — mas o normal é a calculada. */
     if (AGENDA_ATUAL.length) {
       var ba = bloco("Agenda do mês", null, true);
+      ba.id = "bloco-agenda";
       ba.querySelector(".bloco__cab").appendChild(el("span", "bloco__n",
         new Date().toLocaleDateString("pt-BR", { month: "long" })));
       var ag = el("div", "agenda");
@@ -263,6 +264,43 @@
   });
   var botaoTodos = document.getElementById("nav-todos");
   if (botaoTodos) botaoTodos.addEventListener("click", abrirPainel);
+
+  /* ---------- os outros botões da barra ----------
+     Eles existiam desenhados e não faziam nada: o cursor virava
+     mãozinha, a pessoa clicava e a tela ficava parada. Botão que
+     não responde é pior do que botão que não existe, porque ensina
+     a equipe a desconfiar da tela inteira.
+
+     O Hub cabe em uma tela só, então nenhum deles troca de página:
+     eles levam o olho até o pedaço certo e acendem para dizer onde
+     você está. No celular, onde tudo vira uma coluna comprida, é
+     justamente aí que rolar sozinho ajuda. */
+  function acender(botao) {
+    var todos = document.querySelectorAll(".nav__b");
+    var i;
+    for (i = 0; i < todos.length; i++) todos[i].classList.remove("on");
+    if (botao) botao.classList.add("on");
+  }
+
+  function levarA(alvo, botao) {
+    if (!alvo) return;
+    acender(botao);
+    alvo.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function ligarBotao(id, achar) {
+    var b = document.getElementById(id);
+    if (!b) return;
+    b.addEventListener("click", function () { levarA(achar(), b); });
+  }
+
+  ligarBotao("nav-inicio", function () { return document.querySelector(".cab"); });
+  ligarBotao("nav-pendencias", function () { return document.getElementById("pendencias"); });
+  ligarBotao("nav-agenda", function () {
+    /* A agenda é redesenhada quando o banco chega, então o
+       elemento é procurado na hora do clique, não guardado antes. */
+    return document.getElementById("bloco-agenda");
+  });
 
   /* ---------- quem está usando ----------
      Enquanto o login da equipe não existe, o Hub pergunta o nome
