@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ícones · rodada 13 · Hub Totali</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32">
+<style>
+/* ============================================================
+   RODADA 13 — os avisos saem, e seis arrumações de ícone
+
+   DUAS MUDANÇAS FIXAS NAS SEIS:
+
+   1. O trilho é só das pendências, agrupadas por urgência, e vai
+      até o pé da tela. Elas podem crescer à vontade agora.
+
+   2. Os avisos viraram uma BARRA FINA no rodapé da área central.
+      Uma linha, sempre a mesma altura, nunca cresce — se
+      houver mais de três, os outros esperam a vez. É o lugar
+      certo para informação que a pessoa precisa ver mas não
+      precisa agir: presente, e sem cobrar atenção.
+
+   O QUE VARIA: só como os ícones dos sistemas se arrumam.
+   ============================================================ */
+
+*,*::before,*::after{box-sizing:border-box}
+/* ---------- paleta ----------
+   Azul vivo sobre azul-claríssimo, cartões brancos, texto
+   azul-marinho. O acento tem duas versões: a viva, para preencher
+   fundo, e a escurecida, para quando a mesma cor vira TEXTO sobre
+   claro — sem isso o azul brilhante some no branco. */
+:root{
+  --base:#eef3fe; --papel:#fff; --realce:#f2f6ff; --fio:#dde7fb; --fio-2:#c3d6f7;
+  --txt:#0a1a3a; --txt-2:#3f5680; --txt-3:#7488ab;
+  --nav:#0a1f4d; --nav-txt:#8fadde;
+  --acento:#0b5cf6; --acento-esc:#0842b8; --acento-txt:#fff;
+  --acento-luz:#e3ecfe;
+  --alerta:#d63a3a; --alerta-luz:#fdecec;
+  --mono:ui-monospace,"Cascadia Mono",Consolas,monospace;
+}
+body{margin:0;font-family:"Segoe UI Variable Display","Segoe UI",system-ui,sans-serif;
+     min-height:100vh;background:#05080e;color:var(--txt)}
+h1,h2,h3,p{margin:0}
+img{display:block;max-width:100%}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+a{text-decoration:none;color:inherit}
+
+.escolha{position:sticky;top:0;z-index:100;background:#05080e;border-bottom:1px solid #1a2436;
+         padding:11px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.escolha__t{font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#7f93b3}
+.opcao{padding:7px 14px;border-radius:9px;font-size:12.5px;font-weight:620;
+       background:#101a2c;border:1px solid #1f2c44;color:#a6b9d6;transition:all .16s}
+.opcao:hover{background:#17243a;color:#eaf1fa}
+.opcao[aria-pressed="true"]{background:#e0b44c;border-color:#e0b44c;color:#191203}
+.escolha__n{font-size:12px;color:#5c7093;margin-left:auto}
+
+.modelo{display:none}
+.modelo.ativo{display:block}
+
+/* ---------- esqueleto ---------- */
+/* ---------- vidro ----------
+   Uma luz de fundo bem fraca (dourado num canto, azul no outro)
+   e, por cima, superfícies translúcidas com desfoque. É o que dá
+   o ar técnico numa tela clara: o conteúdo parece flutuar sobre
+   alguma coisa em vez de estar colado num papel branco.
+
+   A transparência é de 72%, não de 40%: abaixo disso o texto
+   passa a competir com o que está atrás e a leitura sofre — e
+   esta é uma tela para trabalhar oito horas, não para exibir. */
+.tela{height:calc(100vh - 47px);display:grid;grid-template-columns:64px 1fr 380px;
+      grid-template-rows:auto 1fr auto;overflow:hidden;position:relative;
+      background:var(--base)}
+.tela::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(48% 54% at 12% 4%, rgba(11,92,246,.20), transparent 62%),
+    radial-gradient(46% 52% at 90% 10%, rgba(90,150,255,.24), transparent 62%),
+    radial-gradient(54% 58% at 60% 98%, rgba(11,92,246,.12), transparent 62%)}
+.tela > *{position:relative;z-index:1}
+.nav{grid-row:1/-1;grid-column:1;background:var(--nav);display:flex;flex-direction:column;
+     align-items:center;gap:5px;padding:14px 0}
+.nav__logo{width:32px;height:32px;object-fit:contain;margin-bottom:12px}
+.nav__b{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
+        color:var(--nav-txt);transition:background .14s,color .14s}
+.nav__b:hover{background:rgba(255,255,255,.10);color:#fff}
+.nav__b.on{background:var(--acento);color:var(--acento-txt)}
+.nav__b svg{width:19px;height:19px}
+
+.cab{grid-column:2/-1;grid-row:1;display:flex;align-items:center;gap:18px;
+     padding:12px 24px;border-bottom:1px solid rgba(255,255,255,.7);
+     background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(18px) saturate(1.4);
+     backdrop-filter:blur(18px) saturate(1.4)}
+.marca{height:38px;width:auto}
+.rel{margin-left:auto;display:flex;align-items:center;gap:13px}
+.rel__h{font-family:var(--mono);font-size:17px;font-weight:680}
+.rel__d{font-size:10.5px;color:var(--txt-3);text-transform:uppercase;letter-spacing:.07em;margin-top:2px}
+.rel__risco{width:1px;height:28px;background:var(--fio)}
+.rel__ola{font-size:14px;font-weight:640}
+.rel__sub{font-size:11.5px;color:var(--txt-2);margin-top:2px}
+.rel__sub b{color:var(--alerta)}
+
+.centro{grid-column:2;grid-row:2;overflow:auto;padding:18px 24px;display:flex;flex-direction:column;gap:12px}
+.lado{grid-column:3;grid-row:2/-1;overflow:auto;padding:18px 20px;
+      background:rgba(255,255,255,.70);-webkit-backdrop-filter:blur(20px) saturate(1.4);
+      backdrop-filter:blur(20px) saturate(1.4);border-left:1px solid rgba(255,255,255,.75)}
+
+/* ---------- a barra de avisos, no pé ---------- */
+/* Altura fixa, uma linha. Não cresce nunca: se um dia houver dez
+   avisos, os sete últimos esperam a vez em vez de empurrarem a
+   tela para baixo. */
+.avisos{grid-column:2;grid-row:3;display:flex;align-items:center;gap:0;
+        background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+        border-top:1px solid rgba(255,255,255,.75);padding:0 24px;height:44px;overflow:hidden}
+.avisos__rot{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.15em;
+             text-transform:uppercase;color:var(--txt-3);flex:none;margin-right:16px}
+.av{display:flex;align-items:baseline;gap:7px;white-space:nowrap;flex:none}
+.av__p{width:5px;height:5px;border-radius:50%;background:var(--acento);flex:none;position:relative;top:-2px}
+.av__t{font-size:12.5px;font-weight:640}
+.av__x{font-size:12px;color:var(--txt-3)}
+.av__sep{width:1px;height:15px;background:var(--fio);margin:0 16px;flex:none}
+.avisos__mais{margin-left:auto;font-size:11.5px;color:var(--txt-3);flex:none}
+
+/* ---------- pendências por urgência ---------- */
+.lado__t{font-size:14px;font-weight:730;margin-bottom:4px}
+.faixa{display:flex;align-items:center;gap:8px;margin:16px 0 8px}
+.faixa:first-of-type{margin-top:12px}
+.faixa__t{font-size:11.5px;font-weight:730;letter-spacing:.04em;text-transform:uppercase}
+.faixa__n{font-family:var(--mono);font-size:10.5px;font-weight:700;padding:1px 8px;border-radius:99px}
+.faixa--atraso .faixa__t{color:var(--alerta)}
+.faixa--atraso .faixa__n{background:var(--alerta-luz);color:var(--alerta)}
+.faixa--hoje .faixa__t{color:var(--acento-esc)}
+.faixa--hoje .faixa__n{background:var(--acento-luz);color:var(--acento-esc)}
+.faixa--depois .faixa__t{color:var(--txt-3)}
+.faixa--depois .faixa__n{background:var(--base);color:var(--txt-3)}
+.pen{display:flex;gap:12px;padding:12px;border-radius:12px;background:rgba(243,245,249,.75);
+     align-items:flex-start;margin-bottom:7px}
+.pen__f{width:3px;border-radius:99px;align-self:stretch;background:var(--fio-2);flex:none}
+.pen--atrasada .pen__f{background:var(--alerta)}
+.pen--hoje .pen__f{background:var(--acento)}
+.pen__p{flex:none;width:38px;text-align:center}
+.pen__d{font-family:var(--mono);font-size:17px;font-weight:730;line-height:1;color:var(--txt-2)}
+.pen__m{font-size:8.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--txt-3);margin-top:4px}
+.pen--atrasada .pen__d{color:var(--alerta)}
+.pen--hoje .pen__d{color:var(--acento-esc)}
+.pen__o{font-size:13px;font-weight:640;line-height:1.35}
+.pen__q{font-size:11px;color:var(--txt-3);margin-top:3px}
+
+/* ---------- peças comuns dos sistemas ---------- */
+.rot{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.17em;
+     text-transform:uppercase;color:var(--txt-3)}
+.bloco{background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(16px) saturate(1.4);
+       backdrop-filter:blur(16px) saturate(1.4);
+       border:1px solid rgba(255,255,255,.8);border-radius:14px;padding:15px 17px;
+       box-shadow:0 6px 22px rgba(13,25,38,.05);display:flex;flex-direction:column;min-height:0}
+.bloco__cab{display:flex;align-items:baseline;gap:10px;margin-bottom:12px}
+.bloco__t{font-size:14px;font-weight:730}
+.bloco__n{font-family:var(--mono);font-size:10.5px;color:var(--txt-3);margin-left:auto}
+.ico{border-radius:12px;background:#fff;border:1px solid var(--fio);display:grid;place-items:center;
+     overflow:hidden;flex:none;transition:transform .18s cubic-bezier(.16,1,.3,1)}
+.ico img{object-fit:contain}
+.ico--sigla{background:var(--acento);color:var(--acento-txt);font-weight:780;border:0}
+
+.gaveta{display:flex;align-items:center;gap:13px;padding:13px 16px;border-radius:14px;
+        background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+        border:1px solid rgba(255,255,255,.8);width:100%;text-align:left;
+        box-shadow:0 6px 22px rgba(13,25,38,.05);transition:border-color .15s}
+.gaveta:hover{border-color:var(--acento)}
+.gaveta__c{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;flex:none;
+           background:var(--acento);color:var(--acento-txt);font-family:var(--mono);font-size:13px;font-weight:700}
+.gaveta__t{font-size:13.5px;font-weight:660}
+.gaveta__s{font-size:11.5px;color:var(--txt-3);margin-top:2px}
+.gaveta__seta{margin-left:auto;color:var(--txt-3);font-size:20px}
+
+.agenda{display:grid;grid-template-columns:repeat(auto-fit,minmax(106px,1fr));gap:8px}
+.prazo{background:rgba(243,245,249,.7);border-radius:10px;padding:10px 11px;border-left:3px solid var(--fio-2)}
+.prazo--perto{border-left-color:var(--acento)}
+.prazo--hoje{border-left-color:var(--alerta)}
+.prazo__d{font-family:var(--mono);font-size:18px;font-weight:730;line-height:1}
+.prazo--hoje .prazo__d{color:var(--alerta)}
+.prazo--perto .prazo__d{color:var(--acento-esc)}
+.prazo__n{font-size:10.5px;font-weight:620;color:var(--txt-2);margin-top:5px;line-height:1.3}
+.prazo__q{font-size:9.5px;color:var(--txt-3);margin-top:2px}
+
+/* ============================================================
+   N1 · DUAS COLUNAS
+   Os dois blocos lado a lado em vez de empilhados. Aproveita a
+   largura e encurta a página em uma linha inteira.
+   ============================================================ */
+#N1 .duas{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#N1 .apps{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:13px 5px}
+#N1 .app{display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;
+         padding:6px 2px;border-radius:11px;transition:background .14s}
+#N1 .app:hover{background:var(--realce)}
+#N1 .app:hover .ico{transform:translateY(-3px)}
+#N1 .ico{width:40px;height:40px}
+#N1 .ico img{width:27px;height:27px}
+#N1 .ico--sigla{font-size:13px}
+#N1 .app__n{font-size:10.5px;font-weight:600;color:var(--txt-2);line-height:1.25}
+
+/* ============================================================
+   N2 · FILEIRA ÚNICA
+   Todos os doze numa fila só, sem bloco nenhum, direto sobre o
+   fundo. É a arrumação mais econômica de altura que existe: uma
+   linha resolve os sistemas do dia inteiro.
+   ============================================================ */
+#N2 .fileira{display:flex;gap:4px;flex-wrap:wrap}
+#N2 .app{display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;
+         width:82px;padding:8px 2px;border-radius:12px;transition:background .14s}
+#N2 .app:hover{background:var(--papel)}
+#N2 .app:hover .ico{transform:translateY(-3px)}
+#N2 .ico{width:44px;height:44px}
+#N2 .ico img{width:29px;height:29px}
+#N2 .ico--sigla{font-size:14px}
+#N2 .app__n{font-size:10.5px;font-weight:600;color:var(--txt-2);line-height:1.25}
+#N2 .divisor{width:1px;align-self:stretch;background:var(--fio);margin:6px 10px}
+
+/* ============================================================
+   N3 · NOME AO LADO
+   Ícone pequeno com o nome à direita, em três colunas. Lê-se em
+   vez de se olhar — e nome completo cabe sem quebrar linha, o
+   que a grade de ícone não consegue.
+   ============================================================ */
+#N3 .colunas{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:4px 20px}
+#N3 .linha{display:flex;align-items:center;gap:10px;padding:7px 8px;border-radius:9px;transition:background .14s}
+#N3 .linha:hover{background:var(--papel)}
+#N3 .ico{width:28px;height:28px;border-radius:8px}
+#N3 .ico img{width:19px;height:19px}
+#N3 .ico--sigla{font-size:10px}
+#N3 .linha__n{font-size:13px;font-weight:600;color:var(--txt-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#N3 .linha:hover .linha__n{color:var(--txt)}
+
+/* ============================================================
+   N4 · MOSAICO
+   Os quatro primeiros ganham cartão largo com nome e legenda;
+   os outros oito ficam em ícone normal. Hierarquia dentro do
+   próprio grupo, sem precisar de um grupo novo.
+   ============================================================ */
+#N4 .destaques{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:9px;margin-bottom:12px}
+#N4 .grande{display:flex;align-items:center;gap:11px;padding:12px 13px;border-radius:13px;
+            background:var(--papel);border:1px solid var(--fio);transition:transform .15s,border-color .15s}
+#N4 .grande:hover{transform:translateY(-2px);border-color:var(--acento)}
+#N4 .grande .ico{width:38px;height:38px}
+#N4 .grande .ico img{width:25px;height:25px}
+#N4 .grande .ico--sigla{font-size:12px}
+#N4 .grande__n{font-size:13px;font-weight:660}
+#N4 .grande__x{font-size:10.5px;color:var(--txt-3);margin-top:2px}
+#N4 .apps{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:12px 5px}
+#N4 .app{display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;
+         padding:6px 2px;border-radius:11px;transition:background .14s}
+#N4 .app:hover{background:var(--papel)}
+#N4 .app .ico{width:38px;height:38px}
+#N4 .app .ico img{width:25px;height:25px}
+#N4 .app .ico--sigla{font-size:12px}
+#N4 .app__n{font-size:10px;font-weight:600;color:var(--txt-2);line-height:1.25}
+
+/* ============================================================
+   N5 · SEM CAIXA
+   Nenhum bloco branco: os ícones ficam direto sobre o fundo,
+   separados por um rótulo e um fio. A tela mais leve possível —
+   menos uma borda por grupo.
+   ============================================================ */
+#N5 .grupo + .grupo{margin-top:22px}
+#N5 .grupo__rot{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+#N5 .grupo__rot::after{content:"";flex:1;height:1px;background:var(--fio)}
+#N5 .apps{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:14px 5px}
+#N5 .app{display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;
+         padding:7px 2px;border-radius:11px;transition:background .14s}
+#N5 .app:hover{background:var(--papel)}
+#N5 .app:hover .ico{transform:translateY(-3px)}
+#N5 .ico{width:42px;height:42px}
+#N5 .ico img{width:28px;height:28px}
+#N5 .ico--sigla{font-size:13px}
+#N5 .app__n{font-size:10.5px;font-weight:600;color:var(--txt-2);line-height:1.25}
+
+/* ============================================================
+   N6 · CARTÕES LARGOS
+   Cada sistema é um cartão com ícone, nome e legenda, em três
+   colunas. O que mais informa e o que mais ocupa — vale se a
+   equipe é nova e ainda não sabe o que é cada coisa.
+   ============================================================ */
+#N6 .cartoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:9px}
+#N6 .cartao{display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:13px;
+            background:var(--papel);border:1px solid var(--fio);transition:transform .15s,border-color .15s}
+#N6 .cartao:hover{transform:translateY(-2px);border-color:var(--acento)}
+#N6 .ico{width:40px;height:40px}
+#N6 .ico img{width:27px;height:27px}
+#N6 .ico--sigla{font-size:13px}
+#N6 .cartao__n{font-size:13.5px;font-weight:660}
+#N6 .cartao__x{font-size:11px;color:var(--txt-3);margin-top:2px}
+
+/* ============================================================
+   N7 · ACESSO RÁPIDO
+   O padrão do app do Sebrae: cartão pequeno, ícone no alto à
+   esquerda, nome embaixo em duas linhas. Três ou quatro por
+   fileira, borda fina.
+
+   Por que funciona: o nome ganha DUAS linhas em vez de uma. Na
+   grade de ícone centralizado, "Conectividade Social" tinha que
+   caber numa linha de 84px ou ser cortado; aqui ele respira. E o
+   alinhamento à esquerda cria uma coluna de leitura que a grade
+   centralizada não tem.
+   ============================================================ */
+#N7 .rapido{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:9px}
+#N7 .qa{display:flex;flex-direction:column;gap:9px;padding:12px 13px;border-radius:12px;
+        background:rgba(255,255,255,.82);border:1px solid var(--fio);
+        transition:border-color .15s,transform .15s,box-shadow .15s}
+#N7 .qa:hover{border-color:var(--acento);transform:translateY(-2px);
+              box-shadow:0 8px 20px rgba(11,92,246,.13)}
+#N7 .qa .ico{width:30px;height:30px;border-radius:9px;background:var(--acento-luz);border:0}
+#N7 .qa .ico img{width:20px;height:20px}
+#N7 .qa .ico--sigla{background:var(--acento);color:var(--acento-txt);font-size:11px}
+#N7 .qa__n{font-size:12px;font-weight:640;color:var(--txt);line-height:1.3}
+#N7 .qa__x{font-size:10.5px;color:var(--txt-3);margin-top:2px;line-height:1.3}
+
+/* ============================================================
+   N8 · PRATELEIRA
+   Cada grupo é uma tira que rola na horizontal, como estante de
+   loja de aplicativo. Ocupa uma altura fixa por grupo, não
+   importa quantos sistemas entrem — o vigésimo link não empurra
+   nada para baixo.
+   ============================================================ */
+#N8 .prateleira{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+#N8 .pt{flex:none;width:132px;display:flex;flex-direction:column;gap:9px;padding:12px;
+        border-radius:12px;background:rgba(255,255,255,.82);border:1px solid var(--fio);
+        transition:border-color .15s,transform .15s}
+#N8 .pt:hover{border-color:var(--acento);transform:translateY(-2px)}
+#N8 .pt .ico{width:34px;height:34px;border-radius:10px;background:var(--acento-luz);border:0}
+#N8 .pt .ico img{width:23px;height:23px}
+#N8 .pt .ico--sigla{background:var(--acento);color:var(--acento-txt);font-size:12px}
+#N8 .pt__n{font-size:12px;font-weight:640;line-height:1.3}
+
+/* ============================================================
+   N9 · DOIS POR LINHA
+   Cartão largo, ícone grande e nome em corpo de leitura. Só dois
+   por linha. O oposto da grade apertada: menos itens à vista, e
+   cada um impossível de errar.
+   ============================================================ */
+#N9 .duplas{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:9px}
+#N9 .dupla{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:13px;
+           background:rgba(255,255,255,.82);border:1px solid var(--fio);
+           transition:border-color .15s,transform .15s}
+#N9 .dupla:hover{border-color:var(--acento);transform:translateY(-2px)}
+#N9 .dupla .ico{width:46px;height:46px;border-radius:14px}
+#N9 .dupla .ico img{width:30px;height:30px}
+#N9 .dupla .ico--sigla{font-size:15px}
+#N9 .dupla__n{font-size:14.5px;font-weight:660}
+#N9 .dupla__x{font-size:11.5px;color:var(--txt-3);margin-top:3px}
+
+/* ============================================================
+   N10 · FAIXA COLORIDA
+   Cartão pequeno com um traço da cor do grupo à esquerda. O
+   traço faz o agrupamento sem precisar de caixa em volta nem de
+   rótulo repetido — dá para misturar tudo numa grade só e ainda
+   assim saber de onde cada um veio.
+   ============================================================ */
+#N10 .misturado{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:8px}
+#N10 .fx{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:11px;
+         background:rgba(255,255,255,.82);border:1px solid var(--fio);
+         border-left:3px solid var(--cor,var(--fio-2));transition:transform .15s,box-shadow .15s}
+#N10 .fx:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(11,92,246,.12)}
+#N10 .fx .ico{width:28px;height:28px;border-radius:8px}
+#N10 .fx .ico img{width:19px;height:19px}
+#N10 .fx .ico--sigla{font-size:10px}
+#N10 .fx__n{font-size:12.5px;font-weight:620;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#N10 .legenda{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+#N10 .lg{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--txt-2)}
+#N10 .lg__c{width:9px;height:9px;border-radius:3px;flex:none}
+
+/* ============================================================
+   RESPONSIVO — e mobile first de verdade
+
+   No celular a planta muda, não encolhe. Três decisões:
+
+   1. A BARRA LATERAL VIRA BARRA INFERIOR. Polegar não alcança o
+      topo de um telefone de 6 polegadas; alcança o rodapé. É por
+      isso que todo aplicativo sério pôs a navegação embaixo, e é
+      o que o app do Sebrae faz.
+
+   2. AS ZONAS EMPILHAM NA ORDEM DA URGÊNCIA: primeiro as
+      pendências, depois os sistemas, depois a agenda. No
+      computador as pendências ficam ao lado porque há largura
+      sobrando; no telefone não há, e aí quem vem primeiro é
+      quem importa mais.
+
+   3. OS AVISOS ROLAM NA HORIZONTAL em vez de quebrar em várias
+      linhas — continuam com altura fixa, como no computador.
+   ============================================================ */
+@media (max-width:900px){
+  .tela{height:auto;min-height:calc(100vh - 47px);
+        grid-template-columns:1fr;grid-template-rows:auto auto auto auto auto;overflow:visible;
+        padding-bottom:64px}
+
+  /* a lateral escura vira barra inferior, fixa */
+  .nav{grid-row:auto;grid-column:1;position:fixed;left:0;right:0;bottom:0;top:auto;
+       flex-direction:row;justify-content:space-around;align-items:center;
+       height:60px;padding:0 8px;z-index:60;
+       box-shadow:0 -2px 16px rgba(10,26,58,.16)}
+  .nav__logo{display:none}
+  .nav__b{width:52px;height:44px;border-radius:11px}
+
+  .cab{grid-column:1;grid-row:1;padding:10px 16px;gap:12px;flex-wrap:wrap}
+  .marca{height:32px}
+  .rel{gap:10px}
+  .rel__h{font-size:15px}
+  .rel__risco{height:24px}
+  .rel__ola{font-size:13px}
+
+  /* pendências primeiro: no telefone, quem manda é a urgência */
+  .lado{grid-column:1;grid-row:2;border-left:0;border-bottom:1px solid var(--fio);
+        padding:14px 16px;overflow:visible}
+  .centro{grid-column:1;grid-row:3;padding:14px 16px;overflow:visible;gap:10px}
+  .avisos{grid-column:1;grid-row:4;padding:0 16px;overflow-x:auto;overflow-y:hidden}
+
+  /* grades apertam, ninguém quebra */
+  #N1 .duas{grid-template-columns:1fr}
+  #N7 .rapido{grid-template-columns:repeat(auto-fill,minmax(132px,1fr))}
+  #N9 .duplas{grid-template-columns:1fr}
+  #N10 .misturado{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+  #N6 .cartoes{grid-template-columns:1fr}
+  #N3 .colunas{grid-template-columns:1fr}
+  .agenda{grid-template-columns:repeat(auto-fill,minmax(96px,1fr))}
+}
+
+@media (max-width:420px){
+  .cab{padding:9px 13px}
+  .marca{height:28px}
+  .rel__d,.rel__sub{font-size:10.5px}
+  .centro,.lado{padding:12px 13px}
+  .avisos{padding:0 13px}
+  #N7 .rapido{grid-template-columns:1fr 1fr}
+  #N10 .misturado{grid-template-columns:1fr 1fr}
+  .agenda{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="escolha">
+  <span class="escolha__t">Ícones</span>
+  <div id="botoes" style="display:flex;gap:7px;flex-wrap:wrap"></div>
+  <span class="escolha__n">Avisos no rodapé · pendências sozinhas no trilho</span>
+</div>
+
+<div id="palco"></div>
+
+<script src="js/sistemas.js"></script>
+<script src="js/logos.js"></script>
+<script src="js/modelos13.js"></script>
+</body>
+</html>
