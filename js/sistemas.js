@@ -167,3 +167,23 @@ const AVISOS = [
   { tipo:"prazo", titulo:"eSocial e FGTS Digital", texto:"Fechamento da folha até o dia 15." },
   { tipo:"aviso", titulo:"Este Hub é editável", texto:"Faltou um sistema? Edite js/sistemas.js." },
 ];
+
+/* ============================================================
+   Agenda do mês — os vencimentos que aparecem no centro da tela
+   ------------------------------------------------------------
+   O "estado" muda só a cor da tarja à esquerda:
+       "hoje"  vermelho  ·  "perto" azul-aço  ·  vazio, neutro
+
+   Como o dia é texto e não data, ele vale para todo mês — a
+   agenda tributária repete os mesmos vencimentos. Quem edita
+   marca à mão o que está perto, na admin.html.
+   ============================================================ */
+
+const AGENDA = [
+  { dia:"07", nome:"FGTS · Conectividade",   quem:"todos os clientes",   estado:"perto" },
+  { dia:"15", nome:"eSocial e FGTS Digital", quem:"fechamento da folha", estado:"perto" },
+  { dia:"20", nome:"DAS do Simples",         quem:"todos os optantes",   estado:"" },
+  { dia:"20", nome:"INSS e IRRF",            quem:"retenções",           estado:"" },
+  { dia:"25", nome:"PIS e COFINS",           quem:"lucro presumido",     estado:"" },
+  { dia:"30", nome:"ICMS Sergipe",           quem:"apuração mensal",     estado:"" },
+];

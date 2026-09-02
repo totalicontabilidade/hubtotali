@@ -1,508 +1,319 @@
 /* ============================================================
    Hub Totali · folha de estilo
    ------------------------------------------------------------
-   Fundo branco, texto no azul-noite da marca, dourado como
-   acento.
+   O desenho aprovado em 02/09/2026, depois de quinze rodadas de
+   comparação. As páginas modelos*.html guardam o caminho até
+   aqui — se um dia alguém perguntar por que a tela é assim, a
+   resposta está lá.
 
-   A tela tem DUAS CAMADAS, e é isso que a mantém limpa:
+   O QUE ESTÁ DECIDIDO AQUI, e por quê:
 
-     CARTÃO  o que se abre todo dia. Logo do site, nome e
-             legenda, sempre à vista. Ocupa espaço porque merece.
+   TRÊS ZONAS, cada uma com um assunto. Barra de navegação
+   escura à esquerda; sistemas e agenda no centro; pendências
+   no trilho da direita; avisos numa faixa fina no rodapé. Nada
+   se mistura, e nenhuma zona pode crescer para dentro da outra.
 
-     GAVETA  o que se abre de vez em quando — órgão de governo,
-             consulta pontual. Fica FECHADA: uma linha só, com o
-             nome do setor e quantos links guarda. Vinte e cinco
-             pastilhas soltas na tela eram a maior fonte de
-             poluição visual da página; agora são quatro linhas
-             quietas que só falam quando alguém pergunta.
+   ITEM SEM MOLDURA. O sistema é ícone, nome e legenda soltos
+   sobre o fundo — sem retângulo em volta de retângulo, que foi
+   o que deixava a tela poluída nas primeiras versões.
 
-   O logo de cada site é ARQUIVO NOSSO, em assets/logos/. Nada é
-   buscado fora na hora de abrir: seria meia dúzia de pedidos de
-   rede por nada, e contaria a um terceiro quais sistemas a
-   Totali usa. Faltou o arquivo, entra o quadradinho de iniciais.
+   UMA COR DE MARCA, UMA DE ESTADO, UMA DE ALERTA. O azul-noite
+   é a identidade (barra, iniciais, foco). O azul-aço marca "para
+   hoje". O vermelho é só atraso, e mais nada — se ele também
+   enfeitasse um botão, deixaria de significar atenção.
+
+   VIDRO A 72%. Abaixo disso o texto compete com o fundo. Esta
+   é uma tela para trabalhar oito horas por dia.
+
+   MOBILE FIRST. No telefone a planta muda, não encolhe: a barra
+   lateral vira barra inferior, e as zonas empilham na ordem da
+   urgência — pendências antes dos sistemas.
    ============================================================ */
 
-/* ---------- 1. Tokens ---------- */
+*,*::before,*::after{box-sizing:border-box}
+
 :root{
-  /* Superfícies. O papel é branco; o cinza-azulado só aparece
-     como piso da página, para o cartão branco ter onde pousar. */
-  --piso:#f4f7fa;
-  --papel:#ffffff;
-  --papel-2:#f8fafc;
+  /* superfícies */
+  --base:#eef1f6;
+  --fio:#dde4ee;
+  --fio-2:#c6d1e0;
 
-  /* Fios. Quem separa um cartão do outro é a linha, não a sombra. */
-  --fio:#e4eaf1;
-  --fio-2:#d2dce7;
-
-  /* Azul-noite da marca, no texto. */
-  --navy:#0d1926;
+  /* texto */
   --txt:#0d1926;
-  --txt-2:#4d5f72;
-  /* A legenda do cartão é o texto menor da tela. No tom claro que
-     eu tinha posto ela media 3,5:1 sobre o branco — legível para
-     quem enxerga bem, cansativa para quem não. Escurecida até
-     passar de 4,5:1, o mínimo da norma de acessibilidade. */
-  --txt-3:#5e7183;
+  --txt-2:#4a5d76;
+  --txt-3:#7c8ea8;
 
-  /* Dourado da marca. Na versão clara ele precisa escurecer: o
-     #c2a250 do portal escuro não alcança contraste sobre branco. */
-  --gold:#7f6420;
-  --gold-2:#b08d3c;
-  --gold-luz:#f7f1e2;
-  --gold-fio:#e6d6ab;
+  /* as três cores com trabalho definido */
+  --marca:#0d1926;   --marca-txt:#fff;
+  --estado:#2c5a8f;  --estado-luz:#e6edf6;
+  --alerta:#c0453a;  --alerta-luz:#fbeceb;
 
-  --prazo:#b8801f;
-  --aviso:#2f6ba8;
-  --ok:#2f7d55;
+  --nav:#0d1926;     --nav-txt:#8ea5c2;
 
-  --r-sm:9px;
-  --r:13px;
-  --r-lg:18px;
-
-  --sh:0 1px 2px rgba(13,25,38,.05);
-  --sh-2:0 8px 24px rgba(13,25,38,.10);
-
-  /* Largura generosa de propósito: quanto mais colunas cabem na
-     grade, menos linhas — e o objetivo da tela é caber inteira,
-     sem rolagem, no monitor da equipe. */
-  --maxw:1760px;
-
+  --r:14px;
   --font:"Segoe UI Variable Display","Segoe UI",-apple-system,BlinkMacSystemFont,
          system-ui,Roboto,"Helvetica Neue",Arial,sans-serif;
   --mono:ui-monospace,"Cascadia Mono","Segoe UI Mono",Consolas,monospace;
-  --ease:cubic-bezier(.22,.61,.36,1);
-  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease:cubic-bezier(.16,1,.3,1);
 }
 
-/* ---------- 2. Reset ---------- */
-*,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;background:var(--piso)}
-body{
-  margin:0;
-  min-height:100vh;
-  font-family:var(--font);
-  font-size:15px;
-  line-height:1.5;
-  color:var(--txt);
-  background:var(--piso);
-  text-rendering:optimizeLegibility;
-  overflow-wrap:break-word;
-  display:flex;
-  flex-direction:column;
-}
-h1,h2,h3,p,ul,li,figure{margin:0}
-h1,h2,h3{line-height:1.2;letter-spacing:-.02em;font-weight:660}
-ul{padding:0}
-li{list-style:none}
-img,svg{display:block;max-width:100%}
-a{color:inherit;text-decoration:none}
+html{-webkit-text-size-adjust:100%;background:var(--base)}
+body{margin:0;font-family:var(--font);color:var(--txt);background:var(--base);
+     -webkit-font-smoothing:antialiased}
+h1,h2,h3,p{margin:0}
+img{display:block;max-width:100%}
 button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
-code{font-family:var(--mono);font-size:.92em;
-     background:var(--piso);border:1px solid var(--fio);border-radius:5px;padding:1px 5px}
+a{color:inherit;text-decoration:none}
 [hidden]{display:none !important}
+:focus-visible{outline:2px solid var(--estado);outline-offset:2px;border-radius:8px}
+::selection{background:rgba(44,90,143,.2)}
 
-:focus-visible{outline:2px solid var(--gold-2);outline-offset:2px;border-radius:6px}
-::selection{background:rgba(176,141,60,.22)}
+.pular{position:absolute;left:12px;top:-64px;z-index:200;background:var(--marca);color:#fff;
+       padding:10px 16px;border-radius:9px;font-weight:700;font-size:14px;transition:top .18s}
+.pular:focus{top:12px}
 
-.skip-link{
-  position:absolute;left:12px;top:-64px;z-index:50;
-  background:var(--navy);color:#fff;padding:10px 16px;
-  border-radius:var(--r-sm);font-weight:700;font-size:14px;
-  transition:top .18s var(--ease);
-}
-.skip-link:focus{top:12px}
-
-/* ---------- 3. Topo ---------- */
-.topo{
-  background:var(--papel);
-  border-bottom:1px solid var(--fio);
-  position:sticky;top:0;z-index:20;
-}
-.topo__interno{
-  max-width:var(--maxw);margin:0 auto;
-  padding:12px 24px;
-  display:flex;align-items:center;justify-content:space-between;gap:20px;
-}
-/* A logo é um conjunto largo, de duas linhas (símbolo + "hub
-   totali" empilhado). Por isso a altura é que manda e a largura
-   segue: fixar largura achataria ou esticaria a marca. 46px de
-   altura deixa cada palavra com uns 18px — o menor tamanho em
-   que essa tipografia ainda se lê sem esforço. */
-.marca{display:flex;align-items:center;gap:12px;min-width:0}
-.marca__logo{height:46px;width:auto;max-width:240px;object-fit:contain;flex:none}
-
-/* Só aparece se o arquivo da logo sumir da pasta. Melhor o nome
-   escrito do que um espaço vazio no alto da página. */
-.marca__monograma{
-  font-size:18px;font-weight:700;letter-spacing:-.024em;color:var(--navy);
-}
-
-/* Na administração, diz em que página você está. */
-.marca__secao{
-  font-size:12.5px;font-weight:640;color:var(--txt-2);
-  padding:3px 9px;border-radius:999px;
-  background:var(--piso);border:1px solid var(--fio);
-  white-space:nowrap;
-}
-
-/* O relógio, discreto: uma linha só, no corpo do texto de apoio.
-   A hora vem em fonte de largura fixa — sem isso, cada minuto
-   empurraria a data um pixel para o lado e o canto da tela
-   ficaria tremendo o dia inteiro. Sem segundos, de propósito:
-   número piscando no alto da página puxa o olho a cada instante,
-   e ninguém abre o Hub para cronometrar nada. */
-.relogio{
-  flex:none;display:flex;align-items:baseline;gap:7px;
-  font-size:13px;color:var(--txt-2);
-}
-.relogio__hora{font-family:var(--mono);font-variant-numeric:tabular-nums;
-  font-weight:620;color:var(--navy);letter-spacing:-.01em}
-.relogio__sep{color:var(--fio-2)}
-.relogio__data{color:var(--txt-2)}
-
-/* ---------- 4. Página e colunas ---------- */
-.pagina{
-  flex:1;
-  width:100%;max-width:var(--maxw);margin:0 auto;
-  padding:22px 24px 36px;
-}
-.colunas{
+/* ============================================================
+   1 · A planta
+   ============================================================ */
+.tela{
+  height:100vh;
   display:grid;
-  grid-template-columns:minmax(0,1fr) 280px;
-  gap:26px;
-  align-items:start;
-}
-.coluna-sistemas{min-width:0;display:flex;flex-direction:column;gap:20px}
-
-/* ---------- 5. Cabeçalho de setor ---------- */
-.setor__cabeca{
-  display:flex;align-items:baseline;gap:10px;
-  padding:0 2px 8px;margin-bottom:11px;
-  border-bottom:1px solid var(--fio);
-}
-.setor__titulo{
-  font-size:12.5px;font-weight:730;
-  letter-spacing:.085em;text-transform:uppercase;
-  color:var(--navy);
-  display:flex;align-items:center;gap:7px;
-}
-.setor__estrela{fill:var(--gold-2)}
-.setor__nota{font-size:12.5px;color:var(--txt-3);margin-left:auto;text-align:right}
-
-/* ---------- 5b. Gavetas ---------- */
-/* A metade de baixo da tela era vinte e cinco pastilhas soltas,
-   todas do mesmo tamanho, gritando junto. Agora é uma pilha de
-   quatro linhas fechadas. Quem precisa do e-CAC abre a gaveta do
-   Fiscal; quem não precisa nem vê que ela existe. */
-.gavetas{
-  display:flex;flex-direction:column;
-  border:1px solid var(--fio);
-  border-radius:var(--r-lg);
-  background:var(--papel);
+  grid-template-columns:64px minmax(0,1fr) 380px;
+  grid-template-rows:auto minmax(0,1fr) auto;
   overflow:hidden;
-}
-.gaveta + .gaveta{border-top:1px solid var(--fio)}
-
-.gaveta__puxador{
-  display:flex;align-items:center;gap:10px;
-  padding:12px 16px;
-  cursor:pointer;
-  list-style:none;                    /* tira o triângulo do navegador */
-  transition:background-color .15s var(--ease);
-  -webkit-tap-highlight-color:transparent;
-}
-.gaveta__puxador::-webkit-details-marker{display:none}
-.gaveta__puxador:hover{background:var(--papel-2)}
-.gaveta[open] .gaveta__puxador{background:var(--papel-2)}
-
-.gaveta__titulo{
-  font-size:13.5px;font-weight:660;color:var(--navy);
-  letter-spacing:-.008em;
-}
-.gaveta__nota{font-size:12.5px;color:var(--txt-3);min-width:0;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-
-/* Quantos links a gaveta guarda. Dá para decidir se vale abrir
-   sem precisar abrir. */
-.gaveta__conta{
-  margin-left:auto;flex:none;
-  min-width:22px;height:20px;padding:0 7px;
-  display:grid;place-items:center;
-  border-radius:999px;
-  background:var(--piso);border:1px solid var(--fio);
-  font-size:11.5px;font-weight:700;color:var(--txt-2);
-  font-variant-numeric:tabular-nums;
-}
-.gaveta__seta{flex:none;width:18px;height:18px;color:var(--txt-3);
-  transition:transform .22s var(--ease-out),color .15s var(--ease)}
-.gaveta__seta svg{width:18px;height:18px}
-.gaveta[open] .gaveta__seta{transform:rotate(180deg);color:var(--txt-2)}
-.gaveta__puxador:hover .gaveta__seta{color:var(--navy)}
-
-.gaveta .chips{padding:2px 16px 15px}
-
-/* Onde o navegador souber animar o conteúdo de um <details>, a
-   gaveta desliza em vez de pular. Onde não souber, abre igual —
-   é enfeite, não estrutura. */
-@supports (interpolate-size: allow-keywords){
-  :root{interpolate-size:allow-keywords}
-  .gaveta::details-content{
-    block-size:0;overflow:hidden;opacity:0;
-    transition:block-size .26s var(--ease-out),opacity .2s var(--ease),content-visibility .26s allow-discrete;
-  }
-  .gaveta[open]::details-content{block-size:auto;opacity:1}
-}
-
-/* ---------- 6. Camada 1 · cartão ---------- */
-.grade{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
-  gap:10px;
-}
-.cartao{
   position:relative;
-  display:flex;align-items:center;gap:11px;
-  padding:11px 12px;
-  background:var(--papel);
-  border:1px solid var(--fio);
-  border-radius:var(--r);
-  box-shadow:none;
-  transition:border-color .18s var(--ease),box-shadow .18s var(--ease),
-             transform .18s var(--ease),background-color .18s var(--ease);
 }
-.cartao:hover{
-  background:var(--papel-2);
-  border-color:var(--fio-2);
-  box-shadow:var(--sh-2);
-  transform:translateY(-2px);
+/* A luz de fundo. Fica atrás de tudo e não recebe clique. */
+.tela::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(48% 54% at 12% 4%,  rgba(13,25,38,.10),  transparent 62%),
+    radial-gradient(46% 52% at 90% 10%, rgba(44,90,143,.14), transparent 62%),
+    radial-gradient(54% 58% at 60% 98%, rgba(13,25,38,.07),  transparent 62%);
 }
-.cartao:focus-within{border-color:var(--gold-fio)}
+.tela > *{position:relative;z-index:1}
 
-/* O link cobre o cartão inteiro: o alvo do clique é o cartão, não
-   o texto. A estrela fica por cima, num nível acima. */
-.cartao__link{position:absolute;inset:0;border-radius:var(--r);z-index:1}
-.cartao__link:focus-visible{outline-offset:-2px}
+/* ---------- barra de navegação ---------- */
+.nav{grid-row:1/-1;grid-column:1;background:var(--nav);
+     display:flex;flex-direction:column;align-items:center;gap:5px;padding:14px 0}
+.nav__logo{width:32px;height:32px;object-fit:contain;margin-bottom:12px}
+.nav__b{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
+        color:var(--nav-txt);transition:background .14s,color .14s}
+.nav__b:hover{background:rgba(255,255,255,.10);color:#fff}
+.nav__b.on{background:rgba(255,255,255,.15);color:#fff}
+.nav__b svg{width:19px;height:19px}
 
-.cartao__texto{min-width:0;flex:1}
-.cartao__nome{
-  display:block;font-size:14px;font-weight:640;color:var(--navy);
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-.cartao__nota{
-  display:block;font-size:11.5px;color:var(--txt-3);margin-top:1px;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-.cartao--sem-link{opacity:.62}
-.cartao--sem-link:hover{transform:none;box-shadow:none;border-color:var(--fio)}
+/* ---------- cabeçalho ---------- */
+.cab{grid-column:2/-1;grid-row:1;display:flex;align-items:center;gap:18px;padding:12px 24px;
+     background:rgba(255,255,255,.74);border-bottom:1px solid rgba(255,255,255,.7);
+     -webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4)}
+.cab__logo{height:38px;width:auto}
+.rel{margin-left:auto;display:flex;align-items:center;gap:13px}
+/* Hora em largura fixa: sem isso, cada minuto empurra a data um
+   pixel para o lado e o canto da tela treme o dia inteiro. */
+/* Trocados de tamanho: a saudação é o que a pessoa lê primeiro, a
+   hora é só referência. Quem abre o Hub não veio ver a hora. */
+.rel__h{font-family:var(--mono);font-size:14.5px;font-weight:660;font-variant-numeric:tabular-nums;color:var(--txt-2)}
+.rel__d{font-size:10px;color:var(--txt-3);text-transform:uppercase;letter-spacing:.07em;margin-top:2px}
+.rel__risco{width:1px;height:28px;background:var(--fio)}
+.rel__ola{font-size:17px;font-weight:680;letter-spacing:-.015em}
+.rel__sub{font-size:11.5px;color:var(--txt-2);margin-top:2px}
+.rel__sub b{color:var(--alerta);font-weight:700}
 
-/* ---------- 7. Camada 2 · chip ---------- */
-.chips{display:flex;flex-wrap:wrap;gap:7px}
-.chip{
-  position:relative;
-  display:inline-flex;align-items:center;gap:7px;
-  padding:5px 10px 5px 6px;
-  background:var(--papel);
-  border:1px solid var(--fio);
-  border-radius:999px;
-  box-shadow:none;
-  transition:border-color .16s var(--ease),box-shadow .16s var(--ease),
-             transform .16s var(--ease),background-color .16s var(--ease);
-}
-.chip:hover{
-  background:var(--papel-2);
-  border-color:var(--fio-2);
-  box-shadow:var(--sh-2);
-  transform:translateY(-1px);
-}
-.chip:focus-within{border-color:var(--gold-fio)}
-.chip__link{position:absolute;inset:0;border-radius:999px;z-index:1}
-.chip__link:focus-visible{outline-offset:-2px}
-.chip__nome{
-  font-size:12.5px;font-weight:600;color:var(--txt);
-  white-space:nowrap;
-}
-.chip--sem-link{opacity:.62}
-.chip--sem-link:hover{transform:none;box-shadow:none;border-color:var(--fio)}
+/* ---------- centro e trilho ---------- */
+.centro{grid-column:2;grid-row:2;overflow:auto;padding:18px 24px;
+        display:flex;flex-direction:column;gap:12px}
+.trilho{grid-column:3;grid-row:2/-1;overflow:auto;padding:18px 20px;
+        background:rgba(255,255,255,.72);border-left:1px solid rgba(255,255,255,.75);
+        -webkit-backdrop-filter:blur(20px) saturate(1.4);backdrop-filter:blur(20px) saturate(1.4)}
 
-/* ---------- 8. O selo: logo do site, ou iniciais ---------- */
+/* ============================================================
+   2 · Blocos e sistemas
+   ============================================================ */
+.bloco{background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.8);border-radius:var(--r);
+       padding:15px 17px;box-shadow:0 6px 22px rgba(13,25,38,.05);
+       -webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);
+       display:flex;flex-direction:column;min-height:0}
+.bloco--cresce{flex:1}
+.bloco__cab{display:flex;align-items:baseline;gap:10px;margin-bottom:12px}
+.bloco__t{font-size:14px;font-weight:730}
+.bloco__n{font-family:var(--mono);font-size:10.5px;color:var(--txt-3);margin-left:auto}
 
-/* Fundo branco atrás de todo logo, sempre. Muitos ícones de
-   órgão público são desenhos escuros com fundo transparente;
-   sobre o cinza do piso eles somem. O fio fino em volta também
-   dá contorno a logo branco, que sem ele desapareceria. */
-.selo{
-  flex:none;width:34px;height:34px;border-radius:var(--r-sm);
-  display:grid;place-items:center;overflow:hidden;
-  background:#fff;border:1px solid var(--fio);
-  transition:transform .18s var(--ease-out);
+/* O item: sem moldura e sem preenchimento. O ícone já é o
+   cartão — não precisa de um retângulo em volta dele. */
+.grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:2px 10px}
+.item{display:flex;align-items:center;gap:12px;padding:10px;border-radius:11px;
+      transition:background .14s}
+.item:hover{background:rgba(255,255,255,.9)}
+.item__n{font-size:13.5px;font-weight:660;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item__x{font-size:11px;color:var(--txt-3);margin-top:2px;
+         white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item__txt{min-width:0}
+
+.ico{width:40px;height:40px;border-radius:12px;background:#fff;border:1px solid var(--fio);
+     display:grid;place-items:center;overflow:hidden;flex:none;
+     transition:transform .18s var(--ease)}
+.item:hover .ico{transform:translateY(-2px)}
+.ico img{width:27px;height:27px;object-fit:contain}
+.ico--sigla{background:var(--marca);color:var(--marca-txt);border:0;
+            font-weight:780;font-size:13px;letter-spacing:.01em}
+
+/* Sistema cadastrado sem endereço: aparece apagado e não clica.
+   É o sinal de que falta colar o link, e não um item quebrado. */
+.item--sem-link{opacity:.5}
+.item--sem-link:hover{background:transparent}
+.item--sem-link:hover .ico{transform:none}
+
+/* ---------- a gaveta dos órgãos ---------- */
+.gaveta{display:flex;align-items:center;gap:13px;padding:13px 16px;border-radius:var(--r);
+        width:100%;text-align:left;
+        background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.8);
+        box-shadow:0 6px 22px rgba(13,25,38,.05);
+        -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+        transition:border-color .15s}
+.gaveta:hover{border-color:var(--marca)}
+.gaveta__c{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;flex:none;
+           background:var(--marca);color:var(--marca-txt);
+           font-family:var(--mono);font-size:13px;font-weight:700}
+.gaveta__t{font-size:13.5px;font-weight:660}
+.gaveta__s{font-size:11.5px;color:var(--txt-3);margin-top:2px}
+.gaveta__seta{margin-left:auto;color:var(--txt-3);font-size:20px;line-height:1}
+
+/* ---------- agenda do mês ---------- */
+.agenda{display:grid;grid-template-columns:repeat(auto-fit,minmax(106px,1fr));gap:8px}
+.prazo{background:rgba(255,255,255,.55);border-radius:10px;padding:10px 11px;
+       border-left:3px solid var(--fio-2)}
+.prazo--perto{border-left-color:var(--estado)}
+.prazo--hoje{border-left-color:var(--alerta)}
+.prazo__d{font-family:var(--mono);font-size:18px;font-weight:730;line-height:1;
+          font-variant-numeric:tabular-nums}
+.prazo--hoje .prazo__d{color:var(--alerta)}
+.prazo--perto .prazo__d{color:var(--estado)}
+.prazo__n{font-size:10.5px;font-weight:620;color:var(--txt-2);margin-top:5px;line-height:1.3}
+.prazo__q{font-size:9.5px;color:var(--txt-3);margin-top:2px}
+
+/* ============================================================
+   3 · Pendências, agrupadas por urgência
+   ------------------------------------------------------------
+   Em lista corrida é preciso ler todas para saber quais são de
+   hoje. Agrupadas, a resposta vem antes da leitura: o título já
+   diz, e a contagem confirma.
+   ============================================================ */
+.trilho__t{font-size:14px;font-weight:730}
+.faixa{display:flex;align-items:center;gap:8px;margin:16px 0 8px}
+.faixa:first-of-type{margin-top:12px}
+.faixa__t{font-size:11.5px;font-weight:730;letter-spacing:.04em;text-transform:uppercase}
+.faixa__n{font-family:var(--mono);font-size:10.5px;font-weight:700;padding:1px 8px;border-radius:99px}
+.faixa--atraso .faixa__t{color:var(--alerta)}
+.faixa--atraso .faixa__n{background:var(--alerta-luz);color:var(--alerta)}
+.faixa--hoje   .faixa__t{color:var(--estado)}
+.faixa--hoje   .faixa__n{background:var(--estado-luz);color:var(--estado)}
+.faixa--depois .faixa__t{color:var(--txt-3)}
+.faixa--depois .faixa__n{background:var(--base);color:var(--txt-3)}
+
+.pen{display:flex;gap:12px;padding:12px;border-radius:12px;background:rgba(255,255,255,.55);
+     align-items:flex-start;margin-bottom:7px;transition:background .14s}
+.pen:hover{background:#fff}
+.pen__f{width:3px;border-radius:99px;align-self:stretch;background:var(--fio-2);flex:none}
+.pen--atrasada .pen__f{background:var(--alerta)}
+.pen--hoje     .pen__f{background:var(--estado)}
+.pen__p{flex:none;width:38px;text-align:center}
+.pen__d{font-family:var(--mono);font-size:17px;font-weight:730;line-height:1;color:var(--txt-2);
+        font-variant-numeric:tabular-nums}
+.pen__m{font-size:8.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--txt-3);margin-top:4px}
+.pen--atrasada .pen__d{color:var(--alerta)}
+.pen--hoje     .pen__d{color:var(--estado)}
+.pen__o{font-size:13px;font-weight:640;line-height:1.35}
+.pen__q{font-size:11px;color:var(--txt-3);margin-top:3px}
+
+/* Zona ainda sem conteúdo: diz o que vai aparecer ali e por que
+   ainda não apareceu. Melhor do que um espaço em branco sem
+   explicação — e melhor ainda do que dado inventado. */
+.vazio{margin-top:14px;padding:16px;border-radius:12px;background:rgba(255,255,255,.5);
+       border:1px dashed var(--fio-2)}
+.vazio__t{font-size:12px;font-weight:730;letter-spacing:.05em;text-transform:uppercase;
+          color:var(--txt-3);margin-bottom:7px}
+.vazio__x{font-size:12.5px;line-height:1.5;color:var(--txt-2)}
+
+/* ============================================================
+   4 · Avisos — faixa de altura fixa no rodapé
+   ------------------------------------------------------------
+   Uma linha, sempre a mesma altura, nunca cresce. Se um dia
+   houver dez avisos, os últimos esperam a vez em vez de
+   empurrarem a tela. É o lugar de informação que a pessoa
+   precisa ver mas não precisa agir.
+   ============================================================ */
+.avisos{grid-column:2;grid-row:3;display:flex;align-items:center;height:44px;padding:0 24px;
+        background:rgba(255,255,255,.74);border-top:1px solid rgba(255,255,255,.75);
+        -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);overflow:hidden}
+.avisos__rot{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.15em;
+             text-transform:uppercase;color:var(--txt-3);flex:none;margin-right:16px}
+.av{display:flex;align-items:baseline;gap:7px;white-space:nowrap;flex:none}
+.av__p{width:5px;height:5px;border-radius:50%;background:var(--estado);flex:none;position:relative;top:-2px}
+.av__t{font-size:12.5px;font-weight:640}
+.av__x{font-size:12px;color:var(--txt-3)}
+.av__sep{width:1px;height:15px;background:var(--fio);margin:0 16px;flex:none}
+.avisos__mais{margin-left:auto;font-size:11.5px;color:var(--txt-3);flex:none}
+
+/* ============================================================
+   5 · O painel dos órgãos
+   ============================================================ */
+.painel{position:fixed;inset:0;z-index:80;display:none;place-items:center;padding:24px;
+        background:rgba(13,25,38,.45)}
+.painel.on{display:grid}
+.painel__caixa{background:#fff;border-radius:18px;width:100%;max-width:860px;max-height:82vh;
+               overflow:auto;padding:22px 24px;box-shadow:0 30px 70px rgba(13,25,38,.3)}
+.painel__cab{display:flex;align-items:center;margin-bottom:16px}
+.painel__t{font-size:17px;font-weight:730}
+.painel__x{margin-left:auto;font-size:24px;line-height:1;color:var(--txt-3);padding:0 6px}
+.painel__x:hover{color:var(--txt)}
+.painel__g + .painel__g{margin-top:18px}
+.painel__rot{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.17em;
+             text-transform:uppercase;color:var(--txt-3);display:block;margin-bottom:9px}
+
+/* ============================================================
+   6 · Responsivo — mobile first
+   ============================================================ */
+@media (max-width:900px){
+  .tela{height:auto;min-height:100vh;grid-template-columns:1fr;
+        grid-template-rows:auto auto auto auto;overflow:visible;padding-bottom:64px}
+
+  /* A barra vai para o rodapé: polegar não alcança o topo de um
+     telefone de seis polegadas, alcança o pé. */
+  .nav{grid-row:auto;grid-column:1;position:fixed;left:0;right:0;bottom:0;top:auto;
+       flex-direction:row;justify-content:space-around;align-items:center;
+       height:60px;padding:0 8px;z-index:60;box-shadow:0 -2px 16px rgba(13,25,38,.18)}
+  .nav__logo{display:none}
+  .nav__b{width:52px;height:44px;border-radius:11px}
+
+  .cab{grid-column:1;grid-row:1;padding:10px 16px;gap:12px;flex-wrap:wrap}
+  .cab__logo{height:32px}
+
+  /* Pendências antes dos sistemas: no telefone não há largura
+     para as duas lado a lado, e aí quem vem primeiro é quem
+     importa mais. */
+  .trilho{grid-column:1;grid-row:2;border-left:0;border-bottom:1px solid var(--fio);
+          padding:14px 16px;overflow:visible}
+  .centro{grid-column:1;grid-row:3;padding:14px 16px;overflow:visible;gap:10px}
+  .avisos{grid-column:1;grid-row:4;padding:0 16px;overflow-x:auto}
+
+  .grade{grid-template-columns:1fr}
+  .agenda{grid-template-columns:repeat(auto-fill,minmax(96px,1fr))}
 }
-.selo__img{width:24px;height:24px;object-fit:contain}
-.cartao:hover .selo{transform:scale(1.07)}
 
-.selo--sigla{
-  background:var(--gold-luz);border-color:var(--gold-fio);color:var(--gold);
-  font-size:12.5px;font-weight:750;text-transform:uppercase;letter-spacing:.01em;
-}
-.selo--sigla-longa{font-size:10.5px;letter-spacing:-.02em}
-
-.selo-mini{
-  flex:none;width:20px;height:20px;border-radius:6px;
-  display:grid;place-items:center;overflow:hidden;
-  background:#fff;border:1px solid var(--fio);
-}
-.selo-mini__img{width:14px;height:14px;object-fit:contain}
-.selo-mini--sigla{
-  background:var(--gold-luz);border-color:var(--gold-fio);color:var(--gold);
-  font-size:8.5px;font-weight:780;text-transform:uppercase;
-}
-.selo-mini--sigla-longa{font-size:7px;letter-spacing:-.03em}
-
-/* No setor "Nossos sistemas" o selo de iniciais inverte para o
-   azul-noite: é o que separa, de relance, o que é da casa. */
-.setor--destaque .selo--sigla{background:var(--navy);border-color:var(--navy);color:var(--gold-2)}
-
-/* Endereço ainda não conferido por alguém da equipe.
-   O ponto é filho do cartão, não do selo: o selo recorta o que
-   passa das bordas (para o logo não vazar do canto arredondado),
-   e o ponto ficaria cortado ao meio lá dentro. */
-.cartao--verificar::after,
-.chip--verificar::after{
-  content:"";position:absolute;z-index:3;
-  border-radius:50%;background:var(--prazo);
-  box-shadow:0 0 0 2px var(--papel);
-}
-.cartao--verificar::after{top:8px;left:37px;width:6px;height:6px}
-.chip--verificar::after{top:3px;left:19px;width:5px;height:5px}
-
-/* ---------- 9. Estrela dos favoritos ---------- */
-.estrela{
-  position:relative;z-index:2;flex:none;
-  width:24px;height:24px;border-radius:50%;
-  display:grid;place-items:center;
-  color:#c3cedb;
-  opacity:0;
-  transition:opacity .16s var(--ease),color .16s var(--ease),
-             background-color .16s var(--ease),transform .16s var(--ease);
-}
-.estrela svg{width:14px;height:14px;fill:currentColor}
-.cartao:hover .estrela,
-.chip:hover .estrela,
-.estrela:focus-visible{opacity:1}
-.estrela:hover{background:var(--piso);color:var(--gold-2);transform:scale(1.12)}
-.estrela[aria-pressed="true"]{opacity:1;color:var(--gold-2)}
-
-/* No chip a estrela é menor e só ocupa lugar quando aparece —
-   senão sobraria um buraco à direita de cada pastilha. */
-.chip .estrela{width:16px;height:16px;margin-right:-4px}
-.chip .estrela svg{width:11px;height:11px}
-
-/* ---------- 10. Coluna lateral ---------- */
-.lateral{display:flex;flex-direction:column;gap:16px;position:sticky;top:88px}
-.bloco{
-  background:var(--papel);
-  border:1px solid var(--fio);
-  border-radius:var(--r-lg);
-  box-shadow:none;
-  padding:16px 17px;
-}
-.bloco__titulo{
-  font-size:12px;font-weight:730;letter-spacing:.085em;text-transform:uppercase;
-  color:var(--navy);margin-bottom:12px;
-}
-.avisos{display:flex;flex-direction:column;gap:13px}
-.aviso{display:flex;gap:9px}
-.aviso__ponto{flex:none;width:7px;height:7px;border-radius:50%;margin-top:6px;background:var(--aviso)}
-.aviso--prazo .aviso__ponto{background:var(--prazo)}
-.aviso--ok    .aviso__ponto{background:var(--ok)}
-.aviso__titulo{display:block;font-size:13.5px;font-weight:640;color:var(--navy)}
-.aviso__texto{display:block;font-size:12.5px;color:var(--txt-2);margin-top:1px}
-
-/* ---------- 11. Rodapé ---------- */
-.rodape{border-top:1px solid var(--fio);background:var(--papel);padding:13px 24px}
-.rodape p{max-width:var(--maxw);margin:0 auto;font-size:12.5px;color:var(--txt-3)}
-
-/* ---------- 12. A tela se montando ---------- */
-/* Cada cartão sobe um pouco ao entrar, com um atraso mínimo entre
-   um e outro (o --atraso vem do js). O efeito dura menos de meio
-   segundo no total: é para a tela parecer viva ao abrir, não para
-   fazer a equipe esperar animação toda manhã. */
-@keyframes entrar{
-  from{opacity:0;transform:translateY(7px)}
-  to  {opacity:1;transform:none}
-}
-.cartao,.gaveta{animation:entrar .34s var(--ease-out) both;animation-delay:var(--atraso,0ms)}
-/* Chip so existe dentro de gaveta: anima quando a gaveta abre. */
-.gaveta[open] .chip{animation:entrar .28s var(--ease-out) both}
-
-/* ---------- 12b. Telas altas ----------
-   Com as gavetas fechadas, o conteúdo ficou curto: num monitor de
-   1080 sobravam 43% de branco embaixo, e página que acaba no meio
-   parece página que não terminou de carregar.
-
-   A saída não é esticar cartão — cartão esticado fica estranho —
-   é dar mais respiro a tudo. E a regra depende da ALTURA da
-   janela, não da largura: num monitor baixo (1366x768, que ainda
-   existe em escritório) esse respiro faria a página passar a
-   exigir rolagem, que é justamente o que não pode acontecer. */
-@media (min-height:900px){
-  .pagina{padding:30px 24px 40px}
-  .coluna-sistemas{gap:26px}
-  .grade{grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:12px}
-  .cartao{padding:14px 14px;gap:13px}
-  .selo{width:40px;height:40px}
-  .selo__img{width:28px;height:28px}
-  .cartao__nome{font-size:14.5px}
-  .cartao__nota{font-size:12px}
-  .setor__cabeca{padding-bottom:10px;margin-bottom:14px}
-  .gaveta__puxador{padding:15px 18px}
-  .gaveta__titulo{font-size:14px}
-  .bloco{padding:18px 19px}
-  .avisos{gap:15px}
-}
-
-/* ---------- 12c. Telas baixas ----------
-   Monitor de 768px de altura ainda existe em escritório, e nele
-   a logomarca (mais alta que o quadradinho que havia antes)
-   empurrava a página 7px além da tela. Sete pixels bastam para
-   nascer uma barra de rolagem — e o ponto desta tela é não ter
-   nenhuma. Então aqui a marca e a margem de baixo encolhem. */
-@media (max-height:820px){
-  .marca__logo{height:40px}
-  .topo__interno{padding:9px 24px}
-  .pagina{padding:18px 24px 22px}
-}
-
-/* ---------- 13. Telas menores ---------- */
-@media (max-width:1080px){
-  .colunas{grid-template-columns:minmax(0,1fr)}
-  .lateral{position:static}
-}
-@media (max-width:620px){
-  .topo__interno{padding:10px 16px;gap:12px}
-  /* No celular a logo encolhe para sobrar largura ao relógio. */
-  .marca__logo{height:36px;max-width:150px}
-  .marca__secao{display:none}
-  .relogio__hora{font-size:21px}
-  .relogio__seg{font-size:12px}
-  .pagina{padding:16px 16px 28px}
-  .grade{grid-template-columns:repeat(auto-fill,minmax(155px,1fr))}
-  .cartao__nota{display:none}
-  /* No toque não existe passagem do mouse: a estrela fica sempre à mostra. */
-  .estrela{opacity:1}
-  .rodape{padding:13px 16px}
+@media (max-width:420px){
+  .cab{padding:9px 13px}
+  .cab__logo{height:28px}
+  .rel__h{font-size:13.5px}
+  .rel__ola{font-size:15.5px}
+  .centro,.trilho{padding:12px 13px}
+  .avisos{padding:0 13px}
+  .agenda{grid-template-columns:1fr 1fr}
+  .painel{padding:0}
+  .painel__caixa{max-height:100vh;border-radius:0;height:100vh}
 }
 
 @media (prefers-reduced-motion:reduce){
   *{transition-duration:.01ms !important}
-  .cartao,.gaveta,.chip{animation:none}
-  .cartao:hover,.chip:hover{transform:none}
-  .cartao:hover .selo{transform:none}
-}
-
-/* ---------- 14. Impressão ---------- */
-@media print{
-  .topo,.rodape,.estrela{display:none}
-  body{background:#fff}
-  .cartao,.chip{box-shadow:none;break-inside:avoid;animation:none}
-  .gaveta[open] .chip{animation:none}
+  .item:hover .ico{transform:none}
 }

@@ -56,11 +56,24 @@ const Dados = (function () {
     return {
       setores: (typeof SETORES !== "undefined") ? JSON.parse(JSON.stringify(SETORES)) : [],
       avisos:  (typeof AVISOS  !== "undefined") ? JSON.parse(JSON.stringify(AVISOS))  : [],
+      agenda:  (typeof AGENDA  !== "undefined") ? JSON.parse(JSON.stringify(AGENDA))  : [],
     };
   }
 
   function valido(d) {
     return d && typeof d === "object" && Array.isArray(d.setores);
+  }
+
+  /* Documento salvo antes de um campo existir não tem esse campo.
+     Em vez de a tela perder um pedaço, o que falta vem da
+     semente. É o que permite acrescentar coisa nova ao Hub sem
+     obrigar ninguém a salvar de novo pela administração. */
+  function completar(d) {
+    var padrao = semente();
+    Object.keys(padrao).forEach(function (k) {
+      if (!Array.isArray(d[k])) d[k] = padrao[k];
+    });
+    return d;
   }
 
   /* ---------- Cópia guardada no navegador ---------- */
@@ -86,13 +99,14 @@ const Dados = (function () {
      quando a versão do servidor chegar. */
   function carregar(aoAtualizar) {
     if (!temBanco()) {
-      return lerCache(CHAVE_LOCAL) || semente();
+      return completar(lerCache(CHAVE_LOCAL) || semente());
     }
 
-    var imediato = lerCache(CHAVE_CACHE) || semente();
+    var imediato = completar(lerCache(CHAVE_CACHE) || semente());
 
     buscarDoServidor().then(function (doServidor) {
       if (!doServidor) return;
+      doServidor = completar(doServidor);
       gravarCache(CHAVE_CACHE, doServidor);
       /* Só reavisa se realmente mudou — redesenhar a tela por
          nada faria os cartões piscarem na cara de quem abriu. */

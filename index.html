@@ -2,23 +2,20 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- Nenhum script externo, nenhuma CDN, nenhuma fonte remota.
-     A única imagem que pode vir de fora é o ícone de um sistema
-     recém-cadastrado, enquanto ninguém rodou baixar-logos.js para
-     trazê-lo para assets/logos/ — depois disso o arquivo nosso
-     assume e nada mais sai daqui.
-     O "file:" está na lista para o caso de alguém abrir o arquivo
-     com dois cliques, sem servidor — aí o navegador não trata a
-     pasta como origem e 'self' sozinho barraria o próprio CSS. -->
+<!-- Nenhum script externo, nenhuma CDN, nenhuma fonte remota. Fora
+     da própria pasta o Hub só fala com dois endereços: o banco, de
+     onde vem a lista, e o serviço de ícone — este último apenas
+     para sistema recém-cadastrado, até alguém rodar
+     ferramentas/baixar-logos.js e trazer o ícone para dentro. -->
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self' file:;
   script-src 'self' file:;
   style-src 'self' file:;
   img-src 'self' file: data: https://icons.duckduckgo.com;
   font-src 'self' file:;
-  connect-src https://firestore.googleapis.com;
+  connect-src https://firestore.googleapis.com https://identitytoolkit.googleapis.com;
   object-src 'none';
   base-uri 'none';
   form-action 'none'">
@@ -27,79 +24,79 @@
 <title>Hub Totali</title>
 <meta name="description" content="Todos os sistemas da Totali Soluções Contábeis em uma tela só.">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#0d1926">
 <meta name="color-scheme" content="light">
+<meta name="apple-mobile-web-app-capable" content="yes">
 
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="stylesheet" href="css/styles.css">
 </head>
-
 <body>
 
-<a class="skip-link" href="#conteudo">Ir para os sistemas</a>
+<a class="pular" href="#centro">Ir para os sistemas</a>
 
-<header class="topo">
-  <div class="topo__interno">
+<div class="tela">
 
-    <!-- A logo já traz o nome escrito, então não há texto ao lado:
-         repetir "Hub Totali" em tipo do sistema, colado numa marca
-         que diz a mesma coisa, é ruído. O alt cobre quem não vê a
-         imagem. Se o arquivo faltar, o monograma assume — quem faz
-         a troca é o js/app.js. -->
-    <div class="marca">
-      <img class="marca__logo" id="marca-logo" src="assets/logo-hub.png" alt="Hub Totali">
-      <span class="marca__monograma" id="marca-monograma" hidden>Hub Totali</span>
+  <nav class="nav" aria-label="Seções do Hub">
+    <img class="nav__logo" src="assets/simbolo.png" alt="" width="32" height="32">
+    <button class="nav__b on" type="button" aria-label="Início" title="Início">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 10l9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+    </button>
+    <button class="nav__b" type="button" id="nav-todos" aria-label="Todos os sistemas" title="Todos os sistemas">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
+        <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/>
+        <rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+    </button>
+    <button class="nav__b" type="button" aria-label="Pendências" title="Pendências">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+        <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+    </button>
+    <button class="nav__b" type="button" aria-label="Agenda" title="Agenda">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+        <rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+    </button>
+  </nav>
+
+  <header class="cab">
+    <img class="cab__logo" src="assets/logo-hub.png" alt="Hub Totali">
+    <span class="marca__nome" id="marca-nome" hidden>Hub Totali</span>
+    <div class="rel">
+      <div>
+        <div class="rel__h" id="hora">--:--</div>
+        <div class="rel__d" id="data"></div>
+      </div>
+      <span class="rel__risco"></span>
+      <div>
+        <div class="rel__ola" id="ola"></div>
+        <div class="rel__sub" id="resumo"></div>
+      </div>
     </div>
+  </header>
 
-    <p class="relogio" id="relogio">
-      <span class="relogio__hora" id="relogio-hm">--:--</span>
-      <span class="relogio__sep" aria-hidden="true">·</span>
-      <span class="relogio__data" id="relogio-data"></span>
-    </p>
+  <main class="centro" id="centro"></main>
 
-  </div>
-</header>
+  <aside class="trilho" aria-label="Minhas pendências">
+    <div class="trilho__t">Minhas pendências</div>
+    <div id="pendencias"></div>
+  </aside>
 
-<main class="pagina" id="conteudo">
+  <div class="avisos" id="avisos" aria-label="Avisos"></div>
 
-  <div class="colunas">
+</div>
 
-    <div class="coluna-sistemas">
-
-      <!-- Atalhos marcados por cada pessoa. Some quando não há nenhum. -->
-      <section class="setor setor--cartao" id="secao-atalhos" hidden>
-        <div class="setor__cabeca">
-          <h2 class="setor__titulo">
-            <svg class="setor__estrela" viewBox="0 0 24 24" aria-hidden="true" width="14" height="14">
-              <path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3.1-5.8 3.1 1.1-6.5L2.6 9.4l6.5-.9z"/>
-            </svg>
-            Meus atalhos
-          </h2>
-          <span class="setor__nota">Marque a estrela em qualquer sistema</span>
-        </div>
-        <div class="grade" id="grade-atalhos"></div>
-      </section>
-
-      <!-- Os setores são desenhados aqui pelo js/app.js -->
-      <div id="setores"></div>
-
+<!-- Painel dos órgãos e consultas -->
+<div class="painel" id="painel" role="dialog" aria-modal="true" aria-labelledby="painel-t">
+  <div class="painel__caixa">
+    <div class="painel__cab">
+      <span class="painel__t" id="painel-t">Órgãos, impostos e consultas</span>
+      <button class="painel__x" type="button" id="painel-x" aria-label="Fechar">×</button>
     </div>
-
-    <aside class="lateral" aria-label="Recados e prazos">
-      <section class="bloco" id="bloco-avisos" hidden>
-        <h2 class="bloco__titulo">Recados e prazos</h2>
-        <ul class="avisos" id="lista-avisos"></ul>
-      </section>
-    </aside>
-
+    <div id="painel-corpo"></div>
   </div>
-
-</main>
-
-<footer class="rodape">
-  <p>Totali Soluções Contábeis · para acrescentar um sistema, edite <code>js/sistemas.js</code></p>
-</footer>
+</div>
 
 <script src="js/config-hub.js"></script>
 <script src="js/sistemas.js"></script>
