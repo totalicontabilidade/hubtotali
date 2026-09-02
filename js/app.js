@@ -286,6 +286,15 @@
     if (!alvo) return;
     acender(botao);
     alvo.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    /* No computador o Hub inteiro cabe na tela, então rolar não
+       move nada e o clique pareceria perdido. O alvo pisca uma vez
+       para dizer "é este aqui". No celular a rolagem já responde
+       sozinha, e o pisca só confirma onde parou. */
+    alvo.classList.remove("achei");
+    void alvo.offsetWidth;
+    alvo.classList.add("achei");
+    window.setTimeout(function () { alvo.classList.remove("achei"); }, 1100);
   }
 
   function ligarBotao(id, achar) {

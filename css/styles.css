@@ -116,6 +116,21 @@ a{color:inherit;text-decoration:none}
              transition:opacity .16s}
 .nav__totali:hover{opacity:1}
 
+/* O pisca de quem acabou de ser apontado pela barra. Um contorno
+   que aparece e some — nada de sacudir a caixa, que atrapalha
+   quem está lendo ao lado. */
+@keyframes achei{
+  0%  {box-shadow:0 0 0 0 rgba(44,90,143,0)}
+  25% {box-shadow:0 0 0 3px rgba(44,90,143,.42)}
+  100%{box-shadow:0 0 0 0 rgba(44,90,143,0)}
+}
+.achei{animation:achei 1.05s ease-out;border-radius:14px}
+
+/* Quem prefere o computador sem animação não recebe nenhuma. */
+@media (prefers-reduced-motion:reduce){
+  .achei{animation:none;outline:2px solid var(--estado);outline-offset:2px}
+}
+
 /* ---------- cabeçalho ---------- */
 .cab{grid-column:2/-1;grid-row:1;display:flex;align-items:center;gap:18px;padding:12px 24px;
      background:rgba(255,255,255,.74);border-bottom:1px solid rgba(255,255,255,.7);

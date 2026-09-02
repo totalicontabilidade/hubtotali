@@ -165,7 +165,7 @@ const SETORES = [
 const AVISOS = [
   { tipo:"prazo", titulo:"DAS do Simples", texto:"Vence todo dia 20." },
   { tipo:"prazo", titulo:"eSocial e FGTS Digital", texto:"Fechamento da folha até o dia 15." },
-  { tipo:"aviso", titulo:"Este Hub é editável", texto:"Faltou um sistema? Edite js/sistemas.js." },
+  { tipo:"aviso", titulo:"Este Hub é editável", texto:"Faltou um sistema? Fale com a administração." },
 ];
 
 /* ============================================================
