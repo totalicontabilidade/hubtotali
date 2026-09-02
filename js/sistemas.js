@@ -55,8 +55,8 @@ const SETORES = [
     nota: "O que se abre primeiro",
     estilo: "cartao",
     itens: [
-      { nome:"Confi Tarefas", url:"https://app.confi.net.br/",  nota:"Tarefas e prazos" },
-      { nome:"Confi Chat",    url:"https://chat.confi.net.br/", nota:"Conversa com o cliente" },
+      { nome:"Confi Tarefas", url:"https://app.confi.net.br/",  nota:"Tarefas, prazos e controle do que fazer" },
+      { nome:"Confi Chat",    url:"https://chat.confi.net.br/", nota:"Atendimento e conversa com o cliente" },
       { nome:"Gmail",         url:"https://mail.google.com/", nota:"E-mail da Totali" },
     ]
   },

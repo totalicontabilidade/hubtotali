@@ -173,6 +173,10 @@
       centro.appendChild(gav);
     }
 
+    /* A agenda vem do motor de regras (js/agenda.js), que calcula
+       os vencimentos do mês corrente e se refaz sozinho na virada
+       do mês. Se alguém quiser mandar uma lista fixa pelo banco,
+       ela vence — mas o normal é a calculada. */
     if (AGENDA_ATUAL.length) {
       var ba = bloco("Agenda do mês", null, true);
       ba.querySelector(".bloco__cab").appendChild(el("span", "bloco__n",
@@ -256,6 +260,23 @@
   var botaoTodos = document.getElementById("nav-todos");
   if (botaoTodos) botaoTodos.addEventListener("click", abrirPainel);
 
+  /* ---------- quem está usando ----------
+     Enquanto o login da equipe não existe, o Hub pergunta o nome
+     uma vez e guarda no navegador da pessoa. Quando o login
+     entrar (junto com as pendências), o nome passa a vir da
+     sessão e este atalho vira só o modo de trocar. */
+  var CHAVE_NOME = "hub-totali:meu-nome";
+
+  function meuNome() {
+    var s = Dados.sessao();
+    if (s && s.email) return s.email.split("@")[0];
+    try { return window.localStorage.getItem(CHAVE_NOME) || ""; } catch (e) { return ""; }
+  }
+
+  function guardarNome(n) {
+    try { window.localStorage.setItem(CHAVE_NOME, n); } catch (e) {}
+  }
+
   /* ---------- relógio e saudação ---------- */
   function desenharTopo() {
     var hora = document.getElementById("hora");
@@ -274,13 +295,24 @@
         diaDesenhado = hoje;
         data.textContent = agora.toLocaleDateString("pt-BR",
           { weekday: "short", day: "2-digit", month: "short" });
-        var h = agora.getHours();
-        var s = Dados.sessao();
-        var nome = (s && s.email) ? s.email.split("@")[0] : "";
-        ola.textContent = (h < 12 ? "Bom dia" : h < 18 ? "Boa tarde" : "Boa noite") +
-                          (nome ? ", " + nome : "");
+        pintarSaudacao();
       }
     }
+
+    function pintarSaudacao() {
+      var h = new Date().getHours();
+      var n = meuNome();
+      ola.textContent = (h < 12 ? "Bom dia" : h < 18 ? "Boa tarde" : "Boa noite") +
+                        (n ? ", " + n : "");
+      ola.title = n ? "Clique para trocar o nome" : "Clique para dizer o seu nome";
+    }
+
+    ola.addEventListener("click", function () {
+      var n = window.prompt("Como o Hub deve chamar você?", meuNome());
+      if (n === null) return;
+      guardarNome(n.trim());
+      pintarSaudacao();
+    });
 
     bater();
     /* O mostrador é de minutos: acerto o passo com o virar do
@@ -315,7 +347,10 @@
   function desenharTudo(dados) {
     SETORES_ATUAIS = dados.setores || [];
     AVISOS_ATUAIS  = dados.avisos  || [];
-    AGENDA_ATUAL   = dados.agenda  || [];
+    /* Calculada, não guardada: assim ela se corrige sozinha
+       todo mês sem ninguém precisar editar nada. A lista do
+       banco só entra se alguém tiver gravado uma à mão. */
+    AGENDA_ATUAL = (typeof Agenda !== "undefined") ? Agenda.doMes() : (dados.agenda || []);
     desenharCentro();
     desenharAvisos();
   }

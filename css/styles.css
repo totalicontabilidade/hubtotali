@@ -102,6 +102,12 @@ a{color:inherit;text-decoration:none}
 .nav__b:hover{background:rgba(255,255,255,.10);color:#fff}
 .nav__b.on{background:rgba(255,255,255,.15);color:#fff}
 .nav__b svg{width:19px;height:19px}
+/* A logo da Totali fecha o trilho, empurrada para o pé. Some no
+   celular: lá o trilho vira barra de navegação e cada pixel de
+   largura é para o polegar. */
+.nav__totali{margin-top:auto;width:44px;height:auto;opacity:.75;
+             transition:opacity .16s}
+.nav__totali:hover{opacity:1}
 
 /* ---------- cabeçalho ---------- */
 .cab{grid-column:2/-1;grid-row:1;display:flex;align-items:center;gap:18px;padding:12px 24px;
@@ -116,7 +122,10 @@ a{color:inherit;text-decoration:none}
 .rel__h{font-family:var(--mono);font-size:14.5px;font-weight:660;font-variant-numeric:tabular-nums;color:var(--txt-2)}
 .rel__d{font-size:10px;color:var(--txt-3);text-transform:uppercase;letter-spacing:.07em;margin-top:2px}
 .rel__risco{width:1px;height:28px;background:var(--fio)}
-.rel__ola{font-size:17px;font-weight:680;letter-spacing:-.015em}
+.rel__ola{font-size:17px;font-weight:680;letter-spacing:-.015em;
+          text-align:left;border-radius:7px;padding:1px 4px;margin-left:-4px;
+          transition:background .14s}
+.rel__ola:hover{background:rgba(255,255,255,.9)}
 .rel__sub{font-size:11.5px;color:var(--txt-2);margin-top:2px}
 .rel__sub b{color:var(--alerta);font-weight:700}
 
@@ -283,7 +292,7 @@ a{color:inherit;text-decoration:none}
   .nav{grid-row:auto;grid-column:1;position:fixed;left:0;right:0;bottom:0;top:auto;
        flex-direction:row;justify-content:space-around;align-items:center;
        height:60px;padding:0 8px;z-index:60;box-shadow:0 -2px 16px rgba(13,25,38,.18)}
-  .nav__logo{display:none}
+  .nav__logo,.nav__totali{display:none}
   .nav__b{width:52px;height:44px;border-radius:11px}
 
   .cab{grid-column:1;grid-row:1;padding:10px 16px;gap:12px;flex-wrap:wrap}
