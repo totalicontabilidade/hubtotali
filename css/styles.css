@@ -468,17 +468,29 @@ a{color:inherit;text-decoration:none}
    assets/totali-branca.png, que tem um vão limpo de colunas vazias
    entre o símbolo e a palavra. A versão colorida não tem esse vão
    — ali o símbolo encosta no "t". */
+/* A LARGURA É CALCULADA, NÃO DEDUZIDA DA PROPORÇÃO. Com
+   aspect-ratio e largura automática, o place-items:center do
+   portão puxava as duas para dentro: a da Totali acabava
+   escondendo 33% e a do Hub 16%, quando as duas deviam esconder
+   22%. Largura explícita mais justify-self tiram a decisão do
+   alinhamento do grid e devolvem para cá. */
+.portao{--m:min(76vh,620px)}
+
 .portao__marca{position:absolute;top:50%;z-index:1;background:#1b304a;
+  height:var(--m);
   -webkit-mask-size:contain; mask-size:contain;
   -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
-  -webkit-mask-position:center; mask-position:center;
-  height:min(76vh,620px)}
+  -webkit-mask-position:center; mask-position:center}
 
-.portao__marca--totali{left:0;transform:translate(-22%,-50%);aspect-ratio:112/231;
+.portao__marca--totali{left:0;right:auto;justify-self:start;
+  width:calc(var(--m) * 112 / 231);
+  transform:translate(-22%,-50%);
   -webkit-mask-image:url(../assets/totali-simbolo.png);
   mask-image:url(../assets/totali-simbolo.png)}
 
-.portao__marca--hub{right:0;transform:translate(22%,-50%);aspect-ratio:1;
+.portao__marca--hub{right:0;left:auto;justify-self:end;
+  width:var(--m);
+  transform:translate(22%,-50%);
   -webkit-mask-image:url(../assets/simbolo.png);
   mask-image:url(../assets/simbolo.png)}
 
@@ -520,7 +532,8 @@ a{color:inherit;text-decoration:none}
    rodapé, ainda cortadas pelas bordas opostas, e o cartão fica com
    a largura toda. */
 @media (max-width:900px){
-  .portao__marca{top:auto;bottom:0;height:min(34vh,260px)}
+  .portao{--m:min(34vh,260px)}
+  .portao__marca{top:auto;bottom:0}
   .portao__marca--totali{transform:translate(-30%,26%)}
   .portao__marca--hub{transform:translate(30%,26%)}
 }
