@@ -21,6 +21,14 @@ rules_version = '2';
 // criar uma por fora entra numa tela vazia.
 //
 // ------------------------------------------------------------
+// O QUE MUDOU EM 04/09/2026
+// ------------------------------------------------------------
+// A LISTA DE SISTEMAS DEIXOU DE SER PÚBLICA. Era lida por
+// qualquer um de propósito, para o Hub abrir sem login. Passou a
+// exigir estar na equipe, junto com a tela de entrada do Hub e a
+// retirada da cópia que ficava em js/sistemas.js.
+//
+// ------------------------------------------------------------
 // O QUE MUDOU NA AUDITORIA DE 02/09/2026
 // ------------------------------------------------------------
 // A versão anterior deixava quatro brechas, todas na alteração
@@ -83,12 +91,18 @@ service cloud.firestore {
     }
 
     // ---------- a lista de sistemas do Hub ----------
-    // Leitura aberta de propósito: é o que faz o Hub abrir para a
-    // equipe sem login. Não há nada aqui que não pudesse estar
-    // escrito num cartaz na parede.
+    // ANTES esta leitura era aberta, para o Hub abrir sem login.
+    // Agora é privada: o Hub tem tela de entrada e só desenha
+    // depois dela.
+    //
+    // Fechar aqui só valeu porque a cópia da lista saiu de
+    // js/sistemas.js no mesmo movimento. Aquele arquivo é servido
+    // pela web — o repositório é público — e enquanto a lista
+    // estivesse lá, esta regra seria enfeite: bastava abrir o
+    // endereço do .js.
 
     match /hub/config {
-      allow read: if true;
+      allow read:  if daEquipe() || ehAdmin();
       allow write: if ehAdmin();
     }
 

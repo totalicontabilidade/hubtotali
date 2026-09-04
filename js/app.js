@@ -433,11 +433,63 @@
     desenharAvisos();
   }
 
-  desenharTudo(Dados.carregar(function (maisNovo) {
-    desenharTudo(maisNovo);
-  }));
+  function abrirHub() {
+    document.getElementById("portao").hidden = true;
+    document.getElementById("tela").hidden = false;
 
-  desenharTopo();
-  desenharPendencias();
+    desenharTudo(Dados.carregar(function (maisNovo) {
+      desenharTudo(maisNovo);
+    }));
+
+    desenharTopo();
+    desenharPendencias();
+  }
+
+  /* ---------- o portão ----------
+     A lista de sistemas deixou de ser pública, então o Hub não
+     tem o que desenhar antes de saber quem está do outro lado.
+     Na prática ninguém vê esta tela mais de uma vez por
+     aparelho: a sessão fica guardada e se renova sozinha. */
+  function abrirPortao() {
+    var portao = document.getElementById("portao");
+    var form   = document.getElementById("portao-form");
+    var erro   = document.getElementById("portao-erro");
+    var botao  = document.getElementById("portao-btn");
+
+    portao.hidden = false;
+    document.getElementById("portao-email").focus();
+
+    form.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      erro.hidden = true;
+      botao.disabled = true;
+      botao.textContent = "Entrando…";
+
+      Dados.entrar(document.getElementById("portao-email").value.trim(),
+                   document.getElementById("portao-senha").value)
+        .then(function () { abrirHub(); })
+        .catch(function (e) {
+          erro.textContent = e.message || "Não consegui entrar.";
+          erro.hidden = false;
+          botao.disabled = false;
+          botao.textContent = "Entrar";
+        });
+    });
+  }
+
+  (function ligarSair() {
+    var b = document.getElementById("btn-sair");
+    if (!b) return;
+    b.addEventListener("click", function () {
+      if (!window.confirm("Sair da sua conta neste navegador?")) return;
+      Dados.sair();
+      window.location.reload();
+    });
+  })();
+
+  Dados.pronto().then(function (sessao) {
+    if (sessao || !Dados.temBanco()) abrirHub();
+    else abrirPortao();
+  });
 
 })();

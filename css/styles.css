@@ -433,3 +433,61 @@ a{color:inherit;text-decoration:none}
   *{transition-duration:.01ms !important}
   .item:hover .ico{transform:none}
 }
+
+/* ============================================================
+   O PORTÃO
+   ------------------------------------------------------------
+   A lista de sistemas da casa é privada: quem não está na equipe
+   não a recebe do banco. Esta é a tela que aparece antes do Hub.
+
+   Ela é sóbria de propósito. Não é uma página de produto tentando
+   convencer ninguém a entrar — é a porta de um escritório, e quem
+   chega aqui já sabe o que veio fazer.
+   ============================================================ */
+.portao{min-height:100vh;display:grid;place-items:center;
+        padding:24px;background:var(--nav)}
+
+.portao__caixa{width:100%;max-width:340px;background:var(--base);
+               border-radius:16px;padding:30px 26px 24px;
+               display:flex;flex-direction:column;gap:14px;
+               box-shadow:0 18px 48px rgba(0,0,0,.28)}
+
+.portao__logo{height:38px;width:auto;object-fit:contain;
+              align-self:flex-start;margin-bottom:2px}
+
+.portao__nota{margin:0;font-size:13px;color:var(--txt-2);line-height:1.45}
+
+.pcampo{display:flex;flex-direction:column;gap:5px}
+.pcampo__rotulo{font-size:11.5px;font-weight:600;letter-spacing:.03em;
+                text-transform:uppercase;color:var(--txt-3)}
+.pcampo__caixa{border:1px solid var(--fio-2);border-radius:9px;
+               padding:10px 11px;font:inherit;font-size:14.5px;
+               color:var(--txt);background:#fff;width:100%}
+.pcampo__caixa:focus{outline:2px solid var(--estado);outline-offset:1px;
+                     border-color:var(--estado)}
+
+.portao__erro{margin:0;font-size:13px;color:var(--alerta);
+              background:var(--alerta-luz);border-radius:8px;padding:9px 11px}
+
+.portao__btn{margin-top:4px;border:0;border-radius:10px;
+             background:var(--marca);color:var(--marca-txt);
+             font:inherit;font-size:14.5px;font-weight:600;
+             padding:11px 14px;cursor:pointer;
+             transition:opacity .14s}
+.portao__btn:hover{opacity:.9}
+.portao__btn:disabled{opacity:.55;cursor:default}
+
+.portao__pe{margin:2px 0 0;font-size:12px;color:var(--txt-3);text-align:center}
+
+/* No celular a caixa encosta nas bordas em vez de flutuar espremida. */
+@media (max-width:420px){
+  .portao{padding:16px}
+  .portao__caixa{padding:24px 20px 20px}
+}
+
+/* Sair fica no canto, discreto: é uma saída, não um convite. */
+.cab__sair{margin-left:14px;border:1px solid var(--fio-2);border-radius:8px;
+           background:transparent;color:var(--txt-3);font:inherit;
+           font-size:12.5px;padding:6px 11px;cursor:pointer;
+           transition:color .14s,border-color .14s}
+.cab__sair:hover{color:var(--txt);border-color:var(--txt-3)}

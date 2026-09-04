@@ -903,9 +903,13 @@
     if (img.complete && img.naturalWidth === 0) trocar();
   })();
 
-  /* Quem já entrou nesta aba não precisa entrar de novo a cada
-     recarga. O token vale uma hora; depois disso, senha de novo. */
-  if (Dados.sessao()) abrirEdicao();
-  else mostrarEntrada();
+  /* Quem já entrou continua entrando sozinho: a sessão fica no
+     navegador e se renova antes de vencer. Dados.pronto() espera
+     essa renovação terminar — sem isso, a primeira leitura do
+     banco sairia com um token vencido e voltaria 401. */
+  Dados.pronto().then(function (sessao) {
+    if (sessao || !Dados.temBanco()) abrirEdicao();
+    else mostrarEntrada();
+  });
 
 })();

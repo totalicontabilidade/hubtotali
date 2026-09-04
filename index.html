@@ -15,7 +15,7 @@
   style-src 'self' file:;
   img-src 'self' file: data: https://icons.duckduckgo.com;
   font-src 'self' file:;
-  connect-src https://firestore.googleapis.com https://identitytoolkit.googleapis.com;
+  connect-src https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com;
   object-src 'none';
   base-uri 'none';
   form-action 'none'">
@@ -38,7 +38,37 @@
 
 <a class="pular" href="#centro">Ir para os sistemas</a>
 
-<div class="tela">
+<!-- O portão. A lista de sistemas da casa deixou de ser pública:
+     o banco só a entrega a quem está na equipe, então a tela do
+     Hub só aparece depois daqui. Quem entra uma vez continua
+     entrando sozinho — o navegador guarda a sessão e ela se
+     renova sem pedir nada. -->
+<main class="portao" id="portao" hidden>
+  <form class="portao__caixa" id="portao-form" autocomplete="on">
+    <img class="portao__logo" src="assets/logo-hub.png" alt="Hub Totali">
+    <p class="portao__nota">Entre com o seu e-mail da Totali.</p>
+
+    <label class="pcampo">
+      <span class="pcampo__rotulo">E-mail</span>
+      <input class="pcampo__caixa" type="email" id="portao-email"
+             autocomplete="username" required>
+    </label>
+
+    <label class="pcampo">
+      <span class="pcampo__rotulo">Senha</span>
+      <input class="pcampo__caixa" type="password" id="portao-senha"
+             autocomplete="current-password" required>
+    </label>
+
+    <p class="portao__erro" id="portao-erro" hidden></p>
+
+    <button class="portao__btn" type="submit" id="portao-btn">Entrar</button>
+
+    <p class="portao__pe">Não tem acesso? Fale com a administração.</p>
+  </form>
+</main>
+
+<div class="tela" id="tela" hidden>
 
   <nav class="nav" aria-label="Seções do Hub">
     <img class="nav__logo" src="assets/simbolo.png" alt="" width="32" height="32">
@@ -88,6 +118,12 @@
         <div class="rel__sub" id="resumo"></div>
       </div>
     </div>
+
+    <!-- Com login obrigatório e sessão que se renova sozinha,
+         sair precisa ser possível: computador de balcão, alguém
+         que troca de turno, notebook emprestado. -->
+    <button class="cab__sair" type="button" id="btn-sair"
+            title="Sair desta conta neste navegador">Sair</button>
   </header>
 
   <main class="centro" id="centro"></main>

@@ -118,10 +118,20 @@ const Dados = (function () {
     return imediato;
   }
 
+  /* A lista de sistemas é privada: o banco só a entrega a quem
+     está na equipe. Sem sessão não há o que pedir — a tela de
+     entrada do Hub cuida disso antes de chegar aqui. */
   function buscarDoServidor() {
-    return fetch(BASE_FIRESTORE() + "?key=" + encodeURIComponent(cfg.apiKey), { cache: "no-store" })
+    var s = lerSessao();
+    if (!s) return Promise.resolve(null);
+
+    return fetch(BASE_FIRESTORE() + "?key=" + encodeURIComponent(cfg.apiKey), {
+      cache: "no-store",
+      headers: { "Authorization": "Bearer " + s.idToken },
+    })
       .then(function (r) {
         if (r.status === 404) return null;          /* ainda não foi salvo nada */
+        if (r.status === 401 || r.status === 403) return null;  /* sessão morreu */
         if (!r.ok) throw new Error("HTTP " + r.status);
         return r.json();
       })
@@ -175,6 +185,84 @@ const Dados = (function () {
     });
   }
 
+  /* ---------- Manter a sessão viva ----------
+     O token do Firebase vale uma hora. Sozinho, ele obrigaria a
+     equipe a digitar a senha uma vez por turno — e o Hub é a
+     página inicial de todo mundo. Junto do token vem um SEGUNDO
+     token, o de renovação, que não vence: com ele se pede um
+     token novo sem incomodar ninguém.
+
+     O que isso custa em segurança, dito sem rodeio: quem sentar
+     no computador de alguém da equipe, com o navegador aberto,
+     entra no Hub como aquela pessoa — e, no caso do
+     administrador, na administração. É o mesmo que já vale para o
+     Gmail e para qualquer sistema que fica logado. O botão Sair
+     apaga tudo, e trocar a senha no Firebase derruba os tokens de
+     renovação de todos os aparelhos.
+
+     Contra roubo do token pelo navegador, o que protege é não
+     haver por onde: a política da página não deixa entrar script
+     de fora, e nada vindo do banco é escrito como HTML. */
+
+  var relogioDaRenovacao = null;
+  var renovacaoEmCurso = null;
+
+  function renovar() {
+    var s = lerSessao();
+    if (!s || !s.refreshToken || !temBanco()) return Promise.resolve(null);
+    if (renovacaoEmCurso) return renovacaoEmCurso;
+
+    renovacaoEmCurso = fetch("https://securetoken.googleapis.com/v1/token?key=" +
+                             encodeURIComponent(cfg.apiKey), {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: "grant_type=refresh_token&refresh_token=" + encodeURIComponent(s.refreshToken),
+    })
+    .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+    .then(function (res) {
+      if (!res.ok) {
+        /* Senha trocada, conta desligada ou token revogado. Aí é
+           para pedir a senha mesmo. */
+        sair();
+        return null;
+      }
+      var nova = {
+        idToken:      res.j.id_token,
+        refreshToken: res.j.refresh_token || s.refreshToken,
+        email:        s.email,
+        uid:          res.j.user_id || s.uid,
+        expiraEm:     Date.now() + (parseInt(res.j.expires_in, 10) - 60) * 1000,
+      };
+      guardarSessao(nova);
+      agendarRenovacao();
+      return nova;
+    })
+    .catch(function () { return null; })
+    .then(function (r) { renovacaoEmCurso = null; return r; });
+
+    return renovacaoEmCurso;
+  }
+
+  /* Renova cinco minutos antes de vencer. Cinco porque um pedido
+     que sai no minuto do vencimento pode chegar depois dele. */
+  function agendarRenovacao() {
+    if (relogioDaRenovacao) window.clearTimeout(relogioDaRenovacao);
+    var s = lerSessao();
+    if (!s || !s.refreshToken) return;
+    var falta = (s.expiraEm || 0) - Date.now() - 5 * 60 * 1000;
+    relogioDaRenovacao = window.setTimeout(renovar, Math.max(falta, 1000));
+  }
+
+  /* O que as telas esperam antes do primeiro pedido ao banco:
+     resolve com a sessão boa, ou com null se não há sessão. */
+  function pronto() {
+    var s = lerSessao();
+    if (!s) return Promise.resolve(null);
+    if (s.expiraEm && Date.now() > s.expiraEm - 60 * 1000) return renovar();
+    agendarRenovacao();
+    return Promise.resolve(s);
+  }
+
   /* ---------- Entrar e sair ---------- */
 
   /* ONDE A SESSÃO FICA, E POR QUÊ SÃO DOIS LUGARES
@@ -194,18 +282,28 @@ const Dados = (function () {
      o token de renovação. Passada a hora, pede a senha de novo. */
   function lerSessao() {
     try {
-      var bruto = window.sessionStorage.getItem(CHAVE_SESSAO)
-               || window.localStorage.getItem(CHAVE_SESSAO);
+      var bruto = window.localStorage.getItem(CHAVE_SESSAO)
+               || window.sessionStorage.getItem(CHAVE_SESSAO);
       var s = JSON.parse(bruto || "null");
       if (!s || !s.idToken) return null;
-      /* O token do Firebase vale uma hora. Passou disso, peço a
-         senha de novo — é uma vez por turno de trabalho. */
-      if (s.expiraEm && Date.now() > s.expiraEm) { sair(); return null; }
+
+      /* Vencido E sem como renovar: acabou mesmo. Vencido COM
+         token de renovação não é problema — quem cuida é
+         renovar(), e derrubar aqui faria a tela piscar de logada
+         para deslogada enquanto a renovação está no ar. */
+      if (s.expiraEm && Date.now() > s.expiraEm && !s.refreshToken) {
+        sair();
+        return null;
+      }
       return s;
     } catch (e) { return null; }
   }
 
-  function entrar(email, senha, ficarNoNavegador) {
+  function guardarSessao(s) {
+    try { window.localStorage.setItem(CHAVE_SESSAO, JSON.stringify(s)); } catch (e) {}
+  }
+
+  function entrar(email, senha) {
     if (!temBanco()) {
       /* Sem banco não há a quem perguntar; a edição é local. */
       return Promise.resolve({ email: email || "local", local: true });
@@ -224,10 +322,11 @@ const Dados = (function () {
         throw new Error(recado(codigo));
       }
       var sessao = {
-        idToken: res.j.idToken,
-        email:   res.j.email,
-        uid:     res.j.localId,
-        expiraEm: Date.now() + (parseInt(res.j.expiresIn, 10) - 60) * 1000,
+        idToken:      res.j.idToken,
+        refreshToken: res.j.refreshToken,
+        email:        res.j.email,
+        uid:          res.j.localId,
+        expiraEm:     Date.now() + (parseInt(res.j.expiresIn, 10) - 60) * 1000,
       };
 
       /* Aqui NÃO se pergunta quem é. Esta função atende as duas
@@ -238,8 +337,8 @@ const Dados = (function () {
          nem o Hub nem a administração conseguem gravar nada que
          elas não deixem, venha o pedido de onde vier. */
 
-      var onde = ficarNoNavegador ? window.localStorage : window.sessionStorage;
-      try { onde.setItem(CHAVE_SESSAO, JSON.stringify(sessao)); } catch (e) {}
+      guardarSessao(sessao);
+      agendarRenovacao();
       return sessao;
     });
   }
@@ -263,6 +362,7 @@ const Dados = (function () {
   }
 
   function sair() {
+    if (relogioDaRenovacao) { window.clearTimeout(relogioDaRenovacao); relogioDaRenovacao = null; }
     /* Sai dos dois lugares, sempre: quem clica em Sair quer ter
        saído, não ter saído de metade. */
     try { window.sessionStorage.removeItem(CHAVE_SESSAO); } catch (e) {}
@@ -432,6 +532,8 @@ const Dados = (function () {
     entrar: entrar,
     sair: sair,
     sessao: lerSessao,
+    pronto: pronto,
+    renovar: renovar,
 
     listarEquipe: listarEquipe,
     criarPessoa: criarPessoa,

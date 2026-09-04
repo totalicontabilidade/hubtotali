@@ -299,9 +299,7 @@ const PendenciasUI = (function () {
     b.addEventListener("click", function () {
       msg.hidden = true;
       b.disabled = true; b.textContent = "Entrando…";
-      /* true = fica no navegador. Ver a explicação em js/dados.js,
-         em lerSessao(): o Hub é a página inicial da equipe. */
-      Dados.entrar(email._entrada.value.trim(), senha._entrada.value, true)
+      Dados.entrar(email._entrada.value.trim(), senha._entrada.value)
         .then(function () { fechar(); carregar(); })
         .catch(function (e) {
           msg.textContent = e.message; msg.hidden = false;
