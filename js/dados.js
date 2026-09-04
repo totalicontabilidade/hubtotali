@@ -177,18 +177,35 @@ const Dados = (function () {
 
   /* ---------- Entrar e sair ---------- */
 
+  /* ONDE A SESSÃO FICA, E POR QUÊ SÃO DOIS LUGARES
+     ------------------------------------------------------------
+     A administração guarda na ABA: fechou a aba, acabou. É a
+     conta que pode reescrever o Hub inteiro, e o atrito de digitar
+     de novo é barato perto disso.
+
+     O Hub guarda no NAVEGADOR. Ele é a página inicial da equipe:
+     abre dezenas de vezes por dia, cada vez numa aba nova. Preso à
+     aba, o login teria de ser redigitado em todas elas — e senha
+     que se digita vinte vezes por dia vira senha curta, anotada no
+     monitor, ou o recurso simplesmente para de ser usado.
+
+     Em nenhum dos dois casos fica guardada credencial de longa
+     vida: o que se guarda é o token de uma hora do Firebase, e não
+     o token de renovação. Passada a hora, pede a senha de novo. */
   function lerSessao() {
     try {
-      var s = JSON.parse(window.sessionStorage.getItem(CHAVE_SESSAO) || "null");
+      var bruto = window.sessionStorage.getItem(CHAVE_SESSAO)
+               || window.localStorage.getItem(CHAVE_SESSAO);
+      var s = JSON.parse(bruto || "null");
       if (!s || !s.idToken) return null;
       /* O token do Firebase vale uma hora. Passou disso, peço a
-         senha de novo — é uma vez por sessão de trabalho. */
+         senha de novo — é uma vez por turno de trabalho. */
       if (s.expiraEm && Date.now() > s.expiraEm) { sair(); return null; }
       return s;
     } catch (e) { return null; }
   }
 
-  function entrar(email, senha) {
+  function entrar(email, senha, ficarNoNavegador) {
     if (!temBanco()) {
       /* Sem banco não há a quem perguntar; a edição é local. */
       return Promise.resolve({ email: email || "local", local: true });
@@ -213,11 +230,16 @@ const Dados = (function () {
         expiraEm: Date.now() + (parseInt(res.j.expiresIn, 10) - 60) * 1000,
       };
 
-      if (cfg.ADMIN_UID && sessao.uid !== cfg.ADMIN_UID) {
-        throw new Error("Esta conta não é a de administrador do Hub.");
-      }
+      /* Aqui NÃO se pergunta quem é. Esta função atende as duas
+         telas: a administração e o login das pendências, que é de
+         toda a equipe. A recusa de quem não é administrador mora
+         em js/admin.js, que é a tela que tem esse direito a
+         defender. Quem manda de verdade são as regras do banco:
+         nem o Hub nem a administração conseguem gravar nada que
+         elas não deixem, venha o pedido de onde vier. */
 
-      try { window.sessionStorage.setItem(CHAVE_SESSAO, JSON.stringify(sessao)); } catch (e) {}
+      var onde = ficarNoNavegador ? window.localStorage : window.sessionStorage;
+      try { onde.setItem(CHAVE_SESSAO, JSON.stringify(sessao)); } catch (e) {}
       return sessao;
     });
   }
@@ -241,7 +263,10 @@ const Dados = (function () {
   }
 
   function sair() {
+    /* Sai dos dois lugares, sempre: quem clica em Sair quer ter
+       saído, não ter saído de metade. */
     try { window.sessionStorage.removeItem(CHAVE_SESSAO); } catch (e) {}
+    try { window.localStorage.removeItem(CHAVE_SESSAO); } catch (e) {}
   }
 
   /* ============================================================

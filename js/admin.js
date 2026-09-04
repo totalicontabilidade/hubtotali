@@ -639,7 +639,18 @@
       b.textContent = "Entrando…";
 
       Dados.entrar($("entrada-email").value.trim(), $("entrada-senha").value)
-        .then(function () { abrirEdicao(); })
+        .then(function (sessao) {
+          /* A conta existe e a senha confere — mas esta tela é só
+             do administrador. Quem não é sai da sessão na hora,
+             para não ficar com um login pela metade guardado no
+             navegador. */
+          var uid = (typeof CONFIG_HUB !== "undefined") ? CONFIG_HUB.ADMIN_UID : "";
+          if (uid && sessao && sessao.uid && sessao.uid !== uid) {
+            Dados.sair();
+            throw new Error("Esta conta não é a de administrador do Hub.");
+          }
+          abrirEdicao();
+        })
         .catch(function (e) {
           erro.textContent = e.message || "Não consegui entrar.";
           erro.hidden = false;
