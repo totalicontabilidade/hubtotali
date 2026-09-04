@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modelos de tela de entrada · Hub Totali</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32">
+<style>
+/* ============================================================
+   Seis fundos para a tela de entrada.
+
+   O cartão é IGUAL nos seis de propósito: assim a comparação é só
+   do fundo, que é o que está em jogo. Todos usam o símbolo da
+   Totali, e todos param de se mexer para quem pediu menos
+   movimento no sistema operacional.
+   ============================================================ */
+
+:root{
+  --base:#eef1f6; --fio-2:#c6d1e0;
+  --txt:#0d1926; --txt-2:#4a5d76; --txt-3:#7c8ea8;
+  --marca:#0d1926; --marca-txt:#fff;
+  --estado:#2c5a8f;
+  --noite:#0d1926;
+  --ouro:#b8893a;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font:15px/1.5 "Segoe UI",system-ui,-apple-system,sans-serif;
+     color:var(--txt);background:#fff}
+
+/* ---------- o índice ---------- */
+.topo{position:sticky;top:0;z-index:50;background:#fff;
+      border-bottom:1px solid var(--fio-2);padding:14px 20px}
+.topo h1{margin:0 0 4px;font-size:17px}
+.topo p{margin:0 0 10px;font-size:13px;color:var(--txt-2)}
+.atalhos{display:flex;gap:7px;flex-wrap:wrap}
+.atalhos a{font-size:12.5px;text-decoration:none;color:var(--txt-2);
+           border:1px solid var(--fio-2);border-radius:7px;padding:5px 10px}
+.atalhos a:hover{color:var(--txt);border-color:var(--txt-3)}
+
+/* ---------- cada modelo ---------- */
+.modelo{position:relative;min-height:640px;display:grid;place-items:center;
+        overflow:hidden;isolation:isolate}
+.etiqueta{position:absolute;top:16px;left:16px;z-index:9;
+          background:rgba(255,255,255,.92);border-radius:8px;
+          padding:7px 12px;font-size:12.5px;font-weight:600;color:var(--noite)}
+.etiqueta span{font-weight:400;color:var(--txt-2)}
+
+/* ---------- o cartão, igual nos seis ---------- */
+.cartao{position:relative;z-index:5;width:100%;max-width:340px;
+        background:var(--base);border-radius:16px;padding:30px 26px 24px;
+        display:flex;flex-direction:column;gap:14px;
+        box-shadow:0 18px 48px rgba(0,0,0,.32)}
+.cartao img{height:38px;width:auto;object-fit:contain;align-self:flex-start}
+.cartao p.nota{margin:0;font-size:13px;color:var(--txt-2)}
+.campo{display:flex;flex-direction:column;gap:5px}
+.rot{font-size:11.5px;font-weight:600;letter-spacing:.03em;
+     text-transform:uppercase;color:var(--txt-3)}
+.cx{border:1px solid var(--fio-2);border-radius:9px;padding:10px 11px;
+    font:inherit;font-size:14.5px;background:#fff;width:100%}
+.btn{margin-top:4px;border:0;border-radius:10px;background:var(--marca);
+     color:var(--marca-txt);font:inherit;font-size:14.5px;font-weight:600;
+     padding:11px 14px;cursor:pointer}
+.pe{margin:2px 0 0;font-size:12px;color:var(--txt-3);text-align:center}
+
+/* O símbolo vira silhueta pintável: a máscara usa o desenho do
+   arquivo e a cor vem do CSS. Sem isso, dava só para baixar a
+   opacidade do PNG e o resultado ficava cinza sujo. */
+.simbolo{
+  -webkit-mask-image:url(assets/simbolo.png); mask-image:url(assets/simbolo.png);
+  -webkit-mask-size:contain; mask-size:contain;
+  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+  -webkit-mask-position:center; mask-position:center;
+}
+
+/* ============================================================
+   1 · SANGRADO
+   O símbolo enorme, cortado pela borda. Nada se mexe. É o mais
+   sóbrio dos seis: parece papel timbrado, não parece site.
+   ============================================================ */
+#m1{background:var(--noite)}
+#m1 .fundo{position:absolute;inset:0;z-index:1}
+#m1 .marca{position:absolute;right:-14%;top:50%;transform:translateY(-50%);
+           width:min(76vh,760px);height:min(76vh,760px);
+           background:#1b304a}
+#m1 .cartao{margin-right:min(30vw,420px)}
+@media (max-width:900px){
+  #m1 .marca{right:-30%;width:min(60vh,460px);height:min(60vh,460px)}
+  #m1 .cartao{margin-right:0}
+}
+
+/* ============================================================
+   2 · AURORA
+   Manchas de luz que passeiam devagar atrás do símbolo. É o mais
+   "tecnológico" — o fundo nunca está exatamente igual.
+   ============================================================ */
+#m2{background:#08111c}
+#m2 .mancha{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55}
+#m2 .a{width:520px;height:520px;background:#2c5a8f;top:-140px;left:-120px;
+       animation:passeioA 22s ease-in-out infinite alternate}
+#m2 .b{width:460px;height:460px;background:#b8893a;bottom:-160px;right:-100px;
+       animation:passeioB 27s ease-in-out infinite alternate}
+#m2 .c{width:380px;height:380px;background:#1f6f8b;top:40%;right:20%;
+       animation:passeioC 19s ease-in-out infinite alternate}
+#m2 .marca{position:absolute;inset:0;margin:auto;
+           width:min(52vh,420px);height:min(52vh,420px);
+           background:rgba(255,255,255,.13)}
+@keyframes passeioA{to{transform:translate(180px,120px) scale(1.15)}}
+@keyframes passeioB{to{transform:translate(-160px,-110px) scale(1.1)}}
+@keyframes passeioC{to{transform:translate(-120px,90px) scale(.88)}}
+
+/* ============================================================
+   3 · RESPIRAÇÃO
+   O símbolo atrás do cartão, crescendo e encolhendo de leve, como
+   quem respira. Movimento lento o bastante para não puxar o olho.
+   ============================================================ */
+#m3{background:radial-gradient(120% 100% at 50% 0%,#16283d 0%,#0b1622 70%)}
+#m3 .marca{position:absolute;inset:0;margin:auto;
+           width:min(66vh,560px);height:min(66vh,560px);
+           background:rgba(255,255,255,.10);
+           animation:respirar 9s ease-in-out infinite}
+#m3 .halo{position:absolute;inset:0;margin:auto;width:min(78vh,660px);
+          height:min(78vh,660px);border-radius:50%;
+          background:radial-gradient(circle,rgba(44,90,143,.35) 0%,transparent 62%);
+          animation:respirar 9s ease-in-out infinite reverse}
+@keyframes respirar{
+  0%,100%{transform:scale(1);opacity:.85}
+  50%    {transform:scale(1.06);opacity:1}
+}
+
+/* ============================================================
+   4 · PADRÃO
+   O símbolo repetido em marca-d'água, deslizando na diagonal sem
+   fim. Lembra papel de parede de escritório — discreto de perto,
+   presente de longe.
+   ============================================================ */
+#m4{background:var(--noite)}
+#m4 .trama{position:absolute;inset:-30%;
+           -webkit-mask-image:url(assets/simbolo.png); mask-image:url(assets/simbolo.png);
+           -webkit-mask-size:120px 120px; mask-size:120px 120px;
+           -webkit-mask-repeat:repeat; mask-repeat:repeat;
+           background:rgba(255,255,255,.055);
+           animation:deslizar 60s linear infinite}
+#m4 .brilho{position:absolute;inset:0;
+            background:radial-gradient(70% 60% at 50% 45%,rgba(44,90,143,.45) 0%,transparent 70%)}
+@keyframes deslizar{to{transform:translate(120px,120px)}}
+
+/* ============================================================
+   5 · REFLEXO
+   Uma faixa de luz atravessa o símbolo de tempos em tempos, como
+   luz batendo em metal escovado. O fundo é quieto; o brilho é o
+   único movimento.
+   ============================================================ */
+#m5{background:linear-gradient(160deg,#0d1926 0%,#132539 55%,#0a1420 100%)}
+#m5 .marca{position:absolute;inset:0;margin:auto;
+           width:min(70vh,620px);height:min(70vh,620px);
+           background:linear-gradient(110deg,
+             rgba(255,255,255,.07) 0%, rgba(255,255,255,.07) 38%,
+             rgba(184,137,58,.85) 47%, rgba(255,255,255,.28) 53%,
+             rgba(255,255,255,.07) 62%, rgba(255,255,255,.07) 100%);
+           background-size:280% 100%;
+           animation:reflexo 7s ease-in-out infinite}
+@keyframes reflexo{
+  0%,72%{background-position:130% 0}
+  100%  {background-position:-30% 0}
+}
+
+/* ============================================================
+   6 · PROFUNDIDADE
+   Malha de pontos ao fundo e o símbolo em relevo, feito de dois
+   deslocamentos — um claro, um escuro. Parece gravado na parede.
+   O conjunto anda alguns pixels, bem devagar.
+   ============================================================ */
+#m6{background:#0b1622}
+#m6 .pontos{position:absolute;inset:-10%;
+            background-image:radial-gradient(rgba(255,255,255,.10) 1.4px,transparent 1.4px);
+            background-size:26px 26px;
+            animation:vagar 34s ease-in-out infinite alternate}
+#m6 .relevo{position:absolute;inset:0;margin:auto;
+            width:min(64vh,540px);height:min(64vh,540px)}
+#m6 .relevo i{position:absolute;inset:0;display:block}
+#m6 .clara{background:rgba(255,255,255,.14);transform:translate(-3px,-3px)}
+#m6 .escura{background:rgba(0,0,0,.55);transform:translate(3px,3px)}
+#m6 .corpo{background:#101f30}
+@keyframes vagar{to{transform:translate(26px,18px)}}
+
+/* Quem pediu menos movimento no sistema recebe os seis parados. */
+@media (prefers-reduced-motion:reduce){
+  #m2 .mancha,#m3 .marca,#m3 .halo,#m4 .trama,#m5 .marca,#m6 .pontos{
+    animation:none !important;
+  }
+}
+
+@media (max-width:520px){
+  .modelo{min-height:560px;padding:20px}
+  .etiqueta{top:10px;left:10px;font-size:11.5px}
+}
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <h1>Tela de entrada · seis fundos</h1>
+  <p>O cartão é igual nos seis, para a comparação ser só do fundo. Me diga o número.</p>
+  <nav class="atalhos">
+    <a href="#m1">1 · Sangrado</a>
+    <a href="#m2">2 · Aurora</a>
+    <a href="#m3">3 · Respiração</a>
+    <a href="#m4">4 · Padrão</a>
+    <a href="#m5">5 · Reflexo</a>
+    <a href="#m6">6 · Profundidade</a>
+  </nav>
+</header>
+
+<!-- 1 -->
+<section class="modelo" id="m1">
+  <div class="etiqueta">1 · Sangrado <span>— parado, o mais sóbrio</span></div>
+  <div class="marca simbolo"></div>
+  <form class="cartao" onsubmit="return false">
+    <img src="assets/logo-hub.png" alt="Hub Totali">
+    <p class="nota">Entre com o seu e-mail da Totali.</p>
+    <label class="campo"><span class="rot">E-mail</span><input class="cx" type="email"></label>
+    <label class="campo"><span class="rot">Senha</span><input class="cx" type="password"></label>
+    <button class="btn" type="submit">Entrar</button>
+    <p class="pe">Não tem acesso? Fale com a administração.</p>
+  </form>
+</section>
+
+<!-- 2 -->
+<section class="modelo" id="m2">
+  <div class="etiqueta">2 · Aurora <span>— luz que passeia devagar</span></div>
+  <div class="mancha a"></div><div class="mancha b"></div><div class="mancha c"></div>
+  <div class="marca simbolo"></div>
+  <form class="cartao" onsubmit="return false">
+    <img src="assets/logo-hub.png" alt="Hub Totali">
+    <p class="nota">Entre com o seu e-mail da Totali.</p>
+    <label class="campo"><span class="rot">E-mail</span><input class="cx" type="email"></label>
+    <label class="campo"><span class="rot">Senha</span><input class="cx" type="password"></label>
+    <button class="btn" type="submit">Entrar</button>
+    <p class="pe">Não tem acesso? Fale com a administração.</p>
+  </form>
+</section>
+
+<!-- 3 -->
+<section class="modelo" id="m3">
+  <div class="etiqueta">3 · Respiração <span>— o símbolo pulsando de leve</span></div>
+  <div class="halo"></div>
+  <div class="marca simbolo"></div>
+  <form class="cartao" onsubmit="return false">
+    <img src="assets/logo-hub.png" alt="Hub Totali">
+    <p class="nota">Entre com o seu e-mail da Totali.</p>
+    <label class="campo"><span class="rot">E-mail</span><input class="cx" type="email"></label>
+    <label class="campo"><span class="rot">Senha</span><input class="cx" type="password"></label>
+    <button class="btn" type="submit">Entrar</button>
+    <p class="pe">Não tem acesso? Fale com a administração.</p>
+  </form>
+</section>
+
+<!-- 4 -->
+<section class="modelo" id="m4">
+  <div class="etiqueta">4 · Padrão <span>— marca-d'água deslizando</span></div>
+  <div class="trama"></div>
+  <div class="brilho"></div>
+  <form class="cartao" onsubmit="return false">
+    <img src="assets/logo-hub.png" alt="Hub Totali">
+    <p class="nota">Entre com o seu e-mail da Totali.</p>
+    <label class="campo"><span class="rot">E-mail</span><input class="cx" type="email"></label>
+    <label class="campo"><span class="rot">Senha</span><input class="cx" type="password"></label>
+    <button class="btn" type="submit">Entrar</button>
+    <p class="pe">Não tem acesso? Fale com a administração.</p>
+  </form>
+</section>
+
+<!-- 5 -->
+<section class="modelo" id="m5">
+  <div class="etiqueta">5 · Reflexo <span>— luz de metal atravessando o símbolo</span></div>
+  <div class="marca simbolo"></div>
+  <form class="cartao" onsubmit="return false">
+    <img src="assets/logo-hub.png" alt="Hub Totali">
+    <p class="nota">Entre com o seu e-mail da Totali.</p>
+    <label class="campo"><span class="rot">E-mail</span><input class="cx" type="email"></label>
+    <label class="campo"><span class="rot">Senha</span><input class="cx" type="password"></label>
+    <button class="btn" type="submit">Entrar</button>
+    <p class="pe">Não tem acesso? Fale com a administração.</p>
+  </form>
+</section>
+
+<!-- 6 -->
+<section class="modelo" id="m6">
+  <div class="etiqueta">6 · Profundidade <span>— símbolo em relevo sobre malha</span></div>
+  <div class="pontos"></div>
+  <div class="relevo">
+    <i class="clara simbolo"></i>
+    <i class="escura simbolo"></i>
+    <i class="corpo simbolo"></i>
+  </div>
+  <form class="cartao" onsubmit="return false">
+    <img src="assets/logo-hub.png" alt="Hub Totali">
+    <p class="nota">Entre com o seu e-mail da Totali.</p>
+    <label class="campo"><span class="rot">E-mail</span><input class="cx" type="email"></label>
+    <label class="campo"><span class="rot">Senha</span><input class="cx" type="password"></label>
+    <button class="btn" type="submit">Entrar</button>
+    <p class="pe">Não tem acesso? Fale com a administração.</p>
+  </form>
+</section>
+
+</body>
+</html>
