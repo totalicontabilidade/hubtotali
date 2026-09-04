@@ -44,6 +44,13 @@
      entrando sozinho — o navegador guarda a sessão e ela se
      renova sem pedir nada. -->
 <main class="portao" id="portao" hidden>
+  <!-- As duas marcas do fundo, sangrando pelas bordas opostas.
+       São decoração: por isso div com máscara e não <img> com
+       texto alternativo — quem usa leitor de tela não ganha nada
+       ouvindo "símbolo" duas vezes antes do campo de e-mail. -->
+  <div class="portao__marca portao__marca--totali"></div>
+  <div class="portao__marca portao__marca--hub"></div>
+
   <form class="portao__caixa" id="portao-form" autocomplete="on">
     <img class="portao__logo" src="assets/logo-hub.png" alt="Hub Totali">
     <p class="portao__nota">Entre com o seu e-mail da Totali.</p>
