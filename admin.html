@@ -179,7 +179,14 @@
 
   <div class="admin__rodape-acoes">
     <button class="btn" type="button" id="btn-novo-setor">Acrescentar setor</button>
-    <button class="btn btn--fantasma" type="button" id="btn-padrao">Voltar ao conteúdo original</button>
+    <!-- Aqui havia "Voltar ao conteúdo original". O botão fazia
+         sentido quando a lista da casa morava em js/sistemas.js e
+         voltar ao original queria dizer voltar aos 37 sistemas.
+         Esse arquivo foi esvaziado quando a lista ficou privada, e
+         o mesmo botão passou a fazer o contrário do que o nome
+         diz: limparia a tela e, no Salvar seguinte, apagaria a
+         lista da equipe inteira. Um botão que só destrói não
+         precisa existir. -->
   </div>
 
   <section class="painel" id="painel-avisos">

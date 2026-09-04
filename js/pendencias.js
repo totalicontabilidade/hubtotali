@@ -181,6 +181,50 @@ const Pendencias = (function () {
     }).then(conferir);
   }
 
+  /* ---------- corrigir o pedido ----------
+     Quinze minutos para consertar o que você mesmo escreveu: erro
+     de digitação, palavra trocada, prazo posto errado. Depois
+     disso fecha, e ajuste vira comentário na linha do tempo —
+     porque a essa altura o colega já leu, e reescrever o pedido
+     por baixo faria a conversa deixar de bater com o combinado.
+
+     Quem abriu e quando não entram na lista: eles sustentam a
+     trilha. As regras do banco recusam mudar os dois, dentro ou
+     fora da janela. */
+
+  var CAMPOS_DO_PEDIDO = ["oque", "porque", "comoFazer", "sugestao",
+                          "responsavel", "prazo", "setorDestino"];
+
+  function podeCorrigirPedido(p) {
+    var s = Dados.sessao();
+    if (!s || !p || p.criadoPor !== s.uid) return false;
+    var quando = Date.parse(p.criadoEm);
+    return isFinite(quando) && (Date.now() - quando) < 15 * 60 * 1000;
+  }
+
+  function corrigirPedido(p, mudancas) {
+    if (!podeCorrigirPedido(p)) {
+      return Promise.reject(new Error("A janela de quinze minutos passou. Escreva na linha do tempo."));
+    }
+    var campos = {};
+    var mascara = [];
+    CAMPOS_DO_PEDIDO.forEach(function (c) {
+      if (!(c in mudancas)) return;
+      campos[c] = { stringValue: String(mudancas[c] || "") };
+      mascara.push("updateMask.fieldPaths=" + c);
+    });
+    if (!mascara.length) return Promise.resolve();
+
+    /* Sem a máscara, o Firestore SUBSTITUI o documento inteiro e a
+       pendência perderia quem abriu, quando, e os envolvidos. */
+    var url = base() + "/pendencias/" + encodeURIComponent(p.id) + "?" + mascara.join("&");
+    return fetch(url, {
+      method: "PATCH",
+      headers: autorizacao(),
+      body: JSON.stringify({ fields: campos }),
+    }).then(conferir);
+  }
+
   /* ---------- linha do tempo ---------- */
 
   function andamento(id) {
@@ -298,6 +342,8 @@ const Pendencias = (function () {
     andamento: andamento,
     acrescentar: acrescentar,
     podeEditar: podeEditar,
+    podeCorrigirPedido: podeCorrigirPedido,
+    corrigirPedido: corrigirPedido,
     corrigir: corrigir,
     apagar: apagar,
     estado: estado,

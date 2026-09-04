@@ -391,15 +391,85 @@ const PendenciasUI = (function () {
     });
     c.appendChild(meta);
 
-    [
-      ["Por quê", p.porque],
-      ["Como fazer", p.comoFazer],
-      ["Sugestão de solução", p.sugestao],
-      ["Para quando", p.prazo ? p.prazo.split("-").reverse().join("/") : ""],
-    ].forEach(function (par) {
-      var l = linhaFicha(par[0], par[1]);
-      if (l) c.appendChild(l);
-    });
+    var corpo = el("div", "pd-corpo");
+    c.appendChild(corpo);
+
+    function pintarCorpo() {
+      corpo.textContent = "";
+      [
+        ["Por quê", p.porque],
+        ["Como fazer", p.comoFazer],
+        ["Sugestão de solução", p.sugestao],
+        ["Para quando", p.prazo ? p.prazo.split("-").reverse().join("/") : ""],
+      ].forEach(function (par) {
+        var l = linhaFicha(par[0], par[1]);
+        if (l) corpo.appendChild(l);
+      });
+
+      /* Quinze minutos para consertar o próprio pedido. Passou
+         disso o botão some sozinho — não fica ali prometendo o que
+         o banco já não deixa fazer. */
+      if (!Pendencias.podeCorrigirPedido(p)) return;
+
+      var corrigir = el("button", "pd-corrigir", "corrigir o pedido");
+      corrigir.type = "button";
+      corrigir.title = "Você tem 15 minutos para corrigir o que escreveu";
+      corrigir.addEventListener("click", function () { editarCorpo(); });
+      corpo.appendChild(corrigir);
+    }
+
+    function editarCorpo() {
+      corpo.textContent = "";
+      var campos = {};
+
+      function campo(chave, rotulo, valor, tipo) {
+        var l = el("div", "pd-campo");
+        l.appendChild(el("span", "pd-rot", rotulo));
+        var caixa = document.createElement(tipo === "data" ? "input" : "textarea");
+        if (tipo === "data") caixa.type = "date"; else caixa.rows = 2;
+        caixa.className = "pd-corrigir__caixa";
+        caixa.value = valor || "";
+        l.appendChild(caixa);
+        campos[chave] = caixa;
+        corpo.appendChild(l);
+      }
+
+      campo("oque", "O quê", p.oque);
+      campo("porque", "Por quê", p.porque);
+      campo("comoFazer", "Como fazer", p.comoFazer);
+      campo("sugestao", "Sugestão de solução", p.sugestao);
+      campo("prazo", "Para quando", p.prazo, "data");
+
+      var ok  = el("button", "pd-corrigir__ok", "Salvar correção");
+      var nao = el("button", "pd-corrigir__nao", "Deixar como está");
+      ok.type = "button"; nao.type = "button";
+      var acoes = el("div", "pd-corrigir__acoes");
+      acoes.appendChild(ok); acoes.appendChild(nao);
+      corpo.appendChild(acoes);
+
+      nao.addEventListener("click", pintarCorpo);
+
+      ok.addEventListener("click", function () {
+        var novo = {};
+        Object.keys(campos).forEach(function (k) { novo[k] = campos[k].value.trim(); });
+        if (!novo.oque) { campos.oque.focus(); return; }
+        ok.disabled = true;
+        ok.textContent = "Salvando…";
+        Pendencias.corrigirPedido(p, novo)
+          .then(function () {
+            Object.keys(novo).forEach(function (k) { p[k] = novo[k]; });
+            pintarCorpo();
+            desenhar();
+          })
+          .catch(function (err) {
+            ok.disabled = false;
+            ok.textContent = "Salvar correção";
+            corpo.appendChild(el("div", "pd-corrigir__erro", err.message));
+          });
+      });
+    }
+
+    pintarCorpo();
 
     /* Situação: só quem faz e quem pediu mexem. */
     if (p.responsavel === eu || p.criadoPor === eu) {
@@ -472,16 +542,64 @@ const PendenciasUI = (function () {
         var texto = el("div", "pd-item__txt", x.texto);
         d.appendChild(texto);
 
+        /* A correção acontece na própria ficha, não numa caixa do
+           navegador. A caixa nativa parecia mais barata de fazer e
+           custava caro: não dá para estilizar, vira um pop-up do
+           sistema operacional no celular, some o resto da tela de
+           vista, e o navegador deixa o usuário desligar esse tipo
+           de caixa — desligada, a correção deixaria de existir sem
+           nenhum aviso. */
         if (Pendencias.podeEditar(x)) {
           var ed = el("button", "pd-corrigir", "corrigir");
           ed.type = "button";
           ed.title = "Você tem 15 minutos para corrigir o que escreveu";
           ed.addEventListener("click", function () {
-            var novo = window.prompt("Corrigir o que você escreveu:", x.texto);
-            if (novo === null || !novo.trim()) return;
-            Pendencias.corrigir(p.id, x, novo)
-              .then(function () { pintarLinha(p, onde); })
-              .catch(function (err) { window.alert(err.message); });
+            var caixa = document.createElement("textarea");
+            caixa.className = "pd-corrigir__caixa";
+            caixa.value = x.texto;
+            caixa.rows = 3;
+
+            var ok = el("button", "pd-corrigir__ok", "Salvar correção");
+            ok.type = "button";
+            var nao = el("button", "pd-corrigir__nao", "Deixar como está");
+            nao.type = "button";
+
+            var acoes = el("div", "pd-corrigir__acoes");
+            acoes.appendChild(ok);
+            acoes.appendChild(nao);
+
+            texto.hidden = true;
+            ed.hidden = true;
+            d.appendChild(caixa);
+            d.appendChild(acoes);
+            caixa.focus();
+
+            function desistir() {
+              caixa.remove();
+              acoes.remove();
+              texto.hidden = false;
+              ed.hidden = false;
+            }
+
+            nao.addEventListener("click", desistir);
+            caixa.addEventListener("keydown", function (ev) {
+              if (ev.key === "Escape") desistir();
+            });
+
+            ok.addEventListener("click", function () {
+              var novo = caixa.value.trim();
+              if (!novo) return;
+              ok.disabled = true;
+              ok.textContent = "Salvando…";
+              Pendencias.corrigir(p.id, x, novo)
+                .then(function () { pintarLinha(p, onde); })
+                .catch(function (err) {
+                  ok.disabled = false;
+                  ok.textContent = "Salvar correção";
+                  var aviso = el("div", "pd-corrigir__erro", err.message);
+                  d.appendChild(aviso);
+                });
+            });
           });
           d.appendChild(ed);
         }

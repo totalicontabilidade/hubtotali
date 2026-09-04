@@ -581,13 +581,6 @@
       desenhar();
     });
 
-    $("btn-padrao").addEventListener("click", function () {
-      if (!window.confirm("Isto joga fora tudo o que está na tela e volta ao conteúdo original do arquivo js/sistemas.js.\n\nO que já foi salvo continua salvo até você clicar em Salvar de novo.\n\nContinuar?")) return;
-      dados = Dados.semente();
-      marcarPendente();
-      desenhar();
-    });
-
     $("btn-salvar").addEventListener("click", function () {
       var b = $("btn-salvar");
       b.disabled = true;

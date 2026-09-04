@@ -452,6 +452,10 @@ const Dados = (function () {
      tocada. */
   function criarPessoa(dados) {
     if (!temBanco()) return Promise.reject(new Error("O banco não está ligado."));
+    /* O nome entra na lista porque é ele que aparece nas
+       pendências. Sem nome, a pessoa vira um e-mail solto numa
+       cobrança — e ninguém sabe de quem se está falando. */
+    if (!dados.nome) return Promise.reject(new Error("O nome é obrigatório: é ele que aparece nas pendências."));
     if (!dados.email || !dados.senha) return Promise.reject(new Error("E-mail e senha são obrigatórios."));
     if (String(dados.senha).length < 6) return Promise.reject(new Error("A senha precisa de pelo menos 6 caracteres."));
 
