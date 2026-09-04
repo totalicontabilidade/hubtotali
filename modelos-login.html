@@ -55,11 +55,19 @@ body{font:15px/1.5 "Segoe UI",system-ui,-apple-system,sans-serif;color:var(--txt
 .logo{position:absolute;left:clamp(28px,6vw,88px);top:50%;
       transform:translateY(-50%);height:auto;z-index:2}
 
-/* O SÍMBOLO DA TOTALI, à direita, cortado pela borda. Aqui a
-   máscara serve: é uma forma só, e o corte pede cor chapada que
-   converse com o fundo em vez de brigar com ele. */
+/* O SÍMBOLO DA TOTALI. Recortado da própria logo: o arquivo
+   assets/totali-branca.png tem um vão limpo entre o símbolo e a
+   palavra, e é dali que ele saiu — 112 por 231, silhueta pura.
+
+   Vem como MÁSCARA porque assim a cor é decidida aqui: o mesmo
+   arquivo serve para o dourado da marca e para o azul apagado de
+   marca-d água. Como imagem, ele viria com as cores travadas.
+
+   (O que estava aqui antes era o símbolo do HUB, não o da Totali.
+   São marcas diferentes e a troca era o pedido.) */
 .simbolo{position:absolute;top:50%;transform:translateY(-50%);z-index:1;
-  -webkit-mask-image:url(assets/simbolo.png); mask-image:url(assets/simbolo.png);
+  aspect-ratio:112/231;
+  -webkit-mask-image:url(assets/totali-simbolo.png); mask-image:url(assets/totali-simbolo.png);
   -webkit-mask-size:contain; mask-size:contain;
   -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
   -webkit-mask-position:center; mask-position:center;
@@ -82,21 +90,29 @@ body{font:15px/1.5 "Segoe UI",system-ui,-apple-system,sans-serif;color:var(--txt
      padding:11px 14px;cursor:pointer}
 .pe{margin:2px 0 0;font-size:12px;color:var(--txt-3);text-align:center}
 
-/* ---------- A · equilibrado ---------- */
+/* ---------- A · inteiro, em azul ----------
+   O símbolo é alto e estreito, ao contrário do redondo que estava
+   aqui antes. Forma assim pede respiro dos lados em vez de corte:
+   cortada, ela vira três riscos e deixa de ser marca. */
 #a .logo{width:min(20vw,230px)}
-#a .simbolo{right:-9%;width:min(72vh,660px);height:min(72vh,660px);
-            background:#1b304a}
-
-/* ---------- B · marcas discretas ---------- */
-#b .logo{width:min(16vw,180px);opacity:.42}
-#b .simbolo{right:-13%;width:min(64vh,580px);height:min(64vh,580px);
-            background:#16283c}
-
-/* ---------- C · marcas fortes ---------- */
-#c{background:linear-gradient(100deg,#0b1723 0%,#12253a 60%,#0d1926 100%)}
-#c .logo{width:min(24vw,290px)}
-#c .simbolo{right:-6%;width:min(84vh,780px);height:min(84vh,780px);
+#a .simbolo{right:clamp(28px,7vw,110px);height:min(74vh,600px);
             background:#22456b}
+
+/* ---------- B · inteiro, em dourado ----------
+   A cor da casa, apagada o bastante para não competir com o
+   cartão. É a versão que mais parece a marca de verdade. */
+#b .logo{width:min(20vw,230px)}
+#b .simbolo{right:clamp(28px,7vw,110px);height:min(74vh,600px);
+            background:#8a6528}
+
+/* ---------- C · sangrando, bem grande ----------
+   Aqui ele volta a ser cortado pela borda, mas grande o bastante
+   para o corte ler como enquadramento e não como falta. Fundo em
+   degradê leve. */
+#c{background:linear-gradient(100deg,#0b1723 0%,#12253a 62%,#0d1926 100%)}
+#c .logo{width:min(22vw,260px)}
+#c .simbolo{right:-4%;height:min(122vh,1000px);
+            background:#1e3a5a}
 
 /* ---------- telas estreitas ----------
    Lado a lado só existe onde há lados. No celular a logo sobe para
@@ -111,27 +127,27 @@ body{font:15px/1.5 "Segoe UI",system-ui,-apple-system,sans-serif;color:var(--txt
      o fundo continuava escuro e o desenho, invisível. Ele desce e
      escapa pela direita, do mesmo jeito que faz no computador —
      assim aparece a parte de fora dele, que é a que se lê. */
-  .simbolo{left:auto;right:-34%;top:auto;bottom:-12%;transform:none}
-  #a .simbolo{width:min(86vw,400px);height:min(86vw,400px);background:#213d5e}
-  #b .simbolo{width:min(80vw,360px);height:min(80vw,360px);background:#1a3049}
-  #c .simbolo{width:min(94vw,440px);height:min(94vw,440px);background:#2a527d}
+  .simbolo{left:auto;right:-16%;top:auto;bottom:-10%;transform:none}
+  #a .simbolo{height:min(46vh,360px);background:#213d5e}
+  #b .simbolo{height:min(46vh,360px);background:#8a6528}
+  #c .simbolo{height:min(58vh,440px);background:#1e3a5a}
 }
 </style>
 </head>
 <body>
 
 <header class="topo">
-  <h1>Modelo 1 · logo à esquerda, símbolo à direita, entrada no meio</h1>
-  <p>A disposição é a mesma nas três. Muda só a força das duas marcas. O cartão perdeu a logo de dentro — ela agora está no fundo.</p>
+  <h1>Modelo 1 · logo do Hub à esquerda, símbolo da Totali à direita</h1>
+  <p>Agora com o símbolo certo — o da Totali, recortado da própria logo. Muda o tratamento dele nas três.</p>
   <nav class="atalhos">
-    <a href="#a">A · equilibrado</a>
-    <a href="#b">B · marcas discretas</a>
-    <a href="#c">C · marcas fortes</a>
+    <a href="#a">A · azul, inteiro</a>
+    <a href="#b">B · dourado, inteiro</a>
+    <a href="#c">C · sangrando</a>
   </nav>
 </header>
 
 <section class="modelo" id="a">
-  <div class="etiqueta">A · equilibrado <span>— logo legível, símbolo em tom próximo do fundo</span></div>
+  <div class="etiqueta">A · símbolo inteiro, em azul <span>— o mais discreto</span></div>
   <img class="logo" src="assets/logo-hub-escuro.png" alt="Hub Totali">
   <div class="simbolo"></div>
   <form class="cartao" onsubmit="return false">
@@ -145,7 +161,7 @@ body{font:15px/1.5 "Segoe UI",system-ui,-apple-system,sans-serif;color:var(--txt
 </section>
 
 <section class="modelo" id="b">
-  <div class="etiqueta">B · marcas discretas <span>— as duas recuam, o cartão manda</span></div>
+  <div class="etiqueta">B · símbolo inteiro, em dourado <span>— a cor da casa</span></div>
   <img class="logo" src="assets/logo-hub-escuro.png" alt="Hub Totali">
   <div class="simbolo"></div>
   <form class="cartao" onsubmit="return false">
@@ -159,7 +175,7 @@ body{font:15px/1.5 "Segoe UI",system-ui,-apple-system,sans-serif;color:var(--txt
 </section>
 
 <section class="modelo" id="c">
-  <div class="etiqueta">C · marcas fortes <span>— símbolo maior e mais claro, fundo em degradê</span></div>
+  <div class="etiqueta">C · símbolo sangrando, bem grande <span>— cortado pela borda</span></div>
   <img class="logo" src="assets/logo-hub-escuro.png" alt="Hub Totali">
   <div class="simbolo"></div>
   <form class="cartao" onsubmit="return false">
