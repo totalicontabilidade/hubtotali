@@ -100,15 +100,21 @@ body{font:15px/1.5 "Segoe UI",system-ui,-apple-system,sans-serif;color:var(--txt
 
 /* ---------- telas estreitas ----------
    Lado a lado só existe onde há lados. No celular a logo sobe para
-   o alto, o símbolo vira fundo atrás de tudo, e o cartão continua
-   no meio — que é o único lugar que sobra e também o certo. */
+   o alto e o cartão fica no meio — único lugar que sobra e também
+   o certo. O símbolo desce para o canto de baixo. */
 @media (max-width:860px){
   .modelo{min-height:600px;padding:24px;
           display:flex;flex-direction:column;justify-content:center;align-items:center}
   .logo{position:static;transform:none;margin:0 auto 22px;display:block}
   #a .logo,#b .logo,#c .logo{width:min(52vw,190px);opacity:1}
-  .simbolo{left:50%;right:auto;transform:translate(-50%,-50%);opacity:.5}
-  #a .simbolo,#b .simbolo,#c .simbolo{width:min(78vw,420px);height:min(78vw,420px)}
+  /* Centrado, o símbolo ficava exatamente atrás do cartão e sumia:
+     o fundo continuava escuro e o desenho, invisível. Ele desce e
+     escapa pela direita, do mesmo jeito que faz no computador —
+     assim aparece a parte de fora dele, que é a que se lê. */
+  .simbolo{left:auto;right:-34%;top:auto;bottom:-12%;transform:none}
+  #a .simbolo{width:min(86vw,400px);height:min(86vw,400px);background:#213d5e}
+  #b .simbolo{width:min(80vw,360px);height:min(80vw,360px);background:#1a3049}
+  #c .simbolo{width:min(94vw,440px);height:min(94vw,440px);background:#2a527d}
 }
 </style>
 </head>
