@@ -25,8 +25,6 @@
 (function () {
   "use strict";
 
-  var INDICE_LOGOS = (typeof LOGOS !== "undefined") ? LOGOS : {};
-  var PASTA_LOGOS = "assets/logos/";
 
   var dados = null;        /* a cópia em edição */
   var pendente = false;    /* há mudança não salva? */
@@ -132,40 +130,15 @@
 
   /* ---------- Logo ---------- */
 
-  /* Colou o link, o ícone aparece. Sem clicar em nada.
+  /* AQUI HAVIA "colou o link, o ícone aparece": ao digitar a URL,
+     o cadastro guardava um endereço do DuckDuckGo com o domínio do
+     sistema dentro. Bonito de usar e caro de manter — cada abertura
+     do Hub, de cada pessoa da equipe, contava a um terceiro quais
+     sites a casa usa, e isso sobrevivia à lista ter virado privada.
 
-     Por que apontar em vez de baixar: o navegador proíbe uma
-     página de LER os bytes de uma imagem de outro domínio que
-     não autorize isso explicitamente (nem o serviço do Google
-     nem o do DuckDuckGo autorizam). Dá para EXIBIR, não dá para
-     guardar. Então guardamos o endereço.
-
-     Isso deixa um pedidinho para fora quando o Hub abre — só
-     para os sistemas que ainda não têm arquivo na nossa pasta.
-     Rodar `node ferramentas/baixar-logos.js` traz esses ícones
-     para dentro, e a partir daí o arquivo local assume sozinho:
-     o endereço externo continua guardado, mas nunca mais é
-     usado. É o melhor dos dois: automático agora, nosso depois. */
-  function apontarLogoDoSite(item) {
-    /* Quem tem imagem enviada à mão, ou arquivo nosso, não
-       precisa: essas duas vencem o remoto na hora de desenhar,
-       e sujar o dado com um endereço inútil só confunde. */
-    if (item.logoDados) return;
-    if (INDICE_LOGOS[apelido(item.nome || "")]) { delete item.logoRemoto; return; }
-
-    var dominio = "";
-    try {
-      var u = new URL(item.url);
-      if (u.protocol !== "http:" && u.protocol !== "https:") throw new Error("outro esquema");
-      dominio = u.hostname.replace(/^www\./, "");
-    } catch (e) {
-      delete item.logoRemoto;
-      return;
-    }
-
-    if (!dominio) { delete item.logoRemoto; return; }
-    item.logoRemoto = "https://icons.duckduckgo.com/ip3/" + dominio + ".ico";
-  }
+     Agora a imagem se envia pela própria tela, clicando no
+     quadradinho ao lado do nome, e vive dentro do banco. Quem não
+     tem imagem mostra as iniciais. */
 
   function previaDoLogo(item) {
     var caixa = elemento("button", "linha__logo");
@@ -176,11 +149,7 @@
       caixa.textContent = "";
       /* Mesma ordem do Hub, para a prévia aqui mostrar
          exatamente o que a equipe vai ver lá. */
-      var arquivo = item.logo || INDICE_LOGOS[apelido(item.nome || "")];
-      var endereco = item.logoDados
-                  || (arquivo ? PASTA_LOGOS + arquivo : "")
-                  || item.logoRemoto
-                  || "";
+      var endereco = item.logoDados || "";
       if (endereco) {
         var img = document.createElement("img");
         img.src = endereco;
@@ -349,7 +318,6 @@
 
     linha.appendChild(caixaTexto("cx-url", item.url, "https://…", function (v) {
       item.url = v;
-      apontarLogoDoSite(item);
       if (logo._pintar) logo._pintar();
     }));
     linha.appendChild(caixaTexto("cx-legenda", item.nota, "Legenda (opcional)", function (v) { item.nota = v; }));

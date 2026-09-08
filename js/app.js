@@ -26,9 +26,6 @@
 (function () {
   "use strict";
 
-  var LOGOS_IDX = (typeof LOGOS !== "undefined") ? LOGOS : {};
-  var PASTA_LOGOS = "assets/logos/";
-
   var SETORES_ATUAIS = [];
   var AVISOS_ATUAIS = [];
   var AGENDA_ATUAL = [];
@@ -40,13 +37,6 @@
     if (c) e.className = c;
     if (x !== undefined && x !== null) e.textContent = x;
     return e;
-  }
-
-  /* Mesma regra da ferramenta que baixa os logos: é ela que faz
-     "e-CAC" e "e-cac.ico" se encontrarem. Mudou aqui, mude lá. */
-  function apelido(n) {
-    return String(n).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
-      .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   }
 
   /* A sigla de quem não tem logo. O campo "sigla" do cadastro
@@ -79,27 +69,24 @@
     } catch (e) { return ""; }
   }
 
-  /* Quatro origens para o ícone, nesta ordem: imagem enviada pela
-     administração, arquivo apontado à mão, arquivo da nossa pasta
-     e — só para sistema recém-cadastrado — o ícone do próprio
-     site. Rodar baixar-logos.js traz esse último para dentro, e
-     a partir daí o arquivo local assume sozinho. */
-  /* De onde uma imagem PODE vir. A política de segurança da
-     página já barra o resto, mas conferir aqui também custa três
-     linhas e protege caso alguém um dia afrouxe a política sem
-     lembrar deste ponto. */
+  /* UMA ORIGEM SÓ: a imagem guardada no banco, embutida no próprio
+     documento. Antes eram quatro, e as outras três vazavam.
+
+     A pasta assets/logos/ era servida pela web e o repositório é
+     público: os nomes dos arquivos diziam quais sistemas a casa
+     usa, mesmo depois de a lista ficar privada. E o ícone do
+     DuckDuckGo, usado para sistema recém-cadastrado, contava a um
+     terceiro o endereço de cada site nosso, uma vez por abertura
+     do Hub, para todo mundo da equipe.
+
+     Sistema sem imagem agora mostra as iniciais — e a imagem se
+     envia pela tela de administração, como tudo o mais. */
   function origemPermitida(endereco) {
-    return endereco.indexOf("assets/logos/") === 0
-        || endereco.indexOf("data:image/") === 0
-        || endereco.indexOf("https://icons.duckduckgo.com/") === 0;
+    return endereco.indexOf("data:image/") === 0;
   }
 
   function icone(item) {
-    var arquivo = item.logo || LOGOS_IDX[apelido(item.nome || "")];
-    var endereco = item.logoDados
-                || (arquivo ? PASTA_LOGOS + arquivo : "")
-                || item.logoRemoto
-                || "";
+    var endereco = item.logoDados || "";
     var caixa = el("span", "ico");
     if (endereco && !origemPermitida(endereco)) endereco = "";
     if (endereco) {

@@ -72,29 +72,30 @@ Trocar um setor de camada é um seletor na `admin.html`.
 
 ## Os logos
 
-Ficam em `assets/logos/`, **baixados uma vez e servidos pela nossa pasta**, por
-dois motivos: velocidade (trinta imagens buscadas fora a cada abertura é meio
-segundo jogado fora) e privacidade (pedir o ícone de cada site a um serviço de
-terceiro conta a ele, toda manhã, quais sistemas a Totali usa).
+**Vivem dentro do banco**, embutidos no próprio documento da lista, um por
+sistema. Enviam-se pela `admin.html`: clique no quadradinho ao lado do nome e
+escolha a imagem. Ela é reduzida para no máximo 64 pixels de lado — sem nunca
+ampliar — e guardada como PNG, que preserva a transparência de logo de órgão
+público.
 
-Para baixar os logos de links novos:
+Sistema sem imagem aparece com as iniciais num quadradinho. Não quebra e não
+fica buraco.
 
-```bash
-node ferramentas/baixar-logos.js
-```
+### Por que deixaram de ser arquivos
 
-Sistema **recém-cadastrado** pela tela aponta sozinho para o ícone do próprio
-site, sem ninguém clicar em nada. Esse é o único caso em que o Hub busca uma
-imagem fora, e é temporário: rodar a ferramenta acima traz o ícone para a nossa
-pasta, e a partir daí o arquivo local assume e a busca externa deixa de
-acontecer.
+Antes ficavam em `assets/logos/`, servidos pela nossa pasta, com um índice
+gerado em `js/logos.js`. Funcionava, e vazava: o repositório é público, e os
+NOMES dos arquivos diziam quais sistemas a casa usa — mesmo depois de a lista
+ter virado privada no banco. Fechar a regra do Firestore e deixar os ícones ali
+seria fechar a porta com a janela aberta.
 
-Sistema sem logo nenhum aparece com as iniciais num quadradinho — não quebra e
-não fica buraco. Também dá para enviar uma imagem pela `admin.html`, que vale
-mais que qualquer uma das outras origens.
+Junto saiu a outra fuga: sistema recém-cadastrado apontava para
+`icons.duckduckgo.com`, o que contava a um terceiro o endereço de cada sistema
+nosso — uma vez por abertura do Hub, para cada pessoa da equipe. Hoje a
+política da página não permite imagem de fora nenhuma: `img-src 'self' data:`.
 
-A ordem, quando há mais de uma opção: imagem enviada à mão → arquivo em
-`assets/logos/` → ícone do site → iniciais.
+Os 33 ícones que existiam foram convertidos e gravados no banco antes de os
+arquivos serem apagados; nada se perdeu.
 
 ### A logomarca do Hub
 

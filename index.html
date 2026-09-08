@@ -4,16 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- Nenhum script externo, nenhuma CDN, nenhuma fonte remota. Fora
-     da própria pasta o Hub só fala com dois endereços: o banco, de
-     onde vem a lista, e o serviço de ícone — este último apenas
-     para sistema recém-cadastrado, até alguém rodar
-     ferramentas/baixar-logos.js e trazer o ícone para dentro. -->
+<!-- Nenhum script externo, nenhuma CDN, nenhuma fonte remota,
+     nenhuma imagem de fora. Fora da própria pasta o Hub só fala com
+     o Google: o login, o banco e a renovação do token. Os ícones dos
+     sistemas vêm dentro do próprio documento do banco. -->
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self' file:;
   script-src 'self' file:;
   style-src 'self' file:;
-  img-src 'self' file: data: https://icons.duckduckgo.com;
+  img-src 'self' file: data:;
   font-src 'self' file:;
   connect-src https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com;
   object-src 'none';
@@ -157,7 +156,6 @@
 
 <script src="js/config-hub.js"></script>
 <script src="js/sistemas.js"></script>
-<script src="js/logos.js"></script>
 <script src="js/agenda.js"></script>
 <script src="js/dados.js"></script>
 <script src="js/pendencias.js"></script>
