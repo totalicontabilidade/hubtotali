@@ -39,10 +39,23 @@ service firebase.storage {
 
       allow read: if daEquipe();
 
+      // "resource == null" É A LINHA QUE IMPEDE A TROCA, e ela
+      // precisa estar aqui porque as regras do Storage NÃO chamam
+      // de "update" o que se esperaria.
+      //
+      // Sobrescrever um arquivo existente é um create para elas —
+      // "update" é só mexer nos metadados. Sem esta condição,
+      // "allow update: if false" não protegia coisa alguma: um
+      // envio para o mesmo caminho passava com 200 e trocava o
+      // conteúdo. Foi assim no teste, antes desta linha.
+      //
+      // Com ela, create vale só quando não há nada ali.
+      //
       // Dez megas por arquivo. Não é economia de espaço — é que um
       // anexo de cinquenta megas trava o envio de quem está numa
       // internet ruim, e a pessoa fica sem saber se mandou.
       allow create: if daEquipe()
+                    && resource == null
                     && request.resource.size < 10 * 1024 * 1024;
 
       // SUBSTITUIR E APAGAR, NUNCA. Anexo é prova de que algo foi

@@ -301,16 +301,22 @@ const Pendencias = (function () {
         if (!r.ok) throw new Error("Não consegui enviar (HTTP " + r.status + ").");
         return r.json();
       })
-      .then(function (j) {
+      .then(function () {
+        /* O QUE NÃO SE GUARDA AQUI: o token de download.
+
+           O Storage devolve um, e com ele o arquivo abre por link
+           puro, sem login — é assim que ele foi feito, e é o
+           contrário do que este sistema é. Um anexo encaminhado
+           por engano viraria acesso permanente e público a
+           documento fiscal de cliente.
+
+           Guardamos só o CAMINHO. Na hora de abrir, o Hub busca o
+           arquivo com o token da sessão de quem clicou, e a regra
+           do Storage decide. Fora da equipe, não abre. */
         var ficha = {
           nome: arquivo.name,
           tamanho: arquivo.size,
           caminho: caminho,
-          /* O token de download vem do Storage e é o que deixa o
-             arquivo ser aberto por link. Sem ele, só com sessão. */
-          url: "https://firebasestorage.googleapis.com/v0/b/" + encodeURIComponent(balde()) +
-               "/o/" + encodeURIComponent(caminho) + "?alt=media" +
-               (j.downloadTokens ? "&token=" + encodeURIComponent(j.downloadTokens.split(",")[0]) : ""),
           por: s.uid,
           em: new Date().toISOString(),
         };
@@ -333,6 +339,23 @@ const Pendencias = (function () {
         }) }
       } } }),
     }).then(conferir);
+  }
+
+  /* Busca o arquivo com a sessão de quem pediu e devolve um
+     endereço temporário, válido só neste navegador e nesta aba. */
+  function abrirAnexo(anexo) {
+    var s = Dados.sessao();
+    if (!s) return Promise.reject(new Error("Sessão expirada. Entre de novo."));
+    var url = "https://firebasestorage.googleapis.com/v0/b/" + encodeURIComponent(balde()) +
+              "/o/" + encodeURIComponent(anexo.caminho) + "?alt=media";
+    return fetch(url, { headers: { "Authorization": "Bearer " + s.idToken } })
+      .then(function (r) {
+        if (r.status === 403) throw new Error("Sem permissão para abrir este arquivo.");
+        if (r.status === 404) throw new Error("Arquivo não encontrado no Storage.");
+        if (!r.ok) throw new Error("Não consegui abrir (HTTP " + r.status + ").");
+        return r.blob();
+      })
+      .then(function (b) { return URL.createObjectURL(b); });
   }
 
   function lerAnexos(p) {
@@ -462,6 +485,7 @@ const Pendencias = (function () {
     temAnexos: temAnexos,
     enviarAnexo: enviarAnexo,
     lerAnexos: lerAnexos,
+    abrirAnexo: abrirAnexo,
     podeCorrigirPedido: podeCorrigirPedido,
     corrigirPedido: corrigirPedido,
     corrigir: corrigir,

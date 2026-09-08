@@ -659,12 +659,34 @@ const PendenciasUI = (function () {
 
     lista.forEach(function (a) {
       var linha = el("div", "pd-anexo");
-      var link = document.createElement("a");
-      link.className = "pd-anexo__n";
-      link.href = a.url;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = a.nome;
+
+      /* Botão, não link com endereço dentro. O arquivo não tem
+         endereço público: ele é buscado na hora, com a sessão de
+         quem clicou, e o endereço temporário que sai daí só vale
+         neste navegador.
+
+         A aba é aberta ANTES da busca, ainda dentro do clique. Se
+         fosse aberta depois, o navegador a barraria como janela
+         não pedida — do ponto de vista dele, o clique já passou. */
+      var link = el("button", "pd-anexo__n", a.nome);
+      link.type = "button";
+      link.title = "Abrir " + a.nome;
+      link.addEventListener("click", function () {
+        var aba = window.open("", "_blank", "noopener");
+        link.disabled = true;
+        Pendencias.abrirAnexo(a)
+          .then(function (endereco) {
+            if (aba) aba.location = endereco;
+            else window.location = endereco;
+            /* Solta a memória do arquivo depois de a aba pegá-lo. */
+            window.setTimeout(function () { URL.revokeObjectURL(endereco); }, 60000);
+          })
+          .catch(function (err) {
+            if (aba) aba.close();
+            onde.appendChild(el("div", "pd-anexo__erro", err.message));
+          })
+          .then(function () { link.disabled = false; });
+      });
       linha.appendChild(link);
       linha.appendChild(el("span", "pd-anexo__t", tamanhoLegivel(a.tamanho)));
       linha.appendChild(el("span", "pd-anexo__q", nomeDe(a.por)));

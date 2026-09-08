@@ -683,7 +683,10 @@ a{color:inherit;text-decoration:none}
 .pd-anexo{display:flex;align-items:baseline;gap:8px;padding:7px 9px;
           border:1px solid var(--fio);border-radius:8px;background:#fff}
 .pd-anexo__n{flex:1;min-width:0;font-size:13px;font-weight:600;color:var(--estado);
-             text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+             text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+             border:0;background:transparent;font-family:inherit;text-align:left;
+             padding:0;cursor:pointer}
+.pd-anexo__n:disabled{opacity:.6;cursor:default}
 .pd-anexo__n:hover{text-decoration:underline}
 .pd-anexo__t{font-size:11.5px;color:var(--txt-3);flex:none}
 .pd-anexo__q{font-size:11.5px;color:var(--txt-3);flex:none}
