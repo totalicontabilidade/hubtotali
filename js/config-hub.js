@@ -36,4 +36,13 @@ const CONFIG_HUB = {
   /* Do Authentication → Users → UID do usuário */
   ADMIN_UID: "UMBvjqMpw2bEbpvBIZnhE5iwlB23",
 
+  /* O balde do Storage, para os anexos das pendências.
+
+     Onde achar: console do Firebase → Storage → o endereço no topo
+     da lista de arquivos, sem o "gs://". Projetos novos usam
+     ...firebasestorage.app; os antigos, ...appspot.com. Deixado em
+     branco, os anexos ficam desligados e o resto do Hub funciona
+     igual. */
+  STORAGE_BUCKET: "",
+
 };

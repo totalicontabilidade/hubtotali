@@ -21,6 +21,16 @@ rules_version = '2';
 // criar uma por fora entra numa tela vazia.
 //
 // ------------------------------------------------------------
+// ANEXOS
+// ------------------------------------------------------------
+// Uma pendência passou a poder carregar arquivos. Eles moram no
+// Storage — ver storage.rules, que é outro arquivo e outra
+// publicação — e o que fica aqui é só a ficha de cada um.
+//
+// Qualquer pessoa da equipe acrescenta. Ninguém tira: a regra
+// exige que a lista nova seja pelo menos do tamanho da antiga.
+//
+// ------------------------------------------------------------
 // O QUE MUDOU EM 08/09/2026, MAIS TARDE
 // ------------------------------------------------------------
 // A REGRA DE hub/config PASSOU A VALER PARA hub/{doc}. Apareceram
@@ -237,6 +247,18 @@ service cloud.firestore {
                               mudou().hasOnly(['situacao'])
                               || request.time < resource.data.criadoEm + duration.value(15, 'm')
                             ))
+
+                         // QUALQUER UM DA EQUIPE acrescenta anexo, e
+                         // só acrescenta: a lista nova precisa ser
+                         // pelo menos do tamanho da antiga. Anexo é
+                         // prova de que algo foi combinado, e quem
+                         // pode apagar a prova pode apagar o
+                         // combinado.
+                         || (mudou().hasOnly(['anexos'])
+                             && request.resource.data.anexos is list
+                             && request.resource.data.anexos.size() <= 20
+                             && (!('anexos' in resource.data)
+                                 || request.resource.data.anexos.size() >= resource.data.anexos.size()))
                        );
 
       // Apagar: só quem abriu. Responsável resolve, não some com

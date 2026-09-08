@@ -603,6 +603,14 @@ const PendenciasUI = (function () {
       c.appendChild(sit);
     }
 
+    /* ---------- anexos ---------- */
+    if (Pendencias.temAnexos()) {
+      c.appendChild(el("div", "pd-rot pd-rot--secao", "Anexos"));
+      var caixaAnexos = el("div", "pd-anexos");
+      c.appendChild(caixaAnexos);
+      pintarAnexos(p, caixaAnexos);
+    }
+
     /* Linha do tempo */
     c.appendChild(el("div", "pd-rot pd-rot--secao", "Linha do tempo"));
     var linha = el("div", "pd-linha-tempo", "Carregando…");
@@ -636,6 +644,59 @@ const PendenciasUI = (function () {
     }
 
     pintarLinha(p, linha);
+  }
+
+  function tamanhoLegivel(bytes) {
+    if (!bytes) return "";
+    if (bytes < 1024) return bytes + " B";
+    if (bytes < 1024 * 1024) return Math.round(bytes / 1024) + " kB";
+    return (Math.round(bytes / 1024 / 1024 * 10) / 10) + " MB";
+  }
+
+  function pintarAnexos(p, onde) {
+    onde.textContent = "";
+    var lista = Pendencias.lerAnexos(p);
+
+    lista.forEach(function (a) {
+      var linha = el("div", "pd-anexo");
+      var link = document.createElement("a");
+      link.className = "pd-anexo__n";
+      link.href = a.url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = a.nome;
+      linha.appendChild(link);
+      linha.appendChild(el("span", "pd-anexo__t", tamanhoLegivel(a.tamanho)));
+      linha.appendChild(el("span", "pd-anexo__q", nomeDe(a.por)));
+      onde.appendChild(linha);
+    });
+
+    if (!lista.length) {
+      onde.appendChild(el("div", "pd-vazio", "Nenhum arquivo ainda."));
+    }
+
+    var b = el("button", "pd-anexo__btn", "Anexar arquivo");
+    b.type = "button";
+    b.title = "Até 10 MB por arquivo. Anexo não se apaga: é prova do que foi combinado.";
+    b.addEventListener("click", function () {
+      var entrada = document.createElement("input");
+      entrada.type = "file";
+      entrada.addEventListener("change", function () {
+        var arquivo = entrada.files && entrada.files[0];
+        if (!arquivo) return;
+        b.disabled = true;
+        b.textContent = "Enviando " + arquivo.name + "…";
+        Pendencias.enviarAnexo(p, arquivo)
+          .then(function () { pintarAnexos(p, onde); })
+          .catch(function (err) {
+            b.disabled = false;
+            b.textContent = "Anexar arquivo";
+            onde.appendChild(el("div", "pd-anexo__erro", err.message));
+          });
+      });
+      entrada.click();
+    });
+    onde.appendChild(b);
   }
 
   function pintarLinha(p, onde) {

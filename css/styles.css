@@ -672,3 +672,25 @@ a{color:inherit;text-decoration:none}
 .faixa--feito{opacity:.75}
 .pd-todas .pen{background:var(--base)}
 .pd-todas .pen:hover{background:#fff}
+
+/* ---------- anexos ----------
+   Uma linha por arquivo: nome à esquerda, tamanho e quem mandou à
+   direita. Sem miniatura de propósito — para mostrar a imagem
+   seria preciso deixar a página buscar figura do Storage, e a
+   política do Hub hoje não deixa buscar imagem de lugar nenhum.
+   Abrir em aba nova resolve, e a política continua fechada. */
+.pd-anexos{display:flex;flex-direction:column;gap:4px}
+.pd-anexo{display:flex;align-items:baseline;gap:8px;padding:7px 9px;
+          border:1px solid var(--fio);border-radius:8px;background:#fff}
+.pd-anexo__n{flex:1;min-width:0;font-size:13px;font-weight:600;color:var(--estado);
+             text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pd-anexo__n:hover{text-decoration:underline}
+.pd-anexo__t{font-size:11.5px;color:var(--txt-3);flex:none}
+.pd-anexo__q{font-size:11.5px;color:var(--txt-3);flex:none}
+.pd-anexo__btn{margin-top:6px;align-self:flex-start;border:1px solid var(--fio-2);
+               border-radius:8px;background:transparent;color:var(--txt-2);
+               font:inherit;font-size:12.5px;padding:7px 12px;cursor:pointer}
+.pd-anexo__btn:hover{color:var(--txt);border-color:var(--txt-3)}
+.pd-anexo__btn:disabled{opacity:.6;cursor:default}
+.pd-anexo__erro{margin-top:6px;font-size:12.5px;color:var(--alerta);
+                background:var(--alerta-luz);border-radius:7px;padding:7px 9px}

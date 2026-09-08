@@ -225,6 +225,123 @@ const Pendencias = (function () {
     }).then(conferir);
   }
 
+  /* ============================================================
+     ANEXOS
+     ------------------------------------------------------------
+     O arquivo vai para o Storage do Firebase; o que fica na
+     pendência é a ficha dele — nome, tamanho, endereço, quem
+     mandou e quando. O documento do Firestore continua leve, e um
+     PDF de dois megas não entra no limite de um mega por
+     documento.
+
+     APPEND-ONLY, e a regra do banco cobra isso: a lista nova
+     precisa ser pelo menos do tamanho da antiga. Anexo é prova de
+     que algo foi combinado; quem pode apagar a prova pode apagar
+     o combinado. Errou o arquivo, manda o certo e explica na
+     linha do tempo.
+
+     Sem STORAGE_BUCKET preenchido, tudo isto fica desligado e o
+     resto do Hub não sente falta.
+     ============================================================ */
+  var LIMITE_DO_ARQUIVO = 10 * 1024 * 1024;   /* 10 MB */
+  var LIMITE_DE_ANEXOS = 20;
+
+  function balde() {
+    var c = (typeof CONFIG_HUB !== "undefined") ? CONFIG_HUB : {};
+    return c.STORAGE_BUCKET || "";
+  }
+
+  function temAnexos() { return !!balde(); }
+
+  /* O caminho carrega o id da pendência: assim a regra do Storage
+     consegue dizer "só quem é da equipe mexe aqui" sem precisar
+     de um índice à parte. */
+  function caminhoDoAnexo(idPendencia, nome) {
+    /* Sem regex, terceira vez nesta base: a barra invertida some
+       em edição e o programa passa a fazer outra coisa em
+       silêncio. Aqui, letra por letra — o que não for seguro vira
+       sublinhado. */
+    var seguros = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-_ ";
+    var limpo = "";
+    var cru = String(nome).slice(0, 120);
+    for (var n = 0; n < cru.length; n++) {
+      limpo += seguros.indexOf(cru.charAt(n)) === -1 ? "_" : cru.charAt(n);
+    }
+    return "pendencias/" + idPendencia + "/" + Date.now() + "-" + limpo;
+  }
+
+  function enviarAnexo(p, arquivo) {
+    if (!temAnexos()) return Promise.reject(new Error("Os anexos não estão ligados. Falta o balde do Storage em js/config-hub.js."));
+    var s = Dados.sessao();
+    if (!s) return Promise.reject(new Error("Sessão expirada. Entre de novo."));
+    if (!arquivo) return Promise.reject(new Error("Nenhum arquivo escolhido."));
+    if (arquivo.size > LIMITE_DO_ARQUIVO) {
+      return Promise.reject(new Error("Arquivo grande demais. O limite é 10 MB — este tem " +
+        (Math.round(arquivo.size / 1024 / 1024 * 10) / 10) + " MB."));
+    }
+    if ((p.anexos || []).length >= LIMITE_DE_ANEXOS) {
+      return Promise.reject(new Error("Esta pendência já tem " + LIMITE_DE_ANEXOS + " anexos."));
+    }
+
+    var caminho = caminhoDoAnexo(p.id, arquivo.name);
+    var url = "https://firebasestorage.googleapis.com/v0/b/" + encodeURIComponent(balde()) +
+              "/o?uploadType=media&name=" + encodeURIComponent(caminho);
+
+    return fetch(url, {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + s.idToken,
+        "Content-Type": arquivo.type || "application/octet-stream",
+      },
+      body: arquivo,
+    })
+      .then(function (r) {
+        if (r.status === 403) throw new Error("Sem permissão para enviar. Confira as regras do Storage.");
+        if (r.status === 404) throw new Error("Balde não encontrado. Confira STORAGE_BUCKET em js/config-hub.js.");
+        if (!r.ok) throw new Error("Não consegui enviar (HTTP " + r.status + ").");
+        return r.json();
+      })
+      .then(function (j) {
+        var ficha = {
+          nome: arquivo.name,
+          tamanho: arquivo.size,
+          caminho: caminho,
+          /* O token de download vem do Storage e é o que deixa o
+             arquivo ser aberto por link. Sem ele, só com sessão. */
+          url: "https://firebasestorage.googleapis.com/v0/b/" + encodeURIComponent(balde()) +
+               "/o/" + encodeURIComponent(caminho) + "?alt=media" +
+               (j.downloadTokens ? "&token=" + encodeURIComponent(j.downloadTokens.split(",")[0]) : ""),
+          por: s.uid,
+          em: new Date().toISOString(),
+        };
+        var lista = (p.anexos || []).concat([ficha]);
+        return gravarAnexos(p, lista).then(function () {
+          p.anexos = lista;
+          return ficha;
+        });
+      });
+  }
+
+  function gravarAnexos(p, lista) {
+    var url = base() + "/pendencias/" + encodeURIComponent(p.id) + "?updateMask.fieldPaths=anexos";
+    return fetch(url, {
+      method: "PATCH",
+      headers: autorizacao(),
+      body: JSON.stringify({ fields: { anexos: {
+        arrayValue: { values: lista.map(function (a) {
+          return { stringValue: JSON.stringify(a) };
+        }) }
+      } } }),
+    }).then(conferir);
+  }
+
+  function lerAnexos(p) {
+    return (p.anexos || []).map(function (a) {
+      if (typeof a !== "string") return a;
+      try { return JSON.parse(a); } catch (e) { return null; }
+    }).filter(Boolean);
+  }
+
   /* ---------- linha do tempo ---------- */
 
   function andamento(id) {
@@ -342,6 +459,9 @@ const Pendencias = (function () {
     andamento: andamento,
     acrescentar: acrescentar,
     podeEditar: podeEditar,
+    temAnexos: temAnexos,
+    enviarAnexo: enviarAnexo,
+    lerAnexos: lerAnexos,
     podeCorrigirPedido: podeCorrigirPedido,
     corrigirPedido: corrigirPedido,
     corrigir: corrigir,

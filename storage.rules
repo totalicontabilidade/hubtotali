@@ -1,0 +1,61 @@
+rules_version = '2';
+
+// ============================================================
+// Hub Totali · regras do Storage
+// ------------------------------------------------------------
+// Cole na aba REGRAS do Storage, no console do Firebase, e clique
+// em Publicar. Este arquivo é só a cópia.
+//
+// Antes disso, o Storage precisa estar LIGADO: console → Storage →
+// Começar. E o endereço do balde que aparecer lá vai em
+// js/config-hub.js, no campo STORAGE_BUCKET. Enquanto ele estiver
+// em branco, os anexos ficam desligados e o resto do Hub funciona
+// igual.
+//
+// ------------------------------------------------------------
+// A MESMA IDEIA DAS REGRAS DO BANCO
+// ------------------------------------------------------------
+// Ter conta no Firebase não dá acesso a nada. O que dá acesso é
+// estar na LISTA DA EQUIPE — que vive no Firestore, e que só o
+// administrador escreve. As regras do Storage sabem consultar o
+// Firestore, então a mesma lista manda nos dois lugares, e não há
+// duas verdades sobre quem é da casa.
+// ============================================================
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function daEquipe() {
+      return request.auth != null
+             && firestore.exists(/databases/(default)/documents/equipe/$(request.auth.uid))
+             && firestore.get(/databases/(default)/documents/equipe/$(request.auth.uid)).data.ativo == true;
+    }
+
+    // ---------- anexos de pendência ----------
+    // Guardados em pendencias/{id}/{arquivo}. O id no caminho não
+    // é enfeite: é ele que amarra o arquivo à pendência de onde
+    // veio, sem precisar de um índice à parte.
+    match /pendencias/{id}/{arquivo} {
+
+      allow read: if daEquipe();
+
+      // Dez megas por arquivo. Não é economia de espaço — é que um
+      // anexo de cinquenta megas trava o envio de quem está numa
+      // internet ruim, e a pessoa fica sem saber se mandou.
+      allow create: if daEquipe()
+                    && request.resource.size < 10 * 1024 * 1024;
+
+      // SUBSTITUIR E APAGAR, NUNCA. Anexo é prova de que algo foi
+      // combinado; quem pode trocar a prova pode trocar o
+      // combinado. Mandou o arquivo errado, manda o certo e
+      // explica na linha do tempo — que é exatamente o que a linha
+      // do tempo existe para fazer.
+      allow update, delete: if false;
+    }
+
+    // Nada mais neste balde é acessível por ninguém.
+    match /{tudo=**} {
+      allow read, write: if false;
+    }
+  }
+}
