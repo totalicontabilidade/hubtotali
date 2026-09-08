@@ -167,7 +167,11 @@
   }
 
   function desenharBusca(centro) {
-    var termos = semAcento(FILTRO).split(/s+/).filter(Boolean);
+    /* Separa por espaço sem regex de propósito: a barra invertida
+       de \s some com facilidade em edição automática, e quando some
+       o separador vira a LETRA s — foi o que aconteceu aqui, e
+       "rescis" passou a ser procurado como "re" mais "ci". */
+    var termos = semAcento(FILTRO).split(" ").filter(Boolean);
     var achados = [];
     SETORES_ATUAIS.forEach(function (s) {
       (s.itens || []).forEach(function (i) {

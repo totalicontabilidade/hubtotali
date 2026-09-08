@@ -169,7 +169,11 @@
     try {
       var u = new URL(url);
       if (u.protocol !== "http:" && u.protocol !== "https:") return "";
-      return u.hostname.replace(/^www./, "");
+      /* Mesma armadilha: o ponto perdeu a barra e virou "qualquer
+         caractere", então wwwx.exemplo.com viraria exemplo.com.
+         Sem regex não há o que escapar. */
+      var h = u.hostname;
+      return h.indexOf("www.") === 0 ? h.slice(4) : h;
     } catch (e) { return ""; }
   }
 
