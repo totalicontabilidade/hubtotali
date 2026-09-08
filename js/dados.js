@@ -198,7 +198,26 @@ const Dados = (function () {
        Se a cópia falhar, a gravação segue assim mesmo. Perder o
        desfazer é ruim; recusar o trabalho de quem está salvando
        por causa disso seria pior. */
-    return copiarParaOAnterior(sessao)
+    /* OS ÍCONES PRIMEIRO, A LISTA DEPOIS.
+
+       A ordem não é detalhe. A lista gravada já vai SEM as
+       imagens — elas foram separadas — então, se ela fosse
+       primeiro e o outro documento falhasse, os ícones sumiriam
+       da tela de todo mundo e não haveria de onde tirá-los de
+       volta. Gravando as imagens antes, uma falha ali interrompe
+       tudo e nada se perde: a lista continua como estava, com os
+       ícones dentro.
+
+       É o mesmo motivo pelo qual isto AQUI não é opcional
+       enquanto a cópia de segurança é: perder o desfazer custa
+       um arrependimento; perder os ícones custa quarenta imagens
+       que ninguém tem mais. */
+    var primeiro = (logosNovos === logosVelhos)
+      ? Promise.resolve()
+      : gravarLogos(partido.logos, sessao);
+
+    return primeiro
+      .then(function () { return copiarParaOAnterior(sessao); })
       .then(function () {
         return fetch(BASE_FIRESTORE(), {
           method: "PATCH",
@@ -215,8 +234,7 @@ const Dados = (function () {
         }
         if (!r.ok) throw new Error("Não consegui salvar (HTTP " + r.status + ").");
         gravarCache(CHAVE_CACHE, partido.leve);
-        if (logosNovos === logosVelhos) return { local: false };
-        return gravarLogos(partido.logos, sessao).then(function () { return { local: false }; });
+        return { local: false };
       });
   }
 
