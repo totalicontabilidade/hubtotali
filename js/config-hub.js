@@ -43,6 +43,6 @@ const CONFIG_HUB = {
      ...firebasestorage.app; os antigos, ...appspot.com. Deixado em
      branco, os anexos ficam desligados e o resto do Hub funciona
      igual. */
-  STORAGE_BUCKET: "",
+  STORAGE_BUCKET: "hubtotali.firebasestorage.app",
 
 };
