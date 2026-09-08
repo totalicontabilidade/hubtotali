@@ -195,6 +195,11 @@
 
   <div class="admin__rodape-acoes">
     <button class="btn" type="button" id="btn-novo-setor">Acrescentar setor</button>
+    <!-- Só aparece quando existe uma versão guardada, e ela é a de
+         antes do último Salvar — uma, não um histórico. Cobre o
+         erro que de fato acontece: salvar sem querer e perceber em
+         seguida. -->
+    <button class="btn btn--fantasma" type="button" id="btn-desfazer" hidden></button>
     <!-- Aqui havia "Voltar ao conteúdo original". O botão fazia
          sentido quando a lista da casa morava em js/sistemas.js e
          voltar ao original queria dizer voltar aos 37 sistemas.

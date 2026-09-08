@@ -603,6 +603,7 @@
      por exemplo) ligaria tudo em dobro: um clique em "acrescentar
      setor" criaria dois setores. */
   var acoesLigadas = false;
+  var oferecerDesfazer = function () {};
 
   function ligarAcoes() {
     if (acoesLigadas) return;
@@ -622,6 +623,47 @@
       desenhar();
     });
 
+    /* ---------- desfazer o último Salvar ---------- */
+    oferecerDesfazer = function () {
+      var b = $("btn-desfazer");
+      if (!b) return;
+      Dados.versaoAnterior().then(function (v) {
+        if (!v) { b.hidden = true; return; }
+        var quando = v.de ? new Date(v.de) : null;
+        b.hidden = false;
+        b.textContent = "Desfazer o último Salvar" +
+          (quando ? " (de " + quando.toLocaleString("pt-BR",
+            { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }) + ")" : "");
+        b.title = v.por ? "Volta ao que estava salvo por " + v.por : "";
+        b._versao = v;
+      });
+    };
+
+    $("btn-desfazer").addEventListener("click", function () {
+      var v = $("btn-desfazer")._versao;
+      if (!v) return;
+      var quando = v.de ? new Date(v.de).toLocaleString("pt-BR") : "antes do último Salvar";
+      if (!window.confirm(
+            "Voltar a lista para como estava em " + quando + "?" +
+            String.fromCharCode(10, 10) +
+            "O que está na tela agora vira a nova versão anterior — dá para desfazer o desfazer.")) return;
+
+      var b = $("btn-desfazer");
+      b.disabled = true;
+      b.textContent = "Voltando…";
+      Dados.salvar(v.dados, Dados.sessao() && Dados.sessao().email)
+        .then(function () {
+          dados = v.dados;
+          pendente = false;
+          $("btn-salvar").disabled = true;
+          desenhar();
+          oferecerDesfazer();
+          recado("Lista de volta ao que estava.");
+        })
+        .catch(function (e) { recado(e.message, true); })
+        .then(function () { b.disabled = false; oferecerDesfazer(); });
+    });
+
     $("btn-salvar").addEventListener("click", function () {
       var b = $("btn-salvar");
       b.disabled = true;
@@ -631,6 +673,9 @@
       Dados.salvar(dados, sessao && sessao.email).then(function (r) {
         limparPendente();
         recado(r.local ? "Salvo neste navegador (modo de teste)." : "Salvo. A equipe já vê a mudança.");
+        /* A versão anterior acabou de mudar: o botão precisa
+           passar a oferecer a volta para ESTE ponto. */
+        oferecerDesfazer();
       }).catch(function (e) {
         b.disabled = false;
         b.textContent = "Salvar mudanças";
@@ -709,6 +754,9 @@
 
     var sessao = Dados.sessao();
     $("quem").textContent = sessao && sessao.email ? sessao.email : "modo de teste";
+
+    /* Depois de ligarAcoes(), que é quem define a função. */
+    window.setTimeout(function () { oferecerDesfazer(); }, 0);
 
     dados = Dados.carregar(function (maisNovo) {
       /* Chegou versão nova do servidor enquanto eu editava. Se

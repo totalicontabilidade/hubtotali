@@ -21,6 +21,14 @@ rules_version = '2';
 // criar uma por fora entra numa tela vazia.
 //
 // ------------------------------------------------------------
+// O QUE MUDOU EM 08/09/2026, MAIS TARDE
+// ------------------------------------------------------------
+// A REGRA DE hub/config PASSOU A VALER PARA hub/{doc}. Apareceram
+// documentos irmãos — a cópia de antes do último Salvar, e os
+// ícones separados — e todos obedecem ao mesmo: equipe lê,
+// administrador escreve.
+//
+// ------------------------------------------------------------
 // O QUE MUDOU EM 08/09/2026
 // ------------------------------------------------------------
 // EXISTE MAIS DE UM ADMINISTRADOR. Antes a alçada era um UID
@@ -130,7 +138,18 @@ service cloud.firestore {
     // estivesse lá, esta regra seria enfeite: bastava abrir o
     // endereço do .js.
 
-    match /hub/config {
+    // {doc} em vez de "config": a mesma regra passa a valer para
+    // todos os documentos desta gaveta. São três hoje —
+    //
+    //   config    a lista de sistemas e os recados
+    //   anterior  a cópia de antes do último Salvar, para desfazer
+    //   logos     os ícones, que saíram de config por serem 85% do
+    //             peso e quase nunca mudarem
+    //
+    // — e a regra é a mesma para os três: quem é da equipe lê,
+    // só o administrador escreve. Repetir o bloco por documento
+    // seria três lugares para esquecer de mudar um.
+    match /hub/{doc} {
       allow read:  if daEquipe() || ehAdmin();
       allow write: if ehAdmin();
     }

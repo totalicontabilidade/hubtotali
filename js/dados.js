@@ -42,8 +42,12 @@ const Dados = (function () {
   }
 
   var BASE_FIRESTORE = function () {
+    return DOC_HUB("config");
+  };
+
+  var DOC_HUB = function (nome) {
     return "https://firestore.googleapis.com/v1/projects/" + cfg.projectId +
-           "/databases/(default)/documents/hub/config";
+           "/databases/(default)/documents/hub/" + nome;
   };
 
   /* ---------- A forma dos dados ----------
@@ -102,16 +106,20 @@ const Dados = (function () {
       return completar(lerCache(CHAVE_LOCAL) || semente());
     }
 
-    var imediato = completar(lerCache(CHAVE_CACHE) || semente());
+    /* O cache guarda as duas metades separadas, e elas se juntam
+       aqui — do mesmo jeito que o servidor. */
+    var imediato = juntar(completar(lerCache(CHAVE_CACHE) || semente()), lerLogosDoCache());
 
-    buscarDoServidor().then(function (doServidor) {
+    Promise.all([buscarDoServidor(), buscarLogos()]).then(function (r) {
+      var doServidor = r[0], logos = r[1];
+      if (logos) gravarCache(CHAVE_LOGOS, logos);
       if (!doServidor) return;
-      doServidor = completar(doServidor);
       gravarCache(CHAVE_CACHE, doServidor);
+      var completo = juntar(completar(doServidor), logos || lerLogosDoCache());
       /* Só reavisa se realmente mudou — redesenhar a tela por
          nada faria os cartões piscarem na cara de quem abriu. */
-      if (JSON.stringify(doServidor) !== JSON.stringify(imediato) && typeof aoAtualizar === "function") {
-        aoAtualizar(doServidor);
+      if (JSON.stringify(completo) !== JSON.stringify(imediato) && typeof aoAtualizar === "function") {
+        aoAtualizar(completo);
       }
     }).catch(function () { /* sem rede: fica com o cache, e está tudo bem */ });
 
@@ -153,6 +161,8 @@ const Dados = (function () {
     if (!valido(dados)) return Promise.reject(new Error("Dados em formato inesperado."));
 
     if (!temBanco()) {
+      /* Sem banco tudo fica local, e aí não há motivo para
+         separar: é um objeto só no mesmo navegador. */
       gravarCache(CHAVE_LOCAL, dados);
       return Promise.resolve({ local: true });
     }
@@ -160,29 +170,187 @@ const Dados = (function () {
     var sessao = lerSessao();
     if (!sessao) return Promise.reject(new Error("Sessão expirada. Entre de novo."));
 
+    /* Separa antes de gravar: config fica leve, logos vai à parte
+       e só quando de fato mudou. */
+    var partido = separar(dados);
+    var logosNovos = JSON.stringify(partido.logos);
+    var logosVelhos = JSON.stringify(lerLogosDoCache());
+
     var corpo = {
       fields: {
-        json:          { stringValue: JSON.stringify(dados) },
+        json:          { stringValue: JSON.stringify(partido.leve) },
         atualizadoEm:  { timestampValue: new Date().toISOString() },
         atualizadoPor: { stringValue: String(quem || sessao.email || "") },
       }
     };
 
-    return fetch(BASE_FIRESTORE(), {
+    /* GUARDA A VERSÃO DE ANTES, e só então grava a nova.
+
+       Um Salvar errado escrevia por cima e acabou: o Firestore
+       guarda o documento atual, não o histórico. Uma lista de
+       quarenta e dois sistemas montada ao longo de semanas
+       desaparecia num clique, sem volta.
+
+       A cópia é do que está NO SERVIDOR neste instante, não do que
+       esta tela tinha carregado: se outra pessoa salvou enquanto
+       você editava, é o trabalho dela que precisa ser preservado.
+
+       Se a cópia falhar, a gravação segue assim mesmo. Perder o
+       desfazer é ruim; recusar o trabalho de quem está salvando
+       por causa disso seria pior. */
+    return copiarParaOAnterior(sessao)
+      .then(function () {
+        return fetch(BASE_FIRESTORE(), {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + sessao.idToken,
+          },
+          body: JSON.stringify(corpo),
+        });
+      })
+      .then(function (r) {
+        if (r.status === 401 || r.status === 403) {
+          throw new Error("Sem permissão para salvar. Confira as regras do Firestore.");
+        }
+        if (!r.ok) throw new Error("Não consegui salvar (HTTP " + r.status + ").");
+        gravarCache(CHAVE_CACHE, partido.leve);
+        if (logosNovos === logosVelhos) return { local: false };
+        return gravarLogos(partido.logos, sessao).then(function () { return { local: false }; });
+      });
+  }
+
+  function copiarParaOAnterior(sessao) {
+    return fetch(BASE_FIRESTORE() + "?key=" + encodeURIComponent(cfg.apiKey), {
+      headers: { "Authorization": "Bearer " + sessao.idToken }, cache: "no-store"
+    })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (doc) {
+        if (!doc || !doc.fields || !doc.fields.json) return null;
+        return fetch(DOC_HUB("anterior"), {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + sessao.idToken,
+          },
+          body: JSON.stringify({ fields: {
+            json:          doc.fields.json,
+            atualizadoEm:  doc.fields.atualizadoEm  || { nullValue: null },
+            atualizadoPor: doc.fields.atualizadoPor || { nullValue: null },
+            guardadoEm:    { timestampValue: new Date().toISOString() },
+          } }),
+        });
+      })
+      .catch(function () { return null; });
+  }
+
+  /* ============================================================
+     OS ÍCONES MORAM SEPARADOS
+     ------------------------------------------------------------
+     Estavam dentro de hub/config, embutidos em cada sistema. O
+     documento chegou a 150 kB e uns 85% disso eram imagem — que
+     quase nunca muda, enquanto a lista muda toda semana. Cada
+     mudança de legenda obrigava a equipe a rebaixar 130 kB de
+     ícone idêntico ao que já estava no navegador dela.
+
+     Agora são dois documentos: hub/config, leve, com nomes,
+     endereços e legendas; e hub/logos, um mapa de nome do sistema
+     para imagem. Os dois têm cache próprio, e o pesado só volta a
+     ser buscado quando de fato mudar.
+
+     A junção acontece na hora de desenhar, não no banco: quem lê
+     recebe os dois e casa um com o outro. Assim a lista continua
+     sendo um objeto só para o resto do código, que não precisa
+     saber de nada disto.
+     ============================================================ */
+  var CHAVE_LOGOS = "hub-totali:logos";
+
+  function lerLogosDoCache() {
+    return lerCache(CHAVE_LOGOS) || {};
+  }
+
+  function buscarLogos() {
+    var s = lerSessao();
+    if (!s || !temBanco()) return Promise.resolve(null);
+    return fetch(DOC_HUB("logos") + "?key=" + encodeURIComponent(cfg.apiKey), {
+      headers: { "Authorization": "Bearer " + s.idToken }, cache: "no-store"
+    })
+      .then(function (r) {
+        if (r.status === 404) return {};      /* ainda não separado */
+        return r.ok ? r.json() : null;
+      })
+      .then(function (doc) {
+        if (!doc) return null;
+        if (!doc.fields || !doc.fields.json) return {};
+        try { return JSON.parse(doc.fields.json.stringValue) || {}; }
+        catch (e) { return {}; }
+      })
+      .catch(function () { return null; });
+  }
+
+  function gravarLogos(mapa, sessao) {
+    return fetch(DOC_HUB("logos"), {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + sessao.idToken,
       },
-      body: JSON.stringify(corpo),
+      body: JSON.stringify({ fields: {
+        json:         { stringValue: JSON.stringify(mapa) },
+        atualizadoEm: { timestampValue: new Date().toISOString() },
+      } }),
     }).then(function (r) {
-      if (r.status === 401 || r.status === 403) {
-        throw new Error("Sem permissão para salvar. Confira o UID nas regras do Firestore.");
-      }
-      if (!r.ok) throw new Error("Não consegui salvar (HTTP " + r.status + ").");
-      gravarCache(CHAVE_CACHE, dados);
-      return { local: false };
+      if (!r.ok) throw new Error("Não consegui salvar os ícones (HTTP " + r.status + ").");
+      gravarCache(CHAVE_LOGOS, mapa);
+      return mapa;
     });
+  }
+
+  /* Tira as imagens de dentro da lista e devolve as duas metades.
+     A chave é o nome do sistema — é o que a administração já usa
+     para identificar um item, e o que sobrevive a reordenações. */
+  function separar(dados) {
+    var mapa = {};
+    var leve = JSON.parse(JSON.stringify(dados));
+    (leve.setores || []).forEach(function (s) {
+      (s.itens || []).forEach(function (i) {
+        if (i.logoDados) { mapa[i.nome] = i.logoDados; delete i.logoDados; }
+      });
+    });
+    return { leve: leve, logos: mapa };
+  }
+
+  function juntar(dados, mapa) {
+    if (!mapa) return dados;
+    (dados.setores || []).forEach(function (s) {
+      (s.itens || []).forEach(function (i) {
+        if (!i.logoDados && mapa[i.nome]) i.logoDados = mapa[i.nome];
+      });
+    });
+    return dados;
+  }
+
+  /* O que está guardado como versão anterior, para a tela poder
+     dizer DE QUANDO é antes de oferecer a volta. */
+  function versaoAnterior() {
+    var s = lerSessao();
+    if (!s || !temBanco()) return Promise.resolve(null);
+    return fetch(DOC_HUB("anterior") + "?key=" + encodeURIComponent(cfg.apiKey), {
+      headers: { "Authorization": "Bearer " + s.idToken }, cache: "no-store"
+    })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (doc) {
+        if (!doc || !doc.fields || !doc.fields.json) return null;
+        var d;
+        try { d = JSON.parse(doc.fields.json.stringValue); } catch (e) { return null; }
+        if (!valido(d)) return null;
+        return {
+          dados: completar(d),
+          de: (doc.fields.atualizadoEm || {}).timestampValue || null,
+          por: (doc.fields.atualizadoPor || {}).stringValue || "",
+        };
+      })
+      .catch(function () { return null; });
   }
 
   /* ---------- Manter a sessão viva ----------
@@ -602,6 +770,7 @@ const Dados = (function () {
     semente: semente,
     carregar: carregar,
     salvar: salvar,
+    versaoAnterior: versaoAnterior,
     entrar: entrar,
     sair: sair,
     sessao: lerSessao,
