@@ -113,6 +113,20 @@
   <header class="cab">
     <img class="cab__logo" src="assets/logo-hub.png" alt="Hub Totali">
     <span class="marca__nome" id="marca-nome" hidden>Hub Totali</span>
+    <!-- A busca fica ANTES do relógio porque é o que mais se usa:
+         são quarenta e dois sistemas, vinte e cinco deles dentro
+         da gaveta, e varrer com o olho custa mais que digitar três
+         letras. A barra "/" põe o cursor aqui de qualquer lugar da
+         página. -->
+    <div class="busca">
+      <svg class="busca__lupa" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input class="busca__cx" type="search" id="busca" autocomplete="off"
+             placeholder="Buscar sistema…" aria-label="Buscar sistema">
+      <kbd class="busca__tecla" aria-hidden="true">/</kbd>
+    </div>
+
     <div class="rel">
       <div>
         <div class="rel__h" id="hora">--:--</div>

@@ -142,9 +142,66 @@
     return SETORES_ATUAIS.filter(function (s) { return s.estilo !== "gaveta"; });
   }
 
+  /* ---------- a busca ----------
+     Quarenta e dois sistemas, vinte e cinco deles fechados na
+     gaveta. Digitar três letras é mais rápido que abrir a gaveta e
+     varrer com o olho — e numa página que a equipe abre dezenas de
+     vezes por dia, isso se paga.
+
+     Procura no nome, na legenda, na sigla E no endereço: quem
+     lembra "aquele do gov.br" acha pelo endereço, e quem lembra
+     "o de rescisão" acha pela legenda. */
+  var FILTRO = "";
+
+  function semAcento(s) {
+    return String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+  }
+
+  function combina(item, termos) {
+    var palheiro = semAcento([item.nome, item.nota, item.sigla, item.url].join(" "));
+    return termos.every(function (t) { return palheiro.indexOf(t) !== -1; });
+  }
+
+  function desenharBusca(centro) {
+    var termos = semAcento(FILTRO).split(/s+/).filter(Boolean);
+    var achados = [];
+    SETORES_ATUAIS.forEach(function (s) {
+      (s.itens || []).forEach(function (i) {
+        if (combina(i, termos)) achados.push({ setor: s.titulo, item: i });
+      });
+    });
+
+    var b = bloco("Resultados", achados.length || null);
+    if (!achados.length) {
+      b.appendChild(el("div", "busca-vazia",
+        "Nenhum sistema com “" + FILTRO + "”. O nome, a legenda e o endereço entram na busca."));
+      centro.appendChild(b);
+      return;
+    }
+
+    var grade = el("div", "grade");
+    achados.forEach(function (a, n) {
+      var no = item(a.item);
+      /* A legenda passa a dizer de que setor veio: fora do bloco
+         dele, "Requerimento universal" não diz onde mora. */
+      var leg = no.querySelector(".item__x");
+      if (leg) leg.textContent = a.setor + (a.item.nota ? " · " + a.item.nota : "");
+      else {
+        var t2 = no.querySelector(".item__txt");
+        if (t2) t2.appendChild(el("div", "item__x", a.setor));
+      }
+      if (n === 0) no.classList.add("item--primeiro");
+      grade.appendChild(no);
+    });
+    b.appendChild(grade);
+    centro.appendChild(b);
+  }
+
   function desenharCentro() {
     var centro = document.getElementById("centro");
     centro.textContent = "";
+
+    if (FILTRO.trim()) { desenharBusca(centro); return; }
 
     aVista().forEach(function (s) {
       if (!s.itens || !s.itens.length) return;
@@ -391,7 +448,47 @@
   /* O resumo ao lado da saudação: enquanto não há pendência
      carregada, mostra o tamanho do Hub; com pendência, mostra o
      que importa — quantas atrasadas e quantas para hoje. */
+  /* ---------- o número que aparece sem ninguém procurar ----------
+     Antes, a pessoa só descobria uma pendência nova ao abrir o
+     Hub e olhar a coluna da direita. Quem deixa o Hub aberto numa
+     aba de fundo — que é a maioria, já que ele é a página inicial
+     — não descobria nunca.
+
+     Sem servidor não dá para mandar e-mail, mas dá para pôr o
+     número onde o olho passa de qualquer jeito: no ícone da barra
+     e no TÍTULO DA ABA. "(2) Hub Totali" aparece na barra de
+     abas mesmo com a página escondida atrás de outras dez.
+
+     Atrasada pinta de vermelho; o resto, de azul. */
+  var TITULO_BASE = document.title;
+
+  function pintarAviso(r) {
+    var botao = document.getElementById("nav-pendencias");
+    var quantas = r ? (r.abertas || 0) : 0;
+    var urgentes = r ? (r.atrasadas || 0) : 0;
+
+    if (botao) {
+      var selo = botao.querySelector(".nav__selo");
+      if (!quantas) {
+        if (selo) selo.remove();
+      } else {
+        if (!selo) {
+          selo = el("span", "nav__selo");
+          botao.appendChild(selo);
+        }
+        selo.textContent = quantas > 99 ? "99+" : String(quantas);
+        selo.classList.toggle("nav__selo--alerta", urgentes > 0);
+        botao.title = "Pendências — " + quantas +
+          (quantas > 1 ? " abertas" : " aberta") +
+          (urgentes ? ", " + urgentes + " atrasada" + (urgentes > 1 ? "s" : "") : "");
+      }
+    }
+
+    document.title = quantas ? "(" + quantas + ") " + TITULO_BASE : TITULO_BASE;
+  }
+
   function pintarResumo(r) {
+    pintarAviso(r);
     var res = document.getElementById("resumo");
     if (!res) return;
     res.textContent = "";
@@ -489,6 +586,49 @@
         });
     });
   }
+
+  (function ligarBusca() {
+    var cx = document.getElementById("busca");
+    if (!cx) return;
+
+    var espera = null;
+    cx.addEventListener("input", function () {
+      /* Espera a digitação parar um instante: redesenhar a cada
+         tecla faz a lista tremer debaixo do olho. */
+      if (espera) window.clearTimeout(espera);
+      espera = window.setTimeout(function () {
+        FILTRO = cx.value;
+        desenharCentro();
+      }, 140);
+    });
+
+    cx.addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape") {
+        cx.value = ""; FILTRO = ""; desenharCentro(); cx.blur();
+        return;
+      }
+      if (ev.key !== "Enter") return;
+      /* Abre o primeiro resultado — o que está contornado na tela,
+         para a tecla não virar surpresa. */
+      var primeiro = document.querySelector(".item--primeiro");
+      if (primeiro && primeiro.href) {
+        ev.preventDefault();
+        window.open(primeiro.href, "_blank", "noopener,noreferrer");
+      }
+    });
+
+    /* A barra põe o cursor na busca de qualquer lugar da página —
+       menos de dentro de um campo, senão não se digitaria "e/ou". */
+    document.addEventListener("keydown", function (ev) {
+      if (ev.key !== "/" || ev.ctrlKey || ev.altKey || ev.metaKey) return;
+      var a = document.activeElement;
+      if (a && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)) return;
+      if (a && a.isContentEditable) return;
+      ev.preventDefault();
+      cx.focus();
+      cx.select();
+    });
+  })();
 
   (function ligarSair() {
     var b = document.getElementById("btn-sair");

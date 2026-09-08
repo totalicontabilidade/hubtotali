@@ -610,3 +610,41 @@ a{color:inherit;text-decoration:none}
    carrega. Estava sem estilo nenhum: aparecia como texto solto no
    tamanho do corpo. */
 .marca__nome{font-size:17px;font-weight:700;color:var(--txt);letter-spacing:-.01em}
+
+/* ---------- a busca ----------
+   Cresce até um limite e some no celular: lá o cabeçalho já está
+   apertado com hora, saudação e resumo, e a lista inteira cabe
+   numa rolagem de polegar. */
+.busca{position:relative;display:flex;align-items:center;flex:1;max-width:340px}
+.busca__lupa{position:absolute;left:11px;width:15px;height:15px;color:var(--txt-3);pointer-events:none}
+.busca__cx{width:100%;border:1px solid var(--fio-2);border-radius:10px;
+           padding:9px 34px 9px 33px;font:inherit;font-size:13.5px;
+           color:var(--txt);background:#fff}
+.busca__cx::placeholder{color:var(--txt-3)}
+.busca__cx:focus{outline:2px solid var(--estado);outline-offset:1px;border-color:var(--estado)}
+.busca__cx::-webkit-search-cancel-button{cursor:pointer}
+.busca__tecla{position:absolute;right:9px;font:inherit;font-size:11px;font-weight:600;
+              color:var(--txt-3);border:1px solid var(--fio-2);border-radius:5px;
+              padding:1px 6px;pointer-events:none;background:var(--base)}
+.busca__cx:focus ~ .busca__tecla{opacity:0}
+
+/* O primeiro resultado fica marcado, porque é ele que o Enter
+   abre: prometer com a tecla e não mostrar qual seria é pedir para
+   a pessoa abrir a coisa errada. */
+.item--primeiro{outline:2px solid var(--estado);outline-offset:2px}
+
+.busca-vazia{font-size:13.5px;color:var(--txt-2);padding:14px 2px}
+
+@media (max-width:900px){
+  .busca{display:none}
+}
+
+/* O selo de pendências no ícone da barra. Fica no canto de cima,
+   mordendo a borda do botão, que é onde a convenção manda e onde
+   o olho já procura. */
+.nav__b{position:relative}
+.nav__selo{position:absolute;top:-2px;right:-2px;min-width:17px;height:17px;
+           padding:0 4px;border-radius:99px;background:var(--estado);color:#fff;
+           font-size:10.5px;font-weight:700;line-height:17px;text-align:center;
+           box-shadow:0 0 0 2px var(--nav)}
+.nav__selo--alerta{background:var(--alerta)}
