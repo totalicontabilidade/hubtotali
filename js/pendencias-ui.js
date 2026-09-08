@@ -85,6 +85,15 @@ const PendenciasUI = (function () {
     novo.addEventListener("click", abrirFormulario);
     alvo.appendChild(novo);
 
+    /* A porta para o quadro da casa. Fica embaixo do botão de
+       abrir, discreta: o trilho é da pessoa, e o quadro é de vez
+       em quando. */
+    var todasBtn = el("button", "btn-todas",
+      "Ver todas do escritório (" + todas.length + ")");
+    todasBtn.type = "button";
+    todasBtn.addEventListener("click", abrirTodas);
+    alvo.appendChild(todasBtn);
+
     if (!abertas.length) {
       alvo.appendChild(vazioElemento("Tudo em dia",
         "Você não tem pendência aberta. Quando alguém abrir uma para você, ela aparece aqui."));
@@ -106,7 +115,102 @@ const PendenciasUI = (function () {
     });
   }
 
-  function cartao(p) {
+  /* ============================================================
+     TODAS AS PENDÊNCIAS DO ESCRITÓRIO
+     ------------------------------------------------------------
+     O trilho mostra o que é seu, e isso é proposital: se mostrasse
+     tudo, viraria mural e ninguém acharia a própria tarefa. Mas
+     quem coordena precisa do outro olhar — quantas estão atrasadas,
+     em que setor, com quem.
+
+     Não há segredo novo aqui: a regra do banco já deixava toda a
+     equipe ler todas as pendências. O que faltava era a tela.
+     ============================================================ */
+  var FILTRO_PESSOA = "";
+  var FILTRO_SETOR = "";
+  var MOSTRAR_RESOLVIDAS = false;
+
+  function abrirTodas() {
+    var c = abrir("Todas as pendências");
+
+    var barra = el("div", "pd-filtros");
+
+    var pessoas = el("select", "pd-filtro");
+    pessoas.appendChild(new Option("Todo mundo", ""));
+    equipe.slice().sort(function (a, b) {
+      return (a.nome || "").localeCompare(b.nome || "", "pt-BR");
+    }).forEach(function (p) {
+      pessoas.appendChild(new Option(p.nome || p.email, p.uid));
+    });
+    pessoas.value = FILTRO_PESSOA;
+
+    var setores = el("select", "pd-filtro");
+    setores.appendChild(new Option("Todos os setores", ""));
+    var vistos = {};
+    todas.forEach(function (p) {
+      var s = p.setorDestino || p.setorOrigem || "";
+      if (s && !vistos[s]) { vistos[s] = true; setores.appendChild(new Option(s, s)); }
+    });
+    setores.value = FILTRO_SETOR;
+
+    var resolvidas = document.createElement("label");
+    resolvidas.className = "pd-filtro-marca";
+    var cx = document.createElement("input");
+    cx.type = "checkbox";
+    cx.checked = MOSTRAR_RESOLVIDAS;
+    resolvidas.appendChild(cx);
+    resolvidas.appendChild(el("span", null, "mostrar resolvidas"));
+
+    barra.appendChild(pessoas);
+    barra.appendChild(setores);
+    barra.appendChild(resolvidas);
+    c.appendChild(barra);
+
+    var lista = el("div", "pd-todas");
+    c.appendChild(lista);
+
+    function pintar() {
+      lista.textContent = "";
+
+      var vistas = todas.filter(function (p) {
+        if (!MOSTRAR_RESOLVIDAS && p.situacao === "resolvida") return false;
+        if (FILTRO_PESSOA && !Pendencias.ehMinha(p, FILTRO_PESSOA)) return false;
+        if (FILTRO_SETOR && (p.setorDestino || p.setorOrigem) !== FILTRO_SETOR) return false;
+        return true;
+      });
+
+      if (!vistas.length) {
+        lista.appendChild(el("div", "pd-vazio", "Nada com esses filtros."));
+        return;
+      }
+
+      [
+        { c: "atraso", t: "Atrasadas",     f: function (p) { return p.situacao !== "resolvida" && Pendencias.estado(p) === "atrasada"; } },
+        { c: "hoje",   t: "Para hoje",     f: function (p) { return p.situacao !== "resolvida" && Pendencias.estado(p) === "hoje"; } },
+        { c: "depois", t: "Próximos dias", f: function (p) { return p.situacao !== "resolvida" && !Pendencias.estado(p); } },
+        { c: "feito",  t: "Resolvidas",    f: function (p) { return p.situacao === "resolvida"; } },
+      ].forEach(function (g) {
+        var doGrupo = vistas.filter(g.f);
+        if (!doGrupo.length) return;
+        var f = el("div", "faixa faixa--" + g.c);
+        f.appendChild(el("span", "faixa__t", g.t));
+        f.appendChild(el("span", "faixa__n", String(doGrupo.length)));
+        lista.appendChild(f);
+        doGrupo.forEach(function (p) {
+          var cart = cartao(p, true);
+          lista.appendChild(cart);
+        });
+      });
+    }
+
+    pessoas.addEventListener("change", function () { FILTRO_PESSOA = pessoas.value; pintar(); });
+    setores.addEventListener("change", function () { FILTRO_SETOR = setores.value; pintar(); });
+    cx.addEventListener("change", function () { MOSTRAR_RESOLVIDAS = cx.checked; pintar(); });
+
+    pintar();
+  }
+
+  function cartao(p, comDono) {
     var e = Pendencias.estado(p);
     var b = el("button", "pen" + (e ? " pen--" + e : ""));
     b.type = "button";
@@ -131,7 +235,16 @@ const PendenciasUI = (function () {
          pessoa não achar que a tarefa é dela. */
       quem = "marcaram você · faz: " + nomeDe(p.responsavel);
     }
-    t.appendChild(el("div", "pen__q", quem));
+    /* No quadro do escritório o dono importa: sem ele, quarenta
+       cartões parecem todos da mesma pessoa. No trilho pessoal
+       seria repetição — lá tudo já é seu. */
+    if (comDono) {
+      var dono = nomeDe(p.responsavel);
+      var setor = p.setorDestino || p.setorOrigem || "";
+      t.appendChild(el("div", "pen__q", dono + (setor ? " · " + setor : "")));
+    } else {
+      t.appendChild(el("div", "pen__q", quem));
+    }
     b.appendChild(t);
 
     if (p.situacao === "fazendo") b.appendChild(el("span", "pen__sel", "fazendo"));

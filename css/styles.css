@@ -648,3 +648,27 @@ a{color:inherit;text-decoration:none}
            font-size:10.5px;font-weight:700;line-height:17px;text-align:center;
            box-shadow:0 0 0 2px var(--nav)}
 .nav__selo--alerta{background:var(--alerta)}
+
+/* ---------- o quadro do escritório ----------
+   O trilho é da pessoa; este é de todo mundo. Por isso a porta
+   para ele é discreta, abaixo do botão de abrir pendência: usa-se
+   de vez em quando, não todo dia. */
+.btn-todas{width:100%;margin-top:8px;border:1px solid var(--fio-2);border-radius:10px;
+           background:transparent;color:var(--txt-2);font:inherit;font-size:12.5px;
+           padding:8px 12px;cursor:pointer;transition:color .14s,border-color .14s}
+.btn-todas:hover{color:var(--txt);border-color:var(--txt-3)}
+
+.pd-filtros{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.pd-filtro{border:1px solid var(--fio-2);border-radius:9px;padding:7px 9px;
+           font:inherit;font-size:13px;color:var(--txt);background:#fff}
+.pd-filtro:focus{outline:2px solid var(--estado);outline-offset:1px}
+.pd-filtro-marca{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--txt-2);cursor:pointer}
+.pd-filtro-marca input{accent-color:var(--estado);cursor:pointer}
+
+.pd-todas{display:flex;flex-direction:column;gap:6px}
+
+/* Resolvida recua: continua legível para quem foi procurar, sem
+   disputar atenção com o que ainda falta fazer. */
+.faixa--feito{opacity:.75}
+.pd-todas .pen{background:var(--base)}
+.pd-todas .pen:hover{background:#fff}
