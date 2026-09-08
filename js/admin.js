@@ -844,7 +844,13 @@
         email: p.email || "",
         setores: Array.prototype.slice.call(marcas.querySelectorAll("input:checked"))
                    .map(function (c) { return c.value; }),
-        papel: sPapel.value,
+        /* O seletor do fundador vive travado, e um <select>
+           travado ainda tem valor: sem esta linha, salvar o
+           cadastro dele gravava "equipe". A tela mostrava
+           "Administrador · fundador" assim mesmo, porque isso vem
+           do UID — mas o dado dizia o contrário da tela, e um dia
+           alguém acreditaria no dado. */
+        papel: Dados.ehFundador(p.uid) ? "admin" : sPapel.value,
         ativo: p.ativo !== false,
       }).then(function (atualizada) {
         Object.assign(p, atualizada);
