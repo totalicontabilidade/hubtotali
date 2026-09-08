@@ -55,10 +55,6 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 input,select,textarea{font:inherit;color:inherit}
 [hidden]{display:none !important}
 :focus-visible{outline:2px solid var(--gold-2);outline-offset:2px;border-radius:6px}
-.skip-link{position:absolute;left:12px;top:-60px;z-index:200;background:var(--navy);color:#fff;
-           padding:10px 16px;border-radius:var(--r-sm);font-weight:700;font-size:14px;
-           transition:top .18s var(--ease)}
-.skip-link:focus{top:12px}
 
 /* ---------- topo ---------- */
 .topo{background:var(--papel);border-bottom:1px solid var(--fio);position:sticky;top:0;z-index:20}

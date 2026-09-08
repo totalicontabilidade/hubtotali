@@ -570,3 +570,43 @@ a{color:inherit;text-decoration:none}
 .pd-corrigir__nao:hover{color:var(--txt)}
 .pd-corrigir__erro{margin-top:6px;font-size:12.5px;color:var(--alerta);
                    background:var(--alerta-luz);border-radius:7px;padding:7px 9px}
+
+/* ============================================================
+   MARCAR PESSOAS NUMA PENDÊNCIA
+   ------------------------------------------------------------
+   Este bloco não existia. O JavaScript desenhava as classes e a
+   folha não tinha nenhuma delas, então o navegador empilhava os
+   spans como texto corrido — "RaoniFinanceiro, Diretoria", nome
+   colado no setor, sem respiro e sem hierarquia.
+
+   Cada pessoa é uma faixa clicável inteira, não só o quadradinho:
+   alvo de dedo em celular é o problema real aqui, e um checkbox
+   tem 13 pixels.
+   ============================================================ */
+.pd-marcar{display:flex;flex-direction:column;gap:2px;
+           border:1px solid var(--fio);border-radius:10px;
+           padding:4px;background:#fff;max-height:210px;overflow-y:auto}
+
+.pd-marcar__i{display:flex;align-items:center;gap:9px;
+              padding:8px 9px;border-radius:7px;cursor:pointer;
+              transition:background .12s}
+.pd-marcar__i:hover{background:var(--estado-luz)}
+.pd-marcar__i input{flex:none;width:16px;height:16px;accent-color:var(--estado);cursor:pointer}
+
+/* O nome empurra o setor para a direita: assim a coluna de nomes
+   fica alinhada e o olho desce por ela sem tropeçar. */
+.pd-marcar__n{font-size:13.5px;font-weight:600;color:var(--txt)}
+.pd-marcar__s{margin-left:auto;font-size:11.5px;color:var(--txt-3);
+              text-align:right;max-width:52%}
+
+.pd-dica{margin-top:7px;font-size:12px;line-height:1.45;color:var(--txt-3)}
+
+/* Quem foi marcado tem etiqueta própria na ficha: sem isto,
+   "@Fulano" ficava igual a "Aberta por Fulano", e as duas coisas
+   não são a mesma. */
+.pd-tag--marcado{background:var(--estado-luz);color:var(--estado)}
+
+/* Texto de reserva do cabeçalho, para quando a imagem da logo não
+   carrega. Estava sem estilo nenhum: aparecia como texto solto no
+   tamanho do corpo. */
+.marca__nome{font-size:17px;font-weight:700;color:var(--txt);letter-spacing:-.01em}
