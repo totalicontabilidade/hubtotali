@@ -310,7 +310,18 @@
      sessão e este atalho vira só o modo de trocar. */
   var CHAVE_NOME = "hub-totali:meu-nome";
 
+  /* O NOME CADASTRADO VENCE. Antes a saudação usava o pedaço do
+     e-mail antes do arroba, e dizia "Bom dia, hesley" — em
+     minúscula, e sem o sobrenome que a pessoa escolheu ao ser
+     cadastrada. É o mesmo nome que aparece nas pendências, e ver
+     dois nomes diferentes para si mesmo na mesma tela é estranho.
+
+     O e-mail continua como reserva para o instante entre a página
+     abrir e o cadastro chegar do banco. */
+  var NOME_CADASTRADO = "";
+
   function meuNome() {
+    if (NOME_CADASTRADO) return NOME_CADASTRADO;
     var s = Dados.sessao();
     if (s && s.email) return s.email.split("@")[0];
     try { return window.localStorage.getItem(CHAVE_NOME) || ""; } catch (e) { return ""; }
@@ -349,6 +360,12 @@
                         (n ? ", " + n : "");
       ola.title = n ? "Clique para trocar o nome" : "Clique para dizer o seu nome";
     }
+
+    /* Fica guardada para quem só quer repintar a saudação.
+       Chamar desenharTopo() de novo ligaria um segundo relógio e
+       um segundo clique no mesmo botão, e ainda apagaria o resumo
+       das pendências — três estragos para trocar uma palavra. */
+    desenharTopo.repintarSaudacao = pintarSaudacao;
 
     ola.addEventListener("click", function () {
       var n = window.prompt("Como o Hub deve chamar você?", meuNome());
@@ -430,6 +447,15 @@
 
     desenharTopo();
     desenharPendencias();
+
+    /* Chega depois da primeira pintura, de propósito: a saudação
+       não espera o banco para aparecer. Quando o nome chega, o
+       cabeçalho se redesenha. */
+    Dados.meuCadastro().then(function (p) {
+      if (!p || !p.nome || p.nome === NOME_CADASTRADO) return;
+      NOME_CADASTRADO = p.nome;
+      if (desenharTopo.repintarSaudacao) desenharTopo.repintarSaudacao();
+    });
   }
 
   /* ---------- o portão ----------

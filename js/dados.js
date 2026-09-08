@@ -363,6 +363,9 @@ const Dados = (function () {
 
   function sair() {
     if (relogioDaRenovacao) { window.clearTimeout(relogioDaRenovacao); relogioDaRenovacao = null; }
+    /* Sem isto, quem entrasse em seguida no mesmo navegador seria
+       saudado pelo nome de quem saiu. */
+    meuCadastroEmCache = null;
     /* Sai dos dois lugares, sempre: quem clica em Sair quer ter
        saído, não ter saído de metade. */
     try { window.sessionStorage.removeItem(CHAVE_SESSAO); } catch (e) {}
@@ -452,20 +455,38 @@ const Dados = (function () {
     return !!cfg.ADMIN_UID && uid === cfg.ADMIN_UID;
   }
 
-  function souAdministrador() {
+  /* O CADASTRO DE QUEM ESTÁ USANDO, buscado uma vez e guardado.
+     Duas telas precisam dele por motivos diferentes — a saudação
+     do Hub quer o nome, a administração quer o papel — e sem
+     guardar seriam duas idas ao banco para a mesma resposta. */
+  var meuCadastroEmCache = null;
+
+  function meuCadastro() {
     var s = lerSessao();
-    if (!s) return Promise.resolve(false);
-    if (ehFundador(s.uid)) return Promise.resolve(true);
+    if (!s) return Promise.resolve(null);
+    if (meuCadastroEmCache && meuCadastroEmCache.uid === s.uid) {
+      return Promise.resolve(meuCadastroEmCache.dados);
+    }
     return fetch(BASE_DOCS() + "/equipe/" + encodeURIComponent(s.uid), {
       headers: comAutorizacao(), cache: "no-store"
     })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (d) {
-        if (!d || !d.fields) return false;
-        var p = deFirestore(d.fields);
-        return p.ativo === true && p.papel === "admin";
+        var p = (d && d.fields) ? deFirestore(d.fields) : null;
+        if (p) p.uid = s.uid;
+        meuCadastroEmCache = { uid: s.uid, dados: p };
+        return p;
       })
-      .catch(function () { return false; });
+      .catch(function () { return null; });
+  }
+
+  function souAdministrador() {
+    var s = lerSessao();
+    if (!s) return Promise.resolve(false);
+    if (ehFundador(s.uid)) return Promise.resolve(true);
+    return meuCadastro().then(function (p) {
+      return !!p && p.ativo === true && p.papel === "admin";
+    });
   }
 
   function listarEquipe() {
@@ -585,6 +606,7 @@ const Dados = (function () {
     sair: sair,
     sessao: lerSessao,
     souAdministrador: souAdministrador,
+    meuCadastro: meuCadastro,
     ehFundador: ehFundador,
     pronto: pronto,
     renovar: renovar,
