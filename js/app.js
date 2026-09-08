@@ -157,8 +157,12 @@
     return String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
   }
 
-  function combina(item, termos) {
-    var palheiro = semAcento([item.nome, item.nota, item.sigla, item.url].join(" "));
+  /* O NOME DO SETOR ENTRA NA BUSCA. Sem ele, "legalização" não
+     achava nada — e é assim que a pessoa pensa: ela não procura
+     "REGIN", procura o assunto, e espera ver o que mora naquela
+     gaveta. */
+  function combina(item, setor, termos) {
+    var palheiro = semAcento([item.nome, item.nota, item.sigla, item.url, setor].join(" "));
     return termos.every(function (t) { return palheiro.indexOf(t) !== -1; });
   }
 
@@ -167,7 +171,7 @@
     var achados = [];
     SETORES_ATUAIS.forEach(function (s) {
       (s.itens || []).forEach(function (i) {
-        if (combina(i, termos)) achados.push({ setor: s.titulo, item: i });
+        if (combina(i, s.titulo, termos)) achados.push({ setor: s.titulo, item: i });
       });
     });
 
