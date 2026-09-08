@@ -738,9 +738,26 @@
 
   /* Cadastro antigo tinha "setor" no singular. Esta função lê os
      dois formatos, para ninguém precisar recadastrar ninguém. */
+  /* Três formatos convivem, e por um tempo vão conviver: a lista
+     de verdade (o certo, de hoje em diante), o texto com JSON
+     dentro que o conversor quebrado gravou, e o campo antigo no
+     singular, com os setores separados por vírgula ou
+     ponto-e-vírgula. Ler os três custa oito linhas e evita que
+     cadastro velho apareça vazio na tela. Salvar sempre normaliza
+     para o primeiro. */
   function setoresDe(p) {
     if (Array.isArray(p.setores)) return p.setores;
-    return p.setor ? [p.setor] : [];
+
+    var cru = p.setores || p.setor || "";
+    if (typeof cru !== "string" || !cru.trim()) return [];
+
+    if (cru.trim().charAt(0) === "[") {
+      try {
+        var lista = JSON.parse(cru);
+        if (Array.isArray(lista)) return lista.map(String);
+      } catch (e) { /* não era JSON; cai na separação abaixo */ }
+    }
+    return cru.split(/[;,]/).map(function (s) { return s.trim(); }).filter(Boolean);
   }
 
   function iniciais(nome) {

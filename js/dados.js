@@ -390,11 +390,23 @@ const Dados = (function () {
 
   /* Firestore guarda o tipo junto com o valor. Estas duas
      funções traduzem entre o formato dele e um objeto comum. */
+  /* LISTA VIRA LISTA, não texto. Antes, um array caía no último
+     galho e era gravado como JSON.stringify — os setores de uma
+     pessoa viravam a string ["Fiscal","Contábil"], com colchetes e
+     aspas, e voltavam assim. Por isso a tela mostrava a alçada e
+     nenhum setor: setoresDe() recebia texto onde esperava lista.
+
+     O conversor de js/pendencias.js já fazia certo. Eram duas
+     cópias da mesma ideia, e o conserto de uma nunca chegou na
+     outra — que é o preço de ter duas. */
   function paraFirestore(obj) {
     var f = {};
     Object.keys(obj).forEach(function (k) {
       var v = obj[k];
-      if (typeof v === "string") f[k] = { stringValue: v };
+      if (Array.isArray(v)) {
+        f[k] = { arrayValue: { values: v.map(function (x) { return { stringValue: String(x) }; }) } };
+      }
+      else if (typeof v === "string") f[k] = { stringValue: v };
       else if (typeof v === "boolean") f[k] = { booleanValue: v };
       else if (typeof v === "number") f[k] = { integerValue: String(v) };
       else if (v instanceof Date) f[k] = { timestampValue: v.toISOString() };
@@ -408,7 +420,11 @@ const Dados = (function () {
     var o = {};
     Object.keys(fields || {}).forEach(function (k) {
       var v = fields[k];
-      if ("stringValue" in v) o[k] = v.stringValue;
+      if ("arrayValue" in v) {
+        o[k] = ((v.arrayValue && v.arrayValue.values) || [])
+                 .map(function (x) { return x.stringValue; });
+      }
+      else if ("stringValue" in v) o[k] = v.stringValue;
       else if ("booleanValue" in v) o[k] = v.booleanValue;
       else if ("integerValue" in v) o[k] = parseInt(v.integerValue, 10);
       else if ("timestampValue" in v) o[k] = v.timestampValue;
