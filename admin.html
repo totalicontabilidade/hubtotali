@@ -4,14 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Fora da própria pasta, esta página só fala com dois endereços
-     do Google: o do login e o do banco. Nada de CDN, nada de
-     biblioteca de terceiro, nenhum script de fora. -->
+<!-- Nada de CDN, nada de biblioteca de terceiro, nenhum script de
+     fora. Fora da própria pasta esta página fala com o Google — o
+     login, o banco e a renovação do token — e com unavatar.io,
+     usado só na hora em que alguém digita o endereço de um sistema
+     novo, para trazer o ícone dele para dentro do banco. O Hub, do
+     outro lado, não fala com ninguém: lá a política é
+     img-src 'self' data:. -->
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
   script-src 'self';
   style-src 'self';
-  img-src 'self' data:;
+  img-src 'self' data: https://unavatar.io;
   font-src 'self';
   connect-src https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com;
   object-src 'none';
@@ -130,6 +134,18 @@
              a pessoa troca depois, sozinha, e nem você fica sabendo
              da nova. Se não pudesse trocar, este rótulo seria uma
              promessa falsa e o campo se chamaria só "Senha". -->
+        <div class="campo campo--linha">
+          <span class="campo__rotulo">Acesso</span>
+          <!-- Duas alçadas, e a diferença é grande: quem é da
+               equipe usa o Hub e as pendências; quem é
+               administrador também reescreve a lista de sistemas e
+               cadastra gente. Por isso a escolha é explícita, e
+               não um detalhe escondido. -->
+          <select class="campo__caixa" id="np-papel">
+            <option value="equipe" selected>Equipe — usa o Hub e as pendências</option>
+            <option value="admin">Administrador — também edita tudo</option>
+          </select>
+        </div>
         <div class="campo campo--linha campo--setores">
           <span class="campo__rotulo">Setores</span>
           <!-- Marcação, não seleção única: gente de contabilidade

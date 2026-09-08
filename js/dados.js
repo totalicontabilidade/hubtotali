@@ -425,6 +425,33 @@ const Dados = (function () {
     return h;
   }
 
+  /* Quem é administrador. O fundador é por UID, escrito na
+     configuração e nas regras do banco: é o único jeito de haver
+     um primeiro administrador antes de existir lista. Os demais
+     saem do campo "papel" do próprio documento da pessoa — e é a
+     regra do Firestore que decide de verdade, não isto aqui.
+     Esta função existe para a TELA saber o que mostrar; quem
+     tentar burlar esbarra no banco. */
+  function ehFundador(uid) {
+    return !!cfg.ADMIN_UID && uid === cfg.ADMIN_UID;
+  }
+
+  function souAdministrador() {
+    var s = lerSessao();
+    if (!s) return Promise.resolve(false);
+    if (ehFundador(s.uid)) return Promise.resolve(true);
+    return fetch(BASE_DOCS() + "/equipe/" + encodeURIComponent(s.uid), {
+      headers: comAutorizacao(), cache: "no-store"
+    })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d || !d.fields) return false;
+        var p = deFirestore(d.fields);
+        return p.ativo === true && p.papel === "admin";
+      })
+      .catch(function () { return false; });
+  }
+
   function listarEquipe() {
     if (!temBanco()) return Promise.resolve([]);
     return fetch(BASE_DOCS() + "/equipe?pageSize=200", { headers: comAutorizacao(), cache: "no-store" })
@@ -474,11 +501,16 @@ const Dados = (function () {
         if (/INVALID_EMAIL/.test(c)) throw new Error("Esse e-mail não parece válido.");
         throw new Error(recado(c));
       }
+      /* SETORES, no plural. Estava "setor" no singular, e a tela
+         sempre mandou uma lista: os setores marcados no cadastro
+         eram calados aqui e a pessoa nascia sem nenhum. */
       return gravarPessoa(res.j.localId, {
-        nome:  dados.nome || "",
-        email: dados.email,
-        setor: dados.setor || "",
-        ativo: true,
+        nome:    dados.nome || "",
+        email:   dados.email,
+        setores: Array.isArray(dados.setores) ? dados.setores
+               : (dados.setor ? [dados.setor] : []),
+        papel:   dados.papel === "admin" ? "admin" : "equipe",
+        ativo:   true,
       });
     });
   }
@@ -536,6 +568,8 @@ const Dados = (function () {
     entrar: entrar,
     sair: sair,
     sessao: lerSessao,
+    souAdministrador: souAdministrador,
+    ehFundador: ehFundador,
     pronto: pronto,
     renovar: renovar,
 

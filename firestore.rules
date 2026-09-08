@@ -21,6 +21,20 @@ rules_version = '2';
 // criar uma por fora entra numa tela vazia.
 //
 // ------------------------------------------------------------
+// O QUE MUDOU EM 08/09/2026
+// ------------------------------------------------------------
+// EXISTE MAIS DE UM ADMINISTRADOR. Antes a alçada era um UID
+// escrito nesta regra: para dar acesso de administração a alguém
+// era preciso editar e publicar isto aqui — exatamente o tipo de
+// coisa que este sistema foi feito para não precisar. Agora ela
+// vem do campo "papel" do cadastro da pessoa, que se troca pela
+// tela.
+//
+// O fundador continua por UID, porque alguém precisa ser o
+// primeiro, e o cadastro dele passou a ser intocável por outro
+// administrador — senão o convidado poderia desligar o anfitrião.
+//
+// ------------------------------------------------------------
 // O QUE MUDOU EM 04/09/2026
 // ------------------------------------------------------------
 // A LISTA DE SISTEMAS DEIXOU DE SER PÚBLICA. Era lida por
@@ -63,15 +77,30 @@ service cloud.firestore {
       return request.auth != null;
     }
 
-    function ehAdmin() {
+    // O FUNDADOR é por UID, escrito aqui. Não é preferência: antes
+    // de existir lista de equipe não há de onde tirar um primeiro
+    // administrador, e sem ele ninguém escreveria a lista. É o nó
+    // que se desata por fora.
+    function fundador() {
       return autenticado()
              && request.auth.uid == 'UMBvjqMpw2bEbpvBIZnhE5iwlB23';
+    }
+
+    function meuCadastro() {
+      return get(/databases/$(database)/documents/equipe/$(request.auth.uid)).data;
     }
 
     function daEquipe() {
       return autenticado()
              && exists(/databases/$(database)/documents/equipe/$(request.auth.uid))
-             && get(/databases/$(database)/documents/equipe/$(request.auth.uid)).data.ativo == true;
+             && meuCadastro().ativo == true;
+    }
+
+    // OS DEMAIS ADMINISTRADORES saem do campo "papel" do próprio
+    // cadastro. Assim a alçada se dá e se tira pela tela, sem
+    // ninguém editar regra nem publicar nada.
+    function ehAdmin() {
+      return fundador() || (daEquipe() && meuCadastro().papel == 'admin');
     }
 
     function meuUid(uid) {
@@ -123,12 +152,23 @@ service cloud.firestore {
 
     match /equipe/{uid} {
       allow read: if daEquipe() || ehAdmin();
+
+      // O CADASTRO DO FUNDADOR só ele escreve. Sem isto, um
+      // administrador novo poderia desligar quem lhe deu a alçada
+      // e ficar sozinho com a chave. Ele continua administrador de
+      // qualquer jeito, porque fundador() é por UID — mas ficaria
+      // fora da equipe, e sem pendências.
       allow write: if ehAdmin()
+                   && (uid != 'UMBvjqMpw2bEbpvBIZnhE5iwlB23' || fundador())
                    && request.resource.data.ativo is bool
                    && request.resource.data.nome is string
                    && request.resource.data.nome.size() <= 120
                    && request.resource.data.email is string
-                   && request.resource.data.email.size() <= 200;
+                   && request.resource.data.email.size() <= 200
+                   && (!('papel' in request.resource.data)
+                       || request.resource.data.papel in ['equipe', 'admin'])
+                   && (!('setores' in request.resource.data)
+                       || request.resource.data.setores is list);
     }
 
     // ---------- pendências ----------

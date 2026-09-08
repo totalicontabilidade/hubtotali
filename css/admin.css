@@ -306,3 +306,19 @@ input,select,textarea{font:inherit;color:inherit}
 @media (prefers-reduced-motion:reduce){
   .aviso-salvo{animation:none}
 }
+
+/* ---------- editar quem já está na lista ----------
+   O editor abre DENTRO da linha da pessoa, não numa janela por
+   cima: quem está conferindo a equipe continua vendo os colegas
+   ao redor enquanto corrige um nome. Como a linha é uma fila
+   horizontal, ele quebra para a linha de baixo e ocupa a largura
+   toda. */
+.pessoa{flex-wrap:wrap}
+.pessoa__editor{flex:1 0 100%;margin-top:10px;padding:12px 14px;
+                background:var(--piso);border:1px solid var(--fio);
+                border-radius:10px;display:flex;flex-direction:column;gap:10px}
+.pessoa__editor-acoes{display:flex;gap:8px;justify-content:flex-end}
+
+/* A alçada vem antes dos setores e com peso próprio: dizer que
+   alguém é administrador não é o mesmo que dizer que é do Fiscal. */
+.pessoa__setor--adm{background:var(--navy);color:#fff}

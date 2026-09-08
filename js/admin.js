@@ -140,6 +140,73 @@
      quadradinho ao lado do nome, e vive dentro do banco. Quem não
      tem imagem mostra as iniciais. */
 
+  /* ---------- colou o link, o ícone aparece ----------
+     Volta o automático, por um caminho diferente do antigo.
+
+     O ANTIGO guardava no banco um endereço do DuckDuckGo com o
+     domínio do sistema dentro. O ícone continuava sendo buscado lá
+     fora a cada abertura do Hub, por cada pessoa da equipe, todo
+     dia, para sempre — e isso sobreviveu à lista ter virado
+     privada.
+
+     O DE AGORA busca UMA VEZ, aqui na administração, no momento em
+     que alguém digita o endereço, e guarda a IMAGEM dentro do
+     banco. O Hub nunca fala com ninguém. A conta honesta do que
+     isso custa: o serviço fica sabendo daquele domínio, uma vez,
+     quando um administrador cadastra o sistema.
+
+     Por que unavatar e não os outros: para converter a imagem em
+     dado guardável, o navegador exige que o servidor autorize a
+     leitura por outra origem — e nem o DuckDuckGo nem o Google
+     autorizam. Dá para exibir, não dá para guardar. Entre os que
+     autorizam, o unavatar é o único que responde 404 quando NÃO
+     encontra. Os outros devolvem uma letra genérica sobre fundo
+     colorido, pior do que as iniciais que o próprio Hub desenha a
+     partir do nome do sistema. */
+  var ESPERA_DO_ICONE = null;
+
+  function dominioDe(url) {
+    try {
+      var u = new URL(url);
+      if (u.protocol !== "http:" && u.protocol !== "https:") return "";
+      return u.hostname.replace(/^www./, "");
+    } catch (e) { return ""; }
+  }
+
+  function buscarIconeDoSite(item, pintar) {
+    /* Quem já tem imagem não é atropelado: pode ter sido enviada à
+       mão justamente por a automática ser ruim. */
+    if (item.logoDados) return;
+    var dominio = dominioDe(item.url || "");
+    if (!dominio) return;
+
+    var img = new Image();
+    /* Antes do src, sempre: é esta linha que faz o navegador pedir
+       a autorização de leitura. Depois do src, ela não vale. */
+    img.crossOrigin = "anonymous";
+    img.onload = function () {
+      /* O endereço pode ter mudado enquanto isto voltava. */
+      if (dominioDe(item.url || "") !== dominio || item.logoDados) return;
+      try {
+        var lado = Math.min(64, Math.max(img.width, img.height));
+        var tela = document.createElement("canvas");
+        tela.width = lado; tela.height = lado;
+        var ctx = tela.getContext("2d");
+        var e = Math.min(lado / img.width, lado / img.height);
+        var l = Math.round(img.width * e), a = Math.round(img.height * e);
+        ctx.drawImage(img, Math.round((lado - l) / 2), Math.round((lado - a) / 2), l, a);
+        item.logoDados = tela.toDataURL("image/png");
+        if (pintar) pintar();
+        marcarPendente();
+        recado("Ícone de " + dominio + " trazido para dentro.");
+      } catch (erro) { /* sem autorização de leitura: fica nas iniciais */ }
+    };
+    /* 404 cai aqui, e é o caso bom: o serviço não inventou nada, e
+       as iniciais continuam. */
+    img.onerror = function () {};
+    img.src = "https://unavatar.io/" + encodeURIComponent(dominio) + "?fallback=false";
+  }
+
   function previaDoLogo(item) {
     var caixa = elemento("button", "linha__logo");
     caixa.type = "button";
@@ -319,6 +386,12 @@
     linha.appendChild(caixaTexto("cx-url", item.url, "https://…", function (v) {
       item.url = v;
       if (logo._pintar) logo._pintar();
+      /* Espera a digitação parar: senão sai um pedido por tecla,
+         e "h", "ht", "htt" não são endereço de nada. */
+      if (ESPERA_DO_ICONE) window.clearTimeout(ESPERA_DO_ICONE);
+      ESPERA_DO_ICONE = window.setTimeout(function () {
+        buscarIconeDoSite(item, logo._pintar);
+      }, 800);
     }));
     linha.appendChild(caixaTexto("cx-legenda", item.nota, "Legenda (opcional)", function (v) { item.nota = v; }));
 
@@ -600,17 +673,24 @@
       b.textContent = "Entrando…";
 
       Dados.entrar($("entrada-email").value.trim(), $("entrada-senha").value)
-        .then(function (sessao) {
+        .then(function () {
           /* A conta existe e a senha confere — mas esta tela é só
-             do administrador. Quem não é sai da sessão na hora,
-             para não ficar com um login pela metade guardado no
-             navegador. */
-          var uid = (typeof CONFIG_HUB !== "undefined") ? CONFIG_HUB.ADMIN_UID : "";
-          if (uid && sessao && sessao.uid && sessao.uid !== uid) {
-            Dados.sair();
-            throw new Error("Esta conta não é a de administrador do Hub.");
-          }
-          abrirEdicao();
+             de quem tem alçada. Antes a pergunta era "você é O
+             administrador?", comparando com um único UID fixo.
+             Agora é "você é UM administrador?", e a resposta vem do
+             campo papel do próprio cadastro. O fundador continua
+             valendo pelo UID, senão não haveria como existir o
+             primeiro.
+
+             Quem não passa sai da sessão na hora, para não ficar
+             com um login pela metade guardado no navegador. */
+          return Dados.souAdministrador().then(function (pode) {
+            if (!pode) {
+              Dados.sair();
+              throw new Error("Esta conta não tem acesso de administrador.");
+            }
+            abrirEdicao();
+          });
         })
         .catch(function (e) {
           erro.textContent = e.message || "Não consegui entrar.";
@@ -669,6 +749,102 @@
     return (p[0] || "?").slice(0, 2).toUpperCase();
   }
 
+  /* ---------- Editar quem já está na lista ----------
+     Faltava por inteiro: dava para cadastrar, desligar e mandar
+     e-mail de senha — e não dava para consertar um nome digitado
+     errado nem trocar o setor de quem mudou de área. A alternativa
+     era desligar e cadastrar de novo, o que quebraria o histórico
+     das pendências, que é justamente o que "não existe apagar
+     pessoa" foi feito para proteger.
+
+     O e-mail não se edita: ele é a identidade da conta no login,
+     e trocar aqui deixaria a lista dizendo uma coisa e o
+     Authentication outra. Para trocar de e-mail, cadastra-se de
+     novo e desliga-se o antigo. */
+  function abrirEdicaoDaPessoa(p, linha) {
+    if (linha._editando) return;
+    linha._editando = true;
+
+    var painel = elemento("div", "pessoa__editor");
+
+    var lNome = elemento("label", "campo campo--linha");
+    lNome.appendChild(elemento("span", "campo__rotulo", "Nome"));
+    var iNome = document.createElement("input");
+    iNome.type = "text"; iNome.className = "campo__caixa"; iNome.value = p.nome || "";
+    lNome.appendChild(iNome);
+    painel.appendChild(lNome);
+
+    var lPapel = elemento("label", "campo campo--linha");
+    lPapel.appendChild(elemento("span", "campo__rotulo", "Acesso"));
+    var sPapel = document.createElement("select");
+    sPapel.className = "campo__caixa";
+    [["equipe", "Equipe — usa o Hub e as pendências"],
+     ["admin",  "Administrador — também edita tudo"]].forEach(function (o) {
+      var op = document.createElement("option");
+      op.value = o[0]; op.textContent = o[1];
+      sPapel.appendChild(op);
+    });
+    sPapel.value = p.papel === "admin" ? "admin" : "equipe";
+    /* O fundador não perde a alçada por aqui: o UID dele está nas
+       regras do banco, que ignorariam a mudança, e o seletor
+       prometeria uma coisa que não acontece. */
+    if (Dados.ehFundador(p.uid)) { sPapel.disabled = true; sPapel.title = "O fundador é administrador pelas regras do banco"; }
+    lPapel.appendChild(sPapel);
+    painel.appendChild(lPapel);
+
+    var lSet = elemento("div", "campo campo--linha campo--setores");
+    lSet.appendChild(elemento("span", "campo__rotulo", "Setores"));
+    var marcas = elemento("div", "setores-marca");
+    var atuais = setoresDe(p);
+    Dados.SETORES_DA_CASA.forEach(function (s) {
+      var l = document.createElement("label");
+      var c = document.createElement("input");
+      c.type = "checkbox"; c.value = s; c.checked = atuais.indexOf(s) !== -1;
+      l.appendChild(c);
+      l.appendChild(elemento("span", null, s));
+      marcas.appendChild(l);
+    });
+    lSet.appendChild(marcas);
+    painel.appendChild(lSet);
+
+    var acoes = elemento("div", "pessoa__editor-acoes");
+    var salvar = elemento("button", "btn btn--pequeno btn--principal", "Salvar");
+    var cancelar = elemento("button", "btn btn--pequeno btn--fantasma", "Cancelar");
+    salvar.type = "button"; cancelar.type = "button";
+    acoes.appendChild(salvar); acoes.appendChild(cancelar);
+    painel.appendChild(acoes);
+
+    function fechar() { painel.remove(); linha._editando = false; }
+    cancelar.addEventListener("click", fechar);
+
+    salvar.addEventListener("click", function () {
+      var nome = iNome.value.trim();
+      if (!nome) { iNome.focus(); return; }
+      salvar.disabled = true;
+      salvar.textContent = "Salvando…";
+      Dados.gravarPessoa(p.uid, {
+        nome:  nome,
+        email: p.email || "",
+        setores: Array.prototype.slice.call(marcas.querySelectorAll("input:checked"))
+                   .map(function (c) { return c.value; }),
+        papel: sPapel.value,
+        ativo: p.ativo !== false,
+      }).then(function (atualizada) {
+        Object.assign(p, atualizada);
+        equipe.sort(function (a, b) { return (a.nome || "").localeCompare(b.nome || "", "pt-BR"); });
+        desenharEquipe();
+        recado("Cadastro de " + nome + " atualizado.");
+      }).catch(function (e) {
+        salvar.disabled = false;
+        salvar.textContent = "Salvar";
+        recado(e.message, true);
+      });
+    });
+
+    linha.appendChild(painel);
+    iNome.focus();
+  }
+
   function desenharEquipe() {
     var alvo = $("lista-equipe");
     alvo.textContent = "";
@@ -692,14 +868,21 @@
       txt.appendChild(elemento("div", "pessoa__mail", p.email || ""));
       linha.appendChild(txt);
 
-      var setores = setoresDe(p);
-      if (setores.length) {
-        var caixa = elemento("div", "pessoa__setores");
-        setores.forEach(function (s) { caixa.appendChild(elemento("span", "pessoa__setor", s)); });
-        linha.appendChild(caixa);
+      var caixa = elemento("div", "pessoa__setores");
+      if (p.papel === "admin" || Dados.ehFundador(p.uid)) {
+        caixa.appendChild(elemento("span", "pessoa__setor pessoa__setor--adm",
+          Dados.ehFundador(p.uid) ? "Administrador · fundador" : "Administrador"));
       }
+      setoresDe(p).forEach(function (s) { caixa.appendChild(elemento("span", "pessoa__setor", s)); });
+      if (caixa.children.length) linha.appendChild(caixa);
 
       var fim = elemento("div", "pessoa__fim");
+
+      var editar = elemento("button", "btn btn--pequeno btn--fantasma", "Editar");
+      editar.type = "button";
+      editar.title = "Trocar nome, setores e alçada";
+      editar.addEventListener("click", function () { abrirEdicaoDaPessoa(p, linha); });
+      fim.appendChild(editar);
 
       var senha = elemento("button", "btn btn--pequeno btn--fantasma", "Redefinir senha");
       senha.type = "button";
@@ -813,12 +996,14 @@
         email: $("np-email").value.trim(),
         senha: $("np-senha").value,
         setores: setoresMarcados(),
+        papel: $("np-papel").value,
       }).then(function (pessoa) {
         equipe.push(pessoa);
         equipe.sort(function (a, b2) { return (a.nome || "").localeCompare(b2.nome || "", "pt-BR"); });
         desenharEquipe();
         ["np-nome", "np-email", "np-senha"].forEach(function (id) { $(id).value = ""; });
         Array.prototype.forEach.call(caixaSetores.querySelectorAll("input"), function (c) { c.checked = false; });
+        $("np-papel").value = "equipe";
         recado((pessoa.nome || pessoa.email) + " já pode entrar.");
       }).catch(function (e) {
         erro.textContent = e.message;
@@ -869,8 +1054,15 @@
      essa renovação terminar — sem isso, a primeira leitura do
      banco sairia com um token vencido e voltaria 401. */
   Dados.pronto().then(function (sessao) {
-    if (sessao || !Dados.temBanco()) abrirEdicao();
-    else mostrarEntrada();
+    if (!Dados.temBanco()) { abrirEdicao(); return; }
+    if (!sessao) { mostrarEntrada(); return; }
+    /* Sessão viva não basta: a alçada pode ter sido retirada desde
+       o último acesso. Quem perdeu volta para a tela de entrada em
+       vez de olhar uma tela de edição que o banco vai recusar. */
+    Dados.souAdministrador().then(function (pode) {
+      if (pode) abrirEdicao();
+      else { Dados.sair(); mostrarEntrada(); }
+    });
   });
 
 })();
