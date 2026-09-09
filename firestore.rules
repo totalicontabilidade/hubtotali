@@ -248,22 +248,46 @@ service cloud.firestore {
                               || request.time < resource.data.criadoEm + duration.value(15, 'm')
                             ))
 
-                         // QUALQUER UM DA EQUIPE acrescenta anexo, e
-                         // só acrescenta: a lista nova precisa ser
-                         // pelo menos do tamanho da antiga. Anexo é
-                         // prova de que algo foi combinado, e quem
-                         // pode apagar a prova pode apagar o
-                         // combinado.
-                         || (mudou().hasOnly(['anexos'])
-                             && request.resource.data.anexos is list
-                             && request.resource.data.anexos.size() <= 20
-                             && (!('anexos' in resource.data)
-                                 || request.resource.data.anexos.size() >= resource.data.anexos.size()))
+                         // AQUI HAVIA a permissão de mexer no campo
+                         // "anexos", com a lista nova obrigada a ser
+                         // pelo menos do tamanho da antiga. Isso
+                         // impede a lista ENCOLHER e não impede
+                         // reescrever uma entrada que já está lá —
+                         // eu tinha comentado como se fosse
+                         // imutabilidade, e não era.
+                         //
+                         // Os anexos foram para uma subcoleção, do
+                         // mesmo jeito que a linha do tempo, onde
+                         // cada um é um documento que só pode ser
+                         // criado. Aí a imutabilidade é de verdade,
+                         // e não uma comparação de tamanho.
                        );
 
       // Apagar: só quem abriu. Responsável resolve, não some com
       // a cobrança.
       allow delete: if daEquipe() && meuUid(resource.data.criadoPor);
+
+      // ---------- os anexos ----------
+      // Um documento por arquivo, criado e nunca mais tocado. A
+      // mesma forma da linha do tempo, e pelo mesmo motivo: o que
+      // serve de prova não pode ser reescrito por quem tem
+      // interesse no que ela prova.
+      //
+      // O arquivo em si vive no Storage — ver storage.rules. O que
+      // está aqui é a ficha dele.
+      match /anexos/{item} {
+        allow read:   if daEquipe();
+        allow create: if daEquipe()
+                      && meuUid(request.resource.data.por)
+                      && request.resource.data.nome is string
+                      && request.resource.data.nome.size() > 0
+                      && request.resource.data.nome.size() <= 200
+                      && request.resource.data.caminho is string
+                      && request.resource.data.caminho.size() <= 400
+                      && request.resource.data.tamanho is int
+                      && request.resource.data.tamanho <= 10485760;
+        allow update, delete: if false;
+      }
 
       // ---------- a linha do tempo ----------
 

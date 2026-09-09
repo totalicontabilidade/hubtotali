@@ -655,7 +655,12 @@ const PendenciasUI = (function () {
 
   function pintarAnexos(p, onde) {
     onde.textContent = "";
-    var lista = Pendencias.lerAnexos(p);
+    onde.appendChild(el("div", "pd-vazio", "Carregando…"));
+    Pendencias.lerAnexos(p).then(function (lista) { desenharAnexos(p, onde, lista); });
+  }
+
+  function desenharAnexos(p, onde, lista) {
+    onde.textContent = "";
 
     lista.forEach(function (a) {
       var linha = el("div", "pd-anexo");
@@ -672,7 +677,15 @@ const PendenciasUI = (function () {
       link.type = "button";
       link.title = "Abrir " + a.nome;
       link.addEventListener("click", function () {
-        var aba = window.open("", "_blank", "noopener");
+        /* SEM "noopener" AQUI, de propósito. Com ele o navegador
+           devolve null em vez da aba, e o caminho alternativo
+           levaria a aba ATUAL para o arquivo — tirando o Hub da
+           frente de quem só queria ver um anexo. A aba é nossa e
+           recebe um endereço temporário nosso; o vínculo com ela é
+           cortado logo abaixo, que dá no mesmo sem o efeito
+           colateral. */
+        var aba = window.open("", "_blank");
+        if (aba) { try { aba.opener = null; } catch (e) {} }
         link.disabled = true;
         Pendencias.abrirAnexo(a)
           .then(function (endereco) {
@@ -683,6 +696,8 @@ const PendenciasUI = (function () {
           })
           .catch(function (err) {
             if (aba) aba.close();
+            var velho = onde.querySelector(".pd-anexo__erro");
+            if (velho) velho.remove();
             onde.appendChild(el("div", "pd-anexo__erro", err.message));
           })
           .then(function () { link.disabled = false; });

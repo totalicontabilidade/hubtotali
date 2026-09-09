@@ -279,7 +279,7 @@ const Pendencias = (function () {
       return Promise.reject(new Error("Arquivo grande demais. O limite é 10 MB — este tem " +
         (Math.round(arquivo.size / 1024 / 1024 * 10) / 10) + " MB."));
     }
-    if ((p.anexos || []).length >= LIMITE_DE_ANEXOS) {
+    if ((p._anexos || []).length >= LIMITE_DE_ANEXOS) {
       return Promise.reject(new Error("Esta pendência já tem " + LIMITE_DE_ANEXOS + " anexos."));
     }
 
@@ -320,25 +320,24 @@ const Pendencias = (function () {
           por: s.uid,
           em: new Date().toISOString(),
         };
-        var lista = (p.anexos || []).concat([ficha]);
-        return gravarAnexos(p, lista).then(function () {
-          p.anexos = lista;
-          return ficha;
-        });
+        /* UM DOCUMENTO POR ANEXO, numa subcoleção — a mesma forma
+           da linha do tempo. Antes era um campo de lista dentro da
+           pendência, e a regra só conseguia exigir que a lista não
+           encolhesse: dava para reescrever uma entrada existente.
+           O que serve de prova não pode ser reescrito por quem tem
+           interesse no que ela prova. Documento separado, com
+           update e delete recusados, é imutabilidade de verdade. */
+        return fetch(base() + "/pendencias/" + encodeURIComponent(p.id) + "/anexos", {
+          method: "POST",
+          headers: autorizacao(),
+          body: JSON.stringify({ fields: paraFirestore(ficha) }),
+        })
+          .then(conferir)
+          .then(function () {
+            p._anexos = (p._anexos || []).concat([ficha]);
+            return ficha;
+          });
       });
-  }
-
-  function gravarAnexos(p, lista) {
-    var url = base() + "/pendencias/" + encodeURIComponent(p.id) + "?updateMask.fieldPaths=anexos";
-    return fetch(url, {
-      method: "PATCH",
-      headers: autorizacao(),
-      body: JSON.stringify({ fields: { anexos: {
-        arrayValue: { values: lista.map(function (a) {
-          return { stringValue: JSON.stringify(a) };
-        }) }
-      } } }),
-    }).then(conferir);
   }
 
   /* Busca o arquivo com a sessão de quem pediu e devolve um
@@ -359,10 +358,21 @@ const Pendencias = (function () {
   }
 
   function lerAnexos(p) {
-    return (p.anexos || []).map(function (a) {
-      if (typeof a !== "string") return a;
-      try { return JSON.parse(a); } catch (e) { return null; }
-    }).filter(Boolean);
+    if (!temAnexos()) return Promise.resolve([]);
+    return fetch(base() + "/pendencias/" + encodeURIComponent(p.id) + "/anexos?pageSize=50", {
+      headers: autorizacao(), cache: "no-store"
+    })
+      .then(function (r) {
+        if (r.status === 404) return { documents: [] };
+        return conferir(r);
+      })
+      .then(function (j) {
+        var lista = (j.documents || []).map(function (d) { return deFirestore(d.fields); })
+          .sort(function (a, b) { return String(a.em).localeCompare(String(b.em)); });
+        p._anexos = lista;
+        return lista;
+      })
+      .catch(function () { return []; });
   }
 
   /* ---------- linha do tempo ---------- */
