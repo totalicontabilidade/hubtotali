@@ -4,11 +4,18 @@ O Hub abre um anexo buscando o arquivo **com a sessão de quem clicou**,
 num cabeçalho `Authorization`. É isso que mantém o arquivo privado: sem
 sessão válida, a regra do Storage recusa.
 
-Só que cabeçalho personalizado faz o navegador mandar antes uma pergunta
-ao servidor — "esta origem pode ler isto?" — e o Google Cloud Storage só
-responde que sim se o balde tiver uma política de CORS dizendo isso. Sem
-ela, o navegador nem chega a fazer o pedido de verdade, e o erro que
-aparece é um "Failed to fetch" sem explicação.
+Cabeçalho personalizado faz o navegador conferir antes se aquela origem
+pode ler o arquivo, e sem uma política de CORS no balde a leitura é
+barrada. O erro que chega ao código é um "Failed to fetch" mudo, sem
+status e sem texto — o navegador esconde o motivo de propósito.
+
+**Uma observação honesta sobre o diagnóstico.** A pergunta prévia
+(OPTIONS) ao endpoint do Firebase já respondia liberando tudo, mesmo
+antes de a política existir; medi isso. Ainda assim, era a política que
+faltava: aplicada, a leitura passou a funcionar no mesmo instante, sem
+nenhuma outra mudança. O envio, que também usa cabeçalho, funcionava
+desde antes. Não consegui explicar essa diferença, e prefiro registrar
+o que observei a inventar um mecanismo.
 
 A alternativa seria voltar a usar o link com token de download, que
 dispensa cabeçalho e dispensa CORS — e dispensa também o login, o que
