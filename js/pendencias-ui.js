@@ -31,6 +31,41 @@ const PendenciasUI = (function () {
   /* O primeiro setor de uma pessoa. Ela pode ter vários — gente de
      escritório pequeno cobre mais de uma frente — e para etiquetar
      uma pendência um basta. */
+  /* O seletor devolve "p:uid" ou "s:Setor". Prefixo em vez de duas
+     listas: um valor, uma leitura, sem estado a sincronizar. */
+  function destinoPessoa(v) { return String(v || "").indexOf("p:") === 0 ? v.slice(2) : ""; }
+  function destinoSetor(v) {
+    if (String(v || "").indexOf("s:") === 0) return v.slice(2);
+    return setorDe(porUid[destinoPessoa(v)]);
+  }
+
+  /* QUEM PODE VER uma reservada, gravado na criação e não
+     calculado depois: se alguém virar gerente amanhã, não passa a
+     enxergar o que se falou ontem — e se deixar de ser, continua
+     enxergando o que já viu. Congelar a lista é o que faz o sigilo
+     ser previsível. */
+  function quemPodeVer(responsavel, envolvidos) {
+    var lista = [meuUid()];
+    if (responsavel) lista.push(responsavel);
+    (envolvidos || []).forEach(function (u) { lista.push(u); });
+    equipe.forEach(function (p) {
+      if (!p.ativo) return;
+      var seus = Array.isArray(p.setores) ? p.setores : (p.setor ? [p.setor] : []);
+      var manda = p.papel === "admin" ||
+                  seus.indexOf("Gerência") !== -1 || seus.indexOf("Diretoria") !== -1;
+      if (manda) lista.push(p.uid);
+    });
+    var vistos = {}, saida = [];
+    lista.forEach(function (u) { if (u && !vistos[u]) { vistos[u] = true; saida.push(u); } });
+    return saida;
+  }
+
+  function setoresDe(p) {
+    if (!p) return [];
+    if (Array.isArray(p.setores)) return p.setores;
+    return p.setor ? [p.setor] : [];
+  }
+
   function setorDe(p) {
     if (!p) return "";
     if (Array.isArray(p.setores)) return p.setores[0] || "";
@@ -85,7 +120,8 @@ const PendenciasUI = (function () {
     /* O que é meu: o que eu preciso fazer e o que eu cobrei de
        alguém. Pendência de terceiros existe e é visível na lista
        completa, mas não no meu trilho — senão ele vira mural. */
-    var minhas = todas.filter(function (p) { return Pendencias.ehMinha(p, eu); });
+    var meusSetores = setoresDe(porUid[eu] || {});
+    var minhas = todas.filter(function (p) { return Pendencias.ehMinha(p, eu, meusSetores); });
 
     var abertas = minhas.filter(function (p) { return p.situacao !== "resolvida"; });
 
@@ -195,7 +231,7 @@ const PendenciasUI = (function () {
 
       var vistas = todas.filter(function (p) {
         if (!MOSTRAR_RESOLVIDAS && p.situacao === "resolvida") return false;
-        if (FILTRO_PESSOA && !Pendencias.ehMinha(p, FILTRO_PESSOA)) return false;
+        if (FILTRO_PESSOA && !Pendencias.ehMinha(p, FILTRO_PESSOA, setoresDe(porUid[FILTRO_PESSOA] || {}))) return false;
         if (FILTRO_SETOR && (p.setorDestino || p.setorOrigem) !== FILTRO_SETOR) return false;
         return true;
       });
@@ -272,7 +308,7 @@ const PendenciasUI = (function () {
        cartões parecem todos da mesma pessoa. No trilho pessoal
        seria repetição — lá tudo já é seu. */
     if (comDono) {
-      var dono = nomeDe(p.responsavel);
+      var dono = p.responsavel ? nomeDe(p.responsavel) : "Setor " + (p.setorDestino || "—");
       var setor = p.setorDestino || p.setorOrigem || "";
       t.appendChild(el("div", "pen__q", dono + (setor ? " · " + setor : "")));
     } else {
@@ -411,6 +447,7 @@ const PendenciasUI = (function () {
     opcoes.forEach(function (o) {
       var op = document.createElement("option");
       op.value = o.valor; op.textContent = o.texto;
+      if (o.desabilitado) op.disabled = true;
       if (o.valor === valor) op.selected = true;
       s.appendChild(op);
     });
@@ -464,8 +501,16 @@ const PendenciasUI = (function () {
 
     var oque = campo("O quê", "Ex.: Enviar o balancete da Gigantte");
     var porque = area("Por quê", "O que depende disso — ajuda quem vai fazer a entender a urgência");
+    /* Pessoa OU setor. A lista mistura os dois de propósito, com
+       os setores no fim: quem sabe o nome escolhe o nome, quem não
+       sabe escolhe a área, e ninguém precisa entender a diferença
+       entre dois campos parecidos. */
     var quem = seletor("Quem faz", equipe.filter(function (p) { return p.ativo; })
-      .map(function (p) { return { valor: p.uid, texto: p.nome + (p.setor ? " · " + p.setor : "") }; }));
+      .map(function (p) { return { valor: "p:" + p.uid, texto: p.nome + (setorDe(p) ? " · " + setorDe(p) : "") }; })
+      .concat([{ valor: "", texto: "— ou mande para um setor —", desabilitado: true }])
+      .concat((Dados.SETORES_DA_CASA || []).map(function (s) {
+        return { valor: "s:" + s, texto: "Setor " + s };
+      })));
     var quando = campo("Para quando");
     quando._entrada.type = "date";
 
@@ -497,12 +542,26 @@ const PendenciasUI = (function () {
     var sugestao = area("Sugestão de solução",
       "O que você faria no lugar dele. É este campo que transforma cobrança em ajuda.");
 
+    /* RESERVADA. Fica no fim, depois de tudo, porque é decisão
+       sobre o que já foi escrito — e desmarcada por padrão: sigilo
+       que vem ligado de fábrica deixa de ser escolha. */
+    var reservada = el("div", "pd-campo");
+    var lr = document.createElement("label");
+    lr.className = "pd-filtro-marca";
+    var cr = document.createElement("input");
+    cr.type = "checkbox";
+    lr.appendChild(cr);
+    lr.appendChild(el("span", null, "Reservada — só as partes, gerência e diretoria veem"));
+    reservada.appendChild(lr);
+    reservada.appendChild(el("div", "pd-dica",
+      "Some da lista de todo mundo, inclusive do quadro do escritório. Use para assunto de pessoal, salário, advertência."));
+
     var ativos = equipe.filter(function (p) { return p.ativo; });
     var marcar = marcador("Marcar mais alguém", ativos, meuUid());
     marcar.appendChild(el("div", "pd-dica",
       "Quem for marcado também vê esta pendência na página dele. A responsabilidade continua sendo de uma pessoa só."));
 
-    [oque, porque, quem, quando, urgencia, sugestao, marcar].forEach(function (x) { c.appendChild(x); });
+    [oque, porque, quem, quando, urgencia, sugestao, marcar, reservada].forEach(function (x) { c.appendChild(x); });
 
     var msg = erro(""); msg.hidden = true;
     c.appendChild(msg);
@@ -516,12 +575,13 @@ const PendenciasUI = (function () {
         oque: oque._entrada.value,
         porque: porque._entrada.value,
         sugestao: sugestao._entrada.value,
-        responsavel: quem._entrada.value,
+        responsavel: destinoPessoa(quem._entrada.value),
         prazo: quando._entrada.value,
         urgencia: urgencia._entrada.value,
         setorOrigem: (Array.isArray(eu.setores) ? eu.setores[0] : eu.setor) || "",
-        /* Sai do cadastro de quem vai fazer, não de um seletor. */
-        setorDestino: setorDe(porUid[quem._entrada.value]),
+        setorDestino: destinoSetor(quem._entrada.value),
+        confidencial: cr.checked,
+        podemVer: cr.checked ? quemPodeVer(destinoPessoa(quem._entrada.value), marcar._valores()) : [],
         envolvidos: marcar._valores(),
       }).then(function () { fechar(); carregar(); })
         .catch(function (e) {
@@ -560,7 +620,10 @@ const PendenciasUI = (function () {
     var e = Pendencias.estado(p);
     if (e) meta.appendChild(el("span", "pd-tag pd-tag--" + e, e === "atrasada" ? "Atrasada" : "Vence hoje"));
     meta.appendChild(el("span", "pd-tag", "Aberta por " + nomeDe(p.criadoPor)));
-    meta.appendChild(el("span", "pd-tag", "Faz: " + nomeDe(p.responsavel)));
+    meta.appendChild(el("span", "pd-tag", p.responsavel
+      ? "Faz: " + nomeDe(p.responsavel)
+      : "Para o setor " + (p.setorDestino || "—")));
+    if (p.confidencial) meta.appendChild(el("span", "pd-tag pd-tag--reservada", "Reservada"));
     (p.envolvidos || []).forEach(function (uid) {
       meta.appendChild(el("span", "pd-tag pd-tag--marcado", "@" + nomeDe(uid)));
     });
@@ -769,7 +832,12 @@ const PendenciasUI = (function () {
       });
       linha.appendChild(link);
       linha.appendChild(el("span", "pd-anexo__t", tamanhoLegivel(a.tamanho)));
-      linha.appendChild(el("span", "pd-anexo__q", nomeDe(a.por)));
+      /* Quem mandou e quando. O "quando" estava sendo gravado
+         desde o começo e nunca aparecia na tela — e é metade da
+         utilidade: "o Fulano mandou" sem "às 14h de terça" não
+         ajuda a reconstruir o que aconteceu. */
+      linha.appendChild(el("span", "pd-anexo__q",
+        nomeDe(a.por) + (a.em ? " · " + quandoEscrito(a.em) : "")));
       onde.appendChild(linha);
     });
 
@@ -910,7 +978,7 @@ const PendenciasUI = (function () {
   function resumo() {
     var eu = meuUid();
     var minhas = todas.filter(function (p) {
-      return Pendencias.ehMinha(p, eu) && p.situacao !== "resolvida";
+      return Pendencias.ehMinha(p, eu, setoresDe(porUid[eu] || {})) && p.situacao !== "resolvida";
     });
     return {
       atrasadas: minhas.filter(function (p) { return Pendencias.estado(p) === "atrasada"; }).length,

@@ -204,7 +204,23 @@ service cloud.firestore {
 
     match /pendencias/{id} {
 
-      allow read: if daEquipe();
+      // ---------- quem enxerga ----------
+      // Pendência RESERVADA só aparece para quem está em podemVer:
+      // as partes, a gerência, a diretoria e os administradores,
+      // gravados na criação.
+      //
+      // A regra vale tanto para abrir uma quanto para listar. E
+      // listar só funciona porque o Hub pergunta em duas consultas
+      // — uma com confidencial == false, outra com podemVer
+      // contendo o próprio uid. Sem esse cuidado do lado de cá, o
+      // Firestore recusaria a lista inteira: ele não filtra pela
+      // regra, ele aprova ou reprova a consulta toda.
+      function podeVer() {
+        return resource.data.confidencial != true
+               || request.auth.uid in resource.data.podemVer;
+      }
+
+      allow read: if daEquipe() && podeVer();
 
       allow create: if daEquipe()
                     && meuUid(request.resource.data.criadoPor)
@@ -212,7 +228,17 @@ service cloud.firestore {
                     && request.resource.data.oque.size() > 2
                     && request.resource.data.oque.size() <= 300
                     && request.resource.data.responsavel is string
-                    && request.resource.data.responsavel.size() > 0
+                    // PESSOA OU SETOR, um dos dois. Nem sempre se
+                    // sabe quem vai fazer, e obrigar a escolher um
+                    // nome faz a pessoa chutar um colega.
+                    && (request.resource.data.responsavel.size() > 0
+                        || (request.resource.data.setorDestino is string
+                            && request.resource.data.setorDestino.size() > 0))
+                    && (!('confidencial' in request.resource.data)
+                        || request.resource.data.confidencial is bool)
+                    && (!('podemVer' in request.resource.data)
+                        || (request.resource.data.podemVer is list
+                            && request.resource.data.podemVer.size() <= 60))
                     && request.resource.data.situacao in ['aberta', 'fazendo', 'resolvida']
                     && (!('envolvidos' in request.resource.data)
                         || request.resource.data.envolvidos is list)
@@ -256,7 +282,13 @@ service cloud.firestore {
                          // responsável (empurrar tarefa sem avisar) nem
                          // o prazo (deixar de estar atrasado por
                          // decisão de quem está devendo).
-                         (meuUid(resource.data.responsavel) && mudou().hasOnly(['situacao']))
+                         // QUEM FAZ, ou QUEM É DO SETOR de destino
+                         // quando a pendência não tem dono: alguém
+                         // do Fiscal precisa poder dizer "peguei".
+                         || ((meuUid(resource.data.responsavel)
+                              || (resource.data.responsavel == ''
+                                  && resource.data.setorDestino in meuCadastro().setores))
+                             && mudou().hasOnly(['situacao']))
 
                          // QUEM ABRIU pode fechar a qualquer momento, e
                          // corrigir o pedido nos primeiros quinze

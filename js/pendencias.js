@@ -106,18 +106,71 @@ const Pendencias = (function () {
      funciona se der para ver o que o setor vizinho está devendo —
      quem vê só a sua parte não coopera, cobra. O filtro por
      pessoa é de exibição, não de permissão. */
-  function listar() {
-    if (!temBanco()) return Promise.resolve([]);
-    return fetch(base() + "/pendencias?pageSize=300", {
-      headers: autorizacao(), cache: "no-store"
+  /* ---------- listar ----------
+     DUAS CONSULTAS, e a razão é que o sigilo precisa ser de
+     verdade.
+
+     O Firestore não filtra uma lista pela regra: ou a consulta
+     inteira passa, ou é recusada. Se a regra disser "só vê a
+     reservada quem está em podemVer" e o Hub pedir a coleção
+     toda, o banco recusa TUDO — porque não tem como provar de
+     antemão que nenhum documento proibido viria junto.
+
+     A saída é perguntar em duas partes, cada uma provadamente
+     segura: as abertas (confidencial == false) e as reservadas em
+     que eu estou (podemVer contém o meu uid). Aí a regra pode ser
+     dura, e o sigilo não depende de a tela se comportar.
+
+     Isso exige consulta estruturada (runQuery) em vez do GET
+     simples de antes. */
+  function consulta(filtro) {
+    return {
+      structuredQuery: {
+        from: [{ collectionId: "pendencias" }],
+        where: filtro,
+        limit: 300,
+      }
+    };
+  }
+
+  function rodar(corpo) {
+    return fetch(base() + ":runQuery", {
+      method: "POST", headers: autorizacao(), body: JSON.stringify(corpo), cache: "no-store"
     })
       .then(conferir)
       .then(function (j) {
-        return (j.documents || []).map(function (d) {
-          var p = deFirestore(d.fields);
-          p.id = d.name.split("/").pop();
+        return (j || []).filter(function (l) { return l.document; }).map(function (l) {
+          var p = deFirestore(l.document.fields);
+          p.id = l.document.name.split("/").pop();
           return p;
         });
+      });
+  }
+
+  function listar() {
+    if (!temBanco()) return Promise.resolve([]);
+    var s = Dados.sessao();
+    if (!s) return Promise.resolve([]);
+
+    var abertas = consulta({ fieldFilter: {
+      field: { fieldPath: "confidencial" }, op: "EQUAL", value: { booleanValue: false } } });
+
+    var minhasReservadas = consulta({ fieldFilter: {
+      field: { fieldPath: "podemVer" }, op: "ARRAY_CONTAINS", value: { stringValue: s.uid } } });
+
+    return Promise.all([rodar(abertas), rodar(minhasReservadas)])
+      .then(function (r) {
+        /* Uma pendência reservada em que eu estou volta nas duas?
+           Não: a primeira consulta exige confidencial false. Mas
+           conferir custa três linhas e protege de duplicata se
+           alguém um dia mudar o filtro. */
+        var vistos = {}, saida = [];
+        r[0].concat(r[1]).forEach(function (p) {
+          if (vistos[p.id]) return;
+          vistos[p.id] = true;
+          saida.push(p);
+        });
+        return saida;
       });
   }
 
@@ -131,8 +184,12 @@ const Pendencias = (function () {
     if (!dados.oque || dados.oque.trim().length < 3) {
       return Promise.reject(new Error("Escreva o que precisa ser feito."));
     }
-    if (!dados.responsavel) {
-      return Promise.reject(new Error("Escolha quem vai fazer."));
+    /* PESSOA OU SETOR, um dos dois. Nem sempre se sabe quem vai
+       fazer — "alguém do Fiscal precisa ver isto" é um pedido
+       legítimo, e obrigar a escolher um nome faz a pessoa chutar
+       um colega ou desistir de abrir. */
+    if (!dados.responsavel && !dados.setorDestino) {
+      return Promise.reject(new Error("Escolha quem vai fazer, ou ao menos o setor."));
     }
 
     var doc = {
@@ -153,6 +210,11 @@ const Pendencias = (function () {
          de ontem deve continuar dizendo de onde veio. */
       setorDestino: dados.setorDestino || "",
       urgencia:     URGENCIAS.indexOf(dados.urgencia) !== -1 ? dados.urgencia : "normal",
+      /* RESERVADA: some da lista de quem não tem o que ver nela.
+         Quem pode ver vai gravado em podemVer — ver a explicação
+         em listar(), que é onde isso vira consulta. */
+      confidencial: !!dados.confidencial,
+      podemVer:     Array.isArray(dados.podemVer) ? dados.podemVer : [],
       situacao:     "aberta",
       criadoPor:    s.uid,
       criadoEm:     new Date(),
@@ -522,11 +584,18 @@ const Pendencias = (function () {
   /* A pendência é minha se eu faço, se eu pedi, ou se me
      marcaram nela. É esta função que decide o que entra no
      trilho de cada pessoa. */
-  function ehMinha(p, uid) {
+  /* Minha é: o que eu faço, o que eu cobrei, onde fui marcado — e
+     agora também o que caiu no MEU SETOR sem dono. Sem a última,
+     pendência endereçada ao Fiscal não apareceria para ninguém. */
+  function ehMinha(p, uid, setores) {
     if (!uid) return false;
     if (p.responsavel === uid) return true;
     if (p.criadoPor === uid) return true;
-    return Array.isArray(p.envolvidos) && p.envolvidos.indexOf(uid) !== -1;
+    if (Array.isArray(p.envolvidos) && p.envolvidos.indexOf(uid) !== -1) return true;
+    if (!p.responsavel && p.setorDestino && Array.isArray(setores)) {
+      return setores.indexOf(p.setorDestino) !== -1;
+    }
+    return false;
   }
 
   /* ---------- estado de prazo ----------

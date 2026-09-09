@@ -773,3 +773,16 @@ a{color:inherit;text-decoration:none}
 .agenda--cheia{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
 .prazo--passou{opacity:.5}
 .prazo--passou .prazo__d{color:var(--txt-3)}
+
+/* A etiqueta de reservada usa o vermelho da casa: ela não é um
+   estado da tarefa, é um aviso de que aquilo não se comenta no
+   corredor. */
+.pd-tag--reservada{background:var(--alerta-luz);color:var(--alerta)}
+
+/* O nome e a hora de quem mandou o anexo cabem numa linha só até
+   apertar; aí quebram juntos, sem separar um do outro. */
+.pd-anexo__q{white-space:nowrap}
+@media (max-width:520px){
+  .pd-anexo{flex-wrap:wrap}
+  .pd-anexo__q{white-space:normal;flex-basis:100%}
+}
