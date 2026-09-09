@@ -348,6 +348,16 @@ const Pendencias = (function () {
     var url = "https://firebasestorage.googleapis.com/v0/b/" + encodeURIComponent(balde()) +
               "/o/" + encodeURIComponent(anexo.caminho) + "?alt=media";
     return fetch(url, { headers: { "Authorization": "Bearer " + s.idToken } })
+      .catch(function () {
+        /* Um fetch que nem sai do lugar cai aqui, sem status e sem
+           texto — o navegador esconde o motivo de propósito. Na
+           prática, com cabeçalho de autorização, quase sempre é a
+           política de CORS do balde faltando. Dizer isso é melhor
+           do que repetir "falha de rede" para quem não tem como
+           adivinhar. Ver STORAGE-CORS.md. */
+        throw new Error("Não consegui falar com o Storage. Se isto acontece com todos " +
+                        "os anexos, falta a política de CORS no balde — ver STORAGE-CORS.md.");
+      })
       .then(function (r) {
         if (r.status === 403) throw new Error("Sem permissão para abrir este arquivo.");
         if (r.status === 404) throw new Error("Arquivo não encontrado no Storage.");
