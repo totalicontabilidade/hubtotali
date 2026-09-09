@@ -44,15 +44,49 @@ const Agenda = (function () {
                 "adia" (vai para o dia útil seguinte)
      conferir · marca o que eu não tenho certeza                */
   var REGRAS = [
-    { nome:"eSocial e FGTS Digital", quem:"fechamento da folha",   dia:15, ajuste:"antecipa" },
-    { nome:"DCTFWeb",                quem:"competência anterior",  dia:15, ajuste:"antecipa" },
-    { nome:"DAS do Simples",         quem:"todos os optantes",     dia:20, ajuste:"adia" },
-    { nome:"INSS e IRRF",            quem:"retenções na fonte",    dia:20, ajuste:"antecipa" },
-    { nome:"PIS e COFINS",           quem:"lucro presumido e real",dia:25, ajuste:"antecipa" },
-    { nome:"ICMS Sergipe",           quem:"apuração mensal",       dia:10, ajuste:"adia", conferir:true },
-    { nome:"ISS Itabaiana",          quem:"serviços do mês",       dia:10, ajuste:"adia", conferir:true },
-    { nome:"EFD-Contribuições",      quem:"escrituração",          dia:10, ajuste:"antecipa", conferir:true },
-    { nome:"SPED Fiscal",            quem:"EFD ICMS/IPI",          dia:15, ajuste:"antecipa", conferir:true },
+    /* ---------- FEDERAL · pagamento ---------- */
+    { nome:"FGTS",              quem:"folha do mês anterior",     dia:20, ajuste:"antecipa" },
+    { nome:"INSS e IRRF",       quem:"retenções na fonte",        dia:20, ajuste:"antecipa" },
+    { nome:"PIS e COFINS",      quem:"lucro presumido e real",    dia:25, ajuste:"antecipa", regime:"normal" },
+    { nome:"IRPJ e CSLL",       quem:"trimestre encerrado",       quando:"ultimoDiaUtil", trimestral:true, regime:"normal" },
+    { nome:"INSS do 13º",       quem:"segunda parcela",           dia:20, ajuste:"antecipa", mesUnico:11 },
+
+    /* ---------- FEDERAL · declarações ---------- */
+    /* eSocial e EFD-Reinf vencem no dia 15 e ADIAM: a EFD-Reinf
+       de julho de 2026 caiu em 17 de agosto, porque o dia 15 foi
+       sábado. Confere com a regra. */
+    { nome:"eSocial",           quem:"fechamento da folha",       dia:15, ajuste:"adia" },
+    { nome:"EFD-Reinf",         quem:"retenções do mês anterior", dia:15, ajuste:"adia" },
+    { nome:"DIRBI",             quem:"benefícios fiscais",        dia:20, ajuste:"adia" },
+    { nome:"PGDAS-D",           quem:"apuração do Simples",       dia:20, ajuste:"adia", regime:"simples" },
+    /* A DCTFWeb mudou em 2025: era dia 15, passou a ser o ÚLTIMO
+       DIA ÚTIL do mês seguinte. Em agosto de 2026 caiu no dia 31. */
+    { nome:"DCTFWeb",           quem:"competência anterior",      quando:"ultimoDiaUtil" },
+    /* 10º DIA ÚTIL do segundo mês seguinte, e por isso não tem dia
+       fixo: a de junho de 2026 venceu em 14 de agosto. */
+    { nome:"EFD-Contribuições", quem:"escrituração de PIS/COFINS", dia:10, quando:"diaUtil", regime:"normal" },
+
+    /* ---------- SIMPLES NACIONAL ---------- */
+    { nome:"DAS do Simples",    quem:"todos os optantes",         dia:20, ajuste:"adia", regime:"simples" },
+
+    /* ---------- SERGIPE · ICMS ----------
+       Dias da Portaria SEFAZ/SE 600/2023, Anexo Único, cruzados
+       com a agenda da casa. O ajuste é "adiaNoMes", que é a regra
+       própria do estado. */
+    { nome:"ICMS ST interna",   quem:"substituição tributária",   dia:5,  ajuste:"adiaNoMes", regime:"normal" },
+    { nome:"ICMS normal e FCP", quem:"apuração do mês anterior",  dia:9,  ajuste:"adiaNoMes", regime:"normal" },
+    { nome:"ICMS ST de outra UF", quem:"substituição de fora",    dia:9,  ajuste:"adiaNoMes", regime:"normal" },
+    { nome:"DIFAL imobilizado e uso", quem:"diferencial de alíquota", dia:9, ajuste:"adiaNoMes", regime:"normal" },
+    { nome:"FCP do DIFAL",      quem:"fundo de combate à pobreza", dia:15, ajuste:"adiaNoMes", regime:"normal", conferir:true },
+    { nome:"ICMS antecipado e FCP", quem:"entradas de outra UF",  dia:25, ajuste:"adiaNoMes" },
+    /* Entrega da EFD ICMS/IPI em Sergipe: dia 20, pela Portaria
+       SEFAZ/SE 73/2012. Deixado SEM ajuste porque a fonte diz que
+       não há prorrogação por fim de semana — e, na dúvida, mostrar
+       o dia da lei é mais seguro do que empurrar para frente. */
+    { nome:"SPED Fiscal",       quem:"EFD ICMS/IPI",              dia:20, ajuste:"nenhum", regime:"normal", conferir:true },
+
+    /* ---------- MUNICIPAL ---------- */
+    { nome:"ISS Itabaiana",     quem:"serviços do mês",           dia:10, ajuste:"adia", conferir:true },
   ];
 
   /* ---------- feriados ----------
@@ -118,11 +152,58 @@ const Agenda = (function () {
     return !CACHE_FERIADOS[ano][chave(d)];
   }
 
-  function ajustar(d, como) {
-    var passo = (como === "adia") ? 1 : -1;
+  function andarAteDiaUtil(d, passo) {
     var limite = 0;
-    while (!ehDiaUtil(d) && limite++ < 15) d = somarDias(d, passo);
+    while (!ehDiaUtil(d) && limite++ < 20) d = somarDias(d, passo);
     return d;
+  }
+
+  function ultimoDiaUtilDoMes(ano, mes) {
+    return andarAteDiaUtil(new Date(ano, mes + 1, 0), -1);
+  }
+
+  /* O enésimo dia útil do mês. A EFD-Contribuições vence no 10º
+     dia útil do segundo mês seguinte, e isso não é um dia fixo:
+     em agosto de 2026 caiu no dia 14, em outro mês cai no 13 ou
+     no 15. */
+  function diaUtilDeNumero(ano, mes, n) {
+    var d = new Date(ano, mes, 1), contados = 0, limite = 0;
+    while (limite++ < 40) {
+      if (ehDiaUtil(d)) { contados++; if (contados === n) return d; }
+      d = somarDias(d, 1);
+    }
+    return d;
+  }
+
+  /* TRÊS COMPORTAMENTOS, e cada um tem dono.
+
+     antecipa   · tributo federal de pagamento. Sem expediente
+                  bancário, paga-se ANTES: FGTS, INSS, IRRF,
+                  PIS/COFINS.
+
+     adia       · Simples Nacional e as declarações acessórias
+                  federais. Vai para o dia útil seguinte.
+
+     adiaNoMes  · ICMS de Sergipe, e é regra própria do estado.
+                  A Portaria SEFAZ/SE 600/2023 manda adiar para o
+                  dia útil seguinte "desde que a data dessa
+                  prorrogação continue dentro do mesmo mês"; se
+                  passar do mês, paga-se até o ÚLTIMO DIA ÚTIL do
+                  mês original. Meu motor antecipava tudo isso, o
+                  que estava errado.
+
+     nenhum     · fica no dia da lei, sem mexer. Para quando a
+                  norma diz que não há prorrogação. */
+  function ajustar(d, como) {
+    if (como === "nenhum") return d;
+    if (como === "adia") return andarAteDiaUtil(d, 1);
+    if (como === "adiaNoMes") {
+      var mes = d.getMonth();
+      var adiado = andarAteDiaUtil(new Date(d.getTime()), 1);
+      if (adiado.getMonth() === mes) return adiado;
+      return ultimoDiaUtilDoMes(d.getFullYear(), mes);
+    }
+    return andarAteDiaUtil(d, -1);
   }
 
   /* ---------- a agenda do mês ---------- */
@@ -135,8 +216,19 @@ const Agenda = (function () {
     var ano = hoje.getFullYear(), mes = hoje.getMonth();
     var diaHoje = hoje.getDate();
 
-    return REGRAS.map(function (r) {
-      var venc = ajustar(new Date(ano, mes, r.dia), r.ajuste);
+    return REGRAS.filter(function (r) {
+      /* Trimestral só nos meses que fecham trimestre; anual só no
+         mês dela. Sem isto, IRPJ apareceria todo mês. */
+      if (r.trimestral && [0, 3, 6, 9].indexOf(mes) === -1) return false;
+      if (r.mesUnico !== undefined && r.mesUnico !== mes) return false;
+      return true;
+    }).map(function (r) {
+      var bruto;
+      if (r.quando === "ultimoDiaUtil") bruto = ultimoDiaUtilDoMes(ano, mes);
+      else if (r.quando === "diaUtil")   bruto = diaUtilDeNumero(ano, mes, r.dia);
+      else                               bruto = new Date(ano, mes, r.dia);
+      var venc = (r.quando === "ultimoDiaUtil" || r.quando === "diaUtil")
+                   ? bruto : ajustar(bruto, r.ajuste);
       var faltam = Math.round((venc - new Date(ano, mes, diaHoje)) / 86400000);
       return {
         dia: ("0" + venc.getDate()).slice(-2),
@@ -146,6 +238,7 @@ const Agenda = (function () {
         _ordem: venc.getTime(),
         _passou: faltam < 0,
         conferir: !!r.conferir,
+        regime: r.regime || "todos",
       };
     })
     /* Vencimento que já passou sai da tela: agenda de prazo
