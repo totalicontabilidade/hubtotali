@@ -239,6 +239,11 @@ const Agenda = (function () {
       var faltam = Math.round((venc - new Date(ano, mes, diaHoje)) / 86400000);
       return {
         dia: ("0" + venc.getDate()).slice(-2),
+        /* O dia da semana entra aqui, e não na tela: quem sabe a
+           data é quem a calculou. "seg", "ter" — sem o ponto que o
+           navegador põe. */
+        semana: venc.toLocaleDateString("pt-BR", { weekday: "short" })
+                    .replace(".", "").slice(0, 3),
         nome: r.nome,
         quem: r.quem,
         estado: faltam === 0 ? "hoje" : (faltam > 0 && faltam <= 5 ? "perto" : ""),

@@ -245,12 +245,46 @@
       ba.id = "bloco-agenda";
       ba.querySelector(".bloco__cab").appendChild(el("span", "bloco__n",
         new Date().toLocaleDateString("pt-BR", { month: "long" })));
-      var ag = el("div", "agenda");
+      /* UM CARTÃO POR DATA, não por obrigação. Dezoito cartões
+         soltos viravam um paredão em que nada se destacava — e
+         cinco deles vencem no mesmo dia 15, o que a tela não
+         dizia. Agrupados, são oito, e a pergunta que a pessoa faz
+         de manhã ("o que vence hoje?") tem resposta numa olhada.
+
+         O agrupamento usa LISTA, não objeto: chaves como "08" e
+         "09" têm zero à esquerda, e o JavaScript as ordena como
+         texto, jogando-as para depois do dia 30. */
+      var grupos = [];
       AGENDA_ATUAL.forEach(function (p) {
-        var x = el("div", "prazo" + (p.estado ? " prazo--" + p.estado : ""));
-        x.appendChild(el("div", "prazo__d", p.dia));
-        x.appendChild(el("div", "prazo__n", p.nome));
-        if (p.quem) x.appendChild(el("div", "prazo__q", p.quem));
+        var g = grupos[grupos.length - 1];
+        if (!g || g.dia !== p.dia) { g = { dia: p.dia, semana: p.semana, estado: p.estado, itens: [] }; grupos.push(g); }
+        /* O estado mais urgente do dia manda na cor do grupo. */
+        if (p.estado === "hoje") g.estado = "hoje";
+        else if (p.estado === "perto" && g.estado !== "hoje") g.estado = "perto";
+        g.itens.push(p);
+      });
+
+      var ag = el("div", "agenda");
+      grupos.forEach(function (g) {
+        var x = el("div", "prazo" + (g.estado ? " prazo--" + g.estado : ""));
+
+        var cab = el("div", "prazo__cab");
+        cab.appendChild(el("span", "prazo__d", g.dia));
+        if (g.semana) cab.appendChild(el("span", "prazo__s", g.semana));
+        x.appendChild(cab);
+
+        var lista = el("ul", "prazo__lista");
+        g.itens.forEach(function (i) {
+          var li = el("li", "prazo__i");
+          li.appendChild(el("span", "prazo__n", i.nome));
+          if (i.regime && i.regime !== "todos") {
+            li.appendChild(el("span", "prazo__r prazo__r--" + i.regime,
+              i.regime === "simples" ? "Simples" : "Normal"));
+          }
+          if (i.quem) li.appendChild(el("span", "prazo__q", i.quem));
+          lista.appendChild(li);
+        });
+        x.appendChild(lista);
         ag.appendChild(x);
       });
       ba.appendChild(ag);

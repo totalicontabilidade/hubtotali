@@ -161,10 +161,15 @@ a{color:inherit;text-decoration:none}
 /* ============================================================
    2 · Blocos e sistemas
    ============================================================ */
+/* "flex:0 0 auto" É O QUE IMPEDE O BLOCO DE ENCOLHER. O .centro é
+   uma coluna flexível, e filho de flex encolhe por padrão: com
+   min-height:0 o bloco da agenda ficava 52px MENOR que o próprio
+   conteúdo, e as últimas linhas apareciam do lado de fora, sem o
+   fundo branco. Era esse o "alguns estão sem o fundo". */
 .bloco{background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.8);border-radius:var(--r);
        padding:15px 17px;box-shadow:0 6px 22px rgba(13,25,38,.05);
        -webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);
-       display:flex;flex-direction:column;min-height:0}
+       display:flex;flex-direction:column;flex:0 0 auto;min-height:0}
 .bloco--cresce{flex:1}
 .bloco__cab{display:flex;align-items:baseline;gap:10px;margin-bottom:12px}
 .bloco__t{font-size:14px;font-weight:730}
@@ -211,17 +216,47 @@ a{color:inherit;text-decoration:none}
 .gaveta__seta{margin-left:auto;color:var(--txt-3);font-size:20px;line-height:1}
 
 /* ---------- agenda do mês ---------- */
-.agenda{display:grid;grid-template-columns:repeat(auto-fit,minmax(106px,1fr));gap:8px}
-.prazo{background:rgba(255,255,255,.55);border-radius:10px;padding:10px 11px;
+/* ---------- agenda ----------
+   Um cartão por DATA, com as obrigações daquele dia listadas
+   dentro. Antes era um cartão por obrigação: dezoito quadradinhos
+   iguais em que nada se destacava, e cinco deles com o mesmo dia
+   15 sem que a tela dissesse isso.
+
+   As colunas são largas o bastante para o nome de uma obrigação
+   caber numa linha só — 220px é o "EFD-Contribuições" com folga. */
+.agenda{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+        gap:10px;align-items:start}
+
+.prazo__cab{display:flex;align-items:baseline;gap:6px;margin-bottom:8px;
+            padding-bottom:7px;border-bottom:1px solid var(--fio)}
+.prazo__s{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+          color:var(--txt-3)}
+
+.prazo__lista{list-style:none;margin:0;padding:0;display:flex;
+              flex-direction:column;gap:7px}
+.prazo__i{display:flex;flex-wrap:wrap;align-items:baseline;gap:5px}
+
+/* A etiqueta de regime só aparece quando a obrigação NÃO é de
+   todos: metade da agenda não vale para metade dos clientes, e
+   quem abre precisa saber de qual metade se trata. */
+.prazo__r{font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+          border-radius:99px;padding:1px 6px;flex:none}
+.prazo__r--normal{background:var(--estado-luz);color:var(--estado)}
+.prazo__r--simples{background:#eaf3ec;color:#2f6b43}
+
+.prazo{background:rgba(255,255,255,.55);border-radius:10px;padding:11px 13px;
        border-left:3px solid var(--fio-2)}
 .prazo--perto{border-left-color:var(--estado)}
 .prazo--hoje{border-left-color:var(--alerta)}
-.prazo__d{font-family:var(--mono);font-size:18px;font-weight:730;line-height:1;
+.prazo__d{font-family:var(--mono);font-size:21px;font-weight:730;line-height:1;
           font-variant-numeric:tabular-nums}
 .prazo--hoje .prazo__d{color:var(--alerta)}
 .prazo--perto .prazo__d{color:var(--estado)}
-.prazo__n{font-size:10.5px;font-weight:620;color:var(--txt-2);margin-top:5px;line-height:1.3}
-.prazo__q{font-size:9.5px;color:var(--txt-3);margin-top:2px}
+.prazo__n{font-size:12px;font-weight:640;color:var(--txt);line-height:1.3}
+/* A explicação fica embaixo do nome, ocupando a linha toda: ao
+   lado, ela empurraria o nome para uma segunda linha e a lista
+   perderia o alinhamento. */
+.prazo__q{font-size:10px;color:var(--txt-3);line-height:1.3;flex-basis:100%}
 
 /* ============================================================
    3 · Pendências, agrupadas por urgência
