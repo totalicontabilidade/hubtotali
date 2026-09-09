@@ -58,12 +58,36 @@ service firebase.storage {
                     && resource == null
                     && request.resource.size < 10 * 1024 * 1024;
 
-      // SUBSTITUIR E APAGAR, NUNCA. Anexo é prova de que algo foi
+      // SUBSTITUIR, NUNCA. Anexo é prova de que algo foi
       // combinado; quem pode trocar a prova pode trocar o
       // combinado. Mandou o arquivo errado, manda o certo e
       // explica na linha do tempo — que é exatamente o que a linha
       // do tempo existe para fazer.
-      allow update, delete: if false;
+      allow update: if false;
+
+      // APAGAR, SÓ JUNTO COM A PENDÊNCIA INTEIRA.
+      //
+      // A permissão é estreita de propósito, e cada pedaço dela
+      // tem função:
+      //
+      //   · só quem ABRIU a pendência — é quem já podia apagá-la;
+      //   · só ENQUANTO ELA EXISTE — o firestore.get() abaixo falha
+      //     depois de ela sumir, então esta janela se fecha
+      //     sozinha. É o que impede alguém voltar meses depois e
+      //     limpar arquivo de pendência que já era.
+      //
+      // O que continua impossível: tirar UM anexo e deixar o resto.
+      // Para o arquivo sair, a pendência inteira tem de sair — que
+      // é um ato visível e deliberado, não uma edição discreta no
+      // meio de uma conversa.
+      function abriuAPendencia(id) {
+        return (firestore.exists(/databases/(default)/documents/pendencias/$(id))
+                && firestore.get(/databases/(default)/documents/pendencias/$(id)).data.criadoPor == request.auth.uid)
+            || (firestore.exists(/databases/(default)/documents/pendencias_reservadas/$(id))
+                && firestore.get(/databases/(default)/documents/pendencias_reservadas/$(id)).data.criadoPor == request.auth.uid);
+      }
+
+      allow delete: if daEquipe() && abriuAPendencia(id);
     }
 
     // Nada mais neste balde é acessível por ninguém.

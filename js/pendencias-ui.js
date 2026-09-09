@@ -765,15 +765,82 @@ const PendenciasUI = (function () {
     if (p.criadoPor === eu) {
       var apagar = el("button", "pd-botao pd-botao--perigo", "Apagar pendência");
       apagar.type = "button";
-      apagar.addEventListener("click", function () {
-        if (!window.confirm("Apagar esta pendência? A linha do tempo vai junto.")) return;
-        Pendencias.apagar(p).then(function () { fechar(); carregar(); })
-          .catch(function (err) { window.alert(err.message); });
-      });
+      apagar.addEventListener("click", function () { avisarAntesDeApagar(p, apagar, c, fechar); });
       c.appendChild(apagar);
     }
 
     pintarLinha(p, linha);
+  }
+
+  /* ---------- o aviso antes de apagar ----------
+     NÃO É window.confirm, e a razão vale escrever: a caixa nativa
+     não cabe uma lista, não dá para ler com calma, e alguns
+     navegadores deixam o usuário desligá-la — e uma confirmação
+     desligada devolve "não", que aqui até seria seguro, mas
+     esconderia do usuário por que o botão parou de funcionar.
+
+     O aviso abre DENTRO da ficha, nomeia cada arquivo que vai
+     junto, e exige um segundo clique num botão que diz exatamente
+     o que vai acontecer. Apagar é irreversível: o mínimo é a
+     pessoa ver o tamanho do estrago antes. */
+  function avisarAntesDeApagar(p, botao, onde, fechar) {
+    if (onde.querySelector(".pd-perigo")) return;
+    botao.hidden = true;
+
+    var caixa = el("div", "pd-perigo");
+    caixa.appendChild(el("div", "pd-perigo__t", "Apagar esta pendência?"));
+
+    var texto = el("div", "pd-perigo__x",
+      "A linha do tempo vai junto, com tudo o que foi escrito nela. Não há como desfazer.");
+    caixa.appendChild(texto);
+
+    var acoes = el("div", "pd-perigo__acoes");
+    var sim = el("button", "pd-botao pd-botao--perigo", "Apagar tudo");
+    var nao = el("button", "pd-botao", "Deixar como está");
+    sim.type = "button"; nao.type = "button";
+    sim.disabled = true;
+    sim.textContent = "Conferindo os anexos…";
+    acoes.appendChild(sim); acoes.appendChild(nao);
+    caixa.appendChild(acoes);
+    onde.appendChild(caixa);
+
+    nao.addEventListener("click", function () { caixa.remove(); botao.hidden = false; });
+
+    /* Os arquivos são listados PELO NOME antes de qualquer coisa
+       ser apagada: "3 anexos" não diz nada, "o contrato assinado"
+       diz tudo. */
+    Pendencias.lerAnexos(p).then(function (anexos) {
+      if (anexos.length) {
+        var lista = el("div", "pd-perigo__arquivos");
+        lista.appendChild(el("div", "pd-perigo__rot",
+          anexos.length === 1 ? "Este arquivo será apagado do Storage:"
+                              : "Estes " + anexos.length + " arquivos serão apagados do Storage:"));
+        anexos.forEach(function (a) {
+          lista.appendChild(el("div", "pd-perigo__arq",
+            a.nome + " · " + tamanhoLegivel(a.tamanho) + " · " + nomeDe(a.por)));
+        });
+        caixa.insertBefore(lista, acoes);
+        sim.textContent = "Apagar a pendência e " +
+          (anexos.length === 1 ? "o anexo" : "os " + anexos.length + " anexos");
+      } else {
+        sim.textContent = "Apagar tudo";
+      }
+      sim.disabled = false;
+    });
+
+    sim.addEventListener("click", function () {
+      sim.disabled = true;
+      sim.textContent = "Apagando…";
+      Pendencias.apagar(p)
+        .then(function () { fechar(); carregar(); })
+        .catch(function (err) {
+          sim.disabled = false;
+          sim.textContent = "Tentar de novo";
+          var velho = caixa.querySelector(".pd-perigo__erro");
+          if (velho) velho.remove();
+          caixa.appendChild(el("div", "pd-perigo__erro", err.message));
+        });
+    });
   }
 
   function tamanhoLegivel(bytes) {

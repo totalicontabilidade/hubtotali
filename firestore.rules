@@ -308,6 +308,11 @@ service cloud.firestore {
       // está aqui é a ficha dele.
       match /anexos/{item} {
         allow read:   if daEquipe();
+        // Apagar a FICHA do anexo, só quem abriu a pendência — e a
+        // regra do Storage exige o mesmo para o arquivo. Os dois
+        // saem juntos ou não sai nenhum, e o que some é sempre a
+        // pendência inteira.
+        allow delete: if daEquipe() && meuUid(get(/databases/$(database)/documents/pendencias/$(id)).data.criadoPor);
         allow create: if daEquipe()
                       && meuUid(request.resource.data.por)
                       && request.resource.data.nome is string
@@ -418,7 +423,8 @@ service cloud.firestore {
       match /anexos/{item} {
         allow read:   if daEquipe() && request.auth.uid in get(/databases/$(database)/documents/pendencias_reservadas/$(id)).data.podemVer;
         allow create: if daEquipe() && meuUid(request.resource.data.por);
-        allow update, delete: if false;
+        allow delete: if daEquipe() && meuUid(get(/databases/$(database)/documents/pendencias_reservadas/$(id)).data.criadoPor);
+        allow update: if false;
       }
 
       match /andamento/{item} {

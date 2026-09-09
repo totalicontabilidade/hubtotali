@@ -539,8 +539,12 @@ const Pendencias = (function () {
         return conferir(r);
       })
       .then(function (j) {
-        var lista = (j.documents || []).map(function (d) { return deFirestore(d.fields); })
-          .sort(function (a, b) { return String(a.em).localeCompare(String(b.em)); });
+        var lista = (j.documents || []).map(function (d) {
+          var x = deFirestore(d.fields);
+          /* O id da ficha, que é o que permite apagá-la depois. */
+          x.id = d.name.split("/").pop();
+          return x;
+        }).sort(function (a, b) { return String(a.em).localeCompare(String(b.em)); });
         p._anexos = lista;
         return lista;
       })
@@ -619,14 +623,58 @@ const Pendencias = (function () {
   }
 
   /* ---------- apagar (só quem abriu) ---------- */
+  /* ---------- apagar, com os arquivos junto ----------
+     A ORDEM IMPORTA, e é o contrário da intuição: os arquivos
+     saem PRIMEIRO, a pendência por último.
+
+     As duas regras — a do Storage e a do Firestore — só deixam
+     apagar um anexo enquanto a pendência AINDA EXISTE, porque é
+     nela que está escrito quem a abriu. Apagando a pendência
+     antes, a permissão de apagar os arquivos morre junto e eles
+     ficam órfãos para sempre, sem ninguém que possa removê-los.
+
+     Se um arquivo falhar, a pendência NÃO é apagada. Melhor ficar
+     tudo de pé e a pessoa tentar de novo do que sumir com o
+     registro e deixar o arquivo perdido no balde. */
   function apagar(p) {
-    return fetch(caminho(p), {
-      method: "DELETE", headers: autorizacao(),
-    }).then(function (r) {
-      if (r.status === 403) throw new Error("Só quem abriu a pendência pode apagá-la.");
-      if (!r.ok && r.status !== 200) throw new Error("Não consegui apagar (HTTP " + r.status + ").");
-      return true;
-    });
+    return lerAnexos(p)
+      .then(function (anexos) {
+        var s = Dados.sessao();
+        return anexos.reduce(function (fila, a) {
+          return fila.then(function () {
+            if (!a.caminho || !temAnexos()) return;
+            return fetch("https://firebasestorage.googleapis.com/v0/b/" + encodeURIComponent(balde()) +
+                         "/o/" + encodeURIComponent(a.caminho), {
+              method: "DELETE", headers: { "Authorization": "Bearer " + s.idToken },
+            }).then(function (r) {
+              /* 404 é sucesso disfarçado: o arquivo já não estava
+                 lá, e o que queremos é que ele não esteja. */
+              if (!r.ok && r.status !== 404) {
+                throw new Error("Não consegui apagar o arquivo “" + a.nome + "”. Nada foi removido.");
+              }
+            });
+          });
+        }, Promise.resolve()).then(function () { return anexos; });
+      })
+      .then(function (anexos) {
+        /* As fichas dos anexos, agora que os arquivos se foram. */
+        return anexos.reduce(function (fila, a) {
+          return fila.then(function () {
+            if (!a.id) return;
+            return fetch(caminho(p) + "/anexos/" + encodeURIComponent(a.id), {
+              method: "DELETE", headers: autorizacao(),
+            });
+          });
+        }, Promise.resolve());
+      })
+      .then(function () {
+        return fetch(caminho(p), { method: "DELETE", headers: autorizacao() });
+      })
+      .then(function (r) {
+        if (r.status === 403) throw new Error("Só quem abriu a pendência pode apagá-la.");
+        if (!r.ok && r.status !== 200) throw new Error("Não consegui apagar (HTTP " + r.status + ").");
+        return true;
+      });
   }
 
   /* A pendência é minha se eu faço, se eu pedi, ou se me

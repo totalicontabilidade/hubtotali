@@ -786,3 +786,20 @@ a{color:inherit;text-decoration:none}
   .pd-anexo{flex-wrap:wrap}
   .pd-anexo__q{white-space:normal;flex-basis:100%}
 }
+
+/* ---------- o aviso antes de apagar ----------
+   Vermelho de alerta e borda cheia: quem chegou aqui precisa
+   perceber que saiu do fluxo normal e entrou numa porta sem
+   volta. */
+.pd-perigo{margin-top:10px;border:1px solid var(--alerta);border-radius:11px;
+           background:var(--alerta-luz);padding:13px 14px}
+.pd-perigo__t{font-size:14px;font-weight:730;color:var(--alerta);margin-bottom:5px}
+.pd-perigo__x{font-size:12.5px;line-height:1.45;color:var(--txt-2)}
+.pd-perigo__arquivos{margin-top:10px;background:#fff;border-radius:8px;padding:9px 10px}
+.pd-perigo__rot{font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;
+                color:var(--alerta);margin-bottom:5px}
+.pd-perigo__arq{font-size:12.5px;color:var(--txt);padding:2px 0;
+                overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pd-perigo__acoes{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.pd-perigo__erro{margin-top:9px;font-size:12.5px;color:var(--alerta);
+                 background:#fff;border-radius:7px;padding:8px 10px}
