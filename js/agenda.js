@@ -77,16 +77,23 @@ const Agenda = (function () {
     { nome:"ICMS normal e FCP", quem:"apuração do mês anterior",  dia:9,  ajuste:"adiaNoMes", regime:"normal" },
     { nome:"ICMS ST de outra UF", quem:"substituição de fora",    dia:9,  ajuste:"adiaNoMes", regime:"normal" },
     { nome:"DIFAL imobilizado e uso", quem:"diferencial de alíquota", dia:9, ajuste:"adiaNoMes", regime:"normal" },
-    { nome:"FCP do DIFAL",      quem:"fundo de combate à pobreza", dia:15, ajuste:"adiaNoMes", regime:"normal", conferir:true },
+    { nome:"FCP do DIFAL",      quem:"fundo de combate à pobreza", dia:15, ajuste:"adiaNoMes", regime:"normal" },
     { nome:"ICMS antecipado e FCP", quem:"entradas de outra UF",  dia:25, ajuste:"adiaNoMes" },
-    /* Entrega da EFD ICMS/IPI em Sergipe: dia 20, pela Portaria
-       SEFAZ/SE 73/2012. Deixado SEM ajuste porque a fonte diz que
-       não há prorrogação por fim de semana — e, na dúvida, mostrar
-       o dia da lei é mais seguro do que empurrar para frente. */
-    { nome:"SPED Fiscal",       quem:"EFD ICMS/IPI",              dia:20, ajuste:"nenhum", regime:"normal", conferir:true },
+    /* DIA 15, corrigido pelo Hesley. Eu tinha posto 20, tirado de
+       um portal que dizia ser esse o prazo em Sergipe — e quem
+       entrega a obrigação todo mês é ele.
+
+       Fica SEM ajuste. Não é descuido: a mesma fonte que errou o
+       dia dizia que não há prorrogação em fim de semana, e depois
+       do erro ela não vale como prova de nada. Entrega de
+       escrituração se transmite em qualquer dia, inclusive sábado,
+       então mostrar o dia da lei não atrapalha ninguém — e, se
+       algum dia prorrogar, quem viu o 15 entregou antes, que é o
+       lado seguro de errar. */
+    { nome:"SPED Fiscal",       quem:"EFD ICMS/IPI",              dia:15, ajuste:"nenhum", regime:"normal" },
 
     /* ---------- MUNICIPAL ---------- */
-    { nome:"ISS Itabaiana",     quem:"serviços do mês",           dia:10, ajuste:"adia", conferir:true },
+    { nome:"ISS Itabaiana",     quem:"serviços do mês",           dia:10, ajuste:"adia" },
   ];
 
   /* ---------- feriados ----------
