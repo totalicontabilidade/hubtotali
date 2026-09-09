@@ -442,9 +442,12 @@ const Pendencias = (function () {
       return Promise.reject(new Error("Esta pendência já tem " + LIMITE_DE_ANEXOS + " anexos."));
     }
 
-    var caminho = caminhoDoAnexo(p.id, arquivo.name);
+    /* Nome diferente da função caminho(): esta é a posição do
+       arquivo DENTRO DO BALDE, aquela é o endereço do documento no
+       banco. Chamavam-se igual, e a variável escondia a função. */
+    var noBalde = caminhoDoAnexo(p.id, arquivo.name);
     var url = "https://firebasestorage.googleapis.com/v0/b/" + encodeURIComponent(balde()) +
-              "/o?uploadType=media&name=" + encodeURIComponent(caminho);
+              "/o?uploadType=media&name=" + encodeURIComponent(noBalde);
 
     return fetch(url, {
       method: "POST",
@@ -475,7 +478,7 @@ const Pendencias = (function () {
         var ficha = {
           nome: arquivo.name,
           tamanho: arquivo.size,
-          caminho: caminho,
+          caminho: noBalde,
           por: s.uid,
           em: new Date().toISOString(),
         };
