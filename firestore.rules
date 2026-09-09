@@ -204,23 +204,7 @@ service cloud.firestore {
 
     match /pendencias/{id} {
 
-      // ---------- quem enxerga ----------
-      // Pendência RESERVADA só aparece para quem está em podemVer:
-      // as partes, a gerência, a diretoria e os administradores,
-      // gravados na criação.
-      //
-      // A regra vale tanto para abrir uma quanto para listar. E
-      // listar só funciona porque o Hub pergunta em duas consultas
-      // — uma com confidencial == false, outra com podemVer
-      // contendo o próprio uid. Sem esse cuidado do lado de cá, o
-      // Firestore recusaria a lista inteira: ele não filtra pela
-      // regra, ele aprova ou reprova a consulta toda.
-      function podeVer() {
-        return resource.data.confidencial != true
-               || request.auth.uid in resource.data.podemVer;
-      }
-
-      allow read: if daEquipe() && podeVer();
+      allow read: if daEquipe();
 
       allow create: if daEquipe()
                     && meuUid(request.resource.data.criadoPor)
@@ -234,11 +218,7 @@ service cloud.firestore {
                     && (request.resource.data.responsavel.size() > 0
                         || (request.resource.data.setorDestino is string
                             && request.resource.data.setorDestino.size() > 0))
-                    && (!('confidencial' in request.resource.data)
-                        || request.resource.data.confidencial is bool)
-                    && (!('podemVer' in request.resource.data)
-                        || (request.resource.data.podemVer is list
-                            && request.resource.data.podemVer.size() <= 60))
+
                     && request.resource.data.situacao in ['aberta', 'fazendo', 'resolvida']
                     && (!('envolvidos' in request.resource.data)
                         || request.resource.data.envolvidos is list)
@@ -368,6 +348,86 @@ service cloud.firestore {
                       && request.time < resource.data.criadoEm + duration.value(15, 'm');
 
         // Apagar, nunca.
+        allow delete: if false;
+      }
+    }
+
+    // ============================================================
+    // PENDÊNCIAS RESERVADAS
+    // ------------------------------------------------------------
+    // Mesma coisa das outras, com uma diferença: quem lê precisa
+    // estar em podemVer — as partes, a gerência, a diretoria e os
+    // administradores, gravados na criação.
+    //
+    // COLEÇÃO SEPARADA, e não um campo "confidencial" na coleção
+    // de sempre. A primeira tentativa foi campo, e quebrou por um
+    // motivo do Firestore que só apareceu no teste: para listar,
+    // ele exige que a consulta seja provadamente segura contra a
+    // regra. Consulta sem filtro vira 403 — não devolve o que
+    // pode, recusa tudo. E filtrar por "confidencial == false" não
+    // alcança documento onde o campo não existe, o que sumiu com
+    // toda pendência criada antes da mudança.
+    //
+    // Com a coleção separada, a de sempre volta a ter regra que
+    // não olha conteúdo — lista sem filtro, documento antigo
+    // continua visível — e a reservada é consultada filtrando por
+    // podemVer, que todo documento de lá tem por construção.
+    // ============================================================
+    match /pendencias_reservadas/{id} {
+
+      allow read: if daEquipe() && request.auth.uid in resource.data.podemVer;
+
+      allow create: if daEquipe()
+                    && meuUid(request.resource.data.criadoPor)
+                    && request.resource.data.podemVer is list
+                    && request.resource.data.podemVer.size() > 0
+                    && request.resource.data.podemVer.size() <= 60
+                    // Quem cria precisa estar na lista. Sem isto,
+                    // dava para abrir uma reservada e não poder
+                    // mais lê-la — inclusive sem querer.
+                    && request.auth.uid in request.resource.data.podemVer
+                    && request.resource.data.oque is string
+                    && request.resource.data.oque.size() > 2
+                    && request.resource.data.oque.size() <= 300
+                    && request.resource.data.situacao in ['aberta', 'fazendo', 'resolvida']
+                    && textoAte('porque', 2000)
+                    && textoAte('sugestao', 2000)
+                    && textoAte('prazo', 10)
+                    && textoAte('setorOrigem', 60)
+                    && textoAte('setorDestino', 60);
+
+      allow update: if daEquipe()
+                    && request.auth.uid in resource.data.podemVer
+                    && request.resource.data.criadoPor == resource.data.criadoPor
+                    && request.resource.data.criadoEm == resource.data.criadoEm
+                    && request.resource.data.podemVer == resource.data.podemVer
+                    && request.resource.data.situacao in ['aberta', 'fazendo', 'resolvida']
+                    && (
+                         (mudou().hasOnly(['vistas'])
+                          && request.resource.data.vistas is list
+                          && request.resource.data.vistas.size() <= 60)
+                         || (meuUid(resource.data.responsavel) && mudou().hasOnly(['situacao']))
+                         || (meuUid(resource.data.criadoPor) && (
+                              mudou().hasOnly(['situacao'])
+                              || request.time < resource.data.criadoEm + duration.value(15, 'm')
+                            ))
+                       );
+
+      allow delete: if daEquipe() && meuUid(resource.data.criadoPor);
+
+      match /anexos/{item} {
+        allow read:   if daEquipe() && request.auth.uid in get(/databases/$(database)/documents/pendencias_reservadas/$(id)).data.podemVer;
+        allow create: if daEquipe() && meuUid(request.resource.data.por);
+        allow update, delete: if false;
+      }
+
+      match /andamento/{item} {
+        allow read:   if daEquipe() && request.auth.uid in get(/databases/$(database)/documents/pendencias_reservadas/$(id)).data.podemVer;
+        allow create: if daEquipe() && meuUid(request.resource.data.autor);
+        allow update: if daEquipe()
+                      && meuUid(resource.data.autor)
+                      && mudou().hasOnly(['texto', 'editadoEm'])
+                      && request.time < resource.data.criadoEm + duration.value(15, 'm');
         allow delete: if false;
       }
     }

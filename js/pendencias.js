@@ -123,10 +123,10 @@ const Pendencias = (function () {
 
      Isso exige consulta estruturada (runQuery) em vez do GET
      simples de antes. */
-  function consulta(filtro) {
+  function consulta(colecao, filtro) {
     return {
       structuredQuery: {
-        from: [{ collectionId: "pendencias" }],
+        from: [{ collectionId: colecao }],
         where: filtro,
         limit: 300,
       }
@@ -142,23 +142,69 @@ const Pendencias = (function () {
         return (j || []).filter(function (l) { return l.document; }).map(function (l) {
           var p = deFirestore(l.document.fields);
           p.id = l.document.name.split("/").pop();
+          p._col = l.document.name.indexOf("/" + RESERVADAS + "/") !== -1 ? RESERVADAS : ABERTAS;
           return p;
         });
       });
   }
+
+  /* ============================================================
+     DUAS COLEÇÕES, e não uma com um campo de sigilo.
+     ------------------------------------------------------------
+     A primeira tentativa foi campo: confidencial true/false, e a
+     regra olhando esse campo. Quebrou por um motivo do Firestore
+     que só apareceu no teste: para LISTAR, ele exige que a
+     consulta seja provadamente segura contra a regra. Consulta sem
+     filtro vira 403 — não devolve o que pode, recusa tudo. E a
+     consulta filtrada por "confidencial == false" NÃO alcança
+     documento onde o campo não existe, o que apagou da tela toda
+     pendência criada antes da mudança.
+
+     Coleções separadas resolvem os dois de uma vez:
+
+       pendencias             regra simples, lista sem filtro,
+                              documento antigo continua visível
+       pendencias_reservadas  regra dura, e a consulta filtra por
+                              podemVer, que TODO documento de lá
+                              tem por construção
+
+     O preço é que uma pendência não vira reservada depois de
+     criada — teria de mudar de coleção. Como o sigilo se decide na
+     abertura, o preço é barato.
+     ============================================================ */
+  var ABERTAS = "pendencias";
+  var RESERVADAS = "pendencias_reservadas";
+
+  function colDe(p) { return (p && p._col) || ABERTAS; }
+  function caminho(p) { return base() + "/" + colDe(p) + "/" + encodeURIComponent(p.id); }
 
   function listar() {
     if (!temBanco()) return Promise.resolve([]);
     var s = Dados.sessao();
     if (!s) return Promise.resolve([]);
 
-    var abertas = consulta({ fieldFilter: {
-      field: { fieldPath: "confidencial" }, op: "EQUAL", value: { booleanValue: false } } });
+    /* As abertas saem por listagem simples: a regra delas não olha
+       o conteúdo, então não há o que provar. */
+    var abertas = fetch(base() + "/" + ABERTAS + "?pageSize=300", {
+      headers: autorizacao(), cache: "no-store"
+    })
+      .then(conferir)
+      .then(function (j) {
+        return (j.documents || []).map(function (d) {
+          var p = deFirestore(d.fields);
+          p.id = d.name.split("/").pop();
+          p._col = ABERTAS;
+          return p;
+        });
+      });
 
-    var minhasReservadas = consulta({ fieldFilter: {
-      field: { fieldPath: "podemVer" }, op: "ARRAY_CONTAINS", value: { stringValue: s.uid } } });
+    /* As reservadas, por consulta filtrada em podemVer — que é o
+       que torna a consulta provadamente segura. */
+    var minhasReservadas = rodar(consulta(RESERVADAS, { fieldFilter: {
+      field: { fieldPath: "podemVer" }, op: "ARRAY_CONTAINS", value: { stringValue: s.uid } } }))
+      .catch(function () { return []; });
 
-    return Promise.all([rodar(abertas), rodar(minhasReservadas)])
+    return Promise.all([abertas, minhasReservadas])
       .then(function (r) {
         /* Uma pendência reservada em que eu estou volta nas duas?
            Não: a primeira consulta exige confidencial false. Mas
@@ -210,10 +256,9 @@ const Pendencias = (function () {
          de ontem deve continuar dizendo de onde veio. */
       setorDestino: dados.setorDestino || "",
       urgencia:     URGENCIAS.indexOf(dados.urgencia) !== -1 ? dados.urgencia : "normal",
-      /* RESERVADA: some da lista de quem não tem o que ver nela.
-         Quem pode ver vai gravado em podemVer — ver a explicação
-         em listar(), que é onde isso vira consulta. */
-      confidencial: !!dados.confidencial,
+      /* RESERVADA não é um campo, é OUTRA COLEÇÃO — ver a
+         explicação em listar(). O que fica no documento é só quem
+         pode ver. */
       podemVer:     Array.isArray(dados.podemVer) ? dados.podemVer : [],
       situacao:     "aberta",
       criadoPor:    s.uid,
@@ -223,7 +268,8 @@ const Pendencias = (function () {
       vistas:       [s.uid],
     };
 
-    return fetch(base() + "/pendencias", {
+    var colecao = dados.confidencial ? RESERVADAS : ABERTAS;
+    return fetch(base() + "/" + colecao, {
       method: "POST",
       headers: autorizacao(),
       body: JSON.stringify({ fields: paraFirestore(doc) }),
@@ -245,8 +291,7 @@ const Pendencias = (function () {
     if (["aberta", "fazendo", "resolvida"].indexOf(nova) === -1) {
       return Promise.reject(new Error("Situação desconhecida."));
     }
-    var url = base() + "/pendencias/" + encodeURIComponent(p.id) +
-              "?updateMask.fieldPaths=situacao";
+    var url = caminho(p) + "?updateMask.fieldPaths=situacao";
     return fetch(url, {
       method: "PATCH",
       headers: autorizacao(),
@@ -290,7 +335,7 @@ const Pendencias = (function () {
 
     /* Sem a máscara, o Firestore SUBSTITUI o documento inteiro e a
        pendência perderia quem abriu, quando, e os envolvidos. */
-    var url = base() + "/pendencias/" + encodeURIComponent(p.id) + "?" + mascara.join("&");
+    var url = caminho(p) + "?" + mascara.join("&");
     return fetch(url, {
       method: "PATCH",
       headers: autorizacao(),
@@ -345,7 +390,7 @@ const Pendencias = (function () {
     var s = Dados.sessao();
     if (!s || jaVi(p)) return Promise.resolve(false);
     var lista = (Array.isArray(p.vistas) ? p.vistas : []).concat([s.uid]);
-    return fetch(base() + "/pendencias/" + encodeURIComponent(p.id) + "?updateMask.fieldPaths=vistas", {
+    return fetch(caminho(p) + "?updateMask.fieldPaths=vistas", {
       method: "PATCH",
       headers: autorizacao(),
       body: JSON.stringify({ fields: { vistas: {
@@ -441,7 +486,7 @@ const Pendencias = (function () {
            O que serve de prova não pode ser reescrito por quem tem
            interesse no que ela prova. Documento separado, com
            update e delete recusados, é imutabilidade de verdade. */
-        return fetch(base() + "/pendencias/" + encodeURIComponent(p.id) + "/anexos", {
+        return fetch(caminho(p) + "/anexos", {
           method: "POST",
           headers: autorizacao(),
           body: JSON.stringify({ fields: paraFirestore(ficha) }),
@@ -483,7 +528,7 @@ const Pendencias = (function () {
 
   function lerAnexos(p) {
     if (!temAnexos()) return Promise.resolve([]);
-    return fetch(base() + "/pendencias/" + encodeURIComponent(p.id) + "/anexos?pageSize=50", {
+    return fetch(caminho(p) + "/anexos?pageSize=50", {
       headers: autorizacao(), cache: "no-store"
     })
       .then(function (r) {
@@ -501,8 +546,8 @@ const Pendencias = (function () {
 
   /* ---------- linha do tempo ---------- */
 
-  function andamento(id) {
-    return fetch(base() + "/pendencias/" + encodeURIComponent(id) + "/andamento?pageSize=200", {
+  function andamento(p) {
+    return fetch(caminho(p) + "/andamento?pageSize=200", {
       headers: autorizacao(), cache: "no-store"
     })
       .then(conferir)
@@ -517,7 +562,7 @@ const Pendencias = (function () {
       });
   }
 
-  function acrescentar(id, texto, nomeDeQuem) {
+  function acrescentar(p, texto, nomeDeQuem) {
     var s = Dados.sessao();
     if (!s) return Promise.reject(new Error("Você precisa entrar."));
     if (!texto || !texto.trim()) return Promise.reject(new Error("Escreva alguma coisa."));
@@ -528,7 +573,7 @@ const Pendencias = (function () {
       texto:     texto.trim(),
       criadoEm:  new Date(),
     };
-    return fetch(base() + "/pendencias/" + encodeURIComponent(id) + "/andamento", {
+    return fetch(caminho(p) + "/andamento", {
       method: "POST",
       headers: autorizacao(),
       body: JSON.stringify({ fields: paraFirestore(doc) }),
@@ -551,8 +596,8 @@ const Pendencias = (function () {
     return isFinite(quando) && (Date.now() - quando) < 15 * 60 * 1000;
   }
 
-  function corrigir(idPendencia, item, texto) {
-    var url = base() + "/pendencias/" + encodeURIComponent(idPendencia) +
+  function corrigir(p, item, texto) {
+    var url = caminho(p) +
               "/andamento/" + encodeURIComponent(item.id) +
               "?updateMask.fieldPaths=texto&updateMask.fieldPaths=editadoEm";
     return fetch(url, {
@@ -572,7 +617,7 @@ const Pendencias = (function () {
 
   /* ---------- apagar (só quem abriu) ---------- */
   function apagar(p) {
-    return fetch(base() + "/pendencias/" + encodeURIComponent(p.id), {
+    return fetch(caminho(p), {
       method: "DELETE", headers: autorizacao(),
     }).then(function (r) {
       if (r.status === 403) throw new Error("Só quem abriu a pendência pode apagá-la.");
@@ -633,6 +678,7 @@ const Pendencias = (function () {
     apagar: apagar,
     estado: estado,
     ehMinha: ehMinha,
+    ehReservada: function (p) { return colDe(p) === RESERVADAS; },
     URGENCIAS: URGENCIAS,
     pesoDaUrgencia: pesoDaUrgencia,
     jaVi: jaVi,

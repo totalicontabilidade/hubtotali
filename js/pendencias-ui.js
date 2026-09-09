@@ -623,7 +623,9 @@ const PendenciasUI = (function () {
     meta.appendChild(el("span", "pd-tag", p.responsavel
       ? "Faz: " + nomeDe(p.responsavel)
       : "Para o setor " + (p.setorDestino || "—")));
-    if (p.confidencial) meta.appendChild(el("span", "pd-tag pd-tag--reservada", "Reservada"));
+    /* Reservada agora se reconhece pela COLEÇÃO de onde veio, não
+       por um campo dentro do documento. */
+    if (Pendencias.ehReservada(p)) meta.appendChild(el("span", "pd-tag pd-tag--reservada", "Reservada"));
     (p.envolvidos || []).forEach(function (uid) {
       meta.appendChild(el("span", "pd-tag pd-tag--marcado", "@" + nomeDe(uid)));
     });
@@ -754,7 +756,7 @@ const PendenciasUI = (function () {
     b.type = "button";
     b.addEventListener("click", function () {
       b.disabled = true;
-      Pendencias.acrescentar(p.id, novo.value, meuNome())
+      Pendencias.acrescentar(p, novo.value, meuNome())
         .then(function () { novo.value = ""; b.disabled = false; pintarLinha(p, linha); })
         .catch(function (err) { b.disabled = false; window.alert(err.message); });
     });
@@ -870,7 +872,7 @@ const PendenciasUI = (function () {
   }
 
   function pintarLinha(p, onde) {
-    Pendencias.andamento(p.id).then(function (itens) {
+    Pendencias.andamento(p).then(function (itens) {
       onde.textContent = "";
       if (!itens.length) {
         onde.appendChild(el("div", "pd-vazio", "Nada ainda. A primeira atualização começa a história."));
@@ -935,7 +937,7 @@ const PendenciasUI = (function () {
               if (!novo) return;
               ok.disabled = true;
               ok.textContent = "Salvando…";
-              Pendencias.corrigir(p.id, x, novo)
+              Pendencias.corrigir(p, x, novo)
                 .then(function () { pintarLinha(p, onde); })
                 .catch(function (err) {
                   ok.disabled = false;
