@@ -451,7 +451,11 @@ a{color:inherit;text-decoration:none}
   .avisos{grid-column:1;grid-row:4;padding:0 16px;overflow-x:auto}
 
   .grade{grid-template-columns:1fr}
-  .agenda{grid-template-columns:repeat(auto-fill,minmax(96px,1fr))}
+  /* UMA COLUNA. Os 96px de antes eram a largura de um cartão que
+     tinha só um dia e um nome; agora cada cartão traz o dia, o dia
+     da semana e a lista das obrigações daquela data — em 96px,
+     "EFD-Contribuições" quebraria em quatro linhas. */
+  .agenda{grid-template-columns:1fr;gap:8px}
 }
 
 @media (max-width:420px){
