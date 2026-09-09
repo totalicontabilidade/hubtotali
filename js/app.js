@@ -347,6 +347,70 @@
     painel.classList.add("on");
     document.getElementById("painel-x").focus();
   }
+  /* ---------- a agenda do mês inteiro ----------
+     A agenda do centro esconde o que já venceu, e faz bem: prazo
+     vencido no meio dos próximos atrapalha quem está procurando o
+     de amanhã. Só que "o que eu já paguei este mês?" também é
+     pergunta legítima, e para ela não havia resposta em lugar
+     nenhum.
+
+     Este painel mostra o mês fechado, do dia 1 ao 31, com o que
+     passou em cinza. Reaproveita a mesma gaveta dos sistemas: é
+     mais uma coisa que se abre por cima e se fecha no Esc, e não
+     havia motivo para inventar outra. */
+  function abrirAgendaCheia() {
+    if (typeof Agenda === "undefined") return;
+
+    var corpo = document.getElementById("painel-corpo");
+    corpo.textContent = "";
+    document.getElementById("painel-t").textContent =
+      "Agenda de " + new Date().toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
+
+    /* doMes() já esconde o que passou. Para ver o mês fechado,
+       pergunto a ele com data de referência no dia 1. */
+    var hoje = new Date();
+    var tudo = Agenda.doMes(new Date(hoje.getFullYear(), hoje.getMonth(), 1));
+    var diaHoje = hoje.getDate();
+
+    var grupos = [];
+    tudo.forEach(function (p) {
+      var g = grupos[grupos.length - 1];
+      if (!g || g.dia !== p.dia) { g = { dia: p.dia, semana: p.semana, itens: [] }; grupos.push(g); }
+      g.itens.push(p);
+    });
+
+    var caixa = el("div", "agenda agenda--cheia");
+    grupos.forEach(function (g) {
+      var passou = parseInt(g.dia, 10) < diaHoje;
+      var ehHoje = parseInt(g.dia, 10) === diaHoje;
+      var x = el("div", "prazo" + (passou ? " prazo--passou" : "") + (ehHoje ? " prazo--hoje" : ""));
+
+      var cab = el("div", "prazo__cab");
+      cab.appendChild(el("span", "prazo__d", g.dia));
+      if (g.semana) cab.appendChild(el("span", "prazo__s", g.semana));
+      if (passou) cab.appendChild(el("span", "prazo__s", "· venceu"));
+      x.appendChild(cab);
+
+      var lista = el("ul", "prazo__lista");
+      g.itens.forEach(function (i) {
+        var li = el("li", "prazo__i");
+        li.appendChild(el("span", "prazo__n", i.nome));
+        if (i.regime && i.regime !== "todos") {
+          li.appendChild(el("span", "prazo__r prazo__r--" + i.regime,
+            i.regime === "simples" ? "Simples" : "Normal"));
+        }
+        if (i.quem) li.appendChild(el("span", "prazo__q", i.quem));
+        lista.appendChild(li);
+      });
+      x.appendChild(lista);
+      caixa.appendChild(x);
+    });
+
+    corpo.appendChild(caixa);
+    painel.classList.add("on");
+    document.getElementById("painel-x").focus();
+  }
+
   function fecharPainel() { painel.classList.remove("on"); }
 
   document.getElementById("painel-x").addEventListener("click", fecharPainel);
@@ -396,17 +460,33 @@
   }
 
   ligarBotao("nav-inicio", function () { return document.querySelector(".cab"); });
-  /* Mira no trilho inteiro, não na lista de dentro dele: mirando
-     na lista, o título "Minhas pendências" ficava 45px acima da
-     borda da tela e a pessoa chegava numa lista sem cabeça. */
-  ligarBotao("nav-pendencias", function () {
-    return document.querySelector(".trilho") || document.getElementById("pendencias");
-  });
-  ligarBotao("nav-agenda", function () {
-    /* A agenda é redesenhada quando o banco chega, então o
-       elemento é procurado na hora do clique, não guardado antes. */
-    return document.getElementById("bloco-agenda");
-  });
+
+  /* ---------- os dois que só piscavam ----------
+     Pendências e Agenda apontavam para pedaços que JÁ ESTÃO na
+     tela. O clique acendia o ícone, o alvo dava uma piscada, e
+     nada acontecia de fato — porque não havia para onde ir.
+
+     Agora eles abrem o que NÃO cabe na tela: o quadro de todas as
+     pendências do escritório, e o mês inteiro da agenda, com o que
+     já venceu junto. Botão que mostra o que a tela não mostra tem
+     motivo para existir; botão que rola até o que está à vista,
+     não. */
+  (function ligarQuadro() {
+    var b = document.getElementById("nav-pendencias");
+    if (!b) return;
+    b.title = "Todas as pendências do escritório";
+    b.addEventListener("click", function () {
+      acender(b);
+      if (typeof PendenciasUI !== "undefined" && PendenciasUI.abrirTodas) PendenciasUI.abrirTodas();
+    });
+  })();
+
+  (function ligarAgendaCheia() {
+    var b = document.getElementById("nav-agenda");
+    if (!b) return;
+    b.title = "O mês inteiro, com o que já venceu";
+    b.addEventListener("click", function () { acender(b); abrirAgendaCheia(); });
+  })();
 
   /* ---------- quem está usando ----------
      Enquanto o login da equipe não existe, o Hub pergunta o nome
@@ -514,6 +594,12 @@
     var botao = document.getElementById("nav-pendencias");
     var quantas = r ? (r.abertas || 0) : 0;
     var urgentes = r ? (r.atrasadas || 0) : 0;
+    /* NÃO LIDA PULSA. O número já dizia quantas existem; o que
+       faltava era distinguir "tenho três pendências, todas
+       conhecidas" de "chegou uma agora e eu não vi". A primeira é
+       rotina, a segunda é notícia. */
+    var novas = r ? (r.naoLidas || 0) : 0;
+    if (botao) botao.classList.toggle("nav__b--novo", novas > 0);
 
     if (botao) {
       var selo = botao.querySelector(".nav__selo");

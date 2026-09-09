@@ -217,8 +217,9 @@ service cloud.firestore {
                     && (!('envolvidos' in request.resource.data)
                         || request.resource.data.envolvidos is list)
                     && textoAte('porque', 2000)
-                    && textoAte('comoFazer', 2000)
                     && textoAte('sugestao', 2000)
+                    && (!('urgencia' in request.resource.data)
+                        || request.resource.data.urgencia in ['urgente', 'normal', 'quando_der'])
                     && textoAte('prazo', 10)
                     && textoAte('setorOrigem', 60)
                     && textoAte('setorDestino', 60);
@@ -233,6 +234,24 @@ service cloud.firestore {
                     && request.resource.data.criadoEm == resource.data.criadoEm
                     && request.resource.data.situacao in ['aberta', 'fazendo', 'resolvida']
                     && (
+                         // MARCA DE LEITURA. Qualquer um da equipe
+                         // se acrescenta à lista de quem já abriu a
+                         // ficha, e a lista não encolhe.
+                         //
+                         // Aqui a comparação de tamanho BASTA, ao
+                         // contrário do que acontecia com os anexos.
+                         // Anexo é prova, e prova precisa de
+                         // imutabilidade de verdade — por isso foi
+                         // para uma subcoleção. Marca de leitura é
+                         // conveniência: o pior que alguém consegue
+                         // adulterando isto é aparecer como quem
+                         // não leu.
+                         (mudou().hasOnly(['vistas'])
+                          && request.resource.data.vistas is list
+                          && request.resource.data.vistas.size() <= 60
+                          && (!('vistas' in resource.data)
+                              || request.resource.data.vistas.size() >= resource.data.vistas.size()))
+
                          // QUEM FAZ mexe só na situação. Não troca o
                          // responsável (empurrar tarefa sem avisar) nem
                          // o prazo (deixar de estar atrasado por

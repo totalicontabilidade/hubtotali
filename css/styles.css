@@ -738,3 +738,38 @@ a{color:inherit;text-decoration:none}
 .pd-anexo__btn:disabled{opacity:.6;cursor:default}
 .pd-anexo__erro{margin-top:6px;font-size:12.5px;color:var(--alerta);
                 background:var(--alerta-luz);border-radius:7px;padding:7px 9px}
+
+/* ---------- urgência e não lida ----------
+   A etiqueta de urgência só aparece nos extremos. "Normal" não
+   ganha etiqueta de propósito: etiquetar tudo faz a etiqueta
+   deixar de significar alguma coisa. */
+.pen__u{display:inline-block;margin-top:4px;font-size:9.5px;font-weight:700;
+        letter-spacing:.04em;text-transform:uppercase;border-radius:99px;padding:2px 7px}
+.pen__u--urgente{background:var(--alerta-luz);color:var(--alerta)}
+.pen__u--quando_der{background:var(--base);color:var(--txt-3)}
+
+/* Pendência que chegou e ninguém abriu: fundo cheio, nome em peso
+   maior e um ponto antes do título. Três sinais em vez de um,
+   porque quem não enxerga cor precisa dos outros dois. */
+.pen--nova{background:#fff;box-shadow:0 2px 10px rgba(13,25,38,.08)}
+.pen--nova .pen__o{font-weight:730;color:var(--txt)}
+.pen__ponto{display:inline-block;width:7px;height:7px;border-radius:50%;
+            background:var(--estado);margin-right:6px;vertical-align:middle}
+.pen--atrasada .pen__ponto{background:var(--alerta)}
+
+/* O ícone da barra pulsa enquanto houver pendência não lida. Para
+   quem desligou animação no sistema, fica o anel parado — o aviso
+   não pode depender de movimento. */
+@keyframes pulsoDoSelo{
+  0%,100%{box-shadow:0 0 0 2px var(--nav)}
+  50%    {box-shadow:0 0 0 2px var(--nav),0 0 0 6px rgba(192,69,58,.35)}
+}
+.nav__b--novo .nav__selo{animation:pulsoDoSelo 2s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){
+  .nav__b--novo .nav__selo{animation:none;box-shadow:0 0 0 2px var(--nav),0 0 0 3px rgba(192,69,58,.5)}
+}
+
+/* O mês fechado, no painel: o que já venceu recua sem sumir. */
+.agenda--cheia{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.prazo--passou{opacity:.5}
+.prazo--passou .prazo__d{color:var(--txt-3)}

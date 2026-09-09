@@ -138,16 +138,27 @@ const Pendencias = (function () {
     var doc = {
       oque:         dados.oque.trim(),
       porque:       (dados.porque || "").trim(),
-      comoFazer:    (dados.comoFazer || "").trim(),
       sugestao:     (dados.sugestao || "").trim(),
       responsavel:  dados.responsavel,
       envolvidos:   Array.isArray(dados.envolvidos) ? dados.envolvidos : [],
       prazo:        dados.prazo || "",
       setorOrigem:  dados.setorOrigem || "",
+      /* O SETOR NÃO É MAIS DIGITADO: ele vem de quem vai fazer.
+         Perguntar o setor depois de já ter perguntado a pessoa era
+         pedir duas vezes a mesma informação — e abrir espaço para
+         as duas se contradizerem.
+
+         Fica GRAVADO em vez de calculado na hora de mostrar,
+         porque a pessoa pode mudar de setor amanhã e a pendência
+         de ontem deve continuar dizendo de onde veio. */
       setorDestino: dados.setorDestino || "",
+      urgencia:     URGENCIAS.indexOf(dados.urgencia) !== -1 ? dados.urgencia : "normal",
       situacao:     "aberta",
       criadoPor:    s.uid,
       criadoEm:     new Date(),
+      /* Quem já abriu a ficha. Quem não está aqui recebe destaque
+         de "ainda não vi". Quem cria já viu o que escreveu. */
+      vistas:       [s.uid],
     };
 
     return fetch(base() + "/pendencias", {
@@ -243,6 +254,47 @@ const Pendencias = (function () {
      Sem STORAGE_BUCKET preenchido, tudo isto fica desligado e o
      resto do Hub não sente falta.
      ============================================================ */
+  /* TRÊS NÍVEIS, e três é de propósito. Com cinco, tudo vira
+     "alta" e a escala perde o sentido; com dois, não há como dizer
+     "isso pode esperar" sem parecer descaso. */
+  var URGENCIAS = ["urgente", "normal", "quando_der"];
+
+  function pesoDaUrgencia(p) {
+    var i = URGENCIAS.indexOf(p && p.urgencia);
+    return i === -1 ? 1 : i;   /* sem campo, trata como normal */
+  }
+
+  /* ---------- quem já abriu ----------
+     Marca de leitura, uma por pessoa, guardada como lista no
+     próprio documento.
+
+     Por que aqui e não numa subcoleção, como os anexos: anexo é
+     prova, e prova precisa de imutabilidade de verdade. Marca de
+     leitura é conveniência — o pior que alguém consegue fazendo
+     malandragem é aparecer como quem não leu. E a lista no
+     documento custa ZERO leitura extra, enquanto a subcoleção
+     custaria uma por pendência, toda vez que o trilho desenha. */
+  function jaVi(p) {
+    var s = Dados.sessao();
+    return !!s && Array.isArray(p.vistas) && p.vistas.indexOf(s.uid) !== -1;
+  }
+
+  function marcarComoVista(p) {
+    var s = Dados.sessao();
+    if (!s || jaVi(p)) return Promise.resolve(false);
+    var lista = (Array.isArray(p.vistas) ? p.vistas : []).concat([s.uid]);
+    return fetch(base() + "/pendencias/" + encodeURIComponent(p.id) + "?updateMask.fieldPaths=vistas", {
+      method: "PATCH",
+      headers: autorizacao(),
+      body: JSON.stringify({ fields: { vistas: {
+        arrayValue: { values: lista.map(function (u) { return { stringValue: u }; }) }
+      } } }),
+    })
+      .then(conferir)
+      .then(function () { p.vistas = lista; return true; })
+      .catch(function () { return false; });
+  }
+
   var LIMITE_DO_ARQUIVO = 10 * 1024 * 1024;   /* 10 MB */
   var LIMITE_DE_ANEXOS = 20;
 
@@ -512,6 +564,10 @@ const Pendencias = (function () {
     apagar: apagar,
     estado: estado,
     ehMinha: ehMinha,
+    URGENCIAS: URGENCIAS,
+    pesoDaUrgencia: pesoDaUrgencia,
+    jaVi: jaVi,
+    marcarComoVista: marcarComoVista,
   };
 
 })();

@@ -28,6 +28,15 @@ const PendenciasUI = (function () {
     return e;
   }
 
+  /* O primeiro setor de uma pessoa. Ela pode ter vários — gente de
+     escritório pequeno cobre mais de uma frente — e para etiquetar
+     uma pendência um basta. */
+  function setorDe(p) {
+    if (!p) return "";
+    if (Array.isArray(p.setores)) return p.setores[0] || "";
+    return p.setor || "";
+  }
+
   function nomeDe(uid) {
     var p = porUid[uid];
     return (p && p.nome) || (p && p.email) || "alguém";
@@ -105,7 +114,19 @@ const PendenciasUI = (function () {
       { c:"hoje",   t:"Para hoje",     f:function (p) { return Pendencias.estado(p) === "hoje"; } },
       { c:"depois", t:"Próximos dias", f:function (p) { return !Pendencias.estado(p); } },
     ].forEach(function (g) {
-      var lista = abertas.filter(g.f);
+      /* DENTRO DO GRUPO, A URGÊNCIA MANDA; depois, o prazo.
+
+         Os grupos continuam sendo por prazo — atrasada, hoje,
+         depois — porque é a pergunta que se faz de manhã. A
+         urgência ordena DENTRO deles: entre duas que vencem hoje,
+         a urgente aparece primeiro. Ordenar tudo por urgência
+         esconderia uma atrasada "normal" atrás de uma urgente que
+         vence semana que vem, o que seria pior. */
+      var lista = abertas.filter(g.f).sort(function (a, b) {
+        var d = Pendencias.pesoDaUrgencia(a) - Pendencias.pesoDaUrgencia(b);
+        if (d !== 0) return d;
+        return String(a.prazo || "9999").localeCompare(String(b.prazo || "9999"));
+      });
       if (!lista.length) return;
       var f = el("div", "faixa faixa--" + g.c);
       f.appendChild(el("span", "faixa__t", g.t));
@@ -212,7 +233,8 @@ const PendenciasUI = (function () {
 
   function cartao(p, comDono) {
     var e = Pendencias.estado(p);
-    var b = el("button", "pen" + (e ? " pen--" + e : ""));
+    var naoVi = !Pendencias.jaVi(p);
+    var b = el("button", "pen" + (e ? " pen--" + e : "") + (naoVi ? " pen--nova" : ""));
     b.type = "button";
     b.appendChild(el("span", "pen__f"));
 
@@ -223,7 +245,18 @@ const PendenciasUI = (function () {
     b.appendChild(pr);
 
     var t = el("div", "pen__txt");
-    t.appendChild(el("div", "pen__o", p.oque));
+
+    var titulo = el("div", "pen__o");
+    if (naoVi) titulo.appendChild(el("span", "pen__ponto", ""));
+    titulo.appendChild(document.createTextNode(p.oque));
+    t.appendChild(titulo);
+
+    /* A etiqueta só aparece quando NÃO é o normal: etiquetar tudo
+       faz a etiqueta deixar de significar alguma coisa. */
+    if (p.urgencia === "urgente" || p.urgencia === "quando_der") {
+      t.appendChild(el("span", "pen__u pen__u--" + p.urgencia,
+        p.urgencia === "urgente" ? "Urgente" : "Quando der"));
+    }
     var eu = meuUid();
     var quem;
     if (p.responsavel === eu) {
@@ -428,9 +461,6 @@ const PendenciasUI = (function () {
   function abrirFormulario() {
     var c = abrir("Abrir pendência");
     var eu = porUid[meuUid()] || {};
-    var setores = (Dados.SETORES_DA_CASA || []).map(function (s) {
-      return { valor: s, texto: s };
-    });
 
     var oque = campo("O quê", "Ex.: Enviar o balancete da Gigantte");
     var porque = area("Por quê", "O que depende disso — ajuda quem vai fazer a entender a urgência");
@@ -438,8 +468,32 @@ const PendenciasUI = (function () {
       .map(function (p) { return { valor: p.uid, texto: p.nome + (p.setor ? " · " + p.setor : "") }; }));
     var quando = campo("Para quando");
     quando._entrada.type = "date";
-    var destino = seletor("Setor de destino", [{ valor:"", texto:"—" }].concat(setores));
-    var como = area("Como fazer", "O caminho, se você já souber");
+
+    /* URGÊNCIA. Não é o prazo: prazo é quando vence, urgência é o
+       que fazer primeiro quando duas coisas vencem no mesmo dia.
+       Três níveis — com cinco, tudo vira "alta". */
+    var urgencia = seletor("Urgência", [
+      { valor: "urgente",    texto: "Urgente — na frente das outras" },
+      { valor: "normal",     texto: "Normal" },
+      { valor: "quando_der", texto: "Quando der — sem pressa" },
+    ], "normal");
+
+    /* AQUI HAVIA "Setor de destino" e "Como fazer".
+
+       O SETOR saiu porque era perguntar duas vezes a mesma coisa:
+       quem faz já foi escolhido logo acima, e a pessoa tem setor
+       no cadastro. Duas perguntas para o mesmo dado é convite para
+       as duas se contradizerem. O setor passou a vir de quem vai
+       fazer, e continua sendo gravado — para a pendência de hoje
+       continuar dizendo o setor de hoje se a pessoa mudar de área
+       amanhã.
+
+       O "COMO FAZER" saiu porque quem abre pendência quase nunca
+       sabe o como melhor do que quem vai fazer — e quando sabe, o
+       lugar disso é a Sugestão, que já existe e é opcional do mesmo
+       jeito. Campo que quase sempre fica vazio não é neutro: ele
+       alonga o formulário e faz a pessoa desistir de abrir a
+       pendência, que é o contrário do que queremos. */
     var sugestao = area("Sugestão de solução",
       "O que você faria no lugar dele. É este campo que transforma cobrança em ajuda.");
 
@@ -448,7 +502,7 @@ const PendenciasUI = (function () {
     marcar.appendChild(el("div", "pd-dica",
       "Quem for marcado também vê esta pendência na página dele. A responsabilidade continua sendo de uma pessoa só."));
 
-    [oque, porque, quem, quando, destino, como, sugestao, marcar].forEach(function (x) { c.appendChild(x); });
+    [oque, porque, quem, quando, urgencia, sugestao, marcar].forEach(function (x) { c.appendChild(x); });
 
     var msg = erro(""); msg.hidden = true;
     c.appendChild(msg);
@@ -461,12 +515,13 @@ const PendenciasUI = (function () {
       Pendencias.criar({
         oque: oque._entrada.value,
         porque: porque._entrada.value,
-        comoFazer: como._entrada.value,
         sugestao: sugestao._entrada.value,
         responsavel: quem._entrada.value,
         prazo: quando._entrada.value,
+        urgencia: urgencia._entrada.value,
         setorOrigem: (Array.isArray(eu.setores) ? eu.setores[0] : eu.setor) || "",
-        setorDestino: destino._entrada.value,
+        /* Sai do cadastro de quem vai fazer, não de um seletor. */
+        setorDestino: setorDe(porUid[quem._entrada.value]),
         envolvidos: marcar._valores(),
       }).then(function () { fechar(); carregar(); })
         .catch(function (e) {
@@ -490,6 +545,13 @@ const PendenciasUI = (function () {
 
   function abrirFicha(p) {
     var c = abrir(p.oque);
+
+    /* Abriu, leu. A marca vai para o banco sem segurar a tela: se
+       falhar, o pior que acontece é continuar aparecendo como não
+       lida — e ninguém perde nada por isso. */
+    if (!Pendencias.jaVi(p)) {
+      Pendencias.marcarComoVista(p).then(function (mudou) { if (mudou) desenhar(); });
+    }
     var eu = meuUid();
 
     var meta = el("div", "pd-meta");
@@ -511,9 +573,13 @@ const PendenciasUI = (function () {
       corpo.textContent = "";
       [
         ["Por quê", p.porque],
-        ["Como fazer", p.comoFazer],
+        /* "Como fazer" saiu junto com o campo. Pendência antiga
+           que tenha o texto continua guardando — só não é
+           mostrada, porque o campo deixou de existir. */
         ["Sugestão de solução", p.sugestao],
         ["Para quando", p.prazo ? p.prazo.split("-").reverse().join("/") : ""],
+        ["Urgência", p.urgencia === "urgente" ? "Urgente" :
+                     p.urgencia === "quando_der" ? "Quando der" : ""],
       ].forEach(function (par) {
         var l = linhaFicha(par[0], par[1]);
         if (l) corpo.appendChild(l);
@@ -549,7 +615,6 @@ const PendenciasUI = (function () {
 
       campo("oque", "O quê", p.oque);
       campo("porque", "Por quê", p.porque);
-      campo("comoFazer", "Como fazer", p.comoFazer);
       campo("sugestao", "Sugestão de solução", p.sugestao);
       campo("prazo", "Para quando", p.prazo, "data");
 
@@ -851,6 +916,9 @@ const PendenciasUI = (function () {
       atrasadas: minhas.filter(function (p) { return Pendencias.estado(p) === "atrasada"; }).length,
       hoje:      minhas.filter(function (p) { return Pendencias.estado(p) === "hoje"; }).length,
       abertas:   minhas.length,
+      /* Chegou e ninguém abriu. É este número que vira o destaque
+         no ícone da barra. */
+      naoLidas:  minhas.filter(function (p) { return !Pendencias.jaVi(p); }).length,
     };
   }
 
@@ -863,6 +931,8 @@ const PendenciasUI = (function () {
     carregar();
   }
 
-  return { iniciar: iniciar, recarregar: carregar, resumo: resumo, entrar: abrirEntrada };
+  return { iniciar: iniciar, recarregar: carregar, resumo: resumo, entrar: abrirEntrada,
+           /* A barra lateral abre o quadro por aqui. */
+           abrirTodas: function () { if (Dados.sessao()) abrirTodas(); } };
 
 })();
