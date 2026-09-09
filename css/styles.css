@@ -170,7 +170,9 @@ a{color:inherit;text-decoration:none}
        padding:15px 17px;box-shadow:0 6px 22px rgba(13,25,38,.05);
        -webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);
        display:flex;flex-direction:column;flex:0 0 auto;min-height:0}
-.bloco--cresce{flex:1}
+/* Cresce, mas NUNCA encolhe abaixo do conteúdo: "flex:1" sozinho
+   é "1 1 0%", e o "1" do meio é a permissão de encolher. */
+.bloco--cresce{flex:1 0 auto}
 .bloco__cab{display:flex;align-items:baseline;gap:10px;margin-bottom:12px}
 .bloco__t{font-size:14px;font-weight:730}
 .bloco__n{font-family:var(--mono);font-size:10.5px;color:var(--txt-3);margin-left:auto}

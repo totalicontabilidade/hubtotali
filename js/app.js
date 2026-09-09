@@ -241,7 +241,13 @@
        do mês. Se alguém quiser mandar uma lista fixa pelo banco,
        ela vence — mas o normal é a calculada. */
     if (AGENDA_ATUAL.length) {
-      var ba = bloco("Agenda do mês", null, true);
+      /* SEM "cresce". A classe existia para o último bloco ocupar
+         a sobra da tela quando a agenda era baixinha. Agora ela
+         tem sete cartões e é mais alta que a sobra — e "cresce"
+         também deixa ENCOLHER, o que fazia o bloco ficar 175px
+         menor que o próprio conteúdo, com as últimas linhas caindo
+         para fora do fundo branco. */
+      var ba = bloco("Agenda do mês", null, false);
       ba.id = "bloco-agenda";
       ba.querySelector(".bloco__cab").appendChild(el("span", "bloco__n",
         new Date().toLocaleDateString("pt-BR", { month: "long" })));
