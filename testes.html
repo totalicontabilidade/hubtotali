@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self';
+  style-src 'self';
+  img-src 'self' data:;
+  font-src 'self';
+  connect-src https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://firebasestorage.googleapis.com;
+  object-src 'none';
+  base-uri 'none';
+  form-action 'none'">
+<meta name="referrer" content="no-referrer">
+
+<title>Conferência do Hub Totali</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32">
+<link rel="stylesheet" href="css/admin.css">
+<style>
+/* ---------- a folha desta página ----------
+   Ela empresta as cores da administração e acrescenta só o que é
+   dela: a lista de conferências e o placar. */
+.tst{max-width:860px;margin:0 auto;padding:22px 20px 60px}
+.tst__cab{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.tst__t{font-size:20px;font-weight:730;color:var(--navy);margin:0}
+.tst__x{font-size:13.5px;color:var(--txt-2);line-height:1.5;margin:0 0 18px}
+.tst__acoes{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+
+.placar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.placar__n{font-size:12.5px;font-weight:700;border-radius:99px;padding:5px 12px}
+.placar__n--ok{background:#eaf3ec;color:#2f6b43}
+.placar__n--falha{background:var(--alerta-luz);color:var(--alerta)}
+.placar__n--nada{background:var(--piso);color:var(--txt-3)}
+
+.grupo{margin-top:16px}
+.grupo__t{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+          color:var(--txt-3);margin-bottom:6px}
+.linha-tst{display:flex;gap:9px;align-items:baseline;padding:7px 10px;
+           border:1px solid var(--fio);border-radius:8px;margin-bottom:4px;background:#fff}
+.linha-tst--falha{border-color:var(--alerta);background:var(--alerta-luz)}
+.marca{flex:none;font-weight:700;font-size:12.5px}
+.marca--ok{color:#2f6b43}
+.marca--falha{color:var(--alerta)}
+.linha-tst__t{flex:1;font-size:13px;color:var(--txt)}
+.linha-tst__d{font-size:12px;color:var(--txt-3)}
+.linha-tst--falha .linha-tst__d{color:var(--alerta)}
+
+.limpeza{margin-top:20px;font-size:12.5px;color:var(--txt-2);
+         border-top:1px solid var(--fio);padding-top:12px}
+</style>
+</head>
+<body class="admin">
+
+<script src="js/quebra-moldura.js"></script>
+
+<header class="topo">
+  <div class="topo__interno">
+    <div class="marca">
+      <img class="marca__logo" src="assets/logo-hub.png" alt="Hub Totali">
+      <span class="marca__secao">Conferência</span>
+    </div>
+    <div class="topo__acoes">
+      <a class="btn btn--fantasma" href="index.html">Voltar ao Hub</a>
+    </div>
+  </div>
+</header>
+
+<main class="tst">
+  <div class="tst__cab"><h1 class="tst__t">Conferência automática</h1></div>
+
+  <p class="tst__x">
+    Roda uma bateria de verificações contra o sistema <strong>de verdade</strong> — o mesmo banco,
+    as mesmas regras — usando pendências de teste que ela mesma cria e apaga no fim.
+    Nenhum dado de trabalho é tocado: tudo o que ela escreve começa com
+    <code>ZZ-TESTE</code>, e a limpeza é conferida e relatada.
+  </p>
+
+  <p class="faixa faixa--atencao">
+    <strong>Escreve no banco de verdade.</strong> Não é simulação. Se algo falhar no meio,
+    pode sobrar uma pendência <code>ZZ-TESTE</code> — a própria página avisa quais, para você apagar.
+  </p>
+
+  <div class="tst__acoes">
+    <button class="btn btn--principal" type="button" id="btn-rodar">Rodar a conferência</button>
+    <span class="quem" id="quem"></span>
+  </div>
+
+  <div class="placar" id="placar" hidden></div>
+  <div id="saida"></div>
+  <div class="limpeza" id="limpeza" hidden></div>
+</main>
+
+<script src="js/config-hub.js"></script>
+<script src="js/sistemas.js"></script>
+<script src="js/agenda.js"></script>
+<script src="js/dados.js"></script>
+<script src="js/pendencias.js"></script>
+<script src="js/testes.js"></script>
+</body>
+</html>
