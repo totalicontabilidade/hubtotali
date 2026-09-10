@@ -241,6 +241,15 @@ const PendenciasUI = (function () {
         return;
       }
 
+      /* Diz o que NÃO está aqui. O quadro carrega as sessenta
+         resolvidas mais recentes; sem esta linha, quem procurasse
+         uma antiga concluiria que ela foi apagada. */
+      if (MOSTRAR_RESOLVIDAS) {
+        lista.appendChild(el("div", "pd-vazio",
+          "As resolvidas mais recentes aparecem aqui. As mais antigas continuam guardadas no banco, " +
+          "fora desta tela — elas saem na cópia de segurança."));
+      }
+
       [
         { c: "atraso", t: "Atrasadas",     f: function (p) { return p.situacao !== "resolvida" && Pendencias.estado(p) === "atrasada"; } },
         { c: "hoje",   t: "Para hoje",     f: function (p) { return p.situacao !== "resolvida" && Pendencias.estado(p) === "hoje"; } },
@@ -721,10 +730,13 @@ const PendenciasUI = (function () {
         var b = el("button", "pd-sit" + (p.situacao === o[0] ? " on" : ""), o[1]);
         b.type = "button";
         b.addEventListener("click", function () {
-          Pendencias.mudarSituacao(p, o[0]).then(function () {
+          Pendencias.mudarSituacao(p, o[0], meuNome()).then(function () {
             p.situacao = o[0];
             Array.prototype.forEach.call(sit.children, function (x) { x.classList.remove("on"); });
             b.classList.add("on");
+            /* A anotação automática acabou de entrar: repinta a
+               conversa para ela aparecer sem recarregar. */
+            pintarLinha(p, linha);
             desenhar();
           }).catch(function (err) { window.alert(err.message); });
         });
@@ -1030,7 +1042,7 @@ const PendenciasUI = (function () {
         return;
       }
       itens.forEach(function (x) {
-        var d = el("div", "pd-item");
+        var d = el("div", "pd-item" + (x.doSistema ? " pd-item--sistema" : ""));
         var cab = el("div", "pd-item__cab");
         cab.appendChild(el("span", "pd-item__quem", x.autorNome || nomeDe(x.autor)));
         cab.appendChild(el("span", "pd-item__quando", quandoEscrito(x.criadoEm)));
@@ -1046,7 +1058,7 @@ const PendenciasUI = (function () {
            vista, e o navegador deixa o usuário desligar esse tipo
            de caixa — desligada, a correção deixaria de existir sem
            nenhum aviso. */
-        if (Pendencias.podeEditar(x)) {
+        if (Pendencias.podeEditar(x) && !x.doSistema) {
           var ed = el("button", "pd-corrigir", "corrigir");
           ed.type = "button";
           ed.title = "Você tem 15 minutos para corrigir o que escreveu";

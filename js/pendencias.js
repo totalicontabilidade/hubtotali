@@ -183,20 +183,57 @@ const Pendencias = (function () {
     var s = Dados.sessao();
     if (!s) return Promise.resolve([]);
 
-    /* As abertas saem por listagem simples: a regra delas não olha
-       o conteúdo, então não há o que provar. */
-    var abertas = fetch(base() + "/" + ABERTAS + "?pageSize=300", {
-      headers: autorizacao(), cache: "no-store"
+    /* ---------- por que DUAS consultas nas abertas ----------
+       Antes era uma listagem simples de 300. Resolvida nunca sai
+       da coleção, então em um ou dois anos de uso esse teto seria
+       alcançado — e o que cairia fora não seriam as velhas, seria
+       o que o Firestore devolvesse por último. Pendência aberta
+       sumindo da tela sem aviso é o pior defeito possível num
+       sistema de cobrança.
+
+       Agora: TUDO o que não está resolvido, sem teto prático, mais
+       as sessenta resolvidas mais recentes, para o histórico
+       próximo continuar à mão. O que passa disso não some do
+       banco; só deixa de ser carregado toda manhã.
+
+       A ordenação das resolvidas é por criadoEm, e não por uma
+       data de resolução: criadoEm existe em todo documento, e
+       consulta ordenada por campo ausente não devolve o
+       documento. Já perdemos pendência para essa armadilha uma
+       vez. */
+    function deDocumento(l) {
+      var p = deFirestore(l.document.fields);
+      p.id = l.document.name.split("/").pop();
+      p._col = ABERTAS;
+      return p;
+    }
+
+    var naoResolvidas = fetch(base() + ":runQuery", {
+      method: "POST", headers: autorizacao(), cache: "no-store",
+      body: JSON.stringify({ structuredQuery: {
+        from: [{ collectionId: ABERTAS }],
+        where: { fieldFilter: { field: { fieldPath: "situacao" },
+                 op: "NOT_EQUAL", value: { stringValue: "resolvida" } } },
+        limit: 500 } }),
     })
       .then(conferir)
-      .then(function (j) {
-        return (j.documents || []).map(function (d) {
-          var p = deFirestore(d.fields);
-          p.id = d.name.split("/").pop();
-          p._col = ABERTAS;
-          return p;
-        });
-      });
+      .then(function (j) { return (j || []).filter(function (l) { return l.document; }).map(deDocumento); });
+
+    var resolvidasRecentes = fetch(base() + ":runQuery", {
+      method: "POST", headers: autorizacao(), cache: "no-store",
+      body: JSON.stringify({ structuredQuery: {
+        from: [{ collectionId: ABERTAS }],
+        where: { fieldFilter: { field: { fieldPath: "situacao" },
+                 op: "EQUAL", value: { stringValue: "resolvida" } } },
+        orderBy: [{ field: { fieldPath: "criadoEm" }, direction: "DESCENDING" }],
+        limit: 60 } }),
+    })
+      .then(function (r) { return r.ok ? r.json() : []; })
+      .then(function (j) { return (j || []).filter(function (l) { return l.document; }).map(deDocumento); })
+      .catch(function () { return []; });
+
+    var abertas = Promise.all([naoResolvidas, resolvidasRecentes])
+      .then(function (r) { return r[0].concat(r[1]); });
 
     /* As reservadas, por consulta filtrada em podemVer — que é o
        que torna a consulta provadamente segura. */
@@ -287,16 +324,39 @@ const Pendencias = (function () {
      Sem a máscara, o Firestore substituiria o documento inteiro
      pelo que eu mandasse — e apagaria tudo o que eu não tivesse
      incluído no corpo. */
-  function mudarSituacao(p, nova) {
+  var NOME_DA_SITUACAO = { aberta: "Aberta", fazendo: "Fazendo", resolvida: "Resolvida" };
+
+  /* MUDAR A SITUAÇÃO DEIXA RASTRO na linha do tempo.
+
+     Era a única ação importante que não ficava gravada: alguém
+     marcava "resolvida" e nada dizia quem foi nem quando. Num
+     sistema cujo propósito é sustentar combinado, isso é o
+     contrário do que ele existe para fazer.
+
+     O registro é escrito DEPOIS da mudança dar certo, e uma falha
+     nele não desfaz a mudança: perder a anotação é ruim, dizer que
+     a situação não mudou quando ela mudou é pior. */
+  function mudarSituacao(p, nova, nomeDeQuem) {
     if (["aberta", "fazendo", "resolvida"].indexOf(nova) === -1) {
       return Promise.reject(new Error("Situação desconhecida."));
     }
+    var antiga = p.situacao;
     var url = caminho(p) + "?updateMask.fieldPaths=situacao";
     return fetch(url, {
       method: "PATCH",
       headers: autorizacao(),
       body: JSON.stringify({ fields: { situacao: { stringValue: nova } } }),
-    }).then(conferir);
+    })
+      .then(conferir)
+      .then(function (r) {
+        if (antiga === nova) return r;
+        return acrescentar(p,
+          "Mudou de " + (NOME_DA_SITUACAO[antiga] || antiga) +
+          " para " + (NOME_DA_SITUACAO[nova] || nova) + ".",
+          nomeDeQuem, true)
+          .catch(function () { /* a anotação falhou; a mudança vale */ })
+          .then(function () { return r; });
+      });
   }
 
   /* ---------- corrigir o pedido ----------
@@ -569,7 +629,7 @@ const Pendencias = (function () {
       });
   }
 
-  function acrescentar(p, texto, nomeDeQuem) {
+  function acrescentar(p, texto, nomeDeQuem, doSistema) {
     var s = Dados.sessao();
     if (!s) return Promise.reject(new Error("Você precisa entrar."));
     if (!texto || !texto.trim()) return Promise.reject(new Error("Escreva alguma coisa."));
@@ -579,6 +639,10 @@ const Pendencias = (function () {
       autorNome: nomeDeQuem || s.email || "",
       texto:     texto.trim(),
       criadoEm:  new Date(),
+      /* Anotação do sistema não se corrige nem se confunde com o
+         que alguém escreveu à mão: a tela desenha diferente e não
+         oferece o "corrigir". */
+      doSistema: !!doSistema,
     };
     return fetch(caminho(p) + "/andamento", {
       method: "POST",

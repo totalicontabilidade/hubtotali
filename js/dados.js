@@ -371,6 +371,119 @@ const Dados = (function () {
       .catch(function () { return null; });
   }
 
+  /* ============================================================
+     CÓPIA DE SEGURANÇA
+     ------------------------------------------------------------
+     O Firestore guarda o estado atual, não o histórico. Um Salvar
+     errado na lista de sistemas tem o desfazer; o resto — equipe,
+     pendências, conversas — não tem nada. E o sistema hoje guarda
+     registro de trabalho e prova de combinado, o que pede cópia.
+
+     Traz TUDO o que é texto, inclusive as subcoleções, que é onde
+     mora a conversa. O que NÃO cabe aqui são os arquivos dos
+     anexos: um único PDF de dois megas engoliria o arquivo de
+     cópia. Deles vai a ficha — nome, tamanho, quem mandou, quando
+     e o caminho no Storage — que é o suficiente para saber o que
+     havia e onde procurar.
+     ============================================================ */
+  function copiaDeSeguranca(aoAndar) {
+    var s = lerSessao();
+    if (!s || !temBanco()) return Promise.reject(new Error("Você precisa entrar."));
+    var cabecalho = { "Authorization": "Bearer " + s.idToken };
+
+    function avisar(o) { if (typeof aoAndar === "function") aoAndar(o); }
+
+    function pegar(caminho) {
+      return fetch(BASE_DOCS() + caminho, { headers: cabecalho, cache: "no-store" })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .catch(function () { return null; });
+    }
+
+    function documentos(j) {
+      return ((j && j.documents) || []).map(function (d) {
+        var o = deFirestore(d.fields);
+        o._id = d.name.split("/").pop();
+        return o;
+      });
+    }
+
+    var saida = {
+      feitaEm: new Date().toISOString(),
+      feitaPor: s.email,
+      projeto: cfg.projectId,
+      aviso: "Cópia de segurança do Hub Totali. Guarde em lugar seguro: " +
+             "contém nomes, e-mails e o conteúdo das pendências, inclusive as reservadas.",
+    };
+
+    avisar("lista de sistemas");
+    return pegar("/hub/config")
+      .then(function (j) {
+        saida.sistemas = (j && j.fields && j.fields.json) ? JSON.parse(j.fields.json.stringValue) : null;
+        avisar("ícones");
+        return pegar("/hub/logos");
+      })
+      .then(function (j) {
+        saida.logos = (j && j.fields && j.fields.json) ? JSON.parse(j.fields.json.stringValue) : {};
+        avisar("equipe");
+        return pegar("/equipe?pageSize=200");
+      })
+      .then(function (j) {
+        saida.equipe = documentos(j);
+        avisar("pendências");
+        return pegar("/pendencias?pageSize=500");
+      })
+      .then(function (j) {
+        saida.pendencias = documentos(j);
+        return subcolecoes("pendencias", saida.pendencias);
+      })
+      .then(function () {
+        avisar("pendências reservadas");
+        /* As reservadas não se listam sem filtro — a regra é dura de
+           propósito. Vêm as que EU posso ver, e a cópia diz isso. */
+        return fetch(base_runQuery(), {
+          method: "POST", headers: comAutorizacao({ "Content-Type": "application/json" }),
+          body: JSON.stringify({ structuredQuery: {
+            from: [{ collectionId: "pendencias_reservadas" }],
+            where: { fieldFilter: { field: { fieldPath: "podemVer" },
+                     op: "ARRAY_CONTAINS", value: { stringValue: s.uid } } },
+            limit: 500 } }),
+        })
+          .then(function (r) { return r.ok ? r.json() : []; })
+          .then(function (j) {
+            saida.reservadas = (j || []).filter(function (l) { return l.document; })
+              .map(function (l) {
+                var o = deFirestore(l.document.fields);
+                o._id = l.document.name.split("/").pop();
+                return o;
+              });
+            saida.reservadasObservacao =
+              "Só as reservadas que " + s.email + " pode ver. Outra pessoa faria uma cópia diferente.";
+            return subcolecoes("pendencias_reservadas", saida.reservadas);
+          })
+          .catch(function () { saida.reservadas = []; });
+      })
+      .then(function () { return saida; });
+
+    function subcolecoes(colecao, lista) {
+      return lista.reduce(function (fila, p) {
+        return fila.then(function () {
+          avisar(p.oque ? "conversa de “" + String(p.oque).slice(0, 30) + "”" : "conversa");
+          return pegar("/" + colecao + "/" + encodeURIComponent(p._id) + "/andamento?pageSize=200")
+            .then(function (j) { p._andamento = documentos(j); })
+            .then(function () {
+              return pegar("/" + colecao + "/" + encodeURIComponent(p._id) + "/anexos?pageSize=50");
+            })
+            .then(function (j) { p._anexos = documentos(j); });
+        });
+      }, Promise.resolve());
+    }
+  }
+
+  function base_runQuery() {
+    return "https://firestore.googleapis.com/v1/projects/" + cfg.projectId +
+           "/databases/(default)/documents:runQuery";
+  }
+
   /* ---------- Manter a sessão viva ----------
      O token do Firebase vale uma hora. Sozinho, ele obrigaria a
      equipe a digitar a senha uma vez por turno — e o Hub é a
@@ -789,6 +902,7 @@ const Dados = (function () {
     carregar: carregar,
     salvar: salvar,
     versaoAnterior: versaoAnterior,
+    copiaDeSeguranca: copiaDeSeguranca,
     entrar: entrar,
     sair: sair,
     sessao: lerSessao,

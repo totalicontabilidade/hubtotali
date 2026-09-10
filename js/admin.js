@@ -1059,6 +1059,46 @@
       }).catch(function (e) { recado(e.message, true); });
     });
 
+    $("btn-copia").addEventListener("click", function () {
+      var b = $("btn-copia");
+      var onde = $("copia-quando");
+      b.disabled = true;
+      onde.textContent = "juntando…";
+
+      Dados.copiaDeSeguranca(function (o) { onde.textContent = "juntando " + o + "…"; })
+        .then(function (tudo) {
+          var texto = JSON.stringify(tudo, null, 2);
+          var hoje = new Date();
+          var nome = "hub-totali-copia-" +
+            hoje.getFullYear() + "-" +
+            ("0" + (hoje.getMonth() + 1)).slice(-2) + "-" +
+            ("0" + hoje.getDate()).slice(-2) + ".json";
+
+          /* O arquivo nasce e morre no navegador: nada sobe para
+             lugar nenhum, e é por isso que a cópia não é um risco
+             novo de vazamento — ela só desce. */
+          var endereco = URL.createObjectURL(new Blob([texto], { type: "application/json" }));
+          var a = document.createElement("a");
+          a.href = endereco;
+          a.download = nome;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          window.setTimeout(function () { URL.revokeObjectURL(endereco); }, 30000);
+
+          var quantas = (tudo.pendencias || []).length + (tudo.reservadas || []).length;
+          onde.textContent = Math.round(texto.length / 1024) + " kB · " + quantas +
+            (quantas === 1 ? " pendência" : " pendências");
+          $("copia-aviso").hidden = false;
+          recado("Cópia baixada: " + nome);
+        })
+        .catch(function (e) {
+          onde.textContent = "";
+          recado(e.message, true);
+        })
+        .then(function () { b.disabled = false; });
+    });
+
     $("btn-nova-pessoa").addEventListener("click", function () {
       var erro = $("np-erro");
       erro.hidden = true;
