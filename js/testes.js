@@ -284,7 +284,10 @@
       bloco.appendChild(el("div", "grupo__t", nome));
       porGrupo[nome].forEach(function (r) {
         var l = el("div", "linha-tst" + (r.ok ? "" : " linha-tst--falha"));
-        l.appendChild(el("span", "marca " + (r.ok ? "marca--ok" : "marca--falha"), r.ok ? "✓" : "✗"));
+        /* "sinal", não "marca": a folha da administração já usa
+       .marca para o bloco da logo, com display:flex, e ela
+       empurrava o ✓ para a linha de cima. */
+    l.appendChild(el("span", "sinal " + (r.ok ? "sinal--ok" : "sinal--falha"), r.ok ? "✓" : "✗"));
         l.appendChild(el("span", "linha-tst__t", r.oQue));
         if (r.detalhe) l.appendChild(el("span", "linha-tst__d", String(r.detalhe)));
         bloco.appendChild(l);
