@@ -352,8 +352,24 @@ service cloud.firestore {
                       && request.resource.data.texto.size() <= 3000
                       && request.time < resource.data.criadoEm + duration.value(15, 'm');
 
-        // Apagar, nunca.
-        allow delete: if false;
+        // APAGAR, SÓ JUNTO COM A PENDÊNCIA INTEIRA — e por quem a
+        // abriu.
+        //
+        // O "nunca" de antes protegia a coisa certa: ninguém
+        // reescreve nem some com o que o colega escreveu ENQUANTO
+        // a conversa está de pé. Só que ele também deixava a linha
+        // do tempo órfã no banco quando a pendência era apagada —
+        // comentários invisíveis, sem nada que os explicasse.
+        //
+        // A permissão nova é a mesma dos anexos, e é estreita
+        // pelas mesmas razões: só quem ABRIU a pendência, e só
+        // ENQUANTO ELA EXISTE. O get() abaixo falha depois de ela
+        // sumir, então a janela se fecha sozinha.
+        //
+        // O que continua impossível: apagar UM comentário e deixar
+        // o resto. Para um sair, a conversa inteira tem de sair.
+        allow delete: if daEquipe()
+                      && meuUid(get(/databases/$(database)/documents/pendencias/$(id)).data.criadoPor);
       }
     }
 
@@ -434,7 +450,8 @@ service cloud.firestore {
                       && meuUid(resource.data.autor)
                       && mudou().hasOnly(['texto', 'editadoEm'])
                       && request.time < resource.data.criadoEm + duration.value(15, 'm');
-        allow delete: if false;
+        allow delete: if daEquipe()
+                      && meuUid(get(/databases/$(database)/documents/pendencias_reservadas/$(id)).data.criadoPor);
       }
     }
 

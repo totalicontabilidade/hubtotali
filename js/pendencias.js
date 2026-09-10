@@ -677,6 +677,22 @@ const Pendencias = (function () {
         }, Promise.resolve());
       })
       .then(function () {
+        /* E a linha do tempo. Também ANTES da pendência, e pelo
+           mesmo motivo dos arquivos: a permissão de apagar um
+           comentário lê o criadoPor no documento da pendência, e
+           morre junto com ele. */
+        return andamento(p).then(function (itens) {
+          return itens.reduce(function (fila, x) {
+            return fila.then(function () {
+              if (!x.id) return;
+              return fetch(caminho(p) + "/andamento/" + encodeURIComponent(x.id), {
+                method: "DELETE", headers: autorizacao(),
+              });
+            });
+          }, Promise.resolve());
+        }).catch(function () { /* sem linha do tempo, segue */ });
+      })
+      .then(function () {
         return fetch(caminho(p), { method: "DELETE", headers: autorizacao() });
       })
       .then(function (r) {

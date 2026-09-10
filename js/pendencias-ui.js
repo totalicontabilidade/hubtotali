@@ -790,6 +790,10 @@ const PendenciasUI = (function () {
     var caixa = el("div", "pd-perigo");
     caixa.appendChild(el("div", "pd-perigo__t", "Apagar esta pendência?"));
 
+    /* O texto começa genérico e é reescrito com os números reais
+       assim que eles chegam. Prometer "a linha do tempo vai junto"
+       sem dizer quantos comentários são deixa a pessoa imaginar —
+       e o que ela imagina costuma ser menos do que é. */
     var texto = el("div", "pd-perigo__x",
       "A linha do tempo vai junto, com tudo o que foi escrito nela. Não há como desfazer.");
     caixa.appendChild(texto);
@@ -809,7 +813,16 @@ const PendenciasUI = (function () {
     /* Os arquivos são listados PELO NOME antes de qualquer coisa
        ser apagada: "3 anexos" não diz nada, "o contrato assinado"
        diz tudo. */
-    Pendencias.lerAnexos(p).then(function (anexos) {
+    Promise.all([Pendencias.lerAnexos(p), Pendencias.andamento(p).catch(function () { return []; })])
+    .then(function (r) {
+      var anexos = r[0], conversa = r[1];
+
+      texto.textContent = conversa.length
+        ? "A conversa vai junto: " + conversa.length +
+          (conversa.length === 1 ? " comentário será apagado" : " comentários serão apagados") +
+          " e não poderão ser recuperados."
+        : "Não há como desfazer.";
+
       if (anexos.length) {
         var lista = el("div", "pd-perigo__arquivos");
         /* Sem "Storage": ninguém que usa o Hub sabe o que é isso, e
