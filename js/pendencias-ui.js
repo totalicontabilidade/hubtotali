@@ -812,9 +812,12 @@ const PendenciasUI = (function () {
     Pendencias.lerAnexos(p).then(function (anexos) {
       if (anexos.length) {
         var lista = el("div", "pd-perigo__arquivos");
+        /* Sem "Storage": ninguém que usa o Hub sabe o que é isso, e
+           o que a pessoa precisa entender não é ONDE o arquivo
+           mora — é que ele não volta. */
         lista.appendChild(el("div", "pd-perigo__rot",
-          anexos.length === 1 ? "Este arquivo será apagado do Storage:"
-                              : "Estes " + anexos.length + " arquivos serão apagados do Storage:"));
+          anexos.length === 1 ? "Este arquivo será apagado para sempre e não poderá ser recuperado:"
+                              : "Estes " + anexos.length + " arquivos serão apagados para sempre e não poderão ser recuperados:"));
         anexos.forEach(function (a) {
           lista.appendChild(el("div", "pd-perigo__arq",
             a.nome + " · " + tamanhoLegivel(a.tamanho) + " · " + nomeDe(a.por)));
@@ -839,6 +842,82 @@ const PendenciasUI = (function () {
           var velho = caixa.querySelector(".pd-perigo__erro");
           if (velho) velho.remove();
           caixa.appendChild(el("div", "pd-perigo__erro", err.message));
+        });
+    });
+  }
+
+  /* ---------- ver antes de enviar ----------
+     Anexo não se apaga sozinho: uma vez enviado, ele só sai junto
+     com a pendência inteira. Isso torna o erro caro — mandar o
+     arquivo errado é mandar para sempre — e é por isso que vale um
+     passo a mais antes.
+
+     Imagem aparece de verdade, e o resto se abre numa aba se a
+     pessoa quiser conferir. O endereço temporário é do próprio
+     navegador; nada saiu do computador ainda. */
+  function conferirAntesDeEnviar(p, onde, botao, arquivo) {
+    var velho = onde.querySelector(".pd-previa");
+    if (velho) velho.remove();
+    botao.hidden = true;
+
+    var caixa = el("div", "pd-previa");
+    var endereco = URL.createObjectURL(arquivo);
+
+    var cab = el("div", "pd-previa__cab");
+    cab.appendChild(el("span", "pd-previa__n", arquivo.name));
+    cab.appendChild(el("span", "pd-previa__t", tamanhoLegivel(arquivo.size)));
+    caixa.appendChild(cab);
+
+    /* Sem regex: a barra invertida de / some na edição e o teste
+       passa a significar outra coisa. Quinta vez nesta base. */
+    var ehImagem = String(arquivo.type || "").indexOf("image/") === 0;
+    if (ehImagem) {
+      var img = document.createElement("img");
+      img.className = "pd-previa__img";
+      img.src = endereco;
+      img.alt = "";
+      caixa.appendChild(img);
+    } else {
+      var ver = el("button", "pd-previa__ver", "Abrir para conferir");
+      ver.type = "button";
+      ver.addEventListener("click", function () {
+        /* A aba abre dentro do clique, senão o navegador a barra. */
+        var aba = window.open("", "_blank");
+        if (aba) { try { aba.opener = null; } catch (e) {} aba.location = endereco; }
+      });
+      caixa.appendChild(ver);
+      caixa.appendChild(el("div", "pd-previa__x",
+        (arquivo.type || "tipo desconhecido") + " — ainda no seu computador, nada foi enviado."));
+    }
+
+    var acoes = el("div", "pd-previa__acoes");
+    var enviar = el("button", "pd-botao pd-botao--principal", "Enviar este arquivo");
+    var trocar = el("button", "pd-botao", "Escolher outro");
+    var cancelar = el("button", "pd-botao", "Cancelar");
+    [enviar, trocar, cancelar].forEach(function (x) { x.type = "button"; acoes.appendChild(x); });
+    caixa.appendChild(acoes);
+    onde.appendChild(caixa);
+
+    function encerrar() {
+      URL.revokeObjectURL(endereco);
+      caixa.remove();
+      botao.hidden = false;
+    }
+
+    cancelar.addEventListener("click", encerrar);
+    trocar.addEventListener("click", function () { encerrar(); botao.click(); });
+
+    enviar.addEventListener("click", function () {
+      enviar.disabled = true; trocar.disabled = true; cancelar.disabled = true;
+      enviar.textContent = "Enviando…";
+      Pendencias.enviarAnexo(p, arquivo)
+        .then(function () { URL.revokeObjectURL(endereco); pintarAnexos(p, onde); })
+        .catch(function (err) {
+          enviar.disabled = false; trocar.disabled = false; cancelar.disabled = false;
+          enviar.textContent = "Tentar de novo";
+          var e = caixa.querySelector(".pd-anexo__erro");
+          if (e) e.remove();
+          caixa.appendChild(el("div", "pd-anexo__erro", err.message));
         });
     });
   }
@@ -916,22 +995,14 @@ const PendenciasUI = (function () {
 
     var b = el("button", "pd-anexo__btn", "Anexar arquivo");
     b.type = "button";
-    b.title = "Até 10 MB por arquivo. Anexo não se apaga: é prova do que foi combinado.";
+    b.title = "Até 10 MB por arquivo. Anexo não se apaga sozinho: é prova do que foi combinado.";
     b.addEventListener("click", function () {
       var entrada = document.createElement("input");
       entrada.type = "file";
       entrada.addEventListener("change", function () {
         var arquivo = entrada.files && entrada.files[0];
         if (!arquivo) return;
-        b.disabled = true;
-        b.textContent = "Enviando " + arquivo.name + "…";
-        Pendencias.enviarAnexo(p, arquivo)
-          .then(function () { pintarAnexos(p, onde); })
-          .catch(function (err) {
-            b.disabled = false;
-            b.textContent = "Anexar arquivo";
-            onde.appendChild(el("div", "pd-anexo__erro", err.message));
-          });
+        conferirAntesDeEnviar(p, onde, b, arquivo);
       });
       entrada.click();
     });

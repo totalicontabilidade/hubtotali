@@ -649,8 +649,17 @@ const Pendencias = (function () {
             }).then(function (r) {
               /* 404 é sucesso disfarçado: o arquivo já não estava
                  lá, e o que queremos é que ele não esteja. */
+              if (r.status === 403) {
+                /* Quase sempre é o storage.rules desatualizado: a
+                   permissão de apagar é recente. Dizer isso poupa
+                   a pessoa de procurar defeito onde não há. */
+                throw new Error("Sem permissão para apagar o arquivo “" + a.nome + "”. " +
+                  "Nada foi removido — a pendência continua inteira. " +
+                  "Se isto acontece com todos, o storage.rules precisa ser republicado no console do Firebase.");
+              }
               if (!r.ok && r.status !== 404) {
-                throw new Error("Não consegui apagar o arquivo “" + a.nome + "”. Nada foi removido.");
+                throw new Error("Não consegui apagar o arquivo “" + a.nome + "” (erro " + r.status + "). " +
+                  "Nada foi removido — a pendência continua inteira, e nenhum arquivo ficou solto.");
               }
             });
           });
