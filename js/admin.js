@@ -1120,8 +1120,19 @@
        fica apontando para um setor que a lista já não tem. */
     var fila = afetados.reduce(function (antes, p) {
       return antes.then(function () {
+        /* A FICHA VAI INTEIRA, E ISSO NÃO É DESPERDÍCIO. O PATCH do
+           Firestore vai sem updateMask: mandar só "setores"
+           substituiria o documento por um que só tem setores, e a
+           pessoa perderia nome, e-mail, papel e ativo de uma vez.
+           É pelo mesmo motivo que desligarPessoa reenvia tudo. */
         var novos = setoresDe(p).map(function (s) { return s === velho ? novo : s; });
-        return Dados.gravarPessoa(p.uid, { setores: novos });
+        return Dados.gravarPessoa(p.uid, {
+          nome:    p.nome || "",
+          email:   p.email || "",
+          setores: novos,
+          papel:   Dados.ehFundador(p.uid) ? "admin" : (p.papel || "equipe"),
+          ativo:   p.ativo !== false,
+        });
       });
     }, Promise.resolve());
 
