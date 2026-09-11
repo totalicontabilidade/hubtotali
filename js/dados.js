@@ -921,7 +921,7 @@ const Dados = (function () {
     /* Os setores da casa. Mexer aqui muda o seletor do cadastro e
        o destino possível de uma pendência. */
     SETORES_DA_CASA: ["Fiscal", "Contábil", "Pessoal", "Legalização",
-                      "Financeiro", "TI", "Gerência", "Diretoria"],
+                      "Financeiro", "Comercial", "TI", "Gerência", "Diretoria"],
   };
 
 })();
