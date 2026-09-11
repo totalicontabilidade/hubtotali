@@ -9,13 +9,16 @@ pode ler o arquivo, e sem uma política de CORS no balde a leitura é
 barrada. O erro que chega ao código é um "Failed to fetch" mudo, sem
 status e sem texto — o navegador esconde o motivo de propósito.
 
-**Uma observação honesta sobre o diagnóstico.** A pergunta prévia
-(OPTIONS) ao endpoint do Firebase já respondia liberando tudo, mesmo
-antes de a política existir; medi isso. Ainda assim, era a política que
-faltava: aplicada, a leitura passou a funcionar no mesmo instante, sem
-nenhuma outra mudança. O envio, que também usa cabeçalho, funcionava
-desde antes. Não consegui explicar essa diferença, e prefiro registrar
-o que observei a inventar um mecanismo.
+**O que a mudança de endereço esclareceu.** Ficava aqui registrado que
+eu não sabia explicar por que o envio, que também usa cabeçalho,
+funcionava sem a política. A mudança do Hub para
+`hub.totalicontabilidade.com.br` respondeu: da origem nova, ainda fora
+da lista, **enviar e apagar anexo funcionaram; só abrir falhou**. Ou
+seja, a diferença não é o cabeçalho, é o caminho. O endereço de
+download (`?alt=media`) aplica a política de CORS do balde; os
+endereços de envio e exclusão respondem com uma liberação própria,
+independente dela. Por isso a lista `method` abaixo tem só `GET` e
+mesmo assim nada mais quebrou.
 
 A alternativa seria voltar a usar o link com token de download, que
 dispensa cabeçalho e dispensa CORS — e dispensa também o login, o que
@@ -56,9 +59,14 @@ gcloud storage buckets describe gs://hubtotali.firebasestorage.app --format="def
 ## O que esta política permite, e o que não permite
 
 Permite que **só os endereços do Hub** — `hub.totalicontabilidade.com.br` e
-o antigo `totalicontabilidade.github.io` — façam leitura de
-arquivo. Só `GET`: enviar e apagar continuam fora, e continuam também
-sujeitos às regras do `storage.rules`, que é quem de fato decide.
+o antigo `totalicontabilidade.github.io` — façam leitura de arquivo.
+Nenhuma outra página da internet consegue ler. Só `GET`, pelo motivo
+explicado lá em cima: enviar e apagar não passam por aqui.
+
+Quando o endereço antigo deixar de ser usado, tire-o da lista: cada
+origem a mais é uma página a mais que pode tentar.
+
+Tudo continua sujeito ao `storage.rules`, que é quem de fato decide.
 
 CORS não é autorização. Ele só diz ao navegador quais páginas podem
 *tentar*. Quem responde sim ou não continua sendo a regra do Storage,
