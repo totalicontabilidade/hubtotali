@@ -208,6 +208,7 @@
         afirmar(g, "anexo enviado e fichado", !!ficha.caminho);
         afirmar(g, "a ficha não guarda endereço público", !ficha.url);
         minha._caminhoDoAnexo = ficha.caminho;
+        minha._fichaDoAnexo = ficha;
         /* Trocar o arquivo por outro tem de ser recusado: é a
            garantia de que anexo vale como prova. */
         var c = (typeof CONFIG_HUB !== "undefined") ? CONFIG_HUB : {};
@@ -219,6 +220,21 @@
         }).then(function (r) {
           afirmar(g, "substituir o arquivo é recusado", r.status === 403, "HTTP " + r.status);
         });
+      })
+      .then(function () {
+        /* Enviar e abrir usam caminhos diferentes do Storage, e só o
+           de abrir passa pela política de CORS do balde. A bateria
+           testava só o envio, e por isso deu tudo certo no dia em que
+           a abertura estava quebrada no endereço novo. Não de novo. */
+        if (!minha._fichaDoAnexo) return null;
+        return Pendencias.abrirAnexo(minha._fichaDoAnexo)
+          .then(function (endereco) {
+            afirmar(g, "anexo abre de volta", endereco.indexOf("blob:") === 0, endereco.slice(0, 40));
+            URL.revokeObjectURL(endereco);
+          })
+          .catch(function (e) {
+            afirmar(g, "anexo abre de volta", false, e.message);
+          });
       })
       .then(function () {
         return Pendencias.apagar(minha).then(function () {
