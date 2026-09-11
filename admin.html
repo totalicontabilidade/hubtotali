@@ -176,6 +176,33 @@
       <div id="lista-equipe"></div>
     </section>
 
+    <!-- CUIDADO COM A PALAVRA "SETOR": ela quer dizer duas coisas
+         nesta página. Na aba Sistemas, setor é uma CATEGORIA DE
+         LINKS ("Principais", "Do dia a dia"). Aqui, é a ÁREA DA
+         PESSOA (Fiscal, Contábil). São coisas diferentes, guardadas
+         em documentos diferentes. Por isso os identificadores daqui
+         começam com "dep-", de departamento: já existe um
+         btn-novo-setor logo abaixo, e é o da outra aba. -->
+    <section class="painel">
+      <div class="painel__cabeca">
+        <h2 class="painel__titulo">Setores</h2>
+        <span class="painel__nota" id="dep-conta"></span>
+      </div>
+      <p class="admin__nota">
+        São as áreas que aparecem no cadastro de cada pessoa e no
+        <strong>Quem faz</strong> das pendências. Grava na hora, como o resto desta aba.
+      </p>
+      <div id="dep-lista"></div>
+      <div class="dep-novo">
+        <label class="campo campo--linha">
+          <span class="campo__rotulo">Novo setor</span>
+          <input class="campo__caixa" type="text" id="dep-nome" maxlength="30" placeholder="Ex.: Comercial">
+        </label>
+        <button class="btn btn--principal" type="button" id="btn-novo-departamento">Acrescentar</button>
+      </div>
+      <p class="erro" id="dep-erro" hidden></p>
+    </section>
+
     <section class="painel">
       <div class="painel__cabeca">
         <h2 class="painel__titulo">Cópia de segurança</h2>

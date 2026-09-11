@@ -775,6 +775,10 @@
   })();
 
   Dados.pronto().then(function (sessao) {
+    /* Os setores vivem no banco. Busca sem esperar: a tela nunca
+       depende deles para desenhar, e quem vai usá-los é o
+       formulário de pendência, montado só quando alguém clica. */
+    if (sessao) Dados.carregarSetores();
     if (sessao || !Dados.temBanco()) abrirHub();
     else abrirPortao();
   });

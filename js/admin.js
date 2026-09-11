@@ -993,11 +993,188 @@
     });
   }
 
+  /* ---------- Os setores da casa ----------
+
+     "Setor" quer dizer duas coisas nesta página: na aba Sistemas é
+     uma categoria de links; aqui é a área de uma pessoa. São
+     documentos diferentes no banco, e por isso os nomes daqui
+     começam com "dep", de departamento. */
+
+  function desenharCaixasDaNovaPessoa() {
+    var caixa = $("np-setores");
+    if (!caixa) return;
+    /* Guarda o que já estava marcado: mexer nos setores no meio de
+       um cadastro pela metade não pode desmarcar o que a pessoa
+       tinha acabado de escolher. */
+    var marcados = {};
+    Array.prototype.slice.call(caixa.querySelectorAll("input:checked"))
+      .forEach(function (c) { marcados[c.value] = true; });
+    caixa.textContent = "";
+    Dados.SETORES_DA_CASA.forEach(function (s) {
+      var l = document.createElement("label");
+      var c = document.createElement("input");
+      c.type = "checkbox"; c.value = s; c.checked = !!marcados[s];
+      l.appendChild(c);
+      l.appendChild(elemento("span", null, s));
+      caixa.appendChild(l);
+    });
+  }
+
+  function erroDep(texto) {
+    var e = $("dep-erro");
+    if (!e) return;
+    e.textContent = texto || "";
+    e.hidden = !texto;
+  }
+
+  function quemEstaEm(nome) {
+    var alvo = String(nome).toLowerCase();
+    return equipe.filter(function (p) {
+      return setoresDe(p).some(function (s) { return String(s).toLowerCase() === alvo; });
+    });
+  }
+
+  function setorJaExiste(nome) {
+    var alvo = String(nome).toLowerCase();
+    return Dados.SETORES_DA_CASA.some(function (s) { return s.toLowerCase() === alvo; });
+  }
+
+  function desenharSetores() {
+    var caixa = $("dep-lista");
+    if (!caixa) return;
+    var lista = Dados.SETORES_DA_CASA;
+    $("dep-conta").textContent = lista.length === 1 ? "1 setor" : lista.length + " setores";
+    caixa.textContent = "";
+    lista.forEach(function (nome) {
+      var linha = elemento("div", "dep-linha");
+      linha.appendChild(elemento("span", "dep-linha__nome", nome));
+      var n = quemEstaEm(nome).length;
+      linha.appendChild(elemento("span", "dep-linha__uso",
+        n === 0 ? "ninguém" : (n === 1 ? "1 pessoa" : n + " pessoas")));
+
+      var fim = elemento("div", "dep-linha__fim");
+      var bRenomear = elemento("button", "btn btn--pequeno", "Renomear");
+      bRenomear.type = "button";
+      bRenomear.addEventListener("click", function () { renomearSetor(nome); });
+      var bRemover = elemento("button", "btn btn--pequeno btn--perigo", "Remover");
+      bRemover.type = "button";
+      bRemover.addEventListener("click", function () { removerSetor(nome); });
+      fim.appendChild(bRenomear);
+      fim.appendChild(bRemover);
+      linha.appendChild(fim);
+      caixa.appendChild(linha);
+    });
+  }
+
+  /* Grava a lista e redesenha os três lugares que a usam: esta
+     lista, as caixinhas da nova pessoa e a ficha de cada pessoa. */
+  function salvarSetores(lista, aviso) {
+    erroDep("");
+    return Dados.gravarSetores(lista)
+      .then(function () {
+        desenharSetores();
+        desenharCaixasDaNovaPessoa();
+        desenharEquipe();
+        recado(aviso);
+      })
+      .catch(function (e) { erroDep(e.message); throw e; });
+  }
+
+  function acrescentarSetor() {
+    var campo = $("dep-nome");
+    var nome = campo.value.replace(/^\s+|\s+$/g, "");
+    erroDep("");
+    if (!nome) { erroDep("Escreva o nome do setor."); campo.focus(); return; }
+    if (setorJaExiste(nome)) { erroDep("Já existe um setor com esse nome."); campo.focus(); return; }
+    salvarSetores(Dados.SETORES_DA_CASA.concat([nome]), "Setor “" + nome + "” criado.")
+      .then(function () { campo.value = ""; })
+      .catch(function () { /* a mensagem já está na tela */ });
+  }
+
+  /* RENOMEAR ALCANÇA O CADASTRO DAS PESSOAS, MAS NÃO AS PENDÊNCIAS.
+     O setor de uma pessoa é texto guardado na ficha dela, então dá
+     para corrigir. Já o destino de uma pendência a regra do banco
+     congela na criação — de propósito, para ninguém empurrar tarefa
+     para outra área sem avisar. Então pendência aberta para o nome
+     velho continua com o nome velho, e quem vai confirmar precisa
+     saber disso ANTES, não depois. */
+  function renomearSetor(velho) {
+    erroDep("");
+    var novo = window.prompt("Novo nome para o setor “" + velho + "”:", velho);
+    if (novo === null) return;
+    novo = novo.replace(/^\s+|\s+$/g, "");
+    if (!novo || novo === velho) return;
+    if (setorJaExiste(novo)) { erroDep("Já existe um setor com esse nome."); return; }
+
+    var afetados = quemEstaEm(velho);
+    var abertas = "As pendências já abertas para “" + velho + "” continuam com o nome " +
+                  "antigo: o banco não deixa trocar o destino de uma pendência depois de criada.";
+    var pergunta = afetados.length
+      ? "Renomear para “" + novo + "” também corrige o cadastro de " +
+        (afetados.length === 1 ? "1 pessoa" : afetados.length + " pessoas") + ".\n\n" + abertas +
+        "\n\nRenomear assim mesmo?"
+      : "Renomear “" + velho + "” para “" + novo + "”?\n\n" + abertas;
+    if (!window.confirm(pergunta)) return;
+
+    /* As pessoas primeiro, a lista depois. Se parar no meio, ninguém
+       fica apontando para um setor que a lista já não tem. */
+    var fila = afetados.reduce(function (antes, p) {
+      return antes.then(function () {
+        var novos = setoresDe(p).map(function (s) { return s === velho ? novo : s; });
+        return Dados.gravarPessoa(p.uid, { setores: novos });
+      });
+    }, Promise.resolve());
+
+    fila
+      .then(function () {
+        return salvarSetores(Dados.SETORES_DA_CASA.map(function (s) {
+          return s === velho ? novo : s;
+        }), "Setor renomeado para “" + novo + "”.");
+      })
+      .then(function () { carregarEquipe(); })
+      .catch(function (e) {
+        erroDep("Parei no meio: " + e.message + " Confira a lista e tente de novo.");
+        carregarEquipe();
+      });
+  }
+
+  function removerSetor(nome) {
+    erroDep("");
+    var dentro = quemEstaEm(nome);
+    if (dentro.length) {
+      erroDep("Não dá para remover “" + nome + "”: " +
+              dentro.map(function (p) { return p.nome || p.email; }).join(", ") +
+              (dentro.length === 1 ? " ainda está nele." : " ainda estão nele.") +
+              " Tire do cadastro dessas pessoas primeiro.");
+      return;
+    }
+    if (Dados.SETORES_DA_CASA.length <= 1) {
+      erroDep("A casa precisa de pelo menos um setor.");
+      return;
+    }
+    if (!window.confirm("Remover o setor “" + nome + "”?\n\n" +
+                        "Pendências já abertas para ele continuam existindo e guardando esse nome.")) return;
+    salvarSetores(Dados.SETORES_DA_CASA.filter(function (s) { return s !== nome; }),
+                  "Setor “" + nome + "” removido.")
+      .catch(function () { /* a mensagem já está na tela */ });
+  }
+
+  function ligarSetores() {
+    if (ligarSetores.pronto) return;
+    ligarSetores.pronto = true;
+    $("btn-novo-departamento").addEventListener("click", acrescentarSetor);
+    $("dep-nome").addEventListener("keydown", function (ev) {
+      if (ev.key === "Enter") { ev.preventDefault(); acrescentarSetor(); }
+    });
+    desenharSetores();
+  }
+
   function carregarEquipe() {
     Dados.listarEquipe()
       .then(function (lista) {
         equipe = lista;
         desenharEquipe();
+        desenharSetores();
         conferirSeEstouNaLista();
       })
       .catch(function (e) {
@@ -1024,18 +1201,12 @@
     ligarEquipe.pronto = true;
 
     var caixaSetores = $("np-setores");
-    Dados.SETORES_DA_CASA.forEach(function (s) {
-      var l = document.createElement("label");
-      var c = document.createElement("input");
-      c.type = "checkbox"; c.value = s;
-      l.appendChild(c);
-      l.appendChild(elemento("span", null, s));
-      caixaSetores.appendChild(l);
-    });
+    desenharCaixasDaNovaPessoa();
     function setoresMarcados() {
       return Array.prototype.slice.call(caixaSetores.querySelectorAll("input:checked"))
         .map(function (c) { return c.value; });
     }
+    ligarSetores();
 
     $("btn-sou-eu").addEventListener("click", function () {
       var s = Dados.sessao();
@@ -1175,8 +1346,12 @@
        o último acesso. Quem perdeu volta para a tela de entrada em
        vez de olhar uma tela de edição que o banco vai recusar. */
     Dados.souAdministrador().then(function (pode) {
-      if (pode) abrirEdicao();
-      else { Dados.sair(); mostrarEntrada(); }
+      if (!pode) { Dados.sair(); mostrarEntrada(); return; }
+      /* Aqui ESPERA os setores, ao contrário do Hub: as caixinhas
+         de setor são desenhadas na abertura da tela, e desenhar a
+         lista padrão para trocar meio segundo depois faria a
+         pessoa marcar um setor que pisca e some. */
+      Dados.carregarSetores().then(abrirEdicao);
     });
   });
 

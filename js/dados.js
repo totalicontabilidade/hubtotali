@@ -896,6 +896,106 @@ const Dados = (function () {
     });
   }
 
+  /* ---------- Os setores da casa ----------
+
+     Ficavam fixos neste arquivo. Agora vivem no banco, em
+     hub/departamentos, para a administração poder criar e
+     renomear sem mexer em código. A lista abaixo continua
+     existindo como semente e como rede de segurança: é o que
+     vale antes de o banco responder, e se ele não responder.
+
+     O DOCUMENTO NÃO SE CHAMA "setores", de propósito. Dentro de
+     hub/config, "setores" já significa outra coisa — as
+     categorias de sistemas da tela inicial. Dois conceitos com o
+     mesmo nome no mesmo lugar é pedir para alguém apagar a coisa
+     errada um dia.
+
+     Nenhuma regra do Firestore conhece nomes de setor: ela só
+     exige que "setores" seja uma lista. Por isso criar um setor
+     novo não pede republicação de regra. */
+
+  var CHAVE_SETORES = "hub-totali:setores";
+
+  var SETORES_PADRAO = ["Fiscal", "Contábil", "Pessoal", "Legalização",
+                        "Financeiro", "Comercial", "TI", "Gerência", "Diretoria"];
+
+  /* O MESMO array do começo ao fim da sessão. Quem leu
+     Dados.SETORES_DA_CASA guardou a referência; trocar o objeto
+     deixaria essa gente com a lista velha na mão. Mexe-se no
+     conteúdo, nunca na caixa. */
+  var SETORES_DA_CASA = SETORES_PADRAO.slice();
+
+  function trocarSetores(lista) {
+    SETORES_DA_CASA.length = 0;
+    lista.forEach(function (s) { SETORES_DA_CASA.push(s); });
+    return SETORES_DA_CASA;
+  }
+
+  /* Tira espaço sobrando, vazio e repetido. Repetido é comparado
+     sem diferença de maiúscula: "fiscal" e "Fiscal" seriam dois
+     setores na tela e um só na cabeça de quem usa. */
+  function limparSetores(lista) {
+    var vistos = {}, saida = [];
+    (lista || []).forEach(function (s) {
+      var nome = String(s == null ? "" : s).replace(/^\s+|\s+$/g, "");
+      if (!nome || nome.length > 30) return;
+      var chave = nome.toLowerCase();
+      if (vistos[chave]) return;
+      vistos[chave] = true;
+      saida.push(nome);
+    });
+    return saida;
+  }
+
+  function lerSetoresDoCache() {
+    try {
+      var bruto = window.localStorage.getItem(CHAVE_SETORES);
+      var d = bruto ? JSON.parse(bruto) : null;
+      return Array.isArray(d) ? d : null;
+    } catch (e) { return null; }
+  }
+
+  function carregarSetores() {
+    var doCache = lerSetoresDoCache();
+    if (doCache && doCache.length) trocarSetores(limparSetores(doCache));
+
+    if (!temBanco() || !lerSessao()) return Promise.resolve(SETORES_DA_CASA);
+
+    return fetch(DOC_HUB("departamentos"), { headers: comAutorizacao() })
+      .then(function (r) {
+        /* 404 é o caso normal antes de alguém salvar pela primeira
+           vez: vale a lista padrão, sem erro na cara de ninguém. */
+        return r.ok ? r.json() : null;
+      })
+      .then(function (doc) {
+        if (!doc || !doc.fields || !doc.fields.json) return SETORES_DA_CASA;
+        var lista = limparSetores(JSON.parse(doc.fields.json.stringValue));
+        if (!lista.length) return SETORES_DA_CASA;
+        gravarCache(CHAVE_SETORES, lista);
+        return trocarSetores(lista);
+      })
+      .catch(function () { return SETORES_DA_CASA; });
+  }
+
+  function gravarSetores(lista) {
+    if (!lerSessao()) return Promise.reject(new Error("Sessão expirada. Entre de novo."));
+    var limpa = limparSetores(lista);
+    if (!limpa.length) return Promise.reject(new Error("A casa precisa de pelo menos um setor."));
+
+    return fetch(DOC_HUB("departamentos"), {
+      method: "PATCH",
+      headers: comAutorizacao({ "Content-Type": "application/json" }),
+      body: JSON.stringify({ fields: {
+        json:         { stringValue: JSON.stringify(limpa) },
+        atualizadoEm: { timestampValue: new Date().toISOString() },
+      } }),
+    }).then(function (r) {
+      if (!r.ok) throw new Error("Não consegui salvar os setores (HTTP " + r.status + ").");
+      gravarCache(CHAVE_SETORES, limpa);
+      return trocarSetores(limpa);
+    });
+  }
+
   return {
     temBanco: temBanco,
     semente: semente,
@@ -920,8 +1020,10 @@ const Dados = (function () {
 
     /* Os setores da casa. Mexer aqui muda o seletor do cadastro e
        o destino possível de uma pendência. */
-    SETORES_DA_CASA: ["Fiscal", "Contábil", "Pessoal", "Legalização",
-                      "Financeiro", "Comercial", "TI", "Gerência", "Diretoria"],
+    SETORES_DA_CASA: SETORES_DA_CASA,
+    SETORES_PADRAO: SETORES_PADRAO,
+    carregarSetores: carregarSetores,
+    gravarSetores: gravarSetores,
   };
 
 })();
