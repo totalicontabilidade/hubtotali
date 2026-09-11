@@ -1,6 +1,9 @@
 [
   {
-    "origin": ["https://totalicontabilidade.github.io"],
+    "origin": [
+      "https://hub.totalicontabilidade.com.br",
+      "https://totalicontabilidade.github.io"
+    ],
     "method": ["GET"],
     "responseHeader": ["Content-Type", "Content-Disposition", "Authorization"],
     "maxAgeSeconds": 3600

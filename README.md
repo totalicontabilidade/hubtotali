@@ -137,7 +137,14 @@ máquina; no ar ele não faz falta.
 
 ## Publicar no GitHub Pages
 
-Está publicado em **https://totalicontabilidade.github.io/hubtotali/**
+Está publicado em **https://hub.totalicontabilidade.com.br**
+
+O endereço antigo, `https://totalicontabilidade.github.io/hubtotali/`,
+continua funcionando: o GitHub redireciona sozinho para o domínio novo.
+O domínio vive no arquivo `CNAME`, na raiz — apagar esse arquivo derruba
+o endereço. O DNS está na Cloudflare: `hub` é um CNAME para
+`totalicontabilidade.github.io`, **sem proxy** (nuvem cinza), porque é
+o GitHub quem emite o certificado.
 
 Para publicar uma mudança de código:
 

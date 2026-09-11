@@ -34,7 +34,10 @@ acesso público e permanente a documento fiscal de cliente.
 cat > cors.json <<'JSON'
 [
   {
-    "origin": ["https://totalicontabilidade.github.io"],
+    "origin": [
+      "https://hub.totalicontabilidade.com.br",
+      "https://totalicontabilidade.github.io"
+    ],
     "method": ["GET"],
     "responseHeader": ["Content-Type", "Content-Disposition", "Authorization"],
     "maxAgeSeconds": 3600
@@ -52,7 +55,8 @@ gcloud storage buckets describe gs://hubtotali.firebasestorage.app --format="def
 
 ## O que esta política permite, e o que não permite
 
-Permite que **uma única origem** — o endereço do Hub — faça leitura de
+Permite que **só os endereços do Hub** — `hub.totalicontabilidade.com.br` e
+o antigo `totalicontabilidade.github.io` — façam leitura de
 arquivo. Só `GET`: enviar e apagar continuam fora, e continuam também
 sujeitos às regras do `storage.rules`, que é quem de fato decide.
 
