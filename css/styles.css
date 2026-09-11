@@ -370,6 +370,48 @@ a{color:inherit;text-decoration:none}
 .pd-caixa-txt{width:100%;padding:9px 11px;border:1px solid var(--fio-2);border-radius:9px;
               font:inherit;font-size:13.5px;color:var(--txt);background:#fff}
 .pd-caixa-txt:focus{outline:none;border-color:var(--estado);box-shadow:0 0 0 3px rgba(44,90,143,.14)}
+
+/* O SETOR COMO LEMBRETE, NÃO COMO CRACHÁ
+   ------------------------------------------------------------
+   Por muito tempo o conteúdo de um <option> foi intocável: o
+   sistema operacional desenhava a lista, e o CSS ficava do lado de
+   fora. appearance:base-select muda isso — o navegador passa a
+   desenhar a lista como HTML comum, e aí dá para dizer que o setor
+   é menor e mais claro que o nome.
+
+   É melhoria progressiva, e de propósito. Continua sendo um
+   <select> de verdade: mesmo elemento, mesmo value, mesmo
+   comportamento de teclado e de leitor de tela. Onde a regra não
+   for entendida, nada quebra — a lista volta a ser a nativa e o
+   setor aparece entre parênteses, como antes.
+
+   O QUE MUDA DE FATO: onde isto vale, a lista aberta deixa de ser
+   a do Windows e passa a ser esta. No celular, o mesmo: em vez da
+   roleta do sistema, esta lista. É o preço de poder estilizar, e
+   por isso o desenho aqui imita o campo em vez de inventar. */
+@supports (appearance: base-select) {
+  .pd-caixa-txt{appearance:base-select}
+  .pd-caixa-txt::picker(select){
+    appearance:base-select;
+    border:1px solid var(--fio-2);border-radius:10px;background:#fff;padding:4px;
+    box-shadow:0 12px 30px rgba(13,25,38,.16);
+  }
+  .pd-caixa-txt option{
+    display:flex;align-items:baseline;gap:5px;
+    padding:7px 9px;border-radius:7px;font-size:13.5px;color:var(--txt);
+  }
+  .pd-caixa-txt option::checkmark{display:none}
+  .pd-caixa-txt option:hover,
+  .pd-caixa-txt option:checked{background:var(--estado-luz)}
+  /* O separador "— ou mande para um setor —" não é escolha: é
+     título de grupo, e tem de parecer um. */
+  .pd-caixa-txt option:disabled{
+    color:var(--txt-3);font-size:11px;font-weight:730;letter-spacing:.06em;
+    text-transform:uppercase;padding-top:10px;
+  }
+  .pd-caixa-txt option:disabled:hover{background:transparent}
+  .pd-op-sec{font-size:11.5px;font-weight:400;color:var(--txt-3)}
+}
 .pd-area{resize:vertical;min-height:52px;line-height:1.45}
 
 .pd-botao{width:100%;padding:11px;border-radius:10px;font-size:13.5px;font-weight:660;

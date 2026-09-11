@@ -455,7 +455,22 @@ const PendenciasUI = (function () {
     s.className = "pd-caixa-txt";
     opcoes.forEach(function (o) {
       var op = document.createElement("option");
-      op.value = o.valor; op.textContent = o.texto;
+      op.value = o.valor;
+      op.textContent = o.texto;
+      /* A PARTE SECUNDÁRIA VAI NUM <span> DENTRO DA OPÇÃO.
+         Navegador que entende appearance:base-select desenha a
+         opção com CSS, e aí o span pode ficar menor e mais claro.
+         Navegador que não entende ignora o span e mostra o texto
+         corrido, "Anne (Pessoal)" — que continua legível. Por isso
+         os parênteses ficam no texto e não no estilo: eles são o
+         que sobra quando o estilo não chega. */
+      if (o.secundario) {
+        op.appendChild(document.createTextNode(" "));
+        var sec = document.createElement("span");
+        sec.className = "pd-op-sec";
+        sec.textContent = "(" + o.secundario + ")";
+        op.appendChild(sec);
+      }
       if (o.desabilitado) op.disabled = true;
       if (o.valor === valor) op.selected = true;
       s.appendChild(op);
@@ -521,17 +536,12 @@ const PendenciasUI = (function () {
            frente, e ver "Rone · Contábil" quando ele também é do
            Fiscal esconde metade de quem ele é.
 
-           ENTRE PARÊNTESES, E NÃO MAIS CLARO. O pedido era apagar
-           um pouco o setor para ele não competir com o nome. Num
-           <select> nativo o navegador desenha o texto da opção
-           inteiro de uma vez: cor e peso valem para tudo, e clarear
-           o setor clarearia o nome junto. Parênteses fazem o mesmo
-           serviço com pontuação — o olho lê o que está dentro como
-           secundário — e a lista continua sendo um campo nativo,
-           que funciona no teclado, no leitor de tela e no seletor
-           do celular. */
+           O SETOR É LEMBRETE, NÃO CRACHÁ. Com o mesmo peso do nome
+           ele parecia definir a pessoa. Vai como parte secundária
+           da opção: menor e mais claro onde o navegador deixa
+           estilizar a lista, entre parênteses onde não deixa. */
         var s = setoresDe(p).join(", ");
-        return { valor: "p:" + p.uid, texto: p.nome + (s ? " (" + s + ")" : "") };
+        return { valor: "p:" + p.uid, texto: p.nome, secundario: s };
       })
       .concat([{ valor: "", texto: "— ou mande para um setor —", desabilitado: true }])
       .concat((Dados.SETORES_DA_CASA || []).map(function (s) {
