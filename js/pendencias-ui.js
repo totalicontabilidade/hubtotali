@@ -515,7 +515,24 @@ const PendenciasUI = (function () {
        sabe escolhe a área, e ninguém precisa entender a diferença
        entre dois campos parecidos. */
     var quem = seletor("Quem faz", equipe.filter(function (p) { return p.ativo; })
-      .map(function (p) { return { valor: "p:" + p.uid, texto: p.nome + (setorDe(p) ? " · " + setorDe(p) : "") }; })
+      .map(function (p) {
+        /* Todos os setores da pessoa, não só o primeiro: em
+           escritório pequeno quase todo mundo cobre mais de uma
+           frente, e ver "Rone · Contábil" quando ele também é do
+           Fiscal esconde metade de quem ele é.
+
+           ENTRE PARÊNTESES, E NÃO MAIS CLARO. O pedido era apagar
+           um pouco o setor para ele não competir com o nome. Num
+           <select> nativo o navegador desenha o texto da opção
+           inteiro de uma vez: cor e peso valem para tudo, e clarear
+           o setor clarearia o nome junto. Parênteses fazem o mesmo
+           serviço com pontuação — o olho lê o que está dentro como
+           secundário — e a lista continua sendo um campo nativo,
+           que funciona no teclado, no leitor de tela e no seletor
+           do celular. */
+        var s = setoresDe(p).join(", ");
+        return { valor: "p:" + p.uid, texto: p.nome + (s ? " (" + s + ")" : "") };
+      })
       .concat([{ valor: "", texto: "— ou mande para um setor —", desabilitado: true }])
       .concat((Dados.SETORES_DA_CASA || []).map(function (s) {
         return { valor: "s:" + s, texto: "Setor " + s };
