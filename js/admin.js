@@ -674,12 +674,24 @@
       b.textContent = "Salvando…";
 
       var sessao = Dados.sessao();
-      Dados.salvar(dados, sessao && sessao.email).then(function (r) {
+      var quem = sessao && sessao.email;
+
+      /* OS RECADOS VÃO SEMPRE, A LISTA SÓ SE FOR ADMINISTRADOR.
+         São dois documentos e duas alçadas: a Gerência escreve o
+         recado e nada mais. Mandar os dois para quem só pode um
+         voltaria 403 e faria parecer que o recado também falhou. */
+      var indo = Dados.salvarAvisos(dados.avisos || [], quem);
+      if (souAdmin) {
+        indo = indo.then(function () { return Dados.salvar(dados, quem); });
+      }
+
+      indo.then(function (r) {
         limparPendente();
-        recado(r.local ? "Salvo neste navegador (modo de teste)." : "Salvo. A equipe já vê a mudança.");
+        recado((r && r.local) ? "Salvo neste navegador (modo de teste)."
+                              : "Salvo. A equipe já vê a mudança.");
         /* A versão anterior acabou de mudar: o botão precisa
            passar a oferecer a volta para ESTE ponto. */
-        oferecerDesfazer();
+        if (souAdmin) oferecerDesfazer();
       }).catch(function (e) {
         b.disabled = false;
         b.textContent = "Salvar mudanças";
@@ -787,6 +799,34 @@
      ============================================================ */
 
   var equipe = [];
+
+  /* Preenchido na entrada. Governa o que a tela mostra e o que o
+     Salvar tenta gravar. */
+  var souAdmin = false;
+
+  /* A tela da Gerência: a mesma página, com quase tudo escondido.
+     Esconder é o certo aqui, e não desabilitar — campo cinza
+     convida a perguntar "por que não posso?", e a resposta seria
+     uma aula sobre alçada que ninguém pediu. */
+  function sóRecados() {
+    $("abas").hidden = true;
+    $("painel-equipe").hidden = true;
+    var sistemas = $("painel-sistemas");
+    sistemas.hidden = false;
+    Array.prototype.slice.call(sistemas.children).forEach(function (filho) {
+      if (filho.id !== "painel-avisos") filho.hidden = true;
+    });
+
+    var cabeca = document.createElement("div");
+    cabeca.className = "admin__cabeca";
+    cabeca.appendChild(elemento("h1", "admin__titulo", "Recados e prazos"));
+    cabeca.appendChild(elemento("p", "admin__nota",
+      "O que você escrever aqui aparece na coluna da direita do Hub, para a equipe inteira. " +
+      "Nada é gravado até clicar em Salvar."));
+    sistemas.insertBefore(cabeca, $("painel-avisos"));
+
+    document.querySelector(".marca__secao").textContent = "Recados";
+  }
 
   /* Cadastro antigo tinha "setor" no singular. Esta função lê os
      dois formatos, para ninguém precisar recadastrar ninguém. */
@@ -1034,6 +1074,22 @@
     });
   }
 
+  /* DOIS NOMES SÃO LOAD-BEARING, e renomeá-los quebraria coisa em
+     silêncio. "Gerência" está escrito na regra do Firestore que
+     deixa mexer nos recados. "Gerência" e "Diretoria" estão no
+     código que decide quem enxerga pendência reservada. Trocar o
+     texto na tela não troca o texto lá — e o efeito seria alguém
+     perder acesso sem ninguém entender por quê.
+
+     Isto é dívida, e está registrada como tal: o certo seria a
+     alçada não depender do NOME de um setor. Enquanto depende, a
+     tela protege os dois. */
+  var SETORES_TRAVADOS = {
+    "Gerência":  "a regra do banco usa este nome para saber quem mexe nos recados, " +
+                 "e o código das pendências reservadas também",
+    "Diretoria": "o código das pendências reservadas usa este nome para saber quem enxerga",
+  };
+
   function setorJaExiste(nome) {
     var alvo = String(nome).toLowerCase();
     return Dados.SETORES_DA_CASA.some(function (s) { return s.toLowerCase() === alvo; });
@@ -1053,14 +1109,22 @@
         n === 0 ? "ninguém" : (n === 1 ? "1 pessoa" : n + " pessoas")));
 
       var fim = elemento("div", "dep-linha__fim");
-      var bRenomear = elemento("button", "btn btn--pequeno", "Renomear");
-      bRenomear.type = "button";
-      bRenomear.addEventListener("click", function () { renomearSetor(nome); });
-      var bRemover = elemento("button", "btn btn--pequeno btn--perigo", "Remover");
-      bRemover.type = "button";
-      bRemover.addEventListener("click", function () { removerSetor(nome); });
-      fim.appendChild(bRenomear);
-      fim.appendChild(bRemover);
+      if (SETORES_TRAVADOS[nome]) {
+        /* Sem botão, e com o motivo à vista. Botão que só sabe
+           recusar ensina o caminho errado antes de dizer não. */
+        var trava = elemento("span", "dep-linha__trava", "fixo");
+        trava.title = SETORES_TRAVADOS[nome];
+        fim.appendChild(trava);
+      } else {
+        var bRenomear = elemento("button", "btn btn--pequeno", "Renomear");
+        bRenomear.type = "button";
+        bRenomear.addEventListener("click", function () { renomearSetor(nome); });
+        var bRemover = elemento("button", "btn btn--pequeno btn--perigo", "Remover");
+        bRemover.type = "button";
+        bRemover.addEventListener("click", function () { removerSetor(nome); });
+        fim.appendChild(bRenomear);
+        fim.appendChild(bRemover);
+      }
       linha.appendChild(fim);
       caixa.appendChild(linha);
     });
@@ -1100,6 +1164,10 @@
      saber disso ANTES, não depois. */
   function renomearSetor(velho) {
     erroDep("");
+    if (SETORES_TRAVADOS[velho]) {
+      erroDep("“" + velho + "” não pode ser renomeado: " + SETORES_TRAVADOS[velho] + ".");
+      return;
+    }
     var novo = window.prompt("Novo nome para o setor “" + velho + "”:", velho);
     if (novo === null) return;
     novo = novo.replace(/^\s+|\s+$/g, "");
@@ -1151,6 +1219,10 @@
 
   function removerSetor(nome) {
     erroDep("");
+    if (SETORES_TRAVADOS[nome]) {
+      erroDep("“" + nome + "” não pode ser removido: " + SETORES_TRAVADOS[nome] + ".");
+      return;
+    }
     var dentro = quemEstaEm(nome);
     if (dentro.length) {
       erroDep("Não dá para remover “" + nome + "”: " +
@@ -1356,13 +1428,28 @@
     /* Sessão viva não basta: a alçada pode ter sido retirada desde
        o último acesso. Quem perdeu volta para a tela de entrada em
        vez de olhar uma tela de edição que o banco vai recusar. */
+    /* DUAS ALÇADAS ENTRAM AQUI, E VEEM COISAS DIFERENTES.
+       Administrador vê a tela inteira. Quem é da Gerência entra
+       para uma coisa só: os recados do Hub. O resto nem aparece —
+       não por educação, mas porque a regra do banco recusaria, e
+       botão que só sabe dar erro não devia estar na tela. */
     Dados.souAdministrador().then(function (pode) {
-      if (!pode) { Dados.sair(); mostrarEntrada(); return; }
-      /* Aqui ESPERA os setores, ao contrário do Hub: as caixinhas
-         de setor são desenhadas na abertura da tela, e desenhar a
-         lista padrão para trocar meio segundo depois faria a
-         pessoa marcar um setor que pisca e some. */
-      Dados.carregarSetores().then(abrirEdicao);
+      souAdmin = pode;
+      if (pode) {
+        /* Aqui ESPERA os setores, ao contrário do Hub: as caixinhas
+           de setor são desenhadas na abertura da tela, e desenhar a
+           lista padrão para trocar meio segundo depois faria a
+           pessoa marcar um setor que pisca e some. */
+        Dados.carregarSetores().then(abrirEdicao);
+        return;
+      }
+      Dados.possoAvisar().then(function (podeRecado) {
+        if (!podeRecado) { Dados.sair(); mostrarEntrada(); return; }
+        Dados.carregarSetores().then(function () {
+          abrirEdicao();
+          sóRecados();
+        });
+      });
     });
   });
 

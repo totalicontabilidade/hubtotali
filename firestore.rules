@@ -121,6 +121,22 @@ service cloud.firestore {
       return fundador() || (daEquipe() && meuCadastro().papel == 'admin');
     }
 
+    // QUEM É DA GERÊNCIA. Serve para uma coisa só: mexer nos
+    // recados do Hub sem poder mexer na lista de sistemas.
+    //
+    // O NOME "Gerência" ESTÁ ESCRITO AQUI, e isso amarra a regra a
+    // um texto que a administração pode renomear. Por isso a tela
+    // de setores se recusa a renomear ou remover este — e a de
+    // Diretoria, que o código das pendências reservadas também usa
+    // como chave. Renomear em silêncio tiraria acesso de gente sem
+    // ninguém entender por quê.
+    function ehGerencia() {
+      return daEquipe()
+             && 'setores' in meuCadastro()
+             && meuCadastro().setores is list
+             && 'Gerência' in meuCadastro().setores;
+    }
+
     function meuUid(uid) {
       return autenticado() && request.auth.uid == uid;
     }
@@ -178,6 +194,41 @@ service cloud.firestore {
     // gravação errada trocasse ele por texto, a comparação
     // silenciosamente viraria falsa e a equipe inteira perderia
     // acesso sem ninguém entender por quê.
+
+    // ---------- os recados e prazos ----------
+    // MORAM FORA DO hub/config, e o motivo é de alçada. Estavam
+    // dentro dele, junto da lista de sistemas — e o documento
+    // inteiro é de administrador. Para a Gerência poder escrever um
+    // recado sem poder reescrever os quarenta e tantos links da
+    // casa, o recado precisou de documento próprio.
+    //
+    // Esta regra CONVIVE com a de /hub/{doc} acima: o Firestore
+    // libera se QUALQUER regra liberar. A de cima já dá escrita ao
+    // administrador; esta acrescenta a Gerência, e só aqui.
+    match /hub/avisos {
+      allow read:  if daEquipe();
+      allow write: if (ehAdmin() || ehGerencia())
+                      && request.resource.data.json is string
+                      && request.resource.data.json.size() <= 20000;
+    }
+
+    // ---------- os favoritos de cada pessoa ----------
+    // Um documento por pessoa, com o nome do documento sendo o uid
+    // dela. A regra é curta porque a pergunta é curta: é seu? então
+    // é sua. Ninguém lê nem escreve o de ninguém — nem o
+    // administrador, e isso é de propósito: favorito não é dado de
+    // trabalho, é preferência, e não há motivo para a casa olhar.
+    //
+    // O TAMANHO É LIMITADO porque este é o único lugar do sistema
+    // onde a pessoa comum escreve texto livre num documento só
+    // dela. Sem teto, uma aba aberta com um laço maluco encheria o
+    // banco da casa.
+    match /favoritos/{uid} {
+      allow read: if meuUid(uid) && daEquipe();
+      allow write: if meuUid(uid) && daEquipe()
+                      && request.resource.data.json is string
+                      && request.resource.data.json.size() <= 8000;
+    }
 
     match /equipe/{uid} {
       allow read: if daEquipe() || ehAdmin();

@@ -55,7 +55,10 @@
 
     <div class="topo__acoes" id="topo-acoes" hidden>
       <span class="quem" id="quem"></span>
-      <a class="btn btn--fantasma" href="index.html" target="_blank" rel="noopener">Ver o Hub</a>
+      <!-- Mesma guia, de propósito. Se houver alteração não salva, o
+           aviso de "sair do site" aparece antes — é o beforeunload
+           lá do admin.js fazendo o trabalho dele. -->
+      <a class="btn btn--fantasma" href="index.html">Ver o Hub</a>
       <button class="btn btn--fantasma" type="button" id="btn-sair">Sair</button>
       <button class="btn btn--principal" type="button" id="btn-salvar" disabled>Salvar</button>
     </div>

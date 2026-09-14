@@ -202,6 +202,40 @@ a{color:inherit;text-decoration:none}
 .item--sem-link:hover{background:transparent}
 .item--sem-link:hover .ico{transform:none}
 
+/* MEUS FAVORITOS
+   ------------------------------------------------------------
+   A estrela mora fora do <a>, num invólucro, para não ser botão
+   dentro de link. Some quando não está marcada e ninguém está
+   olhando aquele cartão: quarenta e duas estrelas apagadas na
+   tela seriam mais ruído do que a lista inteira. Aparece no
+   passar do mouse, no foco do teclado e sempre que está marcada
+   — porque aí ela não é convite, é estado. */
+.item-caixa{position:relative}
+.item-caixa .item{padding-right:34px}
+.estrela{position:absolute;top:50%;right:6px;transform:translateY(-50%);
+         width:26px;height:26px;border:0;border-radius:8px;background:transparent;
+         cursor:pointer;font-size:15px;line-height:1;color:var(--txt-3);
+         opacity:0;transition:opacity .12s,background .12s}
+.item-caixa:hover .estrela,
+.estrela:focus-visible,
+.estrela--on{opacity:1}
+.estrela:hover{background:rgba(13,25,38,.06);color:var(--txt)}
+.estrela--on{color:#d9a520}
+.estrela--tirar{font-size:18px}
+.estrela--tirar:hover{color:var(--alerta)}
+
+.btn-fav{border:1px solid var(--fio-2);background:#fff;color:var(--txt-2);
+         border-radius:8px;padding:4px 10px;font:inherit;font-size:12px;font-weight:640;
+         cursor:pointer}
+.btn-fav:hover{border-color:var(--estado);color:var(--estado)}
+.btn-fav--cab{margin-left:auto}
+.fav-novo{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 10px}
+.fav-novo__c{flex:1 1 150px;min-width:0;padding:7px 10px;border:1px solid var(--fio-2);
+             border-radius:9px;font:inherit;font-size:13px;background:#fff;color:var(--txt)}
+.fav-novo__c--larga{flex:2 1 240px}
+.fav-novo__c:focus{outline:none;border-color:var(--estado)}
+.fav-novo__erro{font-size:12px;color:var(--alerta);margin:-4px 0 8px}
+
 /* ---------- a gaveta dos órgãos ---------- */
 .gaveta{display:flex;align-items:center;gap:13px;padding:13px 16px;border-radius:var(--r);
         width:100%;text-align:left;

@@ -110,10 +110,13 @@ const Dados = (function () {
        aqui — do mesmo jeito que o servidor. */
     var imediato = juntar(completar(lerCache(CHAVE_CACHE) || semente()), lerLogosDoCache());
 
-    Promise.all([buscarDoServidor(), buscarLogos()]).then(function (r) {
-      var doServidor = r[0], logos = r[1];
+    Promise.all([buscarDoServidor(), buscarLogos(), buscarAvisos()]).then(function (r) {
+      var doServidor = r[0], logos = r[1], avisos = r[2];
       if (logos) gravarCache(CHAVE_LOGOS, logos);
       if (!doServidor) return;
+      /* Recado que veio do documento próprio manda; se ele ainda
+         não existe, fica o que estava dentro do config. */
+      if (avisos) { doServidor.avisos = avisos; gravarCache(CHAVE_AVISOS, avisos); }
       gravarCache(CHAVE_CACHE, doServidor);
       var completo = juntar(completar(doServidor), logos || lerLogosDoCache());
       /* Só reavisa se realmente mudou — redesenhar a tela por
@@ -304,6 +307,167 @@ const Dados = (function () {
         catch (e) { return {}; }
       })
       .catch(function () { return null; });
+  }
+
+  /* ---------- Os recados, fora do hub/config ----------
+
+     ESTAVAM DENTRO DELE, junto da lista de sistemas. O motivo de
+     terem saído é de alçada: hub/config inteiro é de
+     administrador, e para a Gerência poder escrever um recado sem
+     poder reescrever os quarenta e tantos links da casa, o recado
+     precisou de documento próprio.
+
+     Enquanto hub/avisos não existir, vale o que está dentro do
+     config — é o que mantém o Hub funcionando entre a publicação
+     deste código e o primeiro Salvar. */
+
+  var CHAVE_AVISOS = "hub-totali:avisos";
+
+  function buscarAvisos() {
+    var s = lerSessao();
+    if (!s || !temBanco()) return Promise.resolve(null);
+    return fetch(DOC_HUB("avisos") + "?key=" + encodeURIComponent(cfg.apiKey), {
+      headers: { "Authorization": "Bearer " + s.idToken }, cache: "no-store"
+    })
+      .then(function (r) {
+        if (r.status === 404) return null;    /* ainda não separado: vale o do config */
+        return r.ok ? r.json() : null;
+      })
+      .then(function (doc) {
+        if (!doc || !doc.fields || !doc.fields.json) return null;
+        try { return JSON.parse(doc.fields.json.stringValue) || []; }
+        catch (e) { return null; }
+      })
+      .catch(function () { return null; });
+  }
+
+  function salvarAvisos(lista, quem) {
+    var s = lerSessao();
+    if (!s) return Promise.reject(new Error("Sessão expirada. Entre de novo."));
+    var limpa = (lista || []).slice(0, 40).map(function (a) {
+      return {
+        tipo:   String(a.tipo || "aviso").slice(0, 20),
+        titulo: String(a.titulo || "").slice(0, 120),
+        texto:  String(a.texto || "").slice(0, 400),
+      };
+    });
+    return fetch(DOC_HUB("avisos"), {
+      method: "PATCH",
+      headers: comAutorizacao({ "Content-Type": "application/json" }),
+      body: JSON.stringify({ fields: {
+        json:          { stringValue: JSON.stringify(limpa) },
+        atualizadoEm:  { timestampValue: new Date().toISOString() },
+        atualizadoPor: { stringValue: String(quem || s.email || "") },
+      } }),
+    }).then(function (r) {
+      if (r.status === 403) throw new Error("Sem permissão para mexer nos recados.");
+      if (!r.ok) throw new Error("Não consegui salvar os recados (HTTP " + r.status + ").");
+      gravarCache(CHAVE_AVISOS, limpa);
+      return limpa;
+    });
+  }
+
+  /* Quem pode mexer nos recados: administrador, ou quem está no
+     setor Gerência. A mesma conta que a regra do banco faz — e a
+     regra é que manda. Isto aqui só evita mostrar um botão que
+     acabaria em 403. */
+  function possoAvisar() {
+    if (!temBanco()) return Promise.resolve(true);
+    return souAdministrador().then(function (admin) {
+      if (admin) return true;
+      return meuCadastro().then(function (eu) {
+        var setores = (eu && eu.setores) || [];
+        return Array.isArray(setores) && setores.indexOf("Gerência") !== -1;
+      });
+    }).catch(function () { return false; });
+  }
+
+  /* ---------- Os favoritos de cada pessoa ----------
+
+     Um documento por pessoa, com o uid dela no nome. Ninguém lê o
+     de ninguém, nem o administrador: favorito é preferência, não
+     é dado de trabalho.
+
+     GUARDADO NO BANCO, E NÃO SÓ NO NAVEGADOR. O Hub é a página
+     inicial da equipe e abre em mais de uma máquina — no
+     computador da mesa e no de casa. Favorito que só vale num
+     navegador é favorito que a pessoa monta duas vezes e perde
+     quando troca de máquina. */
+
+  function CHAVE_FAVORITOS() {
+    var s = lerSessao();
+    return "hub-totali:favoritos:" + ((s && s.uid) || "anon");
+  }
+
+  function DOC_FAVORITOS(uid) {
+    return "https://firestore.googleapis.com/v1/projects/" + cfg.projectId +
+           "/databases/(default)/documents/favoritos/" + encodeURIComponent(uid);
+  }
+
+  function favoritosVazios() { return { marcados: [], meus: [] }; }
+
+  function limparFavoritos(f) {
+    var o = favoritosVazios();
+    if (!f || typeof f !== "object") return o;
+    o.marcados = (Array.isArray(f.marcados) ? f.marcados : [])
+      .slice(0, 60)
+      .map(function (n) { return String(n).slice(0, 80); });
+    o.meus = (Array.isArray(f.meus) ? f.meus : [])
+      .slice(0, 30)
+      .map(function (m) {
+        return { nome: String((m && m.nome) || "").slice(0, 60),
+                 url:  String((m && m.url) || "").slice(0, 500) };
+      })
+      .filter(function (m) { return m.nome && m.url; });
+    return o;
+  }
+
+  function lerFavoritosDoCache() {
+    try {
+      var bruto = window.localStorage.getItem(CHAVE_FAVORITOS());
+      return bruto ? limparFavoritos(JSON.parse(bruto)) : null;
+    } catch (e) { return null; }
+  }
+
+  function carregarFavoritos() {
+    var s = lerSessao();
+    if (!s || !temBanco()) return Promise.resolve(lerFavoritosDoCache() || favoritosVazios());
+    return fetch(DOC_FAVORITOS(s.uid) + "?key=" + encodeURIComponent(cfg.apiKey), {
+      headers: { "Authorization": "Bearer " + s.idToken }, cache: "no-store"
+    })
+      .then(function (r) {
+        if (r.status === 404) return null;    /* ninguém marcou nada ainda */
+        return r.ok ? r.json() : null;
+      })
+      .then(function (doc) {
+        if (!doc || !doc.fields || !doc.fields.json) return favoritosVazios();
+        var f = limparFavoritos(JSON.parse(doc.fields.json.stringValue));
+        gravarCache(CHAVE_FAVORITOS(), f);
+        return f;
+      })
+      .catch(function () { return lerFavoritosDoCache() || favoritosVazios(); });
+  }
+
+  function salvarFavoritos(f) {
+    var s = lerSessao();
+    if (!s) return Promise.reject(new Error("Sessão expirada. Entre de novo."));
+    var limpo = limparFavoritos(f);
+    /* Grava no navegador ANTES de falar com o banco: a tela já
+       respondeu ao clique, e se a rede falhar a escolha não se
+       perde no meio do caminho. */
+    gravarCache(CHAVE_FAVORITOS(), limpo);
+    if (!temBanco()) return Promise.resolve(limpo);
+    return fetch(DOC_FAVORITOS(s.uid), {
+      method: "PATCH",
+      headers: comAutorizacao({ "Content-Type": "application/json" }),
+      body: JSON.stringify({ fields: {
+        json:         { stringValue: JSON.stringify(limpo) },
+        atualizadoEm: { timestampValue: new Date().toISOString() },
+      } }),
+    }).then(function (r) {
+      if (!r.ok) throw new Error("Não consegui salvar os favoritos (HTTP " + r.status + ").");
+      return limpo;
+    });
   }
 
   function gravarLogos(mapa, sessao) {
@@ -1020,6 +1184,11 @@ const Dados = (function () {
 
     /* Os setores da casa. Mexer aqui muda o seletor do cadastro e
        o destino possível de uma pendência. */
+    salvarAvisos: salvarAvisos,
+    possoAvisar: possoAvisar,
+    carregarFavoritos: carregarFavoritos,
+    salvarFavoritos: salvarFavoritos,
+
     SETORES_DA_CASA: SETORES_DA_CASA,
     SETORES_PADRAO: SETORES_PADRAO,
     carregarSetores: carregarSetores,

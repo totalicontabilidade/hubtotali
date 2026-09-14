@@ -106,7 +106,7 @@
     return caixa;
   }
 
-  function item(i) {
+  function item(i, semEstrela) {
     var url = enderecoSeguro(i.url);
     var a = document.createElement(url ? "a" : "div");
     a.className = "item" + (url ? "" : " item--sem-link");
@@ -121,7 +121,186 @@
     t.appendChild(el("div", "item__n", i.nome));
     if (i.nota) t.appendChild(el("div", "item__x", i.nota));
     a.appendChild(t);
-    return a;
+
+    if (semEstrela) return a;
+
+    /* A ESTRELA FICA FORA DO <a>, NUM INVÓLUCRO.
+       Botão dentro de link é HTML inválido e, pior, é armadilha de
+       leitor de tela: o aparelho anuncia um link e encontra um
+       botão no meio do caminho. Com o invólucro são dois irmãos —
+       o link abre o sistema, o botão marca o favorito, e cada um
+       responde por si no teclado. */
+    var caixa = el("div", "item-caixa");
+    caixa.appendChild(a);
+    caixa.appendChild(estrelaDe(i.nome));
+    caixa._link = a;
+    return caixa;
+  }
+
+  /* ---------- Meus Favoritos ----------
+
+     Guardados no banco, num documento por pessoa, e não no
+     navegador: o Hub abre no computador da mesa e no de casa, e
+     favorito que vale num lugar só é favorito montado duas vezes.
+
+     São duas listas com naturezas diferentes. MARCADOS são apps da
+     casa, e guardam só o nome — o endereço continua saindo da
+     administração, conferido, e se ele mudar amanhã o favorito
+     acompanha sozinho. MEUS são links que a pessoa escreveu, com
+     endereço próprio, e por isso não aparecem para mais ninguém. */
+
+  var FAVORITOS = { marcados: [], meus: [] };
+
+  function ehFavorito(nome) {
+    return FAVORITOS.marcados.indexOf(nome) !== -1;
+  }
+
+  var FAVORITOS_ERRO = "";
+
+  function guardarFavoritos() {
+    FAVORITOS_ERRO = "";
+    Dados.salvarFavoritos(FAVORITOS).catch(function (e) {
+      /* NÃO ENGOLIR. A escolha ficou guardada neste navegador, e
+         por isso a tela continua certa — mas ela não subiu, e
+         então não vai acompanhar a pessoa para outra máquina.
+         Ficar calado aqui seria deixá-la acreditar numa coisa que
+         não aconteceu. */
+      FAVORITOS_ERRO = "Guardado só neste navegador — não consegui salvar na sua conta. " +
+                       (e && e.message ? e.message : "");
+      desenharCentro();
+    });
+  }
+
+  function virarFavorito(nome) {
+    var onde = FAVORITOS.marcados.indexOf(nome);
+    if (onde === -1) FAVORITOS.marcados.push(nome);
+    else FAVORITOS.marcados.splice(onde, 1);
+    guardarFavoritos();
+    desenharCentro();
+  }
+
+  function estrelaDe(nome) {
+    var marcada = ehFavorito(nome);
+    var b = el("button", "estrela" + (marcada ? " estrela--on" : ""));
+    b.type = "button";
+    b.textContent = marcada ? "★" : "☆";
+    b.title = marcada ? "Tirar dos meus favoritos" : "Pôr nos meus favoritos";
+    b.setAttribute("aria-label", b.title);
+    b.setAttribute("aria-pressed", marcada ? "true" : "false");
+    b.addEventListener("click", function (ev) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      virarFavorito(nome);
+    });
+    return b;
+  }
+
+  /* Acha o app da casa pelo nome. Se a administração tiver
+     removido o sistema, o favorito simplesmente não desenha — e
+     fica guardado, porque o app pode voltar. */
+  function appDaCasa(nome) {
+    var achado = null;
+    SETORES_ATUAIS.forEach(function (s) {
+      (s.itens || []).forEach(function (i) { if (i.nome === nome) achado = i; });
+    });
+    return achado;
+  }
+
+  function itemMeu(meu, indice) {
+    var caixa = item({ nome: meu.nome, url: meu.url, nota: "meu link" }, true);
+    var fora = el("div", "item-caixa");
+    fora.appendChild(caixa);
+    var x = el("button", "estrela estrela--tirar");
+    x.type = "button";
+    x.textContent = "×";
+    x.title = "Tirar “" + meu.nome + "” dos meus favoritos";
+    x.setAttribute("aria-label", x.title);
+    x.addEventListener("click", function (ev) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      if (!window.confirm("Tirar “" + meu.nome + "” dos seus favoritos?")) return;
+      FAVORITOS.meus.splice(indice, 1);
+      guardarFavoritos();
+      desenharCentro();
+    });
+    fora.appendChild(x);
+    return fora;
+  }
+
+  function formularioDeFavorito(bloco) {
+    var f = el("form", "fav-novo");
+    var nome = document.createElement("input");
+    nome.className = "fav-novo__c"; nome.type = "text";
+    nome.placeholder = "Nome"; nome.maxLength = 60; nome.required = true;
+    var url = document.createElement("input");
+    url.className = "fav-novo__c fav-novo__c--larga"; url.type = "url";
+    url.placeholder = "https://…"; url.maxLength = 500; url.required = true;
+    var ok = el("button", "btn-fav", "Guardar");
+    ok.type = "submit";
+    var erro = el("div", "fav-novo__erro");
+    erro.hidden = true;
+
+    f.appendChild(nome); f.appendChild(url); f.appendChild(ok);
+    f.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      erro.hidden = true;
+      var n = nome.value.trim();
+      var e = enderecoSeguro(url.value.trim());
+      if (!n) { erro.textContent = "Falta o nome."; erro.hidden = false; return; }
+      if (!e) {
+        erro.textContent = "Endereço inválido. Precisa começar com http:// ou https://.";
+        erro.hidden = false; return;
+      }
+      if (FAVORITOS.meus.length >= 30) {
+        erro.textContent = "Trinta é o limite de links próprios.";
+        erro.hidden = false; return;
+      }
+      FAVORITOS.meus.push({ nome: n, url: e });
+      guardarFavoritos();
+      desenharCentro();
+    });
+
+    bloco.appendChild(f);
+    bloco.appendChild(erro);
+    nome.focus();
+  }
+
+  var FORM_FAVORITO_ABERTO = false;
+
+  function desenharFavoritos(centro) {
+    var daCasa = FAVORITOS.marcados.map(appDaCasa).filter(Boolean);
+    var quantos = daCasa.length + FAVORITOS.meus.length;
+
+    var b = bloco("Meus Favoritos", quantos || null);
+
+    var acrescentar = el("button", "btn-fav btn-fav--cab",
+      FORM_FAVORITO_ABERTO ? "Fechar" : "+ Acrescentar");
+    acrescentar.type = "button";
+    acrescentar.addEventListener("click", function () {
+      FORM_FAVORITO_ABERTO = !FORM_FAVORITO_ABERTO;
+      desenharCentro();
+    });
+    b.querySelector(".bloco__cab").appendChild(acrescentar);
+
+    if (FORM_FAVORITO_ABERTO) formularioDeFavorito(b);
+
+    if (FAVORITOS_ERRO) {
+      var aviso = el("div", "fav-novo__erro", FAVORITOS_ERRO);
+      aviso.hidden = false;
+      b.appendChild(aviso);
+    }
+
+    if (!quantos) {
+      b.appendChild(el("div", "busca-vazia",
+        "Nada aqui ainda. Clique na estrela de um sistema para trazê-lo para cima, " +
+        "ou acrescente um link seu."));
+    } else {
+      var grade = el("div", "grade");
+      daCasa.forEach(function (i) { grade.appendChild(item(i)); });
+      FAVORITOS.meus.forEach(function (m, n) { grade.appendChild(itemMeu(m, n)); });
+      b.appendChild(grade);
+    }
+    centro.appendChild(b);
   }
 
   function bloco(titulo, conta, cresce) {
@@ -198,7 +377,10 @@
         var t2 = no.querySelector(".item__txt");
         if (t2) t2.appendChild(el("div", "item__x", a.setor));
       }
-      if (n === 0) no.classList.add("item--primeiro");
+      /* A borda (e o Enter que abre o primeiro) pertencem ao
+         link, não ao invólucro da estrela: quem lê .item--primeiro
+         espera um href. */
+      if (n === 0) (no._link || no).classList.add("item--primeiro");
       grade.appendChild(no);
     });
     b.appendChild(grade);
@@ -210,6 +392,12 @@
     centro.textContent = "";
 
     if (FILTRO.trim()) { desenharBusca(centro); return; }
+
+    /* ANTES DE TUDO. É a lista que a pessoa montou: se não vier
+       primeiro, ela tem de passar os olhos pelos blocos da casa
+       para achar o que já tinha escolhido — e aí não adiantou
+       escolher. */
+    desenharFavoritos(centro);
 
     aVista().forEach(function (s) {
       if (!s.itens || !s.itens.length) return;
@@ -779,6 +967,15 @@
        depende deles para desenhar, e quem vai usá-los é o
        formulário de pendência, montado só quando alguém clica. */
     if (sessao) Dados.carregarSetores();
+    if (sessao) {
+      Dados.carregarFavoritos().then(function (f) {
+        FAVORITOS = f;
+        /* Só redesenha se houver o que mostrar: o centro já foi
+           desenhado com a lista vazia, e repintar por nada faria
+           os cartões piscarem na cara de quem abriu. */
+        if (f.marcados.length || f.meus.length) desenharCentro();
+      });
+    }
     if (sessao || !Dados.temBanco()) abrirHub();
     else abrirPortao();
   });
