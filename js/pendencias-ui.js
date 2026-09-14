@@ -304,7 +304,15 @@ const PendenciasUI = (function () {
     }
     var eu = meuUid();
     var quem;
-    if (p.responsavel === eu) {
+    /* DE MIM PARA MIM NÃO TEM QUEM PEDIU. O cartão dizia "Legalização
+       pediu para você" numa pendência que a própria pessoa abriu para
+       si — porque o setor de origem é o dela, e a frase saía pronta
+       sem ninguém conferir se fazia sentido. O caso sempre existiu
+       (dava para se designar), mas só apareceu quando o "só eu"
+       tornou isso comum. */
+    if (p.criadoPor === eu && p.responsavel === eu) {
+      quem = "anotação sua";
+    } else if (p.responsavel === eu) {
       quem = (p.setorOrigem || nomeDe(p.criadoPor)) + " pediu para você";
     } else if (p.criadoPor === eu) {
       quem = "você pediu para " + nomeDe(p.responsavel);
@@ -709,14 +717,26 @@ const PendenciasUI = (function () {
     var eu = meuUid();
 
     var meta = el("div", "pd-meta");
-    meta.appendChild(el("span", "pd-tag", (p.setorOrigem || nomeDe(p.criadoPor)) +
-                                          " → " + (p.setorDestino || nomeDe(p.responsavel))));
+    /* A seta "origem → destino" só diz algo quando há dois lados.
+       Numa anotação que a pessoa abriu para si mesma ela virava
+       "Legalização → Hesley", inventando um pedido que não houve. */
+    if (p.criadoPor && p.criadoPor === p.responsavel) {
+      meta.appendChild(el("span", "pd-tag", "Anotação de " + nomeDe(p.criadoPor)));
+    } else {
+      meta.appendChild(el("span", "pd-tag", (p.setorOrigem || nomeDe(p.criadoPor)) +
+                                            " → " + (p.setorDestino || nomeDe(p.responsavel))));
+    }
     var e = Pendencias.estado(p);
     if (e) meta.appendChild(el("span", "pd-tag pd-tag--" + e, e === "atrasada" ? "Atrasada" : "Vence hoje"));
-    meta.appendChild(el("span", "pd-tag", "Aberta por " + nomeDe(p.criadoPor)));
-    meta.appendChild(el("span", "pd-tag", p.responsavel
-      ? "Faz: " + nomeDe(p.responsavel)
-      : "Para o setor " + (p.setorDestino || "—")));
+    /* Numa anotação de si para si, "Aberta por X" e "Faz: X" são a
+       mesma informação da etiqueta acima, repetida duas vezes. Três
+       etiquetas com o mesmo nome fazem o olho parar de ler todas. */
+    if (!p.criadoPor || p.criadoPor !== p.responsavel) {
+      meta.appendChild(el("span", "pd-tag", "Aberta por " + nomeDe(p.criadoPor)));
+      meta.appendChild(el("span", "pd-tag", p.responsavel
+        ? "Faz: " + nomeDe(p.responsavel)
+        : "Para o setor " + (p.setorDestino || "—")));
+    }
     /* Reservada agora se reconhece pela COLEÇÃO de onde veio, não
        por um campo dentro do documento. */
     if (Pendencias.ehReservada(p)) {
