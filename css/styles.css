@@ -234,7 +234,8 @@ a{color:inherit;text-decoration:none}
              border-radius:9px;font:inherit;font-size:13px;background:#fff;color:var(--txt)}
 .fav-novo__c--larga{flex:2 1 240px}
 .fav-novo__c:focus{outline:none;border-color:var(--estado)}
-.fav-novo__erro{font-size:12px;color:var(--alerta);margin:-4px 0 8px}
+.fav-novo__erro{font-size:12px;color:var(--alerta);margin:-4px 0 8px;line-height:1.5}
+.btn-fav--erro{display:block;margin-top:7px;color:var(--estado);border-color:var(--estado)}
 
 /* ---------- a gaveta dos órgãos ---------- */
 .gaveta{display:flex;align-items:center;gap:13px;padding:13px 16px;border-radius:var(--r);

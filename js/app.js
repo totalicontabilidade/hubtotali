@@ -253,25 +253,75 @@
     erro.hidden = true;
 
     f.appendChild(nome); f.appendChild(url); f.appendChild(ok);
+
+    /* A recusa que ENSINA o caminho certo em vez de só barrar.
+       Quando existe uma ação óbvia — marcar a estrela do sistema
+       que a pessoa tentou guardar à mão —, o botão fica ali, e ela
+       não precisa fechar isto e ir procurar o cartão na tela. */
+    function dizer(texto, rotuloDoBotao, aoClicar) {
+      erro.textContent = "";
+      erro.appendChild(document.createTextNode(texto));
+      if (rotuloDoBotao) {
+        var b = el("button", "btn-fav btn-fav--erro", rotuloDoBotao);
+        b.type = "button";
+        b.addEventListener("click", aoClicar);
+        erro.appendChild(b);
+      }
+      erro.hidden = false;
+    }
+
     f.addEventListener("submit", function (ev) {
       ev.preventDefault();
       erro.hidden = true;
+      erro.textContent = "";
       var n = nome.value.trim();
       var e = normalizarEndereco(url.value);
-      if (!n) { erro.textContent = "Falta o nome."; erro.hidden = false; return; }
+      if (!n) { dizer("Falta o nome."); return; }
       if (!e) {
-        erro.textContent = "Não entendi esse endereço. Escreva algo como gov.br " +
-                           "ou https://gov.br/receitafederal.";
-        erro.hidden = false; return;
+        dizer("Não entendi esse endereço. Escreva algo como gov.br " +
+              "ou https://gov.br/receitafederal.");
+        return;
       }
       /* Mostra no campo o endereço COMO FICOU. A pessoa escreveu
          "gov.br" e vai ser guardado "https://gov.br/" — ela tem o
          direito de ver isso antes de a tela fechar, para não
          descobrir no primeiro clique que virou outra coisa. */
       url.value = e;
+
+      /* JÁ EXISTE NA CASA? Então a estrela é o caminho certo, e não
+         um link próprio. Não é preciosismo: o favorito marcado
+         guarda só o NOME, e o endereço continua saindo da
+         administração — se ele mudar, o favorito acompanha. Um link
+         próprio congela o endereço de hoje e um dia quebra calado. */
+      var daCasa = appDaCasaCom(e);
+      if (daCasa) {
+        if (ehFavorito(daCasa.nome)) {
+          dizer("“" + daCasa.nome + "” é um sistema da casa e já está nos seus favoritos.");
+        } else {
+          dizer("“" + daCasa.nome + "” já é um sistema da casa. Marque a estrela dele em vez " +
+                "de guardar o endereço à mão — assim, se a administração trocar o link, " +
+                "o seu favorito acompanha sozinho.",
+                "Pôr “" + daCasa.nome + "” nos favoritos", function () {
+                  virarFavorito(daCasa.nome);   /* já redesenha tudo */
+                });
+        }
+        return;
+      }
+
+      /* E já é um link meu? Dois cartões idênticos não ajudam
+         ninguém, e o segundo some no meio da lista. */
+      var meuIgual = null;
+      FAVORITOS.meus.forEach(function (m) {
+        if (!meuIgual && mesmoLugar(m.url, e)) meuIgual = m;
+      });
+      if (meuIgual) {
+        dizer("Você já tem esse endereço aqui, com o nome “" + meuIgual.nome + "”.");
+        return;
+      }
+
       if (FAVORITOS.meus.length >= 30) {
-        erro.textContent = "Trinta é o limite de links próprios.";
-        erro.hidden = false; return;
+        dizer("Trinta é o limite de links próprios.");
+        return;
       }
       /* Entra na hora, sem esperar o ícone: quem clicou já viu o
          link aparecer. A imagem chega depois e a tela se repinta —
@@ -375,6 +425,57 @@
       if (u.hostname.indexOf(".") === -1 && u.hostname !== "localhost") return "";
       return u.href;
     } catch (e) { return ""; }
+  }
+
+  /* ---------- O mesmo lugar, escrito de outro jeito ----------
+
+     Serve para não deixar alguém guardar como "link meu" um sistema
+     que a casa já tem. Quem faz isso perde o que a estrela dá: o
+     endereço do favorito marcado continua saindo da administração,
+     então se ele mudar amanhã o favorito acompanha sozinho. Um link
+     próprio apontando para o mesmo lugar congela o endereço de hoje
+     e um dia quebra calado.
+
+     POR QUE HOST **MAIS CAMINHO**, E NÃO SÓ O DOMÍNIO. Medi a lista
+     da casa antes de escolher: gov.br sozinho hospeda seis sistemas
+     diferentes — SPED, eSocial, Trabalho, REDESIM —, e
+     totalicontabilidade.github.io outros seis. Comparar domínio
+     recusaria um link legítimo dizendo que já existe, e a pessoa não
+     teria como discordar. Com o caminho na conta, cada um desses
+     seis continua sendo um sistema distinto.
+
+     A busca e o fragmento (?x=1, #aba) ficam FORA da conta: são a
+     mesma página aberta em outro estado, e quem digitou o endereço
+     com um parâmetro a mais não quis um sistema novo. */
+
+  function mesmoLugar(a, b) {
+    var x = pedacoQueIdentifica(a);
+    return !!x && x === pedacoQueIdentifica(b);
+  }
+
+  function pedacoQueIdentifica(url) {
+    try {
+      var u = new URL(url);
+      if (u.protocol !== "http:" && u.protocol !== "https:") return "";
+      var h = u.hostname.toLowerCase();
+      if (h.indexOf("www.") === 0) h = h.slice(4);
+      /* Barra no fim não muda a página. Tirada num laço, e não com
+         expressão regular: barra invertida some em edição
+         automática, e aqui somem junto as garantias. */
+      var c = u.pathname;
+      while (c.length > 0 && c.charAt(c.length - 1) === "/") c = c.slice(0, -1);
+      return h + c.toLowerCase();
+    } catch (e) { return ""; }
+  }
+
+  function appDaCasaCom(endereco) {
+    var achado = null;
+    SETORES_ATUAIS.forEach(function (s) {
+      (s.itens || []).forEach(function (i) {
+        if (!achado && i.url && mesmoLugar(i.url, endereco)) achado = i;
+      });
+    });
+    return achado;
   }
 
   function dominioDe(url) {
