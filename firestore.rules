@@ -349,13 +349,34 @@ service cloud.firestore {
                          // crescer: o que ENTROU tem de ser só o uid
                          // de quem está escrevendo. Ninguém dá
                          // ciência por ninguém, nem sem querer.
+                         // TRÊS CONDIÇÕES, E CADA UMA FECHA UM BURACO
+                         // QUE UM TESTE ENCONTROU:
+                         //
+                         // hasAll(antiga) — a lista NÃO PODE PERDER
+                         // ninguém. Sem isto, bastava mandar uma lista
+                         // vazia: removeAll de nada é nada, e "nada"
+                         // satisfaz hasOnly. A regra barrava assinar
+                         // pelo colega e deixava APAGAR a assinatura
+                         // dele — que estraga a prova pelo outro lado.
+                         // Medi: HTTP 200 onde devia ser 403.
+                         //
+                         // removeAll(antiga).hasOnly([uid]) — o que
+                         // ENTROU só pode ser o próprio nome. É o que
+                         // impede assinar por outro.
+                         //
+                         // uid in nova — quem escreve está na lista.
+                         // Sem isto, uma escrita que não acrescenta
+                         // nada passaria sem dizer a quem serve.
                          || (mudou().hasOnly(['ciencia'])
                              && request.resource.data.ciencia is list
                              && request.resource.data.ciencia.size() <= 60
+                             && request.auth.uid in request.resource.data.ciencia
                              && (('ciencia' in resource.data)
-                                 ? request.resource.data.ciencia
-                                     .removeAll(resource.data.ciencia)
-                                     .hasOnly([request.auth.uid])
+                                 ? (request.resource.data.ciencia
+                                      .hasAll(resource.data.ciencia)
+                                    && request.resource.data.ciencia
+                                      .removeAll(resource.data.ciencia)
+                                      .hasOnly([request.auth.uid]))
                                  : request.resource.data.ciencia
                                      .hasOnly([request.auth.uid])))
 
@@ -561,13 +582,34 @@ service cloud.firestore {
                          // crescer: o que ENTROU tem de ser só o uid
                          // de quem está escrevendo. Ninguém dá
                          // ciência por ninguém, nem sem querer.
+                         // TRÊS CONDIÇÕES, E CADA UMA FECHA UM BURACO
+                         // QUE UM TESTE ENCONTROU:
+                         //
+                         // hasAll(antiga) — a lista NÃO PODE PERDER
+                         // ninguém. Sem isto, bastava mandar uma lista
+                         // vazia: removeAll de nada é nada, e "nada"
+                         // satisfaz hasOnly. A regra barrava assinar
+                         // pelo colega e deixava APAGAR a assinatura
+                         // dele — que estraga a prova pelo outro lado.
+                         // Medi: HTTP 200 onde devia ser 403.
+                         //
+                         // removeAll(antiga).hasOnly([uid]) — o que
+                         // ENTROU só pode ser o próprio nome. É o que
+                         // impede assinar por outro.
+                         //
+                         // uid in nova — quem escreve está na lista.
+                         // Sem isto, uma escrita que não acrescenta
+                         // nada passaria sem dizer a quem serve.
                          || (mudou().hasOnly(['ciencia'])
                              && request.resource.data.ciencia is list
                              && request.resource.data.ciencia.size() <= 60
+                             && request.auth.uid in request.resource.data.ciencia
                              && (('ciencia' in resource.data)
-                                 ? request.resource.data.ciencia
-                                     .removeAll(resource.data.ciencia)
-                                     .hasOnly([request.auth.uid])
+                                 ? (request.resource.data.ciencia
+                                      .hasAll(resource.data.ciencia)
+                                    && request.resource.data.ciencia
+                                      .removeAll(resource.data.ciencia)
+                                      .hasOnly([request.auth.uid]))
                                  : request.resource.data.ciencia
                                      .hasOnly([request.auth.uid])))
                          || (meuUid(resource.data.responsavel) && mudou().hasOnly(['situacao']))
