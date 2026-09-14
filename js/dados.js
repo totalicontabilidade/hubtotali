@@ -694,9 +694,27 @@ const Dados = (function () {
     .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
     .then(function (res) {
       if (!res.ok) {
-        /* Senha trocada, conta desligada ou token revogado. Aí é
-           para pedir a senha mesmo. */
-        sair();
+        /* NEM TODA RECUSA É O FIM DA SESSÃO, e tratar as duas do
+           mesmo jeito era o que derrubava a pessoa "depois de um
+           tempo".
+
+           DEFINITIVO: senha trocada, conta desligada, token
+           revogado. Aí é para pedir a senha mesmo, e sair() é o
+           certo.
+
+           PASSAGEIRO: 500 do Google, 429 de excesso de pedidos,
+           rede que oscilou. Antes isso também chamava sair() — uma
+           instabilidade de dez segundos do lado de lá punha todo
+           mundo na tela de login. Agora mantém a sessão e tenta de
+           novo, porque o token de renovação continua valendo. */
+        var motivo = (res.j && res.j.error && res.j.error.message) || "";
+        var definitivo = motivo.indexOf("TOKEN_EXPIRED") !== -1
+                      || motivo.indexOf("INVALID_REFRESH_TOKEN") !== -1
+                      || motivo.indexOf("USER_DISABLED") !== -1
+                      || motivo.indexOf("USER_NOT_FOUND") !== -1
+                      || motivo.indexOf("INVALID_GRANT_TYPE") !== -1;
+        if (definitivo) { sair(); return null; }
+        tentarDeNovoEmBreve();
         return null;
       }
       var nova = {
@@ -710,7 +728,12 @@ const Dados = (function () {
       agendarRenovacao();
       return nova;
     })
-    .catch(function () { return null; })
+    .catch(function () {
+      /* Sem rede o pedido nem sai. Não é motivo para deslogar
+         ninguém: é motivo para tentar outra vez. */
+      tentarDeNovoEmBreve();
+      return null;
+    })
     .then(function (r) { renovacaoEmCurso = null; return r; });
 
     return renovacaoEmCurso;
@@ -726,12 +749,82 @@ const Dados = (function () {
     relogioDaRenovacao = window.setTimeout(renovar, Math.max(falta, 1000));
   }
 
+  /* TENTAR DE NOVO, EM VEZ DE PARAR PARA SEMPRE. Antes, uma
+     renovação que falhava não reagendava nada: o relógio morria
+     ali, o token vencia meia hora depois e a pessoa descobria pelo
+     primeiro clique que não funcionou. Um minuto é curto o
+     bastante para a pessoa não perceber e longo o bastante para
+     não virar enxurrada de pedidos. */
+  function tentarDeNovoEmBreve() {
+    if (relogioDaRenovacao) window.clearTimeout(relogioDaRenovacao);
+    relogioDaRenovacao = window.setTimeout(renovar, 60 * 1000);
+  }
+
+  /* ---------- Os gatilhos que o relógio sozinho não cobre ----------
+
+     UM setTimeout DE CINQUENTA E CINCO MINUTOS NÃO É CONFIÁVEL. O
+     navegador estrangula temporizador de aba de fundo, e o Hub é
+     página inicial: passa o dia numa aba que ninguém olha. Pior: se
+     a máquina dorme, o relógio não anda — e o token vence enquanto
+     ela dorme.
+
+     Então, além do relógio, três momentos em que vale conferir: a
+     aba voltar a ficar visível, a janela receber o foco, e a rede
+     voltar. Nesses instantes, se o token está perto de vencer ou já
+     venceu, renova na hora. É o que faz o computador acordar de
+     manhã com a sessão viva. */
+  function conferirAoVoltar() {
+    var s = lerSessao();
+    if (!s || !s.refreshToken) return;
+    /* Dez minutos de margem: se falta menos que isso, renova já em
+       vez de esperar o relógio, que pode ter atrasado. */
+    if ((s.expiraEm || 0) - Date.now() < 10 * 60 * 1000) renovar();
+    else agendarRenovacao();
+  }
+
+  if (typeof document !== "undefined") {
+    document.addEventListener("visibilitychange", function () {
+      if (!document.hidden) conferirAoVoltar();
+    });
+    window.addEventListener("focus", conferirAoVoltar);
+    window.addEventListener("online", conferirAoVoltar);
+
+    /* UMA ABA RENOVOU, AS OUTRAS APROVEITAM. O Hub abre em várias
+       abas ao mesmo tempo. Sem isto, cada uma tenta renovar por si
+       com o token que leu no começo — e se o Google rodar o token
+       de renovação, a segunda tentativa vai com um token velho e
+       toma recusa definitiva, derrubando todo mundo. Ouvindo a
+       mudança no armazenamento, quem não renovou só reaproveita. */
+    window.addEventListener("storage", function (ev) {
+      if (ev.key !== CHAVE_SESSAO) return;
+      if (!ev.newValue) return;   /* outra aba saiu; quem cuida é a tela */
+      agendarRenovacao();
+    });
+  }
+
   /* O que as telas esperam antes do primeiro pedido ao banco:
      resolve com a sessão boa, ou com null se não há sessão. */
   function pronto() {
     var s = lerSessao();
     if (!s) return Promise.resolve(null);
-    if (s.expiraEm && Date.now() > s.expiraEm - 60 * 1000) return renovar();
+    if (s.expiraEm && Date.now() > s.expiraEm - 60 * 1000) {
+      /* SE A RENOVAÇÃO FALHAR POR REDE, A SESSÃO NÃO MORREU.
+         Antes isto devolvia o null de renovar() direto, e a tela
+         entendia "não tem sessão" e mostrava o login — por causa de
+         uma oscilação de rede na hora de abrir. Agora, se ainda
+         existe token de renovação, devolve a sessão velha: o Hub
+         desenha do cache, a tentativa seguinte conserta o token, e
+         ninguém é mandado para a tela de senha por engano.
+
+         Quando renovar() decide que é definitivo, ele mesmo chama
+         sair() — e aí lerSessao() já não acha nada, que é o
+         comportamento certo. */
+      return renovar().then(function (nova) {
+        if (nova) return nova;
+        var ainda = lerSessao();
+        return (ainda && ainda.refreshToken) ? ainda : null;
+      });
+    }
     agendarRenovacao();
     return Promise.resolve(s);
   }
@@ -750,9 +843,22 @@ const Dados = (function () {
      que se digita vinte vezes por dia vira senha curta, anotada no
      monitor, ou o recurso simplesmente para de ser usado.
 
-     Em nenhum dos dois casos fica guardada credencial de longa
-     vida: o que se guarda é o token de uma hora do Firebase, e não
-     o token de renovação. Passada a hora, pede a senha de novo. */
+     O QUE FICA GUARDADO, HOJE. Este comentário dizia que só o
+     token de uma hora era guardado, e não o de renovação — e isso
+     deixou de ser verdade quando a renovação automática entrou.
+     Guardar o token de uma hora sem o de renovação significava
+     pedir a senha a cada hora, todo dia, para a equipe inteira; e
+     senha que se digita a cada hora vira senha curta anotada no
+     monitor. A troca foi consciente.
+
+     Então: fica guardado o token de renovação, e com ele a sessão
+     dura até alguém clicar em Sair. O que isso custa, dito com
+     clareza: quem tiver o navegador daquela máquina destrancado
+     entra no Hub sem senha. É o mesmo risco de um e-mail que fica
+     logado, e a defesa é a mesma — trancar a tela do computador.
+     Em compensação, não há script de terceiro nesta página que
+     possa ler esse token: a política de segurança não deixa
+     carregar nenhum. */
   function lerSessao() {
     try {
       var bruto = window.localStorage.getItem(CHAVE_SESSAO)
