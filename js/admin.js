@@ -396,9 +396,11 @@
       "A busca é pelo DOMÍNIO, não pela página. Endereços que se distinguem " +
       "só pelo caminho — como os nossos em totalicontabilidade.github.io — " +
       "dão todos na mesma consulta.\n\n" +
-      "Escreva outro domínio para tentar (o Gmail, por exemplo, responde em " +
-      "gmail.com e não em mail.google.com), ou clique em Cancelar e envie a " +
-      "imagem à mão clicando no logo.",
+      "Escreva outro domínio para tentar, ou clique em Cancelar.\n\n" +
+      "ALGUNS SITES NÃO TÊM CONSERTO POR AQUI: os do Google — Gmail, Drive, " +
+      "Agenda, Gemini, Firebase — devolvem todos a mesma marca genérica, em " +
+      "qualquer domínio que se tente. Para esses, feche isto e ponha a imagem " +
+      "à mão no logo: dá para clicar, colar com Ctrl+V ou arrastar o arquivo.",
       tentado);
     if (resposta === null) return;
     var limpo = String(resposta).trim().toLowerCase();
@@ -442,18 +444,112 @@
     pintar();
     caixa._pintar = pintar;
 
+    /* TRÊS CAMINHOS PARA A MESMA COISA, E O MOTIVO É CONCRETO.
+
+       Cinco sistemas da casa são do Google — Gmail, Drive, Agenda,
+       Gemini, Firebase — e para todos eles o serviço de ícones
+       devolve a mesma marca genérica. Medi as alternativas: o
+       DuckDuckGo tem os ícones separados mas recusa a leitura por
+       outra origem, e o serviço do próprio Google também. Sem
+       leitura autorizada a imagem não pode virar dado guardado.
+       Então, para esses, o automático não tem conserto — o que
+       tinha conserto era o trabalho manual, que era só "abra o
+       seletor de arquivos e ache a imagem no disco".
+
+       Agora também dá para COLAR (a pessoa copia o ícone do próprio
+       site com o botão direito e aperta Ctrl+V) e para ARRASTAR o
+       arquivo para cima do logo. Nenhum dos dois passa por rede,
+       então nenhum depende de CORS nem de serviço de terceiro. */
+    caixa.title = "Clique para escolher um arquivo — ou, com o mouse aqui em cima, " +
+                  "cole com Ctrl+V, ou arraste a imagem para cá";
+
+    /* QUEM ESTÁ SOB O MOUSE, e não só quem tem o foco. Clicar no
+       logo abre o seletor de arquivos — então exigir foco para
+       colar seria exigir que a pessoa clicasse, cancelasse o
+       diálogo e só então apertasse Ctrl+V. Passar o mouse e colar
+       é o gesto que as pessoas já tentam. O foco continua valendo,
+       para quem anda pela tela com Tab. */
+    caixa.addEventListener("mouseenter", function () { LOGO_SOB_MOUSE = caixa; });
+    caixa.addEventListener("mouseleave", function () {
+      if (LOGO_SOB_MOUSE === caixa) LOGO_SOB_MOUSE = null;
+    });
+
     caixa.addEventListener("click", function () { escolherLogo(item, pintar); });
+
+    caixa.addEventListener("dragover", function (ev) {
+      ev.preventDefault();
+      caixa.classList.add("linha__logo--recebendo");
+    });
+    caixa.addEventListener("dragleave", function () {
+      caixa.classList.remove("linha__logo--recebendo");
+    });
+    caixa.addEventListener("drop", function (ev) {
+      ev.preventDefault();
+      caixa.classList.remove("linha__logo--recebendo");
+      var arquivo = ev.dataTransfer && ev.dataTransfer.files && ev.dataTransfer.files[0];
+      if (!arquivo) { recado("Não vi imagem no que você arrastou.", true); return; }
+      guardarImagem(arquivo, item, pintar, "arrastada");
+    });
+
+    /* O PASTE ESCUTA NO DOCUMENTO, não na caixa. Botão não é campo
+       de texto, e em vários navegadores o Ctrl+V simplesmente não
+       chega a um elemento que não edita nada. Escutando em cima e
+       perguntando quem está com o foco, funciona em todos. */
+    caixa._recebeColagem = function (arquivo) {
+      guardarImagem(arquivo, item, pintar, "colada");
+    };
     return caixa;
   }
+
+  function guardarImagem(arquivo, item, pintar, comoVeio) {
+    if (!arquivo.type || arquivo.type.indexOf("image/") !== 0) {
+      recado("Isso não é uma imagem.", true);
+      return;
+    }
+    reduzirImagem(arquivo, 64).then(function (dataUri) {
+      item.logoDados = dataUri;
+      if (pintar) pintar();
+      marcarPendente();
+      recado("Imagem " + comoVeio + " virou o ícone. Falta clicar em Salvar.");
+    }).catch(function () {
+      recado("Não consegui ler essa imagem.", true);
+    });
+  }
+
+  /* Um ouvinte só para a página inteira, e não um por linha: são
+     sessenta e três sistemas, e sessenta e três ouvintes de colagem
+     para um Ctrl+V que só pode ter um destino seria desperdício. */
+  var LOGO_SOB_MOUSE = null;
+
+  document.addEventListener("paste", function (ev) {
+    var foco = document.activeElement;
+    var temClasse = foco && foco.classList && foco.classList.contains("linha__logo");
+    var alvo = temClasse ? foco : LOGO_SOB_MOUSE;
+    if (!alvo || !alvo._recebeColagem) return;
+    var itens = (ev.clipboardData && ev.clipboardData.items) || [];
+    for (var i = 0; i < itens.length; i++) {
+      if (itens[i].kind === "file" && String(itens[i].type).indexOf("image/") === 0) {
+        var arquivo = itens[i].getAsFile();
+        if (arquivo) {
+          ev.preventDefault();
+          alvo._recebeColagem(arquivo);
+          return;
+        }
+      }
+    }
+    recado("Não havia imagem na área de transferência.", true);
+  });
 
   function escolherLogo(item, pintar) {
     /* Quem já enviou um logo tem duas vontades possíveis ao
        clicar de novo: trocar ou tirar. Pergunto qual. */
     if (item.logoDados) {
       var trocar = window.confirm(
-        "Este sistema já tem um logo que você enviou.\n\n" +
-        "OK — escolher outra imagem\n" +
-        "Cancelar — remover e voltar ao logo automático"
+        "Este sistema já tem um ícone.\n\n" +
+        "OK — escolher uma imagem do computador\n" +
+        "Cancelar — remover o ícone\n\n" +
+        "Sem abrir isto, dá também para colar uma imagem com Ctrl+V " +
+        "ou arrastar o arquivo para cima do logo."
       );
       if (!trocar) {
         delete item.logoDados;
