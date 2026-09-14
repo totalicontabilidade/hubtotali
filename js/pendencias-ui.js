@@ -304,13 +304,29 @@ const PendenciasUI = (function () {
     }
     var eu = meuUid();
     var quem;
+    var ehRecado = Pendencias.pedeCiencia(p);
+
+    /* RECADO NÃO TEM DONO NEM "PEDIU PARA VOCÊ". Tem uma coisa a
+       confirmar, ou já confirmada. Quem mandou vê a conta; quem foi
+       chamado vê o que falta fazer. */
+    if (ehRecado) {
+      var cc = Pendencias.contaDaCiencia(p);
+      var placar = cc.deram + " de " + cc.total;
+      if (Pendencias.devoCiencia(p) && !Pendencias.jaDeiCiencia(p)) {
+        quem = "recado — confirme que leu";
+      } else if (Pendencias.jaDeiCiencia(p)) {
+        quem = "recado — você confirmou · " + placar;
+      } else {
+        quem = "recado · " + placar + " confirmaram";
+      }
+    }
     /* DE MIM PARA MIM NÃO TEM QUEM PEDIU. O cartão dizia "Legalização
        pediu para você" numa pendência que a própria pessoa abriu para
        si — porque o setor de origem é o dela, e a frase saía pronta
        sem ninguém conferir se fazia sentido. O caso sempre existiu
        (dava para se designar), mas só apareceu quando o "só eu"
        tornou isso comum. */
-    if (p.criadoPor === eu && p.responsavel === eu) {
+    else if (p.criadoPor === eu && p.responsavel === eu) {
       quem = "anotação sua";
     } else if (p.responsavel === eu) {
       quem = (p.setorOrigem || nomeDe(p.criadoPor)) + " pediu para você";
@@ -324,7 +340,10 @@ const PendenciasUI = (function () {
     /* No quadro do escritório o dono importa: sem ele, quarenta
        cartões parecem todos da mesma pessoa. No trilho pessoal
        seria repetição — lá tudo já é seu. */
-    if (comDono) {
+    /* No quadro do escritório, recado também não tem dono: dizer
+       "Setor —" ali seria pior que não dizer nada. O placar é a
+       informação útil, e ele já está em "quem". */
+    if (comDono && !ehRecado) {
       var dono = p.responsavel ? nomeDe(p.responsavel) : "Setor " + (p.setorDestino || "—");
       var setor = p.setorDestino || p.setorOrigem || "";
       t.appendChild(el("div", "pen__q", dono + (setor ? " · " + setor : "")));
@@ -426,7 +445,7 @@ const PendenciasUI = (function () {
      isso ao seletor múltiplo do navegador porque naquele é
      preciso segurar Ctrl para escolher dois — e ninguém
      descobre isso sozinho. */
-  function marcador(rotulo, pessoas, excluir) {
+  function marcador(rotulo, pessoas, excluir, jaMarcados) {
     var l = el("div", "pd-campo");
     l.appendChild(el("span", "pd-rot", rotulo));
     var caixa = el("div", "pd-marcar");
@@ -437,6 +456,11 @@ const PendenciasUI = (function () {
       var c = document.createElement("input");
       c.type = "checkbox";
       c.value = p.uid;
+      /* Já marcado quando quem chamou disse "todos": no recado com
+         ciência o normal é o escritório inteiro, e obrigar a marcar
+         sete caixinhas para chegar ao caso comum é cobrar trabalho
+         pelo padrão. Desmarcar quem não entra é mais rápido. */
+      if (jaMarcados) { c.checked = true; escolhidos.push(p.uid); }
       c.addEventListener("change", function () {
         var i = escolhidos.indexOf(p.uid);
         if (c.checked && i === -1) escolhidos.push(p.uid);
@@ -589,6 +613,26 @@ const PendenciasUI = (function () {
     /* RESERVADA. Fica no fim, depois de tudo, porque é decisão
        sobre o que já foi escrito — e desmarcada por padrão: sigilo
        que vem ligado de fábrica deixa de ser escolha. */
+    /* RECADO COM CIÊNCIA — uma terceira natureza, ao lado de
+       "tarefa de uma pessoa" e "tarefa de um setor".
+
+       Existe porque pedir a mesma coisa a sete pessoas não caberia
+       numa pendência comum: ela tem UMA situação, então o primeiro
+       que clicasse em resolvida fecharia para todos, e ninguém
+       saberia quem fez. Aqui não há responsável nem "feito": há uma
+       lista de quem foi chamado e outra de quem já confirmou. */
+    var recado = el("div", "pd-campo");
+    var lrec = document.createElement("label");
+    lrec.className = "pd-filtro-marca";
+    var crec = document.createElement("input");
+    crec.type = "checkbox";
+    lrec.appendChild(crec);
+    lrec.appendChild(el("span", null, "É um recado — cada pessoa confirma que leu"));
+    recado.appendChild(lrec);
+    recado.appendChild(el("div", "pd-dica",
+      "Para avisar o escritório de algo que precisa de confirmação. Não tem responsável " +
+      "nem botão de feito: tem ciência, uma por pessoa."));
+
     var reservada = el("div", "pd-campo");
     var lr = document.createElement("label");
     lr.className = "pd-filtro-marca";
@@ -639,6 +683,11 @@ const PendenciasUI = (function () {
 
     var ativos = equipe.filter(function (p) { return p.ativo; });
     var marcar = marcador("Marcar mais alguém", ativos, meuUid());
+    var chamados = marcador("Quem precisa dar ciência", ativos, meuUid(), true);
+    chamados.hidden = true;
+    chamados.appendChild(el("div", "pd-dica",
+      "Cada pessoa marcada vê o recado na lista dela e aparece um botão para confirmar " +
+      "que leu. Você acompanha quantos já confirmaram."));
     marcar.appendChild(el("div", "pd-dica",
       "Quem for marcado também vê esta pendência na página dele. A responsabilidade continua sendo de uma pessoa só."));
 
@@ -657,7 +706,23 @@ const PendenciasUI = (function () {
     }
     cr.addEventListener("change", aplicarPlateia);
 
-    [oque, porque, quem, quando, urgencia, sugestao, marcar, reservada].forEach(function (x) { c.appendChild(x); });
+    [oque, porque, recado, quem, chamados, quando, urgencia, sugestao, marcar, reservada]
+      .forEach(function (x) { c.appendChild(x); });
+
+    /* RECADO E RESERVADA SÃO EXCLUDENTES, e não por gosto: a
+       plateia de uma reservada é congelada na criação e não
+       incluiria os chamados — eles não conseguiriam nem LER o
+       recado, muito menos dar ciência. Um recado para o escritório
+       também não é, por definição, assunto reservado. */
+    function aplicarRecado() {
+      var r = crec.checked;
+      quem.hidden = r;
+      marcar.hidden = r;
+      chamados.hidden = !r;
+      reservada.hidden = r;
+      if (r && cr.checked) { cr.checked = false; aplicarPlateia(); }
+    }
+    crec.addEventListener("change", aplicarRecado);
 
     var msg = erro(""); msg.hidden = true;
     c.appendChild(msg);
@@ -671,20 +736,27 @@ const PendenciasUI = (function () {
         oque: oque._entrada.value,
         porque: porque._entrada.value,
         sugestao: sugestao._entrada.value,
-        /* No modo "só eu" a pendência é minha, de mim para mim: o
-           responsável sou eu, não há setor de destino e não há
-           mais ninguém na plateia. Ler os campos escondidos daria
-           um documento que contradiz a escolha. */
-        responsavel: soEu() ? meuUid() : destinoPessoa(quem._entrada.value),
+        /* Três naturezas, três leituras do formulário. Ler campo
+           escondido daria documento que contradiz a escolha.
+
+           RECADO: sem responsável e sem setor — não é tarefa de
+           ninguém. Quem responde por ele é a lista de ciência.
+           SÓ EU: de mim para mim, plateia de um.
+           NORMAL: pessoa ou setor, como sempre foi. */
+        responsavel: crec.checked ? ""
+                     : soEu() ? meuUid()
+                     : destinoPessoa(quem._entrada.value),
         prazo: quando._entrada.value,
         urgencia: urgencia._entrada.value,
         setorOrigem: (Array.isArray(eu.setores) ? eu.setores[0] : eu.setor) || "",
-        setorDestino: soEu() ? "" : destinoSetor(quem._entrada.value),
-        confidencial: cr.checked,
-        podemVer: !cr.checked ? []
+        setorDestino: (crec.checked || soEu()) ? "" : destinoSetor(quem._entrada.value),
+        confidencial: crec.checked ? false : cr.checked,
+        podemVer: crec.checked ? []
+                  : !cr.checked ? []
                   : soEu() ? [meuUid()]
                   : quemPodeVer(destinoPessoa(quem._entrada.value), marcar._valores()),
-        envolvidos: soEu() ? [] : marcar._valores(),
+        envolvidos: (crec.checked || soEu()) ? [] : marcar._valores(),
+        deveDarCiencia: crec.checked ? chamados._valores() : [],
       }).then(function () { fechar(); carregar(); })
         .catch(function (e) {
           msg.textContent = e.message; msg.hidden = false;
@@ -839,6 +911,58 @@ const PendenciasUI = (function () {
     }
 
     pintarCorpo();
+
+    /* ---------- Ciência ----------
+       Vem ANTES da situação, e antes do resto das ações: num recado
+       é a única coisa que se espera de quem abriu a ficha. */
+    if (Pendencias.pedeCiencia(p)) {
+      var cx = el("div", "pd-ciencia");
+      var cont = Pendencias.contaDaCiencia(p);
+      var cab = el("div", "pd-ciencia__cab");
+      cab.appendChild(el("span", "pd-rot", "Quem confirmou que leu"));
+      var placarEl = el("span", "pd-ciencia__n", cont.deram + " de " + cont.total);
+      cab.appendChild(placarEl);
+      cx.appendChild(cab);
+
+      var nomes = el("div", "pd-ciencia__lista");
+      function pintarCiencia() {
+        var atual = Pendencias.contaDaCiencia(p);
+        placarEl.textContent = atual.deram + " de " + atual.total;
+        nomes.textContent = "";
+        (p.deveDarCiencia || []).forEach(function (u) {
+          var deu = Array.isArray(p.ciencia) && p.ciencia.indexOf(u) !== -1;
+          var n = el("span", "pd-ciencia__p" + (deu ? " pd-ciencia__p--ok" : ""),
+                     (deu ? "✓ " : "") + nomeDe(u));
+          nomes.appendChild(n);
+        });
+      }
+      pintarCiencia();
+      cx.appendChild(nomes);
+
+      /* O botão aparece só para quem foi chamado e ainda não
+         confirmou. Quem não foi chamado vê a lista e nada mais —
+         dar ciência por curiosidade sujaria a prova. */
+      if (Pendencias.devoCiencia(p) && !Pendencias.jaDeiCiencia(p)) {
+        var bc = el("button", "pd-botao pd-botao--principal", "Confirmo que li");
+        bc.type = "button";
+        bc.addEventListener("click", function () {
+          bc.disabled = true; bc.textContent = "Registrando…";
+          Pendencias.darCiencia(p).then(function () {
+            bc.remove();
+            pintarCiencia();
+            cx.appendChild(el("div", "pd-dica", "Ciência registrada. Obrigado."));
+            desenhar();
+          }).catch(function (err) {
+            bc.disabled = false; bc.textContent = "Confirmo que li";
+            window.alert(err.message);
+          });
+        });
+        cx.appendChild(bc);
+      } else if (Pendencias.jaDeiCiencia(p)) {
+        cx.appendChild(el("div", "pd-dica", "Você já confirmou que leu este recado."));
+      }
+      c.appendChild(cx);
+    }
 
     /* Situação: só quem faz e quem pediu mexem. */
     if (p.responsavel === eu || p.criadoPor === eu) {

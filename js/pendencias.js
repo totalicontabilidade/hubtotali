@@ -271,8 +271,12 @@ const Pendencias = (function () {
        fazer — "alguém do Fiscal precisa ver isto" é um pedido
        legítimo, e obrigar a escolher um nome faz a pessoa chutar
        um colega ou desistir de abrir. */
-    if (!dados.responsavel && !dados.setorDestino) {
+    var chamados = Array.isArray(dados.deveDarCiencia) ? dados.deveDarCiencia : [];
+    if (!dados.responsavel && !dados.setorDestino && !chamados.length) {
       return Promise.reject(new Error("Escolha quem vai fazer, ou ao menos o setor."));
+    }
+    if (chamados.length > 60) {
+      return Promise.reject(new Error("São muitas pessoas para uma ciência só."));
     }
 
     var doc = {
@@ -303,6 +307,19 @@ const Pendencias = (function () {
       /* Quem já abriu a ficha. Quem não está aqui recebe destaque
          de "ainda não vi". Quem cria já viu o que escreveu. */
       vistas:       [s.uid],
+
+      /* CIÊNCIA DE TODOS. Quando isto tem gente dentro, a pendência
+         não é tarefa de uma pessoa: é um recado que cada nome da
+         lista precisa confirmar que leu.
+
+         São dois campos porque são duas perguntas. "deveDarCiencia"
+         é quem foi chamado, congelado na criação — igual ao podemVer
+         das reservadas, e pelo mesmo motivo: quem entrar na equipe
+         amanhã não passa a dever ciência de um recado de ontem, e
+         quem sair continua devendo o que devia. "ciencia" é quem já
+         confirmou. A conta "3 de 7" sai da comparação dos dois. */
+      deveDarCiencia: Array.isArray(dados.deveDarCiencia) ? dados.deveDarCiencia : [],
+      ciencia:        [],
     };
 
     var colecao = dados.confidencial ? RESERVADAS : ABERTAS;
@@ -444,6 +461,57 @@ const Pendencias = (function () {
   function jaVi(p) {
     var s = Dados.sessao();
     return !!s && Array.isArray(p.vistas) && p.vistas.indexOf(s.uid) !== -1;
+  }
+
+  /* ---------- Ciência ----------
+
+     Deliberada, ao contrário de marcarComoVista(), que dispara
+     sozinha ao abrir o cartão. A diferença não é de estilo: ciência
+     serve para alguém poder dizer depois "você confirmou que leu", e
+     confirmação que acontece por acidente não confirma nada. */
+
+  function pedeCiencia(p) {
+    return !!p && Array.isArray(p.deveDarCiencia) && p.deveDarCiencia.length > 0;
+  }
+
+  function devoCiencia(p) {
+    var s = Dados.sessao();
+    return !!s && pedeCiencia(p) && p.deveDarCiencia.indexOf(s.uid) !== -1;
+  }
+
+  function jaDeiCiencia(p) {
+    var s = Dados.sessao();
+    return !!s && Array.isArray(p.ciencia) && p.ciencia.indexOf(s.uid) !== -1;
+  }
+
+  /* Quantos confirmaram, de quantos foram chamados. Conta só quem
+     está na lista de chamados: se alguém confirmou e depois saiu da
+     equipe, o número não pode passar do total e virar "8 de 7". */
+  function contaDaCiencia(p) {
+    var chamados = Array.isArray(p.deveDarCiencia) ? p.deveDarCiencia : [];
+    var deram = Array.isArray(p.ciencia) ? p.ciencia : [];
+    var quantos = 0;
+    chamados.forEach(function (u) { if (deram.indexOf(u) !== -1) quantos++; });
+    return { deram: quantos, total: chamados.length };
+  }
+
+  function darCiencia(p) {
+    var s = Dados.sessao();
+    if (!s) return Promise.reject(new Error("Sessão expirada. Entre de novo."));
+    if (jaDeiCiencia(p)) return Promise.resolve(false);
+    var lista = (Array.isArray(p.ciencia) ? p.ciencia : []).concat([s.uid]);
+    return fetch(caminho(p) + "?updateMask.fieldPaths=ciencia", {
+      method: "PATCH",
+      headers: autorizacao(),
+      body: JSON.stringify({ fields: { ciencia: {
+        arrayValue: { values: lista.map(function (u) { return { stringValue: u }; }) } } } }),
+    })
+      .then(function (r) {
+        if (r.status === 403) throw new Error("Sem permissão para dar ciência nesta pendência.");
+        if (!r.ok) throw new Error("Não consegui registrar a ciência (HTTP " + r.status + ").");
+        p.ciencia = lista;
+        return true;
+      });
   }
 
   function marcarComoVista(p) {
@@ -823,6 +891,11 @@ const Pendencias = (function () {
     pesoDaUrgencia: pesoDaUrgencia,
     jaVi: jaVi,
     marcarComoVista: marcarComoVista,
+    pedeCiencia: pedeCiencia,
+    devoCiencia: devoCiencia,
+    jaDeiCiencia: jaDeiCiencia,
+    contaDaCiencia: contaDaCiencia,
+    darCiencia: darCiencia,
   };
 
 })();

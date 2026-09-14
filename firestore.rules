@@ -275,12 +275,22 @@ service cloud.firestore {
                     && request.resource.data.oque.size() > 2
                     && request.resource.data.oque.size() <= 300
                     && request.resource.data.responsavel is string
-                    // PESSOA OU SETOR, um dos dois. Nem sempre se
-                    // sabe quem vai fazer, e obrigar a escolher um
-                    // nome faz a pessoa chutar um colega.
+                    // PESSOA, SETOR OU CIÊNCIA — um dos três. Nem
+                    // sempre se sabe quem vai fazer, e obrigar a
+                    // escolher um nome faz a pessoa chutar um colega.
+                    //
+                    // A TERCEIRA FORMA É O RECADO COM CIÊNCIA: não tem
+                    // responsável nem setor de destino porque não é
+                    // tarefa de ninguém — é um aviso que cada nome da
+                    // lista precisa confirmar que leu. Sem esta
+                    // cláusula a regra recusaria justamente o caso
+                    // que ela não previa.
                     && (request.resource.data.responsavel.size() > 0
                         || (request.resource.data.setorDestino is string
-                            && request.resource.data.setorDestino.size() > 0))
+                            && request.resource.data.setorDestino.size() > 0)
+                        || (request.resource.data.deveDarCiencia is list
+                            && request.resource.data.deveDarCiencia.size() > 0
+                            && request.resource.data.deveDarCiencia.size() <= 60))
 
                     && request.resource.data.situacao in ['aberta', 'fazendo', 'resolvida']
                     && (!('envolvidos' in request.resource.data)
@@ -320,6 +330,34 @@ service cloud.firestore {
                           && request.resource.data.vistas.size() <= 60
                           && (!('vistas' in resource.data)
                               || request.resource.data.vistas.size() >= resource.data.vistas.size()))
+
+                         // CIÊNCIA É OUTRA COISA QUE A MARCA DE
+                         // LEITURA, e por isso é outro campo.
+                         //
+                         // "vistas" é marcado sozinho quando alguém
+                         // abre o cartão: serve para destacar o que
+                         // ainda não se leu, e o pior que uma
+                         // adulteração faz é a pessoa aparecer como
+                         // quem não leu. Por isso a regra dele se
+                         // contenta em conferir que a lista cresceu.
+                         //
+                         // "ciencia" é ato deliberado e serve de
+                         // prova: alguém clicou dizendo "eu li e
+                         // estou ciente". Prova frouxa não é prova —
+                         // se desse para pôr o nome de um colega,
+                         // não valeria nada. Então aqui não basta
+                         // crescer: o que ENTROU tem de ser só o uid
+                         // de quem está escrevendo. Ninguém dá
+                         // ciência por ninguém, nem sem querer.
+                         || (mudou().hasOnly(['ciencia'])
+                             && request.resource.data.ciencia is list
+                             && request.resource.data.ciencia.size() <= 60
+                             && (('ciencia' in resource.data)
+                                 ? request.resource.data.ciencia
+                                     .removeAll(resource.data.ciencia)
+                                     .hasOnly([request.auth.uid])
+                                 : request.resource.data.ciencia
+                                     .hasOnly([request.auth.uid])))
 
                          // QUEM FAZ mexe só na situação. Não troca o
                          // responsável (empurrar tarefa sem avisar) nem
@@ -490,6 +528,34 @@ service cloud.firestore {
                          (mudou().hasOnly(['vistas'])
                           && request.resource.data.vistas is list
                           && request.resource.data.vistas.size() <= 60)
+
+                         // CIÊNCIA É OUTRA COISA QUE A MARCA DE
+                         // LEITURA, e por isso é outro campo.
+                         //
+                         // "vistas" é marcado sozinho quando alguém
+                         // abre o cartão: serve para destacar o que
+                         // ainda não se leu, e o pior que uma
+                         // adulteração faz é a pessoa aparecer como
+                         // quem não leu. Por isso a regra dele se
+                         // contenta em conferir que a lista cresceu.
+                         //
+                         // "ciencia" é ato deliberado e serve de
+                         // prova: alguém clicou dizendo "eu li e
+                         // estou ciente". Prova frouxa não é prova —
+                         // se desse para pôr o nome de um colega,
+                         // não valeria nada. Então aqui não basta
+                         // crescer: o que ENTROU tem de ser só o uid
+                         // de quem está escrevendo. Ninguém dá
+                         // ciência por ninguém, nem sem querer.
+                         || (mudou().hasOnly(['ciencia'])
+                             && request.resource.data.ciencia is list
+                             && request.resource.data.ciencia.size() <= 60
+                             && (('ciencia' in resource.data)
+                                 ? request.resource.data.ciencia
+                                     .removeAll(resource.data.ciencia)
+                                     .hasOnly([request.auth.uid])
+                                 : request.resource.data.ciencia
+                                     .hasOnly([request.auth.uid])))
                          || (meuUid(resource.data.responsavel) && mudou().hasOnly(['situacao']))
                          || (meuUid(resource.data.criadoPor) && (
                               mudou().hasOnly(['situacao'])
