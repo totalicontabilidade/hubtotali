@@ -375,7 +375,21 @@ service cloud.firestore {
                          // corrigir o pedido nos primeiros quinze
                          // minutos — depois disso, ajuste vira
                          // comentário na linha do tempo.
-                         || (meuUid(resource.data.criadoPor) && (
+                         // MENOS A CIÊNCIA. A janela de quinze minutos
+                         // existe para corrigir um pedido escrito com
+                         // pressa, e antes dela não havia campo que
+                         // fosse prova. Agora há: sem esta exceção,
+                         // quem abre um recado poderia escrever a
+                         // ciência dos colegas nos primeiros quinze
+                         // minutos — e confirmação que o remetente
+                         // fabrica não confirma nada. Medi: quatro
+                         // tentativas de assinar por outro passaram, e
+                         // passaram por aqui. Corrigir o texto do
+                         // recado segue liberado; assinar por outro,
+                         // não.
+                         || (meuUid(resource.data.criadoPor)
+                             && !mudou().hasAny(['ciencia'])
+                             && (
                               mudou().hasOnly(['situacao'])
                               || request.time < resource.data.criadoEm + duration.value(15, 'm')
                             ))
@@ -557,7 +571,21 @@ service cloud.firestore {
                                  : request.resource.data.ciencia
                                      .hasOnly([request.auth.uid])))
                          || (meuUid(resource.data.responsavel) && mudou().hasOnly(['situacao']))
-                         || (meuUid(resource.data.criadoPor) && (
+                         // MENOS A CIÊNCIA. A janela de quinze minutos
+                         // existe para corrigir um pedido escrito com
+                         // pressa, e antes dela não havia campo que
+                         // fosse prova. Agora há: sem esta exceção,
+                         // quem abre um recado poderia escrever a
+                         // ciência dos colegas nos primeiros quinze
+                         // minutos — e confirmação que o remetente
+                         // fabrica não confirma nada. Medi: quatro
+                         // tentativas de assinar por outro passaram, e
+                         // passaram por aqui. Corrigir o texto do
+                         // recado segue liberado; assinar por outro,
+                         // não.
+                         || (meuUid(resource.data.criadoPor)
+                             && !mudou().hasAny(['ciencia'])
+                             && (
                               mudou().hasOnly(['situacao'])
                               || request.time < resource.data.criadoEm + duration.value(15, 'm')
                             ))

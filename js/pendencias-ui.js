@@ -791,8 +791,17 @@ const PendenciasUI = (function () {
     var meta = el("div", "pd-meta");
     /* A seta "origem → destino" só diz algo quando há dois lados.
        Numa anotação que a pessoa abriu para si mesma ela virava
-       "Legalização → Hesley", inventando um pedido que não houve. */
-    if (p.criadoPor && p.criadoPor === p.responsavel) {
+       "Legalização → Hesley", inventando um pedido que não houve. E
+       num recado virava "TI → alguém", que é pior: "alguém" era o
+       nome que nomeDe() dá a um responsável vazio. Recado não tem
+       destinatário único — tem uma lista, e ela já aparece no bloco
+       de ciência logo abaixo. */
+    if (Pendencias.pedeCiencia(p)) {
+      var cr = Pendencias.contaDaCiencia(p);
+      meta.appendChild(el("span", "pd-tag", "Recado de " + nomeDe(p.criadoPor)));
+      meta.appendChild(el("span", "pd-tag",
+        cr.total === 1 ? "ciência de 1 pessoa" : "ciência de " + cr.total + " pessoas"));
+    } else if (p.criadoPor && p.criadoPor === p.responsavel) {
       meta.appendChild(el("span", "pd-tag", "Anotação de " + nomeDe(p.criadoPor)));
     } else {
       meta.appendChild(el("span", "pd-tag", (p.setorOrigem || nomeDe(p.criadoPor)) +
@@ -803,7 +812,7 @@ const PendenciasUI = (function () {
     /* Numa anotação de si para si, "Aberta por X" e "Faz: X" são a
        mesma informação da etiqueta acima, repetida duas vezes. Três
        etiquetas com o mesmo nome fazem o olho parar de ler todas. */
-    if (!p.criadoPor || p.criadoPor !== p.responsavel) {
+    if (!Pendencias.pedeCiencia(p) && (!p.criadoPor || p.criadoPor !== p.responsavel)) {
       meta.appendChild(el("span", "pd-tag", "Aberta por " + nomeDe(p.criadoPor)));
       meta.appendChild(el("span", "pd-tag", p.responsavel
         ? "Faz: " + nomeDe(p.responsavel)
