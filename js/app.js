@@ -207,7 +207,8 @@
   }
 
   function itemMeu(meu, indice) {
-    var caixa = item({ nome: meu.nome, url: meu.url, nota: "meu link" }, true);
+    var caixa = item({ nome: meu.nome, url: meu.url, nota: "meu link",
+                       logoDados: meu.logoDados }, true);
     var fora = el("div", "item-caixa");
     fora.appendChild(caixa);
     var x = el("button", "estrela estrela--tirar");
@@ -255,14 +256,93 @@
         erro.textContent = "Trinta é o limite de links próprios.";
         erro.hidden = false; return;
       }
-      FAVORITOS.meus.push({ nome: n, url: e });
+      /* Entra na hora, sem esperar o ícone: quem clicou já viu o
+         link aparecer. A imagem chega depois e a tela se repinta —
+         e se não chegar, ficam as iniciais, que é o normal de
+         qualquer sistema sem logo aqui. */
+      var novo = { nome: n, url: e };
+      FAVORITOS.meus.push(novo);
       guardarFavoritos();
       desenharCentro();
+      buscarIcone(e).then(function (dados) {
+        if (!dados) return;
+        if (FAVORITOS.meus.indexOf(novo) === -1) return;   /* tirado enquanto buscava */
+        novo.logoDados = dados;
+        guardarFavoritos();
+        desenharCentro();
+      });
     });
 
     bloco.appendChild(f);
     bloco.appendChild(erro);
     nome.focus();
+  }
+
+  /* ---------- O ícone do link próprio ----------
+
+     O HUB NÃO FALA COM NINGUÉM — essa foi a escolha, e ela continua
+     valendo para tudo o que é da casa. Aqui abre-se uma exceção
+     estreita, igual à que a administração já abre para os sistemas:
+     UMA pergunta ao unavatar.io, no instante em que a pessoa
+     acrescenta o link, e a imagem que voltar fica guardada dentro
+     do documento dela. Depois disso nenhuma abertura do Hub pede
+     nada a ninguém.
+
+     A conta honesta do que custa: o serviço fica sabendo daquele
+     domínio, uma vez, quando a pessoa o acrescenta. É um link que
+     ela mesma escolheu pôr ali, e não a lista de sistemas da casa.
+
+     Por que unavatar e não outro: para virar imagem guardável, o
+     navegador exige que o servidor autorize a leitura por outra
+     origem, e é o único desses que autoriza E responde 404 quando
+     não acha — em vez de devolver uma letra genérica pior do que as
+     iniciais que o próprio Hub desenha. */
+
+  function dominioDe(url) {
+    try {
+      var u = new URL(url);
+      if (u.protocol !== "http:" && u.protocol !== "https:") return "";
+      var h = u.hostname;
+      return h.indexOf("www.") === 0 ? h.slice(4) : h;
+    } catch (e) { return ""; }
+  }
+
+  function buscarIcone(url) {
+    return new Promise(function (pronto) {
+      var dominio = dominioDe(url);
+      if (!dominio) { pronto(""); return; }
+
+      var img = new Image();
+      /* Antes do src, sempre: é esta linha que faz o navegador
+         pedir a autorização de leitura. Depois, não vale. */
+      img.crossOrigin = "anonymous";
+      var acabou = false;
+      function desistir() { if (!acabou) { acabou = true; pronto(""); } }
+
+      img.onload = function () {
+        if (acabou) return;
+        acabou = true;
+        try {
+          var lado = Math.min(64, Math.max(img.width, img.height)) || 64;
+          var tela = document.createElement("canvas");
+          tela.width = lado; tela.height = lado;
+          var ctx = tela.getContext("2d");
+          var e = Math.min(lado / img.width, lado / img.height);
+          var l = Math.round(img.width * e), a = Math.round(img.height * e);
+          ctx.drawImage(img, Math.round((lado - l) / 2), Math.round((lado - a) / 2), l, a);
+          var dados = tela.toDataURL("image/png");
+          /* Grande demais não entra: trinta links com imagem gorda
+             estouram o documento, e aí a pessoa perderia a lista
+             inteira por causa de um ícone. Iniciais servem. */
+          pronto(dados.length <= 9000 ? dados : "");
+        } catch (erro) { pronto(""); }
+      };
+      /* 404 cai aqui, e é o caso bom: o serviço não inventou nada. */
+      img.onerror = desistir;
+      /* Se o serviço não responder, a pessoa não fica esperando. */
+      window.setTimeout(desistir, 6000);
+      img.src = "https://unavatar.io/" + encodeURIComponent(dominio) + "?fallback=false";
+    });
   }
 
   var FORM_FAVORITO_ABERTO = false;

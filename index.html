@@ -4,15 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- Nenhum script externo, nenhuma CDN, nenhuma fonte remota,
-     nenhuma imagem de fora. Fora da própria pasta o Hub só fala com
-     o Google: o login, o banco e a renovação do token. Os ícones dos
-     sistemas vêm dentro do próprio documento do banco. -->
+<!-- Nenhum script externo, nenhuma CDN, nenhuma fonte remota. Fora
+     da própria pasta o Hub fala com o Google — login, banco e
+     renovação do token — e, num caso só, com o unavatar.io.
+
+     ESSE CASO ÚNICO: quando alguém acrescenta um link PRÓPRIO em
+     Meus Favoritos, o Hub pede uma vez o ícone daquele domínio e
+     guarda a imagem dentro do documento de favoritos da pessoa.
+     Nenhuma abertura do Hub pede nada depois disso, e os ícones dos
+     sistemas da casa continuam vindo só do banco. O que o serviço
+     fica sabendo é aquele domínio, uma vez, e é um link que a
+     própria pessoa escolheu pôr ali — não a lista da casa. -->
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self' file:;
   script-src 'self' file:;
   style-src 'self' file:;
-  img-src 'self' file: data: blob:;
+  img-src 'self' file: data: blob: https://unavatar.io;
   font-src 'self' file:;
   connect-src https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://firebasestorage.googleapis.com;
   object-src 'none';

@@ -151,7 +151,9 @@
 
      O DE AGORA busca UMA VEZ, aqui na administração, no momento em
      que alguém digita o endereço, e guarda a IMAGEM dentro do
-     banco. O Hub nunca fala com ninguém. A conta honesta do que
+     banco. Para os sistemas da casa, o Hub nunca fala com ninguém
+     — só o link próprio de Meus Favoritos abre a mesma exceção, e
+     lá quem escolhe é a própria pessoa. A conta honesta do que
      isso custa: o serviço fica sabendo daquele domínio, uma vez,
      quando um administrador cadastra o sistema.
 

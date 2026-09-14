@@ -225,9 +225,21 @@ service cloud.firestore {
     // banco da casa.
     match /favoritos/{uid} {
       allow read: if meuUid(uid) && daEquipe();
-      allow write: if meuUid(uid) && daEquipe()
+      // APAGAR VEM SEPARADO DE ESCREVER, e não por preciosismo: num
+      // apagamento não existe request.resource, então uma condição
+      // sobre ele nunca é verdadeira. Com tudo junto em "write", o
+      // DELETE voltava 403 — medido, não suposto.
+      allow delete: if meuUid(uid) && daEquipe();
+      // O TETO SUBIU porque o ícone de cada link próprio é guardado
+      // aqui dentro, como imagem embutida. A conta do pior caso:
+      // trinta links, cada um com nome, endereço e uma imagem de
+      // até 9 KB, dá algo perto de 280 KB. O limite do Firestore
+      // para um documento é 1 MiB, então ainda sobra folga — e o
+      // teto continua existindo para que uma aba enlouquecida não
+      // encha o banco da casa.
+      allow create, update: if meuUid(uid) && daEquipe()
                       && request.resource.data.json is string
-                      && request.resource.data.json.size() <= 8000;
+                      && request.resource.data.json.size() <= 300000;
     }
 
     match /equipe/{uid} {

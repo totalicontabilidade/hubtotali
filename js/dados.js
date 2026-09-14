@@ -415,8 +415,18 @@ const Dados = (function () {
     o.meus = (Array.isArray(f.meus) ? f.meus : [])
       .slice(0, 30)
       .map(function (m) {
-        return { nome: String((m && m.nome) || "").slice(0, 60),
-                 url:  String((m && m.url) || "").slice(0, 500) };
+        var item = { nome: String((m && m.nome) || "").slice(0, 60),
+                     url:  String((m && m.url) || "").slice(0, 500) };
+        /* O ÍCONE VEM COMO IMAGEM EMBUTIDA, e só assim. Aceitar
+           qualquer texto aqui seria deixar a pessoa guardar um
+           endereço de fora que a tela depois pediria a cada
+           abertura — exatamente o vazamento que o Hub tirou do
+           caminho quando parou de usar ícone de terceiro. O teto de
+           tamanho é por item, para trinta links não estourarem o
+           documento. */
+        var logo = String((m && m.logoDados) || "");
+        if (logo.indexOf("data:image/") === 0 && logo.length <= 9000) item.logoDados = logo;
+        return item;
       })
       .filter(function (m) { return m.nome && m.url; });
     return o;
