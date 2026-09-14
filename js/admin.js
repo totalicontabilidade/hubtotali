@@ -101,6 +101,11 @@
     pegador: '<svg viewBox="0 0 24 24"><circle cx="9" cy="6" r="1.6"/><circle cx="15" cy="6" r="1.6"/>' +
              '<circle cx="9" cy="12" r="1.6"/><circle cx="15" cy="12" r="1.6"/>' +
              '<circle cx="9" cy="18" r="1.6"/><circle cx="15" cy="18" r="1.6"/></svg>',
+    /* Seta em círculo: "busca de novo". Traço só, como os outros,
+       para não parecer de outra família. */
+    recarregar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" ' +
+                'stroke-linecap="round" stroke-linejoin="round">' +
+                '<path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v4h-4"/></svg>',
     lixo:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" ' +
              'stroke-linecap="round"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13"/></svg>',
     cima:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" ' +
@@ -179,20 +184,41 @@
     } catch (e) { return ""; }
   }
 
-  function buscarIconeDoSite(item, pintar) {
-    /* Quem já tem imagem não é atropelado: pode ter sido enviada à
-       mão justamente por a automática ser ruim. */
-    if (item.logoDados) return;
+  /* O TERCEIRO ARGUMENTO É O QUE FALTAVA NESTA TELA.
+
+     Sem ele, esta função desistia na primeira linha quando o
+     sistema já tinha ícone — e desistia com razão, porque ela roda
+     sozinha a cada endereço digitado e não deve atropelar uma
+     imagem que alguém escolheu à mão.
+
+     Mas isso deixava um buraco: SITE QUE TROCA DE ÍCONE ficava com
+     o antigo para sempre no Hub. Não havia caminho nenhum para
+     reatualizar — nem o "voltar ao logo automático" do clique no
+     logo, que remove a imagem mas não busca outra, porque a busca
+     só dispara ao digitar o endereço. Com "forcar", o botão da
+     linha manda buscar de novo, e aí atropelar é justamente o que
+     se pediu. */
+  function buscarIconeDoSite(item, pintar, forcar) {
+    if (item.logoDados && !forcar) return;
     var dominio = dominioDe(item.url || "");
-    if (!dominio) return;
+    if (!dominio) {
+      if (forcar) recado("Este sistema não tem um endereço válido para buscar o ícone.", true);
+      return;
+    }
 
     var img = new Image();
     /* Antes do src, sempre: é esta linha que faz o navegador pedir
        a autorização de leitura. Depois do src, ela não vale. */
     img.crossOrigin = "anonymous";
+    var acabou = false;
     img.onload = function () {
-      /* O endereço pode ter mudado enquanto isto voltava. */
-      if (dominioDe(item.url || "") !== dominio || item.logoDados) return;
+      if (acabou) return;
+      acabou = true;
+      /* O endereço pode ter mudado enquanto isto voltava. Já o
+         "tem logo" só barra a busca automática: se foi pedida, a
+         imagem nova é para entrar no lugar da velha. */
+      if (dominioDe(item.url || "") !== dominio) return;
+      if (item.logoDados && !forcar) return;
       try {
         var lado = Math.min(64, Math.max(img.width, img.height));
         var tela = document.createElement("canvas");
@@ -201,16 +227,51 @@
         var e = Math.min(lado / img.width, lado / img.height);
         var l = Math.round(img.width * e), a = Math.round(img.height * e);
         ctx.drawImage(img, Math.round((lado - l) / 2), Math.round((lado - a) / 2), l, a);
-        item.logoDados = tela.toDataURL("image/png");
+        var novo = tela.toDataURL("image/png");
+
+        /* IGUAL AO QUE JÁ ESTAVA NÃO É "TRAZIDO PARA DENTRO".
+           Quem clicou em buscar de novo clicou porque o site trocou
+           de ícone. Se o que volta é byte a byte o mesmo, dizer
+           "trazido" faria a pessoa procurar na tela uma mudança que
+           não houve — e desconfiar do botão, não do serviço. */
+        if (forcar && novo === (item.logoDados || "")) {
+          recado("O que voltou é o mesmo ícone que já estava aqui. " +
+                 "O serviço de ícones pode estar com a cópia antiga guardada; " +
+                 "dá para enviar a imagem à mão clicando no logo.");
+          return;
+        }
+
+        item.logoDados = novo;
         if (pintar) pintar();
         marcarPendente();
-        recado("Ícone de " + dominio + " trazido para dentro.");
-      } catch (erro) { /* sem autorização de leitura: fica nas iniciais */ }
+        recado(forcar ? "Ícone de " + dominio + " atualizado."
+                      : "Ícone de " + dominio + " trazido para dentro.");
+      } catch (erro) {
+        /* O servidor entregou a imagem mas não autorizou LER os
+           pixels, então ela não pode virar dado guardado. Na busca
+           automática fica nas iniciais, calado. Num clique, não. */
+        if (forcar) recado("Achei a imagem, mas o serviço não deixou copiá-la. " +
+                           "Dá para enviar à mão clicando no logo.", true);
+      }
     };
-    /* 404 cai aqui, e é o caso bom: o serviço não inventou nada, e
-       as iniciais continuam. */
-    img.onerror = function () {};
-    img.src = "https://unavatar.io/" + encodeURIComponent(dominio) + "?fallback=false";
+    /* 404 cai aqui. Na busca automática é o caso bom e o silêncio
+       está certo: o serviço não inventou nada e as iniciais
+       continuam. Mas quando alguém CLICOU pedindo, silêncio é a
+       resposta errada — a pessoa fica sem saber se o Hub tentou. */
+    img.onerror = function () {
+      if (acabou) return;
+      acabou = true;
+      if (forcar) recado("Não achei ícone em " + dominio + ". O site pode não ter um, " +
+                         "ou não deixar copiar. Dá para enviar a imagem à mão clicando no logo.", true);
+    };
+    var endereco = "https://unavatar.io/" + encodeURIComponent(dominio) + "?fallback=false";
+    /* AO PEDIR DE NOVO, UM ENDEREÇO DIFERENTE. Sem isto o navegador
+       devolve a imagem que ele já tem guardada e o clique não faz
+       nada visível. Isto fura o cache DAQUI; se o próprio unavatar
+       ainda estiver com a cópia antiga, o que volta é a antiga — e
+       aí o caminho certo é enviar a imagem à mão. */
+    if (forcar) endereco += "&_=" + Date.now();
+    img.src = endereco;
   }
 
   function previaDoLogo(item) {
@@ -415,6 +476,18 @@
     conferir.appendChild(document.createTextNode("a conferir"));
     conferir.title = "Marca o cartão com um ponto âmbar, para lembrar que o endereço ainda não foi conferido";
     fim.appendChild(conferir);
+
+    var rebuscar = botaoIcone("recarregar", "Buscar o ícone no site de novo");
+    rebuscar.addEventListener("click", function () {
+      if (!item.url) { recado("Preencha o endereço antes de buscar o ícone.", true); return; }
+      rebuscar.disabled = true;
+      buscarIconeDoSite(item, logo._pintar, true);
+      /* Solta o botão depois do tempo que a própria busca espera:
+         clicar dez vezes seguidas não traz o ícone dez vezes mais
+         rápido, só faz dez pedidos ao serviço. */
+      window.setTimeout(function () { rebuscar.disabled = false; }, 6500);
+    });
+    fim.appendChild(rebuscar);
 
     var apagar = botaoIcone("lixo", "Apagar " + (item.nome || "este sistema"), true);
     apagar.addEventListener("click", function () {
