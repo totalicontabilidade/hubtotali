@@ -823,7 +823,8 @@
     cabeca.className = "admin__cabeca";
     cabeca.appendChild(elemento("h1", "admin__titulo", "Recados e prazos"));
     cabeca.appendChild(elemento("p", "admin__nota",
-      "O que você escrever aqui aparece na coluna da direita do Hub, para a equipe inteira. " +
+      "O que você escrever aqui aparece na barra inferior do Hub, para a equipe inteira. " +
+      "Só os três primeiros cabem na faixa — o resto fica contado num “+” ao lado. " +
       "Nada é gravado até clicar em Salvar."));
     sistemas.insertBefore(cabeca, $("painel-avisos"));
 

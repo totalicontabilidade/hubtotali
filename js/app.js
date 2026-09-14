@@ -234,8 +234,19 @@
     nome.className = "fav-novo__c"; nome.type = "text";
     nome.placeholder = "Nome"; nome.maxLength = 60; nome.required = true;
     var url = document.createElement("input");
-    url.className = "fav-novo__c fav-novo__c--larga"; url.type = "url";
-    url.placeholder = "https://…"; url.maxLength = 500; url.required = true;
+    url.className = "fav-novo__c fav-novo__c--larga";
+    /* TEXTO, E NÃO "url". O type=url faz o navegador recusar
+       "gov.br" antes de o código rodar: o formulário nem dispara o
+       envio, e a pessoa fica olhando um campo que não reage. Quem
+       confere agora é normalizarEndereco, que completa o que falta
+       e recusa o que não dá. O inputmode ainda pede o teclado de
+       endereço no celular. */
+    url.type = "text";
+    url.setAttribute("inputmode", "url");
+    url.setAttribute("autocapitalize", "off");
+    url.setAttribute("spellcheck", "false");
+    url.placeholder = "gov.br  (o https:// entra sozinho)";
+    url.maxLength = 500; url.required = true;
     var ok = el("button", "btn-fav", "Guardar");
     ok.type = "submit";
     var erro = el("div", "fav-novo__erro");
@@ -246,12 +257,18 @@
       ev.preventDefault();
       erro.hidden = true;
       var n = nome.value.trim();
-      var e = enderecoSeguro(url.value.trim());
+      var e = normalizarEndereco(url.value);
       if (!n) { erro.textContent = "Falta o nome."; erro.hidden = false; return; }
       if (!e) {
-        erro.textContent = "Endereço inválido. Precisa começar com http:// ou https://.";
+        erro.textContent = "Não entendi esse endereço. Escreva algo como gov.br " +
+                           "ou https://gov.br/receitafederal.";
         erro.hidden = false; return;
       }
+      /* Mostra no campo o endereço COMO FICOU. A pessoa escreveu
+         "gov.br" e vai ser guardado "https://gov.br/" — ela tem o
+         direito de ver isso antes de a tela fechar, para não
+         descobrir no primeiro clique que virou outra coisa. */
+      url.value = e;
       if (FAVORITOS.meus.length >= 30) {
         erro.textContent = "Trinta é o limite de links próprios.";
         erro.hidden = false; return;
@@ -297,6 +314,68 @@
      origem, e é o único desses que autoriza E responde 404 quando
      não acha — em vez de devolver uma letra genérica pior do que as
      iniciais que o próprio Hub desenha. */
+
+  /* ---------- O endereço que a pessoa digitou ----------
+
+     "gov.br" é o que gente escreve. "https://gov.br" é o que um
+     endereço precisa ser. Pedir o https:// à mão é pedir que a
+     pessoa fale a língua da máquina.
+
+     POR QUE NÃO BASTA COLAR "https://" NA FRENTE. O enderecoSeguro
+     desta página resolve o texto CONTRA a página atual, e nessa
+     conta "gov.br" não dá erro: vira
+     https://hub.totalicontabilidade.com.br/gov.br — um endereço
+     válido, que aponta para o próprio Hub. O favorito entraria e só
+     se descobriria o engano no primeiro clique. Medi isso antes de
+     escrever: por isso aqui a conta é feita SEM base, onde texto
+     solto é erro em vez de caminho.
+
+     E o esquema não se acrescenta cegamente: "javascript:alert(1)"
+     já tem esquema, e é o que não pode passar. Quem já trouxe um,
+     ou trouxe http/https e vale, ou não entra. */
+
+  function temEsquema(texto) {
+    /* Sem expressão regular de propósito: as barras invertidas
+       desaparecem em edição automática, e quando desaparecem a
+       regra passa a dizer outra coisa sem avisar. Aqui é só a
+       pergunta "os dois-pontos vêm antes da primeira barra?", que
+       é o que distingue um esquema de uma porta ou de um caminho. */
+    var doisPontos = texto.indexOf(":");
+    if (doisPontos === -1) return false;
+    var barra = texto.indexOf("/");
+    if (barra !== -1 && barra < doisPontos) return false;
+    /* PONTO ANTES DOS DOIS-PONTOS QUER DIZER DOMÍNIO, NÃO ESQUEMA.
+       "hub.sieg.com:8443/painel" é endereço com porta, e sem esta
+       linha o código leria "hub.sieg.com" como esquema e recusaria
+       um endereço legítimo — sistema interno com porta é comum.
+       Esquema de verdade não tem ponto: http, https, javascript. */
+    return texto.slice(0, doisPontos).indexOf(".") === -1;
+  }
+
+  function normalizarEndereco(texto) {
+    var t = String(texto === undefined || texto === null ? "" : texto).trim();
+    if (!t) return "";
+
+    if (temEsquema(t)) {
+      var baixo = t.toLowerCase();
+      if (baixo.indexOf("http://") !== 0 && baixo.indexOf("https://") !== 0) return "";
+    } else {
+      t = "https://" + t;
+    }
+
+    try {
+      /* SEM SEGUNDO ARGUMENTO. É esta ausência que faz texto solto
+         virar erro em vez de caminho no domínio do Hub. */
+      var u = new URL(t);
+      if (u.protocol !== "http:" && u.protocol !== "https:") return "";
+      if (!u.hostname) return "";
+      /* Precisa parecer um domínio. Sem isto, "receita federal"
+         viraria https://receita%20federal/ e entraria como
+         favorito que nunca abre. */
+      if (u.hostname.indexOf(".") === -1 && u.hostname !== "localhost") return "";
+      return u.href;
+    } catch (e) { return ""; }
+  }
 
   function dominioDe(url) {
     try {
