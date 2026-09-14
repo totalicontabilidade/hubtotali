@@ -6,18 +6,27 @@
 
 <!-- Nada de CDN, nada de biblioteca de terceiro, nenhum script de
      fora. Fora da própria pasta esta página fala com o Google — o
-     login, o banco e a renovação do token — e com unavatar.io,
-     usado só na hora em que alguém digita o endereço de um sistema
-     novo, para trazer o ícone dele para dentro do banco. O Hub, do
-     outro lado, não fala com ninguém: lá a política é
-     img-src 'self' data:. -->
+     login, o banco e a renovação do token —, com unavatar.io e com
+     os SITES DA PRÓPRIA CASA.
+
+     POR QUE OS SITES DA CASA ENTRARAM no connect-src. O ícone de um
+     sistema costuma estar declarado no HTML da página, em
+     <link rel="icon">, e às vezes embutido ali como data: — foi o
+     caso do confere-nfse. O serviço de ícones não abre página: ele
+     consulta por DOMÍNIO, e seis sistemas nossos moram no mesmo
+     totalicontabilidade.github.io, distinguidos só pelo caminho.
+     Lendo o HTML, cada um traz o seu.
+
+     A lista é fechada nos nossos dois domínios de propósito. Abrir
+     para qualquer host daria a esta página o poder de conversar com
+     a internet inteira, e ela não precisa disso para nada. -->
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
   script-src 'self';
   style-src 'self';
-  img-src 'self' data: https://unavatar.io;
+  img-src 'self' data: https://unavatar.io https://totalicontabilidade.github.io https://*.totalicontabilidade.com.br;
   font-src 'self';
-  connect-src https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com;
+  connect-src https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://totalicontabilidade.github.io https://*.totalicontabilidade.com.br;
   object-src 'none';
   base-uri 'none';
   form-action 'none'">

@@ -198,17 +198,111 @@
      só dispara ao digitar o endereço. Com "forcar", o botão da
      linha manda buscar de novo, e aí atropelar é justamente o que
      se pediu. */
-  function buscarIconeDoSite(item, pintar, forcar) {
+  /* A CONSULTA É POR DOMÍNIO, NÃO POR PÁGINA — e é isso que explica
+     os dois enganos que apareceram no uso.
+
+     O serviço de ícones recebe um domínio e devolve o ícone DAQUELE
+     domínio. Ele não abre a página nem lê o <link rel="icon"> dela.
+     Consequências medidas, não supostas:
+
+     · Seis sistemas nossos moram em totalicontabilidade.github.io e
+       se distinguem só pelo caminho. A consulta é a mesma para os
+       seis — e para esse domínio o serviço responde 404. O
+       confere-nfse TEM ícone, declarado como data: dentro do HTML
+       da página, e não há como o serviço chegar nele.
+
+     · O Gmail mora em mail.google.com, e para esse domínio o
+       serviço devolve o logo do Google, não o do Gmail. Para
+       "gmail.com" devolve o certo. Não existe regra geral que
+       adivinhe isso: tirar o subdomínio acertaria aqui e erraria
+       em mil outros lugares.
+
+     Daí o quarto argumento. Quando a busca automática não serve,
+     quem está na administração diz de qual domínio buscar. É a
+     única peça de informação que falta, e é humana. */
+  /* ---------- O ícone que a própria página declara ----------
+
+     É o caminho CERTO quando dá para usar, porque é por ENDEREÇO e
+     não por domínio: os seis sistemas em totalicontabilidade.github.io
+     passam a trazer cada um o seu, em vez de dar todos na mesma
+     consulta. E alcança ícone embutido no HTML como data:, que é o
+     caso do confere-nfse e que nenhum serviço externo enxerga.
+
+     SÓ FUNCIONA ONDE O SITE AUTORIZA a leitura por outra origem. O
+     GitHub Pages autoriza (Access-Control-Allow-Origin: *) — medi.
+     A maioria dos sites de fora não, e para esses o pedido nem sai:
+     a política desta página só lista os nossos dois domínios. Cai
+     no catch e segue para o serviço de ícones, como antes.
+
+     O HTML é lido com DOMParser, que monta a árvore SEM executar
+     script nem baixar nada do que estiver dentro. */
+
+  function iconeDaPagina(endereco) {
+    return fetch(endereco, { mode: "cors", credentials: "omit" })
+      .then(function (r) { return r.ok ? r.text() : null; })
+      .then(function (html) {
+        if (!html) return "";
+        var doc = new DOMParser().parseFromString(html, "text/html");
+        var achados = Array.prototype.slice.call(
+          doc.querySelectorAll('link[rel~="icon"], link[rel="shortcut icon"]'));
+        if (!achados.length) return "";
+
+        /* O maior primeiro: sizes="512x512" dá imagem melhor para
+           reduzir a 64 do que um favicon de 16. */
+        achados.sort(function (a, b) { return lado(b) - lado(a); });
+        var href = achados[0].getAttribute("href") || "";
+        if (!href) return "";
+        if (href.indexOf("data:") === 0) {
+          return href.indexOf("data:image/") === 0 ? href : "";
+        }
+        try { return new URL(href, endereco).href; } catch (e) { return ""; }
+
+        function lado(l) {
+          var s = (l.getAttribute("sizes") || "").toLowerCase();
+          var x = s.indexOf("x");
+          var n = x === -1 ? 0 : parseInt(s.slice(0, x), 10);
+          return isNaN(n) ? 0 : n;
+        }
+      });
+  }
+
+  function buscarIconeDoSite(item, pintar, forcar, dominioEscolhido) {
     if (item.logoDados && !forcar) return;
-    var dominio = dominioDe(item.url || "");
+    var dominio = dominioEscolhido || dominioDe(item.url || "");
     if (!dominio) {
       if (forcar) recado("Este sistema não tem um endereço válido para buscar o ícone.", true);
       return;
     }
 
+    /* A PÁGINA PRIMEIRO, o serviço depois. Só quando o domínio veio
+       do endereço: se alguém escolheu um domínio à mão, foi
+       justamente porque a página não serviu. */
+    if (!dominioEscolhido && item.url) {
+      iconeDaPagina(item.url)
+        .then(function (achado) {
+          if (!achado) throw new Error("sem <link rel=icon> utilizável");
+          return trazerImagem(achado, item, pintar, forcar, dominio, true);
+        })
+        .catch(function () { peloServico(); });
+      return;
+    }
+    peloServico();
+
+    function peloServico() {
+      trazerImagem("https://unavatar.io/" + encodeURIComponent(dominio) + "?fallback=false" +
+                   (forcar ? "&_=" + Date.now() : ""),
+                   item, pintar, forcar, dominio, false);
+    }
+  }
+
+  /* Carrega uma imagem de onde estiver, reduz para 64 e guarda como
+     dado embutido. Serve para o ícone da página e para o do serviço:
+     o que muda é só de onde vem o endereço. */
+  function trazerImagem(endereco, item, pintar, forcar, dominio, daPagina) {
     var img = new Image();
     /* Antes do src, sempre: é esta linha que faz o navegador pedir
-       a autorização de leitura. Depois do src, ela não vale. */
+       a autorização de leitura. Depois do src, ela não vale.
+       Em data: não faz falta e não estorva. */
     img.crossOrigin = "anonymous";
     var acabou = false;
     img.onload = function () {
@@ -217,7 +311,6 @@
       /* O endereço pode ter mudado enquanto isto voltava. Já o
          "tem logo" só barra a busca automática: se foi pedida, a
          imagem nova é para entrar no lugar da velha. */
-      if (dominioDe(item.url || "") !== dominio) return;
       if (item.logoDados && !forcar) return;
       try {
         var lado = Math.min(64, Math.max(img.width, img.height));
@@ -235,23 +328,28 @@
            "trazido" faria a pessoa procurar na tela uma mudança que
            não houve — e desconfiar do botão, não do serviço. */
         if (forcar && novo === (item.logoDados || "")) {
-          recado("O que voltou é o mesmo ícone que já estava aqui. " +
-                 "O serviço de ícones pode estar com a cópia antiga guardada; " +
-                 "dá para enviar a imagem à mão clicando no logo.");
+          var onde = daPagina ? "a própria página" : dominio;
+          recado("O que voltou de " + onde + " é o mesmo ícone que já estava aqui.");
+          outroDominio(item, pintar, dominio,
+            "O que voltou de " + onde + " é o mesmo ícone que já estava aqui.");
           return;
         }
 
         item.logoDados = novo;
         if (pintar) pintar();
         marcarPendente();
-        recado(forcar ? "Ícone de " + dominio + " atualizado."
-                      : "Ícone de " + dominio + " trazido para dentro.");
+        var de = daPagina ? "da página" : "de " + dominio;
+        recado(forcar ? "Ícone " + de + " atualizado."
+                      : "Ícone " + de + " trazido para dentro.");
       } catch (erro) {
         /* O servidor entregou a imagem mas não autorizou LER os
            pixels, então ela não pode virar dado guardado. Na busca
            automática fica nas iniciais, calado. Num clique, não. */
-        if (forcar) recado("Achei a imagem, mas o serviço não deixou copiá-la. " +
-                           "Dá para enviar à mão clicando no logo.", true);
+        if (forcar) {
+          recado("Achei a imagem de " + dominio + ", mas o serviço não deixou copiá-la.", true);
+          outroDominio(item, pintar, dominio,
+            "Achei a imagem de " + dominio + ", mas o serviço não deixou copiá-la.");
+        }
       }
     };
     /* 404 cai aqui. Na busca automática é o caso bom e o silêncio
@@ -261,17 +359,64 @@
     img.onerror = function () {
       if (acabou) return;
       acabou = true;
-      if (forcar) recado("Não achei ícone em " + dominio + ". O site pode não ter um, " +
-                         "ou não deixar copiar. Dá para enviar a imagem à mão clicando no logo.", true);
+      /* O ícone declarado na página pode não carregar — arquivo que
+         não existe mais, formato que o navegador não abre. Nesse
+         caso ainda resta o serviço, e desistir aqui seria desistir
+         cedo. */
+      if (daPagina) {
+        trazerImagem("https://unavatar.io/" + encodeURIComponent(dominio) + "?fallback=false" +
+                     (forcar ? "&_=" + Date.now() : ""),
+                     item, pintar, forcar, dominio, false);
+        return;
+      }
+      if (!forcar) return;
+      recado("Não achei ícone em " + dominio + ".", true);
+      outroDominio(item, pintar, dominio, "Não achei ícone em " + dominio + ".");
     };
-    var endereco = "https://unavatar.io/" + encodeURIComponent(dominio) + "?fallback=false";
-    /* AO PEDIR DE NOVO, UM ENDEREÇO DIFERENTE. Sem isto o navegador
+    /* AO PEDIR DE NOVO, UM ENDEREÇO DIFERENTE — quem monta o
+       endereço já cuidou disso com "&_=". Sem isso o navegador
        devolve a imagem que ele já tem guardada e o clique não faz
-       nada visível. Isto fura o cache DAQUI; se o próprio unavatar
-       ainda estiver com a cópia antiga, o que volta é a antiga — e
-       aí o caminho certo é enviar a imagem à mão. */
-    if (forcar) endereco += "&_=" + Date.now();
+       nada visível. Fura o cache DAQUI; se o serviço ainda estiver
+       com a cópia antiga, o que volta é a antiga. */
     img.src = endereco;
+  }
+
+  /* A RECUSA QUE PERGUNTA, EM VEZ DE SÓ AVISAR.
+
+     Explica o mecanismo — busca por domínio, não por página — e
+     deixa o campo preenchido com o que foi tentado, para a pessoa
+     editar em vez de digitar do zero. Cancelar encerra; é o
+     Cancelar que evita laço, e não um contador.
+
+     Enviar a imagem à mão continua sendo o caminho que não depende
+     de terceiro, e a pergunta diz isso. */
+  function outroDominio(item, pintar, tentado, oQueAconteceu) {
+    var resposta = window.prompt(
+      oQueAconteceu + "\n\n" +
+      "A busca é pelo DOMÍNIO, não pela página. Endereços que se distinguem " +
+      "só pelo caminho — como os nossos em totalicontabilidade.github.io — " +
+      "dão todos na mesma consulta.\n\n" +
+      "Escreva outro domínio para tentar (o Gmail, por exemplo, responde em " +
+      "gmail.com e não em mail.google.com), ou clique em Cancelar e envie a " +
+      "imagem à mão clicando no logo.",
+      tentado);
+    if (resposta === null) return;
+    var limpo = String(resposta).trim().toLowerCase();
+    /* Aceita que a pessoa cole um endereço inteiro: tira o esquema e
+       o caminho, porque o serviço só entende o domínio. */
+    if (limpo.indexOf("//") !== -1) limpo = limpo.slice(limpo.indexOf("//") + 2);
+    var barra = limpo.indexOf("/");
+    if (barra !== -1) limpo = limpo.slice(0, barra);
+    if (limpo.indexOf("www.") === 0) limpo = limpo.slice(4);
+    if (!limpo || limpo.indexOf(".") === -1) {
+      recado("“" + resposta + "” não parece um domínio.", true);
+      return;
+    }
+    if (limpo === tentado) {
+      recado("Esse é o mesmo domínio que acabei de tentar.", true);
+      return;
+    }
+    buscarIconeDoSite(item, pintar, true, limpo);
   }
 
   function previaDoLogo(item) {
