@@ -587,15 +587,67 @@ const PendenciasUI = (function () {
     var cr = document.createElement("input");
     cr.type = "checkbox";
     lr.appendChild(cr);
-    lr.appendChild(el("span", null, "Reservada — só as partes, gerência e diretoria veem"));
+    lr.appendChild(el("span", null, "Reservada — some da lista de todo mundo"));
     reservada.appendChild(lr);
-    reservada.appendChild(el("div", "pd-dica",
-      "Some da lista de todo mundo, inclusive do quadro do escritório. Use para assunto de pessoal, salário, advertência."));
+
+    /* DUAS RESERVAS DIFERENTES, E A DIFERENÇA IMPORTA.
+       A primeira é para assunto de pessoal: as partes precisam
+       resolver, e gerência e diretoria respondem pela casa, então
+       enxergam. A segunda é para o que é só da pessoa — e aí
+       incluir a chefia por padrão seria justamente o contrário do
+       que ela pediu.
+
+       Quem pode ver é gravado na criação e não recalculado depois:
+       quem virar gerente amanhã não passa a enxergar o que se
+       falou ontem. */
+    var plateia = el("div", "pd-plateia");
+    plateia.hidden = true;
+
+    function escolha(valor, titulo, dica, marcada) {
+      var l = document.createElement("label");
+      l.className = "pd-plateia__op";
+      var r = document.createElement("input");
+      r.type = "radio";
+      r.name = "pd-plateia";
+      r.value = valor;
+      r.checked = !!marcada;
+      var txt = el("div", "pd-plateia__txt");
+      txt.appendChild(el("div", "pd-plateia__t", titulo));
+      txt.appendChild(el("div", "pd-dica", dica));
+      l.appendChild(r);
+      l.appendChild(txt);
+      r.addEventListener("change", aplicarPlateia);
+      plateia.appendChild(l);
+      return r;
+    }
+
+    var rPartes = escolha("partes", "As partes, mais gerência e diretoria",
+      "Para assunto de pessoal, salário, advertência. Quem responde pela casa acompanha.", true);
+    var rSoEu = escolha("so-eu", "Só eu",
+      "Mais ninguém do escritório vê, nem administrador. Vira uma anotação sua, " +
+      "com prazo e linha do tempo, e sem responsável para designar.", false);
+
+    reservada.appendChild(plateia);
 
     var ativos = equipe.filter(function (p) { return p.ativo; });
     var marcar = marcador("Marcar mais alguém", ativos, meuUid());
     marcar.appendChild(el("div", "pd-dica",
       "Quem for marcado também vê esta pendência na página dele. A responsabilidade continua sendo de uma pessoa só."));
+
+    function soEu() { return cr.checked && rSoEu.checked; }
+
+    /* "Só eu" ESCONDE quem faz e quem mais vê, em vez de deixar os
+       campos ali sem efeito. Designar alguém que não pode abrir a
+       pendência criaria tarefa invisível: a pessoa seria a
+       responsável e nunca saberia. Melhor a tela dizer que naquele
+       modo isso não existe. */
+    function aplicarPlateia() {
+      plateia.hidden = !cr.checked;
+      var so = soEu();
+      quem.hidden = so;
+      marcar.hidden = so;
+    }
+    cr.addEventListener("change", aplicarPlateia);
 
     [oque, porque, quem, quando, urgencia, sugestao, marcar, reservada].forEach(function (x) { c.appendChild(x); });
 
@@ -611,14 +663,20 @@ const PendenciasUI = (function () {
         oque: oque._entrada.value,
         porque: porque._entrada.value,
         sugestao: sugestao._entrada.value,
-        responsavel: destinoPessoa(quem._entrada.value),
+        /* No modo "só eu" a pendência é minha, de mim para mim: o
+           responsável sou eu, não há setor de destino e não há
+           mais ninguém na plateia. Ler os campos escondidos daria
+           um documento que contradiz a escolha. */
+        responsavel: soEu() ? meuUid() : destinoPessoa(quem._entrada.value),
         prazo: quando._entrada.value,
         urgencia: urgencia._entrada.value,
         setorOrigem: (Array.isArray(eu.setores) ? eu.setores[0] : eu.setor) || "",
-        setorDestino: destinoSetor(quem._entrada.value),
+        setorDestino: soEu() ? "" : destinoSetor(quem._entrada.value),
         confidencial: cr.checked,
-        podemVer: cr.checked ? quemPodeVer(destinoPessoa(quem._entrada.value), marcar._valores()) : [],
-        envolvidos: marcar._valores(),
+        podemVer: !cr.checked ? []
+                  : soEu() ? [meuUid()]
+                  : quemPodeVer(destinoPessoa(quem._entrada.value), marcar._valores()),
+        envolvidos: soEu() ? [] : marcar._valores(),
       }).then(function () { fechar(); carregar(); })
         .catch(function (e) {
           msg.textContent = e.message; msg.hidden = false;
@@ -661,7 +719,19 @@ const PendenciasUI = (function () {
       : "Para o setor " + (p.setorDestino || "—")));
     /* Reservada agora se reconhece pela COLEÇÃO de onde veio, não
        por um campo dentro do documento. */
-    if (Pendencias.ehReservada(p)) meta.appendChild(el("span", "pd-tag pd-tag--reservada", "Reservada"));
+    if (Pendencias.ehReservada(p)) {
+      /* "Reservada" e "Só eu" precisam se distinguir na lista. Sem
+         isso a pessoa não sabe, olhando, se a chefia enxerga
+         aquela linha — e é justamente essa a dúvida que a levou a
+         marcar a caixa. A plateia de um é a prova: o documento só
+         tem o uid dela. */
+      var so = Array.isArray(p.podemVer) && p.podemVer.length === 1;
+      var etiqueta = el("span", "pd-tag pd-tag--reservada", so ? "Só eu" : "Reservada");
+      etiqueta.title = so
+        ? "Ninguém mais do escritório vê esta pendência."
+        : "As partes, mais gerência e diretoria.";
+      meta.appendChild(etiqueta);
+    }
     (p.envolvidos || []).forEach(function (uid) {
       meta.appendChild(el("span", "pd-tag pd-tag--marcado", "@" + nomeDe(uid)));
     });
