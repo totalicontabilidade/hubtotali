@@ -44,10 +44,19 @@ const PendenciasUI = (function () {
      enxergar o que se falou ontem — e se deixar de ser, continua
      enxergando o que já viu. Congelar a lista é o que faz o sigilo
      ser previsível. */
-  function quemPodeVer(responsavel, envolvidos) {
+  function quemPodeVer(responsavel, envolvidos, comChefia) {
     var lista = [meuUid()];
     if (responsavel) lista.push(responsavel);
     (envolvidos || []).forEach(function (u) { lista.push(u); });
+    /* SEM CHEFIA é a terceira plateia: eu e quem eu marcar, e mais
+       ninguém. Existe porque "as partes mais gerência e diretoria"
+       e "só eu" não cobriam o caso do meio — combinar algo com uma
+       pessoa só, sem a casa acompanhando. */
+    if (comChefia === false) {
+      var vistos0 = {}, saida0 = [];
+      lista.forEach(function (u) { if (u && !vistos0[u]) { vistos0[u] = true; saida0.push(u); } });
+      return saida0;
+    }
     equipe.forEach(function (p) {
       if (!p.ativo) return;
       var seus = Array.isArray(p.setores) ? p.setores : (p.setor ? [p.setor] : []);
@@ -168,10 +177,25 @@ const PendenciasUI = (function () {
        escreveu fecha — porque só ela sabe se o assunto morreu ali
        ou se ainda vai render conversa. Fechar sozinho seria decidir
        isso no lugar dela. */
-    var abertas = minhas.filter(function (p) {
-      if (p.situacao === "resolvida") return false;
-      if (Pendencias.pedeCiencia(p) && p.criadoPor !== eu && Pendencias.jaDeiCiencia(p)) return false;
-      return true;
+    /* DUAS PILHAS: o que ainda pede algo de mim, e o que já
+       terminou do meu lado. Nada desaparece — o que terminou desce
+       para "Concluídas", fechado.
+
+       ANTES ISSO SUMIA, e o Hesley reparou. Recado que eu confirmei
+       saía da lista e só era achável no quadro do escritório; e
+       pendência resolvida nunca aparecia no trilho pessoal. As
+       duas coisas continuavam no banco, mas "está no banco" não é
+       resposta para quem quer consultar depois. */
+    function terminouParaMim(p) {
+      if (p.situacao === "resolvida") return true;
+      /* Recado não tem "resolvida" para quem recebe: tem a minha
+         ciência. Dada, acabou para mim — mesmo que falte gente. */
+      if (Pendencias.pedeCiencia(p) && p.criadoPor !== eu && Pendencias.jaDeiCiencia(p)) return true;
+      return false;
+    }
+    var abertas = minhas.filter(function (p) { return !terminouParaMim(p); });
+    var concluidas = minhas.filter(terminouParaMim).sort(function (a, b) {
+      return String(b.criadoEm || "").localeCompare(String(a.criadoEm || ""));
     });
 
     var novo = el("button", "btn-nova", "Abrir pendência");
@@ -227,7 +251,42 @@ const PendenciasUI = (function () {
       alvo.appendChild(f);
       lista.forEach(function (p) { alvo.appendChild(cartao(p)); });
     });
+
+    /* CONCLUÍDAS FICAM, MAS FECHADAS.
+
+       Guardar e mostrar são coisas diferentes. Se as concluídas
+       aparecessem abertas, o trilho deixaria de responder à
+       pergunta que ele existe para responder — "o que preciso
+       fazer?" — e viraria histórico com pendência no meio. Fechado,
+       o número fica à vista e o conteúdo a um clique.
+
+       Lembra do estado entre um desenho e o outro: sem isso, a
+       atualização de minuto em minuto fecharia a gaveta na cara de
+       quem acabou de abri-la. */
+    if (concluidas.length) {
+      var fh = el("button", "faixa faixa--feito faixa--dobra");
+      fh.type = "button";
+      fh.appendChild(el("span", "faixa__t", "Concluídas"));
+      fh.appendChild(el("span", "faixa__n", String(concluidas.length)));
+      var seta = el("span", "faixa__seta", HISTORICO_ABERTO ? "⌄" : "›");
+      fh.appendChild(seta);
+      alvo.appendChild(fh);
+
+      var caixaH = el("div", "historico");
+      caixaH.hidden = !HISTORICO_ABERTO;
+      concluidas.forEach(function (p) { caixaH.appendChild(cartao(p)); });
+      alvo.appendChild(caixaH);
+
+      fh.addEventListener("click", function () {
+        HISTORICO_ABERTO = !HISTORICO_ABERTO;
+        caixaH.hidden = !HISTORICO_ABERTO;
+        seta.textContent = HISTORICO_ABERTO ? "⌄" : "›";
+      });
+    }
   }
+
+  /* Fora da função de propósito: precisa sobreviver ao redesenho. */
+  var HISTORICO_ABERTO = false;
 
   /* ============================================================
      TODAS AS PENDÊNCIAS DO ESCRITÓRIO
@@ -549,6 +608,34 @@ const PendenciasUI = (function () {
     if (!caixa.children.length) {
       caixa.appendChild(el("div", "pd-vazio", "Ninguém mais cadastrado ainda."));
     }
+
+    /* MARCAR E DESMARCAR TODOS, em dois botões pequenos ao lado do
+       rótulo. A lista de ciência vem toda marcada porque o caso
+       comum é o escritório inteiro — mas quando a pessoa quer só um
+       nome, desmarcar sete a sete é trabalho que a tela devia fazer
+       por ela. Pequenos de propósito: são atalho, não a ação
+       principal. */
+    var atalhos = el("span", "pd-todos");
+    function botaozinho(texto, marcar) {
+      var b = el("button", "pd-todos__b", texto);
+      b.type = "button";
+      b.addEventListener("click", function () {
+        escolhidos.length = 0;
+        Array.prototype.slice.call(caixa.querySelectorAll("input[type=checkbox]"))
+          .forEach(function (c) {
+            c.checked = marcar;
+            if (marcar) escolhidos.push(c.value);
+          });
+      });
+      atalhos.appendChild(b);
+      return b;
+    }
+    if (caixa.children.length > 1) {
+      botaozinho("todos", true);
+      botaozinho("nenhum", false);
+      l.querySelector(".pd-rot").appendChild(atalhos);
+    }
+
     l.appendChild(caixa);
     l._valores = function () { return escolhidos.slice(); };
     return l;
@@ -774,6 +861,9 @@ const PendenciasUI = (function () {
 
     var rPartes = escolha("partes", "As partes, mais gerência e diretoria",
       "Para assunto de pessoal, salário, advertência. Quem responde pela casa acompanha.", true);
+    var rComigo = escolha("comigo", "Eu e quem eu marcar",
+      "As pessoas que você escolher em Quem faz e Marcar mais alguém, e mais nenhuma. " +
+      "Nem gerência, nem diretoria, nem administrador.", false);
     var rSoEu = escolha("so-eu", "Só eu",
       "Mais ninguém do escritório vê, nem administrador. Vira uma anotação sua, " +
       "com prazo e linha do tempo, e sem responsável para designar.", false);
@@ -781,8 +871,26 @@ const PendenciasUI = (function () {
     reservada.appendChild(plateia);
 
     var ativos = equipe.filter(function (p) { return p.ativo; });
-    var marcar = marcador("Marcar mais alguém", ativos, meuUid());
-    var chamados = marcador("Quem precisa dar ciência", ativos, meuUid(), true);
+    /* EU TAMBÉM ENTRO NAS LISTAS, e antes não entrava.
+
+       As duas listas excluíam quem estava criando, com a ideia de
+       que "você já está aqui, não precisa se marcar". Isso é
+       verdade para VER a pendência — quem cria sempre vê — mas
+       falso para duas coisas que importam:
+
+       · Numa reservada, a plateia é a lista de quem pode ler. Sem
+         poder me marcar, eu não conseguia fazer "só eu e o Rone":
+         ou eu escolhia "só eu", que exclui todo mundo, ou aceitava
+         gerência e diretoria junto.
+
+       · Num recado, ciência é ato. Se o aviso vale para mim também
+         — e às vezes vale, é o combinado que eu também sigo — eu
+         preciso poder confirmar que li.
+
+       Passa a excluir apenas quem está desligado, que já é o filtro
+       de "ativos" logo acima. */
+    var marcar = marcador("Marcar mais alguém", ativos, null);
+    var chamados = marcador("Quem precisa dar ciência", ativos, null, true);
     chamados.hidden = true;
     chamados.appendChild(el("div", "pd-dica",
       "Cada pessoa marcada vê o recado na lista dela e aparece um botão para confirmar " +
@@ -875,7 +983,8 @@ const PendenciasUI = (function () {
         podemVer: crec.checked ? []
                   : !cr.checked ? []
                   : soEu() ? [meuUid()]
-                  : quemPodeVer(destinoPessoa(quem._entrada.value), marcar._valores()),
+                  : quemPodeVer(destinoPessoa(quem._entrada.value), marcar._valores(),
+                                rComigo.checked ? false : true),
         envolvidos: (crec.checked || soEu()) ? [] : marcar._valores(),
         deveDarCiencia: crec.checked ? chamados._valores() : [],
       }).then(function () { fechar(); carregar(); })
@@ -1493,6 +1602,153 @@ const PendenciasUI = (function () {
 
   /* ---------- carregar ---------- */
 
+  /* ============================================================
+     A CAIXA GRANDE
+     ------------------------------------------------------------
+     Duas coisas não podem esperar que a pessoa repare num cartão
+     no meio de uma lista:
+
+       · uma tarefa dela VENCEU;
+       · um recado que ela escreveu foi lido por TODOS.
+
+     A primeira porque atraso já aconteceu — não é aviso de algo
+     que vai acontecer, é notícia de algo que falhou. A segunda
+     porque é o fim de uma espera: ela mandou o aviso e estava
+     aguardando, e agora pode fechar o assunto.
+
+     APARECE UMA VEZ POR FATO, E NÃO A CADA ABERTURA. Cada fato tem
+     uma chave — "atraso:id" ou "lido:id" — guardada no navegador
+     quando a pessoa fecha a caixa. Guardar ao FECHAR, e não ao
+     mostrar: se a aba morrer antes de ela ler, o aviso volta.
+
+     A memória é do navegador, e isso tem um custo honesto: quem
+     usa dois computadores vê o mesmo aviso nos dois. A alternativa
+     seria guardar no banco, o que faria cada abertura do Hub
+     escrever um documento por pessoa — caro para o problema que
+     resolve. Ver o mesmo aviso duas vezes incomoda menos que isso.
+     ============================================================ */
+
+  function chaveDosAvisos() { return "hub-totali:avisado:" + (meuUid() || "anon"); }
+
+  function avisosJaDados() {
+    try {
+      var b = window.localStorage.getItem(chaveDosAvisos());
+      var d = b ? JSON.parse(b) : null;
+      return Array.isArray(d) ? d : [];
+    } catch (e) { return []; }
+  }
+
+  function guardarAvisos(lista) {
+    try {
+      /* Teto de duzentas chaves: sem ele a lista cresce para sempre
+         num navegador que fica anos na mesma máquina. As mais
+         antigas saem primeiro, e o pior que acontece é um aviso
+         muito velho aparecer de novo. */
+      window.localStorage.setItem(chaveDosAvisos(), JSON.stringify(lista.slice(-200)));
+    } catch (e) { /* navegador sem espaço: pior caso, avisa de novo */ }
+  }
+
+  function conferirCaixaGrande() {
+    var eu = meuUid();
+    if (!eu || painelAberto()) return;
+    if (document.querySelector(".pd-caixona")) return;
+
+    var jaDados = avisosJaDados();
+    var meusSetores = setoresDe(porUid[eu] || {});
+    var venceram = [], lidos = [], chaves = [];
+
+    todas.forEach(function (p) {
+      if (p.situacao === "resolvida") return;
+
+      if (!Pendencias.pedeCiencia(p)
+          && Pendencias.estado(p) === "atrasada"
+          && Pendencias.ehMinha(p, eu, meusSetores)) {
+        var k = "atraso:" + p.id;
+        if (jaDados.indexOf(k) === -1) { venceram.push(p); chaves.push(k); }
+      }
+
+      if (Pendencias.pedeCiencia(p) && p.criadoPor === eu) {
+        var c = Pendencias.contaDaCiencia(p);
+        if (c.total > 0 && c.deram >= c.total) {
+          var k2 = "lido:" + p.id;
+          if (jaDados.indexOf(k2) === -1) { lidos.push(p); chaves.push(k2); }
+        }
+      }
+    });
+
+    if (!venceram.length && !lidos.length) return;
+    mostrarCaixaGrande(venceram, lidos, chaves);
+  }
+
+  function mostrarCaixaGrande(venceram, lidos, chaves) {
+    var fundo = el("div", "pd-caixona");
+    var caixa = el("div", "pd-caixona__c");
+    caixa.setAttribute("role", "dialog");
+    caixa.setAttribute("aria-modal", "true");
+
+    /* O QUE VENCEU VEM PRIMEIRO. Entre "algo falhou" e "algo se
+       completou", o que falhou manda. */
+    if (venceram.length) {
+      var s1 = el("div", "pd-caixona__s pd-caixona__s--atraso");
+      s1.appendChild(el("div", "pd-caixona__t",
+        venceram.length === 1 ? "Uma tarefa sua venceu" : venceram.length + " tarefas suas venceram"));
+      var l1 = el("ul", "pd-caixona__l");
+      venceram.forEach(function (p) {
+        var li = document.createElement("li");
+        li.appendChild(el("span", "pd-caixona__o", p.oque));
+        li.appendChild(el("span", "pd-caixona__q",
+          "vencia " + (pedacosDaData(p.prazo).d + " " + pedacosDaData(p.prazo).m)));
+        li.addEventListener("click", function () { fechar2(); abrirFicha(p); });
+        l1.appendChild(li);
+      });
+      s1.appendChild(l1);
+      caixa.appendChild(s1);
+    }
+
+    if (lidos.length) {
+      var s2 = el("div", "pd-caixona__s pd-caixona__s--lido");
+      s2.appendChild(el("div", "pd-caixona__t",
+        lidos.length === 1 ? "Todos leram o seu recado" : "Todos leram " + lidos.length + " recados seus"));
+      var l2 = el("ul", "pd-caixona__l");
+      lidos.forEach(function (p) {
+        var c = Pendencias.contaDaCiencia(p);
+        var li = document.createElement("li");
+        li.appendChild(el("span", "pd-caixona__o", p.oque));
+        li.appendChild(el("span", "pd-caixona__q", c.deram + " de " + c.total + " confirmaram"));
+        li.addEventListener("click", function () { fechar2(); abrirFicha(p); });
+        l2.appendChild(li);
+      });
+      s2.appendChild(l2);
+      caixa.appendChild(s2);
+    }
+
+    var b = el("button", "pd-botao pd-botao--principal", "Entendi");
+    b.type = "button";
+    b.addEventListener("click", fechar2);
+    caixa.appendChild(b);
+
+    caixa.appendChild(el("div", "pd-dica",
+      "Clique num item para abrir. Este aviso não volta para os mesmos itens."));
+
+    fundo.appendChild(caixa);
+    /* Clicar fora e Escape fecham, como qualquer caixa. Mas o
+       "Entendi" é que existe para ser óbvio: o resto é atalho. */
+    fundo.addEventListener("click", function (ev) { if (ev.target === fundo) fechar2(); });
+    document.addEventListener("keydown", pelaTecla);
+    document.body.appendChild(fundo);
+    b.focus();
+
+    function pelaTecla(ev) { if (ev.key === "Escape") fechar2(); }
+
+    function fechar2() {
+      document.removeEventListener("keydown", pelaTecla);
+      if (fundo.parentNode) fundo.parentNode.removeChild(fundo);
+      /* SÓ AGORA a chave é guardada. Se a aba morresse antes, o
+         aviso voltaria — que é o certo para quem não leu. */
+      guardarAvisos(avisosJaDados().concat(chaves));
+    }
+  }
+
   function carregar() {
     if (!Dados.sessao() || !Pendencias.temBanco()) { desenhar(); return; }
     Promise.all([Pendencias.listar(), Dados.listarEquipe()])
@@ -1504,6 +1760,7 @@ const PendenciasUI = (function () {
         ultimaAssinatura = assinatura();
         desenhar();
         if (typeof aoMudar === "function") aoMudar(resumo());
+        conferirCaixaGrande();
       })
       .catch(function (e) {
         alvo.textContent = "";
@@ -1582,6 +1839,10 @@ const PendenciasUI = (function () {
         ultimaAssinatura = agora;
         desenhar();
         if (typeof aoMudar === "function") aoMudar(resumo());
+        /* Vale também na atualização sozinha: uma tarefa vence à
+           meia-noite com o Hub aberto, e um recado se completa
+           quando o último colega confirma. */
+        conferirCaixaGrande();
       })
       .catch(function () { /* sem rede: a próxima volta tenta */ });
   }

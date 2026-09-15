@@ -414,6 +414,14 @@ a{color:inherit;text-decoration:none}
 .pd-corpo{padding:16px 22px 22px;overflow:auto}
 
 .pd-campo{display:block;margin-bottom:12px}
+/* "todos" e "nenhum" ao lado do rótulo: atalho, não ação
+   principal. Minúsculo e sem borda forte para não disputar com
+   o botão de abrir a pendência. */
+.pd-todos{float:right;display:inline-flex;gap:4px;text-transform:none;letter-spacing:0}
+.pd-todos__b{border:1px solid var(--fio-2);background:#fff;color:var(--txt-3);
+             border-radius:6px;padding:1px 6px;font:inherit;font-size:10px;
+             font-weight:600;cursor:pointer}
+.pd-todos__b:hover{border-color:var(--estado);color:var(--estado)}
 .pd-rot{display:block;font-size:11px;font-weight:730;letter-spacing:.08em;text-transform:uppercase;
         color:var(--txt-3);margin-bottom:5px}
 .pd-rot--secao{margin-top:20px;margin-bottom:10px}
@@ -832,6 +840,49 @@ a{color:inherit;text-decoration:none}
 /* Resolvida recua: continua legível para quem foi procurar, sem
    disputar atenção com o que ainda falta fazer. */
 .faixa--feito{opacity:.75}
+
+/* A faixa de Concluídas é botão, e não rótulo: ela abre e fecha.
+   Herda a aparência da faixa comum para não parecer outro
+   elemento, e só acrescenta o cursor e a seta. */
+.faixa--dobra{width:100%;border:0;background:transparent;cursor:pointer;text-align:left;
+              font:inherit;display:flex;align-items:baseline}
+.faixa--dobra:hover .faixa__t{color:var(--txt-2)}
+.faixa__seta{margin-left:auto;font-size:13px;color:var(--txt-3);line-height:1}
+/* O histórico não precisa gritar: os cartões de dentro ficam mais
+   discretos que os de cima, porque nenhum deles pede ação. */
+.historico{opacity:.8}
+
+/* ============================================================
+   A CAIXA GRANDE
+   ------------------------------------------------------------
+   Por cima de tudo, escura em volta, e centrada. Ela interrompe de
+   propósito: as duas notícias que a usam — tarefa vencida e recado
+   lido por todos — perderiam o sentido se dividissem a tela com
+   quarenta cartões.
+
+   Largura limitada e rolagem interna: se alguém voltar de uma
+   semana de férias com doze vencidas, a caixa cresce até caber na
+   tela e rola dentro, em vez de empurrar o botão para fora do
+   alcance.
+   ============================================================ */
+.pd-caixona{position:fixed;inset:0;z-index:60;display:flex;align-items:center;
+            justify-content:center;padding:20px;background:rgba(13,25,38,.55)}
+.pd-caixona__c{width:100%;max-width:520px;max-height:100%;overflow:auto;
+               background:#fff;border-radius:16px;padding:22px 22px 18px;
+               box-shadow:0 24px 60px rgba(13,25,38,.3)}
+.pd-caixona__s{margin-bottom:18px}
+.pd-caixona__t{font-size:15px;font-weight:700;color:var(--txt);margin-bottom:10px}
+.pd-caixona__s--atraso .pd-caixona__t{color:var(--alerta)}
+.pd-caixona__s--lido   .pd-caixona__t{color:#8a6100}
+.pd-caixona__l{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.pd-caixona__l li{display:flex;align-items:baseline;gap:10px;padding:9px 11px;border-radius:10px;
+                  background:var(--base);cursor:pointer}
+.pd-caixona__l li:hover{background:var(--estado-luz)}
+.pd-caixona__o{font-size:13.5px;font-weight:620;color:var(--txt);min-width:0;
+               overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pd-caixona__q{margin-left:auto;flex:none;font-size:11px;color:var(--txt-3)}
+.pd-caixona .pd-botao{width:100%;margin-top:4px}
+.pd-caixona .pd-dica{text-align:center}
 .pd-todas .pen{background:var(--base)}
 .pd-todas .pen:hover{background:#fff}
 
