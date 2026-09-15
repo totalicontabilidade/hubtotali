@@ -212,10 +212,17 @@ const PendenciasUI = (function () {
     todasBtn.addEventListener("click", abrirTodas);
     alvo.appendChild(todasBtn);
 
+    /* "Tudo em dia" NÃO INTERROMPE o resto do trilho.
+
+       Aqui havia um return, e ele tirava da tela exatamente o que
+       mais importa depois: as concluídas. Quem está com tudo em dia
+       é quem mais tem histórico para consultar — e era justo essa
+       pessoa que via a gaveta desaparecer. Sem o return os grupos
+       de abertas não desenham nada, porque as listas vêm vazias, e
+       o histórico continua logo abaixo. */
     if (!abertas.length) {
       alvo.appendChild(vazioElemento("Tudo em dia",
         "Você não tem pendência aberta. Quando alguém abrir uma para você, ela aparece aqui."));
-      return;
     }
 
     /* RECADO TEM GRUPO PRÓPRIO, E VEM PRIMEIRO.
@@ -286,6 +293,21 @@ const PendenciasUI = (function () {
       var caixaH = el("div", "historico");
       caixaH.hidden = !HISTORICO_ABERTO;
       concluidas.forEach(function (p) { caixaH.appendChild(cartao(p)); });
+
+      /* DE ONDE VEM ESTA LISTA, dito na cara.
+
+         As concluídas carregadas são as mais recentes DO
+         ESCRITÓRIO, e o filtro de "minhas" acontece depois, aqui no
+         navegador. Consequência que ninguém adivinharia sozinho:
+         num mês movimentado, as concluídas dos colegas ocupam a
+         cota e as minhas antigas ficam de fora desta gaveta — sem
+         terem saído do banco. Quem pagina de verdade é o quadro do
+         escritório, que tem botão e busca; então o caminho fica
+         escrito aqui em vez de a pessoa concluir que se perdeu. */
+      caixaH.appendChild(el("div", "pd-dica",
+        "Aqui ficam as suas concluídas mais recentes. Para procurar uma antiga, "
+        + "abra “Ver todas do escritório”, marque “mostrar resolvidas” e use a busca."));
+
       alvo.appendChild(caixaH);
 
       fh.addEventListener("click", function () {
@@ -474,7 +496,23 @@ const PendenciasUI = (function () {
       });
 
       if (!vistas.length) {
-        lista.appendChild(el("div", "pd-vazio", "Nada com esses filtros."));
+        /* "NADA" SÓ PODE SIGNIFICAR NADA.
+
+           Os filtros trabalham sobre o que já está carregado no
+           navegador: eles peneiram, não vão buscar mais fundo no
+           banco. Então procurar por algo concluído em março, com
+           só as concluídas recentes na mão, dava "Nada com esses
+           filtros" — e a pessoa desistia achando que o registro
+           não existia. É o mesmo defeito que o .catch das
+           resolvidas tinha: um vazio de alcance parecendo um vazio
+           de existência. Agora ele diz o que falta e o que fazer. */
+        var faltaBuscar = MOSTRAR_RESOLVIDAS && !rodape._fim
+                          && (FILTRO_BUSCA || FILTRO_PERIODO || FILTRO_PESSOA || FILTRO_SETOR);
+        lista.appendChild(el("div", "pd-vazio", faltaBuscar
+          ? "Nada com esses filtros entre as " + todas.length + " que estão carregadas. "
+            + "Pode estar numa concluída mais antiga — use “Carregar mais” aqui embaixo "
+            + "e procure de novo."
+          : "Nada com esses filtros."));
         return;
       }
 
