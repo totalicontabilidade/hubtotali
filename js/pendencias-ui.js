@@ -176,10 +176,18 @@ const PendenciasUI = (function () {
       return;
     }
 
+    /* RECADO TEM GRUPO PRÓPRIO, E VEM PRIMEIRO.
+
+       Sem isto ele cairia em "Próximos dias", porque não tem prazo
+       e é assim que esse grupo é definido — e aí um aviso ficaria
+       misturado com tarefas que têm dono e data, que é exatamente a
+       confusão que estamos desfazendo. Primeiro porque aviso serve
+       para ser lido antes de o dia começar. */
     [
-      { c:"atraso", t:"Atrasadas",     f:function (p) { return Pendencias.estado(p) === "atrasada"; } },
-      { c:"hoje",   t:"Para hoje",     f:function (p) { return Pendencias.estado(p) === "hoje"; } },
-      { c:"depois", t:"Próximos dias", f:function (p) { return !Pendencias.estado(p); } },
+      { c:"recado", t:"Recados",       f:function (p) { return Pendencias.pedeCiencia(p); } },
+      { c:"atraso", t:"Atrasadas",     f:function (p) { return !Pendencias.pedeCiencia(p) && Pendencias.estado(p) === "atrasada"; } },
+      { c:"hoje",   t:"Para hoje",     f:function (p) { return !Pendencias.pedeCiencia(p) && Pendencias.estado(p) === "hoje"; } },
+      { c:"depois", t:"Próximos dias", f:function (p) { return !Pendencias.pedeCiencia(p) && !Pendencias.estado(p); } },
     ].forEach(function (g) {
       /* DENTRO DO GRUPO, A URGÊNCIA MANDA; depois, o prazo.
 
@@ -282,9 +290,10 @@ const PendenciasUI = (function () {
       }
 
       [
-        { c: "atraso", t: "Atrasadas",     f: function (p) { return p.situacao !== "resolvida" && Pendencias.estado(p) === "atrasada"; } },
-        { c: "hoje",   t: "Para hoje",     f: function (p) { return p.situacao !== "resolvida" && Pendencias.estado(p) === "hoje"; } },
-        { c: "depois", t: "Próximos dias", f: function (p) { return p.situacao !== "resolvida" && !Pendencias.estado(p); } },
+        { c: "recado", t: "Recados",       f: function (p) { return p.situacao !== "resolvida" && Pendencias.pedeCiencia(p); } },
+        { c: "atraso", t: "Atrasadas",     f: function (p) { return p.situacao !== "resolvida" && !Pendencias.pedeCiencia(p) && Pendencias.estado(p) === "atrasada"; } },
+        { c: "hoje",   t: "Para hoje",     f: function (p) { return p.situacao !== "resolvida" && !Pendencias.pedeCiencia(p) && Pendencias.estado(p) === "hoje"; } },
+        { c: "depois", t: "Próximos dias", f: function (p) { return p.situacao !== "resolvida" && !Pendencias.pedeCiencia(p) && !Pendencias.estado(p); } },
         { c: "feito",  t: "Resolvidas",    f: function (p) { return p.situacao === "resolvida"; } },
       ].forEach(function (g) {
         var doGrupo = vistas.filter(g.f);
@@ -343,7 +352,11 @@ const PendenciasUI = (function () {
     if (ehRecado) {
       var cc = Pendencias.contaDaCiencia(p);
       var placar = cc.deram + " de " + cc.total;
-      if (Pendencias.devoCiencia(p) && !Pendencias.jaDeiCiencia(p)) {
+      if (!cc.total) {
+        /* Aviso que ninguém precisa confirmar: "0 de 0" não diz
+           nada a ninguém. */
+        quem = "recado — só seu";
+      } else if (Pendencias.devoCiencia(p) && !Pendencias.jaDeiCiencia(p)) {
         quem = "recado — confirme que leu";
       } else if (Pendencias.jaDeiCiencia(p)) {
         quem = "recado — você confirmou · " + placar;
@@ -776,6 +789,10 @@ const PendenciasUI = (function () {
       marcar.hidden = r;
       chamados.hidden = !r;
       reservada.hidden = r;
+      /* A DIFERENÇA QUE O HESLEY APONTOU: tarefa tem prazo, recado
+         não. Some o campo em vez de deixá-lo ali pedindo uma data
+         que não vai a lugar nenhum. */
+      quando.hidden = r;
       if (r && cr.checked) { cr.checked = false; aplicarPlateia(); }
     }
     /* Os dois rádios já chamam aplicarRecado no change; esta chamada
@@ -790,21 +807,15 @@ const PendenciasUI = (function () {
     b.addEventListener("click", function () {
       msg.hidden = true;
 
-      /* RECADO PARA UMA PESSOA SÓ É QUASE SEMPRE O ENGANO ACIMA.
-         Recado existe para pedir confirmação a VÁRIOS; para pedir
-         algo a uma pessoa, o certo é Tarefa, que tem responsável e
-         botão de feito. Em vez de aceitar em silêncio e produzir
-         uma tarefa que não aparece para ninguém, a tela diz qual é
-         a diferença e deixa a pessoa decidir de novo. */
-      if (crec.checked && chamados._valores().length < 2) {
-        msg.textContent = chamados._valores().length === 1
-          ? "Recado é para várias pessoas confirmarem que leram. Para pedir algo a uma " +
-            "pessoa só, escolha “Tarefa — alguém faz” e use o campo Quem faz: aí ela " +
-            "aparece na lista dela e pode marcar como feito."
-          : "Marque quem precisa dar ciência, ou escolha “Tarefa — alguém faz”.";
-        msg.hidden = false;
-        return;
-      }
+      /* RECADO DE UMA PESSOA, OU DE NENHUMA, É LEGÍTIMO.
+
+         Eu havia recusado recado com menos de duas pessoas, para
+         impedir o engano que produziu as oito pendências órfãs. Era
+         a trava errada no lugar errado: existe recado para uma
+         pessoa só, e existe aviso que a própria pessoa escreve para
+         si, sem ninguém a confirmar. O que confundia não era o
+         número de nomes — era a caixa de marcar, e ela já virou
+         escolha entre duas naturezas. */
 
       b.disabled = true; b.textContent = "Abrindo…";
       Pendencias.criar({
@@ -821,7 +832,12 @@ const PendenciasUI = (function () {
         responsavel: crec.checked ? ""
                      : soEu() ? meuUid()
                      : destinoPessoa(quem._entrada.value),
-        prazo: quando._entrada.value,
+        /* Recado não tem prazo, e o campo nem aparece. Ler o valor
+           de um campo escondido gravaria uma data que ninguém
+           escolheu — a que estivesse ali antes de a pessoa trocar
+           de natureza. */
+        prazo: crec.checked ? "" : quando._entrada.value,
+        ehRecado: crec.checked,
         urgencia: urgencia._entrada.value,
         setorOrigem: (Array.isArray(eu.setores) ? eu.setores[0] : eu.setor) || "",
         setorDestino: (crec.checked || soEu()) ? "" : destinoSetor(quem._entrada.value),

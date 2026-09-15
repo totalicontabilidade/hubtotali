@@ -272,7 +272,17 @@ const Pendencias = (function () {
        legítimo, e obrigar a escolher um nome faz a pessoa chutar
        um colega ou desistir de abrir. */
     var chamados = Array.isArray(dados.deveDarCiencia) ? dados.deveDarCiencia : [];
-    if (!dados.responsavel && !dados.setorDestino && !chamados.length) {
+    /* RECADO É UMA NATUREZA, NÃO UMA CONSEQUÊNCIA DA LISTA.
+
+       Antes eu deduzia "isto é recado" de a lista de ciência não
+       estar vazia. A dedução quebra no caso que o Hesley descreveu:
+       recado só para quem escreveu, sem ninguém a confirmar. Lista
+       vazia daria "não é recado", e o aviso voltaria a ser tratado
+       como tarefa — com prazo, com responsável, com botão de feito.
+
+       Agora a natureza é um campo. A lista de ciência diz QUEM
+       confirma, e pode ter zero, um ou muitos nomes. */
+    if (!dados.responsavel && !dados.setorDestino && !dados.ehRecado) {
       return Promise.reject(new Error("Escolha quem vai fazer, ou ao menos o setor."));
     }
     if (chamados.length > 60) {
@@ -320,7 +330,14 @@ const Pendencias = (function () {
          confirmou. A conta "3 de 7" sai da comparação dos dois. */
       deveDarCiencia: Array.isArray(dados.deveDarCiencia) ? dados.deveDarCiencia : [],
       ciencia:        [],
+      ehRecado:       !!dados.ehRecado,
     };
+
+    /* RECADO NÃO TEM PRAZO. Não é a tela que esconde o campo: é o
+       documento que não guarda a data. Guardar um prazo invisível
+       faria a pendência aparecer como atrasada num grupo que a
+       pessoa nem sabe que existe. */
+    if (doc.ehRecado) doc.prazo = "";
 
     var colecao = dados.confidencial ? RESERVADAS : ABERTAS;
     return fetch(base() + "/" + colecao, {
@@ -471,7 +488,11 @@ const Pendencias = (function () {
      confirmação que acontece por acidente não confirma nada. */
 
   function pedeCiencia(p) {
-    return !!p && Array.isArray(p.deveDarCiencia) && p.deveDarCiencia.length > 0;
+    if (!p) return false;
+    if (p.ehRecado === true) return true;
+    /* Compatibilidade com o que foi criado antes do campo existir:
+       ali, recado era "tem gente na lista de ciência". */
+    return Array.isArray(p.deveDarCiencia) && p.deveDarCiencia.length > 0;
   }
 
   function devoCiencia(p) {

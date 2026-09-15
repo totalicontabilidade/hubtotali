@@ -288,8 +288,16 @@ service cloud.firestore {
                     && (request.resource.data.responsavel.size() > 0
                         || (request.resource.data.setorDestino is string
                             && request.resource.data.setorDestino.size() > 0)
+                        // A TERCEIRA FORMA É UM CAMPO, E NÃO O TAMANHO DE
+                        // UMA LISTA. Antes eu exigia gente na lista de
+                        // ciência para reconhecer um recado — e isso
+                        // recusava o recado que a pessoa escreve para si
+                        // mesma, sem ninguém a confirmar. A natureza
+                        // passou a ser declarada, e o tamanho da lista
+                        // virou só validação.
+                        || request.resource.data.ehRecado == true)
+                    && (!('deveDarCiencia' in request.resource.data)
                         || (request.resource.data.deveDarCiencia is list
-                            && request.resource.data.deveDarCiencia.size() > 0
                             && request.resource.data.deveDarCiencia.size() <= 60))
 
                     && request.resource.data.situacao in ['aberta', 'fazendo', 'resolvida']
