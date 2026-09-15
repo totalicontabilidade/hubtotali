@@ -96,6 +96,37 @@ const PendenciasUI = (function () {
     return { d: p[2], m: meses[(+p[1] - 1)] || "" };
   }
 
+  /* A HORA NO CARTÃO É MAIS CURTA QUE NA FICHA, de propósito. Na
+     ficha cabe "15 set às 12:24"; no cartão isso competiria com o
+     título. O que a pessoa quer saber ali é "isto é de agora ou de
+     antes?" — e para o que é de hoje basta a hora. */
+  function horaCurta(iso) {
+    var ms = Date.parse(iso);
+    if (!isFinite(ms)) return "";
+    var d = new Date(ms), hoje = new Date();
+    var hora = d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+    var mesmoDia = d.getDate() === hoje.getDate()
+                && d.getMonth() === hoje.getMonth()
+                && d.getFullYear() === hoje.getFullYear();
+    if (mesmoDia) return hora;
+    return d.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" }) + " " + hora;
+  }
+
+  /* Linha de baixo do cartão: o texto à esquerda, a hora empurrada
+     para a direita. Em duas partes e não com posição absoluta —
+     absoluta passaria por cima do texto numa tela estreita. */
+  function linhaDeBaixo(texto, criadoEm) {
+    var d = el("div", "pen__q");
+    d.appendChild(el("span", "pen__qt", texto));
+    var h = horaCurta(criadoEm);
+    if (h) {
+      var s = el("span", "pen__quando", h);
+      s.title = "Escrita em " + quandoEscrito(criadoEm);
+      d.appendChild(s);
+    }
+    return d;
+  }
+
   function quandoEscrito(iso) {
     var t = Date.parse(iso);
     if (!isFinite(t)) return "";
@@ -346,9 +377,9 @@ const PendenciasUI = (function () {
     if (comDono && !ehRecado) {
       var dono = p.responsavel ? nomeDe(p.responsavel) : "Setor " + (p.setorDestino || "—");
       var setor = p.setorDestino || p.setorOrigem || "";
-      t.appendChild(el("div", "pen__q", dono + (setor ? " · " + setor : "")));
+      t.appendChild(linhaDeBaixo(dono + (setor ? " · " + setor : ""), p.criadoEm));
     } else {
-      t.appendChild(el("div", "pen__q", quem));
+      t.appendChild(linhaDeBaixo(quem, p.criadoEm));
     }
     b.appendChild(t);
 
@@ -1380,6 +1411,7 @@ const PendenciasUI = (function () {
         equipe = r[1];
         porUid = {};
         equipe.forEach(function (p) { porUid[p.uid] = p; });
+        ultimaAssinatura = assinatura();
         desenhar();
         if (typeof aoMudar === "function") aoMudar(resumo());
       })
@@ -1414,7 +1446,58 @@ const PendenciasUI = (function () {
     carregar();
   }
 
+  /* ---------- Atualizar sozinho, sem atropelar ninguém ----------
+
+     O Hub fica aberto dias numa aba que ninguém recarrega. Sem isto,
+     uma pendência aberta pela manhã só aparecia para o colega no dia
+     em que ele fechasse e abrisse o navegador.
+
+     DUAS CAUTELAS, e as duas vêm de pensar em quem está usando:
+
+     1. NÃO REDESENHA COM PAINEL ABERTO. Se a pessoa está lendo uma
+        ficha, ou pior, escrevendo um comentário ou preenchendo o
+        formulário, refazer a tela embaixo dela apagaria o que ela
+        digitou. A atualização espera o painel fechar.
+
+     2. NÃO REDESENHA SE NADA MUDOU. Uma assinatura do que importa é
+        comparada antes de tocar no DOM: sem isto, a cada minuto os
+        cartões piscariam na cara de quem está olhando. */
+
+  function painelAberto() { return painel.classList.contains("on"); }
+
+  function assinatura() {
+    return todas.map(function (p) {
+      return [p.id, p.situacao, p.oque, p.prazo, p.urgencia,
+              (p.vistas || []).length, (p.ciencia || []).length].join("|");
+    }).sort().join("\n");
+  }
+
+  var ultimaAssinatura = null;
+
+  function conferirSozinho() {
+    if (!Dados.sessao() || !Pendencias.temBanco()) return;
+    if (painelAberto()) return;
+    Promise.all([Pendencias.listar(), Dados.listarEquipe()])
+      .then(function (r) {
+        /* Conferido de novo: o painel pode ter aberto enquanto o
+           banco respondia. */
+        if (painelAberto()) return;
+        var antes = ultimaAssinatura;
+        todas = r[0];
+        equipe = r[1];
+        porUid = {};
+        equipe.forEach(function (x) { porUid[x.uid] = x; });
+        var agora = assinatura();
+        if (agora === antes) return;
+        ultimaAssinatura = agora;
+        desenhar();
+        if (typeof aoMudar === "function") aoMudar(resumo());
+      })
+      .catch(function () { /* sem rede: a próxima volta tenta */ });
+  }
+
   return { iniciar: iniciar, recarregar: carregar, resumo: resumo, entrar: abrirEntrada,
+           conferirSozinho: conferirSozinho, painelAberto: painelAberto,
            /* A barra lateral abre o quadro por aqui. */
            abrirTodas: function () { if (Dados.sessao()) abrirTodas(); } };
 

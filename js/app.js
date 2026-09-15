@@ -1135,6 +1135,72 @@
       NOME_CADASTRADO = p.nome;
       if (desenharTopo.repintarSaudacao) desenharTopo.repintarSaudacao();
     });
+
+    ligarAtualizacaoSozinha();
+  }
+
+  /* ---------- O Hub se atualiza sozinho ----------
+
+     ESTA PÁGINA NÃO É RECARREGADA. Ela é a inicial do navegador:
+     abre de manhã e fica. Dias, num computador que não se desliga.
+     Sem isto, uma pendência aberta às nove só aparecia para o
+     colega no dia em que ele fechasse o navegador — e um recado
+     urgente não chegava nunca.
+
+     Não há aviso instantâneo do banco sem carregar a biblioteca do
+     Firebase, e carregar biblioteca de terceiro nesta página é
+     justamente o que este projeto não faz. Então é consulta de
+     tempo em tempo, com três economias que importam numa tela que
+     passa o dia aberta:
+
+     · ABA ESCONDIDA NÃO CONSULTA. Ninguém está olhando, e cada
+       consulta é leitura cobrada no banco. Ao voltar a ficar
+       visível, consulta na hora — que é o instante em que a pessoa
+       de fato quer ver o que chegou.
+
+     · PENDÊNCIA DE MINUTO EM MINUTO, SISTEMA DE MEIA EM MEIA HORA.
+       A lista de sistemas e os recados mudam quando alguém edita a
+       administração, o que é raro; pendência muda o dia inteiro.
+       Consultar as duas coisas no mesmo passo seria pagar caro pelo
+       que não muda.
+
+     · SÓ REDESENHA SE MUDOU, e nunca com painel aberto — quem está
+       escrevendo um comentário não pode ver o texto desaparecer. */
+
+  var RELOGIO_PENDENCIAS = null;
+  var RELOGIO_SISTEMAS = null;
+
+  function ligarAtualizacaoSozinha() {
+    if (ligarAtualizacaoSozinha.ligado) return;
+    ligarAtualizacaoSozinha.ligado = true;
+
+    function pendencias() {
+      if (document.hidden) return;
+      /* typeof, e não window.PendenciasUI: o módulo é declarado com
+         const, e const de topo não vira propriedade de window. A
+         guarda errada seria sempre falsa e a atualização nunca
+         rodaria — em silêncio, que é o pior jeito de não funcionar.
+         É o mesmo typeof que o resto deste arquivo já usa. */
+      if (typeof PendenciasUI === "undefined" || !PendenciasUI.conferirSozinho) return;
+      PendenciasUI.conferirSozinho();
+    }
+
+    function sistemas() {
+      if (document.hidden) return;
+      /* O próprio Dados.carregar avisa quando o que veio do servidor
+         é diferente do que está na tela — e só nesse caso. */
+      Dados.carregar(function (maisNovo) { desenharTudo(maisNovo); });
+    }
+
+    RELOGIO_PENDENCIAS = window.setInterval(pendencias, 60 * 1000);
+    RELOGIO_SISTEMAS   = window.setInterval(sistemas, 30 * 60 * 1000);
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) return;
+      pendencias();
+      sistemas();
+    });
+    window.addEventListener("online", function () { pendencias(); sistemas(); });
   }
 
   /* ---------- o portão ----------
