@@ -857,14 +857,14 @@ const PendenciasUI = (function () {
         if (l) corpo.appendChild(l);
       });
 
-      /* Quinze minutos para consertar o próprio pedido. Passou
+      /* Trinta minutos para consertar o próprio pedido. Passou
          disso o botão some sozinho — não fica ali prometendo o que
          o banco já não deixa fazer. */
       if (!Pendencias.podeCorrigirPedido(p)) return;
 
       var corrigir = el("button", "pd-corrigir", "corrigir o pedido");
       corrigir.type = "button";
-      corrigir.title = "Você tem 15 minutos para corrigir o que escreveu";
+      corrigir.title = "Você tem 30 minutos para corrigir o que escreveu";
       corrigir.addEventListener("click", function () { editarCorpo(); });
       corpo.appendChild(corrigir);
     }
@@ -1311,7 +1311,7 @@ const PendenciasUI = (function () {
         if (Pendencias.podeEditar(x) && !x.doSistema) {
           var ed = el("button", "pd-corrigir", "corrigir");
           ed.type = "button";
-          ed.title = "Você tem 15 minutos para corrigir o que escreveu";
+          ed.title = "Você tem 30 minutos para corrigir o que escreveu";
           ed.addEventListener("click", function () {
             var caixa = document.createElement("textarea");
             caixa.className = "pd-corrigir__caixa";

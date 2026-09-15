@@ -32,7 +32,7 @@
    reclamação entre setores.
 
    A LINHA DO TEMPO é uma subcoleção onde só se acrescenta.
-   Ninguém edita o que o outro escreveu; quem errou tem quinze
+   Ninguém edita o que o outro escreveu; quem errou tem trinta
    minutos para corrigir o próprio texto e, passado isso,
    acrescenta a correção embaixo — do jeito que se faz em livro
    contábil. Quem garante isso são as regras do banco, não este
@@ -377,7 +377,7 @@ const Pendencias = (function () {
   }
 
   /* ---------- corrigir o pedido ----------
-     Quinze minutos para consertar o que você mesmo escreveu: erro
+     Trinta minutos para consertar o que você mesmo escreveu: erro
      de digitação, palavra trocada, prazo posto errado. Depois
      disso fecha, e ajuste vira comentário na linha do tempo —
      porque a essa altura o colega já leu, e reescrever o pedido
@@ -399,7 +399,7 @@ const Pendencias = (function () {
 
   function corrigirPedido(p, mudancas) {
     if (!podeCorrigirPedido(p)) {
-      return Promise.reject(new Error("A janela de quinze minutos passou. Escreva na linha do tempo."));
+      return Promise.reject(new Error("A janela de trinta minutos passou. Escreva na linha do tempo."));
     }
     var campos = {};
     var mascara = [];
@@ -725,7 +725,7 @@ const Pendencias = (function () {
       });
   }
 
-  /* Corrigir o próprio texto, dentro dos quinze minutos. Quem
+  /* Corrigir o próprio texto, dentro dos trinta minutos. Quem
      decide se ainda dá tempo é a REGRA DO BANCO — aqui só evito
      mostrar um botão que vai falhar. */
   function podeEditar(item) {
@@ -748,7 +748,7 @@ const Pendencias = (function () {
       } }),
     }).then(function (r) {
       if (r.status === 403) {
-        throw new Error("Passaram os 15 minutos de correção. Acrescente um comentário embaixo.");
+        throw new Error("Passaram os 30 minutos de correção. Acrescente um comentário embaixo.");
       }
       return conferir(r);
     });

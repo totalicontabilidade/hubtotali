@@ -83,7 +83,7 @@ rules_version = '2';
 //
 // A correção segue um princípio: cada pessoa muda o que é do
 // papel dela. Quem faz mexe na SITUAÇÃO, que é o trabalho dela.
-// Quem abriu mexe no PEDIDO, e só nos primeiros quinze minutos.
+// Quem abriu mexe no PEDIDO, e só nos primeiros trinta minutos.
 // ============================================================
 
 service cloud.firestore {
@@ -393,15 +393,15 @@ service cloud.firestore {
                              && mudou().hasOnly(['situacao']))
 
                          // QUEM ABRIU pode fechar a qualquer momento, e
-                         // corrigir o pedido nos primeiros quinze
+                         // corrigir o pedido nos primeiros trinta
                          // minutos — depois disso, ajuste vira
                          // comentário na linha do tempo.
-                         // MENOS A CIÊNCIA. A janela de quinze minutos
+                         // MENOS A CIÊNCIA. A janela de trinta minutos
                          // existe para corrigir um pedido escrito com
                          // pressa, e antes dela não havia campo que
                          // fosse prova. Agora há: sem esta exceção,
                          // quem abre um recado poderia escrever a
-                         // ciência dos colegas nos primeiros quinze
+                         // ciência dos colegas nos primeiros trinta
                          // minutos — e confirmação que o remetente
                          // fabrica não confirma nada. Medi: quatro
                          // tentativas de assinar por outro passaram, e
@@ -412,7 +412,7 @@ service cloud.firestore {
                              && !mudou().hasAny(['ciencia'])
                              && (
                               mudou().hasOnly(['situacao'])
-                              || request.time < resource.data.criadoEm + duration.value(15, 'm')
+                              || request.time < resource.data.criadoEm + duration.value(30, 'm')
                             ))
 
                          // AQUI HAVIA a permissão de mexer no campo
@@ -472,7 +472,7 @@ service cloud.firestore {
                       && request.resource.data.texto.size() <= 3000
                       && textoAte('autorNome', 120);
 
-        // JANELA DE ARREPENDIMENTO: quinze minutos para corrigir
+        // JANELA DE ARREPENDIMENTO: trinta minutos para corrigir
         // o que você mesmo escreveu. Depois fecha para sempre,
         // inclusive para o administrador.
         //
@@ -486,7 +486,7 @@ service cloud.firestore {
                       && request.resource.data.texto is string
                       && request.resource.data.texto.size() > 0
                       && request.resource.data.texto.size() <= 3000
-                      && request.time < resource.data.criadoEm + duration.value(15, 'm');
+                      && request.time < resource.data.criadoEm + duration.value(30, 'm');
 
         // APAGAR, SÓ JUNTO COM A PENDÊNCIA INTEIRA — e por quem a
         // abriu.
@@ -613,12 +613,12 @@ service cloud.firestore {
                                  : request.resource.data.ciencia
                                      .hasOnly([request.auth.uid])))
                          || (meuUid(resource.data.responsavel) && mudou().hasOnly(['situacao']))
-                         // MENOS A CIÊNCIA. A janela de quinze minutos
+                         // MENOS A CIÊNCIA. A janela de trinta minutos
                          // existe para corrigir um pedido escrito com
                          // pressa, e antes dela não havia campo que
                          // fosse prova. Agora há: sem esta exceção,
                          // quem abre um recado poderia escrever a
-                         // ciência dos colegas nos primeiros quinze
+                         // ciência dos colegas nos primeiros trinta
                          // minutos — e confirmação que o remetente
                          // fabrica não confirma nada. Medi: quatro
                          // tentativas de assinar por outro passaram, e
@@ -629,7 +629,7 @@ service cloud.firestore {
                              && !mudou().hasAny(['ciencia'])
                              && (
                               mudou().hasOnly(['situacao'])
-                              || request.time < resource.data.criadoEm + duration.value(15, 'm')
+                              || request.time < resource.data.criadoEm + duration.value(30, 'm')
                             ))
                        );
 
@@ -648,7 +648,7 @@ service cloud.firestore {
         allow update: if daEquipe()
                       && meuUid(resource.data.autor)
                       && mudou().hasOnly(['texto', 'editadoEm'])
-                      && request.time < resource.data.criadoEm + duration.value(15, 'm');
+                      && request.time < resource.data.criadoEm + duration.value(30, 'm');
         allow delete: if daEquipe()
                       && meuUid(get(/databases/$(database)/documents/pendencias_reservadas/$(id)).data.criadoPor);
       }
