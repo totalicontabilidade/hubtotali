@@ -608,10 +608,16 @@ const Pendencias = (function () {
      para ter o histórico inteiro, e menos idas ao banco importa
      mais que resposta pequena.
 
-     O TETO EXISTE E É DITO. Quarenta páginas são doze mil
-     concluídas — décadas, no volume da casa. Se um dia bater,
-     historicoTruncado() fica verdadeiro e a tela avisa, em vez de
-     mostrar meia lista com cara de lista inteira.
+     O TETO EXISTE, É DITO E SE ABRE PELA TELA. Quarenta páginas
+     são doze mil concluídas — décadas, no volume da casa. Batido
+     o teto, historicoTruncado() fica verdadeiro, a tela avisa em
+     vez de mostrar meia lista com cara de lista inteira, E OFERECE
+     UM BOTÃO que continua de onde paramos. Chamar esta função de
+     novo, com o que já se tem na mão, retoma a varredura: outras
+     quarenta páginas, quantas vezes for preciso.
+
+     Teto que exige um programador para ser contornado não é
+     prudência, é dívida com cara de prudência.
 
      Uma ressalva honesta sobre offset: se alguém concluir uma
      pendência no meio da varredura, a ordem muda e uma página pode
@@ -634,6 +640,16 @@ const Pendencias = (function () {
        digitada na busca, e sem esta guarda cada letra abriria uma
        varredura nova do histórico inteiro. */
     if (varrendo) return varrendo;
+
+    /* ZERA A MARCA DE TETO NO COMEÇO DE CADA VARREDURA.
+
+       Sem isto, uma varredura que bateu no teto deixava
+       historicoTruncado() verdadeiro para sempre — inclusive
+       depois de a varredura seguinte chegar ao fim de verdade. A
+       tela passaria a dizer "sobraram concluídas que não examinei"
+       sobre um histórico inteiramente examinado, o que é só outro
+       jeito de mentir. */
+    HISTORICO_TRUNCADO = false;
 
     var achadas = [];
     var pular = Math.max(0, parseInt(quantasJaTenho, 10) || 0);

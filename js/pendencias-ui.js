@@ -338,12 +338,17 @@ const PendenciasUI = (function () {
          trocar de tela para alcançar os próprios registros é
          empurrar para ela um trabalho que é nosso. */
       if (Pendencias.historicoCompleto()) {
-        caixaH.appendChild(el("div", "pd-dica", Pendencias.historicoTruncado()
-          ? "Parei no teto de segurança: há concluídas ainda mais antigas no banco."
-          : "Está tudo aqui — estas são todas as suas concluídas."));
+        caixaH.appendChild(el("div", "pd-dica",
+          "Está tudo aqui — estas são todas as suas concluídas."));
       } else {
+        /* TRUNCADO NÃO É COMPLETO, e a mensagem do teto estava
+           dentro do ramo de "completo" — onde nunca podia aparecer.
+           Aqui é o lugar dela: o histórico não acabou, e o mesmo
+           botão continua de onde a varredura parou. */
+        var parou = Pendencias.historicoTruncado();
         var rodapeH = el("div", "pd-mais");
-        var bH = el("button", "btn-fav", "Carregar todas as antigas");
+        var bH = el("button", "btn-fav",
+          parou ? "Continuar buscando as mais antigas" : "Carregar todas as antigas");
         bH.type = "button";
         bH.addEventListener("click", function () {
           bH.disabled = true;
@@ -357,14 +362,18 @@ const PendenciasUI = (function () {
             desenhar();
           }).catch(function (e) {
             bH.disabled = false;
-            bH.textContent = "Carregar todas as antigas";
+            bH.textContent = parou ? "Continuar buscando as mais antigas"
+                                   : "Carregar todas as antigas";
             rodapeH.appendChild(el("span", "pd-mais__erro", e.message));
           });
         });
         rodapeH.appendChild(bH);
-        rodapeH.appendChild(el("span", "pd-dica",
-          "Até aqui vieram só as concluídas recentes do escritório, e as suas "
-          + "antigas podem ter ficado fora da cota. Isto busca o histórico inteiro."));
+        rodapeH.appendChild(el("span", "pd-dica", parou
+          ? "Parei nas mais recentes para não travar a tela. Há concluídas ainda mais "
+            + "antigas no banco, e isto retoma a busca de onde ela parou — pode clicar "
+            + "quantas vezes precisar."
+          : "Até aqui vieram só as concluídas recentes do escritório, e as suas "
+            + "antigas podem ter ficado fora da cota. Isto busca o histórico inteiro."));
         caixaH.appendChild(rodapeH);
       }
 
@@ -503,6 +512,16 @@ const PendenciasUI = (function () {
     }
 
     var varrendoAgora = false;
+    /* A VARREDURA SOZINHA ACONTECE UMA VEZ.
+
+       pintar() roda a cada tecla digitada na busca, e chama a
+       varredura. Enquanto ela corre, as guardas de dentro seguram
+       as repetições. Depois que ela PARA NO TETO, porém, o
+       histórico não está completo — e sem esta marca a tela
+       recomeçaria sozinha, de quarenta em quarenta páginas, até
+       varrer um banco inteiro sem ninguém ter pedido. Passado o
+       teto, continuar é decisão de quem está na frente da tela. */
+    var jaVarreuSozinho = false;
 
     /* ---------- FILTRAR PASSA A ALCANÇAR TUDO ----------
 
@@ -543,6 +562,9 @@ const PendenciasUI = (function () {
         })
         .catch(function (e) {
           varrendoAgora = false;
+          /* Falha de rede não pode gastar a única tentativa
+             automática: mexer no filtro de novo tenta de novo. */
+          jaVarreuSozinho = false;
           rodape._erro = e.message;
           pintarRodape();
         });
@@ -563,9 +585,20 @@ const PendenciasUI = (function () {
       if (rodape._erro) rodape.appendChild(el("span", "pd-mais__erro", rodape._erro));
 
       if (Pendencias.historicoCompleto()) {
-        rodape.appendChild(el("span", "pd-mais__n", Pendencias.historicoTruncado()
-          ? "— parei no teto de segurança; há concluídas ainda mais antigas no banco"
-          : "— isto é tudo o que existe"));
+        rodape.appendChild(el("span", "pd-mais__n", "— isto é tudo o que existe"));
+        return;
+      }
+
+      /* O TETO VIRA BOTÃO, e não muro. Parar depois de doze mil é
+         para a tela não travar; exigir que alguém mexa no código
+         para passar disso seria transformar cuidado em bloqueio. */
+      if (Pendencias.historicoTruncado()) {
+        rodape.appendChild(el("span", "pd-mais__n",
+          "Parei nas " + tenho + " mais recentes para não travar a tela — há mais no banco."));
+        var seguir = el("button", "btn-fav", "Continuar buscando as mais antigas");
+        seguir.type = "button";
+        seguir.addEventListener("click", function () { garantirHistoricoInteiro(); });
+        rodape.appendChild(seguir);
         return;
       }
 
@@ -604,7 +637,10 @@ const PendenciasUI = (function () {
          de vazio já saia dizendo que a busca está indo mais fundo
          em vez de afirmar que não há nada. */
       var filtrando = !!(FILTRO_BUSCA || FILTRO_PERIODO || FILTRO_PESSOA || FILTRO_SETOR);
-      if (filtrando && MOSTRAR_RESOLVIDAS) garantirHistoricoInteiro();
+      if (filtrando && MOSTRAR_RESOLVIDAS && !jaVarreuSozinho) {
+        jaVarreuSozinho = true;
+        garantirHistoricoInteiro();
+      }
 
       pintarRodape();
 
@@ -648,8 +684,9 @@ const PendenciasUI = (function () {
                 + "As concluídas estão fora desta lista — marque “mostrar resolvidas” "
                 + "para procurar no histórico também.";
         } else if (filtrando && Pendencias.historicoTruncado()) {
-          texto = "Nada com esses filtros. Parei no teto de segurança, então sobraram "
-                + "concluídas muito antigas que não foram examinadas.";
+          texto = "Nada entre as concluídas que examinei. Parei nas mais recentes para "
+                + "não travar a tela, e há mais antigas no banco — use “Continuar "
+                + "buscando as mais antigas” aqui embaixo e procure de novo.";
         } else if (filtrando && Pendencias.historicoCompleto()) {
           texto = "Nada com esses filtros — e o histórico inteiro foi examinado.";
         } else {
