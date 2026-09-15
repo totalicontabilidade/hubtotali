@@ -575,13 +575,16 @@ const PendenciasUI = (function () {
       if (!MOSTRAR_RESOLVIDAS) return;
 
       if (varrendoAgora) {
-        rodape.appendChild(el("span", "pd-mais__n",
-          "Procurando também nas mais antigas… " + (rodape._parcial || 0) + " trazidas"));
+        var quantasJa = rodape._parcial || 0;
+        rodape.appendChild(el("span", "pd-mais__n", "Procurando também nas mais antigas… "
+          + (quantasJa === 1 ? "1 trazida" : quantasJa + " trazidas")));
         return;
       }
 
       var tenho = quantasResolvidasTenho();
-      rodape.appendChild(el("span", "pd-mais__n", tenho + " concluídas carregadas"));
+      rodape.appendChild(el("span", "pd-mais__n", tenho === 1
+        ? "1 concluída carregada"
+        : tenho + " concluídas carregadas"));
       if (rodape._erro) rodape.appendChild(el("span", "pd-mais__erro", rodape._erro));
 
       if (Pendencias.historicoCompleto()) {
