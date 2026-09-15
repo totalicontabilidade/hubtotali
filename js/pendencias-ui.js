@@ -21,6 +21,32 @@ const PendenciasUI = (function () {
 
   var alvo, todas = [], equipe = [], porUid = {};
 
+  /* ---------- O HISTÓRICO BUSCADO SOBREVIVE À ATUALIZAÇÃO ----------
+
+     listar() devolve as abertas mais as concluídas recentes, e o
+     trilho se redesenha de minuto em minuto trocando "todas" pelo
+     que veio. Sem guardar as páginas antigas à parte, cada
+     atualização jogaria fora o histórico que a pessoa acabou de
+     mandar buscar: a gaveta encolheria sozinha na cara dela, um
+     minuto depois de ela abrir. */
+  var extraHistorico = [];
+
+  function juntarComExtra(base) {
+    if (!extraHistorico.length) return base;
+    var tem = {};
+    base.forEach(function (p) { tem[p.id] = true; });
+    return base.concat(extraHistorico.filter(function (p) { return !tem[p.id]; }));
+  }
+
+  function guardarExtra(lote) {
+    var tem = {};
+    extraHistorico.forEach(function (p) { tem[p.id] = true; });
+    todas.forEach(function (p) { tem[p.id] = true; });
+    (lote || []).forEach(function (p) {
+      if (p && p.id && !tem[p.id]) { tem[p.id] = true; extraHistorico.push(p); }
+    });
+  }
+
   function el(t, c, x) {
     var e = document.createElement(t);
     if (c) e.className = c;
@@ -304,9 +330,43 @@ const PendenciasUI = (function () {
          terem saído do banco. Quem pagina de verdade é o quadro do
          escritório, que tem botão e busca; então o caminho fica
          escrito aqui em vez de a pessoa concluir que se perdeu. */
-      caixaH.appendChild(el("div", "pd-dica",
-        "Aqui ficam as suas concluídas mais recentes. Para procurar uma antiga, "
-        + "abra “Ver todas do escritório”, marque “mostrar resolvidas” e use a busca."));
+      /* A GAVETA PESSOAL PAGINA SOZINHA.
+
+         Antes ela mostrava apenas o que a lista geral tinha
+         trazido, e um bilhete mandava a pessoa até o quadro do
+         escritório para ver o resto do que é dela. Mandar alguém
+         trocar de tela para alcançar os próprios registros é
+         empurrar para ela um trabalho que é nosso. */
+      if (Pendencias.historicoCompleto()) {
+        caixaH.appendChild(el("div", "pd-dica", Pendencias.historicoTruncado()
+          ? "Parei no teto de segurança: há concluídas ainda mais antigas no banco."
+          : "Está tudo aqui — estas são todas as suas concluídas."));
+      } else {
+        var rodapeH = el("div", "pd-mais");
+        var bH = el("button", "btn-fav", "Carregar todas as antigas");
+        bH.type = "button";
+        bH.addEventListener("click", function () {
+          bH.disabled = true;
+          bH.textContent = "Buscando…";
+          var naMao = todas.filter(function (p) { return p.situacao === "resolvida"; }).length;
+          Pendencias.todoOHistorico(naMao, function (n) {
+            bH.textContent = "Buscando… " + n;
+          }).then(function (lote) {
+            guardarExtra(lote);
+            todas = juntarComExtra(todas);
+            desenhar();
+          }).catch(function (e) {
+            bH.disabled = false;
+            bH.textContent = "Carregar todas as antigas";
+            rodapeH.appendChild(el("span", "pd-mais__erro", e.message));
+          });
+        });
+        rodapeH.appendChild(bH);
+        rodapeH.appendChild(el("span", "pd-dica",
+          "Até aqui vieram só as concluídas recentes do escritório, e as suas "
+          + "antigas podem ter ficado fora da cota. Isto busca o histórico inteiro."));
+        caixaH.appendChild(rodapeH);
+      }
 
       alvo.appendChild(caixaH);
 
@@ -442,39 +502,104 @@ const PendenciasUI = (function () {
       return todas.filter(function (p) { return p.situacao === "resolvida"; }).length;
     }
 
+    var varrendoAgora = false;
+
+    /* ---------- FILTRAR PASSA A ALCANÇAR TUDO ----------
+
+       O filtro peneirava o que já estava na mão. Quem procurasse
+       algo concluído em março recebia "Nada" e concluiria que o
+       registro se perdeu — o mesmo tipo de mentira que o .catch das
+       resolvidas contava.
+
+       Agora, no instante em que alguém filtra com o histórico à
+       vista, o sistema vai buscar o histórico INTEIRO e só depois
+       peneira. Custa algumas consultas de uma vez, e a troca é
+       clara: prefiro gastar leitura a responder "não existe" sobre
+       algo que existe.
+
+       Uma varredura por vez, e só uma por sessão — a guarda está
+       dentro de todoOHistorico(), porque isto é chamado a cada
+       tecla digitada na busca. */
+    function garantirHistoricoInteiro() {
+      if (varrendoAgora || Pendencias.historicoCompleto()) return;
+      varrendoAgora = true;
+      rodape._erro = "";
+      pintarRodape();
+      Pendencias.todoOHistorico(quantasResolvidasTenho(), function (n) {
+        rodape._parcial = n;
+        pintarRodape();
+      })
+        .then(function (lote) {
+          guardarExtra(lote);
+          todas = juntarComExtra(todas);
+          varrendoAgora = false;
+          rodape._parcial = 0;
+          pintar();
+        })
+        .catch(function (e) {
+          varrendoAgora = false;
+          rodape._erro = e.message;
+          pintarRodape();
+        });
+    }
+
     function pintarRodape() {
       rodape.textContent = "";
       if (!MOSTRAR_RESOLVIDAS) return;
+
+      if (varrendoAgora) {
+        rodape.appendChild(el("span", "pd-mais__n",
+          "Procurando também nas mais antigas… " + (rodape._parcial || 0) + " trazidas"));
+        return;
+      }
+
       var tenho = quantasResolvidasTenho();
       rodape.appendChild(el("span", "pd-mais__n", tenho + " concluídas carregadas"));
-      if (!rodape._fim) {
-        var b = el("button", "btn-fav", "Carregar mais");
-        b.type = "button";
-        b.addEventListener("click", function () {
-          b.disabled = true; b.textContent = "Buscando…";
-          Pendencias.maisResolvidas(tenho).then(function (novas) {
-            /* Sem repetidas: offset pode devolver algo que já
-               está aqui se alguém resolveu uma pendência entre as
-               duas consultas. */
-            var jaTenho = {};
-            todas.forEach(function (p) { jaTenho[p.id] = true; });
-            var entraram = novas.filter(function (p) { return !jaTenho[p.id]; });
-            todas = todas.concat(entraram);
-            if (!novas.length || !entraram.length) rodape._fim = true;
-            pintar();
-          }).catch(function (e) {
-            b.disabled = false; b.textContent = "Carregar mais";
-            rodape.appendChild(el("span", "pd-mais__erro", e.message));
-          });
-        });
-        rodape.appendChild(b);
-      } else {
-        rodape.appendChild(el("span", "pd-mais__n", "— isto é tudo"));
+      if (rodape._erro) rodape.appendChild(el("span", "pd-mais__erro", rodape._erro));
+
+      if (Pendencias.historicoCompleto()) {
+        rodape.appendChild(el("span", "pd-mais__n", Pendencias.historicoTruncado()
+          ? "— parei no teto de segurança; há concluídas ainda mais antigas no banco"
+          : "— isto é tudo o que existe"));
+        return;
       }
+
+      var b = el("button", "btn-fav", "Carregar mais");
+      b.type = "button";
+      b.addEventListener("click", function () {
+        b.disabled = true; b.textContent = "Buscando…";
+        Pendencias.maisResolvidas(tenho, 60).then(function (novas) {
+          /* Sem repetidas: offset pode devolver algo que já está
+             aqui se alguém resolveu uma pendência entre as duas
+             consultas. */
+          guardarExtra(novas);
+          todas = juntarComExtra(todas);
+          pintar();
+        }).catch(function (e) {
+          b.disabled = false; b.textContent = "Carregar mais";
+          rodape.appendChild(el("span", "pd-mais__erro", e.message));
+        });
+      });
+      rodape.appendChild(b);
+
+      /* De uma vez, para quem sabe que vai procurar fundo e não
+         quer clicar de sessenta em sessenta. Pequeno: o comum é
+         filtrar, e filtrar já faz isto sozinho. */
+      var tudo = el("button", "pd-todos__b", "carregar todas");
+      tudo.type = "button";
+      tudo.addEventListener("click", garantirHistoricoInteiro);
+      rodape.appendChild(tudo);
     }
 
     function pintar() {
       lista.textContent = "";
+
+      /* A varredura começa ANTES de peneirar, para que a mensagem
+         de vazio já saia dizendo que a busca está indo mais fundo
+         em vez de afirmar que não há nada. */
+      var filtrando = !!(FILTRO_BUSCA || FILTRO_PERIODO || FILTRO_PESSOA || FILTRO_SETOR);
+      if (filtrando && MOSTRAR_RESOLVIDAS) garantirHistoricoInteiro();
+
       pintarRodape();
 
       var vistas = todas.filter(function (p) {
@@ -506,13 +631,25 @@ const PendenciasUI = (function () {
            não existia. É o mesmo defeito que o .catch das
            resolvidas tinha: um vazio de alcance parecendo um vazio
            de existência. Agora ele diz o que falta e o que fazer. */
-        var faltaBuscar = MOSTRAR_RESOLVIDAS && !rodape._fim
-                          && (FILTRO_BUSCA || FILTRO_PERIODO || FILTRO_PESSOA || FILTRO_SETOR);
-        lista.appendChild(el("div", "pd-vazio", faltaBuscar
-          ? "Nada com esses filtros entre as " + todas.length + " que estão carregadas. "
-            + "Pode estar numa concluída mais antiga — use “Carregar mais” aqui embaixo "
-            + "e procure de novo."
-          : "Nada com esses filtros."));
+        var texto;
+        if (varrendoAgora) {
+          texto = "Procurando no histórico inteiro…";
+        } else if (filtrando && !MOSTRAR_RESOLVIDAS) {
+          /* O engano mais fácil de cometer nesta tela: procurar algo
+             que já foi concluído, com as concluídas fora da lista, e
+             ler "Nada" como "nunca existiu". */
+          texto = "Nada com esses filtros entre as pendências em aberto. "
+                + "As concluídas estão fora desta lista — marque “mostrar resolvidas” "
+                + "para procurar no histórico também.";
+        } else if (filtrando && Pendencias.historicoTruncado()) {
+          texto = "Nada com esses filtros. Parei no teto de segurança, então sobraram "
+                + "concluídas muito antigas que não foram examinadas.";
+        } else if (filtrando && Pendencias.historicoCompleto()) {
+          texto = "Nada com esses filtros — e o histórico inteiro foi examinado.";
+        } else {
+          texto = "Nada com esses filtros.";
+        }
+        lista.appendChild(el("div", "pd-vazio", texto));
         return;
       }
 
@@ -1908,7 +2045,7 @@ const PendenciasUI = (function () {
     if (!Dados.sessao() || !Pendencias.temBanco()) { desenhar(); return; }
     Promise.all([Pendencias.listar(), Dados.listarEquipe()])
       .then(function (r) {
-        todas = r[0];
+        todas = juntarComExtra(r[0]);
         equipe = r[1];
         porUid = {};
         equipe.forEach(function (p) { porUid[p.uid] = p; });
@@ -1985,7 +2122,7 @@ const PendenciasUI = (function () {
            banco respondia. */
         if (painelAberto()) return;
         var antes = ultimaAssinatura;
-        todas = r[0];
+        todas = juntarComExtra(r[0]);
         equipe = r[1];
         porUid = {};
         equipe.forEach(function (x) { porUid[x.uid] = x; });

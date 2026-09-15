@@ -216,16 +216,49 @@ const Pendencias = (function () {
        consulta ordenada por campo ausente não devolve o
        documento. Já perdemos pendência para essa armadilha uma
        vez. */
-    var naoResolvidas = fetch(base() + ":runQuery", {
-      method: "POST", headers: autorizacao(), cache: "no-store",
-      body: JSON.stringify({ structuredQuery: {
-        from: [{ collectionId: ABERTAS }],
-        where: { fieldFilter: { field: { fieldPath: "situacao" },
-                 op: "NOT_EQUAL", value: { stringValue: "resolvida" } } },
-        limit: 500 } }),
-    })
-      .then(conferir)
-      .then(function (j) { return (j || []).filter(function (l) { return l.document; }).map(deDocumento); });
+    /* ---------- AS ABERTAS, SEM TETO CALADO ----------
+
+       Havia aqui um limit de 500 e mais nada. Batido o teto, o
+       excedente simplesmente não vinha — e a tela não tinha como
+       saber que faltava algo. Pendência aberta que não aparece é o
+       pior defeito possível num sistema de cobrança, e "500 é
+       muito" não é garantia: é aposta com prazo.
+
+       Agora vai de página em página até o banco devolver uma
+       página curta, que é o único sinal confiável de fim.
+
+       A ORDEM É EXPLÍCITA, e por dois motivos. Primeiro porque
+       offset só é confiável sobre uma ordem estável. Segundo, e
+       mais importante, porque a ordem é (situacao, id do
+       documento) e não criadoEm: consulta ordenada por campo
+       ausente NÃO devolve o documento, e o id existe em todo
+       documento. Ordenar as abertas por criadoEm deixaria de fora
+       qualquer pendência sem esse campo — armadilha em que este
+       sistema já perdeu uma. */
+    var POR_PAGINA_ABERTAS = 500;
+
+    function paginaDeAbertas(pular, acumulado) {
+      return fetch(base() + ":runQuery", {
+        method: "POST", headers: autorizacao(), cache: "no-store",
+        body: JSON.stringify({ structuredQuery: {
+          from: [{ collectionId: ABERTAS }],
+          where: { fieldFilter: { field: { fieldPath: "situacao" },
+                   op: "NOT_EQUAL", value: { stringValue: "resolvida" } } },
+          orderBy: [{ field: { fieldPath: "situacao" }, direction: "ASCENDING" },
+                    { field: { fieldPath: "__name__" }, direction: "ASCENDING" }],
+          offset: pular,
+          limit: POR_PAGINA_ABERTAS } }),
+      })
+        .then(conferir)
+        .then(function (j) {
+          var lote = (j || []).filter(function (l) { return l.document; }).map(deDocumento);
+          var tudo = acumulado.concat(lote);
+          if (lote.length < POR_PAGINA_ABERTAS) return tudo;
+          return paginaDeAbertas(pular + lote.length, tudo);
+        });
+    }
+
+    var naoResolvidas = paginaDeAbertas(0, []);
 
     var resolvidasRecentes = fetch(base() + ":runQuery", {
       method: "POST", headers: autorizacao(), cache: "no-store",
@@ -532,9 +565,10 @@ const Pendencias = (function () {
   var ERRO_DAS_RESOLVIDAS = "";
   function erroDasResolvidas() { return ERRO_DAS_RESOLVIDAS; }
 
-  function maisResolvidas(quantasJaTenho) {
+  function maisResolvidas(quantasJaTenho, quantasQuero) {
     if (!temBanco() || !Dados.sessao()) return Promise.resolve([]);
     var pular = Math.max(0, parseInt(quantasJaTenho, 10) || 0);
+    var teto = Math.max(1, parseInt(quantasQuero, 10) || 60);
     return fetch(base() + ":runQuery", {
       method: "POST", headers: autorizacao(), cache: "no-store",
       body: JSON.stringify({ structuredQuery: {
@@ -543,15 +577,91 @@ const Pendencias = (function () {
                  op: "EQUAL", value: { stringValue: "resolvida" } } },
         orderBy: [{ field: { fieldPath: "criadoEm" }, direction: "DESCENDING" }],
         offset: pular,
-        limit: 60 } }),
+        limit: teto } }),
     })
       .then(function (r) {
         if (!r.ok) throw new Error("Não consegui buscar mais concluídas (HTTP " + r.status + ").");
         return r.json();
       })
       .then(function (j) {
-        return (j || []).filter(function (l) { return l.document; }).map(deDocumento);
+        var lote = (j || []).filter(function (l) { return l.document; }).map(deDocumento);
+        /* PÁGINA CURTA É FIM DE HISTÓRICO, e quem descobre isso é
+           quem pediu a página. Sem anotar aqui, o botão "carregar
+           mais" ficaria oferecendo páginas vazias para sempre — a
+           pessoa clicaria, nada mudaria, e a tela não explicaria
+           por quê. */
+        if (lote.length < teto) HISTORICO_COMPLETO = true;
+        return lote;
       });
+  }
+
+  /* ---------- TODO o histórico, de uma vez ----------
+
+     Existe porque filtro que só peneira o que já está carregado
+     não é filtro: quem procura "aquela de março" e recebe "Nada"
+     conclui que o registro foi perdido. Então, quando se procura,
+     o sistema vai buscar — página por página, até o fim — e só
+     depois peneira. A busca passa a valer sobre tudo o que existe.
+
+     PÁGINA DE 300, E NÃO 60. O de 60 é para o botão "carregar
+     mais", onde a pessoa espera olhando; aqui ela espera uma vez
+     para ter o histórico inteiro, e menos idas ao banco importa
+     mais que resposta pequena.
+
+     O TETO EXISTE E É DITO. Quarenta páginas são doze mil
+     concluídas — décadas, no volume da casa. Se um dia bater,
+     historicoTruncado() fica verdadeiro e a tela avisa, em vez de
+     mostrar meia lista com cara de lista inteira.
+
+     Uma ressalva honesta sobre offset: se alguém concluir uma
+     pendência no meio da varredura, a ordem muda e uma página pode
+     repetir ou saltar um documento. Repetição a tela descarta pelo
+     id; salto se corrige na próxima varredura. O consolo é que isso
+     só atinge o recém-concluído, que é justamente o que está na
+     primeira página de todo mundo. */
+  var HISTORICO_COMPLETO = false;
+  var HISTORICO_TRUNCADO = false;
+  var varrendo = null;
+  var POR_PAGINA_HISTORICO = 300;
+  var TETO_DE_PAGINAS = 40;
+
+  function historicoCompleto() { return HISTORICO_COMPLETO; }
+  function historicoTruncado() { return HISTORICO_TRUNCADO; }
+
+  function todoOHistorico(quantasJaTenho, aoProgredir) {
+    if (HISTORICO_COMPLETO) return Promise.resolve([]);
+    /* Uma varredura por vez: a tela chama isto a cada tecla
+       digitada na busca, e sem esta guarda cada letra abriria uma
+       varredura nova do histórico inteiro. */
+    if (varrendo) return varrendo;
+
+    var achadas = [];
+    var pular = Math.max(0, parseInt(quantasJaTenho, 10) || 0);
+    var paginas = 0;
+
+    function proxima() {
+      if (paginas >= TETO_DE_PAGINAS) {
+        HISTORICO_TRUNCADO = true;
+        return achadas;
+      }
+      paginas++;
+      return maisResolvidas(pular, POR_PAGINA_HISTORICO).then(function (lote) {
+        achadas = achadas.concat(lote);
+        pular += lote.length;
+        if (typeof aoProgredir === "function") aoProgredir(achadas.length);
+        if (lote.length < POR_PAGINA_HISTORICO) {
+          HISTORICO_COMPLETO = true;
+          return achadas;
+        }
+        return proxima();
+      });
+    }
+
+    varrendo = Promise.resolve().then(proxima).then(
+      function (r) { varrendo = null; return r; },
+      function (e) { varrendo = null; throw e; }
+    );
+    return varrendo;
   }
 
   function jaVi(p) {
@@ -998,6 +1108,9 @@ const Pendencias = (function () {
     URGENCIAS: URGENCIAS,
     pesoDaUrgencia: pesoDaUrgencia,
     maisResolvidas: maisResolvidas,
+    todoOHistorico: todoOHistorico,
+    historicoCompleto: historicoCompleto,
+    historicoTruncado: historicoTruncado,
     erroDasResolvidas: erroDasResolvidas,
     jaVi: jaVi,
     marcarComoVista: marcarComoVista,

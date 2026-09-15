@@ -893,6 +893,14 @@ a{color:inherit;text-decoration:none}
 .pd-mais__n{font-size:11.5px;color:var(--txt-3)}
 .pd-mais__erro{font-size:11.5px;color:var(--alerta)}
 .pd-mais .btn-fav{margin-left:auto}
+/* A GAVETA PESSOAL É ESTREITA, e o rodapé dela tem botão mais
+   explicação. Na linha do quadro do escritório isso cabe lado a
+   lado; no trilho, a explicação desce para a própria linha em vez
+   de estrangular o botão em duas palavras por linha. */
+.historico .pd-mais{flex-direction:column;align-items:stretch;gap:6px;
+                    padding:10px 2px 2px;margin-top:8px}
+.historico .pd-mais .btn-fav{margin-left:0}
+.historico .pd-dica{margin-top:0}
 .pd-todas .pen{background:var(--base)}
 .pd-todas .pen:hover{background:#fff}
 
