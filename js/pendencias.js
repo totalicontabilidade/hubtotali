@@ -475,6 +475,46 @@ const Pendencias = (function () {
      malandragem é aparecer como quem não leu. E a lista no
      documento custa ZERO leitura extra, enquanto a subcoleção
      custaria uma por pendência, toda vez que o trilho desenha. */
+  /* ---------- Mais resolvidas, de página em página ----------
+
+     listar() traz as 60 resolvidas mais recentes. É o suficiente
+     para o trilho e para o quadro no dia a dia, e é pouco para
+     consulta histórica — que é para o que elas ficam guardadas.
+
+     POR QUE offset E NÃO CURSOR. Cursor (startAt) é mais barato:
+     não cobra leitura pelo que salta. Mas ele exige mandar o valor
+     do último documento da página anterior, e o índice que isso
+     usa é o mesmo par (situacao, criadoEm) que já existe — se não
+     existir, a consulta volta 400 pedindo para criar índice, e
+     quem descobre isso é o usuário. offset funciona com o índice
+     que já está lá. A conta: 60 por página, algumas páginas por
+     consulta esporádica. Barato o bastante para não valer o risco.
+
+     Se um dia isso incomodar — muitas páginas, ou muita gente
+     consultando —, o caminho é o cursor, e aí com o índice criado
+     de propósito antes. */
+  function maisResolvidas(quantasJaTenho) {
+    if (!temBanco() || !Dados.sessao()) return Promise.resolve([]);
+    var pular = Math.max(0, parseInt(quantasJaTenho, 10) || 0);
+    return fetch(base() + ":runQuery", {
+      method: "POST", headers: autorizacao(), cache: "no-store",
+      body: JSON.stringify({ structuredQuery: {
+        from: [{ collectionId: ABERTAS }],
+        where: { fieldFilter: { field: { fieldPath: "situacao" },
+                 op: "EQUAL", value: { stringValue: "resolvida" } } },
+        orderBy: [{ field: { fieldPath: "criadoEm" }, direction: "DESCENDING" }],
+        offset: pular,
+        limit: 60 } }),
+    })
+      .then(function (r) {
+        if (!r.ok) throw new Error("Não consegui buscar mais concluídas (HTTP " + r.status + ").");
+        return r.json();
+      })
+      .then(function (j) {
+        return (j || []).filter(function (l) { return l.document; }).map(deDocumento);
+      });
+  }
+
   function jaVi(p) {
     var s = Dados.sessao();
     return !!s && Array.isArray(p.vistas) && p.vistas.indexOf(s.uid) !== -1;
@@ -918,6 +958,7 @@ const Pendencias = (function () {
     ehReservada: function (p) { return colDe(p) === RESERVADAS; },
     URGENCIAS: URGENCIAS,
     pesoDaUrgencia: pesoDaUrgencia,
+    maisResolvidas: maisResolvidas,
     jaVi: jaVi,
     marcarComoVista: marcarComoVista,
     pedeCiencia: pedeCiencia,

@@ -303,6 +303,44 @@ const PendenciasUI = (function () {
   var FILTRO_SETOR = "";
   var MOSTRAR_RESOLVIDAS = false;
 
+  /* Busca sem acento e sem expressão regular. Sem acento porque
+     ninguém digita "ITABAIANA" com acento na pressa; sem regex
+     porque a barra invertida de \s desaparece em edição automática
+     e, quando desaparece, o separador vira a letra "s" — já
+     aconteceu neste arquivo, e o bug era invisível. */
+  var ACENTOS = "áàâãäéèêëíìîïóòôõöúùûüçÁÀÂÃÄÉÈÊËÍÌÎÏÓÒÔÕÖÚÙÛÜÇ";
+  var SEM_ACENTO = "aaaaaeeeeiiiiooooouuuucAAAAAEEEEIIIIOOOOOUUUUC";
+  function semAcento(s) {
+    var saida = "";
+    var texto = String(s || "").toLowerCase();
+    for (var i = 0; i < texto.length; i++) {
+      var pos = ACENTOS.indexOf(texto.charAt(i));
+      saida += pos === -1 ? texto.charAt(i) : SEM_ACENTO.charAt(pos).toLowerCase();
+    }
+    return saida;
+  }
+
+  /* Períodos em texto, comparando o começo do ISO. Data é string
+     "2026-09-15T…", então "começa com 2026-09" é o mês, e
+     "começa com 2026" é o ano — sem montar um Date para nada. */
+  function dentroDoPeriodo(p, periodo) {
+    if (!periodo) return true;
+    var quando = String(p.criadoEm || "");
+    var hoje = new Date();
+    var ano = String(hoje.getFullYear());
+    var mes = ano + "-" + ("0" + (hoje.getMonth() + 1)).slice(-2);
+    if (periodo === "mes") return quando.indexOf(mes) === 0;
+    if (periodo === "ano") return quando.indexOf(ano) === 0;
+    if (periodo === "90") {
+      var limite = new Date(hoje.getTime() - 90 * 24 * 3600 * 1000).toISOString();
+      return quando >= limite;
+    }
+    return true;
+  }
+
+  var FILTRO_BUSCA = "";
+  var FILTRO_PERIODO = "";
+
   function abrirTodas() {
     var c = abrir("Todas as pendências");
 
@@ -334,21 +372,93 @@ const PendenciasUI = (function () {
     resolvidas.appendChild(cx);
     resolvidas.appendChild(el("span", null, "mostrar resolvidas"));
 
+    /* BUSCA PRIMEIRO, porque é o filtro que resolve sozinho a
+       maioria das procuras: quem quer achar "GIGANTTE" digita
+       GIGANTTE, não sai combinando pessoa com setor. */
+    var busca = document.createElement("input");
+    busca.className = "pd-filtro pd-filtro--busca";
+    busca.type = "search";
+    busca.placeholder = "Procurar no título ou no texto";
+    busca.value = FILTRO_BUSCA;
+    busca.setAttribute("autocapitalize", "off");
+
+    var periodo = el("select", "pd-filtro");
+    [["", "Qualquer data"], ["mes", "Este mês"], ["90", "Últimos 90 dias"], ["ano", "Este ano"]]
+      .forEach(function (o) { periodo.appendChild(new Option(o[1], o[0])); });
+    periodo.value = FILTRO_PERIODO;
+
+    barra.appendChild(busca);
     barra.appendChild(pessoas);
     barra.appendChild(setores);
+    barra.appendChild(periodo);
     barra.appendChild(resolvidas);
     c.appendChild(barra);
 
     var lista = el("div", "pd-todas");
     c.appendChild(lista);
 
+    /* ---------- Carregar mais concluídas ----------
+       Antes havia aqui um bilhete dizendo que as antigas ficavam
+       "fora desta tela". Dizer a verdade era melhor que esconder,
+       mas continuava sendo um beco: a pessoa sabia que o dado
+       existia e não tinha como alcançá-lo. Agora tem botão. */
+    var rodape = el("div", "pd-mais");
+    c.appendChild(rodape);
+
+    function quantasResolvidasTenho() {
+      return todas.filter(function (p) { return p.situacao === "resolvida"; }).length;
+    }
+
+    function pintarRodape() {
+      rodape.textContent = "";
+      if (!MOSTRAR_RESOLVIDAS) return;
+      var tenho = quantasResolvidasTenho();
+      rodape.appendChild(el("span", "pd-mais__n", tenho + " concluídas carregadas"));
+      if (!rodape._fim) {
+        var b = el("button", "btn-fav", "Carregar mais");
+        b.type = "button";
+        b.addEventListener("click", function () {
+          b.disabled = true; b.textContent = "Buscando…";
+          Pendencias.maisResolvidas(tenho).then(function (novas) {
+            /* Sem repetidas: offset pode devolver algo que já
+               está aqui se alguém resolveu uma pendência entre as
+               duas consultas. */
+            var jaTenho = {};
+            todas.forEach(function (p) { jaTenho[p.id] = true; });
+            var entraram = novas.filter(function (p) { return !jaTenho[p.id]; });
+            todas = todas.concat(entraram);
+            if (!novas.length || !entraram.length) rodape._fim = true;
+            pintar();
+          }).catch(function (e) {
+            b.disabled = false; b.textContent = "Carregar mais";
+            rodape.appendChild(el("span", "pd-mais__erro", e.message));
+          });
+        });
+        rodape.appendChild(b);
+      } else {
+        rodape.appendChild(el("span", "pd-mais__n", "— isto é tudo"));
+      }
+    }
+
     function pintar() {
       lista.textContent = "";
+      pintarRodape();
 
       var vistas = todas.filter(function (p) {
         if (!MOSTRAR_RESOLVIDAS && p.situacao === "resolvida") return false;
         if (FILTRO_PESSOA && !Pendencias.ehMinha(p, FILTRO_PESSOA, setoresDe(porUid[FILTRO_PESSOA] || {}))) return false;
         if (FILTRO_SETOR && (p.setorDestino || p.setorOrigem) !== FILTRO_SETOR) return false;
+        if (!dentroDoPeriodo(p, FILTRO_PERIODO)) return false;
+        if (FILTRO_BUSCA) {
+          /* Procura no título E no texto: quem lembra "aquela do
+             balancete" acha pelo título, e quem lembra o teor acha
+             pelo porquê. */
+          var alvoBusca = semAcento(p.oque) + " " + semAcento(p.porque) + " " + semAcento(p.sugestao);
+          var termos = semAcento(FILTRO_BUSCA).split(" ").filter(Boolean);
+          for (var i = 0; i < termos.length; i++) {
+            if (alvoBusca.indexOf(termos[i]) === -1) return false;
+          }
+        }
         return true;
       });
 
@@ -357,14 +467,6 @@ const PendenciasUI = (function () {
         return;
       }
 
-      /* Diz o que NÃO está aqui. O quadro carrega as sessenta
-         resolvidas mais recentes; sem esta linha, quem procurasse
-         uma antiga concluiria que ela foi apagada. */
-      if (MOSTRAR_RESOLVIDAS) {
-        lista.appendChild(el("div", "pd-vazio",
-          "As resolvidas mais recentes aparecem aqui. As mais antigas continuam guardadas no banco, " +
-          "fora desta tela — elas saem na cópia de segurança."));
-      }
 
       [
         { c: "recado", t: "Recados",       f: function (p) { return p.situacao !== "resolvida" && Pendencias.pedeCiencia(p); } },
@@ -387,6 +489,10 @@ const PendenciasUI = (function () {
     }
 
     pessoas.addEventListener("change", function () { FILTRO_PESSOA = pessoas.value; pintar(); });
+    periodo.addEventListener("change", function () { FILTRO_PERIODO = periodo.value; pintar(); });
+    /* input, e não change: filtrar enquanto se digita é o que faz a
+       busca valer a pena numa lista longa. */
+    busca.addEventListener("input", function () { FILTRO_BUSCA = busca.value; pintar(); });
     setores.addEventListener("change", function () { FILTRO_SETOR = setores.value; pintar(); });
     cx.addEventListener("change", function () { MOSTRAR_RESOLVIDAS = cx.checked; pintar(); });
 
