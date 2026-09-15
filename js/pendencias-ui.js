@@ -535,6 +535,11 @@ const PendenciasUI = (function () {
           varrendoAgora = false;
           rodape._parcial = 0;
           pintar();
+          /* O TRILHO ATRÁS TAMBÉM MUDOU. Sem isto, a gaveta pessoal
+             seguia oferecendo "carregar todas as antigas" depois de
+             o histórico inteiro já estar na mão — botão que não faz
+             nada é pior que botão que não existe. */
+          desenhar();
         })
         .catch(function (e) {
           varrendoAgora = false;
@@ -575,6 +580,7 @@ const PendenciasUI = (function () {
           guardarExtra(novas);
           todas = juntarComExtra(todas);
           pintar();
+          desenhar();
         }).catch(function (e) {
           b.disabled = false; b.textContent = "Carregar mais";
           rodape.appendChild(el("span", "pd-mais__erro", e.message));
