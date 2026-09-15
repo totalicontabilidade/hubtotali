@@ -1153,10 +1153,17 @@
      tempo em tempo, com três economias que importam numa tela que
      passa o dia aberta:
 
-     · ABA ESCONDIDA NÃO CONSULTA. Ninguém está olhando, e cada
-       consulta é leitura cobrada no banco. Ao voltar a ficar
-       visível, consulta na hora — que é o instante em que a pessoa
-       de fato quer ver o que chegou.
+     · ABA ESCONDIDA CONSULTA MENOS — E NÃO "NÃO CONSULTA". Escrevi
+       assim na primeira vez e estava errado: aba escondida é
+       exatamente o caso para o qual o NÚMERO NO TÍTULO DA ABA
+       existe. É o que faz "(2) Hub Totali" aparecer na barra do
+       navegador para quem deixou o Hub numa aba de fundo — que é a
+       maioria, já que ele é a página inicial. Parar de consultar
+       enquanto escondida congelava esse número e matava o único
+       aviso que o sistema tem sem servidor de e-mail.
+
+       Então: visível, de minuto em minuto; escondida, de cinco em
+       cinco. E ao voltar a ficar visível, na hora.
 
      · PENDÊNCIA DE MINUTO EM MINUTO, SISTEMA DE MEIA EM MEIA HORA.
        A lista de sistemas e os recados mudam quando alguém edita a
@@ -1175,7 +1182,6 @@
     ligarAtualizacaoSozinha.ligado = true;
 
     function pendencias() {
-      if (document.hidden) return;
       /* typeof, e não window.PendenciasUI: o módulo é declarado com
          const, e const de topo não vira propriedade de window. A
          guarda errada seria sempre falsa e a atualização nunca
@@ -1185,6 +1191,17 @@
       PendenciasUI.conferirSozinho();
     }
 
+    /* Um relógio só, batendo de minuto em minuto, e a aba escondida
+       só aproveita uma batida em cada cinco. Dois relógios
+       independentes dariam o mesmo resultado com o dobro de partes
+       para errar. */
+    var voltas = 0;
+    function passo() {
+      voltas++;
+      if (document.hidden && (voltas % 5) !== 0) return;
+      pendencias();
+    }
+
     function sistemas() {
       if (document.hidden) return;
       /* O próprio Dados.carregar avisa quando o que veio do servidor
@@ -1192,7 +1209,7 @@
       Dados.carregar(function (maisNovo) { desenharTudo(maisNovo); });
     }
 
-    RELOGIO_PENDENCIAS = window.setInterval(pendencias, 60 * 1000);
+    RELOGIO_PENDENCIAS = window.setInterval(passo, 60 * 1000);
     RELOGIO_SISTEMAS   = window.setInterval(sistemas, 30 * 60 * 1000);
 
     document.addEventListener("visibilitychange", function () {
