@@ -228,9 +228,36 @@ const Pendencias = (function () {
         orderBy: [{ field: { fieldPath: "criadoEm" }, direction: "DESCENDING" }],
         limit: 60 } }),
     })
-      .then(function (r) { return r.ok ? r.json() : []; })
+      .then(function (r) {
+        /* ESTE .catch JÁ ESCONDEU UM ERRO POR SEMANAS.
+
+           Ele devolvia lista vazia em qualquer falha, e a consulta
+           das resolvidas vinha voltando 400 desde sempre: falta um
+           índice composto (situacao + criadoEm) que o Firestore exige
+           quando se filtra por um campo e ordena por outro. Ninguém
+           viu, porque "nenhuma resolvida" e "não consegui buscar as
+           resolvidas" apareciam exatamente iguais na tela.
+
+           Continua devolvendo vazio — derrubar a lista inteira por
+           causa do histórico seria pior — mas agora ANOTA o motivo,
+           e a tela diz. Lista vazia por erro não pode parecer lista
+           vazia por ausência. */
+        if (!r.ok) {
+          return r.text().then(function (corpo) {
+            var msg = "";
+            try { msg = (JSON.parse(corpo)[0] || {}).error.message || ""; } catch (e) { msg = ""; }
+            ERRO_DAS_RESOLVIDAS = msg || ("HTTP " + r.status);
+            return [];
+          });
+        }
+        ERRO_DAS_RESOLVIDAS = "";
+        return r.json();
+      })
       .then(function (j) { return (j || []).filter(function (l) { return l.document; }).map(deDocumento); })
-      .catch(function () { return []; });
+      .catch(function (e) {
+        ERRO_DAS_RESOLVIDAS = ERRO_DAS_RESOLVIDAS || (e && e.message) || "falha ao buscar";
+        return [];
+      });
 
     var abertas = Promise.all([naoResolvidas, resolvidasRecentes])
       .then(function (r) { return r[0].concat(r[1]); });
@@ -493,6 +520,10 @@ const Pendencias = (function () {
      Se um dia isso incomodar — muitas páginas, ou muita gente
      consultando —, o caminho é o cursor, e aí com o índice criado
      de propósito antes. */
+  /* Guardado fora da função: a tela pergunta depois. */
+  var ERRO_DAS_RESOLVIDAS = "";
+  function erroDasResolvidas() { return ERRO_DAS_RESOLVIDAS; }
+
   function maisResolvidas(quantasJaTenho) {
     if (!temBanco() || !Dados.sessao()) return Promise.resolve([]);
     var pular = Math.max(0, parseInt(quantasJaTenho, 10) || 0);
@@ -959,6 +990,7 @@ const Pendencias = (function () {
     URGENCIAS: URGENCIAS,
     pesoDaUrgencia: pesoDaUrgencia,
     maisResolvidas: maisResolvidas,
+    erroDasResolvidas: erroDasResolvidas,
     jaVi: jaVi,
     marcarComoVista: marcarComoVista,
     pedeCiencia: pedeCiencia,

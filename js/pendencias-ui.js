@@ -263,6 +263,17 @@ const PendenciasUI = (function () {
        Lembra do estado entre um desenho e o outro: sem isso, a
        atualização de minuto em minuto fecharia a gaveta na cara de
        quem acabou de abri-la. */
+    /* Histórico vazio POR ERRO não pode parecer histórico vazio. */
+    var erroHist = Pendencias.erroDasResolvidas && Pendencias.erroDasResolvidas();
+    if (!concluidas.length && erroHist) {
+      var fe = el("div", "faixa faixa--atraso");
+      fe.appendChild(el("span", "faixa__t", "Concluídas"));
+      alvo.appendChild(fe);
+      alvo.appendChild(el("div", "pd-vazio",
+        "Não consegui carregar o histórico. Nada foi perdido — as concluídas estão no " +
+        "banco, e é a consulta que está falhando: " + erroHist));
+    }
+
     if (concluidas.length) {
       var fh = el("button", "faixa faixa--feito faixa--dobra");
       fh.type = "button";
