@@ -644,25 +644,50 @@ const PendenciasUI = (function () {
     /* RESERVADA. Fica no fim, depois de tudo, porque é decisão
        sobre o que já foi escrito — e desmarcada por padrão: sigilo
        que vem ligado de fábrica deixa de ser escolha. */
-    /* RECADO COM CIÊNCIA — uma terceira natureza, ao lado de
-       "tarefa de uma pessoa" e "tarefa de um setor".
+    /* ESCOLHA DE NATUREZA, E NÃO UMA CAIXA PARA MARCAR.
 
-       Existe porque pedir a mesma coisa a sete pessoas não caberia
-       numa pendência comum: ela tem UMA situação, então o primeiro
-       que clicasse em resolvida fecharia para todos, e ninguém
-       saberia quem fez. Aqui não há responsável nem "feito": há uma
-       lista de quem foi chamado e outra de quem já confirmou. */
+       ISTO JÁ FOI UMA CAIXA "É um recado — cada pessoa confirma que
+       leu", e a caixa custou caro. Uma pessoa da equipe abriu OITO
+       pendências seguidas marcando-a: o rótulo descreve o que uma
+       pendência É — um recado, um pedido —, então marcar parecia o
+       certo. E ao marcar, o campo "Quem faz" desaparecia; ela então
+       usou a lista de ciência como se fosse "quem faz", deixando só
+       o nome do colega. Resultado: oito tarefas sem responsável,
+       que não apareciam na lista de quem devia fazê-las.
+
+       A culpa não é de quem usou. Caixa solta pergunta "isto é
+       verdade?" e aceita qualquer leitura do rótulo. Duas opções
+       lado a lado perguntam "qual das duas?", e aí a pessoa compara
+       — e a que ela não quer fica visível, explicando o que perdeu
+       ao não escolher. */
     var recado = el("div", "pd-campo");
-    var lrec = document.createElement("label");
-    lrec.className = "pd-filtro-marca";
-    var crec = document.createElement("input");
-    crec.type = "checkbox";
-    lrec.appendChild(crec);
-    lrec.appendChild(el("span", null, "É um recado — cada pessoa confirma que leu"));
-    recado.appendChild(lrec);
-    recado.appendChild(el("div", "pd-dica",
-      "Para avisar o escritório de algo que precisa de confirmação. Não tem responsável " +
-      "nem botão de feito: tem ciência, uma por pessoa."));
+    recado.appendChild(el("span", "pd-rot", "O que é isto"));
+    var natureza = el("div", "pd-plateia");
+
+    function opcaoNatureza(valor, titulo, dica, marcada) {
+      var l = document.createElement("label");
+      l.className = "pd-plateia__op";
+      var r = document.createElement("input");
+      r.type = "radio";
+      r.name = "pd-natureza";
+      r.value = valor;
+      r.checked = !!marcada;
+      var txt = el("div", "pd-plateia__txt");
+      txt.appendChild(el("div", "pd-plateia__t", titulo));
+      txt.appendChild(el("div", "pd-dica", dica));
+      l.appendChild(r);
+      l.appendChild(txt);
+      r.addEventListener("change", aplicarRecado);
+      natureza.appendChild(l);
+      return r;
+    }
+
+    var rTarefa = opcaoNatureza("tarefa", "Tarefa — alguém faz",
+      "Uma pessoa, ou um setor, é responsável e marca quando fica pronto.", true);
+    var crec = opcaoNatureza("recado", "Recado — várias pessoas confirmam que leram",
+      "Aviso para o escritório. Não tem responsável nem botão de feito: cada pessoa " +
+      "chamada confirma que leu, e você acompanha quantas já confirmaram.", false);
+    recado.appendChild(natureza);
 
     var reservada = el("div", "pd-campo");
     var lr = document.createElement("label");
@@ -753,7 +778,9 @@ const PendenciasUI = (function () {
       reservada.hidden = r;
       if (r && cr.checked) { cr.checked = false; aplicarPlateia(); }
     }
-    crec.addEventListener("change", aplicarRecado);
+    /* Os dois rádios já chamam aplicarRecado no change; esta chamada
+       é para o estado inicial ficar coerente com "Tarefa" marcada. */
+    aplicarRecado();
 
     var msg = erro(""); msg.hidden = true;
     c.appendChild(msg);
@@ -762,6 +789,23 @@ const PendenciasUI = (function () {
     b.type = "button";
     b.addEventListener("click", function () {
       msg.hidden = true;
+
+      /* RECADO PARA UMA PESSOA SÓ É QUASE SEMPRE O ENGANO ACIMA.
+         Recado existe para pedir confirmação a VÁRIOS; para pedir
+         algo a uma pessoa, o certo é Tarefa, que tem responsável e
+         botão de feito. Em vez de aceitar em silêncio e produzir
+         uma tarefa que não aparece para ninguém, a tela diz qual é
+         a diferença e deixa a pessoa decidir de novo. */
+      if (crec.checked && chamados._valores().length < 2) {
+        msg.textContent = chamados._valores().length === 1
+          ? "Recado é para várias pessoas confirmarem que leram. Para pedir algo a uma " +
+            "pessoa só, escolha “Tarefa — alguém faz” e use o campo Quem faz: aí ela " +
+            "aparece na lista dela e pode marcar como feito."
+          : "Marque quem precisa dar ciência, ou escolha “Tarefa — alguém faz”.";
+        msg.hidden = false;
+        return;
+      }
+
       b.disabled = true; b.textContent = "Abrindo…";
       Pendencias.criar({
         oque: oque._entrada.value,

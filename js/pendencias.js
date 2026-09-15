@@ -845,6 +845,14 @@ const Pendencias = (function () {
     if (p.responsavel === uid) return true;
     if (p.criadoPor === uid) return true;
     if (Array.isArray(p.envolvidos) && p.envolvidos.indexOf(uid) !== -1) return true;
+    /* CHAMADO PARA DAR CIÊNCIA É DONO DISSO. Faltava esta linha, e a
+       falta era grave: um recado não aparecia na lista de ninguém
+       que precisava confirmá-lo — só no quadro do escritório, onde
+       ninguém procura o que é seu. A funcionalidade inteira ficava
+       furada no próprio propósito.
+       E o teste não pegou porque eu testei como quem CRIOU, e quem
+       cria já entrava pela linha de cima. */
+    if (Array.isArray(p.deveDarCiencia) && p.deveDarCiencia.indexOf(uid) !== -1) return true;
     if (!p.responsavel && p.setorDestino && Array.isArray(setores)) {
       return setores.indexOf(p.setorDestino) !== -1;
     }
