@@ -280,6 +280,51 @@
       .catch(function (e) { afirmar(g, "a cópia foi montada", false, e.message); });
   }
 
+  /* ---------- o histórico e a paginação ----------
+
+     Escrito depois de dois defeitos que passariam por qualquer
+     leitura, os dois no caminho das concluídas:
+
+       · a consulta das resolvidas voltou 400 por semanas, porque
+         faltava o índice composto, e um .catch devolvia lista
+         vazia — "nada concluído" e "não consegui buscar" ficavam
+         iguais na tela;
+
+       · maisResolvidas() chamava deDocumento(), que morava dentro
+         de listar(). "Carregar mais" estourava ReferenceError em
+         toda tentativa, e só o console sabia.
+
+     Nenhum dos dois quebrava nada visível. Então o que se afirma
+     aqui é o que o BANCO responde, e não o que o código parece
+     fazer. */
+  function conferirHistorico() {
+    var g = "Histórico e paginação";
+    return Pendencias.listar()
+      .then(function (r) {
+        var erro = Pendencias.erroDasResolvidas();
+        /* Esta é a afirmação central: se faltar o índice composto
+           de novo, ou se a regra mudar, ela fica vermelha COM o
+           motivo em vez de o histórico ficar vazio em silêncio. */
+        afirmar(g, "a consulta das concluídas responde sem erro", !erro,
+          erro || "sem erro");
+
+        var quantas = r.filter(function (p) { return p.situacao === "resolvida"; }).length;
+        return Pendencias.maisResolvidas(quantas)
+          .then(function (pag) {
+            /* Não se afirma QUANTAS vieram: num escritório com
+               menos de 60 concluídas o certo é zero. O que se
+               afirma é que a função RODA — era exatamente isso
+               que estava quebrado. */
+            afirmar(g, "pedir a página seguinte não estoura",
+              Array.isArray(pag), pag.length + " na página seguinte");
+          })
+          .catch(function (e) {
+            afirmar(g, "pedir a página seguinte não estoura", false, e.message);
+          });
+      })
+      .catch(function (e) { afirmar(g, "a listagem respondeu", false, e.message); });
+  }
+
   /* ============================================================
      RODAR E MOSTRAR
      ============================================================ */
@@ -361,6 +406,7 @@
       .then(conferirPortas)
       .then(conferirReservadas)
       .then(conferirCiclo)
+      .then(conferirHistorico)
       .then(conferirCopia)
       .catch(function (e) {
         afirmar("Interrompido", "a bateria terminou sem erro fatal", false, e.message);
