@@ -154,7 +154,25 @@ const PendenciasUI = (function () {
     var meusSetores = setoresDe(porUid[eu] || {});
     var minhas = todas.filter(function (p) { return Pendencias.ehMinha(p, eu, meusSetores); });
 
-    var abertas = minhas.filter(function (p) { return p.situacao !== "resolvida"; });
+    /* QUANDO UM RECADO SAI DA SUA LISTA: quando VOCÊ confirmou.
+
+       Um recado não tem "feito" — tem ciência, uma por pessoa. Então
+       não existe um momento em que ele fica pronto para todos ao
+       mesmo tempo: ele fica pronto para cada um, no instante em que
+       aquela pessoa confirma. Depois disso, deixar o aviso no
+       trilho dela seria cobrar duas vezes a mesma coisa.
+
+       Para QUEM ESCREVEU, ele continua à vista enquanto faltar
+       alguém: é o painel de quem está esperando. Quando o último
+       confirma, o cartão diz que todos confirmaram, e daí quem
+       escreveu fecha — porque só ela sabe se o assunto morreu ali
+       ou se ainda vai render conversa. Fechar sozinho seria decidir
+       isso no lugar dela. */
+    var abertas = minhas.filter(function (p) {
+      if (p.situacao === "resolvida") return false;
+      if (Pendencias.pedeCiencia(p) && p.criadoPor !== eu && Pendencias.jaDeiCiencia(p)) return false;
+      return true;
+    });
 
     var novo = el("button", "btn-nova", "Abrir pendência");
     novo.type = "button";
@@ -323,10 +341,18 @@ const PendenciasUI = (function () {
     b.type = "button";
     b.appendChild(el("span", "pen__f"));
 
-    var data = pedacosDaData(p.prazo);
+    /* O QUADRADINHO DA ESQUERDA É O PRAZO, e recado não tem prazo.
+       Mostrava "--", que se lê como dado faltando e não como "não
+       se aplica". Num recado ele diz o que a coisa é. */
     var pr = el("div", "pen__p");
-    pr.appendChild(el("div", "pen__d", data.d));
-    pr.appendChild(el("div", "pen__m", data.m));
+    if (Pendencias.pedeCiencia(p)) {
+      pr.className = "pen__p pen__p--recado";
+      pr.appendChild(el("div", "pen__m", "aviso"));
+    } else {
+      var data = pedacosDaData(p.prazo);
+      pr.appendChild(el("div", "pen__d", data.d));
+      pr.appendChild(el("div", "pen__m", data.m));
+    }
     b.appendChild(pr);
 
     var t = el("div", "pen__txt");
@@ -358,6 +384,10 @@ const PendenciasUI = (function () {
         quem = "recado — só seu";
       } else if (Pendencias.devoCiencia(p) && !Pendencias.jaDeiCiencia(p)) {
         quem = "recado — confirme que leu";
+      } else if (cc.deram >= cc.total) {
+        /* Completo. Para quem escreveu, é o sinal de que pode
+           fechar; para quem lê, de que não falta ninguém. */
+        quem = "recado — todos confirmaram · " + placar;
       } else if (Pendencias.jaDeiCiencia(p)) {
         quem = "recado — você confirmou · " + placar;
       } else {
