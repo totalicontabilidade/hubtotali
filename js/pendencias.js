@@ -178,6 +178,21 @@ const Pendencias = (function () {
   function colDe(p) { return (p && p._col) || ABERTAS; }
   function caminho(p) { return base() + "/" + colDe(p) + "/" + encodeURIComponent(p.id); }
 
+  /* FORA DE listar() DE PROPOSITO.
+
+     Isto morava dentro de listar(), e maisResolvidas() — escrita
+     depois, para paginar o histórico — chamava pelo nome sem
+     alcance nenhum. Resultado: "Carregar mais" estourava
+     "deDocumento is not defined" em toda tentativa, e o único
+     lugar onde isso aparecia era o console. Duas funções leem a
+     mesma coleção do mesmo jeito, então o conversor é das duas. */
+  function deDocumento(l) {
+    var p = deFirestore(l.document.fields);
+    p.id = l.document.name.split("/").pop();
+    p._col = ABERTAS;
+    return p;
+  }
+
   function listar() {
     if (!temBanco()) return Promise.resolve([]);
     var s = Dados.sessao();
@@ -201,13 +216,6 @@ const Pendencias = (function () {
        consulta ordenada por campo ausente não devolve o
        documento. Já perdemos pendência para essa armadilha uma
        vez. */
-    function deDocumento(l) {
-      var p = deFirestore(l.document.fields);
-      p.id = l.document.name.split("/").pop();
-      p._col = ABERTAS;
-      return p;
-    }
-
     var naoResolvidas = fetch(base() + ":runQuery", {
       method: "POST", headers: autorizacao(), cache: "no-store",
       body: JSON.stringify({ structuredQuery: {
