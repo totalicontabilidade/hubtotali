@@ -1876,6 +1876,18 @@ const PendenciasUI = (function () {
         cab.appendChild(el("span", "pd-item__quando", quandoEscrito(x.criadoEm)));
         if (x.editadoEm) cab.appendChild(el("span", "pd-item__editado", "editado"));
         d.appendChild(cab);
+        /* A MARCA DO APAGADO fica no lugar do texto, na mesma
+           posição da conversa. Quem apaga é sempre quem escreveu —
+           a regra só deixa o autor —, então o nome é o do cabeçalho. */
+        if (x.apagado) {
+          d.className += " pd-item--apagado";
+          d.appendChild(el("div", "pd-item__txt",
+            "Comentário apagado por " + (x.autorNome || nomeDe(x.autor)) +
+            (x.apagadoEm ? " — " + quandoEscrito(x.apagadoEm) : "")));
+          onde.appendChild(d);
+          return;
+        }
+
         var texto = el("div", "pd-item__txt", x.texto);
         d.appendChild(texto);
 
@@ -1955,7 +1967,7 @@ const PendenciasUI = (function () {
             }
             var conf = el("div", "pd-corrigir__acoes");
             conf.appendChild(el("span", "pd-apagar-com__aviso",
-              "Apagar este comentário? Ele será apagado permanentemente e não pode ser recuperado."));
+              "Apagar este comentário? O texto será apagado permanentemente e não pode ser recuperado."));
             var sim = el("button", "pd-corrigir__ok pd-corrigir__ok--perigo", "Apagar");
             sim.type = "button";
             var nao2 = el("button", "pd-corrigir__nao", "Manter");

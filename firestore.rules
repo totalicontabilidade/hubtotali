@@ -488,14 +488,36 @@ service cloud.firestore {
         // dá para mudar o texto, não quem escreveu nem quando. O
         // prazo serve para erro de digitação, não para reescrever
         // a história depois que o colega leu e respondeu.
+        //
+        // DOIS JEITOS DE MEXER DENTRO DA JANELA, e só esses dois:
+        //
+        //  · CORRIGIR: troca o texto por outro texto.
+        //
+        //  · APAGAR DEIXANDO A MARCA: o texto vira vazio e o item
+        //    ganha apagado = true e a hora. O texto se perde de
+        //    verdade — o banco não guarda versão anterior —, mas a
+        //    linha do tempo continua mostrando que ali havia um
+        //    comentário, de quem e quando. Sumir sem rastro faria a
+        //    resposta de um colega ficar falando sozinha.
+        //
+        // Item já apagado não volta nem muda mais. Registro do
+        // sistema não entra em nenhum dos dois (o get() com padrão
+        // cobre os comentários antigos, de antes do campo).
         allow update: if daEquipe()
                       && meuUid(resource.data.autor)
                       && resource.data.get('doSistema', false) != true
-                      && mudou().hasOnly(['texto', 'editadoEm'])
-                      && request.resource.data.texto is string
-                      && request.resource.data.texto.size() > 0
-                      && request.resource.data.texto.size() <= 3000
-                      && request.time < resource.data.criadoEm + duration.value(30, 'm');
+                      && resource.data.get('apagado', false) != true
+                      && request.time < resource.data.criadoEm + duration.value(30, 'm')
+                      && ((mudou().hasOnly(['texto', 'editadoEm'])
+                           && request.resource.data.texto is string
+                           && request.resource.data.texto.size() > 0
+                           && request.resource.data.texto.size() <= 3000)
+                          || (mudou().hasOnly(['texto', 'apagado', 'apagadoEm'])
+                              && request.resource.data.texto == ''
+                              && request.resource.data.apagado == true
+                              && request.resource.data.apagadoEm is timestamp
+                              && request.resource.data.apagadoEm > request.time - duration.value(10, 'm')
+                              && request.resource.data.apagadoEm < request.time + duration.value(10, 'm')));
 
         // APAGAR, SÓ JUNTO COM A PENDÊNCIA INTEIRA — e por quem a
         // abriu.
@@ -511,25 +533,13 @@ service cloud.firestore {
         // ENQUANTO ELA EXISTE. O get() abaixo falha depois de ela
         // sumir, então a janela se fecha sozinha.
         //
-        // E A MESMA JANELA DA CORREÇÃO: quem escreveu pode apagar o
-        // próprio comentário nos primeiros trinta minutos. Engano
-        // de trinta segundos — pendência errada, envio duplicado —
-        // não precisa ficar para sempre. Passada a janela, volta a
-        // valer o de antes: um comentário só sai com a conversa
-        // inteira, porque a essa altura alguém pode ter respondido.
         //
-        // Registro do sistema (doSistema) nunca entra nessa janela,
-        // mesmo levando o uid de quem causou o registro: "fulano
-        // marcou como resolvida" é trilha, não conversa. O get()
-        // default é para os comentários antigos, de antes do campo.
-        //
-        // A janela vem PRIMEIRO no ||: se a pendência já não existir,
-        // o get() da segunda parte falha, e a primeira decide sozinha.
+        // Apagar UM comentário dentro da janela não passa por aqui:
+        // é o update lá em cima, que deixa a marca. Um delete de
+        // verdade permitiria sumir sem rastro chamando o banco por
+        // fora da tela.
         allow delete: if daEquipe()
-                      && ((meuUid(resource.data.autor)
-                           && resource.data.get('doSistema', false) != true
-                           && request.time < resource.data.criadoEm + duration.value(30, 'm'))
-                          || meuUid(get(/databases/$(database)/documents/pendencias/$(id)).data.criadoPor));
+                      && meuUid(get(/databases/$(database)/documents/pendencias/$(id)).data.criadoPor);
       }
     }
 
@@ -669,17 +679,24 @@ service cloud.firestore {
       match /andamento/{item} {
         allow read:   if daEquipe() && request.auth.uid in get(/databases/$(database)/documents/pendencias_reservadas/$(id)).data.podemVer;
         allow create: if daEquipe() && meuUid(request.resource.data.autor);
+        // Mesmos dois caminhos das pendências comuns — ver lá.
         allow update: if daEquipe()
                       && meuUid(resource.data.autor)
                       && resource.data.get('doSistema', false) != true
-                      && mudou().hasOnly(['texto', 'editadoEm'])
-                      && request.time < resource.data.criadoEm + duration.value(30, 'm');
-        // Mesma janela das pendências comuns — ver o comentário lá.
+                      && resource.data.get('apagado', false) != true
+                      && request.time < resource.data.criadoEm + duration.value(30, 'm')
+                      && ((mudou().hasOnly(['texto', 'editadoEm'])
+                           && request.resource.data.texto is string
+                           && request.resource.data.texto.size() > 0
+                           && request.resource.data.texto.size() <= 3000)
+                          || (mudou().hasOnly(['texto', 'apagado', 'apagadoEm'])
+                              && request.resource.data.texto == ''
+                              && request.resource.data.apagado == true
+                              && request.resource.data.apagadoEm is timestamp
+                              && request.resource.data.apagadoEm > request.time - duration.value(10, 'm')
+                              && request.resource.data.apagadoEm < request.time + duration.value(10, 'm')));
         allow delete: if daEquipe()
-                      && ((meuUid(resource.data.autor)
-                           && resource.data.get('doSistema', false) != true
-                           && request.time < resource.data.criadoEm + duration.value(30, 'm'))
-                          || meuUid(get(/databases/$(database)/documents/pendencias_reservadas/$(id)).data.criadoPor));
+                      && meuUid(get(/databases/$(database)/documents/pendencias_reservadas/$(id)).data.criadoPor);
       }
     }
 

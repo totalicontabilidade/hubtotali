@@ -974,11 +974,17 @@ const Pendencias = (function () {
     if (!s || item.autor !== s.uid) return false;
     /* Anotação do sistema não é de ninguém para corrigir ou apagar,
        mesmo levando o uid de quem causou o registro. */
-    if (item.doSistema) return false;
+    if (item.doSistema || item.apagado) return false;
     return dentroDaJanela(item.criadoEm);
   }
 
   /* ---------- apagar um comentário, dentro da janela ----------
+
+     APAGA O TEXTO, NÃO O LUGAR. O comentário fica na linha do tempo
+     como "apagado por fulano", com a hora; o que estava escrito
+     é substituído por vazio no banco e não volta — o Firestore não
+     guarda versão anterior. Assim o engano sai, e quem leu antes
+     não fica achando que imaginou a mensagem.
 
      Mesma janela e mesma pessoa da correção. Existe pelo mesmo
      motivo: comentário posto na pendência errada, ou mandado duas
@@ -997,14 +1003,26 @@ const Pendencias = (function () {
   }
 
   function apagarComentario(p, item) {
-    var url = caminho(p) + "/andamento/" + encodeURIComponent(item.id);
-    return fetch(url, { method: "DELETE", headers: autorizacao() })
-      .then(function (r) {
-        if (r.status === 403) {
-          throw new Error("Passaram os 30 minutos. Agora o comentário só sai junto com a pendência inteira.");
-        }
-        return conferir(r);
-      });
+    /* COM MÁSCARA, sempre: sem ela o PATCH substitui o documento e
+       levaria junto autor e data — justamente o que a marca mostra. */
+    var url = caminho(p) + "/andamento/" + encodeURIComponent(item.id) +
+              "?updateMask.fieldPaths=texto" +
+              "&updateMask.fieldPaths=apagado" +
+              "&updateMask.fieldPaths=apagadoEm";
+    return fetch(url, {
+      method: "PATCH",
+      headers: autorizacao(),
+      body: JSON.stringify({ fields: {
+        texto:     { stringValue: "" },
+        apagado:   { booleanValue: true },
+        apagadoEm: { timestampValue: new Date().toISOString() },
+      } }),
+    }).then(function (r) {
+      if (r.status === 403) {
+        throw new Error("Passaram os 30 minutos. Agora o comentário fica como está.");
+      }
+      return conferir(r);
+    });
   }
 
   function corrigir(p, item, texto) {
