@@ -1256,7 +1256,13 @@
          rodaria — em silêncio, que é o pior jeito de não funcionar.
          É o mesmo typeof que o resto deste arquivo já usa. */
       if (typeof PendenciasUI === "undefined" || !PendenciasUI.conferirSozinho) return;
-      if (telaEmUso()) { PENDENCIAS_ESPERANDO = true; return; }
+      if (telaEmUso()) {
+        /* A coluna espera; os avisos (título da aba, selo, cabeçalho)
+           não. Eles ficam fora de tudo o que se pode estar usando. */
+        PENDENCIAS_ESPERANDO = true;
+        if (PendenciasUI.conferirSoOsNumeros) PendenciasUI.conferirSoOsNumeros();
+        return;
+      }
       PENDENCIAS_ESPERANDO = false;
       PendenciasUI.conferirSozinho();
     }

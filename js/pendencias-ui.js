@@ -2224,9 +2224,11 @@ const PendenciasUI = (function () {
   }
 
   /* Quantas atrasadas e quantas para hoje — o cabeçalho usa. */
-  function resumo() {
+  function resumo() { return resumoDe(todas); }
+
+  function resumoDe(lista) {
     var eu = meuUid();
-    var minhas = todas.filter(function (p) {
+    var minhas = lista.filter(function (p) {
       return Pendencias.ehMinha(p, eu, setoresDe(porUid[eu] || {})) && p.situacao !== "resolvida";
     });
     return {
@@ -2302,8 +2304,30 @@ const PendenciasUI = (function () {
       .catch(function () { /* sem rede: a próxima volta tenta */ });
   }
 
+  /* ---------- Só os números, com a tela em uso ----------
+
+     Enquanto algo está aberto, a coluna não é redesenhada. Mas o
+     número no título da aba, o selo do menu e a linha do cabeçalho
+     continuam valendo: são o aviso de quem deixou o Hub com um
+     cadastro aberto e foi para outro programa.
+
+     A LISTA DA TELA NÃO É TOCADA. O que vem do banco serve só para
+     a conta e é jogado fora. Trocar "todas" aqui mudaria o que o
+     quadro aberto mostra ao mexer num filtro, e ainda faria a
+     atualização completa, quando a tela ficar livre, achar que
+     não há novidade — e a coluna ficaria desatualizada. */
+  function conferirSoOsNumeros() {
+    if (!Dados.sessao() || !Pendencias.temBanco()) return;
+    Pendencias.listar()
+      .then(function (lista) {
+        if (typeof aoMudar === "function") aoMudar(resumoDe(juntarComExtra(lista)));
+      })
+      .catch(function () { /* sem rede: a próxima volta tenta */ });
+  }
+
   return { iniciar: iniciar, recarregar: carregar, resumo: resumo, entrar: abrirEntrada,
            conferirSozinho: conferirSozinho, painelAberto: painelAberto,
+           conferirSoOsNumeros: conferirSoOsNumeros,
            /* A barra lateral abre o quadro por aqui. */
            abrirTodas: function () { if (Dados.sessao()) abrirTodas(); } };
 
