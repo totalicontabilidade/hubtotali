@@ -472,14 +472,29 @@ const Pendencias = (function () {
      trilha. As regras do banco recusam mudar os dois, dentro ou
      fora da janela. */
 
+  /* A JANELA DE CORREÇÃO, NUM LUGAR SÓ.
+
+     Quando a janela passou de 15 para 30 minutos, a regra do banco
+     mudou e as duas contas aqui embaixo ficaram em 15: o botão
+     "corrigir" sumia aos quinze minutos, com o banco ainda
+     aceitando até os trinta. Com o número escrito uma vez, a
+     tela não tem mais como discordar de si mesma. O banco continua
+     sendo quem decide — este número precisa ser igual ao das
+     regras (duration.value(30, 'm')). */
+  var JANELA_DE_CORRECAO_MIN = 30;
+
+  function dentroDaJanela(criadoEm) {
+    var quando = Date.parse(criadoEm);
+    return isFinite(quando) && (Date.now() - quando) < JANELA_DE_CORRECAO_MIN * 60 * 1000;
+  }
+
   var CAMPOS_DO_PEDIDO = ["oque", "porque", "comoFazer", "sugestao",
                           "responsavel", "prazo", "setorDestino"];
 
   function podeCorrigirPedido(p) {
     var s = Dados.sessao();
     if (!s || !p || p.criadoPor !== s.uid) return false;
-    var quando = Date.parse(p.criadoEm);
-    return isFinite(quando) && (Date.now() - quando) < 15 * 60 * 1000;
+    return dentroDaJanela(p.criadoEm);
   }
 
   function corrigirPedido(p, mudancas) {
@@ -957,8 +972,39 @@ const Pendencias = (function () {
   function podeEditar(item) {
     var s = Dados.sessao();
     if (!s || item.autor !== s.uid) return false;
-    var quando = Date.parse(item.criadoEm);
-    return isFinite(quando) && (Date.now() - quando) < 15 * 60 * 1000;
+    /* Anotação do sistema não é de ninguém para corrigir ou apagar,
+       mesmo levando o uid de quem causou o registro. */
+    if (item.doSistema) return false;
+    return dentroDaJanela(item.criadoEm);
+  }
+
+  /* ---------- apagar um comentário, dentro da janela ----------
+
+     Mesma janela e mesma pessoa da correção. Existe pelo mesmo
+     motivo: comentário posto na pendência errada, ou mandado duas
+     vezes, não é "história da conversa" — é engano, e engano de
+     trinta segundos não deveria ficar para sempre.
+
+     Depois dos trinta minutos fecha, como a correção: a essa
+     altura o colega pode ter lido e respondido, e sumir com a
+     mensagem deixaria a resposta dele falando sozinha.
+
+     Registro do sistema ("fulano marcou como resolvida") nunca sai
+     por aqui, nem dentro da janela: é a trilha, não a conversa. A
+     regra do banco recusa isso por conta própria. */
+  function podeApagarComentario(item) {
+    return podeEditar(item);
+  }
+
+  function apagarComentario(p, item) {
+    var url = caminho(p) + "/andamento/" + encodeURIComponent(item.id);
+    return fetch(url, { method: "DELETE", headers: autorizacao() })
+      .then(function (r) {
+        if (r.status === 403) {
+          throw new Error("Passaram os 30 minutos. Agora o comentário só sai junto com a pendência inteira.");
+        }
+        return conferir(r);
+      });
   }
 
   function corrigir(p, item, texto) {
@@ -1110,6 +1156,8 @@ const Pendencias = (function () {
     andamento: andamento,
     acrescentar: acrescentar,
     podeEditar: podeEditar,
+    podeApagarComentario: podeApagarComentario,
+    apagarComentario: apagarComentario,
     temAnexos: temAnexos,
     enviarAnexo: enviarAnexo,
     lerAnexos: lerAnexos,

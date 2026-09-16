@@ -229,11 +229,21 @@ const PendenciasUI = (function () {
     novo.addEventListener("click", abrirFormulario);
     alvo.appendChild(novo);
 
-    /* A porta para o quadro da casa. Fica embaixo do botão de
-       abrir, discreta: o trilho é da pessoa, e o quadro é de vez
-       em quando. */
+    /* A porta para o quadro da casa, logo abaixo do botão de abrir.
+
+       O NÚMERO É SÓ DO QUE ESTÁ ATIVO. Antes ele contava tudo o
+       que estava carregado, concluídas inclusive — e com o
+       histórico agora guardado, esse número só cresceria, sem
+       dizer nada sobre o trabalho de hoje. Concluída tem contagem
+       própria, na gaveta; aqui o número responde "quanto tem em
+       aberto no escritório". Sem nada ativo, o número some: zero
+       não é aviso. */
+    var ativasDaCasa = todas.filter(function (p) { return p.situacao !== "resolvida"; }).length;
     var todasBtn = el("button", "btn-todas",
-      "Ver todas do escritório (" + todas.length + ")");
+      "Ver todas do escritório" + (ativasDaCasa ? " (" + ativasDaCasa + ")" : ""));
+    todasBtn.title = ativasDaCasa === 1
+      ? "1 pendência em aberto no escritório"
+      : ativasDaCasa + " pendências em aberto no escritório";
     todasBtn.type = "button";
     todasBtn.addEventListener("click", abrirTodas);
     alvo.appendChild(todasBtn);
@@ -1929,6 +1939,50 @@ const PendenciasUI = (function () {
             });
           });
           d.appendChild(ed);
+        }
+
+        /* APAGAR, na mesma janela do corrigir e com a mesma
+           confirmação na própria ficha — caixa nativa do navegador
+           tem os defeitos descritos logo acima. */
+        if (Pendencias.podeApagarComentario(x)) {
+          var ap = el("button", "pd-corrigir pd-apagar-com", "apagar");
+          ap.type = "button";
+          ap.title = "Você tem 30 minutos para apagar o que escreveu";
+          ap.addEventListener("click", function () {
+            ap.hidden = true;
+            if (d.querySelector(".pd-corrigir:not(.pd-apagar-com)")) {
+              d.querySelector(".pd-corrigir:not(.pd-apagar-com)").hidden = true;
+            }
+            var conf = el("div", "pd-corrigir__acoes");
+            conf.appendChild(el("span", "pd-apagar-com__aviso",
+              "Apagar este comentário? Ele será apagado permanentemente e não pode ser recuperado."));
+            var sim = el("button", "pd-corrigir__ok pd-corrigir__ok--perigo", "Apagar");
+            sim.type = "button";
+            var nao2 = el("button", "pd-corrigir__nao", "Manter");
+            nao2.type = "button";
+            conf.appendChild(sim);
+            conf.appendChild(nao2);
+            d.appendChild(conf);
+
+            nao2.addEventListener("click", function () {
+              conf.remove();
+              ap.hidden = false;
+              var c2 = d.querySelector(".pd-corrigir:not(.pd-apagar-com)");
+              if (c2) c2.hidden = false;
+            });
+            sim.addEventListener("click", function () {
+              sim.disabled = true;
+              sim.textContent = "Apagando…";
+              Pendencias.apagarComentario(p, x)
+                .then(function () { pintarLinha(p, onde); })
+                .catch(function (err) {
+                  sim.disabled = false;
+                  sim.textContent = "Apagar";
+                  conf.appendChild(el("div", "pd-corrigir__erro", err.message));
+                });
+            });
+          });
+          d.appendChild(ap);
         }
         onde.appendChild(d);
       });

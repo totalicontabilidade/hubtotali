@@ -490,6 +490,7 @@ service cloud.firestore {
         // a história depois que o colega leu e respondeu.
         allow update: if daEquipe()
                       && meuUid(resource.data.autor)
+                      && resource.data.get('doSistema', false) != true
                       && mudou().hasOnly(['texto', 'editadoEm'])
                       && request.resource.data.texto is string
                       && request.resource.data.texto.size() > 0
@@ -510,10 +511,25 @@ service cloud.firestore {
         // ENQUANTO ELA EXISTE. O get() abaixo falha depois de ela
         // sumir, então a janela se fecha sozinha.
         //
-        // O que continua impossível: apagar UM comentário e deixar
-        // o resto. Para um sair, a conversa inteira tem de sair.
+        // E A MESMA JANELA DA CORREÇÃO: quem escreveu pode apagar o
+        // próprio comentário nos primeiros trinta minutos. Engano
+        // de trinta segundos — pendência errada, envio duplicado —
+        // não precisa ficar para sempre. Passada a janela, volta a
+        // valer o de antes: um comentário só sai com a conversa
+        // inteira, porque a essa altura alguém pode ter respondido.
+        //
+        // Registro do sistema (doSistema) nunca entra nessa janela,
+        // mesmo levando o uid de quem causou o registro: "fulano
+        // marcou como resolvida" é trilha, não conversa. O get()
+        // default é para os comentários antigos, de antes do campo.
+        //
+        // A janela vem PRIMEIRO no ||: se a pendência já não existir,
+        // o get() da segunda parte falha, e a primeira decide sozinha.
         allow delete: if daEquipe()
-                      && meuUid(get(/databases/$(database)/documents/pendencias/$(id)).data.criadoPor);
+                      && ((meuUid(resource.data.autor)
+                           && resource.data.get('doSistema', false) != true
+                           && request.time < resource.data.criadoEm + duration.value(30, 'm'))
+                          || meuUid(get(/databases/$(database)/documents/pendencias/$(id)).data.criadoPor));
       }
     }
 
@@ -655,10 +671,15 @@ service cloud.firestore {
         allow create: if daEquipe() && meuUid(request.resource.data.autor);
         allow update: if daEquipe()
                       && meuUid(resource.data.autor)
+                      && resource.data.get('doSistema', false) != true
                       && mudou().hasOnly(['texto', 'editadoEm'])
                       && request.time < resource.data.criadoEm + duration.value(30, 'm');
+        // Mesma janela das pendências comuns — ver o comentário lá.
         allow delete: if daEquipe()
-                      && meuUid(get(/databases/$(database)/documents/pendencias_reservadas/$(id)).data.criadoPor);
+                      && ((meuUid(resource.data.autor)
+                           && resource.data.get('doSistema', false) != true
+                           && request.time < resource.data.criadoEm + duration.value(30, 'm'))
+                          || meuUid(get(/databases/$(database)/documents/pendencias_reservadas/$(id)).data.criadoPor));
       }
     }
 
