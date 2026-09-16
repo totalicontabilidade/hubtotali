@@ -286,8 +286,23 @@ const Dados = (function () {
      ============================================================ */
   var CHAVE_LOGOS = "hub-totali:logos";
 
+  /* LEITURA PRÓPRIA, E NÃO lerCache().
+
+     lerCache() só aceita o formato da lista de sistemas (com
+     "setores"), e o mapa de ícones não tem esse formato — então era
+     descartado toda vez, com os 57 ícones guardados ali. Duas
+     consequências que ninguém ligou a esta linha: a tela abria sem
+     ícones e eles piscavam ao chegar; e, como a versão da tela
+     nunca batia com a do servidor, o centro inteiro era
+     redesenhado a cada volta à aba — fechando o que a pessoa
+     tivesse aberto ali. */
   function lerLogosDoCache() {
-    return lerCache(CHAVE_LOGOS) || {};
+    try {
+      var bruto = window.localStorage.getItem(CHAVE_LOGOS);
+      if (!bruto) return {};
+      var d = JSON.parse(bruto);
+      return (d && typeof d === "object" && !Array.isArray(d)) ? d : {};
+    } catch (e) { return {}; }
   }
 
   function buscarLogos() {

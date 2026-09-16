@@ -883,16 +883,60 @@ const PendenciasUI = (function () {
     caixa.appendChild(cab);
     caixa.appendChild(corpo);
     painel.appendChild(caixa);
-    painel.addEventListener("click", function (ev) { if (ev.target === painel) fechar(); });
+
+    /* FECHAR SEM QUERER NÃO PODE LEVAR O QUE FOI ESCRITO.
+
+       Clicar na área escura em volta e apertar Esc fechavam o
+       painel na hora, sem perguntar. Quem volta de outro programa
+       costuma clicar na janela para ativá-la — e se o clique caía
+       na área escura, o cadastro que estava pela metade sumia.
+
+       Agora, com algo digitado, esses dois atalhos não fecham: a
+       tela avisa que o × é o caminho. O × continua fechando na
+       hora, porque ele é um gesto de propósito. Com nada digitado,
+       os atalhos funcionam como antes. */
+    painel.addEventListener("input", marcarDigitado, true);
+    painel.addEventListener("change", marcarDigitado, true);
+    painel.addEventListener("click", function (ev) {
+      if (ev.target !== painel) return;
+      if (painel._digitado) { avisarQueTemTexto(); return; }
+      fechar();
+    });
     document.body.appendChild(painel);
     document.addEventListener("keydown", function (ev) {
-      if (ev.key === "Escape" && painel.classList.contains("on")) fechar();
+      if (ev.key !== "Escape" || !painel.classList.contains("on")) return;
+      if (painel._digitado) { avisarQueTemTexto(); return; }
+      fechar();
     });
+  }
+
+  function marcarDigitado(ev) {
+    var alvo = ev.target;
+    if (!alvo || !/^(INPUT|TEXTAREA|SELECT)$/.test(alvo.tagName)) return;
+    /* Os filtros do quadro do escritório não são trabalho a perder. */
+    if (alvo.closest && alvo.closest(".pd-filtros")) return;
+    painel._digitado = true;
+  }
+
+  function avisarQueTemTexto() {
+    var cab = caixa.querySelector(".pd-cab");
+    var aviso = cab.querySelector(".pd-aviso-fechar");
+    if (!aviso) {
+      aviso = el("span", "pd-aviso-fechar",
+        "Você tem algo escrito aqui. Para fechar sem salvar, use o ×.");
+      cab.insertBefore(aviso, cab.lastChild);
+    }
+    aviso.classList.remove("pd-aviso-fechar--pisca");
+    void aviso.offsetWidth;
+    aviso.classList.add("pd-aviso-fechar--pisca");
   }
 
   function abrir(t) {
     titulo.textContent = t;
     corpo.textContent = "";
+    painel._digitado = false;
+    var aviso = caixa.querySelector(".pd-aviso-fechar");
+    if (aviso) aviso.remove();
     painel.classList.add("on");
     return corpo;
   }

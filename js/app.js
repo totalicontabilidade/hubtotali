@@ -1120,9 +1120,9 @@
     document.getElementById("portao").hidden = true;
     document.getElementById("tela").hidden = false;
 
-    desenharTudo(Dados.carregar(function (maisNovo) {
-      desenharTudo(maisNovo);
-    }));
+    /* A versão do servidor chega um instante depois da primeira
+       pintura, e a pessoa pode ter aberto algo nesse meio-tempo. */
+    desenharTudo(Dados.carregar(desenharSistemasQuandoLivre));
 
     desenharTopo();
     desenharPendencias();
@@ -1171,11 +1171,76 @@
        Consultar as duas coisas no mesmo passo seria pagar caro pelo
        que não muda.
 
-     · SÓ REDESENHA SE MUDOU, e nunca com painel aberto — quem está
+     · SÓ REDESENHA SE MUDOU, e só com a tela livre (telaEmUso, mais
+       abaixo) — quem está
        escrevendo um comentário não pode ver o texto desaparecer. */
 
   var RELOGIO_PENDENCIAS = null;
   var RELOGIO_SISTEMAS = null;
+
+  /* ---------- A TELA ESTÁ EM USO? ----------
+
+     A atualização sozinha só redesenha quando a tela está "limpa":
+     nada aberto por cima, nada sendo digitado, nenhuma busca na
+     caixa, nenhum formulário de favorito aberto. Se estiver em
+     uso, a novidade fica guardada e entra no primeiro instante em
+     que a tela ficar livre — a pessoa não perde o que estava
+     fazendo, e a novidade não se perde também.
+
+     Antes a regra era "nunca com o painel de pendências aberto", e
+     só valia para as pendências: a lista de sistemas redesenhava o
+     centro sem perguntar nada a ninguém. */
+  function telaEmUso() {
+    if (document.querySelector("#painel.on")) return true;
+    if (typeof PendenciasUI !== "undefined" && PendenciasUI.painelAberto && PendenciasUI.painelAberto()) return true;
+    if (document.querySelector(".pd-caixona")) return true;
+    if (FORM_FAVORITO_ABERTO) return true;
+    if (FILTRO && FILTRO.trim()) return true;
+    var a = document.activeElement;
+    if (a && a !== document.body &&
+        (/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName) || a.isContentEditable)) return true;
+    return false;
+  }
+
+  var SISTEMAS_ESPERANDO = null;
+  var PENDENCIAS_ESPERANDO = false;
+
+  function desenharSistemasQuandoLivre(maisNovo) {
+    if (telaEmUso()) { SISTEMAS_ESPERANDO = maisNovo; return; }
+    SISTEMAS_ESPERANDO = null;
+    desenharTudo(maisNovo);
+  }
+
+  /* Chamado depois de cliques, teclas e saídas de campo: é quando a
+     tela pode ter acabado de ficar livre. Só faz algo se houver
+     novidade esperando, então não custa nada no uso normal. */
+  function aplicarSeLivre() {
+    if (!SISTEMAS_ESPERANDO && !PENDENCIAS_ESPERANDO) return;
+    if (telaEmUso()) return;
+    if (SISTEMAS_ESPERANDO) {
+      var d = SISTEMAS_ESPERANDO;
+      SISTEMAS_ESPERANDO = null;
+      desenharTudo(d);
+    }
+    if (PENDENCIAS_ESPERANDO && typeof PendenciasUI !== "undefined" && PendenciasUI.conferirSozinho) {
+      PENDENCIAS_ESPERANDO = false;
+      PendenciasUI.conferirSozinho();
+    }
+  }
+
+  (function ligarAplicarSeLivre() {
+    var espera = null;
+    function logo() {
+      if (!SISTEMAS_ESPERANDO && !PENDENCIAS_ESPERANDO) return;
+      if (espera) window.clearTimeout(espera);
+      /* Um instante depois: o clique que fecha o painel precisa
+         terminar de fechá-lo antes de a pergunta ser feita. */
+      espera = window.setTimeout(aplicarSeLivre, 400);
+    }
+    document.addEventListener("click", logo, true);
+    document.addEventListener("keyup", logo, true);
+    document.addEventListener("focusout", logo, true);
+  })();
 
   function ligarAtualizacaoSozinha() {
     if (ligarAtualizacaoSozinha.ligado) return;
@@ -1188,6 +1253,8 @@
          rodaria — em silêncio, que é o pior jeito de não funcionar.
          É o mesmo typeof que o resto deste arquivo já usa. */
       if (typeof PendenciasUI === "undefined" || !PendenciasUI.conferirSozinho) return;
+      if (telaEmUso()) { PENDENCIAS_ESPERANDO = true; return; }
+      PENDENCIAS_ESPERANDO = false;
       PendenciasUI.conferirSozinho();
     }
 
@@ -1199,6 +1266,7 @@
     function passo() {
       voltas++;
       if (document.hidden && (voltas % 5) !== 0) return;
+      aplicarSeLivre();
       pendencias();
     }
 
@@ -1206,7 +1274,7 @@
       if (document.hidden) return;
       /* O próprio Dados.carregar avisa quando o que veio do servidor
          é diferente do que está na tela — e só nesse caso. */
-      Dados.carregar(function (maisNovo) { desenharTudo(maisNovo); });
+      Dados.carregar(desenharSistemasQuandoLivre);
     }
 
     RELOGIO_PENDENCIAS = window.setInterval(passo, 60 * 1000);
