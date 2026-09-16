@@ -99,6 +99,59 @@ const Pendencias = (function () {
     return r.json();
   }
 
+  /* ---------- gravar com a HORA DO SERVIDOR ----------
+
+     As janelas de correção contam a partir da hora gravada no
+     documento, e essa hora vinha do relógio do computador. Dois
+     problemas com isso: o banco aceitava qualquer hora (até 2100, o
+     que deixava a janela aberta para sempre), e um computador com o
+     relógio errado gravava a hora errada na linha do tempo de todo
+     mundo.
+
+     A gravação passa pelo commit do Firestore com uma
+     "transformação" que põe a hora do servidor no campo. A regra
+     confere essa hora. O id do documento é gerado aqui, porque o
+     commit não sorteia um como o POST sorteava. */
+  var LETRAS_DO_ID = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  function novoId() {
+    var bytes = new Uint8Array(20);
+    window.crypto.getRandomValues(bytes);
+    var id = "";
+    for (var i = 0; i < bytes.length; i++) id += LETRAS_DO_ID.charAt(bytes[i] % LETRAS_DO_ID.length);
+    return id;
+  }
+
+  function nomeDoDocumento(relativo) {
+    return "projects/" + cfg.projectId + "/databases/(default)/documents/" + relativo;
+  }
+
+  function gravarNovo(colecaoRelativa, doc, campoDaHora) {
+    var id = novoId();
+    var campos = {};
+    Object.keys(doc).forEach(function (k) { if (k !== campoDaHora) campos[k] = doc[k]; });
+    var fields = paraFirestore(campos);
+    return fetch(base() + ":commit", {
+      method: "POST",
+      headers: autorizacao(),
+      body: JSON.stringify({ writes: [{
+        update: { name: nomeDoDocumento(colecaoRelativa + "/" + id), fields: fields },
+        updateTransforms: [{ fieldPath: campoDaHora, setToServerValue: "REQUEST_TIME" }],
+        /* Só cria: se o id sorteado já existisse, isto falha em
+           vez de sobrescrever o documento de outra pessoa. */
+        currentDocument: { exists: false },
+      }] }),
+    })
+      .then(conferir)
+      .then(function (j) {
+        var x = deFirestore(fields);
+        x.id = id;
+        var tr = j && j.writeResults && j.writeResults[0] && j.writeResults[0].transformResults;
+        x[campoDaHora] = (tr && tr[0] && tr[0].timestampValue) || new Date().toISOString();
+        return x;
+      });
+  }
+
   /* ---------- listar ---------- */
 
   /* Traz todas e filtra aqui. É de propósito: a equipe inteira lê
@@ -408,17 +461,10 @@ const Pendencias = (function () {
     if (doc.ehRecado) doc.prazo = "";
 
     var colecao = dados.confidencial ? RESERVADAS : ABERTAS;
-    return fetch(base() + "/" + colecao, {
-      method: "POST",
-      headers: autorizacao(),
-      body: JSON.stringify({ fields: paraFirestore(doc) }),
-    })
-      .then(conferir)
-      .then(function (d) {
-        var p = deFirestore(d.fields);
-        p.id = d.name.split("/").pop();
-        return p;
-      });
+    return gravarNovo(colecao, doc, "criadoEm").then(function (p) {
+      p._col = colecao;
+      return p;
+    });
   }
 
   /* ---------- mudar a situação ----------
@@ -953,17 +999,7 @@ const Pendencias = (function () {
          oferece o "corrigir". */
       doSistema: !!doSistema,
     };
-    return fetch(caminho(p) + "/andamento", {
-      method: "POST",
-      headers: autorizacao(),
-      body: JSON.stringify({ fields: paraFirestore(doc) }),
-    })
-      .then(conferir)
-      .then(function (d) {
-        var x = deFirestore(d.fields);
-        x.id = d.name.split("/").pop();
-        return x;
-      });
+    return gravarNovo(colDe(p) + "/" + p.id + "/andamento", doc, "criadoEm");
   }
 
   /* Corrigir o próprio texto, dentro dos trinta minutos. Quem
@@ -1003,20 +1039,22 @@ const Pendencias = (function () {
   }
 
   function apagarComentario(p, item) {
-    /* COM MÁSCARA, sempre: sem ela o PATCH substitui o documento e
-       levaria junto autor e data — justamente o que a marca mostra. */
-    var url = caminho(p) + "/andamento/" + encodeURIComponent(item.id) +
-              "?updateMask.fieldPaths=texto" +
-              "&updateMask.fieldPaths=apagado" +
-              "&updateMask.fieldPaths=apagadoEm";
-    return fetch(url, {
-      method: "PATCH",
+    /* COM MÁSCARA, sempre: sem ela a gravação substitui o documento
+       e levaria junto autor e data — justamente o que a marca mostra.
+       A hora do apagado também é a do servidor, pelo mesmo motivo
+       da criação. */
+    return fetch(base() + ":commit", {
+      method: "POST",
       headers: autorizacao(),
-      body: JSON.stringify({ fields: {
-        texto:     { stringValue: "" },
-        apagado:   { booleanValue: true },
-        apagadoEm: { timestampValue: new Date().toISOString() },
-      } }),
+      body: JSON.stringify({ writes: [{
+        update: {
+          name: nomeDoDocumento(colDe(p) + "/" + p.id + "/andamento/" + item.id),
+          fields: { texto: { stringValue: "" }, apagado: { booleanValue: true } },
+        },
+        updateMask: { fieldPaths: ["texto", "apagado"] },
+        updateTransforms: [{ fieldPath: "apagadoEm", setToServerValue: "REQUEST_TIME" }],
+        currentDocument: { exists: true },
+      }] }),
     }).then(function (r) {
       if (r.status === 403) {
         throw new Error("Passaram os 30 minutos. Agora o comentário fica como está.");

@@ -141,6 +141,24 @@ service cloud.firestore {
       return autenticado() && request.auth.uid == uid;
     }
 
+    // HORA DE AGORA. Toda janela de trinta minutos conta a partir
+    // de uma hora gravada no documento — e essa hora vinha do
+    // relógio de quem gravava, sem conferência nenhuma. Um comentário
+    // criado com data em 2100 ficava corrigível e apagável até 2100.
+    // A tela nunca fez isso; bastava chamar o banco direto.
+    //
+    // O Hub agora grava com a hora do SERVIDOR (== request.time).
+    // A tolerância de dez minutos é para uma aba que ficou aberta
+    // com a versão anterior, que ainda manda a hora do computador:
+    // ela continua conseguindo gravar, e o máximo que ganha são dez
+    // minutos a mais de janela.
+    function horaDeAgora(t) {
+      return t is timestamp
+             && (t == request.time
+                 || (t > request.time - duration.value(10, 'm')
+                     && t < request.time + duration.value(10, 'm')));
+    }
+
     // Quais campos a alteração encostou. É o que permite dizer
     // "esta pessoa só pode mexer NAQUELE campo".
     function mudou() {
@@ -271,6 +289,7 @@ service cloud.firestore {
 
       allow create: if daEquipe()
                     && meuUid(request.resource.data.criadoPor)
+                    && horaDeAgora(request.resource.data.criadoEm)
                     && request.resource.data.oque is string
                     && request.resource.data.oque.size() > 2
                     && request.resource.data.oque.size() <= 300
@@ -475,6 +494,7 @@ service cloud.firestore {
         allow read:   if daEquipe();
         allow create: if daEquipe()
                       && meuUid(request.resource.data.autor)
+                      && horaDeAgora(request.resource.data.criadoEm)
                       && request.resource.data.texto is string
                       && request.resource.data.texto.size() > 0
                       && request.resource.data.texto.size() <= 3000
@@ -515,9 +535,7 @@ service cloud.firestore {
                           || (mudou().hasOnly(['texto', 'apagado', 'apagadoEm'])
                               && request.resource.data.texto == ''
                               && request.resource.data.apagado == true
-                              && request.resource.data.apagadoEm is timestamp
-                              && request.resource.data.apagadoEm > request.time - duration.value(10, 'm')
-                              && request.resource.data.apagadoEm < request.time + duration.value(10, 'm')));
+                              && horaDeAgora(request.resource.data.apagadoEm)));
 
         // APAGAR, SÓ JUNTO COM A PENDÊNCIA INTEIRA — e por quem a
         // abriu.
@@ -570,6 +588,7 @@ service cloud.firestore {
 
       allow create: if daEquipe()
                     && meuUid(request.resource.data.criadoPor)
+                    && horaDeAgora(request.resource.data.criadoEm)
                     && request.resource.data.podemVer is list
                     && request.resource.data.podemVer.size() > 0
                     && request.resource.data.podemVer.size() <= 60
@@ -678,7 +697,12 @@ service cloud.firestore {
 
       match /andamento/{item} {
         allow read:   if daEquipe() && request.auth.uid in get(/databases/$(database)/documents/pendencias_reservadas/$(id)).data.podemVer;
-        allow create: if daEquipe() && meuUid(request.resource.data.autor);
+        allow create: if daEquipe()
+                      && meuUid(request.resource.data.autor)
+                      && horaDeAgora(request.resource.data.criadoEm)
+                      && request.resource.data.texto is string
+                      && request.resource.data.texto.size() > 0
+                      && request.resource.data.texto.size() <= 3000;
         // Mesmos dois caminhos das pendências comuns — ver lá.
         allow update: if daEquipe()
                       && meuUid(resource.data.autor)
@@ -692,9 +716,7 @@ service cloud.firestore {
                           || (mudou().hasOnly(['texto', 'apagado', 'apagadoEm'])
                               && request.resource.data.texto == ''
                               && request.resource.data.apagado == true
-                              && request.resource.data.apagadoEm is timestamp
-                              && request.resource.data.apagadoEm > request.time - duration.value(10, 'm')
-                              && request.resource.data.apagadoEm < request.time + duration.value(10, 'm')));
+                              && horaDeAgora(request.resource.data.apagadoEm)));
         allow delete: if daEquipe()
                       && meuUid(get(/databases/$(database)/documents/pendencias_reservadas/$(id)).data.criadoPor);
       }
