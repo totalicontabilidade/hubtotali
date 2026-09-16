@@ -940,7 +940,14 @@ const PendenciasUI = (function () {
     painel.classList.add("on");
     return corpo;
   }
-  function fechar() { painel.classList.remove("on"); }
+  function fechar() {
+    /* O cursor não pode ficar preso num campo do painel fechado:
+       para o resto do Hub isso parece "alguém digitando", e a
+       atualização sozinha ficaria esperando para sempre. */
+    var a = document.activeElement;
+    if (a && painel.contains(a) && a.blur) a.blur();
+    painel.classList.remove("on");
+  }
 
   function campo(rotulo, dica) {
     var l = el("label", "pd-campo");

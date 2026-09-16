@@ -1198,7 +1198,10 @@
     if (FILTRO && FILTRO.trim()) return true;
     var a = document.activeElement;
     if (a && a !== document.body &&
-        (/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName) || a.isContentEditable)) return true;
+        (/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName) || a.isContentEditable) &&
+        /* Campo escondido não é alguém digitando: o foco pode
+           sobrar num campo de um painel que já fechou. */
+        a.getClientRects().length > 0) return true;
     return false;
   }
 
