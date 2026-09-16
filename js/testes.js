@@ -325,6 +325,84 @@
       .catch(function (e) { afirmar(g, "a listagem respondeu", false, e.message); });
   }
 
+  /* ---------- corrigir, apagar e a hora do servidor ----------
+
+     Três garantias que só o banco pode dar, e que a tela não tem
+     como provar sozinha:
+
+       · comentário apagado deixa a marca — autor e hora ficam, o
+         texto some — e depois disso não muda mais;
+
+       · registro do sistema não se corrige nem se apaga, mesmo
+         levando o uid de quem causou o registro;
+
+       · a hora de criação é a do servidor, e o banco recusa uma
+         inventada. Antes ele aceitava 2100, e com isso a janela de
+         trinta minutos ficava aberta até 2100. */
+  function conferirComentarios() {
+    var g = "Comentários: corrigir, apagar e hora";
+    var s = Dados.sessao();
+    var c = (typeof CONFIG_HUB !== "undefined") ? CONFIG_HUB : {};
+    var BASE = "https://firestore.googleapis.com/v1/projects/" + c.projectId + "/databases/(default)/documents";
+    var H = { "Content-Type": "application/json", "Authorization": "Bearer " + s.idToken };
+    var p = null, com = null, sis = null;
+
+    function recusou(promessa) {
+      return promessa.then(function () { return false; }, function () { return true; });
+    }
+
+    return Pendencias.criar({ oque: MARCA + " comentarios", responsavel: s.uid, prazo: "2030-12-31" })
+      .then(function (nova) {
+        p = nova;
+        criadas.push(p);
+        afirmar(g, "a pendência nasce com a hora do servidor",
+          Math.abs(Date.parse(p.criadoEm) - Date.now()) < 5 * 60 * 1000, p.criadoEm);
+        return Pendencias.acrescentar(p, "comentário que vai ser apagado", "Conferência");
+      })
+      .then(function (x) {
+        com = x;
+        afirmar(g, "comentário novo pode ser corrigido e apagado",
+          Pendencias.podeEditar(com) && Pendencias.podeApagarComentario(com));
+        return Pendencias.apagarComentario(p, com);
+      })
+      .then(function () { return Pendencias.andamento(p); })
+      .then(function (conversa) {
+        var m = conversa.filter(function (x) { return x.id === com.id; })[0];
+        afirmar(g, "apagado deixa a marca no lugar, sem o texto",
+          !!m && m.apagado === true && m.texto === "" && m.autor === s.uid && !!m.criadoEm && !!m.apagadoEm,
+          m ? "texto: “" + m.texto + "”" : "o item sumiu");
+        return recusou(Pendencias.corrigir(p, m || com, "de volta"));
+      })
+      .then(function (r) {
+        afirmar(g, "o banco recusa mexer no que foi apagado", r);
+        return Pendencias.acrescentar(p, "Conferência marcou algo", "Conferência", true);
+      })
+      .then(function (x) {
+        sis = x;
+        return recusou(Pendencias.corrigir(p, sis, "reescrito"));
+      })
+      .then(function (r) {
+        afirmar(g, "o banco recusa corrigir registro do sistema", r);
+        return recusou(Pendencias.apagarComentario(p, sis));
+      })
+      .then(function (r) {
+        afirmar(g, "o banco recusa apagar registro do sistema", r);
+        return fetch(BASE + "/pendencias/" + p.id + "/andamento", {
+          method: "POST", headers: H,
+          body: JSON.stringify({ fields: {
+            autor: { stringValue: s.uid }, autorNome: { stringValue: "Conferência" },
+            texto: { stringValue: "data inventada" },
+            criadoEm: { timestampValue: "2100-01-01T00:00:00Z" },
+          } }),
+        });
+      })
+      .then(function (r) {
+        afirmar(g, "o banco recusa comentário com hora de criação inventada", r.status === 403,
+          "HTTP " + r.status + (r.status === 200 ? " — as regras publicadas ainda não conferem a hora" : ""));
+      })
+      .catch(function (e) { afirmar(g, "a sequência rodou até o fim", false, e.message); });
+  }
+
   /* ============================================================
      RODAR E MOSTRAR
      ============================================================ */
@@ -407,6 +485,7 @@
       .then(conferirReservadas)
       .then(conferirCiclo)
       .then(conferirHistorico)
+      .then(conferirComentarios)
       .then(conferirCopia)
       .catch(function (e) {
         afirmar("Interrompido", "a bateria terminou sem erro fatal", false, e.message);
