@@ -358,6 +358,34 @@ service cloud.firestore {
                           && (!('vistas' in resource.data)
                               || request.resource.data.vistas.size() >= resource.data.vistas.size()))
 
+                         // MENÇÃO. Escrever "@Fulano" num comentário põe o
+                         // uid dele aqui, e é isso que faz a pendência
+                         // aparecer na coluna dele, marcada como não
+                         // lida. Sai quando ele abre a ficha.
+                         //
+                         // DUAS FORMAS, E SÓ ESSAS DUAS:
+                         //
+                         //  · CHAMAR: a lista só cresce. Qualquer um da
+                         //    equipe pode chamar qualquer um — é a mesma
+                         //    alçada de escrever o comentário que contém a
+                         //    menção, e não dá acesso a nada: quem não podia
+                         //    ver a pendência continua sem poder.
+                         //
+                         //  · DISPENSAR: só o próprio nome sai. Sem isto,
+                         //    daria para tirar o colega da lista e o aviso
+                         //    dele sumiria antes de ele ver — que é o mesmo
+                         //    defeito que a ciência tinha.
+                         || (mudou().hasOnly(['mencoes'])
+                             && request.resource.data.mencoes is list
+                             && request.resource.data.mencoes.size() <= 60
+                             && (('mencoes' in resource.data)
+                                 ? (request.resource.data.mencoes.hasAll(resource.data.mencoes)
+                                    || (resource.data.mencoes.hasAll(request.resource.data.mencoes)
+                                        && resource.data.mencoes
+                                             .removeAll(request.resource.data.mencoes)
+                                             .hasOnly([request.auth.uid])))
+                                 : true))
+
                          // CIÊNCIA É OUTRA COISA QUE A MARCA DE
                          // LEITURA, e por isso é outro campo.
                          //
@@ -521,7 +549,13 @@ service cloud.firestore {
                       && request.resource.data.texto is string
                       && request.resource.data.texto.size() > 0
                       && request.resource.data.texto.size() <= 3000
-                      && textoAte('autorNome', 120);
+                      && textoAte('autorNome', 120)
+                      // Quem foi chamado neste comentário. Guardado aqui
+                      // para a tela poder destacar depois de quem era a
+                      // chamada; quem avisa é a lista da pendência.
+                      && (!('mencionados' in request.resource.data)
+                          || (request.resource.data.mencionados is list
+                              && request.resource.data.mencionados.size() <= 60));
 
         // JANELA DE ARREPENDIMENTO: trinta minutos para corrigir
         // o que você mesmo escreveu. Depois fecha para sempre,
@@ -640,6 +674,34 @@ service cloud.firestore {
                           && request.resource.data.vistas is list
                           && request.resource.data.vistas.size() <= 60)
 
+                         // MENÇÃO. Escrever "@Fulano" num comentário põe o
+                         // uid dele aqui, e é isso que faz a pendência
+                         // aparecer na coluna dele, marcada como não
+                         // lida. Sai quando ele abre a ficha.
+                         //
+                         // DUAS FORMAS, E SÓ ESSAS DUAS:
+                         //
+                         //  · CHAMAR: a lista só cresce. Qualquer um da
+                         //    equipe pode chamar qualquer um — é a mesma
+                         //    alçada de escrever o comentário que contém a
+                         //    menção, e não dá acesso a nada: quem não podia
+                         //    ver a pendência continua sem poder.
+                         //
+                         //  · DISPENSAR: só o próprio nome sai. Sem isto,
+                         //    daria para tirar o colega da lista e o aviso
+                         //    dele sumiria antes de ele ver — que é o mesmo
+                         //    defeito que a ciência tinha.
+                         || (mudou().hasOnly(['mencoes'])
+                             && request.resource.data.mencoes is list
+                             && request.resource.data.mencoes.size() <= 60
+                             && (('mencoes' in resource.data)
+                                 ? (request.resource.data.mencoes.hasAll(resource.data.mencoes)
+                                    || (resource.data.mencoes.hasAll(request.resource.data.mencoes)
+                                        && resource.data.mencoes
+                                             .removeAll(request.resource.data.mencoes)
+                                             .hasOnly([request.auth.uid])))
+                                 : true))
+
                          // CIÊNCIA É OUTRA COISA QUE A MARCA DE
                          // LEITURA, e por isso é outro campo.
                          //
@@ -734,7 +796,10 @@ service cloud.firestore {
                       && horaDeAgora(request.resource.data.criadoEm)
                       && request.resource.data.texto is string
                       && request.resource.data.texto.size() > 0
-                      && request.resource.data.texto.size() <= 3000;
+                      && request.resource.data.texto.size() <= 3000
+                      && (!('mencionados' in request.resource.data)
+                          || (request.resource.data.mencionados is list
+                              && request.resource.data.mencionados.size() <= 60));
         // Mesmos dois caminhos das pendências comuns — ver lá.
         allow update: if daEquipe()
                       && meuUid(resource.data.autor)

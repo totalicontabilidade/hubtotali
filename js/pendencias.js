@@ -743,7 +743,56 @@ const Pendencias = (function () {
 
   function jaVi(p) {
     var s = Dados.sessao();
-    return !!s && Array.isArray(p.vistas) && p.vistas.indexOf(s.uid) !== -1;
+    if (!s) return false;
+    /* MENÇÃO PENDENTE VALE COMO NÃO LIDA, mesmo que a pessoa já
+       tenha aberto a ficha antes. É o que faz o destaque voltar e
+       o número da aba subir quando alguém a chama pelo nome numa
+       pendência que ela já conhecia. */
+    if (fuiChamado(p)) return false;
+    return Array.isArray(p.vistas) && p.vistas.indexOf(s.uid) !== -1;
+  }
+
+  /* ---------- Menção ----------
+
+     Chamar alguém pelo nome num comentário põe o uid dele em
+     "mencoes" na pendência. É isso que a traz para a coluna da
+     pessoa, marcada como não lida, e a faz contar no número da
+     aba. Sai quando ela abre a ficha.
+
+     NÃO DÁ ACESSO A NADA. Numa reservada, quem pode ver continua
+     sendo só quem está em podemVer, congelado na criação — por
+     isso a tela só oferece, para chamar, quem já pode ver. */
+  function fuiChamado(p) {
+    var s = Dados.sessao();
+    return !!s && Array.isArray(p.mencoes) && p.mencoes.indexOf(s.uid) !== -1;
+  }
+
+  function gravarMencoes(p, lista) {
+    return fetch(caminho(p) + "?updateMask.fieldPaths=mencoes", {
+      method: "PATCH",
+      headers: autorizacao(),
+      body: JSON.stringify({ fields: { mencoes: {
+        arrayValue: { values: lista.map(function (u) { return { stringValue: u }; }) }
+      } } }),
+    })
+      .then(conferir)
+      .then(function () { p.mencoes = lista; return true; });
+  }
+
+  function chamar(p, uids) {
+    var atuais = Array.isArray(p.mencoes) ? p.mencoes.slice() : [];
+    var nova = atuais.slice();
+    (uids || []).forEach(function (u) { if (u && nova.indexOf(u) === -1) nova.push(u); });
+    if (nova.length === atuais.length) return Promise.resolve(false);
+    return gravarMencoes(p, nova.slice(0, 60));
+  }
+
+  /* Ao abrir a ficha: o aviso já cumpriu o que tinha a cumprir. */
+  function dispensarMinhaMencao(p) {
+    var s = Dados.sessao();
+    if (!s || !fuiChamado(p)) return Promise.resolve(false);
+    return gravarMencoes(p, p.mencoes.filter(function (u) { return u !== s.uid; }))
+      .catch(function () { return false; });
   }
 
   /* ---------- Ciência ----------
@@ -1101,7 +1150,7 @@ const Pendencias = (function () {
       });
   }
 
-  function acrescentar(p, texto, nomeDeQuem, doSistema) {
+  function acrescentar(p, texto, nomeDeQuem, doSistema, mencionados) {
     var s = Dados.sessao();
     if (!s) return Promise.reject(new Error("Você precisa entrar."));
     if (!texto || !texto.trim()) return Promise.reject(new Error("Escreva alguma coisa."));
@@ -1115,8 +1164,27 @@ const Pendencias = (function () {
          que alguém escreveu à mão: a tela desenha diferente e não
          oferece o "corrigir". */
       doSistema: !!doSistema,
+      /* Quem foi chamado NESTE comentário. A lista que avisa é a
+         da pendência; esta fica para a tela poder dizer, depois,
+         de quem era a chamada. */
+      mencionados: Array.isArray(mencionados) ? mencionados.slice(0, 60) : [],
     };
-    return gravarNovo(colDe(p) + "/" + p.id + "/andamento", doc, "criadoEm");
+    return gravarNovo(colDe(p) + "/" + p.id + "/andamento", doc, "criadoEm")
+      .then(function (x) {
+        if (!doc.mencionados.length) return x;
+        /* O aviso vai DEPOIS do comentário, e de propósito: se
+           falhar, ficou um comentário sem aviso — chato. Na ordem
+           inversa ficaria um aviso apontando para um comentário
+           que não existe, que é pior. */
+        /* E a falha do aviso NÃO derruba o comentário, porque ele
+           já existe: devolver erro aqui faria a tela dizer que nada
+           foi enviado, com o texto guardado na caixa, e a pessoa
+           mandaria de novo — dois comentários iguais. A tela avisa
+           que a chamada não saiu. */
+        return chamar(p, doc.mencionados)
+          .then(function () { return x; })
+          .catch(function () { x.avisoNaoSaiu = true; return x; });
+      });
   }
 
   /* Corrigir o próprio texto, dentro dos trinta minutos. Quem
@@ -1298,6 +1366,10 @@ const Pendencias = (function () {
        E o teste não pegou porque eu testei como quem CRIOU, e quem
        cria já entrava pela linha de cima. */
     if (Array.isArray(p.deveDarCiencia) && p.deveDarCiencia.indexOf(uid) !== -1) return true;
+    /* CHAMADO PELO NOME TAMBÉM É DONO DISSO, pelo mesmo motivo da
+       linha de cima: aviso que não aparece onde a pessoa olha não
+       é aviso. */
+    if (Array.isArray(p.mencoes) && p.mencoes.indexOf(uid) !== -1) return true;
     if (!p.responsavel && p.setorDestino && Array.isArray(setores)) {
       return setores.indexOf(p.setorDestino) !== -1;
     }
@@ -1352,6 +1424,8 @@ const Pendencias = (function () {
     historicoTruncado: historicoTruncado,
     erroDasResolvidas: erroDasResolvidas,
     jaVi: jaVi,
+    fuiChamado: fuiChamado,
+    dispensarMinhaMencao: dispensarMinhaMencao,
     marcarComoVista: marcarComoVista,
     pedeCiencia: pedeCiencia,
     devoCiencia: devoCiencia,

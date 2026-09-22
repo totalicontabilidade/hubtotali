@@ -744,6 +744,7 @@ const PendenciasUI = (function () {
   function cartao(p, comDono) {
     var e = Pendencias.estado(p);
     var naoVi = !Pendencias.jaVi(p);
+    var chamaram = Pendencias.fuiChamado(p);
     var b = el("button", "pen" + (e ? " pen--" + e : "") + (naoVi ? " pen--nova" : ""));
     b.type = "button";
     b.appendChild(el("span", "pen__f"));
@@ -768,6 +769,11 @@ const PendenciasUI = (function () {
     if (naoVi) titulo.appendChild(el("span", "pen__ponto", ""));
     titulo.appendChild(document.createTextNode(p.oque));
     t.appendChild(titulo);
+
+    /* CHAMARAM VOCÊ. A etiqueta explica por que esta pendência
+       está na sua coluna — sem ela, uma pendência de outro setor
+       aparece do nada e parece engano do sistema. */
+    if (chamaram) t.appendChild(el("span", "pen__u pen__u--chamado", "Mencionaram você"));
 
     /* A etiqueta só aparece quando NÃO é o normal: etiquetar tudo
        faz a etiqueta deixar de significar alguma coisa. */
@@ -1406,6 +1412,24 @@ const PendenciasUI = (function () {
     return d;
   }
 
+  /* ---------- quem pode ser chamado ----------
+
+     SÓ QUEM JÁ PODE VER A PENDÊNCIA. Chamar alguém não dá acesso a
+     nada: numa reservada, quem lê continua sendo só quem está em
+     podemVer, congelado na criação. Oferecer um nome de fora
+     colocaria na coluna da pessoa uma pendência que ela não
+     consegue abrir — aviso que só serve para irritar. */
+  function chamaveis(p) {
+    var eu = meuUid();
+    return equipe.filter(function (x) {
+      if (!x.ativo || x.uid === eu) return false;
+      if (Array.isArray(p.podemVer) && p.podemVer.length) {
+        return p.podemVer.indexOf(x.uid) !== -1;
+      }
+      return true;
+    });
+  }
+
   function abrirFicha(p) {
     var c = abrir(p.oque);
 
@@ -1414,6 +1438,13 @@ const PendenciasUI = (function () {
        lida — e ninguém perde nada por isso. */
     if (!Pendencias.jaVi(p)) {
       Pendencias.marcarComoVista(p).then(function (mudou) { if (mudou) desenhar(); });
+    }
+    /* CHAMARAM VOCÊ E VOCÊ VEIO: o aviso já fez o que tinha a
+       fazer. Sai daqui, e não quando a pessoa responde — nem toda
+       chamada pede resposta, e um aviso que só some respondendo
+       vira cobrança. */
+    if (Pendencias.fuiChamado(p)) {
+      Pendencias.dispensarMinhaMencao(p).then(function (mudou) { if (mudou) desenhar(); });
     }
     var eu = meuUid();
 
@@ -1643,12 +1674,85 @@ const PendenciasUI = (function () {
     novo.placeholder = "Acrescentar uma atualização…";
     c.appendChild(novo);
 
+    /* ---------- chamar alguém pelo nome ----------
+
+       O "@" abre a lista de quem pode ser chamado; escolher um nome
+       escreve "@Fulano" no texto e guarda o uid.
+
+       AS ESCOLHAS FICAM GUARDADAS À PARTE, e não são lidas de volta
+       do texto. Ler o texto significaria procurar nomes dentro dele
+       na hora de enviar — e dois "Ana" na equipe, ou um nome
+       escrito com acento diferente, chamariam a pessoa errada ou
+       ninguém. Na hora de enviar, só valem as escolhas cujo
+       "@Fulano" ainda está escrito: quem apagou o nome do texto
+       desistiu da chamada. */
+    var escolhidas = [];
+
+    var lista = el("div", "pd-chamar");
+    lista.hidden = true;
+
+    function fecharLista() { lista.hidden = true; lista.textContent = ""; }
+
+    function abrirLista() {
+      var gente = chamaveis(p);
+      lista.textContent = "";
+      if (!gente.length) {
+        lista.appendChild(el("div", "pd-dica", "Não há mais ninguém para chamar aqui."));
+      }
+      gente.forEach(function (x) {
+        var op = el("button", "pd-chamar__op", x.nome || x.email);
+        op.type = "button";
+        op.appendChild(el("span", "pd-chamar__s", setoresDe(x).join(" · ")));
+        op.addEventListener("click", function () {
+          /* Troca o "@" que a pessoa acabou de digitar pelo nome
+             inteiro, em vez de acrescentar outro. */
+          var texto = novo.value;
+          var fim = texto.lastIndexOf("@");
+          novo.value = (fim === -1 ? texto : texto.slice(0, fim)) + "@" + (x.nome || x.email) + " ";
+          if (escolhidas.indexOf(x.uid) === -1) escolhidas.push(x.uid);
+          fecharLista();
+          novo.focus();
+        });
+        lista.appendChild(op);
+      });
+      lista.hidden = false;
+    }
+
+    novo.addEventListener("input", function () {
+      var texto = novo.value;
+      if (texto.charAt(texto.length - 1) === "@") abrirLista();
+      else if (!lista.hidden) fecharLista();
+    });
+    novo.addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape" && !lista.hidden) { ev.stopPropagation(); fecharLista(); }
+    });
+    c.appendChild(lista);
+
     var b = el("button", "pd-botao", "Acrescentar");
     b.type = "button";
     b.addEventListener("click", function () {
       b.disabled = true;
-      Pendencias.acrescentar(p, novo.value, meuNome())
-        .then(function () { novo.value = ""; b.disabled = false; pintarLinha(p, linha); })
+      var chamados = escolhidas.filter(function (uid) {
+        var quem = porUid[uid] || {};
+        return novo.value.indexOf("@" + (quem.nome || quem.email || "")) !== -1;
+      });
+      Pendencias.acrescentar(p, novo.value, meuNome(), false, chamados)
+        .then(function (x) {
+          novo.value = "";
+          escolhidas = [];
+          b.disabled = false;
+          fecharLista();
+          pintarLinha(p, linha);
+          if (x && x.avisoNaoSaiu) {
+            var falhou = el("div", "pd-corrigir__erro",
+              "Comentário enviado, mas não consegui avisar quem você chamou. " +
+              "Escreva de novo o nome num comentário novo para tentar outra vez.");
+            c.insertBefore(falhou, b);
+          }
+          /* A chamada muda a coluna de quem foi chamado, e a minha
+             também quando eu mesmo estou numa lista de antes. */
+          if (chamados.length) desenhar();
+        })
         .catch(function (err) { b.disabled = false; window.alert(err.message); });
     });
     c.appendChild(b);
