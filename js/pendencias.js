@@ -841,7 +841,21 @@ const Pendencias = (function () {
     for (var n = 0; n < cru.length; n++) {
       limpo += seguros.indexOf(cru.charAt(n)) === -1 ? "_" : cru.charAt(n);
     }
-    return "pendencias/" + idPendencia + "/" + Date.now() + "-" + limpo;
+    /* QUEM MANDOU VAI NO CAMINHO, e não nos metadados do arquivo.
+
+       A primeira tentativa foi mandar o "por" como metadado, com
+       envio em duas partes. Medi: o Storage do Firebase não
+       entendeu o pacote — os metadados não ficaram e o tipo do
+       arquivo saiu errado. Com o uid no caminho, a regra lê quem
+       mandou sem depender de nada disso, porque o caminho é a
+       única coisa que ela sempre vê.
+
+       Arquivo antigo está num caminho de dois pedaços
+       (pendencias/id/arquivo) e continua válido: a regra dele
+       segue existindo, e ele só sai com a pendência inteira. */
+    var s = Dados.sessao();
+    return "pendencias/" + idPendencia + "/" + (s ? s.uid : "sem-dono") +
+           "/" + Date.now() + "-" + limpo;
   }
 
   function enviarAnexo(p, arquivo) {
@@ -862,36 +876,16 @@ const Pendencias = (function () {
        banco. Chamavam-se igual, e a variável escondia a função. */
     var noBalde = caminhoDoAnexo(p.id, arquivo.name);
 
-    /* ENVIO EM DUAS PARTES, para gravar QUEM MANDOU junto do
-       arquivo. Antes era envio simples, só os bytes, e o Storage
-       ficava sem saber de quem era o arquivo — a regra dele só
-       conseguia perguntar quem abriu a pendência. Com o "por" nos
-       metadados, a regra pode deixar quem mandou apagar o próprio
-       anexo nos primeiros trinta minutos, e só ele.
-
-       O tipo vai na primeira parte porque, no envio em duas
-       partes, o cabeçalho da requisição descreve o pacote inteiro,
-       e não o arquivo. */
-    var tipo = arquivo.type || "application/octet-stream";
-    var risca = "hubtotali" + Date.now() + "-" + Math.random().toString(36).slice(2);
-    var corpo = new Blob([
-      "--" + risca + "\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n" +
-        JSON.stringify({ contentType: tipo, metadata: { por: s.uid } }) + "\r\n",
-      "--" + risca + "\r\nContent-Type: " + tipo + "\r\n\r\n",
-      arquivo,
-      "\r\n--" + risca + "--",
-    ]);
-
     var url = "https://firebasestorage.googleapis.com/v0/b/" + encodeURIComponent(balde()) +
-              "/o?uploadType=multipart&name=" + encodeURIComponent(noBalde);
+              "/o?uploadType=media&name=" + encodeURIComponent(noBalde);
 
     return fetch(url, {
       method: "POST",
       headers: {
         "Authorization": "Bearer " + s.idToken,
-        "Content-Type": "multipart/related; boundary=" + risca,
+        "Content-Type": arquivo.type || "application/octet-stream",
       },
-      body: corpo,
+      body: arquivo,
     })
       .then(function (r) {
         if (r.status === 403) throw new Error("Sem permissão para enviar. Confira as regras do Storage.");
@@ -991,8 +985,15 @@ const Pendencias = (function () {
         });
       })
       .then(function (r) {
-        if (r.status === 403) {
-          throw new Error("Passaram os 30 minutos. O anexo agora só sai junto com a pendência.");
+        /* O ARQUIVO JÁ SAIU quando se chega aqui. Se a ficha não
+           receber a marca, fica uma ficha apontando para nada — e
+           quem tentar abrir vê erro sem entender. O recado diz o
+           que aconteceu e o que fazer; tentar de novo conserta,
+           porque apagar um arquivo que já não existe conta como
+           feito e a marca é gravada na segunda volta. */
+        if (!r.ok) {
+          throw new Error("O arquivo foi apagado, mas não consegui marcar isso na ficha " +
+                          "(HTTP " + r.status + "). Clique em apagar de novo para completar.");
         }
         return conferir(r);
       })
