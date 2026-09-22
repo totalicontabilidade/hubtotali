@@ -1845,6 +1845,20 @@ const PendenciasUI = (function () {
     lista.forEach(function (a) {
       var linha = el("div", "pd-anexo");
 
+      /* ANEXO APAGADO: fica a marca, como no comentário. O arquivo
+         se perde de verdade; o nome, quem mandou e as duas horas
+         ficam, para quem leu a conversa antes não achar que
+         imaginou o anexo. */
+      if (a.apagado) {
+        linha.className = "pd-anexo pd-anexo--apagado";
+        linha.appendChild(el("span", "pd-anexo__n", a.nome));
+        linha.appendChild(el("span", "pd-anexo__q",
+          "anexo apagado por " + nomeDe(a.por) +
+          (a.apagadoEm ? " \u2014 " + quandoEscrito(a.apagadoEm) : "")));
+        onde.appendChild(linha);
+        return;
+      }
+
       /* Botão, não link com endereço dentro. O arquivo não tem
          endereço público: ele é buscado na hora, com a sessão de
          quem clicou, e o endereço temporário que sai daí só vale
@@ -1884,6 +1898,43 @@ const PendenciasUI = (function () {
       });
       linha.appendChild(link);
       linha.appendChild(el("span", "pd-anexo__t", tamanhoLegivel(a.tamanho)));
+
+      /* APAGAR, na mesma janela e com a mesma confirmação do
+         comentário — inclusive o aviso de que não dá para
+         recuperar, porque aqui é ainda mais verdade. */
+      if (Pendencias.podeApagarAnexo(a)) {
+        var ap = el("button", "pd-corrigir pd-apagar-com", "apagar");
+        ap.type = "button";
+        ap.title = "Você tem 30 minutos para apagar o que enviou";
+        ap.addEventListener("click", function () {
+          ap.hidden = true;
+          var conf = el("div", "pd-corrigir__acoes");
+          conf.appendChild(el("span", "pd-apagar-com__aviso",
+            "Apagar “" + a.nome + "”? O arquivo será apagado permanentemente e não pode " +
+            "ser recuperado. Fica registrado que você o enviou e apagou."));
+          var sim = el("button", "pd-corrigir__ok pd-corrigir__ok--perigo", "Apagar");
+          sim.type = "button";
+          var nao = el("button", "pd-corrigir__nao", "Manter");
+          nao.type = "button";
+          conf.appendChild(sim);
+          conf.appendChild(nao);
+          linha.appendChild(conf);
+          nao.addEventListener("click", function () { conf.remove(); ap.hidden = false; });
+          sim.addEventListener("click", function () {
+            sim.disabled = true;
+            sim.textContent = "Apagando\u2026";
+            Pendencias.apagarAnexo(p, a)
+              .then(function () { return Pendencias.lerAnexos(p); })
+              .then(function (nova) { desenharAnexos(p, onde, nova); })
+              .catch(function (err) {
+                sim.disabled = false;
+                sim.textContent = "Apagar";
+                conf.appendChild(el("div", "pd-corrigir__erro", err.message));
+              });
+          });
+        });
+        linha.appendChild(ap);
+      }
       /* Quem mandou e quando. O "quando" estava sendo gravado
          desde o começo e nunca aparecia na tela — e é metade da
          utilidade: "o Fulano mandou" sem "às 14h de terça" não

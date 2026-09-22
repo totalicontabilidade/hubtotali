@@ -87,7 +87,30 @@ service firebase.storage {
                 && firestore.get(/databases/(default)/documents/pendencias_reservadas/$(id)).data.criadoPor == request.auth.uid);
       }
 
-      allow delete: if daEquipe() && abriuAPendencia(id);
+      // E QUEM MANDOU, NOS PRIMEIROS TRINTA MINUTOS — a mesma
+      // janela da correção de comentário, pelo mesmo motivo:
+      // mandar o arquivo errado é engano de segundos, e engano de
+      // segundos não deveria ficar para sempre.
+      //
+      // Continua sendo APAGAR, nunca substituir: a ficha no banco
+      // guarda a marca de que havia um anexo ali, quem mandou e a
+      // que horas foi apagado. Trocar o arquivo por baixo segue
+      // impossível, e é por isso que anexo vale como prova.
+      //
+      // "resource.metadata.por" é gravado no envio. Arquivo antigo,
+      // de antes disso, não tem o campo: a comparação dá falso e
+      // ele segue saindo só com a pendência inteira, como sempre.
+      //
+      // "resource.timeCreated" é do próprio Storage, e não do
+      // relógio de quem envia — a janela não se estica.
+      function mandouAgora() {
+        return resource != null
+               && resource.metadata != null
+               && resource.metadata.por == request.auth.uid
+               && request.time < resource.timeCreated + duration.value(30, 'm');
+      }
+
+      allow delete: if daEquipe() && (abriuAPendencia(id) || mandouAgora());
     }
 
     // Nada mais neste balde é acessível por ninguém.

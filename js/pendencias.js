@@ -861,16 +861,37 @@ const Pendencias = (function () {
        arquivo DENTRO DO BALDE, aquela é o endereço do documento no
        banco. Chamavam-se igual, e a variável escondia a função. */
     var noBalde = caminhoDoAnexo(p.id, arquivo.name);
+
+    /* ENVIO EM DUAS PARTES, para gravar QUEM MANDOU junto do
+       arquivo. Antes era envio simples, só os bytes, e o Storage
+       ficava sem saber de quem era o arquivo — a regra dele só
+       conseguia perguntar quem abriu a pendência. Com o "por" nos
+       metadados, a regra pode deixar quem mandou apagar o próprio
+       anexo nos primeiros trinta minutos, e só ele.
+
+       O tipo vai na primeira parte porque, no envio em duas
+       partes, o cabeçalho da requisição descreve o pacote inteiro,
+       e não o arquivo. */
+    var tipo = arquivo.type || "application/octet-stream";
+    var risca = "hubtotali" + Date.now() + "-" + Math.random().toString(36).slice(2);
+    var corpo = new Blob([
+      "--" + risca + "\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n" +
+        JSON.stringify({ contentType: tipo, metadata: { por: s.uid } }) + "\r\n",
+      "--" + risca + "\r\nContent-Type: " + tipo + "\r\n\r\n",
+      arquivo,
+      "\r\n--" + risca + "--",
+    ]);
+
     var url = "https://firebasestorage.googleapis.com/v0/b/" + encodeURIComponent(balde()) +
-              "/o?uploadType=media&name=" + encodeURIComponent(noBalde);
+              "/o?uploadType=multipart&name=" + encodeURIComponent(noBalde);
 
     return fetch(url, {
       method: "POST",
       headers: {
         "Authorization": "Bearer " + s.idToken,
-        "Content-Type": arquivo.type || "application/octet-stream",
+        "Content-Type": "multipart/related; boundary=" + risca,
       },
-      body: arquivo,
+      body: corpo,
     })
       .then(function (r) {
         if (r.status === 403) throw new Error("Sem permissão para enviar. Confira as regras do Storage.");
@@ -904,16 +925,82 @@ const Pendencias = (function () {
            O que serve de prova não pode ser reescrito por quem tem
            interesse no que ela prova. Documento separado, com
            update e delete recusados, é imutabilidade de verdade. */
-        return fetch(caminho(p) + "/anexos", {
+        /* A hora vem do servidor, como na pendência e no
+           comentário: é dela que sai a janela de trinta minutos
+           para apagar, e janela medida pelo relógio de quem
+           envia é janela que a pessoa estica. O "em" continua
+           sendo gravado, em texto, porque é o que as fichas
+           antigas têm e o que a tela já sabe mostrar. */
+        return gravarNovo(colDe(p) + "/" + p.id + "/anexos", ficha, "criadoEm")
+          .then(function (gravada) {
+            p._anexos = (p._anexos || []).concat([gravada]);
+            return gravada;
+          });
+      });
+  }
+
+  /* ---------- apagar um anexo, deixando a marca ----------
+
+     A MESMA JANELA DO COMENTÁRIO: trinta minutos, só quem mandou.
+     Mandar o arquivo errado é engano de segundos, e engano de
+     segundos não precisa ficar para sempre na ficha de um cliente.
+
+     SUBSTITUIR CONTINUA IMPOSSÍVEL, e isso não é descuido: anexo
+     vale como prova do que foi combinado, e quem troca a prova
+     troca o combinado. Quem mandou o arquivo errado apaga e manda
+     o certo — e a linha do tempo mostra as duas coisas.
+
+     A ORDEM É A MESMA DE APAGAR A PENDÊNCIA INTEIRA: o arquivo sai
+     primeiro, a ficha depois. Se a ficha fosse marcada antes e o
+     arquivo falhasse, ficaria um arquivo no balde sem nada que o
+     explicasse — e sem ninguém que pudesse apagá-lo depois dos
+     trinta minutos. */
+  function podeApagarAnexo(a) {
+    var s = Dados.sessao();
+    if (!s || !a || a.por !== s.uid || a.apagado) return false;
+    /* Ficha antiga não tem criadoEm: sem hora, não há janela. */
+    return !!a.criadoEm && dentroDaJanela(a.criadoEm);
+  }
+
+  function apagarAnexo(p, a) {
+    if (!podeApagarAnexo(a)) {
+      return Promise.reject(new Error("Passaram os 30 minutos. O anexo agora só sai junto com a pendência."));
+    }
+    var s = Dados.sessao();
+    var noBalde = "https://firebasestorage.googleapis.com/v0/b/" + encodeURIComponent(balde()) +
+                  "/o/" + encodeURIComponent(a.caminho);
+    return fetch(noBalde, { method: "DELETE", headers: { "Authorization": "Bearer " + s.idToken } })
+      .then(function (r) {
+        /* 404 é sucesso para o que se quer aqui: o arquivo não está
+           mais lá. Insistir faria a ficha nunca receber a marca. */
+        if (!r.ok && r.status !== 404) {
+          throw new Error("Não consegui apagar o arquivo (HTTP " + r.status + ").");
+        }
+        return fetch(base() + ":commit", {
           method: "POST",
           headers: autorizacao(),
-          body: JSON.stringify({ fields: paraFirestore(ficha) }),
-        })
-          .then(conferir)
-          .then(function () {
-            p._anexos = (p._anexos || []).concat([ficha]);
-            return ficha;
-          });
+          body: JSON.stringify({ writes: [{
+            update: {
+              name: nomeDoDocumento(colDe(p) + "/" + p.id + "/anexos/" + a.id),
+              fields: { apagado: { booleanValue: true }, caminho: { stringValue: "" } },
+            },
+            updateMask: { fieldPaths: ["apagado", "caminho"] },
+            updateTransforms: [{ fieldPath: "apagadoEm", setToServerValue: "REQUEST_TIME" }],
+            currentDocument: { exists: true },
+          }] }),
+        });
+      })
+      .then(function (r) {
+        if (r.status === 403) {
+          throw new Error("Passaram os 30 minutos. O anexo agora só sai junto com a pendência.");
+        }
+        return conferir(r);
+      })
+      .then(function () {
+        a.apagado = true;
+        a.caminho = "";
+        a.apagadoEm = new Date().toISOString();
+        return true;
       });
   }
 
@@ -1216,6 +1303,8 @@ const Pendencias = (function () {
     apagarComentario: apagarComentario,
     temAnexos: temAnexos,
     enviarAnexo: enviarAnexo,
+    podeApagarAnexo: podeApagarAnexo,
+    apagarAnexo: apagarAnexo,
     lerAnexos: lerAnexos,
     abrirAnexo: abrirAnexo,
     podeCorrigirPedido: podeCorrigirPedido,

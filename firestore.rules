@@ -485,7 +485,30 @@ service cloud.firestore {
                       && request.resource.data.caminho.size() <= 400
                       && request.resource.data.tamanho is int
                       && request.resource.data.tamanho <= 10485760;
-        allow update, delete: if false;
+
+        // APAGAR O ANEXO DEIXANDO A MARCA, nos primeiros trinta
+        // minutos e só por quem mandou.
+        //
+        // NÃO É UM DELETE: a ficha fica, com quem mandou, o nome do
+        // arquivo e a hora em que foi apagado. O arquivo mesmo sai
+        // do Storage, e o "caminho" vira vazio para ninguém tentar
+        // abrir o que não existe mais.
+        //
+        // Substituir continua impossível: não há forma aceita aqui
+        // que troque nome, tamanho ou caminho por outro conteúdo.
+        //
+        // Ficha antiga não tem "criadoEm" — nasceram antes do
+        // campo. Sem hora não há janela para medir, então elas
+        // seguem saindo só com a pendência inteira.
+        allow update: if daEquipe()
+                      && meuUid(resource.data.por)
+                      && resource.data.get('apagado', false) != true
+                      && 'criadoEm' in resource.data
+                      && request.time < resource.data.criadoEm + duration.value(30, 'm')
+                      && mudou().hasOnly(['apagado', 'apagadoEm', 'caminho'])
+                      && request.resource.data.apagado == true
+                      && request.resource.data.caminho == ''
+                      && horaDeAgora(request.resource.data.apagadoEm);
       }
 
       // ---------- a linha do tempo ----------
@@ -692,7 +715,16 @@ service cloud.firestore {
         allow read:   if daEquipe() && request.auth.uid in get(/databases/$(database)/documents/pendencias_reservadas/$(id)).data.podemVer;
         allow create: if daEquipe() && meuUid(request.resource.data.por);
         allow delete: if daEquipe() && meuUid(get(/databases/$(database)/documents/pendencias_reservadas/$(id)).data.criadoPor);
-        allow update: if false;
+        // Mesma marca de apagado das pendências comuns — ver lá.
+        allow update: if daEquipe()
+                      && meuUid(resource.data.por)
+                      && resource.data.get('apagado', false) != true
+                      && 'criadoEm' in resource.data
+                      && request.time < resource.data.criadoEm + duration.value(30, 'm')
+                      && mudou().hasOnly(['apagado', 'apagadoEm', 'caminho'])
+                      && request.resource.data.apagado == true
+                      && request.resource.data.caminho == ''
+                      && horaDeAgora(request.resource.data.apagadoEm);
       }
 
       match /andamento/{item} {
