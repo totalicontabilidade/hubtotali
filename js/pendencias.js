@@ -858,6 +858,14 @@ const Pendencias = (function () {
            "/" + Date.now() + "-" + limpo;
   }
 
+  /* O caminho de antes, sem o uid. Serve de queda quando a regra
+     nova ainda não foi publicada — ver enviarAnexo. */
+  function caminhoAntigoDoAnexo(idPendencia, nome) {
+    var novo = caminhoDoAnexo(idPendencia, nome);
+    var pedacos = novo.split("/");
+    return pedacos[0] + "/" + pedacos[1] + "/" + pedacos[3];
+  }
+
   function enviarAnexo(p, arquivo) {
     if (!temAnexos()) return Promise.reject(new Error("Os anexos não estão ligados. Falta o balde do Storage em js/config-hub.js."));
     var s = Dados.sessao();
@@ -876,17 +884,38 @@ const Pendencias = (function () {
        banco. Chamavam-se igual, e a variável escondia a função. */
     var noBalde = caminhoDoAnexo(p.id, arquivo.name);
 
-    var url = "https://firebasestorage.googleapis.com/v0/b/" + encodeURIComponent(balde()) +
-              "/o?uploadType=media&name=" + encodeURIComponent(noBalde);
+    /* DUAS TENTATIVAS, E A SEGUNDA É O CAMINHO ANTIGO.
 
-    return fetch(url, {
-      method: "POST",
-      headers: {
-        "Authorization": "Bearer " + s.idToken,
-        "Content-Type": arquivo.type || "application/octet-stream",
-      },
-      body: arquivo,
-    })
+       O caminho com o uid dentro só é aceito depois que o
+       storage.rules novo for publicado — e entre publicar o Hub e
+       publicar a regra existe uma janela em que ninguém
+       conseguiria anexar nada. Isso é inaceitável para quem está
+       trabalhando, então o envio cai para o caminho de sempre se o
+       novo for recusado.
+
+       O que se perde no caminho antigo é só a possibilidade de
+       quem mandou apagar depois: a regra não tem como saber de
+       quem o arquivo é. Publicada a regra, o caminho novo passa a
+       valer sozinho e esta queda deixa de acontecer. */
+    function mandarPara(destino) {
+      var url = "https://firebasestorage.googleapis.com/v0/b/" + encodeURIComponent(balde()) +
+                "/o?uploadType=media&name=" + encodeURIComponent(destino);
+      return fetch(url, {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer " + s.idToken,
+          "Content-Type": arquivo.type || "application/octet-stream",
+        },
+        body: arquivo,
+      });
+    }
+
+    return mandarPara(noBalde)
+      .then(function (r) {
+        if (r.status !== 403) return r;
+        noBalde = caminhoAntigoDoAnexo(p.id, arquivo.name);
+        return mandarPara(noBalde);
+      })
       .then(function (r) {
         if (r.status === 403) throw new Error("Sem permissão para enviar. Confira as regras do Storage.");
         if (r.status === 404) throw new Error("Balde não encontrado. Confira STORAGE_BUCKET em js/config-hub.js.");
