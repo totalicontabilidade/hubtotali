@@ -608,6 +608,25 @@ service cloud.firestore {
         // ENQUANTO ELA EXISTE. O get() abaixo falha depois de ela
         // sumir, então a janela se fecha sozinha.
         //
+
+        // DESCONSIDERAR, SEM PRAZO E COM VOLTA.
+        //
+        // É outra coisa que corrigir e apagar, e por isso não tem
+        // janela: o que foi escrito continua lá, legível, só que
+        // riscado. Ninguém perde informação — quem leu antes
+        // continua vendo o que leu, e passa a ver também que a
+        // pessoa voltou atrás. Por isso pode ser feito e desfeito a
+        // qualquer momento, e só por quem escreveu.
+        //
+        // O que NÃO entra aqui: registro do sistema, que é trilha e
+        // não opinião, e comentário já apagado, que não tem mais
+        // texto para riscar.
+        allow update: if daEquipe()
+                      && meuUid(resource.data.autor)
+                      && resource.data.get('doSistema', false) != true
+                      && resource.data.get('apagado', false) != true
+                      && mudou().hasOnly(['desconsiderado'])
+                      && request.resource.data.desconsiderado is bool;
         //
         // Apagar UM comentário dentro da janela não passa por aqui:
         // é o update lá em cima, que deixa a marca. Um delete de
@@ -814,6 +833,26 @@ service cloud.firestore {
                               && request.resource.data.texto == ''
                               && request.resource.data.apagado == true
                               && horaDeAgora(request.resource.data.apagadoEm)));
+
+        // DESCONSIDERAR, SEM PRAZO E COM VOLTA.
+        //
+        // É outra coisa que corrigir e apagar, e por isso não tem
+        // janela: o que foi escrito continua lá, legível, só que
+        // riscado. Ninguém perde informação — quem leu antes
+        // continua vendo o que leu, e passa a ver também que a
+        // pessoa voltou atrás. Por isso pode ser feito e desfeito a
+        // qualquer momento, e só por quem escreveu.
+        //
+        // O que NÃO entra aqui: registro do sistema, que é trilha e
+        // não opinião, e comentário já apagado, que não tem mais
+        // texto para riscar.
+        allow update: if daEquipe()
+                      && meuUid(resource.data.autor)
+                      && resource.data.get('doSistema', false) != true
+                      && resource.data.get('apagado', false) != true
+                      && mudou().hasOnly(['desconsiderado'])
+                      && request.resource.data.desconsiderado is bool;
+
         allow delete: if daEquipe()
                       && meuUid(get(/databases/$(database)/documents/pendencias_reservadas/$(id)).data.criadoPor);
       }

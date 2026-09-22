@@ -1223,6 +1223,34 @@ const Pendencias = (function () {
     return podeEditar(item);
   }
 
+  /* ---------- desconsiderar, e voltar atrás ----------
+
+     Sem prazo, de propósito, e por isso não é "apagar com outro
+     nome": o texto continua lá e legível, riscado. Quem leu antes
+     continua vendo o que leu, e passa a ver que a pessoa voltou
+     atrás — que é uma informação a mais, não a menos. Como nada se
+     perde, não há razão para a janela de trinta minutos existir
+     aqui, e há razão para deixar desfazer. */
+  function podeDesconsiderar(item) {
+    var s = Dados.sessao();
+    return !!s && !!item && item.autor === s.uid && !item.doSistema && !item.apagado;
+  }
+
+  function desconsiderar(p, item, valor) {
+    var url = caminho(p) + "/andamento/" + encodeURIComponent(item.id) +
+              "?updateMask.fieldPaths=desconsiderado";
+    return fetch(url, {
+      method: "PATCH",
+      headers: autorizacao(),
+      body: JSON.stringify({ fields: { desconsiderado: { booleanValue: !!valor } } }),
+    }).then(function (r) {
+      if (r.status === 403) {
+        throw new Error("Só quem escreveu pode desconsiderar este comentário.");
+      }
+      return conferir(r);
+    }).then(function () { item.desconsiderado = !!valor; return true; });
+  }
+
   function apagarComentario(p, item) {
     /* COM MÁSCARA, sempre: sem ela a gravação substitui o documento
        e levaria junto autor e data — justamente o que a marca mostra.
@@ -1402,6 +1430,8 @@ const Pendencias = (function () {
     acrescentar: acrescentar,
     podeEditar: podeEditar,
     podeApagarComentario: podeApagarComentario,
+    podeDesconsiderar: podeDesconsiderar,
+    desconsiderar: desconsiderar,
     apagarComentario: apagarComentario,
     temAnexos: temAnexos,
     enviarAnexo: enviarAnexo,

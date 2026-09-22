@@ -546,6 +546,23 @@ a{color:inherit;text-decoration:none}
    são as duas ações da mesma janela de trinta minutos. */
 .pd-apagar-com{margin-left:12px;color:var(--alerta)}
 /* Aviso de que o × é o caminho para fechar com texto escrito. */
+/* ---------- desconsiderar: os três pontinhos ---------- */
+.pd-item{position:relative}
+.pd-pontos{position:absolute;top:6px;right:4px;border:0;background:transparent;
+           color:var(--txt-3);font-size:15px;line-height:1;padding:2px 6px;
+           border-radius:6px;cursor:pointer;opacity:.45;transition:opacity .14s}
+.pd-item:hover .pd-pontos,.pd-pontos:focus{opacity:1}
+.pd-pontos:hover{background:var(--base);color:var(--txt)}
+.pd-menu{position:absolute;top:26px;right:4px;z-index:5;min-width:210px;
+         background:#fff;border:1px solid var(--fio-2);border-radius:10px;
+         padding:8px;box-shadow:0 8px 24px rgba(13,25,38,.13)}
+.pd-menu__op{width:100%;text-align:left;border:0;background:transparent;font:inherit;
+             font-size:13px;color:var(--txt);padding:7px 8px;border-radius:7px;cursor:pointer}
+.pd-menu__op:hover{background:var(--base)}
+.pd-menu .pd-dica{margin:4px 8px 2px}
+.pd-item__desc{font-size:10px;color:var(--alerta);font-style:italic}
+.pd-item__txt--desc{text-decoration:line-through;color:var(--txt-3)}
+
 /* ---------- chamar alguém pelo nome ---------- */
 .pd-chamar{display:flex;flex-direction:column;gap:2px;margin-top:6px;
            border:1px solid var(--fio-2);border-radius:9px;padding:6px;

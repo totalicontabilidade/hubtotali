@@ -375,6 +375,29 @@
       })
       .then(function (r) {
         afirmar(g, "o banco recusa mexer no que foi apagado", r);
+        return Pendencias.acrescentar(p, "comentário para desconsiderar", "Conferência");
+      })
+      .then(function (x) {
+        /* Desconsiderar não tem janela: vai e volta quantas vezes
+           quiser, e o texto nunca se perde. */
+        afirmar(g, "quem escreveu pode desconsiderar", Pendencias.podeDesconsiderar(x));
+        return Pendencias.desconsiderar(p, x, true).then(function () { return x; });
+      })
+      .then(function (x) {
+        return Pendencias.andamento(p).then(function (conversa) {
+          var m = conversa.filter(function (y) { return y.id === x.id; })[0];
+          afirmar(g, "desconsiderada fica marcada, com o texto inteiro",
+            !!m && m.desconsiderado === true && m.texto === "comentário para desconsiderar");
+          return Pendencias.desconsiderar(p, m, false).then(function () { return m; });
+        });
+      })
+      .then(function (m) {
+        return Pendencias.andamento(p).then(function (conversa) {
+          var v = conversa.filter(function (y) { return y.id === m.id; })[0];
+          afirmar(g, "dá para voltar a considerar", !!v && v.desconsiderado === false);
+        });
+      })
+      .then(function () {
         return Pendencias.acrescentar(p, "Conferência marcou algo", "Conferência", true);
       })
       .then(function (x) {
@@ -399,6 +422,111 @@
       .then(function (r) {
         afirmar(g, "o banco recusa comentário com hora de criação inventada", r.status === 403,
           "HTTP " + r.status + (r.status === 200 ? " — as regras publicadas ainda não conferem a hora" : ""));
+      })
+      .catch(function (e) { afirmar(g, "a sequência rodou até o fim", false, e.message); });
+  }
+
+  /* ---------- anexo: apagar deixando a marca ----------
+
+     O que se afirma aqui é o que o BANCO e o BALDE respondem. Duas
+     garantias que só eles podem dar:
+
+       · substituir arquivo continua impossível — anexo vale como
+         prova, e quem troca a prova troca o combinado;
+
+       · apagar deixa a ficha com o nome, quem mandou e a hora, e o
+         arquivo sai do balde de verdade. */
+  function conferirAnexoApagado() {
+    var g = "Anexo: apagar deixando a marca";
+    if (!Pendencias.temAnexos()) {
+      afirmar(g, "anexos ligados", false, "STORAGE_BUCKET em branco");
+      return Promise.resolve();
+    }
+    var s = Dados.sessao();
+    var c = (typeof CONFIG_HUB !== "undefined") ? CONFIG_HUB : {};
+    var BALDE = "https://firebasestorage.googleapis.com/v0/b/" + encodeURIComponent(c.STORAGE_BUCKET) + "/o";
+    var p = null, ficha = null, caminho = "";
+
+    return Pendencias.criar({ oque: MARCA + " anexo apagado", responsavel: s.uid, prazo: "2030-12-31" })
+      .then(function (nova) {
+        p = nova;
+        criadas.push(p);
+        return Pendencias.enviarAnexo(p, new File(["conferência\n"], MARCA + "-anexo.txt", { type: "text/plain" }));
+      })
+      .then(function (f) {
+        ficha = f;
+        caminho = f.caminho;
+        afirmar(g, "o caminho do arquivo diz quem mandou",
+          caminho.indexOf("pendencias/" + p.id + "/" + s.uid + "/") === 0, caminho);
+        afirmar(g, "quem mandou pode apagar agora", Pendencias.podeApagarAnexo(f));
+        return fetch(BALDE + "?uploadType=media&name=" + encodeURIComponent(caminho), {
+          method: "POST",
+          headers: { "Authorization": "Bearer " + s.idToken, "Content-Type": "text/plain" },
+          body: "TROCADO",
+        });
+      })
+      .then(function (r) {
+        afirmar(g, "trocar o arquivo continua recusado", r.status === 403, "HTTP " + r.status);
+        return Pendencias.apagarAnexo(p, ficha);
+      })
+      .then(function () { return Pendencias.lerAnexos(p); })
+      .then(function (lista) {
+        var m = lista[0];
+        afirmar(g, "a ficha fica, com nome, autor e hora",
+          !!m && m.apagado === true && m.caminho === "" && m.por === s.uid && !!m.apagadoEm,
+          m ? "nome: " + m.nome : "a ficha sumiu");
+        afirmar(g, "a tela não oferece mais apagar", !Pendencias.podeApagarAnexo(m));
+        /* O caminho guardado À PARTE, porque apagarAnexo esvazia o
+           da ficha — conferir pelo campo zerado procuraria um
+           endereço vazio e daria falso negativo. Já aconteceu. */
+        return fetch(BALDE + "/" + encodeURIComponent(caminho), {
+          headers: { "Authorization": "Bearer " + s.idToken },
+        });
+      })
+      .then(function (r) {
+        afirmar(g, "o arquivo saiu do balde", r.status === 404, "HTTP " + r.status);
+      })
+      .catch(function (e) { afirmar(g, "a sequência rodou até o fim", false, e.message); });
+  }
+
+  /* ---------- menção ----------
+
+     A menção é o que traz a pendência para a coluna de quem foi
+     chamado. O que se afirma é o efeito: entrou na lista, a
+     pendência passa a ser dela e volta a contar como não lida. */
+  function conferirMencao() {
+    var g = "Menção";
+    var s = Dados.sessao();
+    var p = null, outro = null;
+
+    return Dados.listarEquipe()
+      .then(function (eq) {
+        var gente = eq.filter(function (x) { return x.ativo && x.uid !== s.uid; });
+        outro = gente[0];
+        return Pendencias.criar({ oque: MARCA + " mencao", responsavel: s.uid, prazo: "2030-12-31" });
+      })
+      .then(function (nova) {
+        p = nova;
+        criadas.push(p);
+        if (!outro) { afirmar(g, "há alguém para chamar", false, "equipe só com uma pessoa"); return null; }
+        afirmar(g, "antes da chamada, a pendência não é da pessoa",
+          !Pendencias.ehMinha(p, outro.uid, []));
+        return Pendencias.acrescentar(p, "@" + (outro.nome || "colega") + " confere?", "Conferência", false, [outro.uid]);
+      })
+      .then(function (x) {
+        if (!x) return null;
+        afirmar(g, "o aviso saiu junto com o comentário", !x.avisoNaoSaiu);
+        afirmar(g, "o comentário guarda quem foi chamado",
+          Array.isArray(x.mencionados) && x.mencionados.indexOf(outro.uid) !== -1);
+        return Pendencias.listar();
+      })
+      .then(function (todas) {
+        if (!todas) return;
+        var nova = todas.filter(function (x) { return x.id === p.id; })[0];
+        afirmar(g, "a chamada ficou gravada na pendência",
+          !!nova && Array.isArray(nova.mencoes) && nova.mencoes.indexOf(outro.uid) !== -1);
+        afirmar(g, "depois da chamada, a pendência é da pessoa",
+          !!nova && Pendencias.ehMinha(nova, outro.uid, []));
       })
       .catch(function (e) { afirmar(g, "a sequência rodou até o fim", false, e.message); });
   }
@@ -486,6 +614,8 @@
       .then(conferirCiclo)
       .then(conferirHistorico)
       .then(conferirComentarios)
+      .then(conferirAnexoApagado)
+      .then(conferirMencao)
       .then(conferirCopia)
       .catch(function (e) {
         afirmar("Interrompido", "a bateria terminou sem erro fatal", false, e.message);

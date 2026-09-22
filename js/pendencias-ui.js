@@ -2081,6 +2081,7 @@ const PendenciasUI = (function () {
         cab.appendChild(el("span", "pd-item__quem", x.autorNome || nomeDe(x.autor)));
         cab.appendChild(el("span", "pd-item__quando", quandoEscrito(x.criadoEm)));
         if (x.editadoEm) cab.appendChild(el("span", "pd-item__editado", "editado"));
+        if (x.desconsiderado) cab.appendChild(el("span", "pd-item__desc", "desconsiderada"));
         d.appendChild(cab);
         /* A MARCA DO APAGADO fica no lugar do texto, na mesma
            posição da conversa. Quem apaga é sempre quem escreveu —
@@ -2094,7 +2095,7 @@ const PendenciasUI = (function () {
           return;
         }
 
-        var texto = el("div", "pd-item__txt", x.texto);
+        var texto = el("div", "pd-item__txt" + (x.desconsiderado ? " pd-item__txt--desc" : ""), x.texto);
         d.appendChild(texto);
 
         /* A correção acontece na própria ficha, não numa caixa do
@@ -2157,6 +2158,72 @@ const PendenciasUI = (function () {
             });
           });
           d.appendChild(ed);
+        }
+
+        /* ---------- os três pontinhos ----------
+
+           DESCONSIDERAR MORA AQUI, e não ao lado de "corrigir".
+
+           É uma ação sem prazo, disponível para sempre em todo
+           comentário que a pessoa escreveu — se ficasse à vista,
+           estaria à vista em toda a conversa, todos os dias, e
+           acabaria clicada por engano. Atrás dos pontinhos ela
+           continua a um clique de distância para quem a procura, e
+           some para quem não está procurando.
+
+           O menu fecha ao escolher, ao clicar fora e no Esc. */
+        if (Pendencias.podeDesconsiderar(x)) {
+          var pontos = el("button", "pd-pontos", "\u22ef");
+          pontos.type = "button";
+          pontos.title = "Mais opções";
+          pontos.setAttribute("aria-label", "Mais opções para este comentário");
+
+          var menu = el("div", "pd-menu");
+          menu.hidden = true;
+
+          function fecharMenu() {
+            menu.hidden = true;
+            document.removeEventListener("click", foraDoMenu, true);
+            document.removeEventListener("keydown", tecladoDoMenu, true);
+          }
+          function foraDoMenu(ev) {
+            if (menu.contains(ev.target) || ev.target === pontos) return;
+            fecharMenu();
+          }
+          function tecladoDoMenu(ev) {
+            if (ev.key !== "Escape") return;
+            /* Não deixa o Esc fechar a ficha inteira junto. */
+            ev.stopPropagation();
+            fecharMenu();
+          }
+
+          var opcao = el("button", "pd-menu__op",
+            x.desconsiderado ? "Voltar a considerar" : "Desconsiderar");
+          opcao.type = "button";
+          opcao.addEventListener("click", function () {
+            opcao.disabled = true;
+            Pendencias.desconsiderar(p, x, !x.desconsiderado)
+              .then(function () { fecharMenu(); pintarLinha(p, onde); })
+              .catch(function (err) {
+                opcao.disabled = false;
+                menu.appendChild(el("div", "pd-corrigir__erro", err.message));
+              });
+          });
+          menu.appendChild(opcao);
+          menu.appendChild(el("div", "pd-dica", x.desconsiderado
+            ? "O risco sai e o comentário volta a valer."
+            : "O texto continua legível, riscado, com o aviso de desconsiderada. "
+              + "Dá para voltar atrás quando quiser."));
+
+          pontos.addEventListener("click", function () {
+            if (!menu.hidden) { fecharMenu(); return; }
+            menu.hidden = false;
+            document.addEventListener("click", foraDoMenu, true);
+            document.addEventListener("keydown", tecladoDoMenu, true);
+          });
+
+          d.appendChild(pontos);
+          d.appendChild(menu);
         }
 
         /* APAGAR, na mesma janela do corrigir e com a mesma
