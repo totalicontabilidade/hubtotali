@@ -1663,10 +1663,24 @@ const PendenciasUI = (function () {
       pintarAnexos(p, caixaAnexos);
     }
 
-    /* Linha do tempo */
+    /* ---------- Linha do tempo, com rolagem própria ----------
+
+       A ROLAGEM FICA NUM INVÓLUCRO, e não na própria linha. O fio
+       vertical é a borda esquerda dela, e as bolinhas de cada
+       atualização ficam montadas em cima desse fio — metade para
+       fora. Uma área com rolagem corta o que passa das bordas, nos
+       dois sentidos, e as bolinhas seriam decepadas ao meio. Com o
+       invólucro, quem corta é ele, e sobra a folga que elas pedem.
+
+       Sem teto, a conversa empurrava a caixa de escrever para bem
+       longe: numa pendência com história, era rolar a ficha inteira
+       até embaixo para responder uma linha. Agora a conversa rola
+       dentro de si mesma e o resto da ficha fica parado. */
     c.appendChild(el("div", "pd-rot pd-rot--secao", "Linha do tempo"));
+    var rolagem = el("div", "pd-linha-rolagem");
     var linha = el("div", "pd-linha-tempo", "Carregando…");
-    c.appendChild(linha);
+    rolagem.appendChild(linha);
+    c.appendChild(rolagem);
 
     var novo = document.createElement("textarea");
     novo.className = "pd-caixa-txt pd-area";
@@ -1962,6 +1976,8 @@ const PendenciasUI = (function () {
       menu.hidden = true;
       document.removeEventListener("click", fora, true);
       document.removeEventListener("keydown", tecla, true);
+      document.removeEventListener("scroll", fechar2, true);
+      window.removeEventListener("resize", fechar2);
     }
     function fora(ev) {
       if (menu.contains(ev.target) || ev.target === pontos) return;
@@ -1986,11 +2002,30 @@ const PendenciasUI = (function () {
     menu.appendChild(opcao);
     menu.appendChild(el("div", "pd-dica", dica));
 
+    /* O MENU FLUTUA PRESO À JANELA, e não ao comentário.
+
+       Dentro da área com rolagem, um menu preso ao comentário seria
+       cortado pela borda dela — e o último comentário, que é
+       justamente o mais mexido, teria o menu decepado. Preso à
+       janela ele aparece inteiro, em qualquer posição.
+
+       Em troca, ele não acompanha a rolagem: por isso fecha quando
+       a pessoa rola ou redimensiona a janela. Fechar é melhor que
+       ficar flutuando longe de onde foi aberto. */
+    function posicionar() {
+      var r = pontos.getBoundingClientRect();
+      menu.style.top = (r.bottom + 4) + "px";
+      menu.style.left = Math.max(8, Math.min(r.right - 210, window.innerWidth - 226)) + "px";
+    }
+
     pontos.addEventListener("click", function () {
       if (!menu.hidden) { fechar2(); return; }
       menu.hidden = false;
+      posicionar();
       document.addEventListener("click", fora, true);
       document.addEventListener("keydown", tecla, true);
+      document.addEventListener("scroll", fechar2, true);
+      window.addEventListener("resize", fechar2);
     });
 
     dentro.appendChild(pontos);
@@ -2143,6 +2178,17 @@ const PendenciasUI = (function () {
       entrada.click();
     });
     onde.appendChild(b);
+  }
+
+  /* Depois de pintar, mostra o FIM da conversa. A ordem no fio é a
+     de quem falou primeiro, mas quem abre a ficha quer o último
+     recado, não o primeiro — e começar em cima obrigaria a rolar
+     até embaixo toda vez. */
+  function mostrarOFim(onde) {
+    var caixa = onde.parentNode;
+    if (caixa && caixa.classList && caixa.classList.contains("pd-linha-rolagem")) {
+      caixa.scrollTop = caixa.scrollHeight;
+    }
   }
 
   function pintarLinha(p, onde) {
@@ -2308,6 +2354,7 @@ const PendenciasUI = (function () {
         }
         onde.appendChild(d);
       });
+      mostrarOFim(onde);
     }).catch(function (e) {
       onde.textContent = "";
       onde.appendChild(el("div", "pd-vazio", e.message));
