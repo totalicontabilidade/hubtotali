@@ -1943,6 +1943,60 @@ const PendenciasUI = (function () {
     Pendencias.lerAnexos(p).then(function (lista) { desenharAnexos(p, onde, lista); });
   }
 
+  /* ---------- os três pontinhos, em qualquer lugar ----------
+
+     Nasceu no comentário e agora serve o anexo também. Uma
+     função só, porque são o mesmo gesto: a ação sem prazo fica
+     escondida para não ser clicada por engano na conversa
+     inteira, e a um clique de quem a procura. */
+  function menuDePontinhos(dentro, rotulo, dica, aoEscolher) {
+    var pontos = el("button", "pd-pontos", "\u22ef");
+    pontos.type = "button";
+    pontos.title = "Mais opções";
+    pontos.setAttribute("aria-label", "Mais opções");
+
+    var menu = el("div", "pd-menu");
+    menu.hidden = true;
+
+    function fechar2() {
+      menu.hidden = true;
+      document.removeEventListener("click", fora, true);
+      document.removeEventListener("keydown", tecla, true);
+    }
+    function fora(ev) {
+      if (menu.contains(ev.target) || ev.target === pontos) return;
+      fechar2();
+    }
+    function tecla(ev) {
+      if (ev.key !== "Escape") return;
+      /* Não deixa o Esc fechar a ficha inteira junto. */
+      ev.stopPropagation();
+      fechar2();
+    }
+
+    var opcao = el("button", "pd-menu__op", rotulo);
+    opcao.type = "button";
+    opcao.addEventListener("click", function () {
+      opcao.disabled = true;
+      aoEscolher(function erro(mensagem) {
+        opcao.disabled = false;
+        menu.appendChild(el("div", "pd-corrigir__erro", mensagem));
+      }, fechar2);
+    });
+    menu.appendChild(opcao);
+    menu.appendChild(el("div", "pd-dica", dica));
+
+    pontos.addEventListener("click", function () {
+      if (!menu.hidden) { fechar2(); return; }
+      menu.hidden = false;
+      document.addEventListener("click", fora, true);
+      document.addEventListener("keydown", tecla, true);
+    });
+
+    dentro.appendChild(pontos);
+    dentro.appendChild(menu);
+  }
+
   function desenharAnexos(p, onde, lista) {
     onde.textContent = "";
 
@@ -1971,6 +2025,7 @@ const PendenciasUI = (function () {
          A aba é aberta ANTES da busca, ainda dentro do clique. Se
          fosse aberta depois, o navegador a barraria como janela
          não pedida — do ponto de vista dele, o clique já passou. */
+      if (a.desconsiderado) linha.className = "pd-anexo pd-anexo--desc";
       var link = el("button", "pd-anexo__n", a.nome);
       link.type = "button";
       link.title = "Abrir " + a.nome;
@@ -2002,6 +2057,28 @@ const PendenciasUI = (function () {
       });
       linha.appendChild(link);
       linha.appendChild(el("span", "pd-anexo__t", tamanhoLegivel(a.tamanho)));
+      if (a.desconsiderado) linha.appendChild(el("span", "pd-anexo__desc", "desconsiderado"));
+
+      /* O ARQUIVO CONTINUA ABRINDO, riscado. Não é apagar com outro
+         nome: quem se baseou nele semana passada precisa poder ver
+         do que se tratava, e ver que quem mandou voltou atrás. */
+      if (Pendencias.podeDesconsiderarAnexo(a)) {
+        menuDePontinhos(linha,
+          a.desconsiderado ? "Voltar a considerar" : "Desconsiderar",
+          a.desconsiderado
+            ? "O risco sai e o anexo volta a valer."
+            : "O arquivo continua aqui e continua abrindo, riscado, com o aviso de "
+              + "desconsiderado. Dá para voltar atrás quando quiser.",
+          function (erro, fechar2) {
+            Pendencias.desconsiderarAnexo(p, a, !a.desconsiderado)
+              .then(function () {
+                fechar2();
+                return Pendencias.lerAnexos(p);
+              })
+              .then(function (nova) { if (nova) desenharAnexos(p, onde, nova); })
+              .catch(function (e) { erro(e.message); });
+          });
+      }
 
       /* APAGAR, na mesma janela e com a mesma confirmação do
          comentário — inclusive o aviso de que não dá para
@@ -2173,57 +2250,17 @@ const PendenciasUI = (function () {
 
            O menu fecha ao escolher, ao clicar fora e no Esc. */
         if (Pendencias.podeDesconsiderar(x)) {
-          var pontos = el("button", "pd-pontos", "\u22ef");
-          pontos.type = "button";
-          pontos.title = "Mais opções";
-          pontos.setAttribute("aria-label", "Mais opções para este comentário");
-
-          var menu = el("div", "pd-menu");
-          menu.hidden = true;
-
-          function fecharMenu() {
-            menu.hidden = true;
-            document.removeEventListener("click", foraDoMenu, true);
-            document.removeEventListener("keydown", tecladoDoMenu, true);
-          }
-          function foraDoMenu(ev) {
-            if (menu.contains(ev.target) || ev.target === pontos) return;
-            fecharMenu();
-          }
-          function tecladoDoMenu(ev) {
-            if (ev.key !== "Escape") return;
-            /* Não deixa o Esc fechar a ficha inteira junto. */
-            ev.stopPropagation();
-            fecharMenu();
-          }
-
-          var opcao = el("button", "pd-menu__op",
-            x.desconsiderado ? "Voltar a considerar" : "Desconsiderar");
-          opcao.type = "button";
-          opcao.addEventListener("click", function () {
-            opcao.disabled = true;
-            Pendencias.desconsiderar(p, x, !x.desconsiderado)
-              .then(function () { fecharMenu(); pintarLinha(p, onde); })
-              .catch(function (err) {
-                opcao.disabled = false;
-                menu.appendChild(el("div", "pd-corrigir__erro", err.message));
-              });
-          });
-          menu.appendChild(opcao);
-          menu.appendChild(el("div", "pd-dica", x.desconsiderado
-            ? "O risco sai e o comentário volta a valer."
-            : "O texto continua legível, riscado, com o aviso de desconsiderada. "
-              + "Dá para voltar atrás quando quiser."));
-
-          pontos.addEventListener("click", function () {
-            if (!menu.hidden) { fecharMenu(); return; }
-            menu.hidden = false;
-            document.addEventListener("click", foraDoMenu, true);
-            document.addEventListener("keydown", tecladoDoMenu, true);
-          });
-
-          d.appendChild(pontos);
-          d.appendChild(menu);
+          menuDePontinhos(d,
+            x.desconsiderado ? "Voltar a considerar" : "Desconsiderar",
+            x.desconsiderado
+              ? "O risco sai e o comentário volta a valer."
+              : "O texto continua legível, riscado, com o aviso de desconsiderada. "
+                + "Dá para voltar atrás quando quiser.",
+            function (erro, fechar2) {
+              Pendencias.desconsiderar(p, x, !x.desconsiderado)
+                .then(function () { fechar2(); pintarLinha(p, onde); })
+                .catch(function (e) { erro(e.message); });
+            });
         }
 
         /* APAGAR, na mesma janela do corrigir e com a mesma

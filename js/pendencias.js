@@ -1034,6 +1034,31 @@ const Pendencias = (function () {
     return !!a.criadoEm && dentroDaJanela(a.criadoEm);
   }
 
+  /* Desconsiderar o anexo: mesma ideia do comentário. O arquivo
+     continua lá e continua abrindo — riscado, dizendo que quem
+     mandou voltou atrás. Serve para o caso que a janela de trinta
+     minutos não alcança: descobrir dias depois que a planilha
+     enviada estava errada. */
+  function podeDesconsiderarAnexo(a) {
+    var s = Dados.sessao();
+    return !!s && !!a && a.por === s.uid && !a.apagado;
+  }
+
+  function desconsiderarAnexo(p, a, valor) {
+    var url = caminho(p) + "/anexos/" + encodeURIComponent(a.id) +
+              "?updateMask.fieldPaths=desconsiderado";
+    return fetch(url, {
+      method: "PATCH",
+      headers: autorizacao(),
+      body: JSON.stringify({ fields: { desconsiderado: { booleanValue: !!valor } } }),
+    }).then(function (r) {
+      if (r.status === 403) {
+        throw new Error("Só quem enviou pode desconsiderar este anexo.");
+      }
+      return conferir(r);
+    }).then(function () { a.desconsiderado = !!valor; return true; });
+  }
+
   function apagarAnexo(p, a) {
     if (!podeApagarAnexo(a)) {
       return Promise.reject(new Error("Passaram os 30 minutos. O anexo agora só sai junto com a pendência."));
@@ -1436,6 +1461,8 @@ const Pendencias = (function () {
     temAnexos: temAnexos,
     enviarAnexo: enviarAnexo,
     podeApagarAnexo: podeApagarAnexo,
+    podeDesconsiderarAnexo: podeDesconsiderarAnexo,
+    desconsiderarAnexo: desconsiderarAnexo,
     apagarAnexo: apagarAnexo,
     lerAnexos: lerAnexos,
     abrirAnexo: abrirAnexo,

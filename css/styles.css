@@ -562,6 +562,12 @@ a{color:inherit;text-decoration:none}
 .pd-menu .pd-dica{margin:4px 8px 2px}
 .pd-item__desc{font-size:10px;color:var(--alerta);font-style:italic}
 .pd-item__txt--desc{text-decoration:line-through;color:var(--txt-3)}
+/* No anexo a linha é horizontal e apertada: os pontinhos entram no
+   fim da linha, e não soltos no canto de cima como no comentário. */
+.pd-anexo{position:relative}
+.pd-anexo .pd-pontos{position:static;flex:none;margin-left:2px}
+.pd-anexo--desc .pd-anexo__n{text-decoration:line-through;color:var(--txt-3)}
+.pd-anexo__desc{font-size:10px;color:var(--alerta);font-style:italic;flex:none}
 
 /* ---------- chamar alguém pelo nome ---------- */
 .pd-chamar{display:flex;flex-direction:column;gap:2px;margin-top:6px;

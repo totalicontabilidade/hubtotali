@@ -467,6 +467,22 @@
       })
       .then(function (r) {
         afirmar(g, "trocar o arquivo continua recusado", r.status === 403, "HTTP " + r.status);
+        /* Desconsiderar vem ANTES de apagar no teste, porque
+           depois de apagado não há arquivo para riscar — e é isso
+           que a última afirmação deste trecho confere. */
+        afirmar(g, "quem mandou pode desconsiderar", Pendencias.podeDesconsiderarAnexo(ficha));
+        return Pendencias.desconsiderarAnexo(p, ficha, true);
+      })
+      .then(function () { return Pendencias.lerAnexos(p); })
+      .then(function (lista) {
+        var m = lista[0];
+        afirmar(g, "desconsiderado fica marcado, com o arquivo no lugar",
+          !!m && m.desconsiderado === true && m.caminho === caminho && m.apagado !== true);
+        return Pendencias.desconsiderarAnexo(p, m, false);
+      })
+      .then(function () { return Pendencias.lerAnexos(p); })
+      .then(function (lista) {
+        afirmar(g, "dá para voltar a considerar", lista[0] && lista[0].desconsiderado === false);
         return Pendencias.apagarAnexo(p, ficha);
       })
       .then(function () { return Pendencias.lerAnexos(p); })
@@ -485,6 +501,15 @@
       })
       .then(function (r) {
         afirmar(g, "o arquivo saiu do balde", r.status === 404, "HTTP " + r.status);
+        return Pendencias.lerAnexos(p);
+      })
+      .then(function (lista) {
+        var m = lista[0];
+        return Pendencias.desconsiderarAnexo(p, m, true)
+          .then(function () { return false; }, function () { return true; })
+          .then(function (recusou) {
+            afirmar(g, "o banco recusa desconsiderar anexo já apagado", recusou);
+          });
       })
       .catch(function (e) { afirmar(g, "a sequência rodou até o fim", false, e.message); });
   }

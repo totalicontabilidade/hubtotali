@@ -514,6 +514,21 @@ service cloud.firestore {
                       && request.resource.data.tamanho is int
                       && request.resource.data.tamanho <= 10485760;
 
+
+        // DESCONSIDERAR O ANEXO, SEM PRAZO E COM VOLTA — o mesmo do
+        // comentário, e pela mesma razão: nada se perde. O arquivo
+        // continua lá e continua abrindo; o que muda é que ele passa
+        // a aparecer riscado, dizendo que quem mandou voltou atrás.
+        // "Mandei a planilha errada" deixa de exigir apagar — e
+        // apagar, depois dos trinta minutos, nem é possível.
+        //
+        // Anexo já apagado não entra: não há arquivo para riscar.
+        allow update: if daEquipe()
+                      && meuUid(resource.data.por)
+                      && resource.data.get('apagado', false) != true
+                      && mudou().hasOnly(['desconsiderado'])
+                      && request.resource.data.desconsiderado is bool;
+
         // APAGAR O ANEXO DEIXANDO A MARCA, nos primeiros trinta
         // minutos e só por quem mandou.
         //
@@ -796,6 +811,21 @@ service cloud.firestore {
         allow read:   if daEquipe() && request.auth.uid in get(/databases/$(database)/documents/pendencias_reservadas/$(id)).data.podemVer;
         allow create: if daEquipe() && meuUid(request.resource.data.por);
         allow delete: if daEquipe() && meuUid(get(/databases/$(database)/documents/pendencias_reservadas/$(id)).data.criadoPor);
+
+        // DESCONSIDERAR O ANEXO, SEM PRAZO E COM VOLTA — o mesmo do
+        // comentário, e pela mesma razão: nada se perde. O arquivo
+        // continua lá e continua abrindo; o que muda é que ele passa
+        // a aparecer riscado, dizendo que quem mandou voltou atrás.
+        // "Mandei a planilha errada" deixa de exigir apagar — e
+        // apagar, depois dos trinta minutos, nem é possível.
+        //
+        // Anexo já apagado não entra: não há arquivo para riscar.
+        allow update: if daEquipe()
+                      && meuUid(resource.data.por)
+                      && resource.data.get('apagado', false) != true
+                      && mudou().hasOnly(['desconsiderado'])
+                      && request.resource.data.desconsiderado is bool;
+
         // Mesma marca de apagado das pendências comuns — ver lá.
         allow update: if daEquipe()
                       && meuUid(resource.data.por)
