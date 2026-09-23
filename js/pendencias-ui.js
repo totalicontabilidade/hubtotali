@@ -1731,6 +1731,23 @@ const PendenciasUI = (function () {
       if (arroba === -1) return null;
       var termo = antes.slice(arroba + 1);
       if (termo.indexOf("\n") !== -1 || termo.length > 40) return null;
+      /* CHAMADA JÁ FEITA NÃO REABRE A LISTA.
+
+         Depois de escolher "@Eduarda", a próxima tecla — uma
+         vírgula, um espaço, a palavra seguinte — fazia a lista
+         voltar dizendo "Ninguém com esse nome", porque o termo
+         passava a ser "Eduarda," e nome nenhum bate com isso.
+         Escolhido o nome, a procura acabou. */
+      var jaEscolhido = false;
+      escolhidas.forEach(function (uid) {
+        var quem = porUid[uid] || {};
+        var nome = quem.nome || quem.email || "";
+        if (nome && termo.length >= nome.length && termo.slice(0, nome.length) === nome) {
+          jaEscolhido = true;
+        }
+      });
+      if (jaEscolhido) return null;
+
       return { arroba: arroba, termo: termo, ate: ate };
     }
 
@@ -1757,7 +1774,12 @@ const PendenciasUI = (function () {
           /* Troca o "@" e o que foi digitado depois dele pelo nome
              inteiro, e devolve o cursor para depois do nome. */
           var t2 = trecho || trechoDaChamada() || { arroba: novo.value.length, ate: novo.value.length };
-          var marca = "@" + (x.nome || x.email) + " ";
+          /* SEM ESPAÇO DEPOIS DO NOME. Com ele, quem escrevia uma
+             vírgula em seguida ficava com "@Eduarda , confere" — um
+             espaço solto antes da pontuação. Quem vai continuar com
+             uma palavra digita o espaço, que é o gesto normal de
+             quem escreve. */
+          var marca = "@" + (x.nome || x.email);
           novo.value = novo.value.slice(0, t2.arroba) + marca + novo.value.slice(t2.ate);
           if (escolhidas.indexOf(x.uid) === -1) escolhidas.push(x.uid);
           fecharLista();
