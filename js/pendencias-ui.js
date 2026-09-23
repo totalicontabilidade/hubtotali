@@ -1682,11 +1682,59 @@ const PendenciasUI = (function () {
     rolagem.appendChild(linha);
     c.appendChild(rolagem);
 
+    /* ---------- a caixa com o realce por baixo ----------
+
+       Um <textarea> não deixa pintar um pedaço do que está escrito:
+       ou tudo de uma cor, ou nada. Sem isso, escrevendo ficava
+       "@Raonitestando aqui" — o nome grudado no resto e sem sinal
+       nenhum de que era uma chamada, que só aparecia depois de
+       publicar.
+
+       O jeito: um espelho ATRÁS da caixa, com o mesmo texto e as
+       mesmas medidas, onde o nome chamado leva um retângulo de
+       fundo. O texto do espelho é transparente — quem se lê é o da
+       caixa, que fica por cima com fundo transparente. Assim só o
+       retângulo aparece, exatamente atrás do nome.
+
+       Toda medida que empurra letra (fonte, entrelinha, recuo,
+       borda, quebra de linha) TEM de ser igual nos dois, senão o
+       retângulo desencontra do nome. Por isso o espelho usa as
+       mesmas classes da caixa, e o CSS acerta o resto.
+
+       E o espelho rola junto: caixa com muito texto rola por
+       dentro, e sem sincronizar o realce ficaria para trás. */
+    var escrita = el("div", "pd-escrita");
+    var fundo = el("div", "pd-escrita__fundo");
+    fundo.setAttribute("aria-hidden", "true");
+
     var novo = document.createElement("textarea");
-    novo.className = "pd-caixa-txt pd-area";
+    novo.className = "pd-caixa-txt pd-area pd-escrita__cx";
     novo.rows = 2;
     novo.placeholder = "Acrescentar uma atualização…";
-    c.appendChild(novo);
+
+    escrita.appendChild(fundo);
+    escrita.appendChild(novo);
+    c.appendChild(escrita);
+
+    function pintarFundo() {
+      var nomes = escolhidas.map(function (uid) {
+        var quem = porUid[uid] || {};
+        return "@" + (quem.nome || quem.email || "");
+      }).filter(function (n) { return n.length > 1; });
+
+      fundo.textContent = "";
+      pedacosComChamadas(novo.value, nomes).forEach(function (pedaco) {
+        if (pedaco.chamada) fundo.appendChild(el("span", "pd-realce", pedaco.texto));
+        else fundo.appendChild(document.createTextNode(pedaco.texto));
+      });
+      /* Uma quebra no fim: sem ela, um texto terminado em Enter
+         mede uma linha a menos que a caixa. */
+      fundo.appendChild(document.createTextNode("\n"));
+      fundo.scrollTop = novo.scrollTop;
+    }
+
+    novo.addEventListener("input", pintarFundo);
+    novo.addEventListener("scroll", function () { fundo.scrollTop = novo.scrollTop; });
 
     /* ---------- chamar alguém pelo nome ----------
 
@@ -1783,6 +1831,7 @@ const PendenciasUI = (function () {
           novo.value = novo.value.slice(0, t2.arroba) + marca + novo.value.slice(t2.ate);
           if (escolhidas.indexOf(x.uid) === -1) escolhidas.push(x.uid);
           fecharLista();
+          pintarFundo();
           novo.focus();
           var cursor = t2.arroba + marca.length;
           if (novo.setSelectionRange) novo.setSelectionRange(cursor, cursor);
@@ -1826,6 +1875,7 @@ const PendenciasUI = (function () {
           novo.value = "";
           escolhidas = [];
           b.disabled = false;
+          pintarFundo();
           fecharLista();
           pintarLinha(p, linha);
           if (x && x.avisoNaoSaiu) {
@@ -2276,15 +2326,14 @@ const PendenciasUI = (function () {
 
      Sem expressão regular: letra por letra, procurando a ocorrência
      mais próxima entre os nomes chamados. */
-  function textoComChamadas(x, classe) {
-    var d = el("div", classe);
-    var texto = String(x.texto || "");
-    var nomes = (x.mencionados || [])
-      .map(function (u) { return "@" + nomeDe(u); })
-      .filter(function (n) { return n.length > 1; });
+  /* Quebra o texto em pedaços, dizendo quais são chamada. Uma
+     função só para os dois lugares que precisam disso: o comentário
+     já publicado e a caixa enquanto se escreve. */
+  function pedacosComChamadas(texto, nomes) {
+    texto = String(texto || "");
+    if (!nomes.length) return [{ texto: texto, chamada: false }];
 
-    if (!nomes.length) { d.textContent = texto; return d; }
-
+    var saida = [];
     var i = 0;
     while (i < texto.length) {
       var achou = -1, qual = "";
@@ -2292,14 +2341,24 @@ const PendenciasUI = (function () {
         var onde = texto.indexOf(n, i);
         if (onde !== -1 && (achou === -1 || onde < achou)) { achou = onde; qual = n; }
       });
-      if (achou === -1) {
-        d.appendChild(document.createTextNode(texto.slice(i)));
-        return d;
-      }
-      if (achou > i) d.appendChild(document.createTextNode(texto.slice(i, achou)));
-      d.appendChild(el("span", "pd-arroba", qual));
+      if (achou === -1) { saida.push({ texto: texto.slice(i), chamada: false }); return saida; }
+      if (achou > i) saida.push({ texto: texto.slice(i, achou), chamada: false });
+      saida.push({ texto: qual, chamada: true });
       i = achou + qual.length;
     }
+    return saida;
+  }
+
+  function textoComChamadas(x, classe) {
+    var d = el("div", classe);
+    var nomes = (x.mencionados || [])
+      .map(function (u) { return "@" + nomeDe(u); })
+      .filter(function (n) { return n.length > 1; });
+
+    pedacosComChamadas(x.texto, nomes).forEach(function (pedaco) {
+      if (pedaco.chamada) d.appendChild(el("span", "pd-arroba", pedaco.texto));
+      else d.appendChild(document.createTextNode(pedaco.texto));
+    });
     return d;
   }
 

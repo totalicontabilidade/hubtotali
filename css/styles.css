@@ -588,6 +588,20 @@ a{color:inherit;text-decoration:none}
    para o olho achar e de menos para roubar a leitura. */
 .pd-arroba{background:var(--estado-luz);color:var(--estado);border-radius:5px;
            padding:0 3px;font-weight:600}
+
+/* ---------- o realce enquanto se escreve ----------
+   O espelho fica exatamente atrás da caixa e só pinta retângulos:
+   o texto dele é transparente, e quem se lê é o da caixa por cima.
+   Toda medida que empurra letra é herdada ou repetida aqui — se
+   uma delas divergir, o retângulo desencontra do nome. */
+.pd-escrita{position:relative}
+.pd-escrita__fundo{position:absolute;top:0;left:0;right:0;bottom:0;
+                   padding:9px 11px;border:1px solid transparent;border-radius:9px;
+                   font:inherit;font-size:13.5px;line-height:1.45;
+                   white-space:pre-wrap;overflow-wrap:break-word;
+                   color:transparent;overflow:hidden;pointer-events:none}
+.pd-escrita__cx{position:relative;background:transparent}
+.pd-realce{background:var(--estado-luz);border-radius:5px}
 .pd-item__txt--desc .pd-arroba{background:transparent;color:var(--txt-3)}
 .pen__u--chamado{background:var(--marca);color:#fff}
 .pd-anexo--apagado .pd-anexo__n{color:var(--txt-3);text-decoration:line-through}
