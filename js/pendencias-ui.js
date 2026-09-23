@@ -816,7 +816,24 @@ const PendenciasUI = (function () {
     else if (p.criadoPor === eu && p.responsavel === eu) {
       quem = "anotação sua";
     } else if (p.responsavel === eu) {
-      quem = (p.setorOrigem || nomeDe(p.criadoPor)) + " pediu para você";
+      /* O NOME DE QUEM PEDIU, NÃO O SETOR DELE.
+
+         Estava ao contrário: o setor vinha primeiro e o nome só
+         aparecia quando não havia setor. Quem recebia lia "Fiscal
+         pediu para você" e não sabia com quem falar — enquanto do
+         outro lado, na mesma pendência, estava escrito "você pediu
+         para Eduarda". Duas metades da mesma conversa, uma com nome
+         e a outra com o setor.
+
+         Setor é útil para saber DE ONDE veio, e continua na ficha;
+         no cartão, o que a pessoa precisa é de quem cobrar resposta.
+
+         O setor volta a ser usado só quando o nome não é conhecido
+         — alguém que saiu da equipe, por exemplo: "Fiscal pediu para
+         você" diz mais que "alguém pediu para você". */
+      var pediu = nomeDe(p.criadoPor);
+      if (pediu === "alguém" && p.setorOrigem) pediu = p.setorOrigem;
+      quem = pediu + " pediu para você";
     } else if (p.criadoPor === eu) {
       quem = "você pediu para " + nomeDe(p.responsavel);
     } else {
