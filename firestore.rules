@@ -487,7 +487,23 @@ service cloud.firestore {
 
       // Apagar: só quem abriu. Responsável resolve, não some com
       // a cobrança.
-      allow delete: if daEquipe() && meuUid(resource.data.criadoPor);
+      //
+      // MAIS UMA PORTA, ESTREITA: o administrador apaga pendência
+      // nascida de INTEGRAÇÃO, e só ela.
+      //
+      // Sem isto, ninguém no escritório consegue remover uma
+      // pendência criada por outro sistema: quem "abriu" é a conta
+      // de robô, e a senha dela mora no script. Descobri no
+      // primeiro teste de ponta a ponta — a pendência de teste
+      // ficou presa, sem ninguém que pudesse apagá-la.
+      //
+      // A exceção é estreita de propósito. A regra de cima existe
+      // para ninguém sumir com a cobrança alheia; um robô não tem
+      // cobrança a proteger. Pendência escrita por gente continua
+      // saindo só pela mão de quem a abriu, administrador ou não.
+      allow delete: if daEquipe()
+                    && (meuUid(resource.data.criadoPor)
+                        || (ehAdmin() && resource.data.get('origemSistema', '') != ''));
 
       // ---------- os anexos ----------
       // Um documento por arquivo, criado e nunca mais tocado. A
