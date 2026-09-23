@@ -1707,35 +1707,84 @@ const PendenciasUI = (function () {
 
     function fecharLista() { lista.hidden = true; lista.textContent = ""; }
 
-    function abrirLista() {
-      var gente = chamaveis(p);
+    /* O QUE ESTÁ SENDO DIGITADO DEPOIS DO ÚLTIMO "@".
+
+       Antes a lista aparecia só quando o texto TERMINAVA em "@", e
+       a primeira letra digitada a fazia sumir — que é justamente
+       quando ela começaria a ser útil, porque é aí que dá para
+       peneirar os nomes.
+
+       O ESPAÇO NÃO ENCERRA a procura: há nome com espaço no meio, e
+       "@Ana P" precisa continuar achando "Ana Paula". Quem encerra
+       é escolher um nome, o Esc, mudar de linha, ou passar de
+       quarenta letras — aí já não é procura de nome, é texto com
+       um arroba no meio.
+
+       Olha só até o cursor, e não até o fim: quem volta para
+       corrigir uma chamada no meio do parágrafo também tem a
+       lista. */
+    function trechoDaChamada() {
+      var ate = novo.selectionStart;
+      if (typeof ate !== "number") ate = novo.value.length;
+      var antes = novo.value.slice(0, ate);
+      var arroba = antes.lastIndexOf("@");
+      if (arroba === -1) return null;
+      var termo = antes.slice(arroba + 1);
+      if (termo.indexOf("\n") !== -1 || termo.length > 40) return null;
+      return { arroba: arroba, termo: termo, ate: ate };
+    }
+
+    function abrirLista(trecho) {
+      var procurado = semAcento(trecho ? trecho.termo : "");
+      var gente = chamaveis(p).filter(function (x) {
+        if (!procurado) return true;
+        return semAcento(x.nome || x.email).indexOf(procurado) !== -1;
+      });
+
       lista.textContent = "";
       if (!gente.length) {
-        lista.appendChild(el("div", "pd-dica", "Não há mais ninguém para chamar aqui."));
+        /* Dizer que não achou é melhor que fechar sozinho: fechar
+           parece defeito, e foi assim que este bug apareceu. */
+        lista.appendChild(el("div", "pd-dica", procurado
+          ? "Ninguém com esse nome para chamar aqui."
+          : "Não há mais ninguém para chamar aqui."));
       }
       gente.forEach(function (x) {
         var op = el("button", "pd-chamar__op", x.nome || x.email);
         op.type = "button";
         op.appendChild(el("span", "pd-chamar__s", setoresDe(x).join(" · ")));
         op.addEventListener("click", function () {
-          /* Troca o "@" que a pessoa acabou de digitar pelo nome
-             inteiro, em vez de acrescentar outro. */
-          var texto = novo.value;
-          var fim = texto.lastIndexOf("@");
-          novo.value = (fim === -1 ? texto : texto.slice(0, fim)) + "@" + (x.nome || x.email) + " ";
+          /* Troca o "@" e o que foi digitado depois dele pelo nome
+             inteiro, e devolve o cursor para depois do nome. */
+          var t2 = trecho || trechoDaChamada() || { arroba: novo.value.length, ate: novo.value.length };
+          var marca = "@" + (x.nome || x.email) + " ";
+          novo.value = novo.value.slice(0, t2.arroba) + marca + novo.value.slice(t2.ate);
           if (escolhidas.indexOf(x.uid) === -1) escolhidas.push(x.uid);
           fecharLista();
           novo.focus();
+          var cursor = t2.arroba + marca.length;
+          if (novo.setSelectionRange) novo.setSelectionRange(cursor, cursor);
         });
         lista.appendChild(op);
       });
       lista.hidden = false;
     }
 
-    novo.addEventListener("input", function () {
-      var texto = novo.value;
-      if (texto.charAt(texto.length - 1) === "@") abrirLista();
+    function conferirChamada() {
+      var trecho = trechoDaChamada();
+      if (trecho) abrirLista(trecho);
       else if (!lista.hidden) fecharLista();
+    }
+
+    novo.addEventListener("input", conferirChamada);
+    /* Mover o cursor com as setas ou com o mouse também muda se há
+       uma chamada sendo escrita ali. */
+    novo.addEventListener("click", conferirChamada);
+    novo.addEventListener("keyup", function (ev) {
+      if (ev.key === "ArrowLeft" || ev.key === "ArrowRight" ||
+          ev.key === "ArrowUp" || ev.key === "ArrowDown" || ev.key === "Home" || ev.key === "End") {
+        conferirChamada();
+      }
     });
     novo.addEventListener("keydown", function (ev) {
       if (ev.key === "Escape" && !lista.hidden) { ev.stopPropagation(); fecharLista(); }
@@ -2191,6 +2240,47 @@ const PendenciasUI = (function () {
     }
   }
 
+  /* ---------- o nome chamado, em relevo ----------
+
+     Um fundo claro e a cor de estado, sem negrito forte: o bastante
+     para a pessoa reconhecer que foi chamada ao correr o olho, e de
+     menos para competir com o que está escrito.
+
+     SÓ OS NOMES QUE FORAM MESMO CHAMADOS ganham o relevo — a lista
+     vem do comentário, não do texto. Quem escreve "@" e um nome à
+     mão, sem escolher da lista, não chamou ninguém: ninguém foi
+     avisado, e pintar aquilo de chamada seria mentir na cara de
+     quem lê.
+
+     Sem expressão regular: letra por letra, procurando a ocorrência
+     mais próxima entre os nomes chamados. */
+  function textoComChamadas(x, classe) {
+    var d = el("div", classe);
+    var texto = String(x.texto || "");
+    var nomes = (x.mencionados || [])
+      .map(function (u) { return "@" + nomeDe(u); })
+      .filter(function (n) { return n.length > 1; });
+
+    if (!nomes.length) { d.textContent = texto; return d; }
+
+    var i = 0;
+    while (i < texto.length) {
+      var achou = -1, qual = "";
+      nomes.forEach(function (n) {
+        var onde = texto.indexOf(n, i);
+        if (onde !== -1 && (achou === -1 || onde < achou)) { achou = onde; qual = n; }
+      });
+      if (achou === -1) {
+        d.appendChild(document.createTextNode(texto.slice(i)));
+        return d;
+      }
+      if (achou > i) d.appendChild(document.createTextNode(texto.slice(i, achou)));
+      d.appendChild(el("span", "pd-arroba", qual));
+      i = achou + qual.length;
+    }
+    return d;
+  }
+
   function pintarLinha(p, onde) {
     Pendencias.andamento(p).then(function (itens) {
       onde.textContent = "";
@@ -2218,7 +2308,7 @@ const PendenciasUI = (function () {
           return;
         }
 
-        var texto = el("div", "pd-item__txt" + (x.desconsiderado ? " pd-item__txt--desc" : ""), x.texto);
+        var texto = textoComChamadas(x, "pd-item__txt" + (x.desconsiderado ? " pd-item__txt--desc" : ""));
         d.appendChild(texto);
 
         /* A correção acontece na própria ficha, não numa caixa do
