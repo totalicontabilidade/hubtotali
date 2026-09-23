@@ -600,7 +600,11 @@ a{color:inherit;text-decoration:none}
                    font:inherit;font-size:13.5px;line-height:1.45;
                    white-space:pre-wrap;overflow-wrap:break-word;
                    color:transparent;overflow:hidden;pointer-events:none}
-.pd-escrita__cx{position:relative;background:transparent}
+/* display:block tira a folga que o navegador deixa embaixo de um
+   elemento de linha; sem ela, o espelho fica 4px mais alto que a
+   caixa. Não desalinha o texto, mas deixa uma borda de realce
+   possível aparecendo abaixo da caixa. */
+.pd-escrita__cx{position:relative;background:transparent;display:block}
 .pd-realce{background:var(--estado-luz);border-radius:5px}
 .pd-item__txt--desc .pd-arroba{background:transparent;color:var(--txt-3)}
 .pen__u--chamado{background:var(--marca);color:#fff}
