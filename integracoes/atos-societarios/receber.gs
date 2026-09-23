@@ -269,7 +269,11 @@ var TIPOS = {
 };
 
 function tituloDe(s) {
-  var tipo = TIPOS[String(s.tipo || "")] || String(s.tipo || "Solicitação");
+  /* O Atos manda o nome do tipo pronto (tipoNome). A tabela abaixo
+     é a rede de segurança para quem mandar só o código — e para
+     códigos que o Atos passe a usar depois deste script existir. */
+  var tipo = String(s.tipoNome || "").trim() ||
+             TIPOS[String(s.tipo || "")] || String(s.tipo || "Solicitação");
   var empresa = String(s.empresa || "").trim() || "sem empresa";
   var t = tipo + " — " + empresa;
   /* O Hub recusa título acima de 300; cortar aqui é melhor que
