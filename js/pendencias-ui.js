@@ -1139,7 +1139,21 @@ const PendenciasUI = (function () {
     var eu = porUid[meuUid()] || {};
 
     var oque = campo("O quê", "Ex.: Enviar o balancete da Gigantte");
-    var porque = area("Por quê", "O que depende disso — ajuda quem vai fazer a entender a urgência");
+    /* "DETALHES", E NÃO MAIS "POR QUÊ".
+
+       O campo nasceu do 5W2H e perguntava o motivo. Só que o que as
+       pessoas escrevem ali é outra coisa: lista de empresas, "Finalizar
+       2025", "Importar contas pagas do 1º semestre". Detalhamento.
+
+       O motivo quase sempre já está no título — "Finalizar 2025" é o
+       quê e o porquê ao mesmo tempo. Campo que pergunta o que a pessoa
+       não tem separadamente fica vazio ou recebe outra coisa, e foi o
+       que aconteceu por meses.
+
+       O NOME DO CAMPO NO BANCO CONTINUA "porque": trocar o rótulo é
+       de graça, trocar o campo obrigaria a converter toda pendência
+       antiga e a mexer nas regras, para ganhar zero. */
+    var porque = area("Detalhes", "Empresas, datas, números — o que a pessoa precisa ter em mãos para fazer");
     /* Pessoa OU setor. A lista mistura os dois de propósito, com
        os setores no fim: quem sabe o nome escolhe o nome, quem não
        sabe escolhe a área, e ninguém precisa entender a diferença
@@ -1521,7 +1535,7 @@ const PendenciasUI = (function () {
     function pintarCorpo() {
       corpo.textContent = "";
       [
-        ["Por quê", p.porque],
+        ["Detalhes", p.porque],
         /* "Como fazer" saiu junto com o campo. Pendência antiga
            que tenha o texto continua guardando — só não é
            mostrada, porque o campo deixou de existir. */
@@ -1563,7 +1577,7 @@ const PendenciasUI = (function () {
       }
 
       campo("oque", "O quê", p.oque);
-      campo("porque", "Por quê", p.porque);
+      campo("porque", "Detalhes", p.porque);
       campo("sugestao", "Sugestão de solução", p.sugestao);
       campo("prazo", "Para quando", p.prazo, "data");
 
