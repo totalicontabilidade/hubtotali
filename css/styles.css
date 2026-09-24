@@ -960,6 +960,19 @@ a{color:inherit;text-decoration:none}
 .pd-caixona__q{margin-left:auto;flex:none;font-size:11px;color:var(--txt-3)}
 .pd-caixona .pd-botao{width:100%;margin-top:4px}
 .pd-caixona .pd-dica{text-align:center}
+/* O item com botões deixa de ser uma linha clicável e passa a ter
+   duas ações nomeadas: "abrir" e "resolver" são coisas diferentes
+   demais para caberem no mesmo clique. */
+.pd-caixona__li--acoes{cursor:default}
+.pd-caixona__acoes{display:flex;gap:8px;margin-top:8px}
+.pd-caixona__b{border:1px solid var(--fio-2);border-radius:8px;background:#fff;
+               font:inherit;font-size:12.5px;color:var(--txt-2);
+               padding:6px 12px;cursor:pointer;transition:border-color .14s,color .14s}
+.pd-caixona__b:hover{border-color:var(--txt-3);color:var(--txt)}
+.pd-caixona__b--ok{background:var(--marca);border-color:var(--marca);color:#fff;font-weight:600}
+.pd-caixona__b--ok:hover{filter:brightness(1.35);color:#fff}
+.pd-caixona__b:disabled{opacity:.55;cursor:default}
+.pd-caixona__erro{margin-top:6px;font-size:12px;color:var(--alerta)}
 
 /* Busca ocupa a linha inteira; os seletores dividem o resto. Numa
    barra com cinco controles, tratar todos igual faria o campo de

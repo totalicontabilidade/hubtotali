@@ -2676,9 +2676,56 @@ const PendenciasUI = (function () {
       lidos.forEach(function (p) {
         var c = Pendencias.contaDaCiencia(p);
         var li = document.createElement("li");
+        li.className = "pd-caixona__li--acoes";
         li.appendChild(el("span", "pd-caixona__o", p.oque));
         li.appendChild(el("span", "pd-caixona__q", c.deram + " de " + c.total + " confirmaram"));
-        li.addEventListener("click", function () { fechar2(); abrirFicha(p); });
+
+        /* RESOLVER SEM SAIR DAQUI.
+
+           "Todos leram" é o fim da vida de um recado: não há o que
+           fazer depois, só encerrar. Mandar a pessoa abrir a ficha
+           para clicar em "Resolvida" era um passeio para um clique.
+
+           Quem resolve aqui é sempre quem escreveu — esta lista só
+           mostra recado próprio —, e é quem a regra do banco deixa
+           mudar a situação a qualquer momento.
+
+           O botão de abrir continua existindo ao lado: encerrar sem
+           reler é comum, mas reler antes de encerrar também. */
+        var acoes = el("div", "pd-caixona__acoes");
+
+        var abrir = el("button", "pd-caixona__b", "Abrir");
+        abrir.type = "button";
+        abrir.addEventListener("click", function () { fechar2(); abrirFicha(p); });
+
+        var resolver = el("button", "pd-caixona__b pd-caixona__b--ok", "Resolver");
+        resolver.type = "button";
+        resolver.addEventListener("click", function () {
+          resolver.disabled = true;
+          abrir.disabled = true;
+          resolver.textContent = "Resolvendo\u2026";
+          Pendencias.mudarSituacao(p, "resolvida", meuNome())
+            .then(function () {
+              p.situacao = "resolvida";
+              li.remove();
+              desenhar();
+              /* Sem itens, a caixa perde a razão de estar na frente
+                 da tela. Fechar por dentro também guarda as chaves,
+                 então o aviso não volta para o que já foi tratado. */
+              if (!l2.children.length) s2.remove();
+              if (!caixa.querySelector(".pd-caixona__l")) fechar2();
+            })
+            .catch(function (e) {
+              resolver.disabled = false;
+              abrir.disabled = false;
+              resolver.textContent = "Resolver";
+              li.appendChild(el("div", "pd-caixona__erro", e.message));
+            });
+        });
+
+        acoes.appendChild(abrir);
+        acoes.appendChild(resolver);
+        li.appendChild(acoes);
         l2.appendChild(li);
       });
       s2.appendChild(l2);
@@ -2691,7 +2738,7 @@ const PendenciasUI = (function () {
     caixa.appendChild(b);
 
     caixa.appendChild(el("div", "pd-dica",
-      "Clique num item para abrir. Este aviso não volta para os mesmos itens."));
+      "Clique numa tarefa vencida para abri-la. Este aviso não volta para os mesmos itens."));
 
     fundo.appendChild(caixa);
     /* Clicar fora e Escape fecham, como qualquer caixa. Mas o
