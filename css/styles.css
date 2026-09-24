@@ -310,6 +310,11 @@ a{color:inherit;text-decoration:none}
 /* Recado tem faixa própria e cor própria: não é urgência
    (vermelho) nem prazo (azul), é outra natureza. Âmbar, a mesma
    do "a conferir" da administração — quer atenção, não ação. */
+/* A faixa da menção usa a cor da marca, e não a de alerta: ser
+   chamado não é problema, é chamada. Vem no topo e desaparece
+   quando a pessoa abre a ficha. */
+.faixa--chamado .faixa__t{color:var(--marca)}
+.faixa--chamado .faixa__n{background:var(--marca);color:#fff}
 .faixa--recado .faixa__t{color:#8a6100}
 .faixa--recado .faixa__n{background:#fdf0d5;color:#8a6100}
 .faixa--atraso .faixa__t{color:var(--alerta)}

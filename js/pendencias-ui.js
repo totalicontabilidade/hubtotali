@@ -268,11 +268,30 @@ const PendenciasUI = (function () {
        misturado com tarefas que têm dono e data, que é exatamente a
        confusão que estamos desfazendo. Primeiro porque aviso serve
        para ser lido antes de o dia começar. */
+    /* MENÇÃO VEM ANTES DE TUDO, E SÓ ENQUANTO NÃO FOI VISTA.
+
+       O grupo existe porque o lugar natural da pendência marcada
+       era o fim do trilho: sem prazo, ela caía em "Próximos dias",
+       abaixo de recados, atrasadas e do dia. Quem tem dez
+       pendências encontrava por último justamente aquela que alguém
+       escreveu para ser vista agora.
+
+       É um grupo TEMPORÁRIO. Ele aparece quando alguém chama a
+       pessoa e some quando ela abre a ficha — aí a pendência volta
+       para o grupo que sempre foi o dela, pelo prazo. Por isso os
+       outros grupos precisam excluir o que está aqui: sem isso a
+       mesma pendência apareceria duas vezes no trilho.
+
+       O que decide é o mesmo campo que faz o número da aba subir,
+       então não há duas verdades sobre "fui chamado". */
+    function chamado(p) { return Pendencias.fuiChamado(p); }
+
     [
-      { c:"recado", t:"Recados",       f:function (p) { return Pendencias.pedeCiencia(p); } },
-      { c:"atraso", t:"Atrasadas",     f:function (p) { return !Pendencias.pedeCiencia(p) && Pendencias.estado(p) === "atrasada"; } },
-      { c:"hoje",   t:"Para hoje",     f:function (p) { return !Pendencias.pedeCiencia(p) && Pendencias.estado(p) === "hoje"; } },
-      { c:"depois", t:"Próximos dias", f:function (p) { return !Pendencias.pedeCiencia(p) && !Pendencias.estado(p); } },
+      { c:"chamado", t:"Mencionaram você", f:chamado },
+      { c:"recado", t:"Recados",       f:function (p) { return !chamado(p) && Pendencias.pedeCiencia(p); } },
+      { c:"atraso", t:"Atrasadas",     f:function (p) { return !chamado(p) && !Pendencias.pedeCiencia(p) && Pendencias.estado(p) === "atrasada"; } },
+      { c:"hoje",   t:"Para hoje",     f:function (p) { return !chamado(p) && !Pendencias.pedeCiencia(p) && Pendencias.estado(p) === "hoje"; } },
+      { c:"depois", t:"Próximos dias", f:function (p) { return !chamado(p) && !Pendencias.pedeCiencia(p) && !Pendencias.estado(p); } },
     ].forEach(function (g) {
       /* DENTRO DO GRUPO, A URGÊNCIA MANDA; depois, o prazo.
 
@@ -292,7 +311,10 @@ const PendenciasUI = (function () {
       f.appendChild(el("span", "faixa__t", g.t));
       f.appendChild(el("span", "faixa__n", String(lista.length)));
       alvo.appendChild(f);
-      lista.forEach(function (p) { alvo.appendChild(cartao(p)); });
+      /* A etiqueta "Mencionaram você" no cartão vira repetição
+         debaixo de uma faixa com esse mesmo nome. Ela continua
+         valendo no quadro do escritório, onde não há grupo. */
+      lista.forEach(function (p) { alvo.appendChild(cartao(p, false, g.c === "chamado")); });
     });
 
     /* CONCLUÍDAS FICAM, MAS FECHADAS.
@@ -741,10 +763,10 @@ const PendenciasUI = (function () {
     pintar();
   }
 
-  function cartao(p, comDono) {
+  function cartao(p, comDono, semEtiquetaDeChamado) {
     var e = Pendencias.estado(p);
     var naoVi = !Pendencias.jaVi(p);
-    var chamaram = Pendencias.fuiChamado(p);
+    var chamaram = Pendencias.fuiChamado(p) && !semEtiquetaDeChamado;
     var b = el("button", "pen" + (e ? " pen--" + e : "") + (naoVi ? " pen--nova" : ""));
     b.type = "button";
     b.appendChild(el("span", "pen__f"));
