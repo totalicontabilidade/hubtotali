@@ -537,6 +537,15 @@ a{color:inherit;text-decoration:none}
 .pd-linha{margin-bottom:14px}
 .pd-valor{font-size:13.5px;line-height:1.5;color:var(--txt);white-space:pre-wrap}
 
+/* O visto fica acima da situação e com cara de ação discreta: é
+   opcional, e um botão forte demais viraria cobrança. */
+.pd-visto{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0 2px}
+.pd-visto__q{font-size:12px;color:var(--txt-3)}
+.pd-visto__b{margin-left:auto;border:1px solid var(--fio-2);border-radius:9px;background:#fff;
+             font:inherit;font-size:12.5px;font-weight:600;color:var(--txt-2);
+             padding:7px 14px;cursor:pointer;transition:border-color .14s,color .14s}
+.pd-visto__b:hover{border-color:var(--estado);color:var(--estado)}
+.pd-visto__b:disabled{opacity:.55;cursor:default}
 .pd-situacao{display:flex;gap:6px;margin:18px 0 4px}
 .pd-sit{flex:1;padding:9px;border-radius:9px;border:1px solid var(--fio-2);background:#fff;
         font-size:12.5px;font-weight:620;color:var(--txt-2);transition:all .15s}

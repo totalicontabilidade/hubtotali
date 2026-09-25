@@ -1716,6 +1716,49 @@ const PendenciasUI = (function () {
       c.appendChild(cx);
     }
 
+    /* ---------- o visto ----------
+
+       Fica ACIMA dos botões de situação e separado deles, porque é
+       outra conversa: situação é sobre o trabalho andar, visto é
+       sobre a pessoa ter tomado conhecimento. Misturar os quatro
+       numa fileira faria "visto" parecer um estado da tarefa.
+
+       Aparece para quem NÃO abriu a pendência — dar visto no
+       próprio pedido não diz nada a ninguém — e some depois de
+       dado, virando a lista de quem já viu. */
+    if (!Pendencias.pedeCiencia(p)) {
+      var vistos = Pendencias.quemDeuVisto(p);
+      var cv = el("div", "pd-visto");
+
+      if (vistos.length) {
+        cv.appendChild(el("span", "pd-visto__q",
+          "Visto por " + vistos.map(nomeDe).join(" · ")));
+      }
+
+      if (Pendencias.podeDarVisto(p)) {
+        var bv = el("button", "pd-visto__b", "Dar visto");
+        bv.type = "button";
+        bv.title = "Registra que você tomou conhecimento. Não é obrigatório.";
+        bv.addEventListener("click", function () {
+          bv.disabled = true;
+          bv.textContent = "Registrando…";
+          Pendencias.darVisto(p, meuNome())
+            .then(function () {
+              abrirFicha(p);          /* redesenha a ficha inteira, com a linha nova */
+              desenhar();
+            })
+            .catch(function (err) {
+              bv.disabled = false;
+              bv.textContent = "Dar visto";
+              cv.appendChild(el("div", "pd-corrigir__erro", err.message));
+            });
+        });
+        cv.appendChild(bv);
+      }
+
+      if (cv.children.length) c.appendChild(cv);
+    }
+
     /* Situação: só quem faz e quem pediu mexem. */
     if (p.responsavel === eu || p.criadoPor === eu) {
       var sit = el("div", "pd-situacao");

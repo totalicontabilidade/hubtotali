@@ -858,6 +858,47 @@ const Pendencias = (function () {
     return { deram: quantos, total: chamados.length };
   }
 
+  /* ---------- o visto de uma tarefa ----------
+
+     Recado tem ciência: uma lista de chamados e uma conta. Tarefa
+     não tem nada disso — e faltava um jeito de a pessoa dizer
+     "recebi, estou sabendo" sem se comprometer a fazer. Sem isso,
+     ela digitava "visto" num comentário, que foi como o problema
+     apareceu.
+
+     NÃO É O MESMO QUE ABRIR A FICHA. O Hub já marca sozinho quem
+     abriu, e é o que apaga o pontinho de não lida. Só que abrir
+     prova que a ficha foi aberta: pode ter sido clique errado.
+     Visto é ato, e por isso tem botão.
+
+     GUARDA NO MESMO CAMPO DA CIÊNCIA, de propósito: a regra do
+     banco que protege aquele campo já é a que se quer aqui — cada
+     um só escreve o próprio nome e a lista nunca encolhe. Campo
+     novo exigiria regra nova para ganhar exatamente o mesmo. */
+  function quemDeuVisto(p) {
+    return Array.isArray(p.ciencia) ? p.ciencia.slice() : [];
+  }
+
+  function podeDarVisto(p) {
+    var s = Dados.sessao();
+    if (!s || !p) return false;
+    if (pedeCiencia(p)) return false;      /* recado tem ciência, não visto */
+    if (p.criadoPor === s.uid) return false;  /* quem pediu não dá visto no próprio pedido */
+    return !jaDeiCiencia(p);
+  }
+
+  function darVisto(p, meuNome) {
+    return darCiencia(p).then(function (mudou) {
+      if (!mudou) return false;
+      /* A LINHA DO TEMPO É ONDE QUEM PEDIU VAI OLHAR. O registro no
+         campo serve ao sistema; a linha serve à pessoa. Se ela
+         falhar, o visto continua valendo — por isso o erro não
+         derruba a promessa. */
+      return acrescentar(p, "deu visto", meuNome, true)
+        .then(function () { return true; }, function () { return true; });
+    });
+  }
+
   function darCiencia(p) {
     var s = Dados.sessao();
     if (!s) return Promise.reject(new Error("Sessão expirada. Entre de novo."));
@@ -1516,6 +1557,9 @@ const Pendencias = (function () {
     jaDeiCiencia: jaDeiCiencia,
     contaDaCiencia: contaDaCiencia,
     darCiencia: darCiencia,
+    quemDeuVisto: quemDeuVisto,
+    podeDarVisto: podeDarVisto,
+    darVisto: darVisto,
   };
 
 })();
