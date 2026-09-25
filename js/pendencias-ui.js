@@ -107,6 +107,25 @@ const PendenciasUI = (function () {
     return p.setor || "";
   }
 
+  /* ---------- gente, e não conta de sistema ----------
+
+     Uma conta de integração (o robô do Atos, por exemplo) precisa
+     existir na equipe: é ela que dá autoria às pendências que
+     chegam de fora, e as regras do banco só aceitam escrita de
+     quem está na lista.
+
+     Só que ela não é pessoa: ninguém designa tarefa para um robô,
+     ninguém o chama num comentário e ele nunca vai confirmar que
+     leu um recado. Nas listas de escolher gente, ele é ruído — e
+     ruído com nome parecido com o de um colega é clique errado
+     esperando acontecer.
+
+     Continua aparecendo no cadastro da administração, onde é
+     preciso poder mexer nele. */
+  function ehGente(p) {
+    return !!p && p.ativo && p.robo !== true;
+  }
+
   function nomeDe(uid) {
     var p = porUid[uid];
     return (p && p.nome) || (p && p.email) || "alguém";
@@ -1180,7 +1199,7 @@ const PendenciasUI = (function () {
        os setores no fim: quem sabe o nome escolhe o nome, quem não
        sabe escolhe a área, e ninguém precisa entender a diferença
        entre dois campos parecidos. */
-    var quem = seletor("Quem faz", equipe.filter(function (p) { return p.ativo; })
+    var quem = seletor("Quem faz", equipe.filter(ehGente)
       .map(function (p) {
         /* Todos os setores da pessoa, não só o primeiro: em
            escritório pequeno quase todo mundo cobre mais de uma
@@ -1328,7 +1347,7 @@ const PendenciasUI = (function () {
 
     reservada.appendChild(plateia);
 
-    var ativos = equipe.filter(function (p) { return p.ativo; });
+    var ativos = equipe.filter(ehGente);
     /* EU TAMBÉM ENTRO NAS LISTAS, e antes não entrava.
 
        As duas listas excluíam quem estava criando, com a ideia de
@@ -1479,7 +1498,7 @@ const PendenciasUI = (function () {
   function chamaveis(p) {
     var eu = meuUid();
     return equipe.filter(function (x) {
-      if (!x.ativo || x.uid === eu) return false;
+      if (!ehGente(x) || x.uid === eu) return false;
       if (Array.isArray(p.podemVer) && p.podemVer.length) {
         return p.podemVer.indexOf(x.uid) !== -1;
       }
