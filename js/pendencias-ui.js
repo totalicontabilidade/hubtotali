@@ -501,7 +501,14 @@ const PendenciasUI = (function () {
 
     var pessoas = el("select", "pd-filtro");
     pessoas.appendChild(new Option("Todo mundo", ""));
-    equipe.slice().sort(function (a, b) {
+    /* Conta de integração fora também daqui: filtrar o quadro por
+       um robô não é pergunta que alguém faz, e era o último lugar
+       onde ele aparecia para quem não é administrador. */
+    /* Aqui a peneira é só contra robô, e não a de "é gente ativa":
+       quem saiu da equipe deixou pendências para trás, e filtrar o
+       quadro pelo nome dessa pessoa continua sendo pergunta
+       legítima. */
+    equipe.filter(function (x) { return x.robo !== true; }).slice().sort(function (a, b) {
       return (a.nome || "").localeCompare(b.nome || "", "pt-BR");
     }).forEach(function (p) {
       pessoas.appendChild(new Option(p.nome || p.email, p.uid));

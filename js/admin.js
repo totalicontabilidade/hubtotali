@@ -1233,6 +1233,29 @@
     lSet.appendChild(marcas);
     painel.appendChild(lSet);
 
+    /* ---------- conta de integração ----------
+
+       Uma conta de robô precisa existir na equipe (é ela que dá
+       autoria ao que chega de outro sistema, e as regras só aceitam
+       escrita de quem está na lista), mas não é gente: não recebe
+       tarefa, não é chamada num comentário e nunca vai confirmar
+       que leu um recado. Marcada assim, ela some das listas de
+       escolher pessoa no Hub e continua aqui, onde se administra.
+
+       A marca fica no cadastro, e não no nome ou no e-mail: nome
+       muda, e comparar texto erra quando menos se espera. */
+    var lRobo = elemento("div", "campo campo--linha");
+    lRobo.appendChild(elemento("span", "campo__rotulo", "Tipo de conta"));
+    var caixaRobo = document.createElement("label");
+    var cRobo = document.createElement("input");
+    cRobo.type = "checkbox";
+    cRobo.checked = p.robo === true;
+    caixaRobo.appendChild(cRobo);
+    caixaRobo.appendChild(elemento("span", null,
+      "É uma conta de integração (robô), não uma pessoa"));
+    lRobo.appendChild(caixaRobo);
+    painel.appendChild(lRobo);
+
     var acoes = elemento("div", "pessoa__editor-acoes");
     var salvar = elemento("button", "btn btn--pequeno btn--principal", "Salvar");
     var cancelar = elemento("button", "btn btn--pequeno btn--fantasma", "Cancelar");
@@ -1260,6 +1283,7 @@
            do UID — mas o dado dizia o contrário da tela, e um dia
            alguém acreditaria no dado. */
         papel: Dados.ehFundador(p.uid) ? "admin" : sPapel.value,
+        robo: cRobo.checked,
         ativo: p.ativo !== false,
       }).then(function (atualizada) {
         Object.assign(p, atualizada);
@@ -1337,6 +1361,10 @@
         Dados.gravarPessoa(p.uid, {
           nome: p.nome || "", email: p.email || "",
           setores: setoresDe(p), ativo: novo,
+          /* Vai junto porque a gravação substitui o documento
+             inteiro: sem esta linha, desligar e religar um robô o
+             transformaria em pessoa outra vez. */
+          robo: p.robo === true,
         }).then(function () {
           p.ativo = novo;
           desenharEquipe();
@@ -1517,6 +1545,7 @@
           setores: novos,
           papel:   Dados.ehFundador(p.uid) ? "admin" : (p.papel || "equipe"),
           ativo:   p.ativo !== false,
+          robo:    p.robo === true,
         });
       });
     }, Promise.resolve());
