@@ -1348,7 +1348,11 @@ const PendenciasUI = (function () {
        Passa a excluir apenas quem está desligado, que já é o filtro
        de "ativos" logo acima. */
     var marcar = marcador("Marcar mais alguém", ativos, null);
-    var chamados = marcador("Quem precisa dar ciência", ativos, null, true);
+    /* Nesta lista o autor NÃO aparece — ao contrário da de cima.
+       "Marcar mais alguém" é sobre quem acompanha, e aí faz sentido
+       se incluir; ciência é sobre quem confirma que leu, e de quem
+       escreveu isso não prova nada. */
+    var chamados = marcador("Quem precisa dar ciência", ativos, meuUid(), true);
     chamados.hidden = true;
     chamados.appendChild(el("div", "pd-dica",
       "Cada pessoa marcada vê o recado na lista dela e aparece um botão para confirmar " +

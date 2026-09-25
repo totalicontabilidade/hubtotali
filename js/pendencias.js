@@ -392,7 +392,12 @@ const Pendencias = (function () {
        fazer — "alguém do Fiscal precisa ver isto" é um pedido
        legítimo, e obrigar a escolher um nome faz a pessoa chutar
        um colega ou desistir de abrir. */
-    var chamados = Array.isArray(dados.deveDarCiencia) ? dados.deveDarCiencia : [];
+    /* O autor sai da lista aqui também, e não só na tela: o
+       formulário não é o único caminho até aqui — há abas antigas
+       abertas e, agora, outro sistema criando pendência. */
+    var eu = s.uid;
+    var chamados = (Array.isArray(dados.deveDarCiencia) ? dados.deveDarCiencia : [])
+      .filter(function (u) { return u !== eu; });
     /* RECADO É UMA NATUREZA, NÃO UMA CONSEQUÊNCIA DA LISTA.
 
        Antes eu deduzia "isto é recado" de a lista de ciência não
@@ -810,9 +815,25 @@ const Pendencias = (function () {
     return Array.isArray(p.deveDarCiencia) && p.deveDarCiencia.length > 0;
   }
 
+  /* QUEM ESCREVEU NÃO CONFIRMA QUE LEU O PRÓPRIO RECADO.
+
+     Ciência serve para alguém poder dizer depois "você confirmou que
+     leu". Do autor isso não prova nada: ele escreveu. Pedir a
+     confirmação dele transforma um ato em burocracia e ainda deixa
+     o recado eternamente incompleto se ele não clicar.
+
+     A conferição está aqui, e não só na tela do formulário, porque
+     há recados já gravados com o autor na lista — a tela antiga o
+     oferecia, já marcado. Com isto, eles se acertam sozinhos. */
+  function souOAutor(p) {
+    var s = Dados.sessao();
+    return !!s && !!p && p.criadoPor === s.uid;
+  }
+
   function devoCiencia(p) {
     var s = Dados.sessao();
-    return !!s && pedeCiencia(p) && p.deveDarCiencia.indexOf(s.uid) !== -1;
+    if (!s || souOAutor(p)) return false;
+    return pedeCiencia(p) && p.deveDarCiencia.indexOf(s.uid) !== -1;
   }
 
   function jaDeiCiencia(p) {
@@ -824,7 +845,13 @@ const Pendencias = (function () {
      está na lista de chamados: se alguém confirmou e depois saiu da
      equipe, o número não pode passar do total e virar "8 de 7". */
   function contaDaCiencia(p) {
-    var chamados = Array.isArray(p.deveDarCiencia) ? p.deveDarCiencia : [];
+    var autor = p && p.criadoPor;
+    /* O autor fora da conta, pelo mesmo motivo: ele não é plateia
+       do próprio recado. Recado antigo que o incluía passa de
+       "2 de 2" para "1 de 1" — o número muda, o fato não: todos os
+       que precisavam confirmar confirmaram. */
+    var chamados = (Array.isArray(p.deveDarCiencia) ? p.deveDarCiencia : [])
+      .filter(function (u) { return u !== autor; });
     var deram = Array.isArray(p.ciencia) ? p.ciencia : [];
     var quantos = 0;
     chamados.forEach(function (u) { if (deram.indexOf(u) !== -1) quantos++; });
