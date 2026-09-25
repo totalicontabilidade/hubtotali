@@ -1719,7 +1719,25 @@ const PendenciasUI = (function () {
     /* Situação: só quem faz e quem pediu mexem. */
     if (p.responsavel === eu || p.criadoPor === eu) {
       var sit = el("div", "pd-situacao");
-      [["aberta","Aberta"],["fazendo","Fazendo"],["resolvida","Resolvida"]].forEach(function (o) {
+
+      /* RECADO NÃO TEM "FAZENDO".
+
+         Recado não é feito por ninguém: é lido e confirmado. O
+         botão vinha junto porque os três estados eram uma lista
+         fixa, e oferecer um estado que não quer dizer nada é
+         convidar a pessoa a inventar um significado para ele.
+
+         A EXCEÇÃO É O RECADO QUE JÁ ESTÁ EM "FAZENDO": alguém
+         clicou antes desta mudança. Esconder o botão ali deixaria
+         a ficha sem nenhum estado aceso — a pessoa não veria em
+         que pé está, nem teria como sair de lá. */
+      var estados = [["aberta","Aberta"],["fazendo","Fazendo"],["resolvida","Resolvida"]]
+        .filter(function (o) {
+          if (o[0] !== "fazendo") return true;
+          return !Pendencias.pedeCiencia(p) || p.situacao === "fazendo";
+        });
+
+      estados.forEach(function (o) {
         var b = el("button", "pd-sit" + (p.situacao === o[0] ? " on" : ""), o[1]);
         b.type = "button";
         b.addEventListener("click", function () {
