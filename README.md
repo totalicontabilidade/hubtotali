@@ -73,6 +73,40 @@ Trocar um setor de camada é um seletor na `admin.html`.
 
 ---
 
+## Lembrar quem não leu um recado
+
+Recado é o aviso que cada pessoa chamada precisa confirmar que leu, no botão
+**Confirmo que li**. A ficha mostra quem já confirmou e quem falta.
+
+Quando falta alguém, quem **escreveu** o recado vê na ficha o botão
+**Lembrar quem não leu (N)**. O clique:
+
+- faz aparecer, na tela de cada um que ainda não confirmou, a mesma caixa
+  das tarefas vencidas — "Há um recado esperando a sua leitura", com o
+  botão **Ler o recado**;
+- deixa uma linha na conversa do recado dizendo a quem foi o lembrete;
+- mostra na ficha a hora do **último lembrete**.
+
+**A caixa insiste, ao contrário da das tarefas vencidas.** Aquela aparece uma
+vez por tarefa; esta volta **toda vez que a pessoa abre o Hub**, até ela
+confirmar. Dentro da mesma aba ela não se repete — a atualização sozinha a
+faria pular na cara de quem acabou de fechá-la —, mas um lembrete novo chega
+mesmo com o Hub aberto. Sai quando a pessoa confirma ou quando o recado é
+resolvido.
+
+**Só o autor lembra**, e só enquanto o recado não está resolvido. Nem
+administrador passa: o recado é de quem o escreveu.
+
+**O que o banco guarda é uma hora, e não uma lista de nomes.** O campo
+`lembradoEm` recebe a hora do servidor, e quem vê o aviso é calculado na
+leitura: os chamados que ainda não confirmaram. Uma lista gravada
+envelheceria no primeiro colega que confirmasse. A regra em
+`firestore.rules` deixa o autor mexer **só** nesse campo, e **só** com a hora
+de agora do servidor — hora inventada ou lembrete de carona com outra mudança
+são recusados.
+
+---
+
 ## Os logos
 
 **Vivem dentro do banco**, embutidos no próprio documento da lista, um por
