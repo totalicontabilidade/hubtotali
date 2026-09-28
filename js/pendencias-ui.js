@@ -495,7 +495,7 @@ const PendenciasUI = (function () {
   var FILTRO_PERIODO = "";
 
   function abrirTodas() {
-    var c = abrir("Todas as pendências");
+    var c = abrir("Todas as pendências", "todas");
 
     var barra = el("div", "pd-filtros");
 
@@ -937,7 +937,29 @@ const PendenciasUI = (function () {
      PAINEL — um só, reaproveitado pelos três usos
      ============================================================ */
 
-  var painel, caixa, corpo, titulo;
+  var painel, caixa, corpo, titulo, voltar;
+
+  /* ---------- de onde a ficha foi aberta ----------
+
+     O painel é um só, e abrir uma ficha a partir do quadro do
+     escritório TROCAVA o conteúdo dele: o quadro deixava de existir,
+     e o único caminho de saída era o ×, que devolve ao Hub. Quem
+     estava percorrendo a lista perdia o lugar a cada pendência
+     aberta — filtro, rolagem e tudo.
+
+     Agora o painel sabe o que está mostrando. Ficha aberta de dentro
+     do quadro ganha "Voltar", que redesenha o quadro com os mesmos
+     filtros e na mesma altura da lista. Aberta do trilho, não ganha:
+     ali o × já devolve ao lugar de onde a pessoa veio. */
+  var TELA = "";
+  var VEIO_DE_TODAS = false;
+  var ROLAGEM_DE_TODAS = 0;
+
+  function voltarParaTodas() {
+    var altura = ROLAGEM_DE_TODAS;
+    abrirTodas();
+    corpo.scrollTop = altura;
+  }
 
   function montarPainel() {
     painel = el("div", "pd-painel");
@@ -948,6 +970,12 @@ const PendenciasUI = (function () {
     x.type = "button";
     x.setAttribute("aria-label", "Fechar");
     x.addEventListener("click", fechar);
+    voltar = el("button", "pd-voltar", "‹ Voltar");
+    voltar.type = "button";
+    voltar.title = "Voltar para todas as pendências";
+    voltar.hidden = true;
+    voltar.addEventListener("click", voltarParaTodas);
+    cab.appendChild(voltar);
     cab.appendChild(titulo);
     cab.appendChild(x);
     corpo = el("div", "pd-corpo");
@@ -1002,9 +1030,21 @@ const PendenciasUI = (function () {
     aviso.classList.add("pd-aviso-fechar--pisca");
   }
 
-  function abrir(t) {
+  function abrir(t, tela) {
+    var vinhaDe = painel.classList.contains("on") ? TELA : "";
+    /* Guardada ANTES de limpar o corpo: depois, a rolagem já é zero. */
+    if (vinhaDe === "todas") ROLAGEM_DE_TODAS = corpo.scrollTop;
+    /* A ficha se redesenha por cima de si mesma — a cada comentário,
+       por exemplo —, e nessa hora o caminho de volta tem de
+       continuar valendo. */
+    VEIO_DE_TODAS = tela === "ficha" &&
+      (vinhaDe === "todas" || (vinhaDe === "ficha" && VEIO_DE_TODAS));
+    TELA = tela || "";
+    voltar.hidden = !VEIO_DE_TODAS;
+
     titulo.textContent = t;
     corpo.textContent = "";
+    corpo.scrollTop = 0;
     painel._digitado = false;
     var aviso = caixa.querySelector(".pd-aviso-fechar");
     if (aviso) aviso.remove();
@@ -1012,6 +1052,9 @@ const PendenciasUI = (function () {
     return corpo;
   }
   function fechar() {
+    TELA = "";
+    VEIO_DE_TODAS = false;
+    voltar.hidden = true;
     /* O cursor não pode ficar preso num campo do painel fechado:
        para o resto do Hub isso parece "alguém digitando", e a
        atualização sozinha ficaria esperando para sempre. */
@@ -1514,7 +1557,7 @@ const PendenciasUI = (function () {
   }
 
   function abrirFicha(p) {
-    var c = abrir(p.oque);
+    var c = abrir(p.oque, "ficha");
 
     /* Abriu, leu. A marca vai para o banco sem segurar a tela: se
        falhar, o pior que acontece é continuar aparecendo como não
@@ -2039,7 +2082,16 @@ const PendenciasUI = (function () {
     if (p.criadoPor === eu) {
       var apagar = el("button", "pd-botao pd-botao--perigo", "Apagar pendência");
       apagar.type = "button";
-      apagar.addEventListener("click", function () { avisarAntesDeApagar(p, apagar, c, fechar); });
+      apagar.addEventListener("click", function () {
+        avisarAntesDeApagar(p, apagar, c, function () {
+          /* Apagou a partir do quadro: volta ao quadro, já sem ela.
+             A lista é corrigida aqui porque a recarga do banco só
+             chega um instante depois. */
+          if (!VEIO_DE_TODAS) { fechar(); return; }
+          todas = todas.filter(function (x) { return x.id !== p.id; });
+          voltarParaTodas();
+        });
+      });
       c.appendChild(apagar);
     }
 

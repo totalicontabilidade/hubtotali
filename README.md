@@ -19,8 +19,11 @@ terceiro. Nem a do Firebase — ver "Como conversa com o banco", no fim.
 
 Abra `admin.html`, entre com o e-mail e a senha, e edite na própria tela:
 
-- **acrescentar, renomear e apagar** sistema e setor;
-- **arrastar para reordenar**, inclusive de um setor para outro;
+- **acrescentar, renomear e apagar** sistema e grupo de sistemas — **Novo grupo**
+  fica na barra do topo, **Excluir grupo** no cabeçalho de cada um;
+- **ir direto a um grupo** pelos atalhos da barra, ou **procurar** um sistema
+  pelo nome; os grupos nascem recolhidos e abrem no clique;
+- **arrastar para reordenar**, inclusive de um grupo para outro;
 - **escolher se o setor fica à vista** (cartões) **ou recolhido** (gaveta);
 - **trocar o logo** de um sistema, enviando uma imagem;
 - **editar os recados** da coluna da direita.

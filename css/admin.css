@@ -172,6 +172,32 @@ input,select,textarea{font:inherit;color:inherit}
 .painel__cabeca .btn{margin-left:0}
 .painel__cabeca .painel__direita{margin-left:auto;display:flex;gap:6px;align-items:center}
 
+/* ---------- Índice e grupos recolhíveis ----------
+   A barra acompanha a rolagem, logo abaixo do topo (59px: 34 da
+   logo, 24 de respiro e 1 de fio). */
+.indice{position:sticky;top:59px;z-index:15;background:var(--piso);
+        padding:10px 0 10px;margin-bottom:6px;border-bottom:1px solid var(--fio)}
+.indice__linha{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:9px}
+.indice__busca{flex:1 1 260px;height:32px;font-size:13.5px}
+.indice__atalhos{display:flex;gap:6px;flex-wrap:wrap}
+.atalho{display:inline-flex;align-items:center;gap:7px;padding:4px 11px;
+        border:1px solid var(--fio-2);border-radius:99px;background:var(--papel);
+        font-size:12.5px;font-weight:620;color:var(--txt-2);
+        transition:border-color .14s var(--ease),color .14s var(--ease)}
+.atalho:hover{border-color:var(--gold-2);color:var(--navy)}
+.atalho__n{font-size:11px;font-weight:700;color:var(--txt-3)}
+.atalho--outro{border-style:dashed}
+.painel__seta{flex:none}
+.painel__conta{font-size:12px;color:var(--txt-3);white-space:nowrap;margin-right:4px}
+.painel--fechado .painel__cabeca{border-bottom:0}
+.painel--alvo{border-color:var(--gold-2);box-shadow:0 0 0 2px var(--gold-fio)}
+.icone-btn:disabled{opacity:.35;cursor:default}
+@media (max-width:900px){
+  /* Em tela estreita o topo quebra em duas linhas e a barra fixa
+     comeria metade da tela: aqui ela rola junto com a página. */
+  .indice{position:static}
+}
+
 .marca-destaque{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--txt-2);white-space:nowrap}
 
 /* ---------- Linha de sistema ---------- */

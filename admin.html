@@ -125,7 +125,17 @@
       </p>
     </div>
 
-    <section class="painel">
+    <!-- Mesmo índice da outra aba, aqui com destinos fixos. -->
+    <nav class="indice" id="indice-equipe" aria-label="Partes desta aba">
+      <div class="indice__atalhos">
+        <button class="atalho" type="button" data-alvo="sec-nova-pessoa">Nova pessoa</button>
+        <button class="atalho" type="button" data-alvo="sec-equipe">Equipe</button>
+        <button class="atalho" type="button" data-alvo="sec-setores">Setores</button>
+        <button class="atalho" type="button" data-alvo="sec-copia">Cópia de segurança</button>
+      </div>
+    </nav>
+
+    <section class="painel" id="sec-nova-pessoa">
       <div class="painel__cabeca">
         <h2 class="painel__titulo">Nova pessoa</h2>
         <span class="painel__nota">A senha pode ser trocada por ela depois</span>
@@ -180,7 +190,7 @@
       <button class="btn btn--pequeno" type="button" id="btn-sou-eu">Pôr minha conta na equipe</button>
     </p>
 
-    <section class="painel">
+    <section class="painel" id="sec-equipe">
       <div class="painel__cabeca">
         <h2 class="painel__titulo">Equipe</h2>
         <span class="painel__nota" id="equipe-conta"></span>
@@ -195,7 +205,7 @@
          em documentos diferentes. Por isso os identificadores daqui
          começam com "dep-", de departamento: já existe um
          btn-novo-setor logo abaixo, e é o da outra aba. -->
-    <section class="painel">
+    <section class="painel" id="sec-setores">
       <div class="painel__cabeca">
         <h2 class="painel__titulo">Setores</h2>
         <span class="painel__nota" id="dep-conta"></span>
@@ -215,7 +225,7 @@
       <p class="erro" id="dep-erro" hidden></p>
     </section>
 
-    <section class="painel">
+    <section class="painel" id="sec-copia">
       <div class="painel__cabeca">
         <h2 class="painel__titulo">Cópia de segurança</h2>
         <span class="painel__nota" id="copia-quando"></span>
@@ -246,14 +256,35 @@
   <div class="admin__cabeca">
     <h1 class="admin__titulo">Sistemas do Hub</h1>
     <p class="admin__nota">
-      Arraste para reordenar, inclusive de um setor para outro. Nada é gravado até você clicar em Salvar.
+      Cada grupo abre e fecha no clique. Arraste para reordenar, inclusive de um grupo para outro —
+      soltar em cima de um grupo fechado põe o sistema no fim dele.
+      Nada é gravado até você clicar em Salvar.
     </p>
   </div>
+
+  <!-- O ÍNDICE. A página cresceu até virar uma rolagem só: para
+       chegar ao último grupo era preciso passar por todos os
+       sistemas de todos os outros, e o botão de criar grupo morava
+       depois do último — tão longe que parecia não existir.
+
+       Agora os grupos nascem fechados, e esta barra, que acompanha
+       a rolagem, leva direto a qualquer um deles. Criar grupo está
+       aqui em cima, à vista. -->
+  <nav class="indice" id="indice" aria-label="Grupos de sistemas">
+    <div class="indice__linha">
+      <input class="campo__caixa indice__busca" type="search" id="indice-busca"
+             placeholder="Procurar sistema pelo nome, legenda ou endereço" autocomplete="off">
+      <button class="btn btn--pequeno" type="button" id="btn-abrir-todos">Abrir todos</button>
+      <button class="btn btn--pequeno" type="button" id="btn-recolher-todos">Recolher todos</button>
+      <button class="btn btn--pequeno btn--principal" type="button" id="btn-novo-grupo">Novo grupo</button>
+    </div>
+    <div class="indice__atalhos" id="indice-atalhos"></div>
+  </nav>
 
   <div id="setores-edicao"></div>
 
   <div class="admin__rodape-acoes">
-    <button class="btn" type="button" id="btn-novo-setor">Acrescentar setor</button>
+    <button class="btn" type="button" id="btn-novo-setor">Acrescentar grupo</button>
     <!-- Só aparece quando existe uma versão guardada, e ela é a de
          antes do último Salvar — uma, não um histórico. Cobre o
          erro que de fato acontece: salvar sem querer e perceber em

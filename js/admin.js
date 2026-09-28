@@ -112,6 +112,8 @@
              'stroke-linecap="round" stroke-linejoin="round"><path d="M6 14l6-6 6 6"/></svg>',
     baixo:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" ' +
              'stroke-linecap="round" stroke-linejoin="round"><path d="M6 10l6 6 6-6"/></svg>',
+    direita: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" ' +
+             'stroke-linecap="round" stroke-linejoin="round"><path d="M10 6l6 6-6 6"/></svg>',
   };
 
   function botaoIcone(icone, titulo, perigo) {
@@ -745,15 +747,116 @@
     return linha;
   }
 
-  /* ---------- Desenho: um setor ---------- */
+  /* ---------- Grupos que abrem e fecham ----------
+
+     A página era uma rolagem só, com todos os sistemas de todos os
+     grupos à mostra. Com sessenta e tantos sistemas, mexer no último
+     grupo era atravessar os outros todos.
+
+     Agora cada grupo nasce FECHADO — uma linha, com o nome e a
+     contagem — e abre no clique. Quais estão abertos fica guardado
+     no navegador, porque quem edita costuma voltar ao mesmo grupo.
+     É conveniência e não dado: se o navegador não guardar, os grupos
+     só nascem fechados de novo. */
+  var CHAVE_ABERTOS = "hub-totali:admin-grupos-abertos";
+  var ABERTOS = {};
+  try { ABERTOS = JSON.parse(window.localStorage.getItem(CHAVE_ABERTOS) || "{}") || {}; }
+  catch (e) { ABERTOS = {}; }
+
+  function guardarAbertos() {
+    try { window.localStorage.setItem(CHAVE_ABERTOS, JSON.stringify(ABERTOS)); } catch (e) {}
+  }
+
+  function abrirGrupo(id, aberto) {
+    if (aberto) ABERTOS[id] = true; else delete ABERTOS[id];
+    guardarAbertos();
+  }
+
+  /* ---------- A busca da administração ----------
+     Sem acento e sem expressão regular, como a do Hub. Com algo
+     digitado, só aparecem os sistemas que combinam, cada um dentro
+     do seu grupo — aberto, esteja como estiver. Combinar com o nome
+     do grupo traz o grupo inteiro. */
+  var BUSCA = "";
+
+  function semAcento(s) {
+    return String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+  }
+
+  function termosDaBusca() {
+    return semAcento(BUSCA).split(" ").filter(Boolean);
+  }
+
+  function combina(texto, termos) {
+    var palheiro = semAcento(texto);
+    return termos.every(function (t) { return palheiro.indexOf(t) !== -1; });
+  }
+
+  /* Rola até um bloco, parando LOGO ABAIXO das barras que ficam
+     presas no topo. A conta é feita na hora, e não com uma folga
+     fixa no CSS, porque o índice muda de altura: mais grupos, mais
+     linhas de atalhos. Em tela estreita o índice não fica preso, e
+     aí só o topo conta. */
+  function levarA(alvo, indice) {
+    if (!alvo) return;
+    var topo = document.querySelector(".topo");
+    var folga = 12;
+    if (topo && window.getComputedStyle(topo).position === "sticky") folga += topo.offsetHeight;
+    if (indice && window.getComputedStyle(indice).position === "sticky") folga += indice.offsetHeight;
+    window.scrollTo({
+      top: Math.max(0, alvo.getBoundingClientRect().top + window.scrollY - folga),
+      behavior: "smooth",
+    });
+  }
+
+  function levarAoGrupo(id) {
+    var alvo = document.getElementById("grupo-" + id);
+    levarA(alvo, $("indice"));
+    return alvo;
+  }
+
+  function contagem(n) {
+    return n === 0 ? "vazio" : (n === 1 ? "1 sistema" : n + " sistemas");
+  }
+
+  /* ---------- Desenho: um grupo ---------- */
 
   function montarSetor(setor, posicao) {
-    var painel = elemento("section", "painel");
+    var termos = termosDaBusca();
+    var itens = setor.itens || [];
+    var mostrar = null;          /* null = todos */
+    if (termos.length && !combina(setor.titulo, termos)) {
+      mostrar = {};
+      var algum = false;
+      itens.forEach(function (item, i) {
+        if (combina([item.nome, item.nota, item.url].join(" "), termos)) { mostrar[i] = true; algum = true; }
+      });
+      if (!algum) return null;
+    }
+    var aberto = termos.length ? true : ABERTOS[setor.id] === true;
+
+    var painel = elemento("section", "painel painel--grupo" + (aberto ? "" : " painel--fechado"));
+    painel.id = "grupo-" + setor.id;
 
     var cabeca = elemento("div", "painel__cabeca");
 
-    cabeca.appendChild(caixaTexto("cx-titulo", setor.titulo, "Nome do setor", function (v) { setor.titulo = v; }));
-    cabeca.appendChild(caixaTexto("cx-nota", setor.nota, "Legenda do setor", function (v) { setor.nota = v; }));
+    var seta = botaoIcone(aberto ? "baixo" : "direita", aberto ? "Recolher o grupo" : "Abrir o grupo");
+    seta.classList.add("painel__seta");
+    seta.setAttribute("aria-expanded", aberto ? "true" : "false");
+    /* Durante a busca o grupo está aberto por causa dela, e fechar
+       não faria sentido: esconderia justamente o que foi achado. */
+    seta.disabled = termos.length > 0;
+    seta.addEventListener("click", function () {
+      abrirGrupo(setor.id, !aberto);
+      desenhar();
+    });
+    cabeca.appendChild(seta);
+
+    cabeca.appendChild(caixaTexto("cx-titulo", setor.titulo, "Nome do grupo", function (v) {
+      setor.titulo = v;
+      desenharIndice();
+    }));
+    cabeca.appendChild(caixaTexto("cx-nota", setor.nota, "Legenda do grupo", function (v) { setor.nota = v; }));
 
     var estilo = document.createElement("select");
     estilo.className = "cx-estilo";
@@ -777,29 +880,39 @@
     });
     destaque.appendChild(cxDestaque);
     destaque.appendChild(document.createTextNode("da casa"));
-    destaque.title = "Marca este setor como “nosso”: o quadradinho de iniciais fica azul-noite";
+    destaque.title = "Marca este grupo como “nosso”: o quadradinho de iniciais fica azul-noite";
     cabeca.appendChild(destaque);
 
     var direita = elemento("div", "painel__direita");
 
-    var cima = botaoIcone("cima", "Subir o setor");
+    direita.appendChild(elemento("span", "painel__conta", contagem(itens.length)));
+
+    var cima = botaoIcone("cima", "Subir o grupo");
     cima.disabled = posicao === 0;
     cima.addEventListener("click", function () { moverSetor(posicao, -1); });
     direita.appendChild(cima);
 
-    var baixo = botaoIcone("baixo", "Descer o setor");
+    var baixo = botaoIcone("baixo", "Descer o grupo");
     baixo.disabled = posicao === dados.setores.length - 1;
     baixo.addEventListener("click", function () { moverSetor(posicao, 1); });
     direita.appendChild(baixo);
 
-    var apagarSetor = botaoIcone("lixo", "Apagar o setor", true);
+    /* ESCRITO, E NÃO SÓ UMA LIXEIRA. O ícone sozinho, igual ao de
+       apagar um sistema, não dizia que ali se apagava o grupo
+       inteiro — e quem procurava "excluir grupo" não achava. */
+    var apagarSetor = elemento("button", "btn btn--pequeno btn--perigo", "Excluir grupo");
+    apagarSetor.type = "button";
     apagarSetor.addEventListener("click", function () {
       var quantos = (setor.itens || []).length;
+      var nome = setor.titulo || "sem nome";
       var pergunta = quantos
-        ? "Apagar o setor “" + setor.titulo + "” e os " + quantos + " sistemas dentro dele?"
-        : "Apagar o setor “" + setor.titulo + "”?";
+        ? "Excluir o grupo “" + nome + "” e " +
+          (quantos === 1 ? "o sistema" : "os " + quantos + " sistemas") + " dentro dele?\n\n" +
+          "Para manter algum, arraste-o para outro grupo antes."
+        : "Excluir o grupo “" + nome + "”?";
       if (!window.confirm(pergunta)) return;
       dados.setores.splice(posicao, 1);
+      abrirGrupo(setor.id, false);
       marcarPendente();
       desenhar();
     });
@@ -807,6 +920,24 @@
 
     cabeca.appendChild(direita);
     painel.appendChild(cabeca);
+
+    if (!aberto) {
+      /* Grupo fechado também recebe sistema arrastado: sem isto,
+         mover de um grupo para outro exigiria abrir os dois. Vai
+         para o fim do grupo. */
+      painel.addEventListener("dragover", function (ev) {
+        if (!arrastando) return;
+        ev.preventDefault();
+        painel.classList.add("painel--alvo");
+      });
+      painel.addEventListener("dragleave", function () { painel.classList.remove("painel--alvo"); });
+      painel.addEventListener("drop", function (ev) {
+        if (!arrastando) return;
+        ev.preventDefault();
+        mover(arrastando, setor.id, (setor.itens || []).length);
+      });
+      return painel;
+    }
 
     var linhas = elemento("div", "linhas");
     if (!setor.itens || !setor.itens.length) {
@@ -821,7 +952,11 @@
       });
       linhas.appendChild(vazio);
     } else {
+      /* O índice que a linha recebe é sempre o de verdade, mesmo com
+         a busca escondendo vizinhos: é ele que o arrasto e o apagar
+         usam para achar o sistema na lista. */
       setor.itens.forEach(function (item, i) {
+        if (mostrar && !mostrar[i]) return;
         linhas.appendChild(montarLinha(setor, item, i));
       });
     }
@@ -833,10 +968,17 @@
     novo.addEventListener("click", function () {
       setor.itens = setor.itens || [];
       setor.itens.push({ nome: "", url: "", nota: "" });
+      /* A linha nova está em branco e não combinaria com busca
+         nenhuma: nasceria escondida. */
+      limparBusca();
+      abrirGrupo(setor.id, true);
       marcarPendente();
       desenhar();
-      /* Leva o cursor direto para o campo do nome do novo. */
-      var todos = painel.querySelectorAll(".cx-nome");
+      /* Leva o cursor direto para o campo do nome do novo. O painel
+         foi refeito pelo desenhar(): o de antes já saiu da página,
+         e procurar nele não acharia campo nenhum. */
+      var refeito = document.getElementById("grupo-" + setor.id);
+      var todos = refeito ? refeito.querySelectorAll(".cx-nome") : [];
       if (todos.length) todos[todos.length - 1].focus();
     });
     acoes.appendChild(novo);
@@ -886,12 +1028,57 @@
 
   /* ---------- Desenho geral ---------- */
 
+  function limparBusca() {
+    BUSCA = "";
+    var campo = $("indice-busca");
+    if (campo) campo.value = "";
+  }
+
+  /* Os atalhos do índice: um por grupo, com a contagem, mais os
+     recados. Refeito a cada desenho e a cada tecla no nome de um
+     grupo, para nunca mostrar um nome que a tela já trocou. */
+  function desenharIndice() {
+    var caixa = $("indice-atalhos");
+    if (!caixa) return;
+    caixa.textContent = "";
+    dados.setores.forEach(function (setor) {
+      var b = elemento("button", "atalho");
+      b.type = "button";
+      b.appendChild(elemento("span", null, setor.titulo || "(sem nome)"));
+      b.appendChild(elemento("span", "atalho__n", String((setor.itens || []).length)));
+      b.addEventListener("click", function () {
+        limparBusca();
+        abrirGrupo(setor.id, true);
+        desenhar();
+        levarAoGrupo(setor.id);
+      });
+      caixa.appendChild(b);
+    });
+    var recados = elemento("button", "atalho atalho--outro", "Recados e prazos");
+    recados.type = "button";
+    recados.addEventListener("click", function () {
+      levarA($("painel-avisos"), $("indice"));
+    });
+    caixa.appendChild(recados);
+  }
+
   function desenhar() {
     var alvo = $("setores-edicao");
     alvo.textContent = "";
+    var desenhados = 0;
     dados.setores.forEach(function (setor, i) {
-      alvo.appendChild(montarSetor(setor, i));
+      var painel = montarSetor(setor, i);
+      if (!painel) return;
+      alvo.appendChild(painel);
+      desenhados++;
     });
+    if (!dados.setores.length) {
+      alvo.appendChild(elemento("div", "vazio", "Nenhum grupo ainda. Crie o primeiro em “Novo grupo”."));
+    } else if (!desenhados) {
+      alvo.appendChild(elemento("div", "vazio",
+        "Nenhum sistema com “" + BUSCA + "”. O nome, a legenda, o endereço e o nome do grupo entram na busca."));
+    }
+    desenharIndice();
 
     var caixaAvisos = $("avisos-edicao");
     caixaAvisos.textContent = "";
@@ -929,11 +1116,44 @@
     if (acoesLigadas) return;
     acoesLigadas = true;
 
-    $("btn-novo-setor").addEventListener("click", function () {
-      dados.setores.push({ id: idNovo(), titulo: "Setor novo", nota: "", estilo: "cartao", itens: [] });
+    /* O grupo novo nasce aberto, no fim da lista, com o cursor já no
+       nome e o texto selecionado: é só digitar por cima. */
+    function novoGrupo() {
+      var id = idNovo();
+      dados.setores.push({ id: id, titulo: "Grupo novo", nota: "", estilo: "cartao", itens: [] });
+      limparBusca();
+      abrirGrupo(id, true);
       marcarPendente();
       desenhar();
-      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+      var painel = levarAoGrupo(id);
+      var nome = painel && painel.querySelector(".cx-titulo");
+      if (nome) { nome.focus({ preventScroll: true }); nome.select(); }
+    }
+    $("btn-novo-setor").addEventListener("click", novoGrupo);
+    $("btn-novo-grupo").addEventListener("click", novoGrupo);
+
+    $("indice-busca").addEventListener("input", function () {
+      BUSCA = $("indice-busca").value;
+      desenhar();
+    });
+
+    $("btn-abrir-todos").addEventListener("click", function () {
+      dados.setores.forEach(function (s) { ABERTOS[s.id] = true; });
+      guardarAbertos();
+      desenhar();
+    });
+    $("btn-recolher-todos").addEventListener("click", function () {
+      ABERTOS = {};
+      guardarAbertos();
+      limparBusca();
+      desenhar();
+    });
+
+    /* Os atalhos da aba Equipe têm destino fixo, escrito no HTML. */
+    Array.prototype.forEach.call(document.querySelectorAll("#indice-equipe .atalho"), function (b) {
+      b.addEventListener("click", function () {
+        levarA(document.getElementById(b.dataset.alvo), $("indice-equipe"));
+      });
     });
 
     $("btn-novo-aviso").addEventListener("click", function () {
