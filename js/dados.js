@@ -454,44 +454,131 @@ const Dados = (function () {
     } catch (e) { return null; }
   }
 
-  function carregarFavoritos() {
+  /* A LISTA QUE O BANCO CONFIRMOU, E A VERSÃO DELA.
+
+     Foi por aqui que os favoritos de um colega sumiram, em
+     setembro de 2026: cada gravação mandava a lista inteira que a
+     aba tinha na memória, sem olhar o que estava no banco. O Hub é a página
+     inicial e fica aberto o dia todo — uma aba aberta de manhã, ou
+     o computador de casa, guardava uma lista velha, e o primeiro
+     clique de estrela nela apagava tudo o que tinha entrado depois.
+     E uma leitura que falhava mostrava a lista VAZIA, e o clique
+     seguinte gravava vazio por cima.
+
+     Agora toda gravação vai com a versão (o updateTime) que esta
+     aba leu, e o banco recusa se alguém gravou antes. Aí a aba
+     relê e refaz SÓ o clique sobre a lista de verdade. Por isso a
+     gravação recebe uma MUDANÇA, e não uma lista pronta.
+
+     favVersao: "" = o documento ainda não existe; null = não sei,
+     é preciso ler antes de gravar. */
+  var favBase = null;
+  var favVersao = null;
+  var favFila = Promise.resolve();
+
+  function lerFavoritosDoBanco() {
     var s = lerSessao();
-    if (!s || !temBanco()) return Promise.resolve(lerFavoritosDoCache() || favoritosVazios());
     return fetch(DOC_FAVORITOS(s.uid) + "?key=" + encodeURIComponent(cfg.apiKey), {
       headers: { "Authorization": "Bearer " + s.idToken }, cache: "no-store"
     })
       .then(function (r) {
-        if (r.status === 404) return null;    /* ninguém marcou nada ainda */
-        return r.ok ? r.json() : null;
+        /* Só o 404 quer dizer "ainda não marcou nada". Qualquer
+           outra recusa é falha, e falha não é lista vazia. */
+        if (r.status === 404) return { lista: favoritosVazios(), versao: "" };
+        if (!r.ok) throw new Error("Não consegui ler os favoritos (HTTP " + r.status + ").");
+        return r.json().then(function (doc) {
+          var f = (doc.fields && doc.fields.json)
+            ? limparFavoritos(JSON.parse(doc.fields.json.stringValue))
+            : favoritosVazios();
+          return { lista: f, versao: doc.updateTime || null };
+        });
       })
-      .then(function (doc) {
-        if (!doc || !doc.fields || !doc.fields.json) return favoritosVazios();
-        var f = limparFavoritos(JSON.parse(doc.fields.json.stringValue));
-        gravarCache(CHAVE_FAVORITOS(), f);
-        return f;
-      })
-      .catch(function () { return lerFavoritosDoCache() || favoritosVazios(); });
+      .then(function (lido) {
+        favBase = lido.lista;
+        favVersao = lido.versao;
+        gravarCache(CHAVE_FAVORITOS(), lido.lista);
+        return lido.lista;
+      });
   }
 
-  function salvarFavoritos(f) {
+  /* Devolve { favoritos, lido }. lido=false quer dizer que o banco
+     não respondeu e a lista é a cópia deste navegador — a tela
+     precisa dizer isso, e não fingir que é a da conta. */
+  function carregarFavoritos() {
+    var s = lerSessao();
+    if (!s || !temBanco()) {
+      return Promise.resolve({ favoritos: lerFavoritosDoCache() || favoritosVazios(), lido: true });
+    }
+    return lerFavoritosDoBanco()
+      .then(function (f) { return { favoritos: f, lido: true }; })
+      .catch(function () {
+        return { favoritos: lerFavoritosDoCache() || favoritosVazios(), lido: false };
+      });
+  }
+
+  /* mudanca(f) altera a lista f no lugar. Precisa descrever a
+     INTENÇÃO ("marcar tal sistema", "tirar tal link"), e não
+     "inverter": ela pode ser aplicada de novo sobre uma lista que
+     outra aba mudou. Devolve a lista que ficou no banco. */
+  function salvarFavoritos(mudanca) {
     var s = lerSessao();
     if (!s) return Promise.reject(new Error("Sessão expirada. Entre de novo."));
-    var limpo = limparFavoritos(f);
-    /* Grava no navegador ANTES de falar com o banco: a tela já
-       respondeu ao clique, e se a rede falhar a escolha não se
-       perde no meio do caminho. */
-    gravarCache(CHAVE_FAVORITOS(), limpo);
-    if (!temBanco()) return Promise.resolve(limpo);
-    return fetch(DOC_FAVORITOS(s.uid), {
-      method: "PATCH",
-      headers: comAutorizacao({ "Content-Type": "application/json" }),
-      body: JSON.stringify({ fields: {
-        json:         { stringValue: JSON.stringify(limpo) },
-        atualizadoEm: { timestampValue: new Date().toISOString() },
-      } }),
-    }).then(function (r) {
-      if (!r.ok) throw new Error("Não consegui salvar os favoritos (HTTP " + r.status + ").");
-      return limpo;
+    if (!temBanco()) {
+      var local = lerFavoritosDoCache() || favoritosVazios();
+      mudanca(local);
+      local = limparFavoritos(local);
+      gravarCache(CHAVE_FAVORITOS(), local);
+      return Promise.resolve(local);
+    }
+    /* EM FILA. Dois cliques rápidos na mesma aba sairiam com a mesma
+       versão, e o segundo seria sempre recusado. */
+    var vez = favFila.then(function () { return gravarMudanca(mudanca, 0); });
+    favFila = vez.catch(function () {});
+    return vez;
+  }
+
+  function gravarMudanca(mudanca, tentativa) {
+    /* Sem versão conhecida, não se grava nada antes de ler: gravar
+       às cegas é exatamente o que apagava a lista. Se a leitura
+       falhar, a gravação falha junto — e o banco fica como estava. */
+    var antes = (favVersao === null) ? lerFavoritosDoBanco() : Promise.resolve();
+    return antes.then(function () {
+      var novo = limparFavoritos(JSON.parse(JSON.stringify(favBase)));
+      mudanca(novo);
+      novo = limparFavoritos(novo);
+      var condicao = favVersao
+        ? "currentDocument.updateTime=" + encodeURIComponent(favVersao)
+        : "currentDocument.exists=false";
+      return fetch(DOC_FAVORITOS(lerSessao().uid) + "?" + condicao, {
+        method: "PATCH",
+        headers: comAutorizacao({ "Content-Type": "application/json" }),
+        body: JSON.stringify({ fields: {
+          json:         { stringValue: JSON.stringify(novo) },
+          atualizadoEm: { timestampValue: new Date().toISOString() },
+        } }),
+      }).then(function (r) {
+        if (r.ok) {
+          return r.json().then(function (doc) {
+            favBase = novo;
+            favVersao = doc.updateTime || null;
+            gravarCache(CHAVE_FAVORITOS(), novo);
+            return novo;
+          });
+        }
+        return r.json().catch(function () { return null; }).then(function (corpo) {
+          var motivo = corpo && corpo.error && corpo.error.status;
+          /* Alguém gravou antes (outra aba, outra máquina), ou o
+             documento nasceu ou sumiu no meio. Relê e refaz. */
+          var outraVersao = motivo === "FAILED_PRECONDITION" ||
+                            motivo === "ALREADY_EXISTS" ||
+                            motivo === "NOT_FOUND";
+          if (outraVersao && tentativa < 3) {
+            favVersao = null;
+            return gravarMudanca(mudanca, tentativa + 1);
+          }
+          throw new Error("Não consegui salvar os favoritos (HTTP " + r.status + ").");
+        });
+      });
     });
   }
 

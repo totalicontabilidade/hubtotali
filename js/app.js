@@ -157,26 +157,74 @@
 
   var FAVORITOS_ERRO = "";
 
-  function guardarFavoritos() {
+  /* Gravações ainda no caminho. Enquanto houver alguma, a lista que
+     volta do banco não substitui a da tela: ela ainda não tem o
+     clique seguinte, e a estrela piscaria apagada e acesa. */
+  var FAV_PENDENTES = 0;
+
+  /* mudanca(f) descreve a INTENÇÃO do clique. Ela é aplicada aqui,
+     para a tela responder na hora, e de novo no banco, sobre a
+     lista de verdade — que pode ter mudado noutra aba ou noutra
+     máquina. Ver salvarFavoritos em dados.js. */
+  function guardarFavoritos(mudanca) {
     FAVORITOS_ERRO = "";
-    Dados.salvarFavoritos(FAVORITOS).catch(function (e) {
-      /* NÃO ENGOLIR. A escolha ficou guardada neste navegador, e
-         por isso a tela continua certa — mas ela não subiu, e
-         então não vai acompanhar a pessoa para outra máquina.
-         Ficar calado aqui seria deixá-la acreditar numa coisa que
-         não aconteceu. */
-      FAVORITOS_ERRO = "Guardado só neste navegador — não consegui salvar na sua conta. " +
-                       (e && e.message ? e.message : "");
-      desenharCentro();
+    mudanca(FAVORITOS);
+    desenharCentro();
+    FAV_PENDENTES++;
+    Dados.salvarFavoritos(mudanca).then(function (f) {
+      FAV_PENDENTES--;
+      if (!FAV_PENDENTES) aplicarFavoritos(f);
+    }, function (e) {
+      FAV_PENDENTES--;
+      /* NÃO ENGOLIR, E NÃO FINGIR. A mudança não chegou à conta, e
+         a tela volta ao que a conta tem — deixar a estrela acesa
+         seria deixar a pessoa acreditar numa coisa que não
+         aconteceu. */
+      FAVORITOS_ERRO = "Não consegui salvar essa mudança na sua conta, e ela foi desfeita. " +
+                       "Tente de novo daqui a pouco. " + (e && e.message ? e.message : "");
+      if (FAV_PENDENTES) { desenharCentro(); return; }
+      Dados.carregarFavoritos().then(function (r) {
+        FAVORITOS = r.favoritos;
+        desenharCentro();
+      });
     });
   }
 
+  /* Troca a lista da tela pela do banco, e só repinta se mudou. */
+  function aplicarFavoritos(f) {
+    if (JSON.stringify(f) === JSON.stringify(FAVORITOS)) return;
+    FAVORITOS = f;
+    if (!telaEmUso()) desenharCentro();
+  }
+
+  /* RELIDOS QUANDO A PESSOA VOLTA À ABA. O Hub fica aberto o dia
+     todo, e uma aba que só lê os favoritos ao abrir mostra à tarde
+     a lista da manhã. A gravação já não depende disto para ser
+     certa — mas a tela, sim. */
+  function recarregarFavoritos() {
+    if (FAV_PENDENTES || telaEmUso()) return;
+    Dados.carregarFavoritos().then(function (r) {
+      if (!r.lido || FAV_PENDENTES || telaEmUso()) return;
+      var tirouAviso = FAVORITOS_ERRO === AVISO_SEM_LEITURA;
+      if (tirouAviso) FAVORITOS_ERRO = "";
+      if (JSON.stringify(r.favoritos) !== JSON.stringify(FAVORITOS)) aplicarFavoritos(r.favoritos);
+      else if (tirouAviso) desenharCentro();
+    });
+  }
+
+  var AVISO_SEM_LEITURA = "Não consegui buscar seus favoritos na sua conta agora. " +
+                          "Esta é a cópia guardada neste navegador.";
+
   function virarFavorito(nome) {
-    var onde = FAVORITOS.marcados.indexOf(nome);
-    if (onde === -1) FAVORITOS.marcados.push(nome);
-    else FAVORITOS.marcados.splice(onde, 1);
-    guardarFavoritos();
-    desenharCentro();
+    /* A intenção sai do que a pessoa VIU: estrela apagada é
+       "marcar". Um "inverter" aplicado no banco desfaria o que
+       outra aba já tivesse marcado. */
+    var marcar = !ehFavorito(nome);
+    guardarFavoritos(function (f) {
+      var onde = f.marcados.indexOf(nome);
+      if (marcar && onde === -1) f.marcados.push(nome);
+      if (!marcar && onde !== -1) f.marcados.splice(onde, 1);
+    });
   }
 
   function estrelaDe(nome) {
@@ -206,7 +254,7 @@
     return achado;
   }
 
-  function itemMeu(meu, indice) {
+  function itemMeu(meu) {
     var caixa = item({ nome: meu.nome, url: meu.url, nota: "meu link",
                        logoDados: meu.logoDados }, true);
     var fora = el("div", "item-caixa");
@@ -220,9 +268,11 @@
       ev.preventDefault();
       ev.stopPropagation();
       if (!window.confirm("Tirar “" + meu.nome + "” dos seus favoritos?")) return;
-      FAVORITOS.meus.splice(indice, 1);
-      guardarFavoritos();
-      desenharCentro();
+      /* Pelo endereço, e não pela posição: na lista do banco o
+         link pode estar noutro lugar. */
+      guardarFavoritos(function (f) {
+        f.meus = f.meus.filter(function (m) { return m.url !== meu.url; });
+      });
     });
     fora.appendChild(x);
     return fora;
@@ -327,16 +377,17 @@
          link aparecer. A imagem chega depois e a tela se repinta —
          e se não chegar, ficam as iniciais, que é o normal de
          qualquer sistema sem logo aqui. */
-      var novo = { nome: n, url: e };
-      FAVORITOS.meus.push(novo);
-      guardarFavoritos();
-      desenharCentro();
+      guardarFavoritos(function (f) {
+        var jaTem = f.meus.some(function (m) { return mesmoLugar(m.url, e); });
+        if (!jaTem) f.meus.push({ nome: n, url: e });
+      });
       buscarIcone(e).then(function (dados) {
         if (!dados) return;
-        if (FAVORITOS.meus.indexOf(novo) === -1) return;   /* tirado enquanto buscava */
-        novo.logoDados = dados;
-        guardarFavoritos();
-        desenharCentro();
+        var aindaEsta = FAVORITOS.meus.some(function (m) { return m.url === e; });
+        if (!aindaEsta) return;   /* tirado enquanto buscava */
+        guardarFavoritos(function (f) {
+          f.meus.forEach(function (m) { if (m.url === e) m.logoDados = dados; });
+        });
       });
     });
 
@@ -557,7 +608,7 @@
     } else {
       var grade = el("div", "grade");
       daCasa.forEach(function (i) { grade.appendChild(item(i)); });
-      FAVORITOS.meus.forEach(function (m, n) { grade.appendChild(itemMeu(m, n)); });
+      FAVORITOS.meus.forEach(function (m) { grade.appendChild(itemMeu(m)); });
       b.appendChild(grade);
     }
     centro.appendChild(b);
@@ -1284,6 +1335,7 @@
       /* O próprio Dados.carregar avisa quando o que veio do servidor
          é diferente do que está na tela — e só nesse caso. */
       Dados.carregar(desenharSistemasQuandoLivre);
+      recarregarFavoritos();
     }
 
     RELOGIO_PENDENCIAS = window.setInterval(passo, 60 * 1000);
@@ -1388,12 +1440,17 @@
        formulário de pendência, montado só quando alguém clica. */
     if (sessao) Dados.carregarSetores();
     if (sessao) {
-      Dados.carregarFavoritos().then(function (f) {
+      Dados.carregarFavoritos().then(function (r) {
+        var f = r.favoritos;
+        /* Uma estrela clicada antes de a lista chegar já saiu pela
+           fila, sobre a lista do banco: a resposta dela manda. */
+        if (FAV_PENDENTES) return;
         FAVORITOS = f;
+        if (!r.lido) FAVORITOS_ERRO = AVISO_SEM_LEITURA;
         /* Só redesenha se houver o que mostrar: o centro já foi
            desenhado com a lista vazia, e repintar por nada faria
            os cartões piscarem na cara de quem abriu. */
-        if (f.marcados.length || f.meus.length) desenharCentro();
+        if (f.marcados.length || f.meus.length || !r.lido) desenharCentro();
       });
     }
     if (sessao || !Dados.temBanco()) abrirHub();
