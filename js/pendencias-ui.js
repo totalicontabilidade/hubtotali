@@ -1813,14 +1813,13 @@ const PendenciasUI = (function () {
          fixa, e oferecer um estado que não quer dizer nada é
          convidar a pessoa a inventar um significado para ele.
 
-         A EXCEÇÃO É O RECADO QUE JÁ ESTÁ EM "FAZENDO": alguém
-         clicou antes desta mudança. Esconder o botão ali deixaria
-         a ficha sem nenhum estado aceso — a pessoa não veria em
-         que pé está, nem teria como sair de lá. */
+         SEM EXCEÇÃO. Havia uma, para o recado em que alguém tinha
+         clicado antes desta mudança: sem o botão, a ficha ficaria
+         sem estado aceso. Agora esse recado já chega aqui como
+         "aberta" — quem acerta é a leitura, em pendencias.js. */
       var estados = [["aberta","Aberta"],["fazendo","Fazendo"],["resolvida","Resolvida"]]
         .filter(function (o) {
-          if (o[0] !== "fazendo") return true;
-          return !Pendencias.pedeCiencia(p) || p.situacao === "fazendo";
+          return o[0] !== "fazendo" || !Pendencias.pedeCiencia(p);
         });
 
       estados.forEach(function (o) {

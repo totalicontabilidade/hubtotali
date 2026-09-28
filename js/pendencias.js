@@ -196,7 +196,7 @@ const Pendencias = (function () {
           var p = deFirestore(l.document.fields);
           p.id = l.document.name.split("/").pop();
           p._col = l.document.name.indexOf("/" + RESERVADAS + "/") !== -1 ? RESERVADAS : ABERTAS;
-          return p;
+          return semFazendoEmRecado(p);
         });
       });
   }
@@ -243,6 +243,26 @@ const Pendencias = (function () {
     var p = deFirestore(l.document.fields);
     p.id = l.document.name.split("/").pop();
     p._col = ABERTAS;
+    return semFazendoEmRecado(p);
+  }
+
+  /* RECADO NÃO TEM "FAZENDO", NEM O QUE FOI MARCADO ANTES.
+
+     O botão saiu da ficha, mas os recados em que alguém já tinha
+     clicado continuaram gravados assim — e a tela seguia mostrando
+     a etiqueta e, por causa dela, o botão.
+
+     O conserto é na LEITURA, e não no banco, por dois motivos. A
+     regra só deixa mexer na situação de um recado quem o escreveu:
+     nem administrador passa. E mudar pelo caminho normal escreveria
+     "Mudou de Fazendo para Aberta" na linha do tempo, que é
+     registro de uma decisão que ninguém tomou.
+
+     Lido assim, o recado é "aberta" em todo lugar: cartão, ficha,
+     quadro e contagem. O dado antigo se acerta sozinho no dia em
+     que o autor o resolver. */
+  function semFazendoEmRecado(p) {
+    if (p.situacao === "fazendo" && pedeCiencia(p)) p.situacao = "aberta";
     return p;
   }
 
