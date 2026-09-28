@@ -470,6 +470,16 @@ service cloud.firestore {
                               || request.time < resource.data.criadoEm + duration.value(30, 'm')
                             ))
 
+                         // LEMBRAR QUEM NÃO LEU. O autor grava só a
+                         // hora do lembrete, e só a hora de AGORA do
+                         // servidor. É ela que põe o aviso na tela de
+                         // quem ainda não confirmou e aparece na ficha
+                         // como "último lembrete" — não pode ser
+                         // inventada.
+                         || (meuUid(resource.data.criadoPor)
+                             && mudou().hasOnly(['lembradoEm'])
+                             && request.resource.data.lembradoEm == request.time)
+
                          // AQUI HAVIA a permissão de mexer no campo
                          // "anexos", com a lista nova obrigada a ser
                          // pelo menos do tamanho da antiga. Isso
@@ -819,6 +829,16 @@ service cloud.firestore {
                               mudou().hasOnly(['situacao'])
                               || request.time < resource.data.criadoEm + duration.value(30, 'm')
                             ))
+
+                         // LEMBRAR QUEM NÃO LEU. O autor grava só a
+                         // hora do lembrete, e só a hora de AGORA do
+                         // servidor. É ela que põe o aviso na tela de
+                         // quem ainda não confirmou e aparece na ficha
+                         // como "último lembrete" — não pode ser
+                         // inventada.
+                         || (meuUid(resource.data.criadoPor)
+                             && mudou().hasOnly(['lembradoEm'])
+                             && request.resource.data.lembradoEm == request.time)
                        );
 
       allow delete: if daEquipe() && meuUid(resource.data.criadoPor);

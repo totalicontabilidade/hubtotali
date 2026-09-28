@@ -519,6 +519,15 @@ a{color:inherit;text-decoration:none}
                    background:var(--estado-luz);font-weight:640}
 .pd-ciencia .pd-botao{margin-top:2px}
 .pd-ciencia .pd-dica{margin-top:0}
+/* O botão do autor: pequeno, como o "Dar visto", com a hora do
+   último lembrete ao lado. */
+.pd-lembrar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pd-lembrar__q{font-size:12px;color:var(--txt-3)}
+.pd-lembrar__b{margin-left:auto;border:1px solid var(--fio-2);border-radius:9px;background:#fff;
+               font:inherit;font-size:12.5px;font-weight:600;color:var(--txt-2);
+               padding:7px 14px;cursor:pointer;transition:border-color .14s,color .14s}
+.pd-lembrar__b:hover{border-color:var(--estado);color:var(--estado)}
+.pd-lembrar__b:disabled{opacity:.55;cursor:default}
 
 .pd-botao{width:100%;padding:11px;border-radius:10px;font-size:13.5px;font-weight:660;
           border:1px solid var(--fio-2);background:#fff;margin-top:8px;transition:background .15s}
@@ -979,6 +988,8 @@ a{color:inherit;text-decoration:none}
 .pd-caixona__t{font-size:15px;font-weight:700;color:var(--txt);margin-bottom:10px}
 .pd-caixona__s--atraso .pd-caixona__t{color:var(--alerta)}
 .pd-caixona__s--lido   .pd-caixona__t{color:#8a6100}
+.pd-caixona__s--lembrete .pd-caixona__t{color:var(--estado);margin-bottom:3px}
+.pd-caixona__sub{font-size:12.5px;color:var(--txt-2);margin-bottom:10px}
 .pd-caixona__l{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
 /* Quebra em várias linhas quando o nome é longo: antes tudo era
    empurrado para a mesma linha, e o que sobrava era o nome. */

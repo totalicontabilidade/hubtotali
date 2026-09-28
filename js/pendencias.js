@@ -938,6 +938,65 @@ const Pendencias = (function () {
       });
   }
 
+  /* ---------- lembrar quem ainda não leu ----------
+
+     Nem todo chamado confirma. Até aqui, o autor via os nomes que
+     faltavam e não tinha o que fazer além de ir cobrar de mesa em
+     mesa.
+
+     O LEMBRETE É UMA HORA, E NÃO UMA LISTA DE NOMES. Quem recebe
+     o aviso sai da conta na leitura: é quem foi chamado e ainda não
+     está em "ciencia". Guardar os nomes seria guardar uma foto que
+     envelhece no primeiro colega que confirmar.
+
+     A hora é a do SERVIDOR. Ela é a chave do aviso na tela de cada
+     um — um lembrete novo tem hora nova e volta a aparecer — e a
+     regra do banco exige que seja o agora dele, para ninguém
+     gravar um lembrete com data de amanhã.
+
+     Só o autor lembra. É o recado dele; e é a mesma porta que já
+     o deixa resolver. */
+  function faltamLer(p) {
+    if (!pedeCiencia(p)) return [];
+    var deram = Array.isArray(p.ciencia) ? p.ciencia : [];
+    return (Array.isArray(p.deveDarCiencia) ? p.deveDarCiencia : [])
+      .filter(function (u) { return u !== p.criadoPor && deram.indexOf(u) === -1; });
+  }
+
+  function podeLembrar(p) {
+    return souOAutor(p) && p.situacao !== "resolvida" && faltamLer(p).length > 0;
+  }
+
+  function lembrarQuemNaoLeu(p, nomeDeQuem, nomesQueFaltam) {
+    if (!podeLembrar(p)) return Promise.reject(new Error("Não há ninguém para lembrar."));
+    return fetch(base() + ":commit", {
+      method: "POST",
+      headers: autorizacao(),
+      body: JSON.stringify({ writes: [{
+        transform: {
+          document: nomeDoDocumento(colDe(p) + "/" + p.id),
+          fieldTransforms: [{ fieldPath: "lembradoEm", setToServerValue: "REQUEST_TIME" }],
+        },
+        currentDocument: { exists: true },
+      }] }),
+    })
+      .then(function (r) {
+        if (r.status === 403) throw new Error("Só quem escreveu o recado pode lembrar os colegas.");
+        if (!r.ok) throw new Error("Não consegui enviar o lembrete (HTTP " + r.status + ").");
+        return r.json();
+      })
+      .then(function (j) {
+        var tr = j && j.writeResults && j.writeResults[0] && j.writeResults[0].transformResults;
+        p.lembradoEm = (tr && tr[0] && tr[0].timestampValue) || new Date().toISOString();
+        /* A linha do tempo é para gente: diz a quem foi o lembrete.
+           Se falhar, o lembrete vale do mesmo jeito. */
+        var texto = "Lembrou quem ainda não confirmou" +
+          (nomesQueFaltam && nomesQueFaltam.length ? ": " + nomesQueFaltam.join(", ") + "." : ".");
+        return acrescentar(p, texto, nomeDeQuem, true)
+          .then(function () { return true; }, function () { return true; });
+      });
+  }
+
   function marcarComoVista(p) {
     var s = Dados.sessao();
     if (!s || jaVi(p)) return Promise.resolve(false);
@@ -1577,6 +1636,9 @@ const Pendencias = (function () {
     jaDeiCiencia: jaDeiCiencia,
     contaDaCiencia: contaDaCiencia,
     darCiencia: darCiencia,
+    faltamLer: faltamLer,
+    podeLembrar: podeLembrar,
+    lembrarQuemNaoLeu: lembrarQuemNaoLeu,
     quemDeuVisto: quemDeuVisto,
     podeDarVisto: podeDarVisto,
     darVisto: darVisto,

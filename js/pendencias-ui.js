@@ -1756,6 +1756,37 @@ const PendenciasUI = (function () {
       } else if (Pendencias.jaDeiCiencia(p)) {
         cx.appendChild(el("div", "pd-dica", "Você já confirmou que leu este recado."));
       }
+
+      /* LEMBRAR QUEM NÃO LEU. Só para o autor, e só enquanto falta
+         alguém. O clique põe uma caixa na tela de cada um que ainda
+         não confirmou — a mesma caixa das tarefas vencidas — toda
+         vez que abrir o Hub, até confirmar. */
+      if (Pendencias.podeLembrar(p)) {
+        var faltam = Pendencias.faltamLer(p);
+        var linha = el("div", "pd-lembrar");
+        var bl = el("button", "pd-lembrar__b",
+          "Lembrar quem não leu (" + faltam.length + ")");
+        bl.type = "button";
+        bl.title = "Quem ainda não confirmou (" + faltam.map(nomeDe).join(", ") +
+                   ") verá um aviso ao abrir o Hub, até confirmar.";
+        bl.addEventListener("click", function () {
+          bl.disabled = true; bl.textContent = "Enviando…";
+          Pendencias.lembrarQuemNaoLeu(p, meuNome(), faltam.map(nomeDe))
+            .then(function () {
+              abrirFicha(p);          /* redesenha, com a linha nova na conversa */
+            })
+            .catch(function (err) {
+              bl.disabled = false;
+              bl.textContent = "Lembrar quem não leu (" + faltam.length + ")";
+              cx.appendChild(el("div", "pd-corrigir__erro", err.message));
+            });
+        });
+        if (p.lembradoEm) {
+          linha.appendChild(el("span", "pd-lembrar__q", "Último lembrete: " + quandoEscrito(p.lembradoEm)));
+        }
+        linha.appendChild(bl);
+        cx.appendChild(linha);
+      }
       c.appendChild(cx);
     }
 
@@ -2782,10 +2813,20 @@ const PendenciasUI = (function () {
 
     var jaDados = avisosJaDados();
     var meusSetores = setoresDe(porUid[eu] || {});
-    var venceram = [], lidos = [], chaves = [];
+    var venceram = [], lembrados = [], lidos = [], chaves = [], lembretes = [];
 
     todas.forEach(function (p) {
       if (p.situacao === "resolvida") return;
+
+      /* O AUTOR PEDIU DE NOVO, e eu ainda não confirmei. Este não
+         vai para as chaves do navegador: volta a cada abertura do
+         Hub até eu confirmar. Só não repete dentro da mesma
+         abertura — a atualização sozinha roda o tempo todo, e a
+         caixa pularia na cara de quem já a fechou. */
+      if (p.lembradoEm && Pendencias.devoCiencia(p) && !Pendencias.jaDeiCiencia(p)) {
+        var k3 = p.id + "@" + p.lembradoEm;
+        if (lembretesNestaAbertura.indexOf(k3) === -1) { lembrados.push(p); lembretes.push(k3); }
+      }
 
       if (!Pendencias.pedeCiencia(p)
           && Pendencias.estado(p) === "atrasada"
@@ -2803,11 +2844,16 @@ const PendenciasUI = (function () {
       }
     });
 
-    if (!venceram.length && !lidos.length) return;
-    mostrarCaixaGrande(venceram, lidos, chaves);
+    if (!venceram.length && !lembrados.length && !lidos.length) return;
+    mostrarCaixaGrande(venceram, lembrados, lidos, chaves, lembretes);
   }
 
-  function mostrarCaixaGrande(venceram, lidos, chaves) {
+  /* Os lembretes já mostrados NESTA ABERTURA do Hub. Na memória da
+     página, e não do navegador: abrir o Hub de novo zera a lista, e
+     o aviso volta — é o que se quer até a pessoa confirmar. */
+  var lembretesNestaAbertura = [];
+
+  function mostrarCaixaGrande(venceram, lembrados, lidos, chaves, lembretes) {
     var fundo = el("div", "pd-caixona");
     var caixa = el("div", "pd-caixona__c");
     caixa.setAttribute("role", "dialog");
@@ -2830,6 +2876,34 @@ const PendenciasUI = (function () {
       });
       s1.appendChild(l1);
       caixa.appendChild(s1);
+    }
+
+    /* LOGO DEPOIS DO QUE VENCEU: um colega está esperando a minha
+       confirmação, e já teve de pedir duas vezes. */
+    if (lembrados.length) {
+      var s3 = el("div", "pd-caixona__s pd-caixona__s--lembrete");
+      s3.appendChild(el("div", "pd-caixona__t",
+        lembrados.length === 1 ? "Há um recado esperando a sua leitura"
+                               : lembrados.length + " recados esperando a sua leitura"));
+      s3.appendChild(el("div", "pd-caixona__sub",
+        "Abra, leia e clique em “Confirmo que li”."));
+      var l3 = el("ul", "pd-caixona__l");
+      lembrados.forEach(function (p) {
+        var li = document.createElement("li");
+        li.className = "pd-caixona__li--acoes";
+        li.appendChild(el("span", "pd-caixona__o", p.oque));
+        li.appendChild(el("span", "pd-caixona__q",
+          "de " + nomeDe(p.criadoPor) + " · lembrado " + quandoEscrito(p.lembradoEm)));
+        var acoes = el("div", "pd-caixona__acoes");
+        var ler = el("button", "pd-caixona__b pd-caixona__b--ok", "Ler o recado");
+        ler.type = "button";
+        ler.addEventListener("click", function () { fechar2(); abrirFicha(p); });
+        acoes.appendChild(ler);
+        li.appendChild(acoes);
+        l3.appendChild(li);
+      });
+      s3.appendChild(l3);
+      caixa.appendChild(s3);
     }
 
     if (lidos.length) {
@@ -2901,8 +2975,9 @@ const PendenciasUI = (function () {
     b.addEventListener("click", fechar2);
     caixa.appendChild(b);
 
-    caixa.appendChild(el("div", "pd-dica",
-      "Clique numa tarefa vencida para abri-la. Este aviso não volta para os mesmos itens."));
+    caixa.appendChild(el("div", "pd-dica", lembrados.length
+      ? "O aviso do recado volta cada vez que você abrir o Hub, até você confirmar a leitura."
+      : "Clique numa tarefa vencida para abri-la. Este aviso não volta para os mesmos itens."));
 
     fundo.appendChild(caixa);
     /* Clicar fora e Escape fecham, como qualquer caixa. Mas o
@@ -2920,6 +2995,7 @@ const PendenciasUI = (function () {
       /* SÓ AGORA a chave é guardada. Se a aba morresse antes, o
          aviso voltaria — que é o certo para quem não leu. */
       guardarAvisos(avisosJaDados().concat(chaves));
+      lembretesNestaAbertura = lembretesNestaAbertura.concat(lembretes);
     }
   }
 
@@ -2991,7 +3067,10 @@ const PendenciasUI = (function () {
   function assinatura() {
     return todas.map(function (p) {
       return [p.id, p.situacao, p.oque, p.prazo, p.urgencia,
-              (p.vistas || []).length, (p.ciencia || []).length].join("|");
+              (p.vistas || []).length, (p.ciencia || []).length,
+              /* um lembrete novo tem de chegar a quem está com o
+                 Hub aberto, sem esperar F5 */
+              p.lembradoEm || ""].join("|");
     }).sort().join("\n");
   }
 
