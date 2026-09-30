@@ -1606,6 +1606,8 @@ const Pendencias = (function () {
     desconsiderar: desconsiderar,
     apagarComentario: apagarComentario,
     temAnexos: temAnexos,
+    LIMITE_DO_ARQUIVO: LIMITE_DO_ARQUIVO,
+    LIMITE_DE_ANEXOS: LIMITE_DE_ANEXOS,
     enviarAnexo: enviarAnexo,
     podeApagarAnexo: podeApagarAnexo,
     podeDesconsiderarAnexo: podeDesconsiderarAnexo,

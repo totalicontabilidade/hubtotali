@@ -1430,6 +1430,66 @@ const PendenciasUI = (function () {
     marcar.appendChild(el("div", "pd-dica",
       "Quem for marcado também vê esta pendência na página dele. A responsabilidade continua sendo de uma pessoa só."));
 
+    /* ---------- anexos já na abertura ----------
+
+       Antes só dava para anexar depois, abrindo a ficha. Para uma
+       tarefa isso era um passo a mais; para um RECADO era defeito:
+       os chamados recebem o aviso no instante em que ele é criado,
+       e quem lia depressa confirmava a leitura de um recado cujo
+       documento ainda nem tinha chegado.
+
+       Os arquivos ficam aqui, no navegador, até o clique em abrir.
+       Só sobem depois de a pendência existir, porque o endereço de
+       cada um leva o id dela. */
+    var escolhidos = [];
+    var anexos = el("div", "pd-campo");
+    anexos.hidden = !Pendencias.temAnexos();
+    anexos.appendChild(el("span", "pd-rot", "Anexos"));
+    var listaAnexos = el("div", "pd-anexos");
+    anexos.appendChild(listaAnexos);
+
+    function pintarEscolhidos(aviso) {
+      listaAnexos.textContent = "";
+      escolhidos.forEach(function (arquivo, i) {
+        var linha = el("div", "pd-anexo");
+        linha.appendChild(el("span", "pd-anexo__n", arquivo.name));
+        linha.appendChild(el("span", "pd-anexo__t", tamanhoLegivel(arquivo.size)));
+        var tirar = el("button", "pd-corrigir pd-apagar-com", "tirar");
+        tirar.type = "button";
+        tirar.addEventListener("click", function () { escolhidos.splice(i, 1); pintarEscolhidos(); });
+        linha.appendChild(tirar);
+        listaAnexos.appendChild(linha);
+      });
+      if (aviso) listaAnexos.appendChild(el("div", "pd-anexo__erro", aviso));
+
+      var ba = el("button", "pd-anexo__btn", "Anexar arquivo");
+      ba.type = "button";
+      ba.title = "Até 10 MB por arquivo. Sobe junto quando você abrir a pendência.";
+      ba.addEventListener("click", function () {
+        var entrada = document.createElement("input");
+        entrada.type = "file";
+        entrada.multiple = true;
+        entrada.addEventListener("change", function () {
+          var recusados = [];
+          Array.prototype.forEach.call(entrada.files || [], function (arquivo) {
+            if (arquivo.size > Pendencias.LIMITE_DO_ARQUIVO) { recusados.push(arquivo.name); return; }
+            if (escolhidos.length >= Pendencias.LIMITE_DE_ANEXOS) { recusados.push(arquivo.name); return; }
+            escolhidos.push(arquivo);
+          });
+          /* A entrada de arquivo não mora no painel, então o aviso de
+             "você tem algo escrito" não ficaria sabendo dela. */
+          if (escolhidos.length) painel._digitado = true;
+          pintarEscolhidos(recusados.length
+            ? "Ficou de fora: " + recusados.join(", ") + ". O limite é de 10 MB por arquivo e " +
+              Pendencias.LIMITE_DE_ANEXOS + " arquivos por pendência."
+            : "");
+        });
+        entrada.click();
+      });
+      listaAnexos.appendChild(ba);
+    }
+    pintarEscolhidos();
+
     function soEu() { return cr.checked && rSoEu.checked; }
 
     /* "Só eu" ESCONDE quem faz e quem mais vê, em vez de deixar os
@@ -1445,7 +1505,7 @@ const PendenciasUI = (function () {
     }
     cr.addEventListener("change", aplicarPlateia);
 
-    [oque, porque, recado, quem, chamados, quando, urgencia, sugestao, marcar, reservada]
+    [oque, porque, recado, quem, chamados, quando, urgencia, sugestao, anexos, marcar, reservada]
       .forEach(function (x) { c.appendChild(x); });
 
     /* RECADO E RESERVADA SÃO EXCLUDENTES, e não por gosto: a
@@ -1463,6 +1523,14 @@ const PendenciasUI = (function () {
          não. Some o campo em vez de deixá-lo ali pedindo uma data
          que não vai a lugar nenhum. */
       quando.hidden = r;
+      /* Recado quase nunca tem solução a sugerir — é aviso. O campo
+         fica, para o raro caso em que o aviso pede uma ação, mas
+         diz que pode ser pulado. */
+      sugestao.querySelector(".pd-rot").textContent =
+        r ? "Sugestão de solução (opcional)" : "Sugestão de solução";
+      sugestao._entrada.placeholder = r
+        ? "Só se o recado pedir alguma ação. Pode ficar em branco."
+        : "O que você faria no lugar dele. É este campo que transforma cobrança em ajuda.";
       if (r && cr.checked) { cr.checked = false; aplicarPlateia(); }
     }
     /* Os dois rádios já chamam aplicarRecado no change; esta chamada
@@ -1519,7 +1587,31 @@ const PendenciasUI = (function () {
                                 rComigo.checked ? false : true),
         envolvidos: (crec.checked || soEu()) ? [] : marcar._valores(),
         deveDarCiencia: crec.checked ? chamados._valores() : [],
-      }).then(function () { fechar(); carregar(); })
+      }).then(function (nova) {
+        /* Um de cada vez: a conta de quantos anexos a pendência já
+           tem é feita na lista dela, e dois envios ao mesmo tempo
+           leriam a mesma conta. */
+        var falhas = [];
+        return escolhidos.reduce(function (fila, arquivo, i) {
+          return fila.then(function () {
+            b.textContent = "Enviando anexo " + (i + 1) + " de " + escolhidos.length + "…";
+            return Pendencias.enviarAnexo(nova, arquivo)
+              .catch(function (e) { falhas.push(arquivo.name + " — " + e.message); });
+          });
+        }, Promise.resolve()).then(function () {
+          carregar();
+          if (!falhas.length) { fechar(); return; }
+          /* A PENDÊNCIA JÁ EXISTE. Devolver o erro ao formulário
+             faria a pessoa clicar de novo e abrir uma segunda, igual.
+             Então a tela vai para a ficha dela, dizendo o que não
+             subiu — e é dali que se anexa de novo. */
+          abrirFicha(nova);
+          corpo.insertBefore(el("div", "pd-erro",
+            "A pendência foi aberta, mas " + (falhas.length === 1
+              ? "um anexo não subiu: " : falhas.length + " anexos não subiram: ") +
+            falhas.join("; ") + " Anexe de novo aqui embaixo."), corpo.firstChild);
+        });
+      })
         .catch(function (e) {
           msg.textContent = e.message; msg.hidden = false;
           b.disabled = false; b.textContent = "Abrir pendência";
