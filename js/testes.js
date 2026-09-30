@@ -92,6 +92,71 @@
     return Promise.resolve();
   }
 
+  /* Negrito, itálico, tachado e listas. Não toca no banco: confere
+     o que o texto vira na tela e o que cada botão faz com a
+     seleção. O que mais importa aqui é o que NÃO pode mudar — texto
+     antigo com asterisco ou sublinhado no meio. */
+  function conferirFormato() {
+    var g = "Formatação";
+    if (typeof Formato === "undefined") {
+      afirmar(g, "o formatador carregou", false, "Formato não está definido");
+      return Promise.resolve();
+    }
+
+    function html(texto) {
+      var d = document.createElement("div");
+      Formato.desenhar(d, texto);
+      return d.innerHTML;
+    }
+    function igual(oQue, texto, esperado) {
+      var veio = html(texto);
+      afirmar(g, oQue, veio === esperado, veio);
+    }
+    var P = '<div class="fmt-p">', F = "</div>";
+
+    igual("negrito", "pagar *hoje* sem falta", P + "pagar <strong>hoje</strong> sem falta" + F);
+    igual("itálico e tachado", "_ver_ ~antes~", P + "<em>ver</em> <s>antes</s>" + F);
+    igual("um dentro do outro", "*_os dois_*", P + "<strong><em>os dois</em></strong>" + F);
+    igual("sublinhado em nome de arquivo fica como está", "contas_pagas_2025.xlsx",
+          P + "contas_pagas_2025.xlsx" + F);
+    igual("asterisco de conta fica como está", "5 * 3 * 2 e *obs", P + "5 * 3 * 2 e *obs" + F);
+    igual("til de aproximação fica como está", "~10 dias, ~20 no máximo", P + "~10 dias, ~20 no máximo" + F);
+    igual("marca não atravessa linha", "*um\ndois*", P + "*um\ndois*" + F);
+    igual("o que parece HTML continua texto", "*<b>x</b>*", P + "<strong>&lt;b&gt;x&lt;/b&gt;</strong>" + F);
+    igual("lista de marcadores", "- um\n- *dois*",
+          '<ul class="fmt-lista"><li>um</li><li><strong>dois</strong></li></ul>');
+    igual("lista numerada guarda o número escrito", "3. a\n4. b",
+          '<ol class="fmt-lista"><li value="3">a</li><li value="4">b</li></ol>');
+    igual("texto, linha em branco e lista", "Empresas:\n\n- A\nfim",
+          P + "Empresas:\n\n" + F + '<ul class="fmt-lista"><li>A</li></ul>' + P + "fim" + F);
+    igual("ano com ponto não é lista", "2025. Finalizar", P + "2025. Finalizar" + F);
+
+    function aplicado(v, m) { return v.slice(0, m.de) + m.texto + v.slice(m.ate); }
+    function botao(oQue, veio, esperado) { afirmar(g, oQue, veio === esperado, veio); }
+
+    var m = Formato.envolver("pagar hoje sem falta", 6, 10, "*");
+    botao("botão de negrito envolve a seleção", aplicado("pagar hoje sem falta", m), "pagar *hoje* sem falta");
+    m = Formato.envolver("pagar *hoje* sem falta", 6, 12, "*");
+    botao("segundo clique tira o negrito", aplicado("pagar *hoje* sem falta", m), "pagar hoje sem falta");
+    m = Formato.envolver("pagar hoje sem", 6, 11, "_");
+    botao("o espaço selecionado fica fora da marca", aplicado("pagar hoje sem", m), "pagar _hoje_ sem");
+    m = Formato.envolver("- um\n- dois", 0, 11, "*");
+    botao("negrito em lista mantém a lista", aplicado("- um\n- dois", m), "- *um*\n- *dois*");
+    m = Formato.listar("um\ndois\n\ntrês", 1, 12, "n");
+    botao("botão de lista numerada", aplicado("um\ndois\n\ntrês", m), "1. um\n2. dois\n\n3. três");
+    m = Formato.listar("1. um\n2. dois", 0, 13, "m");
+    botao("numerada vira marcadores", aplicado("1. um\n2. dois", m), "- um\n- dois");
+    m = Formato.listar("- um\n- dois", 0, 11, "m");
+    botao("segundo clique desfaz a lista", aplicado("- um\n- dois", m), "um\ndois");
+    m = Formato.aoEnter("1. um", 5, 5);
+    botao("Enter continua a numeração", m ? aplicado("1. um", m) : "(nada)", "1. um\n2. ");
+    m = Formato.aoEnter("- um\n- ", 7, 7);
+    botao("Enter em item vazio sai da lista", m ? aplicado("- um\n- ", m) : "(nada)", "- um\n");
+    afirmar(g, "Enter fora de lista é o do navegador", Formato.aoEnter("texto", 5, 5) === null);
+
+    return Promise.resolve();
+  }
+
   function conferirPortas() {
     var g = "Portas fechadas";
     var c = (typeof CONFIG_HUB !== "undefined") ? CONFIG_HUB : {};
@@ -634,6 +699,7 @@
     $("limpeza").hidden = true;
 
     conferirAgenda()
+      .then(conferirFormato)
       .then(conferirPortas)
       .then(conferirReservadas)
       .then(conferirCiclo)

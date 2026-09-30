@@ -1082,6 +1082,7 @@ const PendenciasUI = (function () {
     i.className = "pd-caixa-txt pd-area";
     i.rows = 2;
     if (dica) i.placeholder = dica;
+    l.appendChild(Formato.barra(i));
     l.appendChild(i);
     l._entrada = i;
     return l;
@@ -1530,11 +1531,20 @@ const PendenciasUI = (function () {
 
   /* ---------- a ficha ---------- */
 
-  function linhaFicha(rotulo, texto) {
+  /* "rico" é o texto que a pessoa escreveu à mão — Detalhes e
+     Sugestão —, onde negrito e lista valem. Data e urgência são
+     valores, e entram como sempre. */
+  function linhaFicha(rotulo, texto, rico) {
     if (!texto) return null;
     var d = el("div", "pd-linha");
     d.appendChild(el("span", "pd-rot", rotulo));
-    d.appendChild(el("div", "pd-valor", texto));
+    if (rico) {
+      var v = el("div", "pd-valor");
+      Formato.desenhar(v, texto);
+      d.appendChild(v);
+    } else {
+      d.appendChild(el("div", "pd-valor", texto));
+    }
     return d;
   }
 
@@ -1630,16 +1640,16 @@ const PendenciasUI = (function () {
     function pintarCorpo() {
       corpo.textContent = "";
       [
-        ["Detalhes", p.porque],
+        ["Detalhes", p.porque, true],
         /* "Como fazer" saiu junto com o campo. Pendência antiga
            que tenha o texto continua guardando — só não é
            mostrada, porque o campo deixou de existir. */
-        ["Sugestão de solução", p.sugestao],
+        ["Sugestão de solução", p.sugestao, true],
         ["Para quando", p.prazo ? p.prazo.split("-").reverse().join("/") : ""],
         ["Urgência", p.urgencia === "urgente" ? "Urgente" :
                      p.urgencia === "quando_der" ? "Quando der" : ""],
       ].forEach(function (par) {
-        var l = linhaFicha(par[0], par[1]);
+        var l = linhaFicha(par[0], par[1], par[2]);
         if (l) corpo.appendChild(l);
       });
 
@@ -1666,14 +1676,15 @@ const PendenciasUI = (function () {
         if (tipo === "data") caixa.type = "date"; else caixa.rows = 2;
         caixa.className = "pd-corrigir__caixa";
         caixa.value = valor || "";
+        if (tipo === "rico") l.appendChild(Formato.barra(caixa));
         l.appendChild(caixa);
         campos[chave] = caixa;
         corpo.appendChild(l);
       }
 
       campo("oque", "O quê", p.oque);
-      campo("porque", "Detalhes", p.porque);
-      campo("sugestao", "Sugestão de solução", p.sugestao);
+      campo("porque", "Detalhes", p.porque, "rico");
+      campo("sugestao", "Sugestão de solução", p.sugestao, "rico");
       campo("prazo", "Para quando", p.prazo, "data");
 
       var ok  = el("button", "pd-corrigir__ok", "Salvar correção");
@@ -1931,6 +1942,10 @@ const PendenciasUI = (function () {
 
     escrita.appendChild(fundo);
     escrita.appendChild(novo);
+    /* Os botões ficam FORA do invólucro: dentro, empurrariam a
+       caixa para baixo e o espelho, que é medido pelo invólucro,
+       deixaria de coincidir com ela. */
+    c.appendChild(Formato.barra(novo));
     c.appendChild(escrita);
 
     function pintarFundo() {
@@ -2581,10 +2596,17 @@ const PendenciasUI = (function () {
       .map(function (u) { return "@" + nomeDe(u); })
       .filter(function (n) { return n.length > 1; });
 
-    pedacosComChamadas(x.texto, nomes).forEach(function (pedaco) {
-      if (pedaco.chamada) d.appendChild(el("span", "pd-arroba", pedaco.texto));
-      else d.appendChild(document.createTextNode(pedaco.texto));
-    });
+    function comChamadas(texto, onde) {
+      pedacosComChamadas(texto, nomes).forEach(function (pedaco) {
+        if (pedaco.chamada) onde.appendChild(el("span", "pd-arroba", pedaco.texto));
+        else onde.appendChild(document.createTextNode(pedaco.texto));
+      });
+    }
+
+    /* Registro do sistema não é texto de ninguém: entra como está,
+       sem procurar marca de negrito no nome de um colega. */
+    if (x.doSistema) comChamadas(x.texto, d);
+    else Formato.desenhar(d, x.texto, comChamadas);
     return d;
   }
 
@@ -2644,13 +2666,17 @@ const PendenciasUI = (function () {
             acoes.appendChild(ok);
             acoes.appendChild(nao);
 
+            var botoes = Formato.barra(caixa);
+
             texto.hidden = true;
             ed.hidden = true;
+            d.appendChild(botoes);
             d.appendChild(caixa);
             d.appendChild(acoes);
             caixa.focus();
 
             function desistir() {
+              botoes.remove();
               caixa.remove();
               acoes.remove();
               texto.hidden = false;

@@ -107,6 +107,34 @@ são recusados.
 
 ---
 
+## Negrito, itálico, tachado e listas
+
+Em **Detalhes**, em **Sugestão de solução** e nos **comentários** — ao
+escrever e ao corrigir — há uma fileira de botões em cima da caixa:
+**N** (negrito), *I* (itálico), T riscado (tachado), **• Lista** e
+**1. Lista**. Selecione o trecho e clique; clicar de novo desfaz. `Ctrl+B` e
+`Ctrl+I` fazem o mesmo, e Enter dentro de uma lista abre o item seguinte.
+
+**Na caixa aparecem os sinais; o efeito aparece depois de gravar.** São os
+mesmos do WhatsApp, e quem preferir pode digitá-los:
+
+| Escreve-se | Vira |
+|---|---|
+| `*texto*` | negrito |
+| `_texto_` | itálico |
+| `~texto~` | tachado |
+| `- item` no começo da linha | lista de marcadores |
+| `1. item` no começo da linha | lista numerada |
+
+O sinal só vale colado na palavra, então `contas_pagas_2025.xlsx`, `5 * 3` e
+`~10 dias` continuam como estão. O título da pendência não tem formatação.
+
+**O banco não mudou.** O que se grava é o mesmo texto de antes, com os sinais
+dentro — nenhuma regra nova, e os sinais contam no limite de tamanho. Tudo
+mora em `js/formato.js`, e a página de testes confere o grupo "Formatação".
+
+---
+
 ## Os logos
 
 **Vivem dentro do banco**, embutidos no próprio documento da lista, um por

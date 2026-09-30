@@ -491,6 +491,25 @@ a{color:inherit;text-decoration:none}
 }
 .pd-area{resize:vertical;min-height:52px;line-height:1.45}
 
+/* ---------- negrito, itálico, tachado e listas ----------
+   A fileira de botões em cima da caixa é pequena e sem cor: é
+   ferramenta de quem já está escrevendo, não convite. Cada botão
+   mostra o próprio efeito — o N em negrito, o T riscado. */
+.pd-fmt{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:5px}
+.pd-fmt__b{min-width:26px;height:24px;padding:0 7px;border:1px solid var(--fio-2);
+           border-radius:6px;background:#fff;color:var(--txt-2);
+           font-size:12px;line-height:1;transition:border-color .14s,color .14s}
+.pd-fmt__b:hover{border-color:var(--estado);color:var(--estado)}
+.pd-fmt__b--n{font-weight:800}
+.pd-fmt__b--i{font-style:italic;font-family:Georgia,"Times New Roman",serif}
+.pd-fmt__b--t{text-decoration:line-through}
+.pd-item .pd-fmt{margin-top:6px;margin-bottom:0}
+/* O texto já formatado, na ficha e na conversa. A lista é um bloco
+   dentro de um texto que guarda as quebras de linha: sem margem
+   própria, para a linha em branco ser a que a pessoa digitou. */
+.fmt-lista{margin:0;padding-left:22px}
+.pd-valor strong,.pd-item__txt strong{font-weight:720}
+
 /* A escolha de quem vê uma reservada. Duas opções com uma linha de
    explicação cada, porque a diferença entre elas é a coisa mais
    consequente do formulário inteiro. */
