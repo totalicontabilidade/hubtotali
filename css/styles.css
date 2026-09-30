@@ -386,7 +386,34 @@ a{color:inherit;text-decoration:none}
 .av__t{font-size:13px;font-weight:680;color:#fff}
 .av__x{font-size:12.5px;color:rgba(255,255,255,.72)}
 .av__sep{width:1px;height:15px;background:rgba(255,255,255,.22);margin:0 16px;flex:none}
-.avisos__mais{margin-left:auto;font-size:11.5px;color:rgba(255,255,255,.72);flex:none}
+
+/* O letreiro. A janela recorta; o trilho anda. Parado, é a faixa de
+   sempre. Correndo, o trilho leva a lista duas vezes e anda a
+   largura de uma — a segunda cópia chega exatamente onde a primeira
+   começou, e a volta não dá salto. As bordas esmaecem para o texto
+   entrar e sair em vez de ser cortado a faca. */
+.avisos__janela{flex:1;min-width:0;overflow:hidden;align-self:stretch;display:flex;align-items:center}
+.avisos__trilho{display:flex;align-items:center;flex:none}
+.avisos__copia{display:flex;align-items:center;flex:none}
+.av__sep--volta{display:none}
+.avisos--corre .av__sep--volta{display:block;margin:0 22px}
+.avisos--corre .avisos__janela{
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
+.avisos--corre .avisos__trilho{animation:avisos-passa var(--avisos-dur,30s) linear infinite}
+/* Para com o mouse em cima: quem quer ler até o fim não corre atrás. */
+.avisos--corre:hover .avisos__trilho{animation-play-state:paused}
+@keyframes avisos-passa{
+  from{transform:translateX(0)}
+  to{transform:translateX(calc(-1 * var(--avisos-dist,0px)))}
+}
+/* Quem pediu menos movimento ao sistema: nada anda, e a faixa rola
+   com o mouse ou o dedo. */
+@media (prefers-reduced-motion:reduce){
+  .avisos--corre .avisos__trilho{animation:none}
+  .avisos--corre .avisos__janela{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
+  .avisos--corre .avisos__copia[aria-hidden]{display:none}
+}
 
 /* ============================================================
    5 · O painel dos órgãos

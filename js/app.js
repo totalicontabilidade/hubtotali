@@ -807,26 +807,115 @@
     PendenciasUI.iniciar(alvo, function (r) { pintarResumo(r); });
   }
 
-  /* ---------- avisos ---------- */
+  /* ---------- avisos ----------
+
+     A FAIXA VIRA LETREIRO QUANDO NÃO CABE.
+
+     Antes ela mostrava os três primeiros e um "+ 2" no canto — e
+     mesmo os três eram cortados quando o texto era longo. O "+ 2"
+     dizia que havia mais sem dar jeito nenhum de ler: aviso que
+     ninguém consegue ler não avisa.
+
+     Agora entram todos. Se cabem, a faixa fica parada, como sempre
+     foi. Se não cabem, ela passa devagar da direita para a
+     esquerda, sem fim — a lista vai duas vezes seguidas, e depois
+     do último aviso já vem o primeiro, separado por um traço com
+     um pouco mais de espaço que os outros. Ninguém espera a faixa
+     esvaziar para ela recomeçar. Quando a primeira cópia termina de
+     sair, a segunda está exatamente onde a primeira começou, então
+     o salto de volta não se vê.
+
+     PARA QUANDO O MOUSE ESTÁ EM CIMA: quem quer ler até o fim não
+     pode ficar correndo atrás do texto. E quem pediu ao sistema
+     menos movimento não ganha animação: a faixa fica parada e rola
+     com o mouse ou o dedo. */
+  var ASSINATURA_DOS_AVISOS = null;
+  var PIXELS_POR_SEGUNDO = 45;
+
   function desenharAvisos() {
     var alvo = document.getElementById("avisos");
-    alvo.textContent = "";
-    if (!AVISOS_ATUAIS.length) { alvo.hidden = true; return; }
-    alvo.hidden = false;
+    if (!AVISOS_ATUAIS.length) {
+      alvo.textContent = "";
+      alvo.hidden = true;
+      ASSINATURA_DOS_AVISOS = null;
+      return;
+    }
+    /* A mesma lista de novo não recomeça o letreiro do zero no meio
+       da leitura de alguém — isto roda a cada atualização da casa. */
+    var assinatura = JSON.stringify(AVISOS_ATUAIS.map(function (a) { return [a.titulo, a.texto]; }));
+    if (assinatura === ASSINATURA_DOS_AVISOS && !alvo.hidden) return;
+    ASSINATURA_DOS_AVISOS = assinatura;
 
+    alvo.textContent = "";
+    alvo.hidden = false;
     alvo.appendChild(el("span", "avisos__rot", "Avisos"));
-    AVISOS_ATUAIS.slice(0, 3).forEach(function (a, i) {
-      if (i) alvo.appendChild(el("span", "av__sep"));
+
+    var janela = el("div", "avisos__janela");
+    var trilho = el("div", "avisos__trilho");
+    janela.appendChild(trilho);
+    alvo.appendChild(janela);
+
+    trilho.appendChild(copiaDosAvisos());
+    medirAvisos();
+  }
+
+  function copiaDosAvisos() {
+    var copia = el("span", "avisos__copia");
+    AVISOS_ATUAIS.forEach(function (a, i) {
+      if (i) copia.appendChild(el("span", "av__sep"));
       var x = el("span", "av");
       x.appendChild(el("span", "av__p"));
       x.appendChild(el("span", "av__t", a.titulo));
       if (a.texto) x.appendChild(el("span", "av__x", a.texto));
-      alvo.appendChild(x);
+      copia.appendChild(x);
     });
-    if (AVISOS_ATUAIS.length > 3) {
-      alvo.appendChild(el("span", "avisos__mais", "+ " + (AVISOS_ATUAIS.length - 3)));
-    }
+    /* O traço entre o último aviso e o primeiro da volta seguinte.
+       Só aparece com a faixa correndo, e com um respiro um pouco
+       maior que o dos outros: a lista não para, mas o olho percebe
+       que ali ela recomeçou. */
+    copia.appendChild(el("span", "av__sep av__sep--volta"));
+    return copia;
   }
+
+  /* Decide se a faixa corre, e a que distância. Chamada depois de
+     desenhar e a cada mudança de largura da janela: o que cabe numa
+     tela grande não cabe na do notebook. */
+  function medirAvisos() {
+    var alvo = document.getElementById("avisos");
+    var janela = alvo.querySelector(".avisos__janela");
+    var trilho = alvo.querySelector(".avisos__trilho");
+    if (!janela || !trilho) return;
+
+    /* Volta ao estado parado, com uma cópia só, para medir o que a
+       lista ocupa de verdade. */
+    alvo.classList.remove("avisos--corre");
+    while (trilho.children.length > 1) trilho.removeChild(trilho.lastChild);
+    var copia = trilho.firstChild;
+    if (copia.scrollWidth <= janela.clientWidth) return;
+
+    var segunda = copiaDosAvisos();
+    /* Para quem lê com leitor de tela, a lista é uma só. */
+    segunda.setAttribute("aria-hidden", "true");
+    trilho.appendChild(segunda);
+    alvo.classList.add("avisos--corre");
+
+    /* A distância de uma volta é de onde a primeira cópia começa até
+       onde a segunda começa: a lista mais o respiro entre o fim e o
+       recomeço. Medida DEPOIS da classe, que é quem põe o respiro. */
+    var distancia = segunda.offsetLeft - copia.offsetLeft;
+    trilho.style.setProperty("--avisos-dist", distancia + "px");
+    trilho.style.setProperty("--avisos-dur", Math.max(8, distancia / PIXELS_POR_SEGUNDO) + "s");
+  }
+
+  var esperaDaLargura = null;
+  window.addEventListener("resize", function () {
+    window.clearTimeout(esperaDaLargura);
+    esperaDaLargura = window.setTimeout(medirAvisos, 200);
+  });
+  /* A fonte da página chega depois da primeira pintura e muda a
+     largura do texto; medida antes dela, a volta sairia curta e o
+     letreiro daria um tranco a cada recomeço. */
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(medirAvisos);
 
   /* ---------- painel dos órgãos ---------- */
   var painel = document.getElementById("painel");
