@@ -400,7 +400,12 @@ a{color:inherit;text-decoration:none}
 .avisos--corre .avisos__janela{
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent);
           mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
-.avisos--corre .avisos__trilho{animation:avisos-passa var(--avisos-dur,30s) linear infinite}
+/* will-change põe o trilho numa camada própria da placa de vídeo:
+   sem isso o navegador redesenha as letras a cada quadro, e o texto
+   em movimento treme de leve — é esse tremor que cansa a vista,
+   mais do que a velocidade. */
+.avisos--corre .avisos__trilho{animation:avisos-passa var(--avisos-dur,30s) linear infinite;
+                               will-change:transform;backface-visibility:hidden}
 /* Para com o mouse em cima: quem quer ler até o fim não corre atrás. */
 .avisos--corre:hover .avisos__trilho{animation-play-state:paused}
 @keyframes avisos-passa{
