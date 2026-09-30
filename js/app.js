@@ -830,7 +830,7 @@
      menos movimento não ganha animação: a faixa fica parada e rola
      com o mouse ou o dedo. */
   var ASSINATURA_DOS_AVISOS = null;
-  var PIXELS_POR_SEGUNDO = 45;
+  var PIXELS_POR_SEGUNDO = 32;
 
   function desenharAvisos() {
     var alvo = document.getElementById("avisos");
