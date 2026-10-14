@@ -359,3 +359,5 @@ input,select,textarea{font:inherit;color:inherit}
 /* A alçada vem antes dos setores e com peso próprio: dizer que
    alguém é administrador não é o mesmo que dizer que é do Fiscal. */
 .pessoa__setor--adm{background:var(--navy);color:#fff}
+.pessoa__setor--lib{background:var(--papel);border-style:dashed}
+.linha .campo__caixa[readonly],.painel__cabeca .campo__caixa[readonly]{background:var(--piso);color:var(--txt-2)}

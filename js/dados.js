@@ -382,19 +382,12 @@ const Dados = (function () {
     });
   }
 
-  /* Quem pode mexer nos recados: administrador, ou quem está no
-     setor Gerência. A mesma conta que a regra do banco faz — e a
-     regra é que manda. Isto aqui só evita mostrar um botão que
-     acabaria em 403. */
+  /* Quem pode mexer nos recados: administrador, quem está no setor
+     Gerência, ou quem recebeu a liberação "avisos". A mesma conta
+     que a regra do banco faz — e a regra é que manda. Isto aqui só
+     evita mostrar um botão que acabaria em 403. */
   function possoAvisar() {
-    if (!temBanco()) return Promise.resolve(true);
-    return souAdministrador().then(function (admin) {
-      if (admin) return true;
-      return meuCadastro().then(function (eu) {
-        var setores = (eu && eu.setores) || [];
-        return Array.isArray(setores) && setores.indexOf("Gerência") !== -1;
-      });
-    }).catch(function () { return false; });
+    return minhasLiberacoes().then(function (m) { return !!m.tem.avisos; });
   }
 
   /* ---------- Os favoritos de cada pessoa ----------
@@ -1170,6 +1163,72 @@ const Dados = (function () {
     });
   }
 
+  /* ---------- Liberações ----------
+
+     O administrador pode soltar PARTES da administração para quem
+     não é administrador: acrescentar sistemas, mexer nos recados e
+     por aí vai. Ficam no cadastro da pessoa, no campo "liberacoes"
+     (uma lista de textos), e se dão e se tiram pela aba Equipe.
+
+     DUAS ALÇADAS NÃO MUDAM: administrador tem tudo, e quem é do
+     setor Gerência continua podendo mexer nos recados — essa regra
+     já existia e não vai quebrar quem conta com ela.
+
+     A REGRA DO BANCO SÓ CONSEGUE SEPARAR DOIS BLOCOS: recados, de
+     um lado; e a lista de sistemas e grupos, de outro. Os sistemas
+     e os grupos moram dentro de UM documento só (hub/config), um
+     texto que a regra não abre — então "pode acrescentar mas não
+     apagar" é garantido pela TELA, não pelo banco. Serve para
+     gente de confiança que não deve esbarrar no que não é seu; não
+     serve contra quem fale com o banco por fora da tela. */
+  var LIBERACOES = [
+    { id: "sistemas_adicionar", nome: "Acrescentar sistemas",
+      nota: "Pôr sistemas novos nos grupos. Não mexe nos que já existem." },
+    { id: "sistemas_editar", nome: "Editar e reordenar sistemas",
+      nota: "Mudar nome, endereço, legenda e ícone, e arrastar de lugar." },
+    { id: "sistemas_apagar", nome: "Apagar sistemas",
+      nota: "Tirar sistemas do Hub." },
+    { id: "grupos", nome: "Criar e editar grupos",
+      nota: "Criar, renomear, reordenar e excluir os grupos de sistemas." },
+    { id: "avisos", nome: "Recados e prazos",
+      nota: "A barra inferior do Hub." },
+  ];
+
+  function limparLiberacoes(lista) {
+    var ids = LIBERACOES.map(function (l) { return l.id; });
+    var vistos = {}, saida = [];
+    (Array.isArray(lista) ? lista : []).forEach(function (x) {
+      x = String(x);
+      if (ids.indexOf(x) === -1 || vistos[x]) return;
+      vistos[x] = true;
+      saida.push(x);
+    });
+    return saida;
+  }
+
+  /* O que a conta de quem está usando pode fazer na administração:
+     { admin: bool, tem: { id: true, ... } }. Administrador tem tudo.
+     Sem banco (modo de teste) também, senão não haveria como
+     experimentar a tela. */
+  function minhasLiberacoes() {
+    var todas = {};
+    LIBERACOES.forEach(function (l) { todas[l.id] = true; });
+    if (!temBanco()) return Promise.resolve({ admin: true, tem: todas });
+
+    return souAdministrador().then(function (admin) {
+      if (admin) return { admin: true, tem: todas };
+      return meuCadastro().then(function (eu) {
+        var tem = {};
+        if (eu && eu.ativo === true) {
+          limparLiberacoes(eu.liberacoes).forEach(function (id) { tem[id] = true; });
+          var setores = Array.isArray(eu.setores) ? eu.setores : [];
+          if (setores.indexOf("Gerência") !== -1) tem.avisos = true;
+        }
+        return { admin: false, tem: tem };
+      });
+    }).catch(function () { return { admin: false, tem: {} }; });
+  }
+
   function listarEquipe() {
     if (!temBanco()) return Promise.resolve([]);
     return fetch(BASE_DOCS() + "/equipe?pageSize=200", { headers: comAutorizacao(), cache: "no-store" })
@@ -1228,6 +1287,7 @@ const Dados = (function () {
         setores: Array.isArray(dados.setores) ? dados.setores
                : (dados.setor ? [dados.setor] : []),
         papel:   dados.papel === "admin" ? "admin" : "equipe",
+        liberacoes: limparLiberacoes(dados.liberacoes),
         ativo:   true,
       });
     });
@@ -1404,6 +1464,9 @@ const Dados = (function () {
        o destino possível de uma pendência. */
     salvarAvisos: salvarAvisos,
     possoAvisar: possoAvisar,
+    LIBERACOES: LIBERACOES,
+    limparLiberacoes: limparLiberacoes,
+    minhasLiberacoes: minhasLiberacoes,
     carregarFavoritos: carregarFavoritos,
     salvarFavoritos: salvarFavoritos,
 

@@ -29,6 +29,24 @@
   var dados = null;        /* a cópia em edição */
   var pendente = false;    /* há mudança não salva? */
 
+  /* O que esta conta pode fazer aqui: { admin, tem: { id: true } }.
+     Vem do cadastro (ver "Liberações" em dados.js) e é preenchido na
+     entrada. Esconder e travar é o que a TELA faz; o que o banco
+     recusa de verdade está em firestore.rules. */
+  var LIB = { admin: false, tem: {} };
+  function pode(id) { return LIB.admin || LIB.tem[id] === true; }
+  function mexeEmSistemas() {
+    return pode("sistemas_adicionar") || pode("sistemas_editar") ||
+           pode("sistemas_apagar") || pode("grupos");
+  }
+
+  /* Os sistemas que ESTA pessoa acrescentou nesta sessão e ainda não
+     salvou. Quem só pode acrescentar precisa preencher o que acabou
+     de criar — senão a linha nasceria em branco e travada. Depois do
+     Salvar viram sistemas como os outros. */
+  var novosItens = new WeakSet();
+  function editavel(item) { return pode("sistemas_editar") || novosItens.has(item); }
+
   /* ---------- Utilidades ---------- */
 
   function $(id) { return document.getElementById(id); }
@@ -125,12 +143,15 @@
     return b;
   }
 
-  function caixaTexto(classe, valor, dica, aoMudar) {
+  function caixaTexto(classe, valor, dica, aoMudar, travada) {
     var i = document.createElement("input");
     i.type = "text";
     i.className = "campo__caixa " + classe;
     i.value = valor || "";
     if (dica) i.placeholder = dica;
+    /* readOnly e não disabled: o texto continua selecionável e
+       copiável, só não muda. */
+    if (travada) { i.readOnly = true; i.title = "Você não tem liberação para mudar isto"; }
     i.addEventListener("input", function () { aoMudar(i.value); marcarPendente(); });
     return i;
   }
@@ -423,7 +444,7 @@
     buscarIconeDoSite(item, pintar, true, limpo);
   }
 
-  function previaDoLogo(item) {
+  function previaDoLogo(item, podeTrocar) {
     var caixa = elemento("button", "linha__logo");
     caixa.type = "button";
     caixa.title = "Trocar o logo";
@@ -445,6 +466,8 @@
     }
     pintar();
     caixa._pintar = pintar;
+
+    if (!podeTrocar) { caixa.title = ""; caixa.disabled = true; return caixa; }
 
     /* TRÊS CAMINHOS PARA A MESMA COISA, E O MOTIVO É CONCRETO.
 
@@ -611,6 +634,24 @@
   function ligarArrasto(linha, setor, indice) {
     linha.draggable = true;
 
+    /* SELECIONAR TEXTO DENTRO DE UM CAMPO NÃO É ARRASTAR O CARTÃO.
+       O cartão inteiro é arrastável, e o navegador trata o clique
+       seguido de movimento como início de arrasto — mesmo quando o
+       clique caiu dentro de uma caixa de texto e a intenção era
+       marcar palavras. Resultado: o cartão saía do lugar.
+
+       A solução é decidir no clique: se ele caiu num campo, o
+       cartão deixa de ser arrastável até o próximo clique. Fora dos
+       campos (no pegador, no espaço entre eles) continua arrastando
+       como antes. Precisa ser aqui, antes do movimento: depois que
+       o arrasto começa, não dá mais para desfazer. */
+    linha.addEventListener("mousedown", function (ev) {
+      var alvo = ev.target;
+      var emCampo = alvo && alvo.closest &&
+                    alvo.closest("input, textarea, select, [contenteditable]");
+      linha.draggable = !emCampo;
+    });
+
     linha.addEventListener("dragstart", function (ev) {
       arrastando = { setorId: setor.id, indice: indice };
       linha.classList.add("linha--arrastando");
@@ -685,13 +726,15 @@
     pegador.title = "Arraste para reordenar";
     linha.appendChild(pegador);
 
-    var logo = previaDoLogo(item);
+    var livre = editavel(item);
+
+    var logo = previaDoLogo(item, livre);
     linha.appendChild(logo);
 
     linha.appendChild(caixaTexto("cx-nome", item.nome, "Nome do sistema", function (v) {
       item.nome = v;
       if (logo._pintar) logo._pintar();
-    }));
+    }, !livre));
 
     linha.appendChild(caixaTexto("cx-url", item.url, "https://…", function (v) {
       item.url = v;
@@ -702,8 +745,8 @@
       ESPERA_DO_ICONE = window.setTimeout(function () {
         buscarIconeDoSite(item, logo._pintar);
       }, 800);
-    }));
-    linha.appendChild(caixaTexto("cx-legenda", item.nota, "Legenda (opcional)", function (v) { item.nota = v; }));
+    }, !livre));
+    linha.appendChild(caixaTexto("cx-legenda", item.nota, "Legenda (opcional)", function (v) { item.nota = v; }, !livre));
 
     var fim = elemento("div", "linha__fim");
 
@@ -711,6 +754,7 @@
     var caixa = document.createElement("input");
     caixa.type = "checkbox";
     caixa.checked = item.verificar === true;
+    caixa.disabled = !livre;
     caixa.addEventListener("change", function () {
       if (caixa.checked) item.verificar = true; else delete item.verificar;
       marcarPendente();
@@ -730,7 +774,7 @@
          rápido, só faz dez pedidos ao serviço. */
       window.setTimeout(function () { rebuscar.disabled = false; }, 6500);
     });
-    fim.appendChild(rebuscar);
+    if (livre) fim.appendChild(rebuscar);
 
     var apagar = botaoIcone("lixo", "Apagar " + (item.nome || "este sistema"), true);
     apagar.addEventListener("click", function () {
@@ -739,11 +783,12 @@
       marcarPendente();
       desenhar();
     });
-    fim.appendChild(apagar);
+    if (pode("sistemas_apagar") || novosItens.has(item)) fim.appendChild(apagar);
 
     linha.appendChild(fim);
 
-    ligarArrasto(linha, setor, indice);
+    if (pode("sistemas_editar")) ligarArrasto(linha, setor, indice);
+    else pegador.hidden = true;
     return linha;
   }
 
@@ -855,8 +900,8 @@
     cabeca.appendChild(caixaTexto("cx-titulo", setor.titulo, "Nome do grupo", function (v) {
       setor.titulo = v;
       desenharIndice();
-    }));
-    cabeca.appendChild(caixaTexto("cx-nota", setor.nota, "Legenda do grupo", function (v) { setor.nota = v; }));
+    }, !pode("grupos")));
+    cabeca.appendChild(caixaTexto("cx-nota", setor.nota, "Legenda do grupo", function (v) { setor.nota = v; }, !pode("grupos")));
 
     var estilo = document.createElement("select");
     estilo.className = "cx-estilo";
@@ -866,6 +911,7 @@
       estilo.appendChild(op);
     });
     estilo.value = setor.estilo === "gaveta" ? "gaveta" : "cartao";
+    estilo.disabled = !pode("grupos");
     estilo.title = "Cartões ficam sempre à vista; gaveta nasce fechada e abre no clique";
     estilo.addEventListener("change", function () { setor.estilo = estilo.value; marcarPendente(); });
     cabeca.appendChild(estilo);
@@ -874,6 +920,7 @@
     var cxDestaque = document.createElement("input");
     cxDestaque.type = "checkbox";
     cxDestaque.checked = setor.destaque === true;
+    cxDestaque.disabled = !pode("grupos");
     cxDestaque.addEventListener("change", function () {
       if (cxDestaque.checked) setor.destaque = true; else delete setor.destaque;
       marcarPendente();
@@ -890,12 +937,12 @@
     var cima = botaoIcone("cima", "Subir o grupo");
     cima.disabled = posicao === 0;
     cima.addEventListener("click", function () { moverSetor(posicao, -1); });
-    direita.appendChild(cima);
+    if (pode("grupos")) direita.appendChild(cima);
 
     var baixo = botaoIcone("baixo", "Descer o grupo");
     baixo.disabled = posicao === dados.setores.length - 1;
     baixo.addEventListener("click", function () { moverSetor(posicao, 1); });
-    direita.appendChild(baixo);
+    if (pode("grupos")) direita.appendChild(baixo);
 
     /* ESCRITO, E NÃO SÓ UMA LIXEIRA. O ícone sozinho, igual ao de
        apagar um sistema, não dizia que ali se apagava o grupo
@@ -916,7 +963,7 @@
       marcarPendente();
       desenhar();
     });
-    direita.appendChild(apagarSetor);
+    if (pode("grupos")) direita.appendChild(apagarSetor);
 
     cabeca.appendChild(direita);
     painel.appendChild(cabeca);
@@ -941,7 +988,9 @@
 
     var linhas = elemento("div", "linhas");
     if (!setor.itens || !setor.itens.length) {
-      var vazio = elemento("div", "vazio", "Nenhum sistema aqui ainda. Arraste um para cá, ou acrescente abaixo.");
+      var vazio = elemento("div", "vazio", pode("sistemas_adicionar")
+        ? "Nenhum sistema aqui ainda. Arraste um para cá, ou acrescente abaixo."
+        : "Nenhum sistema aqui ainda.");
       /* Setor vazio também recebe item arrastado — senão não
          haveria como encher um setor recém-criado sem digitar. */
       vazio.addEventListener("dragover", function (ev) { if (arrastando) ev.preventDefault(); });
@@ -967,7 +1016,9 @@
     novo.type = "button";
     novo.addEventListener("click", function () {
       setor.itens = setor.itens || [];
-      setor.itens.push({ nome: "", url: "", nota: "" });
+      var criado = { nome: "", url: "", nota: "" };
+      novosItens.add(criado);
+      setor.itens.push(criado);
       /* A linha nova está em branco e não combinaria com busca
          nenhuma: nasceria escondida. */
       limparBusca();
@@ -981,8 +1032,10 @@
       var todos = refeito ? refeito.querySelectorAll(".cx-nome") : [];
       if (todos.length) todos[todos.length - 1].focus();
     });
-    acoes.appendChild(novo);
-    painel.appendChild(acoes);
+    if (pode("sistemas_adicionar")) {
+      acoes.appendChild(novo);
+      painel.appendChild(acoes);
+    }
 
     return painel;
   }
@@ -1009,6 +1062,7 @@
       tipo.appendChild(op);
     });
     tipo.value = aviso.tipo || "aviso";
+    tipo.disabled = !pode("avisos");
     tipo.addEventListener("change", function () { aviso.tipo = tipo.value; marcarPendente(); });
     linha.appendChild(tipo);
 
@@ -1054,12 +1108,14 @@
       });
       caixa.appendChild(b);
     });
-    var recados = elemento("button", "atalho atalho--outro", "Recados e prazos");
-    recados.type = "button";
-    recados.addEventListener("click", function () {
-      levarA($("painel-avisos"), $("indice"));
-    });
-    caixa.appendChild(recados);
+    if (pode("avisos")) {
+      var recados = elemento("button", "atalho atalho--outro", "Recados e prazos");
+      recados.type = "button";
+      recados.addEventListener("click", function () {
+        levarA($("painel-avisos"), $("indice"));
+      });
+      caixa.appendChild(recados);
+    }
   }
 
   function desenhar() {
@@ -1212,22 +1268,27 @@
       var sessao = Dados.sessao();
       var quem = sessao && sessao.email;
 
-      /* OS RECADOS VÃO SEMPRE, A LISTA SÓ SE FOR ADMINISTRADOR.
-         São dois documentos e duas alçadas: a Gerência escreve o
-         recado e nada mais. Mandar os dois para quem só pode um
-         voltaria 403 e faria parecer que o recado também falhou. */
-      var indo = Dados.salvarAvisos(dados.avisos || [], quem);
-      if (souAdmin) {
+      /* CADA DOCUMENTO SÓ VAI SE A PESSOA PODE ESCREVER NELE.
+         Recados e lista de sistemas são dois documentos e duas
+         alçadas. Mandar os dois para quem só pode um voltaria 403 e
+         faria parecer que o outro também falhou. */
+      var indo = Promise.resolve({});
+      if (pode("avisos")) {
+        indo = indo.then(function () { return Dados.salvarAvisos(dados.avisos || [], quem); });
+      }
+      if (mexeEmSistemas()) {
         indo = indo.then(function () { return Dados.salvar(dados, quem); });
       }
 
       indo.then(function (r) {
         limparPendente();
+        novosItens = new WeakSet();
+        desenhar();
         recado((r && r.local) ? "Salvo neste navegador (modo de teste)."
                               : "Salvo. A equipe já vê a mudança.");
         /* A versão anterior acabou de mudar: o botão precisa
            passar a oferecer a volta para ESTE ponto. */
-        if (souAdmin) oferecerDesfazer();
+        if (LIB.admin) oferecerDesfazer();
       }).catch(function (e) {
         b.disabled = false;
         b.textContent = "Salvar mudanças";
@@ -1272,21 +1333,18 @@
       Dados.entrar($("entrada-email").value.trim(), $("entrada-senha").value)
         .then(function () {
           /* A conta existe e a senha confere — mas esta tela é só
-             de quem tem alçada. Antes a pergunta era "você é O
-             administrador?", comparando com um único UID fixo.
-             Agora é "você é UM administrador?", e a resposta vem do
-             campo papel do próprio cadastro. O fundador continua
-             valendo pelo UID, senão não haveria como existir o
-             primeiro.
+             de quem tem alçada: administrador (o campo papel do
+             cadastro; o fundador vale pelo UID, senão não haveria
+             como existir o primeiro) ou quem recebeu alguma
+             liberação.
 
              Quem não passa sai da sessão na hora, para não ficar
              com um login pela metade guardado no navegador. */
-          return Dados.souAdministrador().then(function (pode) {
-            if (!pode) {
+          return iniciar().then(function (entrou) {
+            if (!entrou) {
               Dados.sair();
-              throw new Error("Esta conta não tem acesso de administrador.");
+              throw new Error("Esta conta não tem liberação para a administração.");
             }
-            abrirEdicao();
           });
         })
         .catch(function (e) {
@@ -1308,7 +1366,7 @@
     $("quem").textContent = sessao && sessao.email ? sessao.email : "modo de teste";
 
     /* Depois de ligarAcoes(), que é quem define a função. */
-    window.setTimeout(function () { oferecerDesfazer(); }, 0);
+    if (LIB.admin) window.setTimeout(function () { oferecerDesfazer(); }, 0);
 
     dados = Dados.carregar(function (maisNovo) {
       /* Chegou versão nova do servidor enquanto eu editava. Se
@@ -1336,33 +1394,65 @@
 
   var equipe = [];
 
-  /* Preenchido na entrada. Governa o que a tela mostra e o que o
-     Salvar tenta gravar. */
-  var souAdmin = false;
-
-  /* A tela da Gerência: a mesma página, com quase tudo escondido.
-     Esconder é o certo aqui, e não desabilitar — campo cinza
-     convida a perguntar "por que não posso?", e a resposta seria
-     uma aula sobre alçada que ninguém pediu. */
-  function sóRecados() {
+  /* A tela de quem NÃO é administrador: a mesma página, com o que
+     não foi liberado escondido. Esconder é o certo aqui, e não
+     desabilitar — campo cinza convida a perguntar "por que não
+     posso?", e a resposta seria uma aula sobre alçada que ninguém
+     pediu. (Os campos de texto de coisa que existe e não é da
+     pessoa mudar ficam só travados, porque são o que ela está
+     vendo.) */
+  function restringirTela() {
     $("abas").hidden = true;
     $("painel-equipe").hidden = true;
     var sistemas = $("painel-sistemas");
     sistemas.hidden = false;
-    Array.prototype.slice.call(sistemas.children).forEach(function (filho) {
-      if (filho.id !== "painel-avisos") filho.hidden = true;
+    $("btn-desfazer").hidden = true;
+
+    if (!mexeEmSistemas()) {
+      /* Só recados: nem o resto do painel aparece. */
+      Array.prototype.slice.call(sistemas.children).forEach(function (filho) {
+        if (filho.id !== "painel-avisos") filho.hidden = true;
+      });
+
+      var cabeca = document.createElement("div");
+      cabeca.className = "admin__cabeca";
+      cabeca.appendChild(elemento("h1", "admin__titulo", "Recados e prazos"));
+      cabeca.appendChild(elemento("p", "admin__nota",
+        "O que você escrever aqui aparece na barra inferior do Hub, para a equipe inteira. " +
+        "Só os três primeiros cabem na faixa — o resto fica contado num “+” ao lado. " +
+        "Nada é gravado até clicar em Salvar."));
+      sistemas.insertBefore(cabeca, $("painel-avisos"));
+
+      document.querySelector(".marca__secao").textContent = "Recados";
+      return;
+    }
+
+    if (!pode("avisos")) $("painel-avisos").hidden = true;
+    if (!pode("grupos")) {
+      $("btn-novo-grupo").hidden = true;
+      $("btn-novo-setor").hidden = true;
+    }
+    if (!pode("avisos")) $("btn-novo-aviso").hidden = true;
+  }
+
+  /* Decide o que esta conta vê e abre a tela. Devolve false quando
+     a conta não tem liberação nenhuma — quem chamou cuida de
+     mandá-la embora. Serve tanto para quem já tinha sessão quanto
+     para quem acabou de entrar pelo formulário. */
+  function iniciar() {
+    return Dados.minhasLiberacoes().then(function (m) {
+      LIB = m;
+      if (!m.admin && !mexeEmSistemas() && !pode("avisos")) return false;
+      /* Aqui ESPERA os setores, ao contrário do Hub: as caixinhas
+         de setor são desenhadas na abertura da tela, e desenhar a
+         lista padrão para trocar meio segundo depois faria a
+         pessoa marcar um setor que pisca e some. */
+      return Dados.carregarSetores().then(function () {
+        abrirEdicao();
+        if (!m.admin) restringirTela();
+        return true;
+      });
     });
-
-    var cabeca = document.createElement("div");
-    cabeca.className = "admin__cabeca";
-    cabeca.appendChild(elemento("h1", "admin__titulo", "Recados e prazos"));
-    cabeca.appendChild(elemento("p", "admin__nota",
-      "O que você escrever aqui aparece na barra inferior do Hub, para a equipe inteira. " +
-      "Só os três primeiros cabem na faixa — o resto fica contado num “+” ao lado. " +
-      "Nada é gravado até clicar em Salvar."));
-    sistemas.insertBefore(cabeca, $("painel-avisos"));
-
-    document.querySelector(".marca__secao").textContent = "Recados";
   }
 
   /* Cadastro antigo tinha "setor" no singular. Esta função lê os
@@ -1394,6 +1484,31 @@
     if (p.length > 1) return (p[0][0] + p[p.length - 1][0]).toUpperCase();
     return (p[0] || "?").slice(0, 2).toUpperCase();
   }
+
+  /* As caixinhas de liberação, usadas no cadastro novo e na edição.
+     Marca o que a pessoa já tem. O texto de ajuda de cada uma fica no
+     title, para a linha não virar um parágrafo. */
+  function caixasDeLiberacao(alvo, marcadas) {
+    alvo.textContent = "";
+    Dados.LIBERACOES.forEach(function (l) {
+      var rotulo = document.createElement("label");
+      rotulo.title = l.nota;
+      var c = document.createElement("input");
+      c.type = "checkbox"; c.value = l.id; c.checked = marcadas.indexOf(l.id) !== -1;
+      rotulo.appendChild(c);
+      rotulo.appendChild(elemento("span", null, l.nome));
+      alvo.appendChild(rotulo);
+    });
+    return alvo;
+  }
+
+  function liberacoesMarcadas(alvo) {
+    return Array.prototype.slice.call(alvo.querySelectorAll("input:checked"))
+      .map(function (c) { return c.value; });
+  }
+
+  var TEXTO_LIBERACOES = "Partes da administração que a pessoa pode usar sem ser administradora. " +
+    "Quem é do setor Gerência já pode mexer nos recados. Administrador pode tudo, com ou sem marca aqui.";
 
   /* ---------- Editar quem já está na lista ----------
      Faltava por inteiro: dava para cadastrar, desligar e mandar
@@ -1453,6 +1568,13 @@
     lSet.appendChild(marcas);
     painel.appendChild(lSet);
 
+    var lLib = elemento("div", "campo campo--linha campo--setores");
+    lLib.appendChild(elemento("span", "campo__rotulo", "Liberações"));
+    var marcasLib = caixasDeLiberacao(elemento("div", "setores-marca"), Dados.limparLiberacoes(p.liberacoes));
+    lLib.appendChild(marcasLib);
+    lLib.appendChild(elemento("p", "admin__nota", TEXTO_LIBERACOES));
+    painel.appendChild(lLib);
+
     /* ---------- conta de integração ----------
 
        Uma conta de robô precisa existir na equipe (é ela que dá
@@ -1504,6 +1626,7 @@
            alguém acreditaria no dado. */
         papel: Dados.ehFundador(p.uid) ? "admin" : sPapel.value,
         robo: cRobo.checked,
+        liberacoes: liberacoesMarcadas(marcasLib),
         ativo: p.ativo !== false,
       }).then(function (atualizada) {
         Object.assign(p, atualizada);
@@ -1550,6 +1673,15 @@
           Dados.ehFundador(p.uid) ? "Administrador · fundador" : "Administrador"));
       }
       setoresDe(p).forEach(function (s) { caixa.appendChild(elemento("span", "pessoa__setor", s)); });
+      if (p.papel !== "admin" && !Dados.ehFundador(p.uid)) {
+        var nomes = {};
+        Dados.LIBERACOES.forEach(function (l) { nomes[l.id] = l.nome; });
+        Dados.limparLiberacoes(p.liberacoes).forEach(function (id) {
+          var chip = elemento("span", "pessoa__setor pessoa__setor--lib", nomes[id]);
+          chip.title = "Liberação dada pela administração";
+          caixa.appendChild(chip);
+        });
+      }
       if (caixa.children.length) linha.appendChild(caixa);
 
       var fim = elemento("div", "pessoa__fim");
@@ -1581,6 +1713,8 @@
         Dados.gravarPessoa(p.uid, {
           nome: p.nome || "", email: p.email || "",
           setores: setoresDe(p), ativo: novo,
+          papel: Dados.ehFundador(p.uid) ? "admin" : (p.papel || "equipe"),
+          liberacoes: Dados.limparLiberacoes(p.liberacoes),
           /* Vai junto porque a gravação substitui o documento
              inteiro: sem esta linha, desligar e religar um robô o
              transformaria em pessoa outra vez. */
@@ -1766,6 +1900,7 @@
           papel:   Dados.ehFundador(p.uid) ? "admin" : (p.papel || "equipe"),
           ativo:   p.ativo !== false,
           robo:    p.robo === true,
+          liberacoes: Dados.limparLiberacoes(p.liberacoes),
         });
       });
     }, Promise.resolve());
@@ -1851,6 +1986,7 @@
 
     var caixaSetores = $("np-setores");
     desenharCaixasDaNovaPessoa();
+    var caixaLiberacoes = caixasDeLiberacao($("np-liberacoes"), []);
     function setoresMarcados() {
       return Array.prototype.slice.call(caixaSetores.querySelectorAll("input:checked"))
         .map(function (c) { return c.value; });
@@ -1932,12 +2068,14 @@
         senha: $("np-senha").value,
         setores: setoresMarcados(),
         papel: $("np-papel").value,
+        liberacoes: liberacoesMarcadas(caixaLiberacoes),
       }).then(function (pessoa) {
         equipe.push(pessoa);
         equipe.sort(function (a, b2) { return (a.nome || "").localeCompare(b2.nome || "", "pt-BR"); });
         desenharEquipe();
         ["np-nome", "np-email", "np-senha"].forEach(function (id) { $(id).value = ""; });
         Array.prototype.forEach.call(caixaSetores.querySelectorAll("input"), function (c) { c.checked = false; });
+        Array.prototype.forEach.call(caixaLiberacoes.querySelectorAll("input"), function (c) { c.checked = false; });
         $("np-papel").value = "equipe";
         recado((pessoa.nome || pessoa.email) + " já pode entrar.");
       }).catch(function (e) {
@@ -1989,33 +2127,16 @@
      essa renovação terminar — sem isso, a primeira leitura do
      banco sairia com um token vencido e voltaria 401. */
   Dados.pronto().then(function (sessao) {
-    if (!Dados.temBanco()) { abrirEdicao(); return; }
+    if (!Dados.temBanco()) { iniciar(); return; }
     if (!sessao) { mostrarEntrada(); return; }
     /* Sessão viva não basta: a alçada pode ter sido retirada desde
        o último acesso. Quem perdeu volta para a tela de entrada em
-       vez de olhar uma tela de edição que o banco vai recusar. */
-    /* DUAS ALÇADAS ENTRAM AQUI, E VEEM COISAS DIFERENTES.
-       Administrador vê a tela inteira. Quem é da Gerência entra
-       para uma coisa só: os recados do Hub. O resto nem aparece —
-       não por educação, mas porque a regra do banco recusaria, e
-       botão que só sabe dar erro não devia estar na tela. */
-    Dados.souAdministrador().then(function (pode) {
-      souAdmin = pode;
-      if (pode) {
-        /* Aqui ESPERA os setores, ao contrário do Hub: as caixinhas
-           de setor são desenhadas na abertura da tela, e desenhar a
-           lista padrão para trocar meio segundo depois faria a
-           pessoa marcar um setor que pisca e some. */
-        Dados.carregarSetores().then(abrirEdicao);
-        return;
-      }
-      Dados.possoAvisar().then(function (podeRecado) {
-        if (!podeRecado) { Dados.sair(); mostrarEntrada(); return; }
-        Dados.carregarSetores().then(function () {
-          abrirEdicao();
-          sóRecados();
-        });
-      });
+       vez de olhar uma tela de edição que o banco vai recusar.
+
+       QUEM ENTRA AQUI: administrador (tela inteira) e quem recebeu
+       alguma liberação — que vê só o que lhe foi liberado. */
+    iniciar().then(function (entrou) {
+      if (!entrou) { Dados.sair(); mostrarEntrada(); }
     });
   });
 

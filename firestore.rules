@@ -137,6 +137,33 @@ service cloud.firestore {
              && 'Gerência' in meuCadastro().setores;
     }
 
+    // LIBERAÇÕES. O administrador pode soltar partes da administração
+    // para quem não é administrador, marcando-as no cadastro da
+    // pessoa (campo "liberacoes", uma lista). Quem escreve esse campo
+    // é só o administrador — a regra de /equipe abaixo —, então
+    // ninguém se libera sozinho.
+    //
+    // O BANCO SÓ ENXERGA DOIS BLOCOS: os recados (hub/avisos) e a
+    // lista de sistemas e grupos (hub/config e seus irmãos). Os
+    // sistemas e os grupos moram dentro de UM documento, num texto
+    // que a regra não abre; por isso "acrescentar mas não apagar" é
+    // garantido pela tela, e não por aqui. Quem tem qualquer
+    // liberação de sistemas ou de grupos pode gravar a lista
+    // inteira se falar com o banco por fora da tela.
+    function liberado(id) {
+      return daEquipe()
+             && 'liberacoes' in meuCadastro()
+             && meuCadastro().liberacoes is list
+             && id in meuCadastro().liberacoes;
+    }
+
+    function podeSistemas() {
+      return liberado('sistemas_adicionar')
+             || liberado('sistemas_editar')
+             || liberado('sistemas_apagar')
+             || liberado('grupos');
+    }
+
     function meuUid(uid) {
       return autenticado() && request.auth.uid == uid;
     }
@@ -195,7 +222,11 @@ service cloud.firestore {
     // seria três lugares para esquecer de mudar um.
     match /hub/{doc} {
       allow read:  if daEquipe() || ehAdmin();
-      allow write: if ehAdmin();
+      // Os três documentos da lista de sistemas também aceitam quem
+      // recebeu liberação de sistemas ou de grupos. Os demais
+      // (departamentos, por exemplo) continuam só do administrador.
+      allow write: if ehAdmin()
+                      || (podeSistemas() && doc in ['config', 'logos', 'anterior']);
     }
 
     // ---------- a equipe ----------
@@ -225,7 +256,7 @@ service cloud.firestore {
     // administrador; esta acrescenta a Gerência, e só aqui.
     match /hub/avisos {
       allow read:  if daEquipe();
-      allow write: if (ehAdmin() || ehGerencia())
+      allow write: if (ehAdmin() || ehGerencia() || liberado('avisos'))
                       && request.resource.data.json is string
                       && request.resource.data.json.size() <= 20000;
     }
@@ -278,7 +309,10 @@ service cloud.firestore {
                    && (!('papel' in request.resource.data)
                        || request.resource.data.papel in ['equipe', 'admin'])
                    && (!('setores' in request.resource.data)
-                       || request.resource.data.setores is list);
+                       || request.resource.data.setores is list)
+                   && (!('liberacoes' in request.resource.data)
+                       || (request.resource.data.liberacoes is list
+                           && request.resource.data.liberacoes.size() <= 20));
     }
 
     // ---------- pendências ----------

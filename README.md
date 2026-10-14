@@ -32,8 +32,30 @@ Nada é gravado até você clicar em **Salvar** — o botão fica dourado quando
 mudança pendente, e a página avisa se você tentar fechar antes. Depois de
 salvar, todo mundo vê no próximo F5.
 
-**A equipe não consegue alterar nada.** O `index.html` só lê, e o banco só
-aceita escrita de quem entrou como administrador.
+**A equipe não consegue alterar nada por padrão.** O `index.html` só lê, e o banco só
+aceita escrita de quem entrou como administrador — ou de quem recebeu uma liberação.
+
+### Liberações
+
+Na aba **Equipe → Editar**, o administrador marca o que cada pessoa pode fazer na
+administração sem ser administradora:
+
+| Liberação | O que permite |
+|---|---|
+| Acrescentar sistemas | pôr sistemas novos nos grupos (e preencher o que acabou de criar) |
+| Editar e reordenar sistemas | mudar nome, endereço, legenda, ícone e arrastar de lugar |
+| Apagar sistemas | tirar sistemas do Hub |
+| Criar e editar grupos | criar, renomear, reordenar e excluir grupos |
+| Recados e prazos | a barra inferior do Hub (quem é do setor Gerência já podia) |
+
+Quem tem alguma liberação entra em `admin.html` e vê só o que foi liberado. As
+liberações ficam no campo `liberacoes` do cadastro. **Depois de mexer nelas no código,
+republique `firestore.rules`.**
+
+**Limite honesto:** os sistemas e os grupos moram num documento só (`hub/config`), que a
+regra do banco não abre. O banco separa só *recados* de *sistemas e grupos*; a separação
+fina (acrescentar sem apagar, por exemplo) é feita pela tela. Serve para gente de
+confiança, não contra quem fale com o banco por fora da tela.
 
 ---
 
