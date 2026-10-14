@@ -860,6 +860,10 @@
     return alvo;
   }
 
+  function totalDeSistemas() {
+    return (dados.setores || []).reduce(function (n, s) { return n + (s.itens || []).length; }, 0);
+  }
+
   function contagem(n) {
     return n === 0 ? "vazio" : (n === 1 ? "1 sistema" : n + " sistemas");
   }
@@ -1135,6 +1139,12 @@
         "Nenhum sistema com “" + BUSCA + "”. O nome, a legenda, o endereço e o nome do grupo entram na busca."));
     }
     desenharIndice();
+
+    var total = $("total-sistemas");
+    if (total) {
+      var n = totalDeSistemas();
+      total.textContent = n + (n === 1 ? " sistema no Hub" : " sistemas no Hub");
+    }
 
     var caixaAvisos = $("avisos-edicao");
     caixaAvisos.textContent = "";

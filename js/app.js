@@ -1227,8 +1227,14 @@
       res.appendChild(document.createTextNode("nenhuma pendência aberta"));
       return;
     }
-    var total = SETORES_ATUAIS.reduce(function (n, s) { return n + (s.itens || []).length; }, 0);
-    res.appendChild(document.createTextNode(total + " sistemas no Hub"));
+    /* Nada de "N sistemas no Hub" aqui: o tamanho da lista é assunto
+       da administração, onde agora mora. Para a equipe o resumo é
+       sempre sobre pendência — as atrasadas e as de hoje acima; e,
+       quando não há nenhuma dessas, quantas estão abertas. */
+    if (r && r.abertas > 0) {
+      res.appendChild(document.createTextNode(
+        r.abertas + (r.abertas > 1 ? " pendências abertas" : " pendência aberta")));
+    }
   }
 
   /* ---------- logo do cabeçalho ---------- */
