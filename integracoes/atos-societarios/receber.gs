@@ -65,7 +65,12 @@ function doPost(e) {
     if (!s.id) return responder({ ok: false, erro: "solicitação sem identificador" });
 
     if (evento === "solicitacao.criada")     return responder(criarPendencia(s));
-    if (evento === "solicitacao.finalizada") return responder(resolverPendencia(s));
+    if (evento === "solicitacao.finalizada") return responder(resolverPendencia(s, "Finalizada no Atos Societários."));
+    /* Solicitação apagada no Atos: a pendência não pode ficar aberta
+       para sempre. Resolve com a anotação do motivo — apagar de verdade
+       continua sendo decisão do administrador do Hub. */
+    if (evento === "solicitacao.excluida")   return responder(resolverPendencia(s, "A solicitação foi excluída no Atos Societários."));
+    if (evento === "solicitacao.reaberta")   return responder(reabrirPendencia(s));
 
     /* Evento desconhecido não é erro: o Atos pode passar a mandar
        tipos novos, e um recebedor antigo deve ignorá-los em paz. */
@@ -218,7 +223,7 @@ function criarPendencia(s) {
 
 /* ---------- resolver ---------- */
 
-function resolverPendencia(s) {
+function resolverPendencia(s, nota) {
   var sessao = entrar();
   var achada = acharPorOrigem(s.id, sessao.token);
   if (!achada) return { ok: true, semPendencia: true };
@@ -231,7 +236,24 @@ function resolverPendencia(s) {
 
   if (r.codigo >= 300) return { ok: false, erro: "o Hub recusou (HTTP " + r.codigo + "): " + r.texto };
 
-  anotar(achada.id, "Finalizada no Atos Societários.", sessao);
+  anotar(achada.id, nota || "Finalizada no Atos Societários.", sessao);
+  return { ok: true, pendencia: achada.id };
+}
+
+/* ---------- reabrir ----------
+   Solicitação reaberta no Atos (finalizada por engano, ou que voltou
+   com problema): a pendência volta a "aberta". A regra do Hub deixa
+   quem abriu a pendência (o robô) mexer só na situação — é isso. */
+function reabrirPendencia(s) {
+  var sessao = entrar();
+  var achada = acharPorOrigem(s.id, sessao.token);
+  if (!achada) return { ok: true, semPendencia: true };
+  var situacao = (achada.campos.situacao || {}).stringValue || "";
+  if (situacao !== "resolvida") return { ok: true, jaEstavaAberta: true };
+  var r = chamar("/pendencias/" + achada.id + "?updateMask.fieldPaths=situacao", "patch",
+    { fields: { situacao: { stringValue: "aberta" } } }, sessao.token);
+  if (r.codigo >= 300) return { ok: false, erro: "o Hub recusou (HTTP " + r.codigo + "): " + r.texto };
+  anotar(achada.id, "Reaberta no Atos Societários.", sessao);
   return { ok: true, pendencia: achada.id };
 }
 
@@ -283,6 +305,9 @@ function tituloDe(s) {
 
 function descricaoDe(s) {
   var linhas = [];
+  /* O pedido, como o cliente fez (ex.: "Mudar endereço, Entrada ou
+     saída de sócio") — o Atos manda desde a versão 1.53. */
+  if (s.pedido)  linhas.push("Pedido: " + s.pedido);
   if (s.cnpj)    linhas.push("CNPJ: " + s.cnpj);
   if (s.contato) linhas.push("Contato: " + s.contato + (s.fone ? " (" + s.fone + ")" : ""));
   if (s.responsavel) linhas.push("Responsável no Atos: " + s.responsavel);

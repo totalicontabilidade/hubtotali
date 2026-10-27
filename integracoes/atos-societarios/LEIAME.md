@@ -69,7 +69,19 @@ segredo. A partir daí:
 - **solicitação criada** → abre pendência no Hub, sem dono, endereçada à
   Legalização, com prazo e observação da solicitação;
 - **solicitação finalizada** → resolve a pendência, deixando a anotação na linha
-  do tempo.
+  do tempo;
+- **solicitação excluída** → resolve a pendência, com a anotação "excluída no
+  Atos" (apagar de vez continua sendo decisão do administrador do Hub);
+- **solicitação reaberta** → a pendência volta a "aberta", com anotação.
+
+Desde a versão 1.53 do Atos, a configuração (endereço e segredo) fica **na
+nuvem do Atos**: o administrador salva uma vez nas Configurações e todo
+navegador da equipe passa a avisar — inclusive o celular do comercial.
+
+**Depois de mudar o `receber.gs`**, cole de novo no Apps Script e publique uma
+**nova versão da mesma implantação** (Implantar → Gerenciar implantações →
+lápis → Versão: Nova versão). Assim o endereço continua o mesmo e o Atos não
+precisa ser reconfigurado.
 
 ---
 
@@ -78,7 +90,7 @@ segredo. A partir daí:
 - **Não duplica.** Antes de criar, procura pendência com o mesmo `origemId`. Se
   a rede cair no meio ou alguém salvar duas vezes, o segundo aviso não vira
   pendência nova.
-- **Não volta.** Resolver a pendência no Hub não finaliza a solicitação no Atos.
+- **Não volta (do Hub para o Atos).** Resolver a pendência no Hub não finaliza a solicitação no Atos.
   Fazer os dois lados escreverem um no outro pede regra de quem manda quando os
   dois mudam junto, e isso não vale a complicação agora.
 - **Não leva anexo.** O arquivo continua no Atos. Copiá-lo para o Hub criaria
