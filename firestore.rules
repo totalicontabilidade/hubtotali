@@ -563,7 +563,11 @@ service cloud.firestore {
         // regra do Storage exige o mesmo para o arquivo. Os dois
         // saem juntos ou não sai nenhum, e o que some é sempre a
         // pendência inteira.
-        allow delete: if daEquipe() && meuUid(get(/databases/$(database)/documents/pendencias/$(id)).data.criadoPor);
+        // ...ou o administrador, na pendência nascida de INTEGRAÇÃO —
+        // a mesma porta estreita da pendência (ver o delete dela).
+        allow delete: if daEquipe()
+                      && (meuUid(get(/databases/$(database)/documents/pendencias/$(id)).data.criadoPor)
+                          || (ehAdmin() && get(/databases/$(database)/documents/pendencias/$(id)).data.get('origemSistema', '') != ''));
         allow create: if daEquipe()
                       && meuUid(request.resource.data.por)
                       && request.resource.data.nome is string
@@ -707,8 +711,14 @@ service cloud.firestore {
         // é o update lá em cima, que deixa a marca. Um delete de
         // verdade permitiria sumir sem rastro chamando o banco por
         // fora da tela.
+        //
+        // A linha do tempo de pendência de INTEGRAÇÃO o administrador
+        // também apaga — junto com ela, nunca solta: sem isto o
+        // "Apagar pendência" do administrador tirava a pendência e
+        // deixava os comentários órfãos no banco.
         allow delete: if daEquipe()
-                      && meuUid(get(/databases/$(database)/documents/pendencias/$(id)).data.criadoPor);
+                      && (meuUid(get(/databases/$(database)/documents/pendencias/$(id)).data.criadoPor)
+                          || (ehAdmin() && get(/databases/$(database)/documents/pendencias/$(id)).data.get('origemSistema', '') != ''));
       }
     }
 

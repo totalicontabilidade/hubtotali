@@ -2216,8 +2216,9 @@ const PendenciasUI = (function () {
     });
     c.appendChild(b);
 
-    if (p.criadoPor === eu) {
-      var apagar = el("button", "pd-botao pd-botao--perigo", "Apagar pendência");
+    function poeBotaoApagar() {
+      if (c.querySelector(".pd-apagar-pendencia")) return;
+      var apagar = el("button", "pd-botao pd-botao--perigo pd-apagar-pendencia", "Apagar pendência");
       apagar.type = "button";
       apagar.addEventListener("click", function () {
         avisarAntesDeApagar(p, apagar, c, function () {
@@ -2230,6 +2231,16 @@ const PendenciasUI = (function () {
         });
       });
       c.appendChild(apagar);
+    }
+    /* Quem abriu apaga. E o ADMINISTRADOR apaga a pendência que
+       nasceu de INTEGRAÇÃO (origemSistema): quem "abriu" essa é a
+       conta de robô, cuja senha mora no script, e sem esta porta
+       ninguém no escritório conseguia tirá-la — a regra do banco já
+       permitia, faltava o botão. A pergunta é assíncrona porque o
+       papel vem do cadastro; a regra do banco decide de verdade. */
+    if (p.criadoPor === eu) poeBotaoApagar();
+    else if (p.origemSistema && window.Dados && Dados.souAdministrador) {
+      Dados.souAdministrador().then(function (adm) { if (adm) poeBotaoApagar(); });
     }
 
     pintarLinha(p, linha);
