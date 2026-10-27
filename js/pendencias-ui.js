@@ -2239,7 +2239,9 @@ const PendenciasUI = (function () {
        permitia, faltava o botão. A pergunta é assíncrona porque o
        papel vem do cadastro; a regra do banco decide de verdade. */
     if (p.criadoPor === eu) poeBotaoApagar();
-    else if (p.origemSistema && window.Dados && Dados.souAdministrador) {
+    else if (p.origemSistema && typeof Dados !== "undefined" && Dados.souAdministrador) {
+      /* typeof, e não window.Dados: o módulo é "const" no escopo do
+         script, e const de topo não vira propriedade de window. */
       Dados.souAdministrador().then(function (adm) { if (adm) poeBotaoApagar(); });
     }
 
