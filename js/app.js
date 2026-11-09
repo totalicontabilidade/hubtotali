@@ -27,6 +27,10 @@
   "use strict";
 
   var SETORES_ATUAIS = [];
+  /* O nome do cartão que junta os grupos "gaveta". Vem da
+     administração; sem nada gravado, fica o de sempre. */
+  var TITULO_GAVETA_PADRAO = "Órgãos, impostos e consultas";
+  var TITULO_GAVETA = TITULO_GAVETA_PADRAO;
   var AVISOS_ATUAIS = [];
   var AGENDA_ATUAL = [];
 
@@ -628,9 +632,6 @@
   function guardados() {
     return SETORES_ATUAIS.filter(function (s) { return s.estilo === "gaveta"; });
   }
-  function aVista() {
-    return SETORES_ATUAIS.filter(function (s) { return s.estilo !== "gaveta"; });
-  }
 
   /* ---------- a busca ----------
      Quarenta e dois sistemas, vinte e cinco deles fechados na
@@ -710,23 +711,20 @@
        escolher. */
     desenharFavoritos(centro);
 
-    aVista().forEach(function (s) {
-      if (!s.itens || !s.itens.length) return;
-      var b = bloco(s.titulo, s.itens.length);
-      var grade = el("div", "grade");
-      s.itens.forEach(function (i) { grade.appendChild(item(i)); });
-      b.appendChild(grade);
-      centro.appendChild(b);
-    });
-
+    /* A ORDEM É A DA ADMINISTRAÇÃO. Os grupos de estilo "gaveta"
+       formam UM cartão só ("Órgãos, impostos e consultas"), que
+       ocupa o lugar do primeiro grupo-gaveta da lista. Para subir
+       o cartão, basta subir esse grupo na administração. */
     var resto = guardados();
     var quantos = resto.reduce(function (n, s) { return n + (s.itens || []).length; }, 0);
-    if (quantos) {
+    var gavetaFeita = false;
+
+    function desenharGaveta() {
       var gav = el("button", "gaveta");
       gav.type = "button";
       gav.appendChild(el("span", "gaveta__c", String(quantos)));
       var t = el("div");
-      t.appendChild(el("div", "gaveta__t", "Órgãos, impostos e consultas"));
+      t.appendChild(el("div", "gaveta__t", TITULO_GAVETA));
       t.appendChild(el("div", "gaveta__s",
         resto.map(function (s) { return s.titulo; }).join(" · ")));
       gav.appendChild(t);
@@ -734,6 +732,19 @@
       gav.addEventListener("click", abrirPainel);
       centro.appendChild(gav);
     }
+
+    SETORES_ATUAIS.forEach(function (s) {
+      if (s.estilo === "gaveta") {
+        if (!gavetaFeita && quantos) { gavetaFeita = true; desenharGaveta(); }
+        return;
+      }
+      if (!s.itens || !s.itens.length) return;
+      var b = bloco(s.titulo, s.itens.length);
+      var grade = el("div", "grade");
+      s.itens.forEach(function (i) { grade.appendChild(item(i)); });
+      b.appendChild(grade);
+      centro.appendChild(b);
+    });
 
     /* A agenda vem do motor de regras (js/agenda.js), que calcula
        os vencimentos do mês corrente e se refaz sozinho na virada
@@ -923,6 +934,10 @@
   function abrirPainel() {
     var corpo = document.getElementById("painel-corpo");
     corpo.textContent = "";
+    /* O título precisa ser reposto: a agenda do mês usa a mesma
+       janela e troca o título — sem isto, abrir a agenda e depois
+       este cartão mostrava "Agenda de ..." em cima dos órgãos. */
+    document.getElementById("painel-t").textContent = TITULO_GAVETA;
     guardados().forEach(function (s) {
       if (!s.itens || !s.itens.length) return;
       var b = el("div", "painel__g");
@@ -1254,6 +1269,7 @@
   function desenharTudo(dados) {
     SETORES_ATUAIS = dados.setores || [];
     AVISOS_ATUAIS  = dados.avisos  || [];
+    TITULO_GAVETA  = (dados.gaveta && String(dados.gaveta.titulo || "").trim()) || TITULO_GAVETA_PADRAO;
     /* Calculada, não guardada: assim ela se corrige sozinha
        todo mês sem ninguém precisar editar nada. A lista do
        banco só entra se alguém tiver gravado uma à mão. */
