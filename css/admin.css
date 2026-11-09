@@ -200,20 +200,34 @@ input,select,textarea{font:inherit;color:inherit}
 
 .marca-destaque{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--txt-2);white-space:nowrap}
 
-/* ---------- Linha de sistema ---------- */
+/* ---------- Linha de sistema ----------
+   EM GRADE, DUAS FILEIRAS. Em cima o que se lê (nome e legenda) e
+   as marcas; embaixo o endereço, comprido por natureza, e o "Mover
+   para". Numa fileira só, o endereço ficava espremido e os botões
+   empurravam tudo para fora. */
 .linhas{display:flex;flex-direction:column}
 .linha{
-  display:flex;align-items:center;gap:9px;
-  padding:9px 14px;
+  display:grid;align-items:center;gap:7px 10px;
+  grid-template-columns:22px 38px minmax(0,1fr) minmax(0,1fr) auto;
+  grid-template-areas:"peg logo nome leg fim" "peg logo url url mover";
+  padding:11px 16px;
   border-bottom:1px solid var(--fio);
   background:var(--papel);
-  transition:background-color .14s var(--ease),opacity .14s var(--ease);
+  transition:background-color .14s var(--ease),opacity .14s var(--ease),box-shadow .14s var(--ease);
 }
 .linha:last-child{border-bottom:0}
 .linha:hover{background:var(--papel-2)}
+.linha .pegador{grid-area:peg}
+.linha .linha__logo{grid-area:logo}
+.linha .cx-nome{grid-area:nome;font-weight:620}
+.linha .cx-legenda{grid-area:leg;font-size:12.5px}
+.linha .cx-url{grid-area:url;font-size:12.5px;color:var(--txt-2)}
+.linha .linha__fim{grid-area:fim}
+.linha .linha__mover{grid-area:mover;width:100%;min-width:150px;color:var(--txt-2)}
+.linha .campo__caixa{height:32px}
 
 .pegador{
-  flex:none;width:22px;height:26px;
+  flex:none;width:22px;height:38px;
   display:grid;place-items:center;
   color:#b7c3d1;cursor:grab;border-radius:5px;
 }
@@ -224,29 +238,24 @@ input,select,textarea{font:inherit;color:inherit}
    destino se abre — é o que dá a sensação de estar segurando
    a coisa, em vez de a tela pular quando você solta. */
 .linha--arrastando{opacity:.35}
-.linha--alvo{box-shadow:inset 0 2px 0 var(--gold-2)}
-.linha--alvo-fim{box-shadow:inset 0 -2px 0 var(--gold-2)}
+.linha--alvo{box-shadow:inset 0 3px 0 var(--gold-2)}
+.linha--alvo-fim{box-shadow:inset 0 -3px 0 var(--gold-2)}
 
 .linha__logo{
-  flex:none;width:32px;height:32px;border-radius:var(--r-sm);
+  flex:none;width:38px;height:38px;border-radius:var(--r-sm);
   border:1px solid var(--fio);background:#fff;
   display:grid;place-items:center;overflow:hidden;cursor:pointer;
   font-size:11px;font-weight:750;color:var(--gold);text-transform:uppercase;
 }
 .linha__logo:hover{border-color:var(--gold-2)}
-.linha__logo img{width:22px;height:22px;object-fit:contain}
+.linha__logo img{width:24px;height:24px;object-fit:contain}
 
-.linha .cx-nome{width:190px;flex:none}
-.linha .cx-url{flex:1;min-width:150px;font-size:12.5px;color:var(--txt-2)}
-.linha .cx-legenda{width:190px;flex:none;font-size:12.5px}
-.linha .campo__caixa{height:32px}
+.linha__fim{display:flex;gap:4px;align-items:center;justify-content:flex-end}
 
-.linha__fim{margin-left:auto;display:flex;gap:4px;align-items:center;flex:none}
-
-.marca-conferir{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--txt-3);white-space:nowrap}
+.marca-conferir{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--txt-3);white-space:nowrap;margin-right:4px}
 
 .icone-btn{
-  width:28px;height:28px;border-radius:var(--r-sm);
+  width:28px;height:28px;border-radius:var(--r-sm);flex:none;
   display:grid;place-items:center;color:var(--txt-3);
   border:1px solid transparent;
 }
@@ -254,7 +263,7 @@ input,select,textarea{font:inherit;color:inherit}
 .icone-btn--perigo:hover{background:#fdeceb;border-color:#e0a9a4;color:#8d2f28}
 .icone-btn svg{width:15px;height:15px}
 
-.vazio{padding:14px;font-size:13px;color:var(--txt-3);text-align:center}
+.vazio{padding:18px 16px;font-size:13px;color:var(--txt-3);text-align:center}
 
 /* ---------- Recados ---------- */
 .aviso-linha{
@@ -335,9 +344,6 @@ input,select,textarea{font:inherit;color:inherit}
 
 /* ---------- Telas menores ---------- */
 @media (max-width:900px){
-  .linha{flex-wrap:wrap}
-  .linha .cx-nome,.linha .cx-legenda{width:calc(50% - 30px)}
-  .linha .cx-url{flex:1 1 100%;order:5}
   .cx-titulo,.cx-nota{width:100%}
 }
 @media (prefers-reduced-motion:reduce){
@@ -361,3 +367,126 @@ input,select,textarea{font:inherit;color:inherit}
 .pessoa__setor--adm{background:var(--navy);color:#fff}
 .pessoa__setor--lib{background:var(--papel);border-style:dashed}
 .linha .campo__caixa[readonly],.painel__cabeca .campo__caixa[readonly]{background:var(--piso);color:var(--txt-2)}
+
+/* ============================================================
+   A TELA INICIAL EM DUAS COLUNAS
+   ------------------------------------------------------------
+   Mapa à esquerda, preso na rolagem; editor à direita. O mapa é
+   a tela do Hub de cima para baixo — por isso os blocos fixos
+   (favoritos, agenda) aparecem nele também, apagados: dão a
+   referência de onde cada coisa cai.
+   ============================================================ */
+.oficina{display:grid;grid-template-columns:minmax(280px,340px) minmax(0,1fr);gap:18px;align-items:start}
+body.so-recados .oficina{grid-template-columns:minmax(0,1fr)}
+
+.mapa-caixa{position:sticky;top:76px;max-height:calc(100vh - 92px);display:flex;flex-direction:column;
+  background:var(--papel);border:1px solid var(--fio);border-radius:var(--r-lg);overflow:hidden}
+.mapa-caixa__cab{padding:12px 12px 10px;border-bottom:1px solid var(--fio);background:var(--papel-2);
+  display:flex;flex-direction:column;gap:8px}
+.mapa-caixa__t{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--txt-3)}
+.mapa-caixa__busca{height:34px;font-size:13.5px}
+.mapa{padding:8px;overflow:auto;flex:1;display:flex;flex-direction:column;gap:3px}
+.mapa-caixa__pe{padding:10px 12px;border-top:1px solid var(--fio);display:flex;flex-direction:column;gap:6px;align-items:stretch}
+
+.mapa__linha{position:relative;display:flex;align-items:center;gap:8px;
+  padding:7px 8px 7px 2px;border-radius:10px;border:1px solid transparent;cursor:pointer;
+  transition:background-color .12s var(--ease),border-color .12s var(--ease)}
+.mapa__linha:hover{background:var(--piso)}
+.mapa__linha--on{background:var(--gold-luz);border-color:var(--gold-fio)}
+.mapa__linha--on .mapa__t{color:var(--navy)}
+.mapa__linha--fixa{opacity:.78}
+.mapa__linha--fixa .mapa__ico{background:var(--piso);color:var(--txt-3)}
+.mapa__linha--arrastando{opacity:.35}
+
+.mapa__pega{flex:none;width:16px;height:28px;display:grid;place-items:center;color:#b7c3d1}
+.mapa__linha[draggable="true"] .mapa__pega{cursor:grab}
+.mapa__linha[draggable="true"]:hover .mapa__pega{color:var(--txt-2)}
+.mapa__pega svg{width:13px;height:13px;fill:currentColor}
+
+.mapa__ico{flex:none;width:30px;height:30px;border-radius:8px;display:grid;place-items:center;
+  background:#e8eef7;color:var(--estado)}
+.mapa__ico svg{width:17px;height:17px}
+.mapa__ico--gaveta{background:var(--navy);color:var(--gold-2)}
+.mapa__ico--pasta{width:26px;height:26px;background:var(--papel);border:1px solid var(--fio);color:var(--txt-2)}
+.mapa__ico--pasta svg{width:15px;height:15px}
+.mapa__ico--mais{width:26px;height:26px;background:none;border:1px dashed var(--fio-2);color:var(--txt-3)}
+.mapa__ico--estrela{color:var(--gold)}
+
+.mapa__txt{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.25}
+.mapa__t{font-size:13.5px;font-weight:640;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mapa__s{font-size:11.5px;color:var(--txt-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mapa__n{flex:none;min-width:24px;text-align:center;font-size:11.5px;font-weight:700;color:var(--txt-2);
+  background:var(--piso);border:1px solid var(--fio);border-radius:99px;padding:1px 7px}
+
+/* As setas só aparecem com o mouse em cima (ou no foco): à vista
+   o tempo todo, viravam ruído em vinte linhas. */
+.mapa__setas{flex:none;display:flex;gap:1px;opacity:0;transition:opacity .12s var(--ease)}
+.mapa__linha:hover .mapa__setas,.mapa__linha:focus-within .mapa__setas,.mapa__linha--on .mapa__setas{opacity:1}
+.mapa__setas .icone-btn{width:24px;height:24px}
+.mapa__setas .icone-btn svg{width:13px;height:13px}
+@media (hover:none){.mapa__setas{opacity:1}}
+
+/* onde vai cair o que se arrasta */
+.mapa__linha--antes::before,.mapa__linha--depois::after{content:"";position:absolute;left:6px;right:6px;
+  height:3px;border-radius:3px;background:var(--gold-2)}
+.mapa__linha--antes::before{top:-3px}
+.mapa__linha--depois::after{bottom:-3px}
+.mapa__linha--receber{background:var(--gold-luz);border-color:var(--gold-2);border-style:dashed}
+
+/* A gaveta: um bloco com moldura, e os grupos dela recuados por
+   dentro. É a diferença que a tela antiga não mostrava. */
+.mapa__gaveta{border:1px solid var(--fio-2);border-radius:12px;background:var(--papel-2);padding:3px;margin:3px 0}
+.mapa__gaveta--vazia{border-style:dashed}
+.mapa__filhos{display:flex;flex-direction:column;gap:2px;padding:2px 0 4px 10px;margin-left:16px;
+  border-left:2px solid var(--fio)}
+.mapa__linha--cab-gaveta .mapa__t{white-space:normal}
+.mapa__linha--filho{padding-top:5px;padding-bottom:5px}
+.mapa__linha--filho .mapa__t{font-size:13px;font-weight:600}
+.mapa__linha--novo .mapa__t{font-weight:560;color:var(--txt-3)}
+.mapa__linha--novo:hover .mapa__t{color:var(--navy)}
+
+/* ---------- o editor da direita ---------- */
+.detalhe{min-width:0;display:flex;flex-direction:column;gap:14px}
+.detalhe__cab{background:var(--papel);border:1px solid var(--fio);border-radius:var(--r-lg);padding:16px 18px}
+.detalhe__trilha{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.detalhe__titulo{font-size:19px;color:var(--navy);margin-bottom:4px}
+.detalhe__nota{font-size:13px;color:var(--txt-2);max-width:68ch}
+.detalhe__grade{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin-top:10px}
+.detalhe__campo{margin:0}
+.detalhe__campo .cx-titulo{font-size:15px;font-weight:660;width:100%}
+.detalhe__campo .cx-nota{width:100%}
+.campo__ajuda{display:block;font-size:11.5px;color:var(--txt-3);margin-top:4px}
+.detalhe__opcoes{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--fio)}
+.detalhe__excluir{margin-left:auto}
+.detalhe__opcoes .btn:disabled{opacity:.45;cursor:default}
+
+.detalhe__lista{background:var(--papel);border:1px solid var(--fio);border-radius:var(--r-lg);overflow:hidden}
+.detalhe__lista-cab{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding:11px 16px;
+  background:var(--papel-2);border-bottom:1px solid var(--fio)}
+.detalhe__lista-t{font-size:14px;font-weight:700;color:var(--navy)}
+.detalhe__lista-n{font-size:12px;color:var(--txt-3)}
+.detalhe__lista-dica{font-size:12px;color:var(--txt-3);margin-left:auto}
+.detalhe__ir{cursor:pointer;text-decoration:underline;text-decoration-color:var(--fio-2);text-underline-offset:3px}
+.detalhe__ir:hover{text-decoration-color:var(--gold-2)}
+.detalhe__acoes{padding:11px 16px;border-top:1px solid var(--fio);display:flex;gap:8px}
+.detalhe__vazio{background:var(--papel);border:1px solid var(--fio);border-radius:var(--r-lg)}
+
+/* grupos dentro da gaveta, no editor dela */
+.sub-grupo{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--fio)}
+.sub-grupo__txt{flex:1;min-width:0}
+.sub-grupo__t{font-size:14px;font-weight:640;color:var(--navy)}
+.sub-grupo__s{font-size:12px;color:var(--txt-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.dica-pegador{display:inline-block;padding:0 4px;border:1px solid var(--fio-2);border-radius:5px;
+  font-size:11px;line-height:1.4;color:var(--txt-2);background:var(--papel)}
+
+@media (max-width:900px){
+  .oficina{grid-template-columns:minmax(0,1fr)}
+  .mapa-caixa{position:static;max-height:none}
+  .detalhe__grade{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:700px){
+  .linha{grid-template-columns:22px 38px minmax(0,1fr);
+    grid-template-areas:"peg logo nome" ". . leg" ". . url" ". . mover" ". . fim"}
+  .linha .linha__fim{justify-content:flex-start}
+}

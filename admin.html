@@ -112,8 +112,8 @@
        misturam — quem veio cadastrar gente não quer tropeçar na
        lista de links. -->
   <div class="abas" id="abas">
-    <button class="aba on" type="button" data-painel="painel-sistemas">Sistemas</button>
-    <button class="aba" type="button" data-painel="painel-equipe">Equipe</button>
+    <button class="aba on" type="button" data-painel="painel-sistemas">Tela inicial</button>
+    <button class="aba" type="button" data-painel="painel-equipe">Equipe e acessos</button>
   </div>
 
   <div id="painel-equipe" class="painel-aba" hidden>
@@ -259,65 +259,41 @@
     </p>
   </div>
 
+  <!-- A TELA INICIAL EM DUAS COLUNAS. À esquerda, o mapa: a tela
+       do Hub de cima para baixo, na ordem em que a equipe vê. À
+       direita, o que estiver escolhido no mapa, aberto para editar.
+       Antes era uma rolagem só de grupos soltos, e o cartão
+       "Órgãos, impostos e consultas" nem aparecia como uma coisa só
+       — não havia como pô-lo em outro lugar. -->
   <div id="painel-sistemas" class="painel-aba">
-  <div class="admin__cabeca">
-    <h1 class="admin__titulo">Sistemas do Hub</h1>
-    <p class="admin__nota" id="total-sistemas"></p>
-    <p class="admin__nota">
-      Cada grupo abre e fecha no clique. Arraste para reordenar, inclusive de um grupo para outro —
-      soltar em cima de um grupo fechado põe o sistema no fim dele.
-      Nada é gravado até você clicar em Salvar.
-    </p>
-  </div>
-
-  <!-- O ÍNDICE. A página cresceu até virar uma rolagem só: para
-       chegar ao último grupo era preciso passar por todos os
-       sistemas de todos os outros, e o botão de criar grupo morava
-       depois do último — tão longe que parecia não existir.
-
-       Agora os grupos nascem fechados, e esta barra, que acompanha
-       a rolagem, leva direto a qualquer um deles. Criar grupo está
-       aqui em cima, à vista. -->
-  <nav class="indice" id="indice" aria-label="Grupos de sistemas">
-    <div class="indice__linha">
-      <input class="campo__caixa indice__busca" type="search" id="indice-busca"
-             placeholder="Procurar sistema pelo nome, legenda ou endereço" autocomplete="off">
-      <button class="btn btn--pequeno" type="button" id="btn-abrir-todos">Abrir todos</button>
-      <button class="btn btn--pequeno" type="button" id="btn-recolher-todos">Recolher todos</button>
-      <button class="btn btn--pequeno btn--principal" type="button" id="btn-novo-grupo">Novo grupo</button>
+    <div class="admin__cabeca">
+      <h1 class="admin__titulo">Tela inicial do Hub</h1>
+      <p class="admin__nota">
+        <strong id="total-sistemas"></strong>
+        À esquerda está a tela de cima para baixo, na ordem em que a equipe vê. Clique num bloco para editar.
+        Arraste pelo pegador <span class="dica-pegador" aria-hidden="true">⠿</span> ou use as setas para mudar a ordem.
+        Nada é gravado até você clicar em <strong>Salvar</strong>.
+      </p>
     </div>
-    <div class="indice__atalhos" id="indice-atalhos"></div>
-  </nav>
 
-  <div id="setores-edicao"></div>
+    <div class="oficina">
+      <aside class="mapa-caixa" id="mapa-caixa" aria-label="Ordem da tela inicial">
+        <div class="mapa-caixa__cab">
+          <span class="mapa-caixa__t">Ordem na tela</span>
+          <input class="campo__caixa mapa-caixa__busca" type="search" id="busca-sistemas"
+                 placeholder="Procurar sistema…" autocomplete="off" aria-label="Procurar sistema">
+        </div>
+        <div class="mapa" id="mapa"></div>
+        <div class="mapa-caixa__pe">
+          <button class="btn btn--pequeno" type="button" id="btn-novo-grupo">+ Novo grupo de cartões</button>
+          <!-- Só aparece quando existe uma versão guardada, e ela é a de
+               antes do último Salvar — uma, não um histórico. -->
+          <button class="btn btn--fantasma btn--pequeno" type="button" id="btn-desfazer" hidden></button>
+        </div>
+      </aside>
 
-  <div class="admin__rodape-acoes">
-    <button class="btn" type="button" id="btn-novo-setor">Acrescentar grupo</button>
-    <!-- Só aparece quando existe uma versão guardada, e ela é a de
-         antes do último Salvar — uma, não um histórico. Cobre o
-         erro que de fato acontece: salvar sem querer e perceber em
-         seguida. -->
-    <button class="btn btn--fantasma" type="button" id="btn-desfazer" hidden></button>
-    <!-- Aqui havia "Voltar ao conteúdo original". O botão fazia
-         sentido quando a lista da casa morava em js/sistemas.js e
-         voltar ao original queria dizer voltar aos 37 sistemas.
-         Esse arquivo foi esvaziado quando a lista ficou privada, e
-         o mesmo botão passou a fazer o contrário do que o nome
-         diz: limparia a tela e, no Salvar seguinte, apagaria a
-         lista da equipe inteira. Um botão que só destrói não
-         precisa existir. -->
-  </div>
-
-  <section class="painel" id="painel-avisos">
-    <div class="painel__cabeca">
-      <h2 class="painel__titulo">Recados e prazos</h2>
-      <span class="painel__nota">A barra inferior do Hub</span>
+      <section class="detalhe" id="detalhe" aria-live="polite"></section>
     </div>
-    <div id="avisos-edicao"></div>
-    <div class="painel__acoes">
-      <button class="btn btn--pequeno" type="button" id="btn-novo-aviso">Acrescentar recado</button>
-    </div>
-  </section>
   </div>
 
 </main>

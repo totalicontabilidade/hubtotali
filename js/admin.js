@@ -132,6 +132,27 @@
              'stroke-linecap="round" stroke-linejoin="round"><path d="M6 10l6 6 6-6"/></svg>',
     direita: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" ' +
              'stroke-linecap="round" stroke-linejoin="round"><path d="M10 6l6 6-6 6"/></svg>',
+    /* Os do mapa: um desenho por tipo de bloco, para dar para
+       reconhecer de longe o que é cada linha. */
+    cartoes: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" ' +
+             'stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.5"/>' +
+             '<rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/>' +
+             '<rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>',
+    gaveta:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" ' +
+             'stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="2"/>' +
+             '<path d="M3.5 12h17M10 15.5h4"/></svg>',
+    pasta:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" ' +
+             'stroke-linejoin="round"><path d="M3.5 7.5a2 2 0 0 1 2-2h4l2 2h7a2 2 0 0 1 2 2v7.5a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/></svg>',
+    estrela: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" ' +
+             'stroke-linejoin="round"><path d="M12 4l2.5 5.2 5.6.7-4.1 3.9 1 5.6L12 16.7l-5 2.7 1-5.6-4.1-3.9 5.6-.7z"/></svg>',
+    agenda:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" ' +
+             'stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5.5" width="16" height="14.5" rx="2"/>' +
+             '<path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/></svg>',
+    recado:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" ' +
+             'stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4h3l6 4V6L7 10z"/>' +
+             '<path d="M16.5 9a4 4 0 0 1 0 6"/></svg>',
+    mais:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" ' +
+             'stroke-linecap="round"><path d="M12 6v12M6 12h12"/></svg>',
   };
 
   function botaoIcone(icone, titulo, perigo) {
@@ -698,6 +719,10 @@
   }
 
   function mover(origem, setorDestinoId, posicao) {
+    /* O desenho abaixo tira da página a linha que estava sendo
+       arrastada; sem zerar aqui, o mapa continuaria achando que há
+       um sistema no ar. */
+    arrastando = null;
     var de = acharSetor(origem.setorId);
     var para = acharSetor(setorDestinoId);
     if (!de || !para) return;
@@ -787,61 +812,232 @@
 
     linha.appendChild(fim);
 
+    /* MOVER PARA OUTRO GRUPO SEM ARRASTAR. Arrastar de um grupo a
+       outro exigia os dois à vista ao mesmo tempo; aqui é escolher
+       o destino numa lista. O sistema vai para o fim dele. */
+    if (pode("sistemas_editar")) {
+      var mov = document.createElement("select");
+      mov.className = "cx-estilo linha__mover";
+      mov.title = "Mandar este sistema para outro grupo";
+      var primeira = document.createElement("option");
+      primeira.value = ""; primeira.textContent = "Mover para…";
+      mov.appendChild(primeira);
+      blocos().forEach(function (b) {
+        var lista = b.tipo === "gaveta" ? b.filhos : [b.setor];
+        lista.forEach(function (s) {
+          if (s === setor) return;
+          var op = document.createElement("option");
+          op.value = s.id;
+          op.textContent = (b.tipo === "gaveta" ? tituloGaveta() + " › " : "") + (s.titulo || "(sem nome)");
+          mov.appendChild(op);
+        });
+      });
+      mov.addEventListener("change", function () {
+        if (!mov.value) return;
+        var destino = acharSetor(mov.value);
+        mover({ setorId: setor.id, indice: indice }, mov.value, destino ? (destino.itens || []).length : 0);
+        recado("“" + (item.nome || "Sistema") + "” foi para “" + ((destino && destino.titulo) || "o grupo") + "”.");
+      });
+      linha.appendChild(mov);
+    }
+
     if (pode("sistemas_editar")) ligarArrasto(linha, setor, indice);
     else pegador.hidden = true;
     return linha;
   }
 
-  /* ---------- Grupos que abrem e fecham ----------
+  /* ============================================================
+     A TELA INICIAL, EM DUAS COLUNAS
+     ------------------------------------------------------------
+     À esquerda, o MAPA: a tela inicial do Hub de cima para baixo,
+     na mesma ordem em que a equipe vê. À direita, o que estiver
+     escolhido no mapa, aberto para editar.
 
-     A página era uma rolagem só, com todos os sistemas de todos os
-     grupos à mostra. Com sessenta e tantos sistemas, mexer no último
-     grupo era atravessar os outros todos.
+     A GAVETA VIROU UM BLOCO DE VERDADE. No banco, os grupos de
+     "Órgãos, impostos e consultas" continuam sendo grupos com
+     estilo "gaveta" — é o formato que o Hub conhece. Mas na tela
+     do Hub eles viram UM cartão só, no lugar do primeiro deles, e
+     a tela antiga mostrava cada um solto: não havia como pegar o
+     cartão inteiro e pô-lo em outro lugar.
 
-     Agora cada grupo nasce FECHADO — uma linha, com o nome e a
-     contagem — e abre no clique. Quais estão abertos fica guardado
-     no navegador, porque quem edita costuma voltar ao mesmo grupo.
-     É conveniência e não dado: se o navegador não guardar, os grupos
-     só nascem fechados de novo. */
-  var CHAVE_ABERTOS = "hub-totali:admin-grupos-abertos";
-  var ABERTOS = {};
-  try { ABERTOS = JSON.parse(window.localStorage.getItem(CHAVE_ABERTOS) || "{}") || {}; }
-  catch (e) { ABERTOS = {}; }
+     Agora o mapa mostra como é: um bloco que contém grupos. Mover
+     o bloco move todos juntos (eles ficam sempre em sequência na
+     lista), e arrastar um grupo para dentro ou para fora dele troca
+     o estilo do grupo.
+     ============================================================ */
 
-  function guardarAbertos() {
-    try { window.localStorage.setItem(CHAVE_ABERTOS, JSON.stringify(ABERTOS)); } catch (e) {}
+  var TITULO_GAVETA_PADRAO = "Órgãos, impostos e consultas";
+
+  /* O que está aberto à direita: "g:<id>" (um grupo), "gaveta",
+     "recados", "favoritos" ou "agenda". Fica no navegador porque
+     quem edita costuma voltar ao mesmo lugar; se não ficar, abre o
+     primeiro bloco e pronto. */
+  var CHAVE_SELECAO = "hub-totali:admin-selecao";
+  var SELECAO = "";
+  try { SELECAO = window.localStorage.getItem(CHAVE_SELECAO) || ""; } catch (e) { SELECAO = ""; }
+
+  function selecionar(chave) {
+    SELECAO = chave;
+    try { window.localStorage.setItem(CHAVE_SELECAO, chave); } catch (e) {}
   }
 
-  function abrirGrupo(id, aberto) {
-    if (aberto) ABERTOS[id] = true; else delete ABERTOS[id];
-    guardarAbertos();
+  function gaveta() {
+    if (!dados.gaveta || typeof dados.gaveta !== "object") dados.gaveta = {};
+    if (typeof dados.gaveta.titulo !== "string") dados.gaveta.titulo = TITULO_GAVETA_PADRAO;
+    return dados.gaveta;
+  }
+  function tituloGaveta() { return String(gaveta().titulo || "").trim() || TITULO_GAVETA_PADRAO; }
+
+  /* Grupo sem id não teria como ser escolhido no mapa. Os do banco
+     já têm; a semente não. O id não aparece no Hub. */
+  function garantirIds() {
+    dados.setores.forEach(function (s) { if (!s.id) s.id = idNovo(); });
   }
 
-  /* ---------- A busca da administração ----------
+  /* ---------- a estrutura: blocos de cima para baixo ---------- */
+
+  function ehGaveta(s) { return s.estilo === "gaveta"; }
+
+  function blocos() {
+    var lista = [], gav = null;
+    dados.setores.forEach(function (s) {
+      if (ehGaveta(s)) {
+        if (!gav) { gav = { tipo: "gaveta", filhos: [] }; lista.push(gav); }
+        gav.filhos.push(s);
+      } else {
+        lista.push({ tipo: "grupo", setor: s });
+      }
+    });
+    return lista;
+  }
+
+  function chaveDe(b) { return b.tipo === "gaveta" ? "gaveta" : "g:" + b.setor.id; }
+
+  function indicePorChave(lista, chave) {
+    for (var i = 0; i < lista.length; i++) if (chaveDe(lista[i]) === chave) return i;
+    return -1;
+  }
+  function indicePorId(lista, id) {
+    for (var i = 0; i < lista.length; i++) if (lista[i].id === id) return i;
+    return -1;
+  }
+
+  /* Devolve a lista de blocos para o formato do banco. A gaveta
+     vazia simplesmente não gera nada. */
+  function achatar(lista) {
+    var saida = [];
+    lista.forEach(function (b) {
+      if (b.tipo === "gaveta") {
+        b.filhos.forEach(function (s) { s.estilo = "gaveta"; saida.push(s); });
+      } else {
+        b.setor.estilo = "cartao";
+        saida.push(b.setor);
+      }
+    });
+    dados.setores = saida;
+    marcarPendente();
+  }
+
+  /* Tira um grupo de onde estiver e põe em outro lugar.
+     destino.onde: "topo" (cartões à vista) ou "gaveta" (dentro dela)
+     destino.antesDe: chave do bloco (topo) ou id do grupo (gaveta)
+                      diante do qual ele entra; null = no fim. */
+  function reposicionarGrupo(id, destino) {
+    var setor = acharSetor(id);
+    if (!setor) return false;
+    var estava = ehGaveta(setor) ? "gaveta" : "topo";
+    if (estava === destino.onde &&
+        (destino.antesDe === "g:" + id || destino.antesDe === id)) return false;
+
+    var lista = blocos().filter(function (b) { return !(b.tipo === "grupo" && b.setor === setor); });
+    var gav = null;
+    lista.forEach(function (b) {
+      if (b.tipo !== "gaveta") return;
+      gav = b;
+      b.filhos = b.filhos.filter(function (s) { return s !== setor; });
+    });
+
+    if (destino.onde === "gaveta") {
+      if (!gav) { gav = { tipo: "gaveta", filhos: [] }; lista.push(gav); }
+      var i = destino.antesDe ? indicePorId(gav.filhos, destino.antesDe) : -1;
+      if (i === -1) gav.filhos.push(setor); else gav.filhos.splice(i, 0, setor);
+    } else {
+      var j = destino.antesDe ? indicePorChave(lista, destino.antesDe) : -1;
+      var novo = { tipo: "grupo", setor: setor };
+      if (j === -1) lista.push(novo); else lista.splice(j, 0, novo);
+    }
+    achatar(lista);
+
+    if (estava !== destino.onde) {
+      recado(destino.onde === "gaveta"
+        ? "“" + (setor.titulo || "Grupo") + "” agora fica dentro de " + tituloGaveta() + "."
+        : "“" + (setor.titulo || "Grupo") + "” saiu de " + tituloGaveta() + " e virou cartões à vista.");
+    }
+    return true;
+  }
+
+  function moverGaveta(antesDe) {
+    if (antesDe === "gaveta") return false;
+    var lista = blocos();
+    var i = indicePorChave(lista, "gaveta");
+    if (i === -1) return false;
+    var b = lista.splice(i, 1)[0];
+    var j = antesDe ? indicePorChave(lista, antesDe) : -1;
+    if (j === -1) lista.push(b); else lista.splice(j, 0, b);
+    achatar(lista);
+    return true;
+  }
+
+  /* As setas: um passo para cima ou para baixo, no nível onde o
+     bloco está. */
+  function passo(chave, direcao) {
+    var lista = blocos();
+    var feito = false;
+    if (chave === "gaveta" || indicePorChave(lista, chave) !== -1) {
+      var i = indicePorChave(lista, chave);
+      if (direcao < 0 && i > 0) {
+        var antes = chaveDe(lista[i - 1]);
+        feito = chave === "gaveta" ? moverGaveta(antes)
+                                   : reposicionarGrupo(chave.slice(2), { onde: "topo", antesDe: antes });
+      } else if (direcao > 0 && i < lista.length - 1) {
+        var depois = i + 2 < lista.length ? chaveDe(lista[i + 2]) : null;
+        feito = chave === "gaveta" ? moverGaveta(depois)
+                                   : reposicionarGrupo(chave.slice(2), { onde: "topo", antesDe: depois });
+      }
+    } else {
+      var id = chave.slice(2);
+      var gav = lista[indicePorChave(lista, "gaveta")];
+      var k = gav ? indicePorId(gav.filhos, id) : -1;
+      if (k === -1) return;
+      if (direcao < 0 && k > 0) {
+        feito = reposicionarGrupo(id, { onde: "gaveta", antesDe: gav.filhos[k - 1].id });
+      } else if (direcao > 0 && k < gav.filhos.length - 1) {
+        feito = reposicionarGrupo(id, { onde: "gaveta",
+          antesDe: k + 2 < gav.filhos.length ? gav.filhos[k + 2].id : null });
+      }
+    }
+    if (feito) desenhar();
+  }
+
+  /* ---------- A busca ----------
      Sem acento e sem expressão regular, como a do Hub. Com algo
-     digitado, só aparecem os sistemas que combinam, cada um dentro
-     do seu grupo — aberto, esteja como estiver. Combinar com o nome
-     do grupo traz o grupo inteiro. */
+     digitado, a coluna da direita mostra os sistemas de todos os
+     grupos que combinam, editáveis ali mesmo. */
   var BUSCA = "";
 
   function semAcento(s) {
     return String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
   }
-
   function termosDaBusca() {
     return semAcento(BUSCA).split(" ").filter(Boolean);
   }
-
   function combina(texto, termos) {
     var palheiro = semAcento(texto);
     return termos.every(function (t) { return palheiro.indexOf(t) !== -1; });
   }
 
-  /* Rola até um bloco, parando LOGO ABAIXO das barras que ficam
-     presas no topo. A conta é feita na hora, e não com uma folga
-     fixa no CSS, porque o índice muda de altura: mais grupos, mais
-     linhas de atalhos. Em tela estreita o índice não fica preso, e
-     aí só o topo conta. */
+  /* Rola até um bloco, parando LOGO ABAIXO das barras presas no
+     topo. Usado pelos atalhos da aba Equipe. */
   function levarA(alvo, indice) {
     if (!alvo) return;
     var topo = document.querySelector(".topo");
@@ -854,12 +1050,6 @@
     });
   }
 
-  function levarAoGrupo(id) {
-    var alvo = document.getElementById("grupo-" + id);
-    levarA(alvo, $("indice"));
-    return alvo;
-  }
-
   function totalDeSistemas() {
     return (dados.setores || []).reduce(function (n, s) { return n + (s.itens || []).length; }, 0);
   }
@@ -868,135 +1058,421 @@
     return n === 0 ? "vazio" : (n === 1 ? "1 sistema" : n + " sistemas");
   }
 
-  /* ---------- Desenho: um grupo ---------- */
+  function somaItens(lista) {
+    return lista.reduce(function (n, s) { return n + (s.itens || []).length; }, 0);
+  }
 
-  function montarSetor(setor, posicao) {
-    var termos = termosDaBusca();
+  /* ============================================================
+     O MAPA (coluna da esquerda)
+     ============================================================ */
+
+  var ARRASTO_MAPA = null;   /* { tipo:"grupo", id } ou { tipo:"gaveta" } */
+
+  function limparAlvosMapa() {
+    Array.prototype.forEach.call(
+      document.querySelectorAll(".mapa__linha--antes,.mapa__linha--depois,.mapa__linha--receber"),
+      function (l) { l.classList.remove("mapa__linha--antes", "mapa__linha--depois", "mapa__linha--receber"); });
+  }
+
+  /* Uma linha do mapa. `o` diz o que ela é:
+       chave     o que abre à direita no clique
+       icone     nome em ICONES
+       titulo, sub, conta
+       filho     true quando mora dentro da gaveta
+       quem      o que o arrasto carrega (null = não se arrasta)
+       alvo      o que soltar em cima dela quer dizer (ver soltarNoMapa)
+       setorId   quando é um grupo: soltar um SISTEMA aqui manda para ele
+       setas     true para mostrar subir/descer */
+  function linhaDoMapa(o) {
+    var linha = elemento("div", "mapa__linha" +
+      (o.filho ? " mapa__linha--filho" : "") +
+      (o.fixa ? " mapa__linha--fixa" : "") +
+      (o.extra ? " " + o.extra : "") +
+      (SELECAO === o.chave && !BUSCA.trim() ? " mapa__linha--on" : ""));
+    linha.tabIndex = 0;
+    linha.setAttribute("role", "button");
+    if (SELECAO === o.chave) linha.setAttribute("aria-current", "true");
+
+    var pega = elemento("span", "mapa__pega");
+    if (o.quem) { pega.innerHTML = ICONES.pegador; pega.title = "Arraste para mudar a ordem"; }
+    linha.appendChild(pega);
+
+    var ico = elemento("span", "mapa__ico mapa__ico--" + o.icone);
+    ico.innerHTML = ICONES[o.icone] || "";
+    linha.appendChild(ico);
+
+    var txt = elemento("span", "mapa__txt");
+    txt.appendChild(elemento("span", "mapa__t", o.titulo));
+    if (o.sub) txt.appendChild(elemento("span", "mapa__s", o.sub));
+    linha.appendChild(txt);
+
+    if (o.conta !== undefined && o.conta !== null) linha.appendChild(elemento("span", "mapa__n", String(o.conta)));
+
+    if (o.setas && pode("grupos")) {
+      var setas = elemento("span", "mapa__setas");
+      var cima = botaoIcone("cima", "Subir");
+      cima.disabled = !o.podeSubir;
+      cima.addEventListener("click", function (ev) { ev.stopPropagation(); passo(o.chave, -1); });
+      var baixo = botaoIcone("baixo", "Descer");
+      baixo.disabled = !o.podeDescer;
+      baixo.addEventListener("click", function (ev) { ev.stopPropagation(); passo(o.chave, 1); });
+      setas.appendChild(cima);
+      setas.appendChild(baixo);
+      linha.appendChild(setas);
+    }
+
+    function abrir() {
+      if (!o.chave) return;
+      limparBusca();
+      selecionar(o.chave);
+      desenhar();
+      /* Em tela estreita o detalhe fica embaixo do mapa: leva até ele. */
+      if (window.matchMedia && window.matchMedia("(max-width: 900px)").matches) levarA($("detalhe"));
+    }
+    linha.addEventListener("click", abrir);
+    linha.addEventListener("keydown", function (ev) {
+      if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); abrir(); }
+    });
+
+    /* ---- arrastar esta linha ---- */
+    if (o.quem && pode("grupos")) {
+      linha.draggable = true;
+      linha.addEventListener("dragstart", function (ev) {
+        ev.stopPropagation();
+        ARRASTO_MAPA = o.quem;
+        linha.classList.add("mapa__linha--arrastando");
+        ev.dataTransfer.effectAllowed = "move";
+        try { ev.dataTransfer.setData("text/plain", "mapa"); } catch (e) {}
+      });
+      linha.addEventListener("dragend", function () {
+        ARRASTO_MAPA = null;
+        linha.classList.remove("mapa__linha--arrastando");
+        limparAlvosMapa();
+      });
+    }
+
+    /* ---- receber em cima desta linha ---- */
+    function aceita() {
+      if (arrastando) return !!o.setorId;              /* sistema: só em grupo */
+      if (!ARRASTO_MAPA || !o.alvo) return false;
+      if (ARRASTO_MAPA.tipo === "gaveta") {            /* a gaveta não entra nela mesma */
+        return o.alvo.nivel !== "gaveta" && o.alvo.nivel !== "fim-gaveta";
+      }
+      return true;
+    }
+    linha.addEventListener("dragover", function (ev) {
+      if (!aceita()) return;
+      ev.preventDefault();
+      ev.stopPropagation();
+      ev.dataTransfer.dropEffect = "move";
+      limparAlvosMapa();
+      if (arrastando) { linha.classList.add("mapa__linha--receber"); return; }
+      if (o.alvo.nivel === "fim-gaveta") { linha.classList.add("mapa__linha--receber"); return; }
+      var r = linha.getBoundingClientRect();
+      linha.classList.add((ev.clientY - r.top) > r.height / 2 ? "mapa__linha--depois" : "mapa__linha--antes");
+    });
+    linha.addEventListener("dragleave", function () {
+      linha.classList.remove("mapa__linha--antes", "mapa__linha--depois", "mapa__linha--receber");
+    });
+    linha.addEventListener("drop", function (ev) {
+      if (!aceita()) return;
+      ev.preventDefault();
+      ev.stopPropagation();
+      if (arrastando) {
+        var destino = acharSetor(o.setorId);
+        var nome = destino && destino.titulo;
+        mover(arrastando, o.setorId, destino ? (destino.itens || []).length : 0);
+        recado("Sistema movido para “" + (nome || "o grupo") + "”.");
+        return;
+      }
+      var r = linha.getBoundingClientRect();
+      soltarNoMapa(o.alvo, (ev.clientY - r.top) > r.height / 2);
+    });
+
+    return linha;
+  }
+
+  /* O que quer dizer soltar um bloco em cima de uma linha, na metade
+     de cima (antes) ou de baixo (depois). */
+  function soltarNoMapa(alvo, embaixo) {
+    var a = ARRASTO_MAPA;
+    ARRASTO_MAPA = null;
+    limparAlvosMapa();
+    if (!a) return;
+    var feito = false;
+
+    if (a.tipo === "gaveta") {
+      var antes;
+      if (alvo.nivel === "topo" || alvo.nivel === "cab-gaveta") antes = embaixo ? alvo.proxima : alvo.chave;
+      else if (alvo.nivel === "inicio") antes = alvo.primeira;
+      else antes = null;
+      feito = moverGaveta(antes);
+    } else {
+      var d;
+      switch (alvo.nivel) {
+        case "topo":       d = { onde: "topo", antesDe: embaixo ? alvo.proxima : alvo.chave }; break;
+        case "cab-gaveta": d = embaixo ? { onde: "gaveta", antesDe: alvo.primeiroFilho }
+                                       : { onde: "topo", antesDe: "gaveta" }; break;
+        case "gaveta":     d = { onde: "gaveta", antesDe: embaixo ? alvo.proximo : alvo.id }; break;
+        case "fim-gaveta": d = { onde: "gaveta", antesDe: null }; break;
+        case "inicio":     d = { onde: "topo", antesDe: alvo.primeira }; break;
+        default:           d = { onde: "topo", antesDe: null };
+      }
+      feito = reposicionarGrupo(a.id, d);
+    }
+    if (feito) desenhar();
+  }
+
+  function desenharMapa() {
+    var alvo = $("mapa");
+    if (!alvo) return;
+    alvo.textContent = "";
+
+    var lista = blocos();
+    var primeira = lista.length ? chaveDe(lista[0]) : null;
+
+    alvo.appendChild(linhaDoMapa({
+      chave: "favoritos", icone: "estrela", fixa: true,
+      titulo: "Meus favoritos", sub: "Sempre no topo · cada pessoa monta o seu",
+      alvo: { nivel: "inicio", primeira: primeira },
+    }));
+
+    var temGaveta = false;
+    lista.forEach(function (b, i) {
+      var proxima = i + 1 < lista.length ? chaveDe(lista[i + 1]) : null;
+      if (b.tipo === "grupo") {
+        var s = b.setor;
+        alvo.appendChild(linhaDoMapa({
+          chave: "g:" + s.id, icone: "cartoes",
+          titulo: s.titulo || "(sem nome)", sub: "Cartões à vista",
+          conta: (s.itens || []).length,
+          quem: { tipo: "grupo", id: s.id }, setorId: s.id,
+          alvo: { nivel: "topo", chave: "g:" + s.id, proxima: proxima },
+          setas: true, podeSubir: i > 0, podeDescer: i < lista.length - 1,
+        }));
+      } else {
+        temGaveta = true;
+        alvo.appendChild(blocoDaGaveta(b, i, lista, proxima));
+      }
+    });
+
+    /* Sem nenhum grupo dentro, a gaveta não aparece no Hub — mas
+       continua aqui, no fim, para dar onde soltar. */
+    if (!temGaveta) alvo.appendChild(blocoDaGaveta({ tipo: "gaveta", filhos: [] }, -1, lista, null));
+
+    alvo.appendChild(linhaDoMapa({
+      chave: "agenda", icone: "agenda", fixa: true,
+      titulo: "Agenda do mês", sub: "Calculada sozinha",
+      alvo: { nivel: "fim" },
+    }));
+
+    if (pode("avisos")) {
+      alvo.appendChild(linhaDoMapa({
+        chave: "recados", icone: "recado",
+        titulo: "Recados e prazos", sub: "Barra de baixo",
+        conta: (dados.avisos || []).length,
+        alvo: { nivel: "fim" },
+      }));
+    }
+  }
+
+  function blocoDaGaveta(b, i, lista, proxima) {
+    var caixa = elemento("div", "mapa__gaveta" + (b.filhos.length ? "" : " mapa__gaveta--vazia"));
+    var real = i !== -1;
+
+    caixa.appendChild(linhaDoMapa({
+      chave: "gaveta", icone: "gaveta", extra: "mapa__linha--cab-gaveta",
+      titulo: tituloGaveta(),
+      sub: real ? "Um cartão que abre · " + b.filhos.length + (b.filhos.length === 1 ? " grupo" : " grupos")
+                : "Vazia · não aparece no Hub",
+      conta: somaItens(b.filhos),
+      quem: real ? { tipo: "gaveta" } : null,
+      alvo: { nivel: "cab-gaveta", chave: "gaveta", proxima: proxima,
+              primeiroFilho: b.filhos.length ? b.filhos[0].id : null },
+      setas: real, podeSubir: i > 0, podeDescer: real && i < lista.length - 1,
+    }));
+
+    var filhos = elemento("div", "mapa__filhos");
+    b.filhos.forEach(function (s, k) {
+      filhos.appendChild(linhaDoMapa({
+        chave: "g:" + s.id, icone: "pasta", filho: true,
+        titulo: s.titulo || "(sem nome)",
+        conta: (s.itens || []).length,
+        quem: { tipo: "grupo", id: s.id }, setorId: s.id,
+        alvo: { nivel: "gaveta", id: s.id, proximo: k + 1 < b.filhos.length ? b.filhos[k + 1].id : null },
+        setas: true, podeSubir: k > 0, podeDescer: k < b.filhos.length - 1,
+      }));
+    });
+
+    if (pode("grupos")) {
+      var novo = linhaDoMapa({
+        chave: "", icone: "mais", filho: true, extra: "mapa__linha--novo",
+        titulo: b.filhos.length ? "Novo grupo aqui dentro" : "Arraste um grupo para cá, ou crie um",
+        alvo: { nivel: "fim-gaveta" },
+      });
+      novo.addEventListener("click", function () { novoGrupo("gaveta"); });
+      filhos.appendChild(novo);
+    }
+    caixa.appendChild(filhos);
+    return caixa;
+  }
+
+  /* ============================================================
+     O DETALHE (coluna da direita)
+     ============================================================ */
+
+  function cabecaDoDetalhe(trilha, titulo, nota) {
+    var cab = elemento("div", "detalhe__cab");
+    if (trilha) cab.appendChild(elemento("div", "detalhe__trilha", trilha));
+    if (titulo) cab.appendChild(elemento("h2", "detalhe__titulo", titulo));
+    if (nota) cab.appendChild(elemento("p", "detalhe__nota", nota));
+    return cab;
+  }
+
+  function campoRotulado(rotulo, campo, ajuda) {
+    var l = elemento("label", "campo detalhe__campo");
+    l.appendChild(elemento("span", "campo__rotulo", rotulo));
+    l.appendChild(campo);
+    if (ajuda) l.appendChild(elemento("span", "campo__ajuda", ajuda));
+    return l;
+  }
+
+  function posicaoNaTela(chave) {
+    var lista = blocos();
+    var i = indicePorChave(lista, chave);
+    return i === -1 ? null : i + 1;
+  }
+
+  function desenharDetalhe() {
+    var alvo = $("detalhe");
+    if (!alvo) return;
+    alvo.textContent = "";
+
+    if (BUSCA.trim()) { desenharResultados(alvo); return; }
+    if (!mexeEmSistemas() || SELECAO === "recados") {
+      if (pode("avisos")) { desenharRecados(alvo); return; }
+    }
+    if (SELECAO === "favoritos") {
+      alvo.appendChild(cabecaDoDetalhe("Tela inicial · sempre o primeiro bloco", "Meus favoritos",
+        "Cada pessoa monta os seus no próprio Hub, clicando na estrela de um sistema — ou guardando um link " +
+        "só dela. Não se edita por aqui, e fica sempre no topo da tela, antes de tudo."));
+      return;
+    }
+    if (SELECAO === "agenda") {
+      alvo.appendChild(cabecaDoDetalhe("Tela inicial · depois dos sistemas", "Agenda do mês",
+        "Calculada sozinha a partir das regras de vencimento e refeita na virada do mês. " +
+        "Não há o que editar aqui: para mudar uma regra de prazo, é no código (js/agenda.js)."));
+      return;
+    }
+    if (SELECAO === "gaveta") { desenharGaveta(alvo); return; }
+
+    var setor = SELECAO.indexOf("g:") === 0 ? acharSetor(SELECAO.slice(2)) : null;
+    if (!setor) {
+      var lista = blocos();
+      if (!lista.length) {
+        alvo.appendChild(cabecaDoDetalhe(null, "Nenhum grupo ainda",
+          "Crie o primeiro em “Novo grupo de cartões”, embaixo do mapa."));
+        return;
+      }
+      var b = lista[0];
+      selecionar(b.tipo === "gaveta" ? "gaveta" : "g:" + b.setor.id);
+      desenharMapa();
+      desenharDetalhe();
+      return;
+    }
+    desenharGrupo(alvo, setor);
+  }
+
+  function desenharGrupo(alvo, setor) {
+    var naGaveta = ehGaveta(setor);
+    var podeGrupos = pode("grupos");
     var itens = setor.itens || [];
-    var mostrar = null;          /* null = todos */
-    if (termos.length && !combina(setor.titulo, termos)) {
-      mostrar = {};
-      var algum = false;
-      itens.forEach(function (item, i) {
-        if (combina([item.nome, item.nota, item.url].join(" "), termos)) { mostrar[i] = true; algum = true; }
+
+    var trilha = naGaveta
+      ? "Tela inicial › " + tituloGaveta() + " › grupo"
+      : "Tela inicial · " + posicaoNaTela("g:" + setor.id) + "º bloco · cartões à vista";
+
+    var cab = cabecaDoDetalhe(trilha, null, null);
+    var grade = elemento("div", "detalhe__grade");
+
+    grade.appendChild(campoRotulado("Nome do grupo",
+      caixaTexto("cx-titulo", setor.titulo, "Nome do grupo", function (v) {
+        setor.titulo = v;
+        desenharMapa();
+      }, !podeGrupos)));
+    grade.appendChild(campoRotulado("Legenda (opcional)",
+      caixaTexto("cx-nota", setor.nota, "Uma linha sobre o grupo", function (v) { setor.nota = v; }, !podeGrupos)));
+    cab.appendChild(grade);
+
+    if (podeGrupos) {
+      var opcoes = elemento("div", "detalhe__opcoes");
+
+      var trocar = elemento("button", "btn btn--pequeno",
+        naGaveta ? "Tirar de “" + tituloGaveta() + "”" : "Guardar dentro de “" + tituloGaveta() + "”");
+      trocar.type = "button";
+      trocar.title = naGaveta
+        ? "O grupo sai da janela e vira um bloco de cartões à vista, logo antes dela"
+        : "O grupo deixa de aparecer à vista e passa a morar na janela que abre no clique";
+      trocar.addEventListener("click", function () {
+        if (naGaveta) reposicionarGrupo(setor.id, { onde: "topo", antesDe: "gaveta" });
+        else reposicionarGrupo(setor.id, { onde: "gaveta", antesDe: null });
+        desenhar();
       });
-      if (!algum) return null;
+      opcoes.appendChild(trocar);
+
+      var destaque = elemento("label", "marca-destaque");
+      var cxDestaque = document.createElement("input");
+      cxDestaque.type = "checkbox";
+      cxDestaque.checked = setor.destaque === true;
+      cxDestaque.addEventListener("change", function () {
+        if (cxDestaque.checked) setor.destaque = true; else delete setor.destaque;
+        marcarPendente();
+      });
+      destaque.appendChild(cxDestaque);
+      destaque.appendChild(document.createTextNode("Sistema da casa"));
+      destaque.title = "Marca este grupo como “nosso”: o quadradinho de iniciais fica azul-noite";
+      opcoes.appendChild(destaque);
+
+      /* ESCRITO, E NÃO SÓ UMA LIXEIRA: o ícone sozinho não dizia
+         que ali se apagava o grupo inteiro. */
+      var apagarSetor = elemento("button", "btn btn--pequeno btn--perigo detalhe__excluir", "Excluir grupo");
+      apagarSetor.type = "button";
+      apagarSetor.addEventListener("click", function () {
+        var quantos = itens.length;
+        var nome = setor.titulo || "sem nome";
+        var pergunta = quantos
+          ? "Excluir o grupo “" + nome + "” e " +
+            (quantos === 1 ? "o sistema" : "os " + quantos + " sistemas") + " dentro dele?\n\n" +
+            "Para manter algum, use “Mover para” na linha dele antes."
+          : "Excluir o grupo “" + nome + "”?";
+        if (!window.confirm(pergunta)) return;
+        var i = dados.setores.indexOf(setor);
+        if (i !== -1) dados.setores.splice(i, 1);
+        selecionar("");
+        marcarPendente();
+        desenhar();
+      });
+      opcoes.appendChild(apagarSetor);
+      cab.appendChild(opcoes);
     }
-    var aberto = termos.length ? true : ABERTOS[setor.id] === true;
+    alvo.appendChild(cab);
 
-    var painel = elemento("section", "painel painel--grupo" + (aberto ? "" : " painel--fechado"));
-    painel.id = "grupo-" + setor.id;
-
-    var cabeca = elemento("div", "painel__cabeca");
-
-    var seta = botaoIcone(aberto ? "baixo" : "direita", aberto ? "Recolher o grupo" : "Abrir o grupo");
-    seta.classList.add("painel__seta");
-    seta.setAttribute("aria-expanded", aberto ? "true" : "false");
-    /* Durante a busca o grupo está aberto por causa dela, e fechar
-       não faria sentido: esconderia justamente o que foi achado. */
-    seta.disabled = termos.length > 0;
-    seta.addEventListener("click", function () {
-      abrirGrupo(setor.id, !aberto);
-      desenhar();
-    });
-    cabeca.appendChild(seta);
-
-    cabeca.appendChild(caixaTexto("cx-titulo", setor.titulo, "Nome do grupo", function (v) {
-      setor.titulo = v;
-      desenharIndice();
-    }, !pode("grupos")));
-    cabeca.appendChild(caixaTexto("cx-nota", setor.nota, "Legenda do grupo", function (v) { setor.nota = v; }, !pode("grupos")));
-
-    var estilo = document.createElement("select");
-    estilo.className = "cx-estilo";
-    [["cartao", "Cartões à vista"], ["gaveta", "Gaveta fechada"]].forEach(function (o) {
-      var op = document.createElement("option");
-      op.value = o[0]; op.textContent = o[1];
-      estilo.appendChild(op);
-    });
-    estilo.value = setor.estilo === "gaveta" ? "gaveta" : "cartao";
-    estilo.disabled = !pode("grupos");
-    estilo.title = "Cartões ficam sempre à vista; gaveta nasce fechada e abre no clique";
-    estilo.addEventListener("change", function () { setor.estilo = estilo.value; marcarPendente(); });
-    cabeca.appendChild(estilo);
-
-    var destaque = elemento("label", "marca-destaque");
-    var cxDestaque = document.createElement("input");
-    cxDestaque.type = "checkbox";
-    cxDestaque.checked = setor.destaque === true;
-    cxDestaque.disabled = !pode("grupos");
-    cxDestaque.addEventListener("change", function () {
-      if (cxDestaque.checked) setor.destaque = true; else delete setor.destaque;
-      marcarPendente();
-    });
-    destaque.appendChild(cxDestaque);
-    destaque.appendChild(document.createTextNode("da casa"));
-    destaque.title = "Marca este grupo como “nosso”: o quadradinho de iniciais fica azul-noite";
-    cabeca.appendChild(destaque);
-
-    var direita = elemento("div", "painel__direita");
-
-    direita.appendChild(elemento("span", "painel__conta", contagem(itens.length)));
-
-    var cima = botaoIcone("cima", "Subir o grupo");
-    cima.disabled = posicao === 0;
-    cima.addEventListener("click", function () { moverSetor(posicao, -1); });
-    if (pode("grupos")) direita.appendChild(cima);
-
-    var baixo = botaoIcone("baixo", "Descer o grupo");
-    baixo.disabled = posicao === dados.setores.length - 1;
-    baixo.addEventListener("click", function () { moverSetor(posicao, 1); });
-    if (pode("grupos")) direita.appendChild(baixo);
-
-    /* ESCRITO, E NÃO SÓ UMA LIXEIRA. O ícone sozinho, igual ao de
-       apagar um sistema, não dizia que ali se apagava o grupo
-       inteiro — e quem procurava "excluir grupo" não achava. */
-    var apagarSetor = elemento("button", "btn btn--pequeno btn--perigo", "Excluir grupo");
-    apagarSetor.type = "button";
-    apagarSetor.addEventListener("click", function () {
-      var quantos = (setor.itens || []).length;
-      var nome = setor.titulo || "sem nome";
-      var pergunta = quantos
-        ? "Excluir o grupo “" + nome + "” e " +
-          (quantos === 1 ? "o sistema" : "os " + quantos + " sistemas") + " dentro dele?\n\n" +
-          "Para manter algum, arraste-o para outro grupo antes."
-        : "Excluir o grupo “" + nome + "”?";
-      if (!window.confirm(pergunta)) return;
-      dados.setores.splice(posicao, 1);
-      abrirGrupo(setor.id, false);
-      marcarPendente();
-      desenhar();
-    });
-    if (pode("grupos")) direita.appendChild(apagarSetor);
-
-    cabeca.appendChild(direita);
-    painel.appendChild(cabeca);
-
-    if (!aberto) {
-      /* Grupo fechado também recebe sistema arrastado: sem isto,
-         mover de um grupo para outro exigiria abrir os dois. Vai
-         para o fim do grupo. */
-      painel.addEventListener("dragover", function (ev) {
-        if (!arrastando) return;
-        ev.preventDefault();
-        painel.classList.add("painel--alvo");
-      });
-      painel.addEventListener("dragleave", function () { painel.classList.remove("painel--alvo"); });
-      painel.addEventListener("drop", function (ev) {
-        if (!arrastando) return;
-        ev.preventDefault();
-        mover(arrastando, setor.id, (setor.itens || []).length);
-      });
-      return painel;
+    /* ---- os sistemas ---- */
+    var lista = elemento("div", "detalhe__lista");
+    var listaCab = elemento("div", "detalhe__lista-cab");
+    listaCab.appendChild(elemento("span", "detalhe__lista-t", "Sistemas"));
+    listaCab.appendChild(elemento("span", "detalhe__lista-n", contagem(itens.length)));
+    if (pode("sistemas_editar") && itens.length > 1) {
+      listaCab.appendChild(elemento("span", "detalhe__lista-dica",
+        "Arraste pelo pegador para reordenar, ou solte em cima de um grupo no mapa."));
     }
+    lista.appendChild(listaCab);
 
     var linhas = elemento("div", "linhas");
-    if (!setor.itens || !setor.itens.length) {
+    if (!itens.length) {
       var vazio = elemento("div", "vazio", pode("sistemas_adicionar")
-        ? "Nenhum sistema aqui ainda. Arraste um para cá, ou acrescente abaixo."
+        ? "Nenhum sistema aqui ainda. Acrescente abaixo, ou arraste um de outro grupo para este no mapa."
         : "Nenhum sistema aqui ainda.");
-      /* Setor vazio também recebe item arrastado — senão não
-         haveria como encher um setor recém-criado sem digitar. */
       vazio.addEventListener("dragover", function (ev) { if (arrastando) ev.preventDefault(); });
       vazio.addEventListener("drop", function (ev) {
         if (!arrastando) return;
@@ -1005,52 +1481,189 @@
       });
       linhas.appendChild(vazio);
     } else {
-      /* O índice que a linha recebe é sempre o de verdade, mesmo com
-         a busca escondendo vizinhos: é ele que o arrasto e o apagar
-         usam para achar o sistema na lista. */
-      setor.itens.forEach(function (item, i) {
-        if (mostrar && !mostrar[i]) return;
-        linhas.appendChild(montarLinha(setor, item, i));
-      });
+      itens.forEach(function (item, i) { linhas.appendChild(montarLinha(setor, item, i)); });
     }
-    painel.appendChild(linhas);
+    lista.appendChild(linhas);
 
-    var acoes = elemento("div", "painel__acoes");
-    var novo = elemento("button", "btn btn--pequeno", "Acrescentar sistema");
-    novo.type = "button";
-    novo.addEventListener("click", function () {
-      setor.itens = setor.itens || [];
-      var criado = { nome: "", url: "", nota: "" };
-      novosItens.add(criado);
-      setor.itens.push(criado);
-      /* A linha nova está em branco e não combinaria com busca
-         nenhuma: nasceria escondida. */
-      limparBusca();
-      abrirGrupo(setor.id, true);
-      marcarPendente();
-      desenhar();
-      /* Leva o cursor direto para o campo do nome do novo. O painel
-         foi refeito pelo desenhar(): o de antes já saiu da página,
-         e procurar nele não acharia campo nenhum. */
-      var refeito = document.getElementById("grupo-" + setor.id);
-      var todos = refeito ? refeito.querySelectorAll(".cx-nome") : [];
-      if (todos.length) todos[todos.length - 1].focus();
-    });
     if (pode("sistemas_adicionar")) {
+      var acoes = elemento("div", "detalhe__acoes");
+      var novo = elemento("button", "btn btn--pequeno btn--principal", "+ Acrescentar sistema");
+      novo.type = "button";
+      novo.addEventListener("click", function () {
+        setor.itens = setor.itens || [];
+        var criado = { nome: "", url: "", nota: "" };
+        novosItens.add(criado);
+        setor.itens.push(criado);
+        marcarPendente();
+        desenhar();
+        var todos = $("detalhe").querySelectorAll(".cx-nome");
+        if (todos.length) todos[todos.length - 1].focus();
+      });
       acoes.appendChild(novo);
-      painel.appendChild(acoes);
+      lista.appendChild(acoes);
     }
-
-    return painel;
+    alvo.appendChild(lista);
   }
 
-  function moverSetor(posicao, direcao) {
-    var destino = posicao + direcao;
-    if (destino < 0 || destino >= dados.setores.length) return;
-    var s = dados.setores.splice(posicao, 1)[0];
-    dados.setores.splice(destino, 0, s);
-    marcarPendente();
-    desenhar();
+  function desenharGaveta(alvo) {
+    var lista = blocos();
+    var b = lista[indicePorChave(lista, "gaveta")] || { filhos: [] };
+    var pos = posicaoNaTela("gaveta");
+    var podeGrupos = pode("grupos");
+
+    var cab = cabecaDoDetalhe(pos ? "Tela inicial · " + pos + "º bloco · um cartão que abre uma janela"
+                                  : "Tela inicial · vazia, não aparece no Hub", null,
+      "Na tela inicial isto é UM cartão só. Clicado, abre uma janela com os grupos abaixo, nesta ordem. " +
+      "Para mudar a posição do cartão, arraste-o no mapa ou use as setas.");
+    var grade = elemento("div", "detalhe__grade");
+    grade.appendChild(campoRotulado("Nome do cartão",
+      caixaTexto("cx-titulo", gaveta().titulo, TITULO_GAVETA_PADRAO, function (v) {
+        gaveta().titulo = v;
+        desenharMapa();
+      }, !podeGrupos), "Aparece no cartão e no alto da janela."));
+    cab.appendChild(grade);
+
+    if (podeGrupos && pos) {
+      var opcoes = elemento("div", "detalhe__opcoes");
+      var subir = elemento("button", "btn btn--pequeno", "Subir o cartão");
+      subir.type = "button";
+      subir.disabled = pos === 1;
+      subir.addEventListener("click", function () { passo("gaveta", -1); });
+      var descer = elemento("button", "btn btn--pequeno", "Descer o cartão");
+      descer.type = "button";
+      descer.disabled = pos === lista.length;
+      descer.addEventListener("click", function () { passo("gaveta", 1); });
+      var topo = elemento("button", "btn btn--pequeno", "Pôr no topo");
+      topo.type = "button";
+      topo.disabled = pos === 1;
+      topo.title = "Logo abaixo dos favoritos, antes de todos os outros blocos";
+      topo.addEventListener("click", function () {
+        if (moverGaveta(chaveDe(blocos()[0]))) desenhar();
+      });
+      opcoes.appendChild(topo);
+      opcoes.appendChild(subir);
+      opcoes.appendChild(descer);
+      cab.appendChild(opcoes);
+    }
+    alvo.appendChild(cab);
+
+    var caixa = elemento("div", "detalhe__lista");
+    var listaCab = elemento("div", "detalhe__lista-cab");
+    listaCab.appendChild(elemento("span", "detalhe__lista-t", "Grupos dentro dele"));
+    listaCab.appendChild(elemento("span", "detalhe__lista-n",
+      b.filhos.length === 1 ? "1 grupo" : b.filhos.length + " grupos"));
+    caixa.appendChild(listaCab);
+
+    if (!b.filhos.length) {
+      caixa.appendChild(elemento("div", "vazio",
+        "Nenhum grupo aqui dentro. Arraste um grupo para cá no mapa, ou crie um novo."));
+    }
+    b.filhos.forEach(function (s, k) {
+      var linha = elemento("div", "sub-grupo");
+      var ico = elemento("span", "mapa__ico mapa__ico--pasta");
+      ico.innerHTML = ICONES.pasta;
+      linha.appendChild(ico);
+      var txt = elemento("div", "sub-grupo__txt");
+      txt.appendChild(elemento("div", "sub-grupo__t", s.titulo || "(sem nome)"));
+      txt.appendChild(elemento("div", "sub-grupo__s",
+        (s.itens || []).map(function (i) { return i.nome; }).filter(Boolean).slice(0, 6).join(" · ") ||
+        "sem sistemas"));
+      linha.appendChild(txt);
+      linha.appendChild(elemento("span", "mapa__n", String((s.itens || []).length)));
+      if (podeGrupos) {
+        var cima = botaoIcone("cima", "Subir");
+        cima.disabled = k === 0;
+        cima.addEventListener("click", function () { passo("g:" + s.id, -1); });
+        var baixo = botaoIcone("baixo", "Descer");
+        baixo.disabled = k === b.filhos.length - 1;
+        baixo.addEventListener("click", function () { passo("g:" + s.id, 1); });
+        linha.appendChild(cima);
+        linha.appendChild(baixo);
+      }
+      var abrir = elemento("button", "btn btn--pequeno", "Editar");
+      abrir.type = "button";
+      abrir.addEventListener("click", function () { selecionar("g:" + s.id); desenhar(); });
+      linha.appendChild(abrir);
+      caixa.appendChild(linha);
+    });
+
+    if (podeGrupos) {
+      var acoes = elemento("div", "detalhe__acoes");
+      var novo = elemento("button", "btn btn--pequeno btn--principal", "+ Novo grupo aqui dentro");
+      novo.type = "button";
+      novo.addEventListener("click", function () { novoGrupo("gaveta"); });
+      acoes.appendChild(novo);
+      caixa.appendChild(acoes);
+    }
+    alvo.appendChild(caixa);
+  }
+
+  function desenharRecados(alvo) {
+    alvo.appendChild(cabecaDoDetalhe("Tela inicial · barra de baixo", "Recados e prazos",
+      "O que estiver aqui aparece na barra inferior do Hub, para a equipe inteira. " +
+      "Só os três primeiros cabem na faixa — o resto fica contado num “+” ao lado."));
+
+    var caixa = elemento("div", "detalhe__lista");
+    var listaCab = elemento("div", "detalhe__lista-cab");
+    listaCab.appendChild(elemento("span", "detalhe__lista-t", "Recados"));
+    listaCab.appendChild(elemento("span", "detalhe__lista-n", String((dados.avisos || []).length)));
+    caixa.appendChild(listaCab);
+
+    var linhas = elemento("div", "linhas");
+    (dados.avisos || []).forEach(function (aviso, i) { linhas.appendChild(montarAviso(aviso, i)); });
+    if (!dados.avisos || !dados.avisos.length) {
+      linhas.appendChild(elemento("div", "vazio", "Sem recados. A barra não aparece no Hub."));
+    }
+    caixa.appendChild(linhas);
+
+    var acoes = elemento("div", "detalhe__acoes");
+    var novo = elemento("button", "btn btn--pequeno btn--principal", "+ Acrescentar recado");
+    novo.type = "button";
+    novo.addEventListener("click", function () {
+      dados.avisos = dados.avisos || [];
+      dados.avisos.push({ tipo: "aviso", titulo: "", texto: "" });
+      marcarPendente();
+      desenhar();
+      var todos = $("detalhe").querySelectorAll(".cx-aviso-titulo");
+      if (todos.length) todos[todos.length - 1].focus();
+    });
+    acoes.appendChild(novo);
+    caixa.appendChild(acoes);
+    alvo.appendChild(caixa);
+  }
+
+  function desenharResultados(alvo) {
+    var termos = termosDaBusca();
+    var achou = 0;
+    alvo.appendChild(cabecaDoDetalhe("Busca", "Resultados para “" + BUSCA.trim() + "”",
+      "O nome, a legenda, o endereço e o nome do grupo entram na busca. Dá para editar aqui mesmo."));
+    dados.setores.forEach(function (setor) {
+      var itens = setor.itens || [];
+      var todoGrupo = combina(setor.titulo, termos);
+      var linhas = [];
+      itens.forEach(function (item, i) {
+        if (todoGrupo || combina([item.nome, item.nota, item.url].join(" "), termos)) {
+          linhas.push(montarLinha(setor, item, i));
+        }
+      });
+      if (!linhas.length) return;
+      achou += linhas.length;
+      var caixa = elemento("div", "detalhe__lista");
+      var cab = elemento("div", "detalhe__lista-cab");
+      var ir = elemento("button", "detalhe__lista-t detalhe__ir",
+        (ehGaveta(setor) ? tituloGaveta() + " › " : "") + (setor.titulo || "(sem nome)"));
+      ir.type = "button";
+      ir.title = "Abrir o grupo";
+      ir.addEventListener("click", function () { limparBusca(); selecionar("g:" + setor.id); desenhar(); });
+      cab.appendChild(ir);
+      cab.appendChild(elemento("span", "detalhe__lista-n", contagem(linhas.length)));
+      caixa.appendChild(cab);
+      var corpo = elemento("div", "linhas");
+      linhas.forEach(function (l) { corpo.appendChild(l); });
+      caixa.appendChild(corpo);
+      alvo.appendChild(caixa);
+    });
+    if (!achou) alvo.appendChild(elemento("div", "vazio detalhe__vazio", "Nenhum sistema combina com essa busca."));
   }
 
   /* ---------- Desenho: recados ---------- */
@@ -1088,80 +1701,25 @@
 
   function limparBusca() {
     BUSCA = "";
-    var campo = $("indice-busca");
+    var campo = $("busca-sistemas");
     if (campo) campo.value = "";
   }
 
-  /* Os atalhos do índice: um por grupo, com a contagem, mais os
-     recados. Refeito a cada desenho e a cada tecla no nome de um
-     grupo, para nunca mostrar um nome que a tela já trocou. */
-  function desenharIndice() {
-    var caixa = $("indice-atalhos");
-    if (!caixa) return;
-    caixa.textContent = "";
-    dados.setores.forEach(function (setor) {
-      var b = elemento("button", "atalho");
-      b.type = "button";
-      b.appendChild(elemento("span", null, setor.titulo || "(sem nome)"));
-      b.appendChild(elemento("span", "atalho__n", String((setor.itens || []).length)));
-      b.addEventListener("click", function () {
-        limparBusca();
-        abrirGrupo(setor.id, true);
-        desenhar();
-        levarAoGrupo(setor.id);
-      });
-      caixa.appendChild(b);
-    });
-    if (pode("avisos")) {
-      var recados = elemento("button", "atalho atalho--outro", "Recados e prazos");
-      recados.type = "button";
-      recados.addEventListener("click", function () {
-        levarA($("painel-avisos"), $("indice"));
-      });
-      caixa.appendChild(recados);
-    }
-  }
-
   function desenhar() {
-    var alvo = $("setores-edicao");
-    alvo.textContent = "";
-    var desenhados = 0;
-    dados.setores.forEach(function (setor, i) {
-      var painel = montarSetor(setor, i);
-      if (!painel) return;
-      alvo.appendChild(painel);
-      desenhados++;
-    });
-    if (!dados.setores.length) {
-      alvo.appendChild(elemento("div", "vazio", "Nenhum grupo ainda. Crie o primeiro em “Novo grupo”."));
-    } else if (!desenhados) {
-      alvo.appendChild(elemento("div", "vazio",
-        "Nenhum sistema com “" + BUSCA + "”. O nome, a legenda, o endereço e o nome do grupo entram na busca."));
-    }
-    desenharIndice();
-
+    garantirIds();
+    desenharMapa();
+    desenharDetalhe();
     var total = $("total-sistemas");
     if (total) {
       var n = totalDeSistemas();
-      total.textContent = n + (n === 1 ? " sistema no Hub" : " sistemas no Hub");
-    }
-
-    var caixaAvisos = $("avisos-edicao");
-    caixaAvisos.textContent = "";
-    (dados.avisos || []).forEach(function (aviso, i) {
-      caixaAvisos.appendChild(montarAviso(aviso, i));
-    });
-    if (!dados.avisos || !dados.avisos.length) {
-      caixaAvisos.appendChild(elemento("div", "vazio", "Sem recados. O bloco não aparece no Hub."));
+      total.textContent = n + (n === 1 ? " sistema no Hub." : " sistemas no Hub.");
     }
   }
 
   /* ---------- Identificador de setor ---------- */
 
-  /* O id do setor é a chave dos favoritos de cada pessoa
-     ("fiscal|e-CAC"). Por isso ele NUNCA muda depois de criado:
-     renomear "Fiscal" para "Tributário" não pode apagar o
-     atalho que alguém marcou. Só setor novo ganha id novo. */
+  /* O id do grupo nunca muda depois de criado: é por ele que esta
+     tela acha o grupo. Só grupo novo ganha id novo. */
   function idNovo() {
     var base = "setor";
     var n = 1;
@@ -1169,12 +1727,31 @@
     return base + n;
   }
 
+  /* O grupo novo nasce escolhido, com o cursor no nome e o texto
+     selecionado: é só digitar por cima. "gaveta" cria dentro dela;
+     senão nasce como bloco de cartões, logo antes da gaveta. */
+  function novoGrupo(onde) {
+    var id = idNovo();
+    var novo = { id: id, titulo: "Grupo novo", nota: "", estilo: onde === "gaveta" ? "gaveta" : "cartao", itens: [] };
+    dados.setores.push(novo);
+    if (onde === "gaveta") reposicionarGrupo(id, { onde: "gaveta", antesDe: null });
+    else {
+      var lista = blocos();
+      var temGaveta = indicePorChave(lista, "gaveta") !== -1;
+      reposicionarGrupo(id, { onde: "topo", antesDe: temGaveta ? "gaveta" : null });
+    }
+    limparBusca();
+    selecionar("g:" + id);
+    marcarPendente();
+    desenhar();
+    var nome = $("detalhe").querySelector(".cx-titulo");
+    if (nome) { nome.focus({ preventScroll: true }); nome.select(); }
+  }
+
   /* ---------- Ações do topo ---------- */
 
   /* Os botões do topo são ligados UMA vez. Sem esta trava, uma
-     segunda chamada a abrirEdicao() (entrar de novo sem recarregar,
-     por exemplo) ligaria tudo em dobro: um clique em "acrescentar
-     setor" criaria dois setores. */
+     segunda chamada a abrirEdicao() ligaria tudo em dobro. */
   var acoesLigadas = false;
   var oferecerDesfazer = function () {};
 
@@ -1182,36 +1759,10 @@
     if (acoesLigadas) return;
     acoesLigadas = true;
 
-    /* O grupo novo nasce aberto, no fim da lista, com o cursor já no
-       nome e o texto selecionado: é só digitar por cima. */
-    function novoGrupo() {
-      var id = idNovo();
-      dados.setores.push({ id: id, titulo: "Grupo novo", nota: "", estilo: "cartao", itens: [] });
-      limparBusca();
-      abrirGrupo(id, true);
-      marcarPendente();
-      desenhar();
-      var painel = levarAoGrupo(id);
-      var nome = painel && painel.querySelector(".cx-titulo");
-      if (nome) { nome.focus({ preventScroll: true }); nome.select(); }
-    }
-    $("btn-novo-setor").addEventListener("click", novoGrupo);
-    $("btn-novo-grupo").addEventListener("click", novoGrupo);
+    $("btn-novo-grupo").addEventListener("click", function () { novoGrupo("topo"); });
 
-    $("indice-busca").addEventListener("input", function () {
-      BUSCA = $("indice-busca").value;
-      desenhar();
-    });
-
-    $("btn-abrir-todos").addEventListener("click", function () {
-      dados.setores.forEach(function (s) { ABERTOS[s.id] = true; });
-      guardarAbertos();
-      desenhar();
-    });
-    $("btn-recolher-todos").addEventListener("click", function () {
-      ABERTOS = {};
-      guardarAbertos();
-      limparBusca();
+    $("busca-sistemas").addEventListener("input", function () {
+      BUSCA = $("busca-sistemas").value;
       desenhar();
     });
 
@@ -1220,13 +1771,6 @@
       b.addEventListener("click", function () {
         levarA(document.getElementById(b.dataset.alvo), $("indice-equipe"));
       });
-    });
-
-    $("btn-novo-aviso").addEventListener("click", function () {
-      dados.avisos = dados.avisos || [];
-      dados.avisos.push({ tipo: "aviso", titulo: "", texto: "" });
-      marcarPendente();
-      desenhar();
     });
 
     /* ---------- desfazer o último Salvar ---------- */
@@ -1419,30 +1963,20 @@
     $("btn-desfazer").hidden = true;
 
     if (!mexeEmSistemas()) {
-      /* Só recados: nem o resto do painel aparece. */
-      Array.prototype.slice.call(sistemas.children).forEach(function (filho) {
-        if (filho.id !== "painel-avisos") filho.hidden = true;
-      });
-
-      var cabeca = document.createElement("div");
-      cabeca.className = "admin__cabeca";
-      cabeca.appendChild(elemento("h1", "admin__titulo", "Recados e prazos"));
-      cabeca.appendChild(elemento("p", "admin__nota",
-        "O que você escrever aqui aparece na barra inferior do Hub, para a equipe inteira. " +
-        "Só os três primeiros cabem na faixa — o resto fica contado num “+” ao lado. " +
-        "Nada é gravado até clicar em Salvar."));
-      sistemas.insertBefore(cabeca, $("painel-avisos"));
-
+      /* Só recados: o mapa some e a coluna da direita mostra só
+         os recados (desenharDetalhe decide isso sozinho). */
+      document.body.classList.add("so-recados");
+      $("mapa-caixa").hidden = true;
+      var cab = sistemas.querySelector(".admin__cabeca");
+      if (cab) cab.hidden = true;
       document.querySelector(".marca__secao").textContent = "Recados";
+      selecionar("recados");
+      desenhar();
       return;
     }
 
-    if (!pode("avisos")) $("painel-avisos").hidden = true;
-    if (!pode("grupos")) {
-      $("btn-novo-grupo").hidden = true;
-      $("btn-novo-setor").hidden = true;
-    }
-    if (!pode("avisos")) $("btn-novo-aviso").hidden = true;
+    if (!pode("grupos")) $("btn-novo-grupo").hidden = true;
+    desenhar();
   }
 
   /* Decide o que esta conta vê e abre a tela. Devolve false quando
