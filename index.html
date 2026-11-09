@@ -5,23 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
 <!-- Nenhum script externo, nenhuma CDN, nenhuma fonte remota. Fora
-     da própria pasta o Hub fala com o Google — login, banco e
-     renovação do token — e, num caso só, com o unavatar.io.
+     da própria pasta o Hub fala com o Google — login, banco,
+     renovação do token e o Storage dos anexos — e, num caso só,
+     com o unavatar.io.
 
      ESSE CASO ÚNICO: quando alguém acrescenta um link PRÓPRIO em
      Meus Favoritos, o Hub pede uma vez o ícone daquele domínio e
      guarda a imagem dentro do documento de favoritos da pessoa.
-     Nenhuma abertura do Hub pede nada depois disso, e os ícones dos
-     sistemas da casa continuam vindo só do banco. O que o serviço
-     fica sabendo é aquele domínio, uma vez, e é um link que a
-     própria pessoa escolheu pôr ali — não a lista da casa. -->
+
+     As notícias e a agenda oficial NÃO passam por aqui: quem lê os
+     sites do governo é o robô do GitHub (ferramentas/), e o Hub só
+     abre o arquivo dados/*.json da própria pasta.
+
+     frame-src blob: é o visualizador de PDF do quadro de pendências:
+     o arquivo é baixado com a sessão e mostrado pelo leitor do
+     próprio navegador, num quadro ao lado. -->
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self' file:;
   script-src 'self' file:;
   style-src 'self' file:;
   img-src 'self' file: data: blob: https://unavatar.io;
   font-src 'self' file:;
-  connect-src https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://firebasestorage.googleapis.com;
+  frame-src 'self' blob:;
+  connect-src 'self' https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://firebasestorage.googleapis.com;
   object-src 'none';
   base-uri 'none';
   form-action 'none'">
@@ -37,6 +43,7 @@
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/pendencias.css">
 </head>
 <body>
 
@@ -45,16 +52,10 @@
 
 <a class="pular" href="#centro">Ir para os sistemas</a>
 
-<!-- O portão. A lista de sistemas da casa deixou de ser pública:
-     o banco só a entrega a quem está na equipe, então a tela do
-     Hub só aparece depois daqui. Quem entra uma vez continua
-     entrando sozinho — o navegador guarda a sessão e ela se
-     renova sem pedir nada. -->
+<!-- O portão. A lista de sistemas da casa é privada: o banco só a
+     entrega a quem está na equipe, então a tela do Hub só aparece
+     depois daqui. Quem entra uma vez continua entrando sozinho. -->
 <main class="portao" id="portao" hidden>
-  <!-- As duas marcas do fundo, sangrando pelas bordas opostas.
-       São decoração: por isso div com máscara e não <img> com
-       texto alternativo — quem usa leitor de tela não ganha nada
-       ouvindo "símbolo" duas vezes antes do campo de e-mail. -->
   <div class="portao__marca portao__marca--totali"></div>
   <div class="portao__marca portao__marca--hub"></div>
 
@@ -82,7 +83,12 @@
   </form>
 </main>
 
-<div class="tela" id="tela" hidden>
+<!-- A TELA TEM TRÊS VISTAS, e a barra da esquerda troca entre elas:
+     Início (sistemas, o cartão Hoje e as notícias), Pendências (o
+     quadro inteiro) e Notícias (todas, com filtro). A Agenda e os
+     órgãos abrem num painel por cima, porque são consulta rápida.
+     O atributo data-vista diz qual está aberta. -->
+<div class="tela" id="tela" data-vista="inicio" hidden>
 
   <nav class="nav" aria-label="Seções do Hub">
     <img class="nav__logo" src="assets/simbolo-escuro.png" alt="" width="32" height="32">
@@ -91,18 +97,23 @@
            stroke-linecap="round" stroke-linejoin="round">
         <path d="M3 10l9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
     </button>
+    <button class="nav__b" type="button" id="nav-pendencias" aria-label="Pendências" title="Pendências">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 11l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 10h18"/></svg>
+    </button>
+    <button class="nav__b" type="button" id="nav-noticias" aria-label="Notícias oficiais" title="Notícias oficiais">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 5h13a2 2 0 0 1 2 2v11a2 2 0 0 0 2-2V9"/><path d="M4 5v13a2 2 0 0 0 2 2h13"/>
+        <path d="M8 9h5M8 13h7M8 17h7"/></svg>
+    </button>
+    <button class="nav__b" type="button" id="nav-agenda" aria-label="Agenda do mês" title="Agenda do mês">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+        <rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+    </button>
     <button class="nav__b" type="button" id="nav-todos" aria-label="Todos os sistemas" title="Todos os sistemas">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
         <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/>
         <rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
-    </button>
-    <button class="nav__b" type="button" id="nav-pendencias" aria-label="Pendências" title="Pendências">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
-        <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
-    </button>
-    <button class="nav__b" type="button" id="nav-agenda" aria-label="Agenda" title="Agenda">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
-        <rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
     </button>
 
     <a class="nav__b nav__b--fim" href="admin.html" id="nav-admin"
@@ -113,19 +124,15 @@
         <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
     </a>
 
-    <!-- A marca da casa fecha o trilho. Aqui embaixo ela assina sem
-         competir: quem abre o Hub veio trabalhar, não ver logo. -->
     <img class="nav__totali" src="assets/totali-branca.png" alt="Totali Soluções Contábeis">
   </nav>
 
   <header class="cab">
     <img class="cab__logo" src="assets/logo-hub.png" alt="Hub Totali">
     <span class="marca__nome" id="marca-nome" hidden>Hub Totali</span>
-    <!-- A busca fica ANTES do relógio porque é o que mais se usa:
-         são quarenta e dois sistemas, vinte e cinco deles dentro
-         da gaveta, e varrer com o olho custa mais que digitar três
-         letras. A barra "/" põe o cursor aqui de qualquer lugar da
-         página. -->
+    <!-- O nome da vista aberta, para quem não está no Início saber
+         onde está. No Início fica escondido: a tela fala por si. -->
+    <span class="cab__vista" id="cab-vista" hidden></span>
     <div class="busca">
       <svg class="busca__lupa" viewBox="0 0 24 24" fill="none" stroke="currentColor"
            stroke-width="2" stroke-linecap="round" aria-hidden="true">
@@ -147,25 +154,185 @@
       </div>
     </div>
 
-    <!-- Com login obrigatório e sessão que se renova sozinha,
-         sair precisa ser possível: computador de balcão, alguém
-         que troca de turno, notebook emprestado. -->
     <button class="cab__sair" type="button" id="btn-sair"
             title="Sair desta conta neste navegador">Sair</button>
   </header>
 
+  <!-- ===================== INÍCIO ===================== -->
   <main class="centro" id="centro"></main>
 
-  <aside class="trilho" aria-label="Minhas pendências">
-    <div class="trilho__t">Minhas pendências</div>
-    <div id="pendencias"></div>
+  <aside class="trilho" id="trilho" aria-label="Hoje e notícias">
+
+    <!-- O que a pessoa precisa ver ao abrir o Hub de manhã: o que
+         atrasou, o que é para hoje, e uma caixa para anotar sem sair
+         daqui. O quadro inteiro é a vista Pendências. -->
+    <section class="cartao cartao--hoje" id="pend-hoje" aria-label="Minhas pendências de hoje">
+      <div class="cartao__cab">
+        <span class="cartao__t">Hoje</span>
+        <span class="cartao__sub" id="pend-hoje-txt"></span>
+        <button class="cartao__acao" type="button" id="pend-hoje-abrir">Abrir o quadro ›</button>
+      </div>
+      <div class="hj__barra" role="progressbar" aria-label="Progresso de hoje" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="pend-hoje-prog"></i></div>
+      <div class="hj__nova">
+        <input class="hj__cx" type="text" id="pend-hoje-nova" maxlength="400"
+               placeholder="Anotar pendência… (ex.: DAE da Alfa até sexta no fiscal)"
+               aria-label="Anotar pendência">
+        <span class="hj__dica" id="pend-hoje-dica" hidden></span>
+      </div>
+      <div id="pend-hoje-lista"></div>
+    </section>
+
+    <!-- As notícias que importam, das fontes oficiais. O arquivo é
+         atualizado de hora em hora pelo robô; a tela só lê. -->
+    <section class="cartao cartao--noticias" id="noticias-rail" aria-label="Notícias oficiais">
+      <div class="cartao__cab">
+        <span class="cartao__t">Notícias oficiais</span>
+        <button class="cartao__acao" type="button" id="noticias-ver-todas">Ver todas ›</button>
+      </div>
+      <div id="noticias-rail-lista"></div>
+      <div class="cartao__pe" id="noticias-rail-pe"></div>
+    </section>
+
   </aside>
+
+  <!-- ===================== PENDÊNCIAS ===================== -->
+  <!-- O quadro, inteiro, como no Pendências Totali. A classe .pend
+       é o que prende o CSS dele (css/pendencias.css) a esta área. -->
+  <section class="vista pend" id="vista-pendencias" hidden aria-label="Quadro de pendências">
+  <div class="app" lang="pt-BR">
+    <aside class="lado">
+      <div class="pmarca">
+        <h1>Minhas pendências</h1>
+        <div class="data" id="hojeData"></div>
+        <div class="conta" id="contaAtual"></div>
+      </div>
+      <div class="prog" aria-live="polite">
+        <div class="barra-p" role="progressbar" aria-label="Progresso de hoje" id="progBar"><i id="progI"></i></div>
+        <div class="tx" id="progTx"></div>
+      </div>
+      <div class="cal" id="cal" aria-label="Calendário"></div>
+      <div class="rot-l"><span class="rot">Setores</span><button class="tog" id="navTog" type="button"></button></div>
+      <nav class="pnav" id="nav" aria-label="Setores"></nav>
+      <button class="nav-it gerir" id="btnClientes" type="button"><span class="mono" aria-hidden="true">#</span><span>Clientes e CNPJs</span><span class="q" id="qCli"></span></button>
+      <button class="nav-it gerir" id="btnBackup" type="button"><span class="mono" aria-hidden="true">⇅</span><span>Exportar / importar</span></button>
+    </aside>
+
+    <div class="prin">
+      <div class="banner" id="semDb" hidden>Não consegui ligar o armazenamento. Confira a conexão e recarregue a página.</div>
+
+      <section class="faxina" id="faxina" hidden aria-label="Faxina da semana"></section>
+
+      <section class="nova" aria-label="Nova pendência">
+        <div class="editor" id="novaTxt" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Nova pendência" data-ph="Nova pendência… (Enter pula linha · use “•” para organizar em tópicos)"></div>
+        <div class="anexos" id="novosAnexos" hidden></div>
+        <div class="ditado" id="ditado" hidden></div>
+        <div class="entendi" id="entendi" hidden></div>
+        <div class="linha">
+          <div id="novaBarra"></div>
+          <button class="fb pdf" id="btnFalar" type="button" title="Falar a pendência (ditado)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg>Falar</button>
+          <button class="fb pdf" id="btnPdf" type="button" title="Anexar PDF (ou arraste o arquivo para cá)" hidden></button>
+          <input type="file" id="arqPdf" accept="application/pdf,.pdf" multiple hidden>
+          <span class="esp"></span>
+          <input type="date" id="novaData" aria-label="Resolver até" title="Resolver até">
+          <select id="novaSetor" aria-label="Setor"></select>
+          <div id="novaStatus"></div>
+          <button class="prim" id="btnAdd">Adicionar</button>
+        </div>
+      </section>
+
+      <div class="linha">
+        <input class="pbusca" id="pendBusca" type="search" placeholder="Buscar nas pendências" aria-label="Buscar nas pendências">
+        <span id="filtroDia"></span>
+        <span class="esp"></span>
+        <span class="dica formato">Selecione um trecho: <b>N</b> negrito, <s>S</s> riscar, cores para grifar. • cria tópicos. Ctrl+Enter adiciona. Duplo clique edita.</span>
+      </div>
+
+      <div class="seg trocar" id="trocar" role="group" aria-label="Mostrar prazo"></div>
+      <main class="quadro" id="quadro" data-col="hoje"></main>
+
+      <details class="feitas" id="feitas"><summary id="feitasTit">Riscadas</summary><div class="lf" id="listaFeitas"></div></details>
+    </div>
+  </div>
+
+  <div class="veu" id="veu" hidden>
+    <div class="ppainel" role="dialog" aria-modal="true" aria-labelledby="pTit">
+      <h3 id="pTit">Setores</h3>
+      <div class="ls" id="lsSetores"></div>
+      <div class="linha"><input id="novoSetor" class="pbusca pbusca--cheia" placeholder="Nome do novo setor" aria-label="Nome do novo setor"><button class="prim" id="btnSetor">Criar</button></div>
+      <div class="dica">As palavras de cada setor escolhem o setor sozinhas quando aparecem na pendência (ex.: “DAE” → Fiscal). Se escolher o setor na mão, vale a sua escolha. Ao excluir um setor, as pendências dele ficam em “Sem setor”.</div>
+      <div class="linha"><span class="esp"></span><button class="sec" id="fechaVeu">Fechar</button></div>
+    </div>
+  </div>
+  <div class="veu" id="veuCli" hidden>
+    <div class="ppainel largo" role="dialog" aria-modal="true" aria-labelledby="cTit">
+      <h3 id="cTit">Clientes e CNPJs</h3>
+      <form class="fcli" id="formCli" autocomplete="off">
+        <input id="cliNome" placeholder="Nome da empresa" aria-label="Nome da empresa">
+        <input id="cliDoc" placeholder="CNPJ" aria-label="CNPJ" inputmode="text">
+        <input class="ap" id="cliAp" placeholder="Apelidos que você usa, separados por vírgula (ex.: Alfa, Alfa Comércio)" aria-label="Apelidos">
+        <div class="linha"><span class="dica" id="cliAviso"></span><span class="esp"></span><button type="button" class="sec" id="cliCancelar" hidden>Cancelar edição</button><button type="submit" class="prim" id="cliSalvar">Cadastrar</button></div>
+      </form>
+      <input id="cliBusca" class="pbusca pbusca--cheia" type="search" placeholder="Buscar por nome, apelido ou CNPJ" aria-label="Buscar cliente">
+      <div class="lcli" id="lsCli"></div>
+      <div class="dica">Também dá para cadastrar escrevendo a pendência assim: “DAE da Empresa Alfa (Empresa Alfa é uma empresa que o CNPJ é 12.345.678/0001-95)”. O parêntese some e a empresa fica gravada.</div>
+      <div class="linha"><span class="esp"></span><button class="sec" id="fechaCli" type="button">Fechar</button></div>
+    </div>
+  </div>
+  <div class="veu" id="veuBackup" hidden>
+    <div class="ppainel" role="dialog" aria-modal="true" aria-labelledby="bkTit">
+      <h3 id="bkTit">Exportar / importar</h3>
+      <div class="dica">A cópia é um arquivo .json com as pendências, comentários, setores, clientes e PDFs do seu quadro. Serve para guardar um backup ou para trazer o quadro de outro sistema ou de outra conta.</div>
+      <div class="linha"><button class="prim" id="bkExportar" type="button">Baixar cópia</button><span class="esp"></span></div>
+      <div class="bk-imp">
+        <div class="linha"><button class="sec" id="bkImportar" type="button">Importar cópia…</button><input type="file" id="bkArquivo" accept="application/json,.json" hidden></div>
+        <label class="bk-op"><input type="checkbox" id="bkSetores" checked> Trazer setores e palavras-chave</label>
+        <label class="bk-op"><input type="checkbox" id="bkClientes" checked> Trazer clientes e CNPJs</label>
+        <div class="dica">Pendências que já existem neste quadro não são duplicadas.</div>
+      </div>
+      <div class="dica" id="bkStatus" aria-live="polite"></div>
+      <div class="linha"><span class="esp"></span><button class="sec" id="bkFechar" type="button">Fechar</button></div>
+    </div>
+  </div>
+  <div class="pop" id="popCli" hidden role="dialog" aria-label="Dados do cliente"></div>
+  <aside class="pdfv" id="pdfv" hidden aria-label="Visualizar PDF">
+    <div class="pdfv-h">
+      <div class="pdfv-t"><span class="nm" id="pdfNome"></span><span class="dica" id="pdfInfo"></span></div>
+      <button class="ic" id="pdfAmpliar" type="button" title="Ampliar para a tela toda" aria-label="Ampliar"></button>
+      <a class="ic" id="pdfAba" target="_blank" rel="noopener" title="Abrir em nova aba" aria-label="Abrir em nova aba"></a>
+      <button class="ic ic--x" id="pdfFechar" type="button" title="Fechar" aria-label="Fechar PDF">×</button>
+    </div>
+    <div class="pdfv-b" id="pdfCorpo"></div>
+  </aside>
+  <div class="calg" id="calg" hidden role="dialog" aria-modal="true" aria-label="Calendário ampliado"></div>
+  <div class="toast" id="toast" hidden></div>
+  </section>
+
+  <!-- ===================== NOTÍCIAS ===================== -->
+  <section class="vista vista--noticias" id="vista-noticias" hidden aria-label="Notícias oficiais">
+    <div class="vn">
+      <header class="vn__cab">
+        <div>
+          <h2 class="vn__t">Notícias oficiais</h2>
+          <p class="vn__sub" id="noticias-atualizado">Carregando…</p>
+        </div>
+        <div class="vn__ferramentas">
+          <select class="vn__sel" id="noticias-fonte" aria-label="Fonte"></select>
+          <input class="vn__busca" type="search" id="noticias-busca" placeholder="Buscar nas notícias…" aria-label="Buscar nas notícias">
+        </div>
+      </header>
+      <div class="vn__filtros" id="noticias-filtros" role="group" aria-label="Assunto"></div>
+      <div class="vn__lista" id="noticias-lista"></div>
+      <footer class="vn__fontes" id="noticias-fontes"></footer>
+      <p class="vn__nota">Só fontes oficiais: órgãos de governo, casas legislativas, conselho de classe e federação do setor.
+        Os sites são lidos de hora em hora e cada notícia abre na fonte original.</p>
+    </div>
+  </section>
 
   <div class="avisos" id="avisos" aria-label="Avisos"></div>
 
 </div>
 
-<!-- Painel dos órgãos e consultas -->
+<!-- Painel dos órgãos e da agenda do mês -->
 <div class="painel" id="painel" role="dialog" aria-modal="true" aria-labelledby="painel-t">
   <div class="painel__caixa">
     <div class="painel__cab">
@@ -176,13 +343,21 @@
   </div>
 </div>
 
+<!-- A ordem importa: o Hub (dados, agenda) antes do quadro, porque
+     o quadro usa a sessão e os setores da casa; o quadro antes de
+     inicio.js e app.js, que falam com ele. -->
 <script src="js/config-hub.js"></script>
 <script src="js/sistemas.js"></script>
 <script src="js/agenda.js"></script>
 <script src="js/dados.js"></script>
-<script src="js/pendencias.js"></script>
-<script src="js/formato.js"></script>
-<script src="js/pendencias-ui.js"></script>
+<script src="js/pendencias/config.js"></script>
+<script src="js/pendencias/armazenamento/local.js"></script>
+<script src="js/pendencias/armazenamento/firestore.js"></script>
+<script src="js/pendencias/escolher.js"></script>
+<script src="js/pendencias/app.js"></script>
+<script src="js/pendencias/backup.js"></script>
+<script src="js/noticias.js"></script>
+<script src="js/inicio.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

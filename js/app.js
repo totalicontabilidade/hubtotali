@@ -759,7 +759,17 @@
          para fora do fundo branco. */
       var ba = bloco("Agenda do mês", null, false);
       ba.id = "bloco-agenda";
-      ba.querySelector(".bloco__cab").appendChild(el("span", "bloco__n",
+      var cabAg = ba.querySelector(".bloco__cab");
+      if (AGENDA_ADE) {
+        var selo = el("span", "agenda__selo", "conferida com a Receita");
+        selo.title = "As obrigações federais foram cruzadas com a agenda oficial (" + AGENDA_ADE + ").";
+        cabAg.appendChild(selo);
+      }
+      var verMes = el("button", "agenda__ver", "mês inteiro ›");
+      verMes.type = "button";
+      verMes.addEventListener("click", abrirAgendaCheia);
+      cabAg.appendChild(verMes);
+      cabAg.appendChild(el("span", "bloco__n",
         new Date().toLocaleDateString("pt-BR", { month: "long" })));
       /* UM CARTÃO POR DATA, não por obrigação. Dezoito cartões
          soltos viravam um paredão em que nada se destacava — e
@@ -790,16 +800,7 @@
         x.appendChild(cab);
 
         var lista = el("ul", "prazo__lista");
-        g.itens.forEach(function (i) {
-          var li = el("li", "prazo__i");
-          li.appendChild(el("span", "prazo__n", i.nome));
-          if (i.regime && i.regime !== "todos") {
-            li.appendChild(el("span", "prazo__r prazo__r--" + i.regime,
-              i.regime === "simples" ? "Simples" : "Normal"));
-          }
-          if (i.quem) li.appendChild(el("span", "prazo__q", i.quem));
-          lista.appendChild(li);
-        });
+        g.itens.forEach(function (i) { lista.appendChild(itemDaAgenda(i)); });
         x.appendChild(lista);
         ag.appendChild(x);
       });
@@ -808,14 +809,44 @@
     }
   }
 
+  /* Um item da agenda: nome, regime, explicação — e o que a Receita
+     disse. Dia conferido ganha um visto discreto; dia diferente do
+     calculado ganha o aviso, com o dia calculado riscado. */
+  function itemDaAgenda(i) {
+    var li = el("li", "prazo__i");
+    li.appendChild(el("span", "prazo__n", i.nome));
+    if (i.regime && i.regime !== "todos") {
+      li.appendChild(el("span", "prazo__r prazo__r--" + i.regime,
+        i.regime === "simples" ? "Simples" : "Normal"));
+    }
+    if (i.oficialDia && i.confere) {
+      var ok = el("span", "prazo__ok", "✓");
+      ok.title = "Confere com a agenda da Receita Federal";
+      li.appendChild(ok);
+    }
+    if (i.conferir) {
+      var c = el("span", "prazo__conferir", "conferir");
+      c.title = "Data escrita a partir do uso comum: confira antes de confiar.";
+      li.appendChild(c);
+    }
+    if (i.quem) li.appendChild(el("span", "prazo__q", i.quem));
+    if (i.diaCalculado) {
+      var av = el("span", "prazo__q prazo__q--receita");
+      av.appendChild(document.createTextNode("A Receita publicou dia " + i.dia + " (a regra dava " + i.diaCalculado + ")."));
+      li.appendChild(av);
+    }
+    return li;
+  }
+
   /* ---------- pendências ----------
-     Quem desenha o trilho é o js/pendencias-ui.js. Aqui só
-     entrego o elemento e um jeito de avisar o cabeçalho quando a
-     contagem muda. */
+     O quadro inteiro é a vista "Pendências" (js/pendencias/app.js);
+     o cartão Hoje do trilho é o js/inicio.js. Os dois falam com o
+     Hub pelo evento pendencias:mudou, que traz o resumo do dia — é
+     ele que pinta o cabeçalho, o selo da barra e o título da aba. */
   function desenharPendencias() {
-    var alvo = document.getElementById("pendencias");
-    if (typeof PendenciasUI === "undefined") return;
-    PendenciasUI.iniciar(alvo, function (r) { pintarResumo(r); });
+    window.addEventListener("pendencias:mudou", function (ev) { pintarResumo(ev.detail); });
+    if (typeof Inicio !== "undefined") Inicio.iniciar();
+    if (typeof PendenciasHub !== "undefined") pintarResumo(PendenciasHub.resumo());
   }
 
   /* ---------- avisos ----------
@@ -972,7 +1003,8 @@
     /* doMes() já esconde o que passou. Para ver o mês fechado,
        pergunto a ele com data de referência no dia 1. */
     var hoje = new Date();
-    var tudo = Agenda.doMes(new Date(hoje.getFullYear(), hoje.getMonth(), 1));
+    var ag = agendaDoMes(new Date(hoje.getFullYear(), hoje.getMonth(), 1));
+    var tudo = ag.itens;
     var diaHoje = hoje.getDate();
 
     var grupos = [];
@@ -995,21 +1027,42 @@
       x.appendChild(cab);
 
       var lista = el("ul", "prazo__lista");
-      g.itens.forEach(function (i) {
-        var li = el("li", "prazo__i");
-        li.appendChild(el("span", "prazo__n", i.nome));
-        if (i.regime && i.regime !== "todos") {
-          li.appendChild(el("span", "prazo__r prazo__r--" + i.regime,
-            i.regime === "simples" ? "Simples" : "Normal"));
-        }
-        if (i.quem) li.appendChild(el("span", "prazo__q", i.quem));
-        lista.appendChild(li);
-      });
+      g.itens.forEach(function (i) { lista.appendChild(itemDaAgenda(i)); });
       x.appendChild(lista);
       caixa.appendChild(x);
     });
 
     corpo.appendChild(caixa);
+
+    /* O que a Receita publicou e a regra não conhece, e a nota de
+       onde a conferência vem. Fora do grid, em lista simples. */
+    var rodape = el("div", "agenda__rodape");
+    if (ag.ade) {
+      var extras = (ag.extras || []).filter(function (x) { return parseInt(x.dia, 10) >= diaHoje; });
+      rodape.appendChild(el("p", "agenda__nota",
+        "Obrigações federais conferidas com a agenda oficial da Receita Federal (" + ag.ade + "). " +
+        "Estado e município saem só da regra."));
+      if (extras.length) {
+        var det = document.createElement("details");
+        det.className = "agenda__extras";
+        var sum = document.createElement("summary");
+        sum.textContent = "Outras obrigações na agenda da Receita neste mês (" + extras.length + ")";
+        det.appendChild(sum);
+        var ul = el("ul", "agenda__extras-lista");
+        extras.forEach(function (x) {
+          var li = el("li");
+          li.appendChild(el("b", null, "dia " + x.dia + " · "));
+          li.appendChild(document.createTextNode(x.completo + (x.periodo ? " (" + x.periodo + ")" : "")));
+          ul.appendChild(li);
+        });
+        det.appendChild(ul);
+        rodape.appendChild(det);
+      }
+    } else {
+      rodape.appendChild(el("p", "agenda__nota",
+        "Datas calculadas por regra. A agenda oficial da Receita ainda não foi lida para este mês."));
+    }
+    corpo.appendChild(rodape);
     painel.classList.add("on");
     document.getElementById("painel-x").focus();
   }
@@ -1062,26 +1115,49 @@
     b.addEventListener("click", function () { levarA(achar(), b); });
   }
 
-  ligarBotao("nav-inicio", function () { return document.querySelector(".cab"); });
+  /* ---------- as vistas ----------
+     Início, Pendências e Notícias dividem a mesma planta; a barra
+     troca entre elas. A Agenda e os órgãos continuam sendo painel
+     por cima: consulta rápida não merece uma vista. */
+  var VISTA = "inicio";
+  var NOMES_DAS_VISTAS = { inicio: "", pendencias: "Pendências", noticias: "Notícias oficiais" };
 
-  /* ---------- os dois que só piscavam ----------
-     Pendências e Agenda apontavam para pedaços que JÁ ESTÃO na
-     tela. O clique acendia o ícone, o alvo dava uma piscada, e
-     nada acontecia de fato — porque não havia para onde ir.
+  function mostrarVista(nome) {
+    if (!NOMES_DAS_VISTAS.hasOwnProperty(nome)) nome = "inicio";
+    VISTA = nome;
+    var tela = document.getElementById("tela");
+    tela.setAttribute("data-vista", nome);
+    document.getElementById("centro").hidden = nome !== "inicio";
+    document.getElementById("trilho").hidden = nome !== "inicio";
+    document.getElementById("vista-pendencias").hidden = nome !== "pendencias";
+    document.getElementById("vista-noticias").hidden = nome !== "noticias";
+    var rotulo = document.getElementById("cab-vista");
+    if (rotulo) { rotulo.textContent = NOMES_DAS_VISTAS[nome]; rotulo.hidden = !NOMES_DAS_VISTAS[nome]; }
+    acender(document.getElementById("nav-" + nome));
+    if (nome === "noticias" && typeof Noticias !== "undefined") Noticias.aoAbrirTela();
+    /* Voltar ao Início aplica o que ficou esperando a tela livre. */
+    if (nome === "inicio") window.setTimeout(aplicarSeLivre, 50);
+    try { window.sessionStorage.setItem("hub-totali:vista", nome); } catch (e) {}
+  }
 
-     Agora eles abrem o que NÃO cabe na tela: o quadro de todas as
-     pendências do escritório, e o mês inteiro da agenda, com o que
-     já venceu junto. Botão que mostra o que a tela não mostra tem
-     motivo para existir; botão que rola até o que está à vista,
-     não. */
-  (function ligarQuadro() {
-    var b = document.getElementById("nav-pendencias");
-    if (!b) return;
-    b.title = "Todas as pendências do escritório";
-    b.addEventListener("click", function () {
-      acender(b);
-      if (typeof PendenciasUI !== "undefined" && PendenciasUI.abrirTodas) PendenciasUI.abrirTodas();
-    });
+  function irParaPendencia(id) {
+    mostrarVista("pendencias");
+    if (typeof PendenciasHub !== "undefined") window.setTimeout(function () { PendenciasHub.irPara(id); }, 30);
+  }
+
+  window.Hub = { mostrarVista: mostrarVista, irParaPendencia: irParaPendencia, vista: function () { return VISTA; } };
+
+  ligarBotao("nav-inicio", function () { mostrarVista("inicio"); return null; });
+
+  (function ligarVistas() {
+    var bp = document.getElementById("nav-pendencias");
+    if (bp) bp.addEventListener("click", function () { mostrarVista("pendencias"); });
+    var bn = document.getElementById("nav-noticias");
+    if (bn) bn.addEventListener("click", function () { mostrarVista("noticias"); });
+    var abrir = document.getElementById("pend-hoje-abrir");
+    if (abrir) abrir.addEventListener("click", function () { mostrarVista("pendencias"); });
+    var todas = document.getElementById("noticias-ver-todas");
+    if (todas) todas.addEventListener("click", function () { mostrarVista("noticias"); });
   })();
 
   (function ligarAgendaCheia() {
@@ -1195,7 +1271,10 @@
 
   function pintarAviso(r) {
     var botao = document.getElementById("nav-pendencias");
-    var quantas = r ? (r.abertas || 0) : 0;
+    /* O número é o que precisa de atenção hoje — atrasadas e para
+       hoje —, não o quadro inteiro: quarenta pendências em
+       "acompanhar" não são quarenta avisos. */
+    var quantas = r ? ((r.atrasadas || 0) + (r.hoje || 0)) : 0;
     var urgentes = r ? (r.atrasadas || 0) : 0;
     /* NÃO LIDA PULSA. O número já dizia quantas existem; o que
        faltava era distinguir "tenho três pendências, todas
@@ -1216,7 +1295,7 @@
         selo.textContent = quantas > 99 ? "99+" : String(quantas);
         selo.classList.toggle("nav__selo--alerta", urgentes > 0);
         botao.title = "Pendências — " + quantas +
-          (quantas > 1 ? " abertas" : " aberta") +
+          (quantas > 1 ? " para hoje" : " para hoje") +
           (urgentes ? ", " + urgentes + " atrasada" + (urgentes > 1 ? "s" : "") : "");
       }
     }
@@ -1238,6 +1317,7 @@
       }
       return;
     }
+    if (r && !r.carregado) return;
     if (r && r.abertas === 0) {
       res.appendChild(document.createTextNode("nenhuma pendência aberta"));
       return;
@@ -1248,7 +1328,7 @@
        quando não há nenhuma dessas, quantas estão abertas. */
     if (r && r.abertas > 0) {
       res.appendChild(document.createTextNode(
-        r.abertas + (r.abertas > 1 ? " pendências abertas" : " pendência aberta")));
+        "nada para hoje · " + r.abertas + (r.abertas > 1 ? " abertas no quadro" : " aberta no quadro")));
     }
   }
 
@@ -1266,14 +1346,66 @@
 
   /* ---------- início ---------- */
 
+  /* ---------- a agenda oficial da Receita ----------
+     dados/agenda-oficial.json é gravado pelo robô (ferramentas/
+     buscar-agenda.js). Com ele em mãos, a lista calculada é cruzada
+     com a publicada: dia igual ganha o selo; dia diferente mostra o
+     da Receita e avisa. Sem o arquivo, fica a regra, como sempre. */
+  var AGENDA_OFICIAL = null;
+  var AGENDA_EXTRAS = [];
+  var AGENDA_ADE = "";
+
+  function carregarAgendaOficial() {
+    return fetch("dados/agenda-oficial.json", { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { AGENDA_OFICIAL = (j && Array.isArray(j.meses)) ? j : null; })
+      .catch(function () { AGENDA_OFICIAL = null; });
+  }
+
+  function mesOficial(ref) {
+    if (!AGENDA_OFICIAL) return null;
+    var ano = ref.getFullYear(), mes = ref.getMonth() + 1;
+    return AGENDA_OFICIAL.meses.filter(function (m) { return m.ano === ano && m.mes === mes; })[0] || null;
+  }
+
+  /* A lista do mês, já conferida. Onde a Receita diz outro dia, o
+     dia da Receita manda — é ela quem multa. */
+  function agendaDoMes(ref) {
+    var hoje = ref || new Date();
+    var lista = (typeof Agenda !== "undefined") ? Agenda.doMes(hoje) : [];
+    var oficial = mesOficial(hoje);
+    if (!oficial || typeof Agenda === "undefined") return { itens: lista, extras: [], ade: "" };
+    var r = Agenda.cruzar(lista, oficial);
+    var diaHoje = hoje.getDate();
+    r.itens = r.itens.map(function (i) {
+      if (!i.oficialDia || i.confere) return i;
+      var d = new Date(hoje.getFullYear(), hoje.getMonth(), parseInt(i.oficialDia, 10));
+      var faltam = Math.round((d - new Date(hoje.getFullYear(), hoje.getMonth(), diaHoje)) / 86400000);
+      var novo = {};
+      Object.keys(i).forEach(function (k) { novo[k] = i[k]; });
+      novo.diaCalculado = i.dia;
+      novo.dia = i.oficialDia;
+      novo.semana = d.toLocaleDateString("pt-BR", { weekday: "short" }).replace(".", "").slice(0, 3);
+      novo.estado = faltam === 0 ? "hoje" : (faltam > 0 && faltam <= 5 ? "perto" : "");
+      novo._ordem = d.getTime();
+      novo._passou = faltam < 0;
+      return novo;
+    }).filter(function (x) { return !x._passou; })
+      .sort(function (a, b) { return a._ordem - b._ordem; });
+    return r;
+  }
+
   function desenharTudo(dados) {
     SETORES_ATUAIS = dados.setores || [];
     AVISOS_ATUAIS  = dados.avisos  || [];
     TITULO_GAVETA  = (dados.gaveta && String(dados.gaveta.titulo || "").trim()) || TITULO_GAVETA_PADRAO;
     /* Calculada, não guardada: assim ela se corrige sozinha
-       todo mês sem ninguém precisar editar nada. A lista do
-       banco só entra se alguém tiver gravado uma à mão. */
-    AGENDA_ATUAL = (typeof Agenda !== "undefined") ? Agenda.doMes() : (dados.agenda || []);
+       todo mês sem ninguém precisar editar nada — e conferida
+       com a agenda oficial quando o arquivo dela está aqui. */
+    var ag = agendaDoMes();
+    AGENDA_ATUAL = ag.itens.length ? ag.itens : (dados.agenda || []);
+    AGENDA_EXTRAS = ag.extras;
+    AGENDA_ADE = ag.ade;
     desenharCentro();
     desenharAvisos();
   }
@@ -1288,6 +1420,11 @@
 
     desenharTopo();
     desenharPendencias();
+    if (typeof Noticias !== "undefined") Noticias.iniciar();
+    /* O quadro espera por este aviso quando a pessoa acabou de
+       passar pelo portão; com a sessão já guardada ele nem precisa. */
+    window.dispatchEvent(new CustomEvent("hub:sessao"));
+    mostrarVista("inicio");
 
     /* Chega depois da primeira pintura, de propósito: a saudação
        não espera o banco para aparecer. Quando o nome chega, o
@@ -1354,8 +1491,7 @@
      centro sem perguntar nada a ninguém. */
   function telaEmUso() {
     if (document.querySelector("#painel.on")) return true;
-    if (typeof PendenciasUI !== "undefined" && PendenciasUI.painelAberto && PendenciasUI.painelAberto()) return true;
-    if (document.querySelector(".pd-caixona")) return true;
+    if (typeof PendenciasHub !== "undefined" && PendenciasHub.emUso()) return true;
     if (FORM_FAVORITO_ABERTO) return true;
     if (FILTRO && FILTRO.trim()) return true;
     var a = document.activeElement;
@@ -1387,10 +1523,7 @@
       SISTEMAS_ESPERANDO = null;
       desenharTudo(d);
     }
-    if (PENDENCIAS_ESPERANDO && typeof PendenciasUI !== "undefined" && PendenciasUI.conferirSozinho) {
-      PENDENCIAS_ESPERANDO = false;
-      PendenciasUI.conferirSozinho();
-    }
+    PENDENCIAS_ESPERANDO = false;
   }
 
   (function ligarAplicarSeLivre() {
@@ -1411,34 +1544,20 @@
     if (ligarAtualizacaoSozinha.ligado) return;
     ligarAtualizacaoSozinha.ligado = true;
 
+    /* O quadro de pendências se atualiza por conta própria
+       (js/pendencias/armazenamento/firestore.js), de minuto em
+       minuto, e avisa o cabeçalho pelo evento. Aqui só se garante
+       que a volta à aba força uma leitura. */
     function pendencias() {
-      /* typeof, e não window.PendenciasUI: o módulo é declarado com
-         const, e const de topo não vira propriedade de window. A
-         guarda errada seria sempre falsa e a atualização nunca
-         rodaria — em silêncio, que é o pior jeito de não funcionar.
-         É o mesmo typeof que o resto deste arquivo já usa. */
-      if (typeof PendenciasUI === "undefined" || !PendenciasUI.conferirSozinho) return;
-      if (telaEmUso()) {
-        /* A coluna espera; os avisos (título da aba, selo, cabeçalho)
-           não. Eles ficam fora de tudo o que se pode estar usando. */
-        PENDENCIAS_ESPERANDO = true;
-        if (PendenciasUI.conferirSoOsNumeros) PendenciasUI.conferirSoOsNumeros();
-        return;
-      }
-      PENDENCIAS_ESPERANDO = false;
-      PendenciasUI.conferirSozinho();
+      if (typeof PendenciasHub !== "undefined" && !document.hidden) PendenciasHub.atualizar();
     }
 
     /* Um relógio só, batendo de minuto em minuto, e a aba escondida
        só aproveita uma batida em cada cinco. Dois relógios
        independentes dariam o mesmo resultado com o dobro de partes
        para errar. */
-    var voltas = 0;
     function passo() {
-      voltas++;
-      if (document.hidden && (voltas % 5) !== 0) return;
       aplicarSeLivre();
-      pendencias();
     }
 
     function sistemas() {
@@ -1530,9 +1649,12 @@
       if (a && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)) return;
       if (a && a.isContentEditable) return;
       ev.preventDefault();
+      if (VISTA !== "inicio") mostrarVista("inicio");
       cx.focus();
       cx.select();
     });
+    /* Digitar na busca fora do Início também volta para lá. */
+    cx.addEventListener("focus", function () { if (VISTA !== "inicio") mostrarVista("inicio"); });
   })();
 
   (function ligarSair() {
@@ -1544,6 +1666,12 @@
       window.location.reload();
     });
   })();
+
+  /* A agenda oficial chega por baixo; quando chegar, o cartão da
+     agenda se refaz, e só ele. */
+  carregarAgendaOficial().then(function () {
+    if (!document.getElementById("tela").hidden && !telaEmUso()) desenharTudo(Dados.carregar(desenharSistemasQuandoLivre));
+  });
 
   Dados.pronto().then(function (sessao) {
     /* Os setores vivem no banco. Busca sem esperar: a tela nunca

@@ -130,6 +130,22 @@ service firebase.storage {
                             && request.time < resource.timeCreated + duration.value(30, 'm')));
     }
 
+    // ---------- os PDFs do quadro de cada pessoa ----------
+    // quadros/{uid}/{arquivo}: o uid no caminho é o dono. Só ele lê,
+    // envia e apaga; ninguém mais — nem o administrador, que lê a
+    // ficha no banco (nome e tamanho) mas não o arquivo. Vinte
+    // megas por PDF, como no Pendências Totali. Sobrescrever é
+    // create para o Storage, por isso o "resource == null".
+    match /quadros/{uid}/{arquivo} {
+      allow read:   if daEquipe() && request.auth.uid == uid;
+      allow create: if daEquipe() && request.auth.uid == uid
+                    && resource == null
+                    && request.resource.size < 20 * 1024 * 1024
+                    && request.resource.contentType.matches('application/pdf');
+      allow update: if false;
+      allow delete: if daEquipe() && request.auth.uid == uid;
+    }
+
     // Nada mais neste balde é acessível por ninguém.
     match /{tudo=**} {
       allow read, write: if false;

@@ -1,0 +1,59 @@
+# ============================================================
+# Hub Totali · notícias e agenda oficial, de hora em hora
+# ------------------------------------------------------------
+# O Hub é um site estático: não tem servidor para buscar nada.
+# Quem busca é este robô do GitHub, que roda os dois programas da
+# pasta ferramentas/ e, se algo mudou, grava o resultado em
+# dados/*.json e faz um commit. O GitHub Pages republica sozinho.
+#
+# Horário: de hora em hora, das 7h às 19h de Brasília (10 às 22
+# UTC), de segunda a sexta — e uma vez no sábado de manhã, para a
+# agenda do mês seguinte não ficar para trás. Também pode ser
+# disparado à mão em Actions → "Atualizar notícias e agenda".
+#
+# Se o repositório ficar 60 dias sem commit nenhum, o GitHub
+# desliga o agendamento; o próprio commit do robô conta, então na
+# prática isso não acontece.
+# ============================================================
+name: Atualizar notícias e agenda
+
+on:
+  schedule:
+    - cron: "15 10-22 * * 1-5"
+    - cron: "15 11 * * 6"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atualizar-dados
+  cancel-in-progress: false
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Buscar notícias oficiais
+        run: node ferramentas/buscar-noticias.js
+
+      - name: Buscar agenda oficial da Receita
+        run: node ferramentas/buscar-agenda.js
+
+      - name: Gravar o que mudou
+        run: |
+          git add dados/noticias.json dados/agenda-oficial.json
+          if git diff --cached --quiet; then
+            echo "Nada mudou."
+            exit 0
+          fi
+          git -c user.name="Robô do Hub" -c user.email="hub-robo@users.noreply.github.com" \
+            commit -m "Notícias e agenda: atualização automática"
+          git push

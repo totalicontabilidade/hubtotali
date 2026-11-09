@@ -78,7 +78,7 @@ a{color:inherit;text-decoration:none}
 .tela{
   height:100vh;
   display:grid;
-  grid-template-columns:64px minmax(0,1fr) 380px;
+  grid-template-columns:64px minmax(0,1fr) 400px;
   grid-template-rows:auto minmax(0,1fr) auto;
   overflow:hidden;
   position:relative;
@@ -154,9 +154,8 @@ a{color:inherit;text-decoration:none}
 /* ---------- centro e trilho ---------- */
 .centro{grid-column:2;grid-row:2;overflow:auto;padding:18px 24px;
         display:flex;flex-direction:column;gap:12px}
-.trilho{grid-column:3;grid-row:2/-1;overflow:auto;padding:18px 20px;
-        background:rgba(255,255,255,.72);border-left:1px solid rgba(255,255,255,.75);
-        -webkit-backdrop-filter:blur(20px) saturate(1.4);backdrop-filter:blur(20px) saturate(1.4)}
+.trilho{grid-column:3;grid-row:2;overflow:auto;padding:18px 18px 18px 14px;
+        display:flex;flex-direction:column;gap:12px}
 
 /* ============================================================
    2 · Blocos e sistemas
@@ -296,69 +295,6 @@ a{color:inherit;text-decoration:none}
 .prazo__q{font-size:10px;color:var(--txt-3);line-height:1.3;flex-basis:100%}
 
 /* ============================================================
-   3 · Pendências, agrupadas por urgência
-   ------------------------------------------------------------
-   Em lista corrida é preciso ler todas para saber quais são de
-   hoje. Agrupadas, a resposta vem antes da leitura: o título já
-   diz, e a contagem confirma.
-   ============================================================ */
-.trilho__t{font-size:14px;font-weight:730}
-.faixa{display:flex;align-items:center;gap:8px;margin:16px 0 8px}
-.faixa:first-of-type{margin-top:12px}
-.faixa__t{font-size:11.5px;font-weight:730;letter-spacing:.04em;text-transform:uppercase}
-.faixa__n{font-family:var(--mono);font-size:10.5px;font-weight:700;padding:1px 8px;border-radius:99px}
-/* Recado tem faixa própria e cor própria: não é urgência
-   (vermelho) nem prazo (azul), é outra natureza. Âmbar, a mesma
-   do "a conferir" da administração — quer atenção, não ação. */
-/* A faixa da menção usa a cor da marca, e não a de alerta: ser
-   chamado não é problema, é chamada. Vem no topo e desaparece
-   quando a pessoa abre a ficha. */
-.faixa--chamado .faixa__t{color:var(--marca)}
-.faixa--chamado .faixa__n{background:var(--marca);color:#fff}
-.faixa--recado .faixa__t{color:#8a6100}
-.faixa--recado .faixa__n{background:#fdf0d5;color:#8a6100}
-.faixa--atraso .faixa__t{color:var(--alerta)}
-.faixa--atraso .faixa__n{background:var(--alerta-luz);color:var(--alerta)}
-.faixa--hoje   .faixa__t{color:var(--estado)}
-.faixa--hoje   .faixa__n{background:var(--estado-luz);color:var(--estado)}
-.faixa--depois .faixa__t{color:var(--txt-3)}
-.faixa--depois .faixa__n{background:var(--base);color:var(--txt-3)}
-
-.pen{display:flex;gap:12px;padding:12px;border-radius:12px;background:rgba(255,255,255,.55);
-     align-items:flex-start;margin-bottom:7px;transition:background .14s}
-.pen:hover{background:#fff}
-.pen__f{width:3px;border-radius:99px;align-self:stretch;background:var(--fio-2);flex:none}
-.pen--atrasada .pen__f{background:var(--alerta)}
-.pen--hoje     .pen__f{background:var(--estado)}
-.pen__p{flex:none;width:38px;text-align:center}
-.pen__d{font-family:var(--mono);font-size:17px;font-weight:730;line-height:1;color:var(--txt-2);
-        font-variant-numeric:tabular-nums}
-.pen__m{font-size:8.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--txt-3);margin-top:4px}
-/* No recado o quadradinho não tem número: centraliza o rótulo
-   em vez de deixar um vazio onde o dia ficaria. */
-.pen__p--recado{display:flex;align-items:center;justify-content:center;align-self:stretch}
-.pen__p--recado .pen__m{margin-top:0;color:#8a6100;font-weight:700}
-.pen--atrasada .pen__d{color:var(--alerta)}
-.pen--hoje     .pen__d{color:var(--estado)}
-.pen__o{font-size:13px;font-weight:640;line-height:1.35}
-.pen__q{display:flex;align-items:baseline;gap:8px;font-size:11px;color:var(--txt-3);margin-top:3px}
-.pen__qt{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-/* A hora é lembrete, não informação principal: menor que a
-   legenda ao lado e mais clara ainda. Fica encostada à direita
-   e nunca encolhe — quem encolhe é o texto. */
-.pen__quando{margin-left:auto;flex:none;font-size:10px;opacity:.72;
-             font-variant-numeric:tabular-nums}
-
-/* Zona ainda sem conteúdo: diz o que vai aparecer ali e por que
-   ainda não apareceu. Melhor do que um espaço em branco sem
-   explicação — e melhor ainda do que dado inventado. */
-.vazio{margin-top:14px;padding:16px;border-radius:12px;background:rgba(255,255,255,.5);
-       border:1px dashed var(--fio-2)}
-.vazio__t{font-size:12px;font-weight:730;letter-spacing:.05em;text-transform:uppercase;
-          color:var(--txt-3);margin-bottom:7px}
-.vazio__x{font-size:12.5px;line-height:1.5;color:var(--txt-2)}
-
-/* ============================================================
    4 · Avisos — faixa de altura fixa no rodapé
    ------------------------------------------------------------
    Uma linha, sempre a mesma altura, nunca cresce. Se um dia
@@ -376,7 +312,7 @@ a{color:inherit;text-decoration:none}
    ocupa um pixel a mais da tela: o que mudou foi o peso, não o
    tamanho. O ponto é dourado porque azul sobre azul-marinho
    desaparece, e o dourado já é da marca. */
-.avisos{grid-column:2;grid-row:3;display:flex;align-items:center;height:44px;padding:0 24px;
+.avisos{grid-column:2/-1;grid-row:3;display:flex;align-items:center;height:44px;padding:0 24px;
         background:var(--marca);border-top:1px solid rgba(255,255,255,.12);
         overflow:hidden}
 .avisos__rot{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.15em;
@@ -435,281 +371,6 @@ a{color:inherit;text-decoration:none}
 .painel__g + .painel__g{margin-top:18px}
 .painel__rot{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.17em;
              text-transform:uppercase;color:var(--txt-3);display:block;margin-bottom:9px}
-
-/* ============================================================
-   5b · Pendências: botão, painel e linha do tempo
-   ============================================================ */
-.btn-nova{width:100%;padding:11px;border-radius:11px;background:var(--marca);color:#fff;
-          font-size:13px;font-weight:660;margin:12px 0 4px;transition:filter .15s}
-.btn-nova:hover{filter:brightness(1.35)}
-
-.pen{width:100%;text-align:left;cursor:pointer}
-.pen__txt{min-width:0;flex:1}
-.pen__sel{margin-left:auto;flex:none;font-size:10px;font-weight:700;text-transform:uppercase;
-          letter-spacing:.06em;padding:3px 8px;border-radius:99px;
-          background:var(--estado-luz);color:var(--estado);align-self:center}
-
-.pd-painel{position:fixed;inset:0;z-index:90;display:none;place-items:center;padding:24px;
-           background:rgba(13,25,38,.45)}
-.pd-painel.on{display:grid}
-.pd-caixa{background:#fff;border-radius:18px;width:100%;max-width:620px;max-height:86vh;
-          display:flex;flex-direction:column;box-shadow:0 30px 70px rgba(13,25,38,.3)}
-.pd-cab{display:flex;align-items:flex-start;gap:12px;padding:20px 22px 14px;border-bottom:1px solid var(--fio)}
-.pd-t{font-size:16.5px;font-weight:730;line-height:1.3;flex:1}
-.pd-x{font-size:24px;line-height:1;color:var(--txt-3);padding:0 4px;flex:none}
-.pd-x:hover{color:var(--txt)}
-/* Só aparece na ficha aberta de dentro do quadro do escritório. */
-.pd-voltar{flex:none;font-size:12.5px;font-weight:660;color:var(--estado);white-space:nowrap;
-           border:1px solid var(--fio-2);border-radius:8px;padding:3px 10px 4px;margin-top:1px}
-.pd-voltar:hover{border-color:var(--estado);background:var(--estado-luz)}
-.pd-corpo{padding:16px 22px 22px;overflow:auto}
-
-.pd-campo{display:block;margin-bottom:12px}
-/* "todos" e "nenhum" ao lado do rótulo: atalho, não ação
-   principal. Minúsculo e sem borda forte para não disputar com
-   o botão de abrir a pendência. */
-.pd-todos{float:right;display:inline-flex;gap:4px;text-transform:none;letter-spacing:0}
-.pd-todos__b{border:1px solid var(--fio-2);background:#fff;color:var(--txt-3);
-             border-radius:6px;padding:1px 6px;font:inherit;font-size:10px;
-             font-weight:600;cursor:pointer}
-.pd-todos__b:hover{border-color:var(--estado);color:var(--estado)}
-.pd-rot{display:block;font-size:11px;font-weight:730;letter-spacing:.08em;text-transform:uppercase;
-        color:var(--txt-3);margin-bottom:5px}
-.pd-rot--secao{margin-top:20px;margin-bottom:10px}
-.pd-caixa-txt{width:100%;padding:9px 11px;border:1px solid var(--fio-2);border-radius:9px;
-              font:inherit;font-size:13.5px;color:var(--txt);background:#fff}
-.pd-caixa-txt:focus{outline:none;border-color:var(--estado);box-shadow:0 0 0 3px rgba(44,90,143,.14)}
-
-/* O SETOR COMO LEMBRETE, NÃO COMO CRACHÁ
-   ------------------------------------------------------------
-   Por muito tempo o conteúdo de um <option> foi intocável: o
-   sistema operacional desenhava a lista, e o CSS ficava do lado de
-   fora. appearance:base-select muda isso — o navegador passa a
-   desenhar a lista como HTML comum, e aí dá para dizer que o setor
-   é menor e mais claro que o nome.
-
-   É melhoria progressiva, e de propósito. Continua sendo um
-   <select> de verdade: mesmo elemento, mesmo value, mesmo
-   comportamento de teclado e de leitor de tela. Onde a regra não
-   for entendida, nada quebra — a lista volta a ser a nativa e o
-   setor aparece entre parênteses, como antes.
-
-   O QUE MUDA DE FATO: onde isto vale, a lista aberta deixa de ser
-   a do Windows e passa a ser esta. No celular, o mesmo: em vez da
-   roleta do sistema, esta lista. É o preço de poder estilizar, e
-   por isso o desenho aqui imita o campo em vez de inventar. */
-@supports (appearance: base-select) {
-  .pd-caixa-txt{appearance:base-select}
-  .pd-caixa-txt::picker(select){
-    appearance:base-select;
-    border:1px solid var(--fio-2);border-radius:10px;background:#fff;padding:4px;
-    box-shadow:0 12px 30px rgba(13,25,38,.16);
-  }
-  .pd-caixa-txt option{
-    display:flex;align-items:baseline;gap:5px;
-    padding:7px 9px;border-radius:7px;font-size:13.5px;color:var(--txt);
-  }
-  .pd-caixa-txt option::checkmark{display:none}
-  .pd-caixa-txt option:hover,
-  .pd-caixa-txt option:checked{background:var(--estado-luz)}
-  /* O separador "— ou mande para um setor —" não é escolha: é
-     título de grupo, e tem de parecer um. */
-  .pd-caixa-txt option:disabled{
-    color:var(--txt-3);font-size:11px;font-weight:730;letter-spacing:.06em;
-    text-transform:uppercase;padding-top:10px;
-  }
-  .pd-caixa-txt option:disabled:hover{background:transparent}
-  .pd-op-sec{font-size:11.5px;font-weight:400;color:var(--txt-3)}
-}
-.pd-area{resize:vertical;min-height:52px;line-height:1.45}
-
-/* ---------- negrito, itálico, tachado e listas ----------
-   A fileira de botões em cima da caixa é pequena e sem cor: é
-   ferramenta de quem já está escrevendo, não convite. Cada botão
-   mostra o próprio efeito — o N em negrito, o T riscado. */
-.pd-fmt{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:5px}
-.pd-fmt__b{min-width:26px;height:24px;padding:0 7px;border:1px solid var(--fio-2);
-           border-radius:6px;background:#fff;color:var(--txt-2);
-           font-size:12px;line-height:1;transition:border-color .14s,color .14s}
-.pd-fmt__b:hover{border-color:var(--estado);color:var(--estado)}
-.pd-fmt__b--n{font-weight:800}
-.pd-fmt__b--i{font-style:italic;font-family:Georgia,"Times New Roman",serif}
-.pd-fmt__b--t{text-decoration:line-through}
-.pd-item .pd-fmt{margin-top:6px;margin-bottom:0}
-/* O texto já formatado, na ficha e na conversa. A lista é um bloco
-   dentro de um texto que guarda as quebras de linha: sem margem
-   própria, para a linha em branco ser a que a pessoa digitou. */
-.fmt-lista{margin:0;padding-left:22px}
-.pd-valor strong,.pd-item__txt strong{font-weight:720}
-
-/* A escolha de quem vê uma reservada. Duas opções com uma linha de
-   explicação cada, porque a diferença entre elas é a coisa mais
-   consequente do formulário inteiro. */
-.pd-plateia{margin:8px 0 0 24px;display:flex;flex-direction:column;gap:8px}
-.pd-plateia__op{display:flex;gap:9px;align-items:flex-start;cursor:pointer}
-.pd-plateia__op input{margin-top:3px;flex:none}
-.pd-plateia__txt{min-width:0}
-.pd-plateia__t{font-size:13px;font-weight:660;color:var(--txt)}
-.pd-plateia__op .pd-dica{margin-top:1px}
-
-/* CIÊNCIA DE UM RECADO
-   ------------------------------------------------------------
-   O placar primeiro, os nomes depois. Quem manda o recado quer
-   saber quantos faltam antes de saber quem são — e quem foi
-   chamado quer achar o próprio nome. Os dois leem a mesma coisa em
-   ordens diferentes, e por isso o número fica grande no cabeçalho
-   e os nomes ficam pequenos e lado a lado. */
-.pd-ciencia{margin:14px 0;padding:12px 13px;border:1px solid var(--fio);border-radius:11px;
-            background:var(--base)}
-.pd-ciencia__cab{display:flex;align-items:baseline;gap:9px;margin-bottom:9px}
-.pd-ciencia__n{margin-left:auto;font-size:13px;font-weight:720;color:var(--estado)}
-.pd-ciencia__lista{display:flex;flex-wrap:wrap;gap:5px 7px;margin-bottom:10px}
-.pd-ciencia__p{font-size:12px;color:var(--txt-3);background:#fff;border:1px solid var(--fio);
-               border-radius:7px;padding:3px 8px}
-.pd-ciencia__p--ok{color:var(--estado);border-color:var(--estado-luz);
-                   background:var(--estado-luz);font-weight:640}
-.pd-ciencia .pd-botao{margin-top:2px}
-.pd-ciencia .pd-dica{margin-top:0}
-/* O botão do autor: pequeno, como o "Dar visto", com a hora do
-   último lembrete ao lado. */
-.pd-lembrar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.pd-lembrar__q{font-size:12px;color:var(--txt-3)}
-.pd-lembrar__b{margin-left:auto;border:1px solid var(--fio-2);border-radius:9px;background:#fff;
-               font:inherit;font-size:12.5px;font-weight:600;color:var(--txt-2);
-               padding:7px 14px;cursor:pointer;transition:border-color .14s,color .14s}
-.pd-lembrar__b:hover{border-color:var(--estado);color:var(--estado)}
-.pd-lembrar__b:disabled{opacity:.55;cursor:default}
-
-.pd-botao{width:100%;padding:11px;border-radius:10px;font-size:13.5px;font-weight:660;
-          border:1px solid var(--fio-2);background:#fff;margin-top:8px;transition:background .15s}
-.pd-botao:hover{background:var(--base)}
-.pd-botao--principal{background:var(--marca);color:#fff;border-color:var(--marca)}
-.pd-botao--principal:hover{filter:brightness(1.35);background:var(--marca)}
-.pd-botao--principal:disabled{opacity:.5;cursor:not-allowed}
-.pd-botao--perigo{color:var(--alerta);border-color:var(--fio)}
-.pd-botao--perigo:hover{background:var(--alerta-luz)}
-
-.pd-erro{font-size:12.5px;color:var(--alerta);background:var(--alerta-luz);
-         border:1px solid #f0cac6;border-radius:9px;padding:9px 11px;margin-bottom:10px}
-
-.pd-meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
-.pd-tag{font-size:11px;font-weight:620;padding:4px 10px;border-radius:99px;
-        background:var(--base);color:var(--txt-2)}
-.pd-tag--atrasada{background:var(--alerta-luz);color:var(--alerta)}
-.pd-tag--hoje{background:var(--estado-luz);color:var(--estado)}
-
-.pd-linha{margin-bottom:14px}
-.pd-valor{font-size:13.5px;line-height:1.5;color:var(--txt);white-space:pre-wrap}
-
-/* O visto fica acima da situação e com cara de ação discreta: é
-   opcional, e um botão forte demais viraria cobrança. */
-.pd-visto{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0 2px}
-.pd-visto__q{font-size:12px;color:var(--txt-3)}
-.pd-visto__b{margin-left:auto;border:1px solid var(--fio-2);border-radius:9px;background:#fff;
-             font:inherit;font-size:12.5px;font-weight:600;color:var(--txt-2);
-             padding:7px 14px;cursor:pointer;transition:border-color .14s,color .14s}
-.pd-visto__b:hover{border-color:var(--estado);color:var(--estado)}
-.pd-visto__b:disabled{opacity:.55;cursor:default}
-.pd-situacao{display:flex;gap:6px;margin:18px 0 4px}
-.pd-sit{flex:1;padding:9px;border-radius:9px;border:1px solid var(--fio-2);background:#fff;
-        font-size:12.5px;font-weight:620;color:var(--txt-2);transition:all .15s}
-.pd-sit:hover{border-color:var(--txt-3)}
-.pd-sit.on{background:var(--marca);border-color:var(--marca);color:#fff}
-
-/* A linha do tempo é uma coluna com um fio à esquerda: cada
-   atualização pendura nele, e a ordem no fio é a ordem do que
-   aconteceu. */
-/* O invólucro rola; a linha fica inteira dentro dele. A folga à
-   esquerda é para as bolinhas do fio, que ficam meio para fora da
-   coluna e seriam cortadas pela borda da área rolável. O recuo
-   negativo devolve o alinhamento de antes. */
-.pd-linha-rolagem{max-height:340px;overflow-y:auto;padding-left:8px;margin-left:-8px;
-                  margin-bottom:14px;overscroll-behavior:contain}
-.pd-linha-tempo{border-left:2px solid var(--fio);padding-left:14px}
-.pd-item{position:relative;padding-bottom:14px}
-.pd-item::before{content:"";position:absolute;left:-19px;top:5px;width:8px;height:8px;
-                 border-radius:50%;background:var(--fio-2);border:2px solid #fff}
-.pd-item:last-child::before{background:var(--estado)}
-.pd-item__cab{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:3px}
-.pd-item__quem{font-size:12.5px;font-weight:660}
-.pd-item__quando{font-size:11px;color:var(--txt-3)}
-.pd-item__editado{font-size:10px;color:var(--txt-3);font-style:italic}
-.pd-item__txt{font-size:13px;line-height:1.5;color:var(--txt-2);white-space:pre-wrap}
-.pd-corrigir{font-size:11px;color:var(--estado);margin-top:4px;text-decoration:underline}
-/* "apagar" ao lado do "corrigir", na mesma linha e no mesmo tamanho:
-   são as duas ações da mesma janela de trinta minutos. */
-.pd-apagar-com{margin-left:12px;color:var(--alerta)}
-/* Aviso de que o × é o caminho para fechar com texto escrito. */
-/* ---------- desconsiderar: os três pontinhos ---------- */
-.pd-item{position:relative}
-.pd-pontos{position:absolute;top:6px;right:4px;border:0;background:transparent;
-           color:var(--txt-3);font-size:15px;line-height:1;padding:2px 6px;
-           border-radius:6px;cursor:pointer;opacity:.45;transition:opacity .14s}
-.pd-item:hover .pd-pontos,.pd-pontos:focus{opacity:1}
-.pd-pontos:hover{background:var(--base);color:var(--txt)}
-.pd-menu{position:fixed;z-index:60;min-width:210px;max-width:218px;
-         background:#fff;border:1px solid var(--fio-2);border-radius:10px;
-         padding:8px;box-shadow:0 8px 24px rgba(13,25,38,.13)}
-.pd-menu__op{width:100%;text-align:left;border:0;background:transparent;font:inherit;
-             font-size:13px;color:var(--txt);padding:7px 8px;border-radius:7px;cursor:pointer}
-.pd-menu__op:hover{background:var(--base)}
-.pd-menu .pd-dica{margin:4px 8px 2px}
-.pd-item__desc{font-size:10px;color:var(--alerta);font-style:italic}
-.pd-item__txt--desc{text-decoration:line-through;color:var(--txt-3)}
-/* No anexo a linha é horizontal e apertada: os pontinhos entram no
-   fim da linha, e não soltos no canto de cima como no comentário. */
-.pd-anexo{position:relative}
-.pd-anexo .pd-pontos{position:static;flex:none;margin-left:2px}
-.pd-anexo--desc .pd-anexo__n{text-decoration:line-through;color:var(--txt-3)}
-.pd-anexo__desc{font-size:10px;color:var(--alerta);font-style:italic;flex:none}
-
-/* ---------- chamar alguém pelo nome ---------- */
-.pd-chamar{display:flex;flex-direction:column;gap:2px;margin-top:6px;
-           border:1px solid var(--fio-2);border-radius:9px;padding:6px;
-           max-height:190px;overflow:auto;background:#fff}
-.pd-chamar__op{display:flex;align-items:baseline;gap:8px;width:100%;text-align:left;
-               border:0;background:transparent;font:inherit;font-size:13px;
-               color:var(--txt);padding:6px 8px;border-radius:7px;cursor:pointer}
-.pd-chamar__op:hover{background:var(--base)}
-.pd-chamar__s{margin-left:auto;font-size:11px;color:var(--txt-3)}
-/* O nome chamado dentro do comentário: relevo de leve, o bastante
-   para o olho achar e de menos para roubar a leitura. */
-.pd-arroba{background:var(--estado-luz);color:var(--estado);border-radius:5px;
-           padding:0 3px;font-weight:600}
-
-/* ---------- o realce enquanto se escreve ----------
-   O espelho fica exatamente atrás da caixa e só pinta retângulos:
-   o texto dele é transparente, e quem se lê é o da caixa por cima.
-   Toda medida que empurra letra é herdada ou repetida aqui — se
-   uma delas divergir, o retângulo desencontra do nome. */
-.pd-escrita{position:relative}
-.pd-escrita__fundo{position:absolute;top:0;left:0;right:0;bottom:0;
-                   padding:9px 11px;border:1px solid transparent;border-radius:9px;
-                   font:inherit;font-size:13.5px;line-height:1.45;
-                   white-space:pre-wrap;overflow-wrap:break-word;
-                   color:transparent;overflow:hidden;pointer-events:none}
-/* display:block tira a folga que o navegador deixa embaixo de um
-   elemento de linha; sem ela, o espelho fica 4px mais alto que a
-   caixa. Não desalinha o texto, mas deixa uma borda de realce
-   possível aparecendo abaixo da caixa. */
-.pd-escrita__cx{position:relative;background:transparent;display:block}
-.pd-realce{background:var(--estado-luz);border-radius:5px}
-.pd-item__txt--desc .pd-arroba{background:transparent;color:var(--txt-3)}
-.pen__u--chamado{background:var(--marca);color:#fff}
-.pd-anexo--apagado .pd-anexo__n{color:var(--txt-3);text-decoration:line-through}
-.pd-anexo--apagado .pd-anexo__q{font-style:italic;color:var(--txt-3)}
-.pd-aviso-fechar{margin-left:auto;margin-right:10px;font-size:12px;color:var(--alerta);
-                 background:var(--alerta-luz);border-radius:7px;padding:4px 9px}
-.pd-aviso-fechar--pisca{animation:pd-pisca .5s ease 2}
-@keyframes pd-pisca{50%{opacity:.35}}
-.pd-apagar-com__aviso{flex:1 1 100%;font-size:12px;color:var(--txt-2);line-height:1.4}
-.pd-vazio{font-size:12.5px;color:var(--txt-3);padding:4px 0}
-
-@media (max-width:520px){
-  .pd-painel{padding:0}
-  .pd-caixa{max-height:100vh;height:100vh;border-radius:0;max-width:none}
-}
-
 /* ============================================================
    6 · Responsivo — mobile first
    ============================================================ */
@@ -735,8 +396,7 @@ a{color:inherit;text-decoration:none}
   /* Pendências antes dos sistemas: no telefone não há largura
      para as duas lado a lado, e aí quem vem primeiro é quem
      importa mais. */
-  .trilho{grid-column:1;grid-row:2;border-left:0;border-bottom:1px solid var(--fio);
-          padding:14px 16px;overflow:visible}
+  .trilho{grid-column:1;grid-row:2;padding:14px 16px 0;overflow:visible}
   .centro{grid-column:1;grid-row:3;padding:14px 16px;overflow:visible;gap:10px}
   .avisos{grid-column:1;grid-row:4;padding:0 16px;overflow-x:auto}
 
@@ -881,63 +541,6 @@ a{color:inherit;text-decoration:none}
            font-size:12.5px;padding:6px 11px;cursor:pointer;
            transition:color .14s,border-color .14s}
 .cab__sair:hover{color:var(--txt);border-color:var(--txt-3)}
-
-/* A correção de um item da linha do tempo, dentro dos 15 minutos.
-   Acontece no lugar do texto, para a pessoa ver o que está
-   mudando sem perder a conversa de vista. */
-.pd-corrigir__caixa{width:100%;border:1px solid var(--estado);border-radius:8px;
-                    padding:8px 9px;font:inherit;font-size:13.5px;
-                    color:var(--txt);background:#fff;resize:vertical;
-                    margin-top:4px}
-.pd-corrigir__caixa:focus{outline:2px solid var(--estado);outline-offset:1px}
-.pd-corrigir__acoes{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:7px}
-.pd-corrigir__ok{border:0;border-radius:7px;background:var(--marca);
-                 color:var(--marca-txt);font:inherit;font-size:12.5px;
-                 font-weight:600;padding:7px 12px;cursor:pointer}
-.pd-corrigir__ok:disabled{opacity:.55;cursor:default}
-.pd-corrigir__ok--perigo{background:var(--alerta);color:#fff}
-.pd-corrigir__nao{border:1px solid var(--fio-2);border-radius:7px;
-                  background:transparent;color:var(--txt-2);font:inherit;
-                  font-size:12.5px;padding:7px 12px;cursor:pointer}
-.pd-corrigir__nao:hover{color:var(--txt)}
-.pd-corrigir__erro{margin-top:6px;font-size:12.5px;color:var(--alerta);
-                   background:var(--alerta-luz);border-radius:7px;padding:7px 9px}
-
-/* ============================================================
-   MARCAR PESSOAS NUMA PENDÊNCIA
-   ------------------------------------------------------------
-   Este bloco não existia. O JavaScript desenhava as classes e a
-   folha não tinha nenhuma delas, então o navegador empilhava os
-   spans como texto corrido — "RaoniFinanceiro, Diretoria", nome
-   colado no setor, sem respiro e sem hierarquia.
-
-   Cada pessoa é uma faixa clicável inteira, não só o quadradinho:
-   alvo de dedo em celular é o problema real aqui, e um checkbox
-   tem 13 pixels.
-   ============================================================ */
-.pd-marcar{display:flex;flex-direction:column;gap:2px;
-           border:1px solid var(--fio);border-radius:10px;
-           padding:4px;background:#fff;max-height:210px;overflow-y:auto}
-
-.pd-marcar__i{display:flex;align-items:center;gap:9px;
-              padding:8px 9px;border-radius:7px;cursor:pointer;
-              transition:background .12s}
-.pd-marcar__i:hover{background:var(--estado-luz)}
-.pd-marcar__i input{flex:none;width:16px;height:16px;accent-color:var(--estado);cursor:pointer}
-
-/* O nome empurra o setor para a direita: assim a coluna de nomes
-   fica alinhada e o olho desce por ela sem tropeçar. */
-.pd-marcar__n{font-size:13.5px;font-weight:600;color:var(--txt)}
-.pd-marcar__s{margin-left:auto;font-size:11.5px;color:var(--txt-3);
-              text-align:right;max-width:52%}
-
-.pd-dica{margin-top:7px;font-size:12px;line-height:1.45;color:var(--txt-3)}
-
-/* Quem foi marcado tem etiqueta própria na ficha: sem isto,
-   "@Fulano" ficava igual a "Aberta por Fulano", e as duas coisas
-   não são a mesma. */
-.pd-tag--marcado{background:var(--estado-luz);color:var(--estado)}
-
 /* Texto de reserva do cabeçalho, para quando a imagem da logo não
    carrega. Estava sem estilo nenhum: aparecia como texto solto no
    tamanho do corpo. */
@@ -970,7 +573,6 @@ a{color:inherit;text-decoration:none}
 @media (max-width:900px){
   .busca{display:none}
 }
-
 /* O selo de pendências no ícone da barra. Fica no canto de cima,
    mordendo a borda do botão, que é onde a convenção manda e onde
    o olho já procura. */
@@ -980,235 +582,214 @@ a{color:inherit;text-decoration:none}
            font-size:10.5px;font-weight:700;line-height:17px;text-align:center;
            box-shadow:0 0 0 2px var(--nav)}
 .nav__selo--alerta{background:var(--alerta)}
-
-/* ---------- o quadro do escritório ----------
-   BOTÃO SECUNDÁRIO DE VERDADE. Era um contorno cinza que se
-   confundia com o fundo; agora tem a cor da marca no contorno e no
-   texto, e peso de botão. Continua abaixo do "Abrir pendência" na
-   hierarquia porque não é preenchido: cheio é a ação principal,
-   contornado é a segunda. No hover ganha só um tom leve, para não
-   virar outro botão cheio. */
-.btn-todas{width:100%;margin-top:8px;border:1.5px solid var(--marca);border-radius:10px;
-           background:#fff;color:var(--marca);font:inherit;font-size:12.5px;font-weight:620;
-           padding:9px 12px;cursor:pointer;transition:background .14s}
-.btn-todas:hover{background:color-mix(in srgb, var(--marca) 9%, #fff)}
-
-.pd-filtros{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
-.pd-filtro{border:1px solid var(--fio-2);border-radius:9px;padding:7px 9px;
-           font:inherit;font-size:13px;color:var(--txt);background:#fff}
-.pd-filtro:focus{outline:2px solid var(--estado);outline-offset:1px}
-.pd-filtro-marca{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--txt-2);cursor:pointer}
-.pd-filtro-marca input{accent-color:var(--estado);cursor:pointer}
-
-.pd-todas{display:flex;flex-direction:column;gap:6px}
-
-/* Resolvida recua: continua legível para quem foi procurar, sem
-   disputar atenção com o que ainda falta fazer. */
-.faixa--feito{opacity:.75}
-
-/* A faixa de Concluídas é botão, e não rótulo: ela abre e fecha.
-   Herda a aparência da faixa comum para não parecer outro
-   elemento, e só acrescenta o cursor e a seta. */
-.faixa--dobra{width:100%;border:0;background:transparent;cursor:pointer;text-align:left;
-              font:inherit;display:flex;align-items:baseline}
-.faixa--dobra:hover .faixa__t{color:var(--txt-2)}
-.faixa__seta{margin-left:auto;font-size:13px;color:var(--txt-3);line-height:1}
-/* O histórico não precisa gritar: os cartões de dentro ficam mais
-   discretos que os de cima, porque nenhum deles pede ação. */
-.historico{opacity:.8}
-
-/* ============================================================
-   A CAIXA GRANDE
-   ------------------------------------------------------------
-   Por cima de tudo, escura em volta, e centrada. Ela interrompe de
-   propósito: as duas notícias que a usam — tarefa vencida e recado
-   lido por todos — perderiam o sentido se dividissem a tela com
-   quarenta cartões.
-
-   Largura limitada e rolagem interna: se alguém voltar de uma
-   semana de férias com doze vencidas, a caixa cresce até caber na
-   tela e rola dentro, em vez de empurrar o botão para fora do
-   alcance.
-   ============================================================ */
-.pd-caixona{position:fixed;inset:0;z-index:60;display:flex;align-items:center;
-            justify-content:center;padding:20px;background:rgba(13,25,38,.55)}
-.pd-caixona__c{width:100%;max-width:520px;max-height:100%;overflow:auto;
-               background:#fff;border-radius:16px;padding:22px 22px 18px;
-               box-shadow:0 24px 60px rgba(13,25,38,.3)}
-.pd-caixona__s{margin-bottom:18px}
-.pd-caixona__t{font-size:15px;font-weight:700;color:var(--txt);margin-bottom:10px}
-.pd-caixona__s--atraso .pd-caixona__t{color:var(--alerta)}
-.pd-caixona__s--lido   .pd-caixona__t{color:#8a6100}
-.pd-caixona__s--lembrete .pd-caixona__t{color:var(--estado);margin-bottom:3px}
-.pd-caixona__sub{font-size:12.5px;color:var(--txt-2);margin-bottom:10px}
-.pd-caixona__l{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
-/* Quebra em várias linhas quando o nome é longo: antes tudo era
-   empurrado para a mesma linha, e o que sobrava era o nome. */
-.pd-caixona__l li{display:flex;align-items:baseline;gap:10px;padding:9px 11px;border-radius:10px;
-                  background:var(--base);cursor:pointer;flex-wrap:wrap}
-.pd-caixona__l li:hover{background:var(--estado-luz)}
-/* O NOME DA TAREFA INTEIRO, sem corte.
-   Ele vinha em uma linha só, com retícias no fim: num aviso que
-   para a tela toda, ler "ZZ-TESTE recado para resolver n..." e ter
-   de abrir para saber do que se trata anula a razão de o aviso
-   existir. Agora quebra em quantas linhas precisar. */
-.pd-caixona__o{font-size:13.5px;font-weight:620;color:var(--txt);min-width:0;
-               overflow-wrap:break-word}
-.pd-caixona__q{margin-left:auto;flex:none;font-size:11px;color:var(--txt-3)}
-/* Com o nome ocupando a largura toda, a contagem desce para a
-   própria linha em vez de espremer o nome contra a borda. */
-.pd-caixona__li--acoes .pd-caixona__o{flex:1 1 100%}
-.pd-caixona__li--acoes .pd-caixona__q{margin-left:0}
-.pd-caixona__li--acoes .pd-caixona__acoes{margin-left:auto;margin-top:0}
-.pd-caixona .pd-botao{width:100%;margin-top:4px}
-.pd-caixona .pd-dica{text-align:center}
-/* O item com botões deixa de ser uma linha clicável e passa a ter
-   duas ações nomeadas: "abrir" e "resolver" são coisas diferentes
-   demais para caberem no mesmo clique. */
-.pd-caixona__li--acoes{cursor:default}
-.pd-caixona__acoes{display:flex;gap:8px;margin-top:8px}
-.pd-caixona__b{border:1px solid var(--fio-2);border-radius:8px;background:#fff;
-               font:inherit;font-size:12.5px;color:var(--txt-2);
-               padding:6px 12px;cursor:pointer;transition:border-color .14s,color .14s}
-.pd-caixona__b:hover{border-color:var(--txt-3);color:var(--txt)}
-.pd-caixona__b--ok{background:var(--marca);border-color:var(--marca);color:#fff;font-weight:600}
-.pd-caixona__b--ok:hover{filter:brightness(1.35);color:#fff}
-.pd-caixona__b:disabled{opacity:.55;cursor:default}
-.pd-caixona__erro{margin-top:6px;font-size:12px;color:var(--alerta)}
-
-/* Busca ocupa a linha inteira; os seletores dividem o resto. Numa
-   barra com cinco controles, tratar todos igual faria o campo de
-   texto ficar do tamanho de um "Este mês". */
-.pd-filtro--busca{flex:1 1 100%;min-width:0}
-.pd-mais{display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-         padding:12px 2px 4px;border-top:1px solid var(--fio);margin-top:12px}
-.pd-mais__n{font-size:11.5px;color:var(--txt-3)}
-.pd-mais__erro{font-size:11.5px;color:var(--alerta)}
-.pd-mais .btn-fav{margin-left:auto}
-/* A GAVETA PESSOAL É ESTREITA, e o rodapé dela tem botão mais
-   explicação. Na linha do quadro do escritório isso cabe lado a
-   lado; no trilho, a explicação desce para a própria linha em vez
-   de estrangular o botão em duas palavras por linha. */
-.historico .pd-mais{flex-direction:column;align-items:stretch;gap:6px;
-                    padding:10px 2px 2px;margin-top:8px}
-.historico .pd-mais .btn-fav{margin-left:0}
-.historico .pd-dica{margin-top:0}
-.pd-todas .pen{background:var(--base)}
-.pd-todas .pen:hover{background:#fff}
-
-/* ---------- anexos ----------
-   Uma linha por arquivo: nome à esquerda, tamanho e quem mandou à
-   direita. Sem miniatura de propósito — para mostrar a imagem
-   seria preciso deixar a página buscar figura do Storage, e a
-   política do Hub hoje não deixa buscar imagem de lugar nenhum.
-   Abrir em aba nova resolve, e a política continua fechada. */
-.pd-anexos{display:flex;flex-direction:column;gap:4px}
-.pd-anexo{display:flex;align-items:baseline;gap:8px;padding:7px 9px;
-          border:1px solid var(--fio);border-radius:8px;background:#fff}
-.pd-anexo__n{flex:1;min-width:0;font-size:13px;font-weight:600;color:var(--estado);
-             text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-             border:0;background:transparent;font-family:inherit;text-align:left;
-             padding:0;cursor:pointer}
-.pd-anexo__n:disabled{opacity:.6;cursor:default}
-.pd-anexo__n:hover{text-decoration:underline}
-.pd-anexo__t{font-size:11.5px;color:var(--txt-3);flex:none}
-.pd-anexo__q{font-size:11.5px;color:var(--txt-3);flex:none}
-.pd-anexo__btn{margin-top:6px;align-self:flex-start;border:1px solid var(--fio-2);
-               border-radius:8px;background:transparent;color:var(--txt-2);
-               font:inherit;font-size:12.5px;padding:7px 12px;cursor:pointer}
-.pd-anexo__btn:hover{color:var(--txt);border-color:var(--txt-3)}
-.pd-anexo__btn:disabled{opacity:.6;cursor:default}
-.pd-anexo__erro{margin-top:6px;font-size:12.5px;color:var(--alerta);
-                background:var(--alerta-luz);border-radius:7px;padding:7px 9px}
-
-/* ---------- urgência e não lida ----------
-   A etiqueta de urgência só aparece nos extremos. "Normal" não
-   ganha etiqueta de propósito: etiquetar tudo faz a etiqueta
-   deixar de significar alguma coisa. */
-.pen__u{display:inline-block;margin-top:4px;font-size:9.5px;font-weight:700;
-        letter-spacing:.04em;text-transform:uppercase;border-radius:99px;padding:2px 7px}
-.pen__u--urgente{background:var(--alerta-luz);color:var(--alerta)}
-.pen__u--quando_der{background:var(--base);color:var(--txt-3)}
-
-/* Pendência que chegou e ninguém abriu: fundo cheio, nome em peso
-   maior e um ponto antes do título. Três sinais em vez de um,
-   porque quem não enxerga cor precisa dos outros dois. */
-.pen--nova{background:#fff;box-shadow:0 2px 10px rgba(13,25,38,.08)}
-.pen--nova .pen__o{font-weight:730;color:var(--txt)}
-.pen__ponto{display:inline-block;width:7px;height:7px;border-radius:50%;
-            background:var(--estado);margin-right:6px;vertical-align:middle}
-.pen--atrasada .pen__ponto{background:var(--alerta)}
-
-/* O ícone da barra pulsa enquanto houver pendência não lida. Para
-   quem desligou animação no sistema, fica o anel parado — o aviso
-   não pode depender de movimento. */
-@keyframes pulsoDoSelo{
-  0%,100%{box-shadow:0 0 0 2px var(--nav)}
-  50%    {box-shadow:0 0 0 2px var(--nav),0 0 0 6px rgba(192,69,58,.35)}
-}
-.nav__b--novo .nav__selo{animation:pulsoDoSelo 2s ease-in-out infinite}
-@media (prefers-reduced-motion:reduce){
-  .nav__b--novo .nav__selo{animation:none;box-shadow:0 0 0 2px var(--nav),0 0 0 3px rgba(192,69,58,.5)}
-}
-
 /* O mês fechado, no painel: o que já venceu recua sem sumir. */
 .agenda--cheia{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
 .prazo--passou{opacity:.5}
 .prazo--passou .prazo__d{color:var(--txt-3)}
 
-/* A etiqueta de reservada usa o vermelho da casa: ela não é um
-   estado da tarefa, é um aviso de que aquilo não se comenta no
-   corredor. */
-.pd-tag--reservada{background:var(--alerta-luz);color:var(--alerta)}
+/* ============================================================
+   7 · As vistas
+   ------------------------------------------------------------
+   Início, Pendências e Notícias dividem a mesma planta. O Início
+   usa o centro e o trilho; as outras duas ocupam a largura toda
+   (colunas 2 até o fim) com rolagem própria. A barra decide qual
+   está à vista pelo atributo data-vista da .tela; o resto some.
+   ============================================================ */
+.vista{grid-column:2/-1;grid-row:2;overflow:auto;min-width:0}
+.vista--noticias{padding:18px 24px 28px}
+.tela[data-vista="pendencias"] .centro,.tela[data-vista="pendencias"] .trilho,
+.tela[data-vista="noticias"]   .centro,.tela[data-vista="noticias"]   .trilho{display:none}
+.tela[data-vista="inicio"] .vista{display:none}
+/* Fora do Início a busca de sistemas não procura nada que esteja à
+   vista; ela continua existindo pelo atalho "/", que volta ao Início. */
+.cab__vista{font-size:15px;font-weight:700;color:var(--txt-2);letter-spacing:-.01em;
+            padding-left:14px;border-left:1px solid var(--fio-2)}
 
-/* O nome e a hora de quem mandou o anexo cabem numa linha só até
-   apertar; aí quebram juntos, sem separar um do outro. */
-.pd-anexo__q{white-space:nowrap}
-@media (max-width:520px){
-  .pd-anexo{flex-wrap:wrap}
-  .pd-anexo__q{white-space:normal;flex-basis:100%}
+/* ============================================================
+   8 · Os cartões do trilho: Hoje e Notícias
+   ------------------------------------------------------------
+   Dois cartões empilhados, cada um com cabeçalho, conteúdo e uma
+   ação no canto. O de cima é o de hoje: é o que a pessoa veio
+   ver. As notícias ficam abaixo e crescem até o fim do trilho.
+   ============================================================ */
+.cartao{background:rgba(255,255,255,.76);border:1px solid rgba(255,255,255,.85);border-radius:var(--r);
+        padding:14px 15px 12px;box-shadow:0 6px 22px rgba(13,25,38,.05);
+        -webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);
+        display:flex;flex-direction:column;flex:0 0 auto;min-height:0}
+.cartao--noticias{flex:1 0 auto}
+.cartao__cab{display:flex;align-items:baseline;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.cartao__t{font-size:14px;font-weight:730}
+.cartao__sub{font-size:11.5px;color:var(--txt-3);min-width:0}
+.cartao__sub b{color:var(--txt);font-weight:700}
+.cartao__acao{margin-left:auto;font-size:12px;font-weight:650;color:var(--estado);padding:2px 6px;border-radius:7px;
+              white-space:nowrap;transition:background .14s}
+.cartao__acao:hover{background:var(--estado-luz)}
+.cartao__pe{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;padding-top:8px;border-top:1px solid var(--fio)}
+.cartao__nota{font-size:11px;color:var(--txt-3)}
+.cartao__nota--aviso{color:#8a6100}
+.cartao__vazio{padding:14px 12px;border-radius:11px;background:rgba(255,255,255,.55);border:1px dashed var(--fio-2);
+               font-size:12.5px;color:var(--txt-2);line-height:1.5;margin-top:6px}
+.cartao__vazio-t{font-weight:700;color:var(--txt);margin-bottom:3px}
+.cartao__vazio-x{color:var(--txt-2)}
+
+/* ---------- o cartão Hoje ---------- */
+.hj__barra{height:6px;border-radius:99px;background:var(--fio);overflow:hidden;margin:2px 0 10px}
+.hj__barra i{display:block;height:100%;width:0;background:#1f8a55;border-radius:99px;transition:width .4s}
+.hj__nova{position:relative;margin-bottom:8px}
+.hj__cx{width:100%;border:1px solid var(--fio-2);border-radius:10px;padding:9px 11px;font:inherit;font-size:13px;
+        color:var(--txt);background:#fff}
+.hj__cx::placeholder{color:var(--txt-3)}
+.hj__cx:focus{outline:2px solid var(--estado);outline-offset:1px;border-color:var(--estado)}
+.hj__cx:disabled{opacity:.6}
+.hj__dica{display:block;font-size:11.5px;color:var(--estado);margin-top:5px;padding-left:2px}
+.hj__faixa{display:flex;align-items:center;gap:8px;margin:10px 0 5px}
+.hj__faixa:first-child{margin-top:2px}
+.hj__faixa-t{font-size:11px;font-weight:730;letter-spacing:.05em;text-transform:uppercase}
+.hj__faixa-n{font-family:var(--mono);font-size:10.5px;font-weight:700;padding:1px 7px;border-radius:99px}
+.hj__faixa--atraso .hj__faixa-t{color:var(--alerta)}
+.hj__faixa--atraso .hj__faixa-n{background:var(--alerta-luz);color:var(--alerta)}
+.hj__faixa--hoje .hj__faixa-t{color:var(--estado)}
+.hj__faixa--hoje .hj__faixa-n{background:var(--estado-luz);color:var(--estado)}
+.hj__i{display:flex;gap:10px;align-items:flex-start;padding:8px 6px 8px 8px;border-radius:11px;
+       background:rgba(255,255,255,.6);margin-bottom:5px;border-left:3px solid var(--fio-2);transition:background .14s,opacity .25s}
+.hj__i:hover{background:#fff}
+.hj__i--atrasada{border-left-color:var(--alerta)}
+.hj__i--hoje{border-left-color:var(--estado)}
+.hj__i--riscando{opacity:.35}
+.hj__chk{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--fio-2);background:transparent;margin-top:2px;
+         cursor:pointer;transition:border-color .14s,background .14s;position:relative}
+.hj__i--atrasada .hj__chk{border-color:var(--alerta)}
+.hj__i--hoje .hj__chk{border-color:var(--estado)}
+.hj__chk:hover{background:var(--estado-luz)}
+.hj__chk:hover::after{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--estado);opacity:.55}
+.hj__txt{min-width:0;flex:1;cursor:pointer}
+.hj__o{font-size:13px;font-weight:620;line-height:1.35;color:var(--txt);overflow-wrap:anywhere}
+.hj__m{display:flex;gap:8px;flex-wrap:wrap;align-items:baseline;margin-top:3px;font-size:11px;color:var(--txt-3)}
+.hj__setor{display:inline-flex;align-items:center;gap:5px;font-weight:640;color:var(--txt-2)}
+.hj__setor::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--sc,var(--fio-2))}
+.hj__i--atrasada .hj__prazo{color:var(--alerta);font-weight:650}
+.hj__nota{font-style:italic;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.hj__abrir{flex:none;width:24px;height:24px;border-radius:7px;color:var(--txt-3);font-size:18px;line-height:1;opacity:0;transition:opacity .12s}
+.hj__i:hover .hj__abrir,.hj__abrir:focus-visible{opacity:1}
+.hj__abrir:hover{background:var(--base);color:var(--txt)}
+.hj__mais{display:block;width:100%;text-align:left;padding:7px 8px;border-radius:9px;font-size:12.5px;font-weight:640;color:var(--estado)}
+.hj__mais:hover{background:var(--estado-luz)}
+.hj__semana{font-size:11.5px;color:var(--txt-3);padding:6px 8px 0}
+
+/* ---------- notícias: um item ---------- */
+.not{display:block;padding:9px 8px;border-radius:11px;transition:background .14s;color:inherit;text-decoration:none;position:relative}
+.not:hover{background:#fff}
+.not + .not{border-top:1px solid rgba(13,25,38,.05)}
+.not__cab{display:flex;align-items:baseline;gap:8px;margin-bottom:3px}
+.not__fonte{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+            padding:2px 7px;border-radius:5px;background:var(--marca);color:#fff;flex:none}
+.not__fonte--receita,.not__fonte--simples{background:#1d4e89}
+.not__fonte--esocial{background:#2f6b43}
+.not__fonte--fazenda,.not__fonte--govbr{background:#0d1926}
+.not__fonte--cfc,.not__fonte--fenacon{background:#6f4bb6}
+.not__fonte--sefaz-se{background:#0f7f7a}
+.not__fonte--camara,.not__fonte--senado{background:#8a6100}
+.not__fonte--ebc{background:#4a5d76}
+.not__quando{font-size:10.5px;color:var(--txt-3);flex:none;font-variant-numeric:tabular-nums}
+.not__ponto{width:7px;height:7px;border-radius:50%;background:var(--estado);margin-left:auto;flex:none;position:relative;top:-1px}
+.not__t{font-size:13px;font-weight:620;line-height:1.35;color:var(--txt)}
+.not--c .not__t{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.not--nova .not__t{font-weight:700}
+.not__r{font-size:12.5px;line-height:1.5;color:var(--txt-2);margin-top:4px}
+.not__tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.not__tag{font-size:10px;font-weight:650;letter-spacing:.02em;padding:2px 8px;border-radius:99px;background:var(--base);color:var(--txt-2)}
+.not__tag--reforma{background:#efe9f9;color:#4e3190}
+.not__tag--simples{background:#eaf3ec;color:#2f6b43}
+.not__tag--trabalhista{background:#e6edf6;color:#1f416a}
+.not__tag--tributos{background:#fbf3dc;color:#6f4f00}
+.not__tag--sergipe{background:#e0f1f6;color:#0b6e8a}
+.not__tag--contabil{background:#f1eafd;color:#5a23a8}
+
+/* ---------- notícias: a tela inteira ---------- */
+.vn{max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.vn__cab{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.vn__t{font-size:22px;font-weight:760;letter-spacing:-.02em}
+.vn__sub{font-size:12.5px;color:var(--txt-3);margin-top:3px}
+.vn__ferramentas{display:flex;gap:8px;flex-wrap:wrap}
+.vn__sel,.vn__busca{border:1px solid var(--fio-2);border-radius:10px;padding:8px 11px;font:inherit;font-size:13px;color:var(--txt);background:#fff}
+.vn__busca{min-width:240px}
+.vn__sel:focus,.vn__busca:focus{outline:2px solid var(--estado);outline-offset:1px;border-color:var(--estado)}
+.vn__filtros{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--fio-2);background:#fff;color:var(--txt-2);border-radius:99px;padding:6px 12px;
+      font-size:12.5px;font-weight:640;display:inline-flex;align-items:center;gap:6px;transition:border-color .14s,color .14s,background .14s}
+.chip:hover{border-color:var(--estado);color:var(--estado)}
+.chip--on{background:var(--marca);border-color:var(--marca);color:#fff}
+.chip__n{font-family:var(--mono);font-size:10px;opacity:.7}
+.vn__lista{display:flex;flex-direction:column;gap:6px}
+.vn__dia{font-size:11.5px;font-weight:730;letter-spacing:.06em;text-transform:uppercase;color:var(--txt-3);margin:14px 0 4px;padding-left:4px}
+.vn__dia:first-child{margin-top:0}
+.vn__grupo{background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.85);border-radius:var(--r);padding:6px;
+           box-shadow:0 6px 22px rgba(13,25,38,.05)}
+.vn__grupo .not{padding:12px 12px}
+.vn__vazio{padding:28px;text-align:center;color:var(--txt-2);font-size:13.5px}
+.vn__fontes{display:flex;gap:6px 10px;flex-wrap:wrap;align-items:baseline;font-size:12px;color:var(--txt-3);
+            padding-top:12px;border-top:1px solid var(--fio)}
+.vn__fontes-rot{font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:10.5px}
+.vn__fonte{color:var(--txt-2);text-decoration:none;border-bottom:1px dotted var(--fio-2)}
+.vn__fonte:hover{color:var(--estado);border-color:var(--estado)}
+.vn__fonte--fora{color:#8a6100;border-bottom-style:dashed}
+.vn__nota{font-size:11.5px;color:var(--txt-3);line-height:1.5}
+
+/* Selo neutro: notícias novas não são alerta, são novidade. */
+.nav__selo--neutro{background:var(--txt-2)}
+
+/* ============================================================
+   9 · O quadro dentro do Hub: o que a folha dele não sabe
+   ------------------------------------------------------------
+   css/pendencias.css veio inteira do Pendências Totali, presa a
+   .pend. Estas poucas regras fazem a emenda com a planta do Hub.
+   ============================================================ */
+.vista.pend{padding:16px 22px 28px}
+/* O destaque de quando a tela inicial aponta para um cartão. */
+@keyframes realce{0%{box-shadow:0 0 0 0 rgba(44,90,143,0)}20%{box-shadow:0 0 0 4px rgba(44,90,143,.55)}100%{box-shadow:0 0 0 0 rgba(44,90,143,0)}}
+.pend .card.realce{animation:realce 1.8s ease-out}
+/* O leitor de PDF do navegador preenche o quadro ao lado. */
+.pend .pdf-quadro{display:block;width:100%;height:100%;border:0;background:#525659}
+.pend .pdfv-b:has(.pdf-quadro){padding:0;overflow:hidden}
+/* Com o PDF aberto ao lado, o quadro encolhe em vez de ficar por baixo. */
+.pend.com-pdf{padding-right:calc(max(360px, min(46vw, 780px)) + 16px)}
+.pend.com-pdf .quadro{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.pend .lado{top:0}
+/* A barra lateral do quadro tem a cor da barra do Hub: as duas se leem como uma coisa só. */
+
+@media (max-width:900px){
+  .vista{grid-column:1;grid-row:2;overflow:visible}
+  .vista.pend{padding:12px 12px 24px}
+  .pend.com-pdf{padding-right:12px}
+  .cab__vista{display:none}
+  .vn__busca{min-width:0;flex:1}
 }
 
-/* ---------- o aviso antes de apagar ----------
-   Vermelho de alerta e borda cheia: quem chegou aqui precisa
-   perceber que saiu do fluxo normal e entrou numa porta sem
-   volta. */
-.pd-perigo{margin-top:10px;border:1px solid var(--alerta);border-radius:11px;
-           background:var(--alerta-luz);padding:13px 14px}
-.pd-perigo__t{font-size:14px;font-weight:730;color:var(--alerta);margin-bottom:5px}
-.pd-perigo__x{font-size:12.5px;line-height:1.45;color:var(--txt-2)}
-.pd-perigo__arquivos{margin-top:10px;background:#fff;border-radius:8px;padding:9px 10px}
-.pd-perigo__rot{font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;
-                color:var(--alerta);margin-bottom:5px}
-.pd-perigo__arq{font-size:12.5px;color:var(--txt);padding:2px 0;
-                overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pd-perigo__acoes{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
-.pd-perigo__erro{margin-top:9px;font-size:12.5px;color:var(--alerta);
-                 background:#fff;border-radius:7px;padding:8px 10px}
+/* ============================================================
+   10 · A agenda conferida com a Receita
+   ============================================================ */
+.agenda__selo{font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#2f6b43;
+              background:#eaf3ec;border-radius:99px;padding:2px 8px}
+.agenda__ver{font-size:12px;font-weight:650;color:var(--estado);padding:1px 6px;border-radius:7px;margin-left:auto}
+.agenda__ver:hover{background:var(--estado-luz)}
+.agenda__ver + .bloco__n{margin-left:0}
+.prazo__ok{font-size:10px;font-weight:800;color:#2f6b43;background:#eaf3ec;border-radius:99px;width:15px;height:15px;
+           display:inline-grid;place-items:center;flex:none;line-height:1}
+.prazo__conferir{font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:99px;
+                 padding:1px 6px;background:#fdf0d5;color:#8a6100;flex:none}
+.prazo__q--receita{color:#8a6100;font-weight:600}
+.agenda__rodape{margin-top:16px;display:flex;flex-direction:column;gap:8px}
+.agenda__nota{font-size:12px;color:var(--txt-3);line-height:1.5}
+.agenda__extras{font-size:12.5px;color:var(--txt-2);background:var(--base);border-radius:10px;padding:8px 12px}
+.agenda__extras summary{cursor:pointer;font-weight:650;color:var(--txt-2)}
+.agenda__extras-lista{margin:8px 0 2px;padding-left:18px;display:flex;flex-direction:column;gap:4px;line-height:1.45}
 
-/* ---------- ver o anexo antes de enviar ----------
-   Anexo não sai sozinho depois de enviado: só junto com a
-   pendência inteira. Isso torna o erro caro, e é por isso que vale
-   um passo a mais antes. */
-.pd-previa{margin-top:8px;border:1px solid var(--estado);border-radius:10px;
-           background:#fff;padding:11px 12px}
-.pd-previa__cab{display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
-.pd-previa__n{flex:1;min-width:0;font-size:13px;font-weight:640;color:var(--txt);
-              overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pd-previa__t{font-size:11.5px;color:var(--txt-3);flex:none}
-.pd-previa__img{display:block;max-width:100%;max-height:220px;border-radius:8px;
-                border:1px solid var(--fio);object-fit:contain;background:var(--base)}
-.pd-previa__ver{border:1px solid var(--fio-2);border-radius:8px;background:transparent;
-                color:var(--estado);font:inherit;font-size:12.5px;font-weight:600;
-                padding:7px 12px;cursor:pointer}
-.pd-previa__ver:hover{border-color:var(--estado)}
-.pd-previa__x{margin-top:7px;font-size:11.5px;color:var(--txt-3);line-height:1.4}
-.pd-previa__acoes{display:flex;gap:7px;margin-top:11px;flex-wrap:wrap}
-
-/* Anotação do sistema — "Mudou de Aberta para Fazendo". Recuada e
-   em itálico: ela conta o que aconteceu, não o que alguém quis
-   dizer, e não deve competir com a conversa de verdade. */
-.pd-item--sistema .pd-item__txt{font-style:italic;color:var(--txt-3);font-size:12.5px}
-.pd-item--sistema .pd-item__quem{font-weight:600;color:var(--txt-3)}
-/* Comentário apagado: mesmo lugar, sem conteúdo, em tom apagado. */
-.pd-item--apagado .pd-item__txt{font-style:italic;color:var(--txt-3);font-size:12.5px}
+/* No celular o cabeçalho tem três coisas: a marca, o botão Sair e o
+   relógio com a saudação. Sair fica no canto da primeira linha; o
+   relógio desce para a segunda, com a largura toda. */
+@media (max-width:900px){
+  .cab{row-gap:6px}
+  .cab__sair{order:2;margin-left:auto}
+  .rel{order:3;flex-basis:100%;margin-left:0;justify-content:flex-start}
+  .cab__logo{order:1}
+}

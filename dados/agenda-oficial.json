@@ -1,0 +1,2676 @@
+{
+ "formato": "hub-totali-agenda-oficial",
+ "versao": 1,
+ "fonte": "Receita Federal — Agenda Tributária",
+ "fonteUrl": "https://www.gov.br/receitafederal/pt-br/assuntos/agenda-tributaria/",
+ "atualizadoEm": "2026-11-09T15:22:25.885Z",
+ "meses": [
+  {
+   "ano": 2026,
+   "mes": 11,
+   "nome": "novembro de 2026",
+   "url": "https://www.gov.br/receitafederal/pt-br/assuntos/agenda-tributaria/2026/Novembro",
+   "ade": "ADE Corat nº 85/2026",
+   "dias": [
+    {
+     "data": "2026-11-05",
+     "url": "https://www.gov.br/receitafederal/pt-br/assuntos/agenda-tributaria/2026/Novembro/dia-05-11-2026",
+     "declaracoes": [],
+     "pagamentos": [
+      {
+       "codigo": "8053",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Títulos de renda fixa - Pessoa Física",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 9.779/99 Art. 5º"
+      },
+      {
+       "codigo": "3426",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Títulos de renda fixa - Pessoa Jurídica",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 9.779/99 Art. 5º"
+      },
+      {
+       "codigo": "6800",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Fundo de Investimento sujeito à tributação periódica",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 14.754/23 Art. 17"
+      },
+      {
+       "codigo": "6813",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Fundo de Investimento em Ações",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 14.754/23 Art. 17"
+      },
+      {
+       "codigo": "5273",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Operações de swap",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 8.981/95 Art. 74"
+      },
+      {
+       "codigo": "8468",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Day-Trade - Operações em Bolsas",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 9.959/00 Art. 8º"
+      },
+      {
+       "codigo": "5557",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Ganhos líquidos em operações em bolsas e assemelhados",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 11.033/04 Art. 2º"
+      },
+      {
+       "codigo": "5706",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Juros remuneratórios do capital próprio",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 9.249/95 Art. 9º"
+      },
+      {
+       "codigo": "5232",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Fundos de Investimento Imobiliário (FII) e Fundos de Investimento nas Cadeias Produtivas do Agronegócio (Fiagro) - Resgate ou amortização de cotas ou distribuição de rendimentos",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 8.668/03 Art. 17"
+      },
+      {
+       "codigo": "0924",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Demais rendimentos de capital",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 8.313/91 Art. 16"
+      },
+      {
+       "codigo": "3699",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Aplicações financeiras em ativos de infraestrutura - Tributação Exclusiva",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 11.478/07 Art. 2º"
+      },
+      {
+       "codigo": "5029",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Ganho de Capital - Integralização de Cotas com Ativos",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 13.043/14 Art. 1º"
+      },
+      {
+       "codigo": "5035",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Fundos de Investimento",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 13.043/14 Art. 8º"
+      },
+      {
+       "codigo": "1605",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Fundo de Investimento em Participações (FIP), Fundo de Investimento em Índice de Mercado (Exchange Traded Fund - ETF), Fundo de Investimento em Direitos Creditórios (FIDC) e Fundo Multimercado (FIM)",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 14.754/23 Art. 24"
+      },
+      {
+       "codigo": "5286",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Residentes ou Domiciliados no Exterior - Aplicações Financeiras",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 8.8383/91 Art. 29"
+      },
+      {
+       "codigo": "9453",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Residentes ou Domiciliados no Exterior - Juros remuneratórios de capital próprio",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Decreto-Lei nº 5.844/43 Art. 97"
+      },
+      {
+       "codigo": "0916",
+       "grupo": "IRRF",
+       "descricao": "Outros Rendimentos - Prêmios obtidos em concursos e sorteios",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Decreto-Lei nº 5.844/43 Art. 96"
+      },
+      {
+       "codigo": "8673",
+       "grupo": "IRRF",
+       "descricao": "Outros Rendimentos - Prêmios obtidos em bingos",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Decreto-Lei nº 5.844/43 Art. 96"
+      },
+      {
+       "codigo": "9385",
+       "grupo": "IRRF",
+       "descricao": "Outros Rendimentos - Multas e vantagens",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 9.430/96 Art. 70"
+      },
+      {
+       "codigo": "1150",
+       "grupo": "IOF",
+       "descricao": "Operações de Crédito - Pessoa Jurídica",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 5.143/66 Art. 1º"
+      },
+      {
+       "codigo": "7893",
+       "grupo": "IOF",
+       "descricao": "Operações de Crédito - Pessoa Física",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 5.143/66 Art. 1º"
+      },
+      {
+       "codigo": "4290",
+       "grupo": "IOF",
+       "descricao": "Operações de Câmbio - Entrada de moeda",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 8.894/94 Art. 6º"
+      },
+      {
+       "codigo": "5220",
+       "grupo": "IOF",
+       "descricao": "Operações de Câmbio - Saída de moeda",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 8.894/94 Art. 6º"
+      },
+      {
+       "codigo": "6854",
+       "grupo": "IOF",
+       "descricao": "Aplicações Financeiras",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 8.033/90 Art. 1º"
+      },
+      {
+       "codigo": "6895",
+       "grupo": "IOF",
+       "descricao": "Factoring",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 9.532/97 Art. 58"
+      },
+      {
+       "codigo": "3467",
+       "grupo": "IOF",
+       "descricao": "Seguros",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 5.143/66 Art. 1º"
+      },
+      {
+       "codigo": "4028",
+       "grupo": "IOF",
+       "descricao": "Ouro, Ativo Financeiro",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 7.766/89 Art. 4º"
+      },
+      {
+       "codigo": "1661",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Servidor Civil Ativo",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 4º"
+      },
+      {
+       "codigo": "1700",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Servidor Civil Inativo",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 4º"
+      },
+      {
+       "codigo": "1717",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Pensionista Civil",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 4º"
+      },
+      {
+       "codigo": "1769",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Patronal - Servidor Civil Ativo - Operação Intra-Orçamentária",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 8º"
+      },
+      {
+       "codigo": "1814",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Patronal - Servidor no Exterior - Operação Intra-Orçamentária",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 8º"
+      },
+      {
+       "codigo": "1723",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Servidor Civil Ativo - Precatório Judicial e Requisição de Pequeno Valor",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 4º"
+      },
+      {
+       "codigo": "1730",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Servidor Civil Inativo - Precatório Judicial e Requisição de Pequeno Valor",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 5º"
+      },
+      {
+       "codigo": "1752",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Pensionista - Precatório Judicial e Requisição de Pequeno Valor",
+       "periodo": "3º decêndio mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 5º"
+      }
+     ]
+    },
+    {
+     "data": "2026-11-10",
+     "url": "https://www.gov.br/receitafederal/pt-br/assuntos/agenda-tributaria/2026/Novembro/dia-10-11-2026",
+     "declaracoes": [
+      {
+       "quem": "PJ",
+       "nome": "SisObraPrefWeb – Envio, pelo Município, da relação de todos os alvarás para construção civil e documentos de habite-se concedidos.",
+       "periodo": "Outubro/2026",
+       "base": "Instrução Normativa RFB nº 1.998/2020",
+       "baseLink": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114290/visao/multivigente"
+      }
+     ],
+     "pagamentos": [
+      {
+       "codigo": "5299",
+       "grupo": "IRRF",
+       "descricao": "Juros de empréstimos externos (Instituição autorizada a operar no mercado de câmbio pelo Banco Central do Brasil)",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Decreto-Lei nº 5.844/43 Art. 97"
+      },
+      {
+       "codigo": "0610",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos Prestação Serviços Transporte Rodoviário Internacional de Carga, Pagos Por PJ Domiciliada no País, Auferidos por Transportador Autônomo PF Residente no Paraguai",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / eSocial",
+       "base": "Lei nº 11.773/08 Art. 1º"
+      },
+      {
+       "codigo": "1020",
+       "grupo": "IPI",
+       "descricao": "Cigarros Contendo Tabaco (Cigarros do código 2402.20.00 da Tipi)",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 4.502/64 Art. 1º"
+      }
+     ]
+    },
+    {
+     "data": "2026-11-13",
+     "url": "https://www.gov.br/receitafederal/pt-br/assuntos/agenda-tributaria/2026/Novembro/Dia%2013-11-2026",
+     "declaracoes": [
+      {
+       "quem": "PJ",
+       "nome": "DCP – Demonstrativo do Crédito Presumido",
+       "periodo": "3º trimestre/2026",
+       "base": "Instrução Normativa RFB nº 419/2004",
+       "baseLink": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/15320"
+      }
+     ],
+     "pagamentos": [
+      {
+       "codigo": "8053",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Títulos de renda fixa - Pessoa Física",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 9.779/99 Art. 5º"
+      },
+      {
+       "codigo": "3426",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Títulos de renda fixa - Pessoa Jurídica",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 9.779/99 Art. 5º"
+      },
+      {
+       "codigo": "6800",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Fundo de Investimento sujeito à tributação periódica",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 14.754/23 Art. 17"
+      },
+      {
+       "codigo": "6813",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Fundo de Investimento em Ações",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 14.754/23 Art. 17"
+      },
+      {
+       "codigo": "5273",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Operações de swap",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 8.981/95 Art. 74"
+      },
+      {
+       "codigo": "8468",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Day-Trade - Operações em Bolsas",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 9.959/00 Art. 8º"
+      },
+      {
+       "codigo": "5557",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Ganhos líquidos em operações em bolsas e assemelhados",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 11.033/04 Art. 2º"
+      },
+      {
+       "codigo": "5706",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Juros remuneratórios do capital próprio",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 9.249/95 Art. 9º"
+      },
+      {
+       "codigo": "5232",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Fundos de Investimento Imobiliário (FII) e Fundos de Investimento nas Cadeias Produtivas do Agronegócio (Fiagro) - Resgate ou amortização de cotas ou distribuição de rendimentos",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 8.668/03 Art. 17"
+      },
+      {
+       "codigo": "0924",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Demais rendimentos de capital",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 8.313/91 Art. 16"
+      },
+      {
+       "codigo": "3699",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Aplicações financeiras em ativos de infraestrutura - Tributação Exclusiva",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 11.478/07 Art. 2º"
+      },
+      {
+       "codigo": "5029",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Ganho de Capital - Integralização de Cotas com Ativos",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 13.043/14 Art. 1º"
+      },
+      {
+       "codigo": "5035",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Fundos de Investimento",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 13.043/14 Art. 8º"
+      },
+      {
+       "codigo": "1605",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Fundo de Investimento em Participações (FIP), Fundo de Investimento em Índice de Mercado (Exchange Traded Fund - ETF), Fundo de Investimento em Direitos Creditórios (FIDC) e Fundo Multimercado (FIM)",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 14.754/23 Art. 24"
+      },
+      {
+       "codigo": "5286",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Residentes ou Domiciliados no Exterior - Aplicações Financeiras",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 8.383/91 Art. 29"
+      },
+      {
+       "codigo": "9453",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Residentes ou Domiciliados no Exterior - Juros remuneratórios de capital próprio",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Decreto-Lei nº 5.844/43 Art. 97"
+      },
+      {
+       "codigo": "0916",
+       "grupo": "IRRF",
+       "descricao": "Outros Rendimentos - Prêmios obtidos em concursos e sorteios",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Decreto-Lei nº 5.844/43 Art. 96"
+      },
+      {
+       "codigo": "8673",
+       "grupo": "IRRF",
+       "descricao": "Outros Rendimentos - Prêmios obtidos em bingos",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Decreto-Lei nº 5.844/43 Art. 96"
+      },
+      {
+       "codigo": "9385",
+       "grupo": "IRRF",
+       "descricao": "Outros Rendimentos - Multas e vantagens",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 9.430/96 Art. 70"
+      },
+      {
+       "codigo": "1150",
+       "grupo": "IOF",
+       "descricao": "Operações de Crédito - Pessoa Jurídica",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 5.143/66 Art. 1º"
+      },
+      {
+       "codigo": "7893",
+       "grupo": "IOF",
+       "descricao": "Operações de Crédito - Pessoa Física",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 5.143/66 Art. 1º"
+      },
+      {
+       "codigo": "4290",
+       "grupo": "IOF",
+       "descricao": "Operações de Câmbio - Entrada de moeda",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 8.894/94 Art. 6º"
+      },
+      {
+       "codigo": "5220",
+       "grupo": "IOF",
+       "descricao": "Operações de Câmbio - Saída de moeda",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 8.894/94 Art. 6º"
+      },
+      {
+       "codigo": "6854",
+       "grupo": "IOF",
+       "descricao": "Aplicações Financeiras",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 8.033/90 Art. 1º"
+      },
+      {
+       "codigo": "6895",
+       "grupo": "IOF",
+       "descricao": "Factoring",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 9.532/97 Art. 58"
+      },
+      {
+       "codigo": "3467",
+       "grupo": "IOF",
+       "descricao": "Seguros",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 5.143/66 Art. 1º"
+      },
+      {
+       "codigo": "4028",
+       "grupo": "IOF",
+       "descricao": "Ouro, Ativo Financeiro",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 7.766/89 Art. 4º"
+      },
+      {
+       "codigo": "1150",
+       "grupo": "IOF",
+       "descricao": "Operações de Crédito - Pessoa Jurídica",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 5.143/66 Art. 1º"
+      },
+      {
+       "codigo": "7893",
+       "grupo": "IOF",
+       "descricao": "Operações de Crédito - Pessoa Física",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 5.143/66 Art. 1º"
+      },
+      {
+       "codigo": "3770",
+       "grupo": "PIS/Pasep",
+       "descricao": "Retenção - Aquisição de autopeças",
+       "periodo": "2ª quinzena mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 10.485/02 Art.3º"
+      },
+      {
+       "codigo": "3746",
+       "grupo": "Cofins",
+       "descricao": "Retenção - Aquisição de autopeças",
+       "periodo": "2ª quinzena mês anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 10.485/02 Art.3º"
+      },
+      {
+       "codigo": "8741",
+       "grupo": "Cide - Remessas ao Exterior",
+       "descricao": "Contribuição de Intervenção no Domínio Econômico incidente sobre a remessa de importâncias ao exterior",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.168/00 Art. 2º"
+      },
+      {
+       "codigo": "9331",
+       "grupo": "Cide - Combustíveis",
+       "descricao": "Contribuição de Intervenção no Domínio Econômico incidente sobre a comercialização de petróleo e seus derivados, gás natural, exceto sob a forma liquefeita, e seus derivados, e álcool etílico combustível.",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.336/01 Art. 1º"
+      }
+     ]
+    },
+    {
+     "data": "2026-11-16",
+     "url": "https://www.gov.br/receitafederal/pt-br/assuntos/agenda-tributaria/2026/Novembro/dia-16-11-2026",
+     "declaracoes": [
+      {
+       "quem": "PJ",
+       "nome": "EFD-Contribuições – Escrituração Fiscal Digital das Contribuições incidentes sobre a Receita",
+       "periodo": "Setembro/2026",
+       "base": "Instrução Normativa RFB nº 1.252/2012",
+       "baseLink": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/37466/visao/multivigente"
+      },
+      {
+       "quem": "PJ/PF",
+       "nome": "EFD-Reinf – Escrituração Fiscal Digital de Retenções e Outras informações Fiscais",
+       "periodo": "Outubro/2026",
+       "base": "Instrução Normativa RFB nº 2.043/2021",
+       "baseLink": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/119859"
+      }
+     ],
+     "pagamentos": [
+      {
+       "codigo": "1661",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Servidor Civil Ativo",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 4º"
+      },
+      {
+       "codigo": "1700",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Servidor Civil Inativo",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 4º"
+      },
+      {
+       "codigo": "1717",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Pensionista Civil",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 4º"
+      },
+      {
+       "codigo": "1769",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Patronal - Servidor Civil Ativo - Operação Intra-Orçamentária",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 8º"
+      },
+      {
+       "codigo": "1814",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Patronal - Servidor no Exterior - Operação Intra-Orçamentária",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 8º"
+      },
+      {
+       "codigo": "1723",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Servidor Civil Ativo - Precatório Judicial e Requisição de Pequeno Valor",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 4º"
+      },
+      {
+       "codigo": "1730",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Servidor Civil Inativo - Precatório Judicial e Requisição de Pequeno Valor",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 5º"
+      },
+      {
+       "codigo": "1752",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Pensionista - Precatório Judicial e Requisição de Pequeno Valor",
+       "periodo": "1º decêndio mês atual (10/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 5º"
+      },
+      {
+       "codigo": "1007",
+       "grupo": "Contribuição Previdenciária",
+       "descricao": "Contribuinte Individual - recolhimento mensal NIT/PIS/Pasep",
+       "periodo": "Mês Anterior (10/2026)",
+       "documento": "GPS",
+       "categoria": "-- / --",
+       "base": "Lei nº 8.212/91 Art. 21"
+      },
+      {
+       "codigo": "1120",
+       "grupo": "Contribuição Previdenciária",
+       "descricao": "Contribuinte Individual - recolhimento mensal - com dedução de 45% (Lei nº 9.876/99) - NIT/PIS/Pasep",
+       "periodo": "Mês Anterior (10/2026)",
+       "documento": "GPS",
+       "categoria": "-- / --",
+       "base": "Lei nº 8.212/91 Art. 21"
+      },
+      {
+       "codigo": "1163",
+       "grupo": "Contribuição Previdenciária",
+       "descricao": "Contribuinte Individual - Opção: aposentadoria apenas por idade - recolhimento Mensal - NIT/PIS/Pasep",
+       "periodo": "Mês Anterior (10/2026)",
+       "documento": "GPS",
+       "categoria": "-- / --",
+       "base": "Lei nº 8.212/91 Art. 21"
+      },
+      {
+       "codigo": "1406",
+       "grupo": "Contribuição Previdenciária",
+       "descricao": "Segurado Facultativo - recolhimento mensal - NIT/PIS/Pasep",
+       "periodo": "Mês Anterior (10/2026)",
+       "documento": "GPS",
+       "categoria": "-- / --",
+       "base": "Lei nº 8.212/91 Art. 21"
+      },
+      {
+       "codigo": "1473",
+       "grupo": "Contribuição Previdenciária",
+       "descricao": "Facultativo - Opção: aposentadoria apenas por idade - recolhimento mensal - NIT/PIS/Pasep",
+       "periodo": "Mês Anterior (10/2026)",
+       "documento": "GPS",
+       "categoria": "-- / --",
+       "base": "Lei nº 8.212/91 Art. 21"
+      },
+      {
+       "codigo": "1503",
+       "grupo": "Contribuição Previdenciária",
+       "descricao": "Segurado Especial - recolhimento mensal - NIT/PIS/Pasep",
+       "periodo": "Mês Anterior (10/2026)",
+       "documento": "GPS",
+       "categoria": "-- / --",
+       "base": "Lei nº 8.212/91 Art. 21"
+      },
+      {
+       "codigo": "1830",
+       "grupo": "Contribuição Previdenciária",
+       "descricao": "Facultativo Baixa Renda - recolhimento mensal - Complemento para Plano Simplificado da Previdência Social - PSPS - Lei nº 12.470/2011",
+       "periodo": "Mês Anterior (10/2026)",
+       "documento": "GPS",
+       "categoria": "-- / --",
+       "base": "Lei nº 8.212/91 Art. 21"
+      },
+      {
+       "codigo": "1910",
+       "grupo": "Contribuição Previdenciária",
+       "descricao": "MEI - Complementação Mensal",
+       "periodo": "Mês Anterior (10/2026)",
+       "documento": "GPS",
+       "categoria": "-- / --",
+       "base": "Lei nº 8.212/91 Art. 21"
+      },
+      {
+       "codigo": "1929",
+       "grupo": "Contribuição Previdenciária",
+       "descricao": "Facultativo Baixa Renda - recolhimento mensal - NIT/PIS/Pasep",
+       "periodo": "Mês Anterior (10/2026)",
+       "documento": "GPS",
+       "categoria": "-- / --",
+       "base": "Lei nº 8.212/91 Art. 21"
+      },
+      {
+       "codigo": "1945",
+       "grupo": "Contribuição Previdenciária",
+       "descricao": "Facultativo Baixa Renda - recolhimento mensal - Complemento",
+       "periodo": "Mês Anterior (10/2026)",
+       "documento": "GPS",
+       "categoria": "-- / --",
+       "base": "Lei nº 8.212/91 Art. 21"
+      }
+     ]
+    },
+    {
+     "data": "2026-11-19",
+     "url": "https://www.gov.br/receitafederal/pt-br/assuntos/agenda-tributaria/2026/Novembro/dia-19-11-2026",
+     "declaracoes": [],
+     "pagamentos": [
+      {
+       "codigo": "--",
+       "grupo": "Simples Doméstico",
+       "descricao": "Regime unificado de pagamento de tributos, de contribuições e dos demais encargos do empregador doméstico",
+       "periodo": "Mês Anterior (10/2026)",
+       "documento": "DAE",
+       "categoria": "DCTFWeb Geral Mensal / eSocial",
+       "base": ""
+      },
+      {
+       "codigo": "4574",
+       "grupo": "PIS/Pasep",
+       "descricao": "Entidades financeiras e equiparadas",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei Complementar nº 7/70 Art. 1º"
+      },
+      {
+       "codigo": "3208",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Aluguéis e royalties pagos a pessoa física",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 7.713/88 Art. 7º"
+      },
+      {
+       "codigo": "3277",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Rendimentos de partes beneficiárias ou de fundador",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Decreto-Lei nº 5.844/43 Art. 96"
+      },
+      {
+       "codigo": "3223",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Resgate Previdência Complementar/Modalidade Contribuição Definida/Variável - Não Optante Tributação Exclusiva",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 7.713/88 Art. 31"
+      },
+      {
+       "codigo": "3556",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Resgate Previdência Complementar/Modalidade Benefício Definido - Não Optante Tributação Exclusiva",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 4.506/64 Art. 16"
+      },
+      {
+       "codigo": "3579",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Resgate Previdência Complementar - Optante Tributação Exclusiva",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 11.053/04 Art. 1º"
+      },
+      {
+       "codigo": "3540",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Benefício Previdência Complementar - Não Optante Tributação Exclusiva",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 4.506/64 Art. 16"
+      },
+      {
+       "codigo": "5565",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Benefício Previdência Complementar - Optante Tributação Exclusiva",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 11.053/04 Art. 1º"
+      },
+      {
+       "codigo": "0561",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos do Trabalho - Trabalho assalariado (exceto Trabalhador Doméstico)",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / eSocial",
+       "base": "Lei nº 7.713/88 Art. 7º"
+      },
+      {
+       "codigo": "0588",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos do Trabalho - Trabalho sem vínculo empregatício",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / eSocial",
+       "base": "Lei nº 7.713/88 Art. 7º"
+      },
+      {
+       "codigo": "3533",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos do Trabalho - Aposentadoria Regime Geral ou do Servidor Público",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / eSocial",
+       "base": "Lei nº 4.506/64 Art. 16"
+      },
+      {
+       "codigo": "3562",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos do Trabalho - Participação nos Lucros ou Resultados - PLR",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / eSocial",
+       "base": "Lei nº 10.101/00 Art. 3º"
+      },
+      {
+       "codigo": "5936",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos do Trabalho - Rendimentos decorrentes de decisão da Justiça do Trabalho, exceto o disposto no art. 12-A da Lei nº 7.713, de 1988",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 8.8541/92 Art 46"
+      },
+      {
+       "codigo": "1889",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos do Trabalho - Rendimentos Acumulados",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / eSocial",
+       "base": "Lei nº 7.713/88 Art. 12-A"
+      },
+      {
+       "codigo": "1708",
+       "grupo": "IRRF",
+       "descricao": "Outros Rendimentos - Remuneração de serviços prestados por pessoa jurídica",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Decreto-Lei nº 2.462/88 Art. 3º"
+      },
+      {
+       "codigo": "5944",
+       "grupo": "IRRF",
+       "descricao": "Outros Rendimentos - Pagamentos de PJ a PJ por serviços de factoring",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Decreto-Lei nº 2.030/83 Art. 2º"
+      },
+      {
+       "codigo": "3280",
+       "grupo": "IRRF",
+       "descricao": "Outros Rendimentos - Pagamento PJ a cooperativa de trabalho",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 8.541/92 Art. 45"
+      },
+      {
+       "codigo": "5204",
+       "grupo": "IRRF",
+       "descricao": "Outros Rendimentos - Juros e indenizações de lucros cessantes",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 8.981/95 Art. 60"
+      },
+      {
+       "codigo": "6891",
+       "grupo": "IRRF",
+       "descricao": "Outros Rendimentos - Vida Gerador de Benefício Livre (VGBL)",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 7.713/88 Art. 7º"
+      },
+      {
+       "codigo": "6904",
+       "grupo": "IRRF",
+       "descricao": "Outros Rendimentos - Indenização por danos morais",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 7.713/88 Art. 7º"
+      },
+      {
+       "codigo": "5928",
+       "grupo": "IRRF",
+       "descricao": "Outros Rendimentos - Rendimentos decorrentes de decisão da Justiça Federal, exceto o disposto no art. 12-A da Lei nº 7.713, de 1988",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 10.833/03 Art. 27"
+      },
+      {
+       "codigo": "1895",
+       "grupo": "IRRF",
+       "descricao": "Outros Rendimentos - Rendimentos decorrentes de decisão da Justiça dos Estados/Distrito Federal, exceto o disposto no art. 12-A da Lei nº 7.713, de 1988",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 7.713/88 Art. 12º-B"
+      },
+      {
+       "codigo": "8045",
+       "grupo": "IRRF",
+       "descricao": "Outros Rendimentos - Demais rendimentos",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 7.450/85 Art. 53"
+      },
+      {
+       "codigo": "1841",
+       "grupo": "IRRF",
+       "descricao": "Lucros ou Dividendos - residentes no país",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 9.249/95 Art. 10 § 4º"
+      },
+      {
+       "codigo": "5952",
+       "grupo": "CSRF",
+       "descricao": "Retenção de contribuições - pagamentos de PJ a PJ de direito privado (Cofins, PIS/Pasep, CSLL)",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 10.833/03 Art. 30"
+      },
+      {
+       "codigo": "5979",
+       "grupo": "CSRF",
+       "descricao": "Retenção PIS/Pasep - pagamentos de PJ a PJ de direito privado",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 10.833/03 Art. 30"
+      },
+      {
+       "codigo": "5960",
+       "grupo": "CSRF",
+       "descricao": "Retenção Cofins - pagamentos de PJ a PJ de direito privado",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 10.833/03 Art. 30"
+      },
+      {
+       "codigo": "5987",
+       "grupo": "CSRF",
+       "descricao": "Retenção CSLL - pagamentos de PJ a PJ de direito privado",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 10.833/03 Art. 30"
+      },
+      {
+       "codigo": "2985",
+       "grupo": "Contribuição Previdenciária",
+       "descricao": "Contribuição Previdenciária Sobre Receita Bruta",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf CP",
+       "base": "Lei nº 12.546/11 Art. 7º"
+      },
+      {
+       "codigo": "2991",
+       "grupo": "Contribuição Previdenciária",
+       "descricao": "Contribuição Previdenciária Sobre Receita Bruta",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf CP",
+       "base": "Lei nº 12.546/11 Art. 8º"
+      },
+      {
+       "codigo": "7987",
+       "grupo": "Cofins",
+       "descricao": "Entidades financeiras e equiparadas",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei Complementar nº 70/91 Art. 1º"
+      },
+      {
+       "codigo": "0039",
+       "grupo": "IRRF",
+       "descricao": "Remuneração Serviços Prestados por Pessoa Jurídica - Operações Intra Orçamentárias",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Decreto-Lei nº 2.030/83 Art. 2º"
+      },
+      {
+       "codigo": "0067",
+       "grupo": "CSRF",
+       "descricao": "Produtos - Retenção em Pagamentos por Órgãos Públicos - Operações Intra Orçamentárias",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 10.833/03 Art. 34 Inc III"
+      },
+      {
+       "codigo": "0070",
+       "grupo": "CSRF",
+       "descricao": "Transporte de Passageiros - Retenção em Pagamentos por Órgãos Públicos - Operações Intra Orçamentárias",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 10.833/03 Art. 34 Inc III"
+      },
+      {
+       "codigo": "0082",
+       "grupo": "CSRF",
+       "descricao": "Financeiras - Retenção em Pagamentos por Órgãos Públicos - Operações Intra Orçamentárias",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 10.833/03 Art. 34 Inc III"
+      },
+      {
+       "codigo": "0095",
+       "grupo": "CSRF",
+       "descricao": "Serviços - Retenção em Pagamentos por Órgãos Públicos - Operações Intra Orçamentárias",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 10.833/03 Art. 34 Inc III"
+      },
+      {
+       "codigo": "0110",
+       "grupo": "CSRF",
+       "descricao": "Medicamentos Adquiridos do Distribuidor ou Varejista - Retido por Órgão Público - Operações Intra Orçamentárias",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 10.833/03 Art. 34 Inc III"
+      },
+      {
+       "codigo": "0122",
+       "grupo": "CSRF",
+       "descricao": "Transporte Internacional de Passageiros-Empresas Nacionais - Retido por Órgão Público-Operações Intra Orçamentárias",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 10.833/03 Art. 34 Inc III"
+      },
+      {
+       "codigo": "0123",
+       "grupo": "CSRF",
+       "descricao": "Bens e serviços adquiridos de sociedades cooperativas e associações profissionais ou assemelhadas - Retido por órgão público - Operações Intra-orçamentárias",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 10.833/03 Art. 34 Inc III"
+      },
+      {
+       "codigo": "1082",
+       "grupo": "Contribuição Previdenciária",
+       "descricao": "Contribuição previdenciária descontada de segurados empregados e avulsos e de trabalhadores rurais contratados por pequeno prazo",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF/DAE",
+       "categoria": "DCTFWeb Geral Mensal / Empregador Doméstico / Segurado Especial / Aferição de Obra / Reclamatória Trabalhista / 1-eSocial / 5-Sero",
+       "base": "Lei nº 8.212/91 Art. 20"
+      },
+      {
+       "codigo": "1099",
+       "grupo": "Contribuição Previdenciária",
+       "descricao": "Contribuição Previdenciária descontada de segurados contribuintes individuais",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF/DAE",
+       "categoria": "DCTFWeb Geral Mensal / Reclamatória Trabalhista / 1-eSocial",
+       "base": "Lei nº 8.212/91 Art. 21"
+      },
+      {
+       "codigo": "1138",
+       "grupo": "Contribuição Previdenciária",
+       "descricao": "Contribuição empresa, inclusive SIMPLES concomitante, s/ remuner empregados, avulsos e contrib. individuais, MEI s/ remuner empregado, empregador doméstico s/sal contrib doméstico.",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF/DAE",
+       "categoria": "DCTFWeb Geral Mensal / Empregador Doméstico / Aferição de Obra / Reclamatória Trabalhista / 1-eSocial / 5-Sero",
+       "base": "Lei nº 8.212/91 Art. 22"
+      }
+     ]
+    },
+    {
+     "data": "2026-11-20",
+     "url": "https://www.gov.br/receitafederal/pt-br/assuntos/agenda-tributaria/2026/Novembro/dia-20-11-2026",
+     "declaracoes": [
+      {
+       "quem": "PJ",
+       "nome": "Dirbi – Declaração de Incentivos, Renúncias, Benefícios e Imunidades de Natureza Tributária",
+       "periodo": "Setembro/2026",
+       "base": "Instrução Normativa RFB nº 2.198/2024",
+       "baseLink": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/114290/visao/multivigente"
+      }
+     ],
+     "pagamentos": []
+    },
+    {
+     "data": "2026-11-23",
+     "url": "https://www.gov.br/receitafederal/pt-br/assuntos/agenda-tributaria/2026/Novembro/dia-23-11-2026",
+     "declaracoes": [
+      {
+       "quem": "PJ",
+       "nome": "PGDAS-D – Programa Gerador do Documento de Arrecadação do Simples Nacional",
+       "periodo": "Outubro/2026",
+       "base": "Resolução CGSN nº 140/2018",
+       "baseLink": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/92278"
+      }
+     ],
+     "pagamentos": [
+      {
+       "codigo": "--",
+       "grupo": "Simples Nacional",
+       "descricao": "Regime Especial Unificado de Arrecadação de Tributos e Contribuições devidos pelas Microempresas e Empresas de Pequeno Porte.",
+       "periodo": "Mês Anterior (10/2026)",
+       "documento": "DAS",
+       "categoria": "PGDAS-D /",
+       "base": "Lei Complementar nº 123/06"
+      },
+      {
+       "codigo": "6177",
+       "grupo": "RET",
+       "descricao": "Pagamento Unificado - Regime de Tributação Específica do Futebol (TEF)",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 14.193/21 Art. 31"
+      },
+      {
+       "codigo": "4095",
+       "grupo": "RET",
+       "descricao": "Pagamento Unificado - Ret Aplicável às Incorporações Imobiliárias (IRPJ, CSLL, PIS/Pasep, Cofins)",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.931/04 Art. 1º"
+      },
+      {
+       "codigo": "1068",
+       "grupo": "RET",
+       "descricao": "Pagamento Unificado - Regime Especial Aplicável às Incorporações Imobiliárias e às Construções, ambas no âmbito do PMCMV e à Construção ou Reforma de Creches e Pré-Escolas (IRPJ, CSLL, PIS/Pasep, Cofins)",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.931/04 Art. 4º"
+      },
+      {
+       "codigo": "4112",
+       "grupo": "RET",
+       "descricao": "Regime Especial de Tributação Aplicável às Incorporações Imobiliárias e às Construções (IRPJ)",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.931/04 Art. 1º"
+      },
+      {
+       "codigo": "4153",
+       "grupo": "RET",
+       "descricao": "Regime Especial de Tributação Aplicável às Incorporações Imobiliárias e às Construções (CSLL)",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.931/04 Art. 1º"
+      },
+      {
+       "codigo": "4138",
+       "grupo": "RET",
+       "descricao": "Regime Especial de Tributação Aplicável às Incorporações Imobiliárias e às Construções (PIS/Pasep)",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.931/04 Art. 1º"
+      },
+      {
+       "codigo": "4166",
+       "grupo": "RET",
+       "descricao": "Regime Especial de Tributação Aplicável às Incorporações Imobiliárias e às Construções (Cofins)",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.931/04 Art. 1º"
+      }
+     ]
+    },
+    {
+     "data": "2026-11-25",
+     "url": "https://www.gov.br/receitafederal/pt-br/assuntos/agenda-tributaria/2026/Novembro/dia-25-11-2026",
+     "declaracoes": [],
+     "pagamentos": [
+      {
+       "codigo": "1150",
+       "grupo": "IOF",
+       "descricao": "Operações de Crédito - Pessoa Jurídica",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 5.143/66 Art. 1º"
+      },
+      {
+       "codigo": "7893",
+       "grupo": "IOF",
+       "descricao": "Operações de Crédito - Pessoa Física",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 5.143/66 Art. 1º"
+      },
+      {
+       "codigo": "4290",
+       "grupo": "IOF",
+       "descricao": "Operações de Câmbio - Entrada de moeda",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 8.894/94 Art. 6º"
+      },
+      {
+       "codigo": "5220",
+       "grupo": "IOF",
+       "descricao": "Operações de Câmbio - Saída de moeda",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 8.894/94 Art. 6º"
+      },
+      {
+       "codigo": "6854",
+       "grupo": "IOF",
+       "descricao": "Aplicações Financeiras",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 8.033/90 Art. 1º"
+      },
+      {
+       "codigo": "6895",
+       "grupo": "IOF",
+       "descricao": "Factoring",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 9.532/97 Art. 58"
+      },
+      {
+       "codigo": "3467",
+       "grupo": "IOF",
+       "descricao": "Seguros",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 5.143/66 Art. 1º"
+      },
+      {
+       "codigo": "4028",
+       "grupo": "IOF",
+       "descricao": "Ouro, Ativo Financeiro",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 7.766/89 Art. 4º"
+      },
+      {
+       "codigo": "8053",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Títulos de renda fixa - Pessoa Física",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 9.779/99 Art. 5º"
+      },
+      {
+       "codigo": "3426",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Títulos de renda fixa - Pessoa Jurídica",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 9.779/99 Art. 5º"
+      },
+      {
+       "codigo": "6800",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Fundo de Investimento sujeito à tributação periódica",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 14.754/23 Art. 17"
+      },
+      {
+       "codigo": "6813",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Fundo de Investimento em Ações",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 14.754/23 Art. 17"
+      },
+      {
+       "codigo": "5273",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Operações de swap",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 8.981/95 Art. 74"
+      },
+      {
+       "codigo": "8468",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Day-Trade - Operações em Bolsas",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 9.959/00 Art. 8º"
+      },
+      {
+       "codigo": "5557",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Ganhos líquidos em operações em bolsas e assemelhados",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 11.033/04 Art. 2º"
+      },
+      {
+       "codigo": "5706",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Juros remuneratórios do capital próprio",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 9.239/95 Art. 9º"
+      },
+      {
+       "codigo": "5232",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Fundos de Investimento Imobiliário (FII) e Fundos de Investimento nas Cadeias Produtivas do Agronegócio (Fiagro) - Resgate ou amortização de cotas ou distribuição de rendimentos",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 8.668/03 Art. 17"
+      },
+      {
+       "codigo": "0924",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Demais rendimentos de capital",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 8.313/91 Art. 16"
+      },
+      {
+       "codigo": "3699",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Aplicações financeiras em ativos de infraestrutura - Tributação Exclusiva",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 11.478/07 Art. 2º"
+      },
+      {
+       "codigo": "5029",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Ganho de Capital - Integralização de Cotas com Ativos",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 13.043/14 Art. 1º"
+      },
+      {
+       "codigo": "5035",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Fundos de Investimento",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 13.043/14 Art. 8º"
+      },
+      {
+       "codigo": "1605",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Capital - Fundo de Investimento em Participações (FIP), Fundo de Investimento em Índice de Mercado (Exchange Traded Fund - ETF), Fundo de Investimento em Direitos Creditórios (FIDC) e Fundo Multimercado (FIM)",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 14.754/23 Art. 24"
+      },
+      {
+       "codigo": "5286",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Residentes ou Domiciliados no Exterior - Aplicações Financeiras",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 8.383/91 Art. 29"
+      },
+      {
+       "codigo": "9453",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de Residentes ou Domiciliados no Exterior - Juros remuneratórios de capital próprio",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Decreto-Lei nº 5.844/43 Art. 97"
+      },
+      {
+       "codigo": "0916",
+       "grupo": "IRRF",
+       "descricao": "Outros Rendimentos - Prêmios obtidos em concursos e sorteios",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Decreto-Lei nº 5.844/43 Art. 96"
+      },
+      {
+       "codigo": "8673",
+       "grupo": "IRRF",
+       "descricao": "Outros Rendimentos - Prêmios obtidos em bingos",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Decreto-Lei nº 5.844/43 Art. 96"
+      },
+      {
+       "codigo": "9385",
+       "grupo": "IRRF",
+       "descricao": "Outros Rendimentos - Multas e vantagens",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 9.430/96 Art. 70"
+      },
+      {
+       "codigo": "8109",
+       "grupo": "PIS/Pasep",
+       "descricao": "Faturamento",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 9.718/98 Art. 2º"
+      },
+      {
+       "codigo": "8301",
+       "grupo": "PIS/Pasep",
+       "descricao": "Folha de salários",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / eSocial",
+       "base": "MP nº 2.158-35/01 Art. 13"
+      },
+      {
+       "codigo": "3703",
+       "grupo": "PIS/Pasep",
+       "descricao": "Pessoa jurídica de direito público",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei Complementar nº 8/70 Art. 1º"
+      },
+      {
+       "codigo": "8496",
+       "grupo": "PIS/Pasep",
+       "descricao": "Fabricantes/Importadores de veículos em substituição tributária",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.485/02 Art. 1º"
+      },
+      {
+       "codigo": "6824",
+       "grupo": "PIS/Pasep",
+       "descricao": "Combustíveis",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 9.718/98 Art. 4º"
+      },
+      {
+       "codigo": "6912",
+       "grupo": "PIS/Pasep",
+       "descricao": "Não-cumulativa",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.637/02 Art. 1º"
+      },
+      {
+       "codigo": "1921",
+       "grupo": "PIS/Pasep",
+       "descricao": "Vendas à Zona Franca de Manaus (ZFM) - Substituição Tributária",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 11.196/05 Art. 64"
+      },
+      {
+       "codigo": "0679",
+       "grupo": "PIS/Pasep",
+       "descricao": "Cervejas - Tributação de Bebidas Frias",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 13.097/15 Art. 24"
+      },
+      {
+       "codigo": "0691",
+       "grupo": "PIS/Pasep",
+       "descricao": "Demais bebidas - Tributação de Bebidas Frias",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 13.097/15 Art. 24"
+      },
+      {
+       "codigo": "0906",
+       "grupo": "PIS/Pasep",
+       "descricao": "Álcool - Regime Especial de Apuração e Pagamento",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 9.718/98 Art. 5º"
+      },
+      {
+       "codigo": "0676",
+       "grupo": "IPI",
+       "descricao": "Automóveis",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 4.502/64 Art. 1º"
+      },
+      {
+       "codigo": "1097",
+       "grupo": "IPI",
+       "descricao": "Máquinas, Aparelhos e Material de Transporte",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 4.502/64 Art. 1º"
+      },
+      {
+       "codigo": "5110",
+       "grupo": "IPI",
+       "descricao": "Tabaco e seus Sucedâneos Manufaturados, Exceto Cigarros Contendo Tabaco",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 4.502/64 Art. 1º"
+      },
+      {
+       "codigo": "5123",
+       "grupo": "IPI",
+       "descricao": "Todos os produtos, com exceção de: bebidas (Capítulo 22), Tabaco e seus Sucedâneos Manufaturados (Capítulo 24) e os das posições 84.29, 84.32, 84.33, 87.01 a 87.06 e 87.11 da Tipi",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 4.502/64 Art. 1º"
+      },
+      {
+       "codigo": "0668",
+       "grupo": "IPI",
+       "descricao": "Bebidas do capítulo 22 da Tipi",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 4.502/64 Art. 1º"
+      },
+      {
+       "codigo": "0821",
+       "grupo": "IPI",
+       "descricao": "Cervejas - Tributação de Bebidas Frias",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 13.097/15 Art. 15"
+      },
+      {
+       "codigo": "0838",
+       "grupo": "IPI",
+       "descricao": "Demais bebidas - Tributação de Bebidas Frias",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 13.097/15 Art. 15"
+      },
+      {
+       "codigo": "2172",
+       "grupo": "Cofins",
+       "descricao": "Demais Entidades",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 9.718/98 Art. 2º"
+      },
+      {
+       "codigo": "8645",
+       "grupo": "Cofins",
+       "descricao": "Fabricantes/Importadores de veículos em substituição tributária",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.485/02 Art. 1º"
+      },
+      {
+       "codigo": "6840",
+       "grupo": "Cofins",
+       "descricao": "Combustíveis",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 9.718/98 Art. 4º"
+      },
+      {
+       "codigo": "5856",
+       "grupo": "Cofins",
+       "descricao": "Não-cumulativa",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.833/03 Art. 1º"
+      },
+      {
+       "codigo": "1840",
+       "grupo": "Cofins",
+       "descricao": "Vendas à Zona Franca de Manaus (ZFM) - Substituição Tributária",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 11.196/05 Art. 64"
+      },
+      {
+       "codigo": "0760",
+       "grupo": "Cofins",
+       "descricao": "Cervejas - Tributação de Bebidas Frias",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 13.097/15 Art. 24"
+      },
+      {
+       "codigo": "0776",
+       "grupo": "Cofins",
+       "descricao": "Demais bebidas - Tributação de Bebidas Frias",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 13.097/15 Art. 24"
+      },
+      {
+       "codigo": "0929",
+       "grupo": "Cofins",
+       "descricao": "Álcool - Regime Especial de Apuração e Pagamento",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 9.718/98 Art. 5º"
+      },
+      {
+       "codigo": "1661",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Servidor Civil Ativo",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 4º"
+      },
+      {
+       "codigo": "1700",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Servidor Civil Inativo",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 4º"
+      },
+      {
+       "codigo": "1717",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Pensionista Civil",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 4º"
+      },
+      {
+       "codigo": "1769",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Patronal - Servidor Civil Ativo - Operação Intra-Orçamentária",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 8º"
+      },
+      {
+       "codigo": "1814",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Patronal - Servidor no Exterior - Operação Intra-Orçamentária",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 8º"
+      },
+      {
+       "codigo": "1723",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Servidor Civil Ativo - Precatório Judicial e Requisição de Pequeno Valor",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 4º"
+      },
+      {
+       "codigo": "1730",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Servidor Civil Inativo - Precatório Judicial e Requisição de Pequeno Valor",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 5º"
+      },
+      {
+       "codigo": "1752",
+       "grupo": "CPSS",
+       "descricao": "CPSS - Pensionista - Precatório Judicial e Requisição de Pequeno Valor",
+       "periodo": "2º decêndio mês atual (20/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 10.887/04 Art. 5º"
+      }
+     ]
+    },
+    {
+     "data": "2026-11-30",
+     "url": "https://www.gov.br/receitafederal/pt-br/assuntos/agenda-tributaria/2026/Novembro/dia-30-11-2026",
+     "declaracoes": [
+      {
+       "quem": "PJ/PF",
+       "nome": "DCTFWeb – Declaração de Débitos e Créditos Tributários Federais",
+       "periodo": "Outubro/2026",
+       "base": "Instrução Normativa RFB nº 2.237/2024",
+       "baseLink": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/119859"
+      },
+      {
+       "quem": "PJ/PF",
+       "nome": "DeCripto – Declaração de Criptoativos",
+       "periodo": "Outubro/2026",
+       "base": "Instrução Normativa RFB nº 2.291/2025",
+       "baseLink": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/147709"
+      },
+      {
+       "quem": "PJ/PF",
+       "nome": "DME – Declaração de Operações Liquidadas com Moeda em Espécie",
+       "periodo": "Outubro/2026",
+       "base": "Instrução Normativa RFB nº 1.761/2017",
+       "baseLink": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/92278"
+      },
+      {
+       "quem": "PJ/PF",
+       "nome": "DOI – Declaração sobre Operações Imobiliárias",
+       "periodo": "Outubro/2026",
+       "base": "Instrução Normativa RFB nº 2.186/2024",
+       "baseLink": "https://normasinternet2.receita.fazenda.gov.br/#/consulta/externa/141910"
+      }
+     ],
+     "pagamentos": [
+      {
+       "codigo": "3770",
+       "grupo": "PIS/Pasep",
+       "descricao": "Retenção - Aquisição de autopeças",
+       "periodo": "1ª quinzena mês atual (15/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 10.485/02 Art.3º"
+      },
+      {
+       "codigo": "3746",
+       "grupo": "Cofins",
+       "descricao": "Retenção - Aquisição de autopeças",
+       "periodo": "1ª quinzena mês atual (15/11/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 10.485/02 Art.3º"
+      },
+      {
+       "codigo": "2927",
+       "grupo": "IOF",
+       "descricao": "Contrato de Derivativos",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Decreto nº 6.306/07 Art. 32-C"
+      },
+      {
+       "codigo": "5232",
+       "grupo": "IRRF",
+       "descricao": "Fundos de investimento imobiliário - rendimentos e ganhos de capital distribuídos semestralmente",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / Reinf RET",
+       "base": "Lei nº 8.668/03 Art. 16-A"
+      },
+      {
+       "codigo": "0473",
+       "grupo": "IRRF",
+       "descricao": "Rendimentos de PJ no Exterior – Ganhos de capital de alienação de bens e direitos do ativo circulante localizados no Brasil",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / eSocial",
+       "base": "Decreto-Lei nº 5.844/43 Art. 97"
+      },
+      {
+       "codigo": "0190",
+       "grupo": "IRRF",
+       "descricao": "Recolhimento mensal (Carnê Leão)",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 7.713/88 Art. 7º"
+      },
+      {
+       "codigo": "4600",
+       "grupo": "IRRF",
+       "descricao": "Ganhos de capital na alienação de bens e direitos",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DIRPF Anual / --",
+       "base": "Lei nº 7.713/88 Art. 2º"
+      },
+      {
+       "codigo": "8523",
+       "grupo": "IRRF",
+       "descricao": "Ganhos de Capital na Alienação de Bens e Direitos Localizados no Exterior",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 7.713/88 Art. 2º"
+      },
+      {
+       "codigo": "6015",
+       "grupo": "IRRF",
+       "descricao": "Ganhos líquidos em operações em bolsa",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DIRPF Anual / --",
+       "base": "Lei nº 8.981/95 Art. 72"
+      },
+      {
+       "codigo": "6371",
+       "grupo": "IRRF",
+       "descricao": "Ganhos de Capital de Depósito em Conta Corrente, Cartão de Crédito ou Débito no Exterior",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 14.754/23 Art. 2º"
+      },
+      {
+       "codigo": "0211",
+       "grupo": "IRPF",
+       "descricao": "Imposto apurado na Declaração de Ajuste Anual (Quota)",
+       "periodo": "Ano-calendário anterior (31/12/2025)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 9.250/1995 Art. 14"
+      },
+      {
+       "codigo": "8960",
+       "grupo": "IRRF",
+       "descricao": "Ganho de capital na alienação de moeda estrangeira mantida em espécie",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 14.754/23 Art. 2º"
+      },
+      {
+       "codigo": "1897",
+       "grupo": "IRRF",
+       "descricao": "Ganho de capital na alienação de criptoativos",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 8.981/1995 Art. 21"
+      },
+      {
+       "codigo": "2469",
+       "grupo": "CSLL",
+       "descricao": "Entidades Financeiras - Estimativa Mensal",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 7.689/88 Art. 1º"
+      },
+      {
+       "codigo": "2484",
+       "grupo": "CSLL",
+       "descricao": "Demais Entidades - Estimativa Mensal",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 7.689/88 Art. 1º"
+      },
+      {
+       "codigo": "2030",
+       "grupo": "CSLL",
+       "descricao": "Entidades Financeiras - Balanço Trimestral (Quota)",
+       "periodo": "Trimestre anterior (30/09/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 7.689/88 Art. 1º"
+      },
+      {
+       "codigo": "6012",
+       "grupo": "CSLL",
+       "descricao": "Demais Entidades - Balanço Trimestral (Quota)",
+       "periodo": "Trimestre anterior (30/09/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 7.689/88 Art. 1º"
+      },
+      {
+       "codigo": "2372",
+       "grupo": "CSLL",
+       "descricao": "Lucro Presumido ou Arbitrado (Quota)",
+       "periodo": "Trimestre anterior (30/09/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 7.689/88 Art. 1º"
+      },
+      {
+       "codigo": "2319",
+       "grupo": "IRPJ",
+       "descricao": "Entidades Financeiras - Estimativa Mensal",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Decreto-Lei nº 5.844/43 Art. 27"
+      },
+      {
+       "codigo": "2362",
+       "grupo": "IRPJ",
+       "descricao": "Demais Entidades - Estimativa Mensal",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Decreto-Lei nº 5.844/43 Art. 27"
+      },
+      {
+       "codigo": "5993",
+       "grupo": "IRPJ",
+       "descricao": "Optantes pelo Lucro Real - Estimativa Mensal",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Decreto-Lei nº 5.844/43 Art. 27"
+      },
+      {
+       "codigo": "3317",
+       "grupo": "IRPJ",
+       "descricao": "IRPJ - Ganhos Líquidos em Operações na Bolsa - Lucro Real",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 7.799/89 Art. 55"
+      },
+      {
+       "codigo": "0231",
+       "grupo": "IRPJ",
+       "descricao": "IRPJ - Ganhos Líquidos em Operações na Bolsa - Lucro Presumido ou Arbitrado",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei nº 7.799/89 Art. 55"
+      },
+      {
+       "codigo": "0507",
+       "grupo": "IRPJ",
+       "descricao": "Ganho de Capital - Alienação de Ativos de ME/EPP optantes pelo Simples Nacional",
+       "periodo": "Mês Anterior (31/10/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Lei Complementar nº 123/06 Art. 13"
+      },
+      {
+       "codigo": "1599",
+       "grupo": "IRPJ",
+       "descricao": "Entidades Financeiras - Balanço Trimestral (Quota)",
+       "periodo": "Trimestre anterior (30/09/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Decreto-Lei nº 5.844/43 Art. 27"
+      },
+      {
+       "codigo": "0220",
+       "grupo": "IRPJ",
+       "descricao": "Demais Entidades - Balanço Trimestral (Quota)",
+       "periodo": "Trimestre anterior (30/09/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Decreto-Lei nº 5.844/43 Art. 27"
+      },
+      {
+       "codigo": "3373",
+       "grupo": "IRPJ",
+       "descricao": "Optantes pelo Lucro Real - Balanço Trimestral (Quota)",
+       "periodo": "Trimestre anterior (30/09/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Decreto-Lei nº 5.844/43 Art. 27"
+      },
+      {
+       "codigo": "2089",
+       "grupo": "IRPJ",
+       "descricao": "Lucro Presumido (Quota)",
+       "periodo": "Trimestre anterior (30/09/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Decreto-Lei nº 5.844/43 Art. 27"
+      },
+      {
+       "codigo": "5625",
+       "grupo": "IRPJ",
+       "descricao": "Lucro Arbitrado (Quota)",
+       "periodo": "Trimestre anterior (30/09/2026)",
+       "documento": "DARF",
+       "categoria": "DCTFWeb Geral Mensal / MIT",
+       "base": "Decreto-Lei nº 5.844/43 Art. 79"
+      },
+      {
+       "codigo": "1070",
+       "grupo": "ITR",
+       "descricao": "Imposto apurado na Declaração do Imposto sobre a Propriedade Territorial Rural (Quota)",
+       "periodo": "Exercício (2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Instrução Normativa RFB nº 2.330/2026"
+      },
+      {
+       "codigo": "9100",
+       "grupo": "Parcelamento",
+       "descricao": "Refis - Parcelamento vinculado à receita bruta",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 9.964/00 Art. 1º"
+      },
+      {
+       "codigo": "9222",
+       "grupo": "Parcelamento",
+       "descricao": "Refis - Parcelamento alternativo",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 9.964/00 Art. 1º"
+      },
+      {
+       "codigo": "9113",
+       "grupo": "Parcelamento",
+       "descricao": "Refis - ITR/Exercícios até 1996",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 9.964/00 Art. 1º"
+      },
+      {
+       "codigo": "9126",
+       "grupo": "Parcelamento",
+       "descricao": "Refis - ITR/Exercícios a partir de 1997",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 9.964/00 Art. 1º"
+      },
+      {
+       "codigo": "7042",
+       "grupo": "Parcelamento",
+       "descricao": "Paes - Pessoa Física",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 10.684/03 Art 1º"
+      },
+      {
+       "codigo": "7093",
+       "grupo": "Parcelamento",
+       "descricao": "Paes - Microempresa",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 10.684/03 Art 1º"
+      },
+      {
+       "codigo": "7114",
+       "grupo": "Parcelamento",
+       "descricao": "Paes - Empresa de Pequeno Porte",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 10.684/03 Art 1º"
+      },
+      {
+       "codigo": "7122",
+       "grupo": "Parcelamento",
+       "descricao": "Paes - Demais Pessoas Jurídicas",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 10.684/03 Art 1º"
+      },
+      {
+       "codigo": "7288",
+       "grupo": "Parcelamento",
+       "descricao": "Paes - ITR",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 10.684/03 Art 1º"
+      },
+      {
+       "codigo": "--",
+       "grupo": "Parcelamento",
+       "descricao": "Simples Nacional - ME/EPP",
+       "periodo": "Mês Atual (11/2026)",
+       "documento": "DAS",
+       "categoria": "-- / --",
+       "base": "Lei Complementar nº 123/06 Art. 21"
+      },
+      {
+       "codigo": "--",
+       "grupo": "Parcelamento",
+       "descricao": "Simples Nacional - MEI",
+       "periodo": "Mês Atual (11/2026)",
+       "documento": "DAS",
+       "categoria": "-- / --",
+       "base": "Lei Complementar nº 123/06 Art. 21"
+      },
+      {
+       "codigo": "--",
+       "grupo": "Parcelamento",
+       "descricao": "Simples Nacional - ME/EPP - Especial",
+       "periodo": "Mês Atual (11/2026)",
+       "documento": "DAS",
+       "categoria": "-- / --",
+       "base": "Lei Complementar nº 155/16 Art. 9º"
+      },
+      {
+       "codigo": "--",
+       "grupo": "Parcelamento",
+       "descricao": "Simples Nacional - MEI - Especial",
+       "periodo": "Mês Atual (11/2026)",
+       "documento": "DAS",
+       "categoria": "-- / --",
+       "base": "Lei Complementar nº 155/16 Art. 9º"
+      },
+      {
+       "codigo": "--",
+       "grupo": "Parcelamento",
+       "descricao": "Programa Especial de Regularização Tributária das Microempresas e Empresas de Pequeno Porte optantes pelo Simples Nacional (Pert-SN)",
+       "periodo": "Mês Atual (11/2026)",
+       "documento": "DAS",
+       "categoria": "-- / --",
+       "base": "Lei Complementar nº 162/18"
+      },
+      {
+       "codigo": "--",
+       "grupo": "Parcelamento",
+       "descricao": "Programa Especial de Regularização Tributária das Microempresas e Empresas de Pequeno Porte optantes pelo Simples Nacional (Pert-SN-MEI) Microempreendedor Individual",
+       "periodo": "Mês Atual (11/2026)",
+       "documento": "DAS",
+       "categoria": "-- / --",
+       "base": "Lei Complementar nº 162/18"
+      },
+      {
+       "codigo": "1136",
+       "grupo": "Parcelamento",
+       "descricao": "PGFN - Débitos Previdenciários - Parcelamento de Dívidas Não Parceladas Anteriormente",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 11.941/09 Art. 1º"
+      },
+      {
+       "codigo": "1165",
+       "grupo": "Parcelamento",
+       "descricao": "PGFN - Débitos Previdenciários - Parcelamento de Saldo Remanescente dos Programas Refis, Paes, Paex e Parcelamentos Ordinários",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 11.941/09 Art. 3º"
+      },
+      {
+       "codigo": "1194",
+       "grupo": "Parcelamento",
+       "descricao": "PGFN - Demais Débitos - Parcelamento de Dívidas Não Parceladas Anteriormente",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 11.941/09 Art. 1º"
+      },
+      {
+       "codigo": "1204",
+       "grupo": "Parcelamento",
+       "descricao": "PGFN - Demais Débitos - Parcelamento de Saldo Remanescente dos Programas Refis, Paes, Paex e Parcelamentos Ordinários",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 11.941/09 Art. 3º"
+      },
+      {
+       "codigo": "1210",
+       "grupo": "Parcelamento",
+       "descricao": "PGFN - Parcelamento Dívida Decorrente de Aproveitamento Indevido de Créditos de IPI",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 11.941/09 Art. 2º"
+      },
+      {
+       "codigo": "1233",
+       "grupo": "Parcelamento",
+       "descricao": "RFB - Débitos Previdenciários - Parcelamento de Dívidas Não Parceladas Anteriormente",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 11.941/09 Art. 1º"
+      },
+      {
+       "codigo": "1240",
+       "grupo": "Parcelamento",
+       "descricao": "RFB - Débitos Previdenciários - Parcelamento de Saldo Remanescente dos Programas Refis, Paes, Paex e Parcelamentos Ordinários",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 11.941/09 Art. 3º"
+      },
+      {
+       "codigo": "1279",
+       "grupo": "Parcelamento",
+       "descricao": "RFB - Demais Débitos - Parcelamento de Dívidas Não Parceladas Anteriormente",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 11.941/09 Art. 1º"
+      },
+      {
+       "codigo": "1285",
+       "grupo": "Parcelamento",
+       "descricao": "RFB - Demais Débitos - Parcelamento de Saldo Remanescente dos Programas Refis, Paes, Paex e Parcelamentos Ordinários",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 11.941/09 Art. 3º"
+      },
+      {
+       "codigo": "1291",
+       "grupo": "Parcelamento",
+       "descricao": "RFB - Parcelamento Dívida Decorrente de Aproveitamento Indevido de Créditos de IPI",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 11.941/09 Art. 2º"
+      },
+      {
+       "codigo": "3780",
+       "grupo": "Parcelamento",
+       "descricao": "Reabertura Lei nº 11.941, de 2009 - PGFN - Débitos Previdenciários Parcelamento de Dívidas Não Parceladas Anteriormente - Art. 1º",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 12.865/13 Art. 17"
+      },
+      {
+       "codigo": "3796",
+       "grupo": "Parcelamento",
+       "descricao": "Reabertura Lei nº 11.941, de 2009 - PGFN - Débitos Previdenciários Parcelamento de Dívidas Não Parceladas Anteriormente - Art. 1º",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 12.865/13 Art. 17"
+      },
+      {
+       "codigo": "3835",
+       "grupo": "Parcelamento",
+       "descricao": "Reabertura Lei nº 11.941, de 2009 - PGFN - Débitos Previdenciários Parcelamento de Saldo Remanescente dos Programas Refis, Paes, Paex e Parcelamentos Ordinários - Art. 3º",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 12.865/13 Art. 17"
+      },
+      {
+       "codigo": "3841",
+       "grupo": "Parcelamento",
+       "descricao": "Reabertura Lei nº 11.941, de 2009 - PGFN - Demais Débitos - Parcelamento de Dívidas Não Parceladas Anteriormente - Art. 1º",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 12.865/13 Art. 17"
+      },
+      {
+       "codigo": "3858",
+       "grupo": "Parcelamento",
+       "descricao": "Reabertura Lei nº 11.941, de 2009 - PGFN - Demais Débitos - Parcelamento de Saldo Remanescente dos Programas Refis, Paes, Paex e Parcelamentos Ordinários - Art. 3º",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 12.865/13 Art. 17"
+      },
+      {
+       "codigo": "3870",
+       "grupo": "Parcelamento",
+       "descricao": "Reabertura Lei nº 11.941, de 2009 - PGFN - Parcelamento Dívida Decorrente de Aproveitamento Indevido de Créditos de IPI - Art. 2º",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 12.865/13 Art. 17"
+      },
+      {
+       "codigo": "3887",
+       "grupo": "Parcelamento",
+       "descricao": "Reabertura Lei nº 11.941, de 2009 - RFB - Débitos Previdenciários Parcelamento de Dívidas Não Parceladas Anteriormente - Art. 1º",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 12.865/13 Art. 17"
+      },
+      {
+       "codigo": "3926",
+       "grupo": "Parcelamento",
+       "descricao": "Reabertura Lei nº 11.941, de 2009 - RFB - Débitos Previdenciários Parcelamento de Saldo Remanescente dos Programas Refis, Paes, Paex e Parcelamentos Ordinários - Art. 3º",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 12.865/13 Art. 17"
+      },
+      {
+       "codigo": "3932",
+       "grupo": "Parcelamento",
+       "descricao": "Reabertura Lei nº 11.941, de 2009 - RFB - Demais Débitos - Parcelamento de Dívidas Não Parceladas Anteriormente - Art. 1º",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 12.865/13 Art. 17"
+      },
+      {
+       "codigo": "3955",
+       "grupo": "Parcelamento",
+       "descricao": "Reabertura Lei nº 11.941, de 2009 - RFB - Demais Débitos - Parcelamento de Saldo Remanescente dos Programas Refis, Paes, Paex e Parcelamentos Ordinários - Art. 3º",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 12.865/13 Art. 17"
+      },
+      {
+       "codigo": "4720",
+       "grupo": "Parcelamento",
+       "descricao": "PGFN - Débitos Previdenciários",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 12.996/14 Art. 2º"
+      },
+      {
+       "codigo": "4737",
+       "grupo": "Parcelamento",
+       "descricao": "PGFN - Demais Débitos",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 12.996/14 Art. 2º"
+      },
+      {
+       "codigo": "4743",
+       "grupo": "Parcelamento",
+       "descricao": "RFB - Débitos Previdenciários",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 12.996/14 Art. 2º"
+      },
+      {
+       "codigo": "4750",
+       "grupo": "Parcelamento",
+       "descricao": "RFB - Demais Débitos",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 12.996/14 Art. 2º"
+      },
+      {
+       "codigo": "4059",
+       "grupo": "Parcelamento",
+       "descricao": "RFB - Parcelamento IRPJ/CSLL",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 12.865/13 Art. 40"
+      },
+      {
+       "codigo": "4065",
+       "grupo": "Parcelamento",
+       "descricao": "PGFN - Parcelamento IRPJ/CSLL",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 12.865/13 Art. 40"
+      },
+      {
+       "codigo": "4007",
+       "grupo": "Parcelamento",
+       "descricao": "RFB - Parcelamento - PIS/Cofins - Instituições Financeiras e Cia Seguradoras",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 12.865/13 Art. 39"
+      },
+      {
+       "codigo": "4013",
+       "grupo": "Parcelamento",
+       "descricao": "PGFN - Parcelamento - PIS/Cofins - Instituições Financeiras e Cia Seguradoras",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 12.865/13 Art. 39"
+      },
+      {
+       "codigo": "4020",
+       "grupo": "Parcelamento",
+       "descricao": "RFB - Parcelamento PIS/Cofins",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 12.865/13 Art. 39 § 1º"
+      },
+      {
+       "codigo": "4042",
+       "grupo": "Parcelamento",
+       "descricao": "PGFN - Parcelamento PIS/Cofins",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "-- / --",
+       "base": "Lei nº 12.865/13 Art. 39 § 1º"
+      },
+      {
+       "codigo": "--",
+       "grupo": "Parcelamento",
+       "descricao": "Programa de Regularização Tributária - Débitos Previdenciários",
+       "periodo": "Mês Atual (11/2026)",
+       "documento": "GPS",
+       "categoria": "/",
+       "base": "MP nº 766/17 Art. 1º"
+      },
+      {
+       "codigo": "--",
+       "grupo": "Parcelamento",
+       "descricao": "Programa de Regularização Tributária - Demais Débitos",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "/",
+       "base": "MP nº 766/17 Art. 1º"
+      },
+      {
+       "codigo": "--",
+       "grupo": "Parcelamento",
+       "descricao": "Programa Especial de Regularização Tributária - Débitos Previdenciários",
+       "periodo": "Mês Atual (11/2026)",
+       "documento": "GPS",
+       "categoria": "/",
+       "base": "Lei nº 13.496/17 Art. 1º"
+      },
+      {
+       "codigo": "--",
+       "grupo": "Parcelamento",
+       "descricao": "Programa Especial de Regularização Tributária - Demais Débitos",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "/",
+       "base": "Lei nº 13.496/17 Art. 1º"
+      },
+      {
+       "codigo": "5161",
+       "grupo": "Parcelamento",
+       "descricao": "Programa de Regularização Tributária Rural (PRR)",
+       "periodo": "Mês Atual (30/11/2026)",
+       "documento": "DARF",
+       "categoria": "/",
+       "base": "Lei nº 13.606/18"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

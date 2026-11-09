@@ -701,7 +701,16 @@ const Dados = (function () {
       })
       .then(function (j) {
         saida.equipe = documentos(j);
-        avisar("pendências");
+        /* OS QUADROS DE CADA PESSOA (o modelo novo, desde 09/11/2026).
+           A regra do banco deixa o administrador LER o quadro de todo
+           mundo justamente para isto. Cada quadro traz as pendências,
+           com comentários dentro, e as duas configurações (setores e
+           clientes). Dos PDFs vai só a ficha, como nos anexos antigos. */
+        return quadros(saida.equipe);
+      })
+      .then(function (q) {
+        saida.quadros = q;
+        avisar("pendências (quadro antigo)");
         return pegar("/pendencias?pageSize=500");
       })
       .then(function (j) {
@@ -735,6 +744,62 @@ const Dados = (function () {
           .catch(function () { saida.reservadas = []; });
       })
       .then(function () { return saida; });
+
+    /* Um quadro por pessoa da equipe: todas as páginas de tarefas e
+       os dois documentos de configuração. Quem nunca abriu o quadro
+       não tem documento nenhum, e isso não é erro. */
+    function quadros(equipe) {
+      var saidaQ = [];
+      return equipe.reduce(function (fila, p) {
+        return fila.then(function () {
+          avisar("quadro de " + (p.nome || p.email || p._id));
+          var base = "/quadros/" + encodeURIComponent(p._id);
+          var tarefas = [];
+          function pagina(token) {
+            return pegar(base + "/tarefas?pageSize=300" + (token ? "&pageToken=" + encodeURIComponent(token) : ""))
+              .then(function (j) {
+                ((j && j.documents) || []).forEach(function (d) {
+                  var o = deValorQuadro(d.fields);
+                  o._id = d.name.split("/").pop();
+                  tarefas.push(o);
+                });
+                if (j && j.nextPageToken) return pagina(j.nextPageToken);
+              });
+          }
+          return pagina(null)
+            .then(function () { return pegar(base + "/config/setores"); })
+            .then(function (s) {
+              var setores = (s && s.fields && s.fields.json) ? JSON.parse(s.fields.json.stringValue) : null;
+              return pegar(base + "/config/clientes").then(function (c) {
+                var clientes = (c && c.fields && c.fields.json) ? JSON.parse(c.fields.json.stringValue) : null;
+                if (tarefas.length || setores || clientes) {
+                  saidaQ.push({ uid: p._id, nome: p.nome || "", email: p.email || "", tarefas: tarefas, setores: setores, clientes: clientes });
+                }
+              });
+            });
+        });
+      }, Promise.resolve()).then(function () { return saidaQ; });
+    }
+
+    /* O quadro grava campo a campo, com listas de mapas (comentários,
+       anexos) e números — mais do que deFirestore() sabe ler. */
+    function deValorQuadro(fields) {
+      function valor(v) {
+        if (!v) return null;
+        if ("stringValue" in v) return v.stringValue;
+        if ("booleanValue" in v) return v.booleanValue;
+        if ("integerValue" in v) return parseInt(v.integerValue, 10);
+        if ("doubleValue" in v) return v.doubleValue;
+        if ("nullValue" in v) return null;
+        if ("timestampValue" in v) return v.timestampValue;
+        if ("arrayValue" in v) return ((v.arrayValue && v.arrayValue.values) || []).map(valor);
+        if ("mapValue" in v) return deValorQuadro((v.mapValue && v.mapValue.fields) || {});
+        return null;
+      }
+      var o = {};
+      Object.keys(fields || {}).forEach(function (k) { o[k] = valor(fields[k]); });
+      return o;
+    }
 
     function subcolecoes(colecao, lista) {
       return lista.reduce(function (fila, p) {

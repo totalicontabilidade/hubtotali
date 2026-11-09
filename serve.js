@@ -11,7 +11,7 @@ const teste = process.argv.includes("--teste");
 const porta = teste ? 8124 : 8123;
 const tipos = { ".html":"text/html; charset=utf-8", ".css":"text/css; charset=utf-8",
   ".js":"application/javascript; charset=utf-8", ".png":"image/png",
-  ".webmanifest":"application/manifest+json", ".svg":"image/svg+xml" };
+  ".webmanifest":"application/manifest+json", ".svg":"image/svg+xml", ".json":"application/json; charset=utf-8" };
 http.createServer((req, res) => {
   let rel = decodeURIComponent(req.url.split("?")[0]).replace(/^\/+/, "") || "index.html";
   const arquivo = path.join(raiz, rel);

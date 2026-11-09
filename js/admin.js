@@ -2586,9 +2586,12 @@
           a.remove();
           window.setTimeout(function () { URL.revokeObjectURL(endereco); }, 30000);
 
-          var quantas = (tudo.pendencias || []).length + (tudo.reservadas || []).length;
-          onde.textContent = Math.round(texto.length / 1024) + " kB · " + quantas +
-            (quantas === 1 ? " pendência" : " pendências");
+          var nosQuadros = (tudo.quadros || []).reduce(function (n, q) { return n + (q.tarefas || []).length; }, 0);
+          var antigas = (tudo.pendencias || []).length + (tudo.reservadas || []).length;
+          onde.textContent = Math.round(texto.length / 1024) + " kB · " +
+            (tudo.quadros || []).length + (tudo.quadros && tudo.quadros.length === 1 ? " quadro, " : " quadros, ") +
+            nosQuadros + (nosQuadros === 1 ? " pendência" : " pendências") +
+            (antigas ? " · " + antigas + " do quadro antigo" : "");
           $("copia-aviso").hidden = false;
           recado("Cópia baixada: " + nome);
         })

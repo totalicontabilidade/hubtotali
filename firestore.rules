@@ -315,7 +315,82 @@ service cloud.firestore {
                            && request.resource.data.liberacoes.size() <= 20));
     }
 
-    // ---------- pendências ----------
+    // ============================================================
+    // OS QUADROS DE PENDÊNCIAS, UM POR PESSOA (desde 09/11/2026)
+    // ------------------------------------------------------------
+    // O quadro novo guarda cada pendência num documento próprio em
+    // quadros/{uid}/tarefas/{id}, e os setores e os clientes de cada
+    // pessoa em quadros/{uid}/config/{setores|clientes}. É SEU: só
+    // o dono lê e escreve o quadro inteiro.
+    //
+    // DUAS PORTAS ALÉM DO DONO, e só essas:
+    //
+    //  · O ADMINISTRADOR LÊ (não escreve). É o que permite a cópia
+    //    de segurança da administração trazer o trabalho de todo
+    //    mundo. Favorito é preferência e ninguém olha; pendência é
+    //    trabalho da casa, e a casa precisa poder guardar cópia.
+    //
+    //  · UM COLEGA (ou uma integração, que entra com conta da
+    //    equipe) pode CRIAR uma pendência no quadro de alguém,
+    //    assinando quem criou em criadoPorUid — é por aí que a
+    //    solicitação do Atos Societários chega ao quadro de quem
+    //    cuida da Legalização. Quem criou ainda pode riscá-la, ou
+    //    acrescentar comentário; mais nada. Trocar texto, prazo ou
+    //    apagar continua sendo só do dono.
+    //
+    // Os campos são validados de forma, não de conteúdo: tipo
+    // certo, tamanho com teto. Os limites impedem que uma aba
+    // enlouquecida encha o banco, não protegem contra o dono — o
+    // quadro é dele.
+    // ============================================================
+    function formaDeTarefa() {
+      let d = request.resource.data;
+      return d.texto is string && d.texto.size() <= 6000
+             && d.html is string && d.html.size() <= 24000
+             && d.status in ['hoje', 'semana', 'data', 'acompanhar']
+             && (!('prazo' in d) || d.prazo == null || (d.prazo is string && d.prazo.size() <= 10))
+             && (!('setor' in d) || d.setor == null || (d.setor is string && d.setor.size() <= 60))
+             && (!('notas' in d) || (d.notas is list && d.notas.size() <= 200))
+             && (!('anexos' in d) || (d.anexos is list && d.anexos.size() <= 30))
+             && (!('criadoPor' in d) || d.criadoPor == null || (d.criadoPor is string && d.criadoPor.size() <= 200))
+             && d.criadoPorUid is string && d.criadoPorUid.size() <= 128
+             && (!('origemId' in d) || d.origemId == null || (d.origemId is string && d.origemId.size() <= 120))
+             && (!('origemSistema' in d) || d.origemSistema == null || (d.origemSistema is string && d.origemSistema.size() <= 40));
+    }
+
+    match /quadros/{uid}/tarefas/{id} {
+      // Quem criou no quadro alheio enxerga SÓ o que criou: é o que
+      // deixa a integração conferir se a solicitação já virou
+      // pendência antes de criar outra. Para listar, a consulta
+      // precisa filtrar por criadoPorUid == o próprio uid, senão o
+      // banco recusa inteira — e é assim que o receber.gs pergunta.
+      allow read:   if daEquipe() && (meuUid(uid) || ehAdmin() || meuUid(resource.data.criadoPorUid));
+      allow create: if daEquipe()
+                    && (meuUid(uid) || meuUid(request.resource.data.criadoPorUid))
+                    && formaDeTarefa();
+      // O dono muda o que quiser; quem criou no quadro alheio só
+      // risca, desrisca e comenta — e não muda quem criou.
+      allow update: if daEquipe() && formaDeTarefa()
+                    && request.resource.data.criadoPorUid == resource.data.criadoPorUid
+                    && (meuUid(uid)
+                        || (meuUid(resource.data.criadoPorUid)
+                            && mudou().hasOnly(['feito', 'feitoEm', 'revisadoEm', 'notas'])));
+      allow delete: if daEquipe() && meuUid(uid);
+    }
+
+    match /quadros/{uid}/config/{nome} {
+      allow read:  if daEquipe() && (meuUid(uid) || ehAdmin());
+      allow write: if daEquipe() && meuUid(uid)
+                   && nome in ['setores', 'clientes']
+                   && request.resource.data.json is string
+                   && request.resource.data.json.size() <= 500000;
+    }
+
+    // ---------- pendências (QUADRO ANTIGO, do escritório) ----------
+    // As regras abaixo continuam valendo para o que já está
+    // gravado: nada se apaga, e a cópia de segurança continua
+    // conseguindo ler. A tela do Hub deixou de usar estas coleções
+    // em 09/11/2026.
 
     match /pendencias/{id} {
 

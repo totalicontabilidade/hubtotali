@@ -7,8 +7,19 @@
    coisa que um site sem servidor não tem.
 
    O CAMINHO INTEIRO, em uma frase: o Atos avisa este endereço
-   quando uma solicitação é criada ou finalizada, e aqui esse
-   aviso vira (ou fecha) uma pendência no Hub.
+   quando uma solicitação é criada, finalizada, excluída ou
+   reaberta, e aqui esse aviso vira (ou risca) uma pendência no
+   QUADRO de quem cuida da Legalização no Hub.
+
+   O QUE MUDOU EM 09/11/2026: o Hub trocou o quadro do escritório
+   por um quadro POR PESSOA (coleção quadros/{uid}/tarefas). A
+   pendência da integração passou a nascer no quadro de uma pessoa
+   escolhida — a propriedade DESTINO_UID abaixo —, assinada pelo
+   robô. Quem recebe vê a pendência no bloco "Acompanhar" (ou "Com
+   data", quando a solicitação tem prazo), com o pedido do cliente
+   dentro, e cuida dela como de qualquer outra. Quando a
+   solicitação termina no Atos, a pendência é riscada com um
+   comentário dizendo isso.
 
    POR QUE O ATOS NÃO ESCREVE DIRETO NO HUB
 
@@ -22,14 +33,19 @@
    O QUE PRECISA ESTAR CONFIGURADO (Arquivo → Propriedades do
    projeto → Propriedades do script), e por quê:
 
-     SEGREDO     a senha combinada com o Atos. Sem ela, qualquer
-                 um que descobrisse o endereço abriria pendência
-                 no Hub.
-     EMAIL       conta do robô no Hub (ex.: atos@...)
-     SENHA       senha desse robô
-     PROJETO     hubtotali
-     CHAVE       a apiKey do Hub (é pública, como no site)
-     SETOR       para onde vão as pendências (Legalização)
+     SEGREDO      a senha combinada com o Atos. Sem ela, qualquer
+                  um que descobrisse o endereço abriria pendência
+                  no Hub.
+     EMAIL        conta do robô no Hub (ex.: atos@...)
+     SENHA        senha desse robô
+     PROJETO      hubtotali
+     CHAVE        a apiKey do Hub (é pública, como no site)
+     DESTINO_UID  o uid da pessoa em cujo quadro a pendência nasce
+                  (console do Firebase → Authentication → Users →
+                  "UID do usuário" da pessoa da Legalização)
+     SETOR_ID     opcional: o id do setor no quadro dela, para a
+                  pendência já nascer colorida (ex.: "legalizacao").
+                  Sem ele, nasce "Sem setor".
 
    A SENHA DO ROBÔ FICA AQUI, e não no Atos, de propósito: aqui
    ela está no servidor do Google, dentro da conta da Totali, e
@@ -63,13 +79,14 @@ function doPost(e) {
     var evento = String(corpo.evento || "");
     var s = corpo.solicitacao || {};
     if (!s.id) return responder({ ok: false, erro: "solicitação sem identificador" });
+    if (!prop("DESTINO_UID", "")) return responder({ ok: false, erro: "falta a propriedade DESTINO_UID (o quadro de destino)" });
 
     if (evento === "solicitacao.criada")     return responder(criarPendencia(s));
-    if (evento === "solicitacao.finalizada") return responder(resolverPendencia(s, "Finalizada no Atos Societários."));
+    if (evento === "solicitacao.finalizada") return responder(riscarPendencia(s, "Finalizada no Atos Societários."));
     /* Solicitação apagada no Atos: a pendência não pode ficar aberta
-       para sempre. Resolve com a anotação do motivo — apagar de verdade
-       continua sendo decisão do administrador do Hub. */
-    if (evento === "solicitacao.excluida")   return responder(resolverPendencia(s, "A solicitação foi excluída no Atos Societários."));
+       para sempre. Risca com a anotação do motivo — apagar de verdade
+       é decisão do dono do quadro. */
+    if (evento === "solicitacao.excluida")   return responder(riscarPendencia(s, "A solicitação foi excluída no Atos Societários."));
     if (evento === "solicitacao.reaberta")   return responder(reabrirPendencia(s));
 
     /* Evento desconhecido não é erro: o Atos pode passar a mandar
@@ -83,7 +100,7 @@ function doPost(e) {
 /* O Atos pode chamar isto para conferir a configuração sem criar
    nada — vale muito no dia de ligar as duas pontas. */
 function doGet() {
-  return responder({ ok: true, servico: "recebedor do Atos no Hub" });
+  return responder({ ok: true, servico: "recebedor do Atos no Hub (quadros)" });
 }
 
 function responder(obj) {
@@ -117,6 +134,10 @@ function base() {
          "/databases/(default)/documents";
 }
 
+function colecao() {
+  return "/quadros/" + encodeURIComponent(prop("DESTINO_UID", "")) + "/tarefas";
+}
+
 function chamar(caminho, metodo, corpo, token) {
   var r = UrlFetchApp.fetch(base() + caminho, {
     method: metodo,
@@ -128,36 +149,70 @@ function chamar(caminho, metodo, corpo, token) {
   return { codigo: r.getResponseCode(), texto: r.getContentText() };
 }
 
+/* ---------- de e para o formato do Firestore ----------
+   O quadro grava campo a campo, com listas de mapas (os
+   comentários) e números (as horas). */
+function paraValor(v) {
+  if (v === null || v === undefined) return { nullValue: null };
+  if (typeof v === "string") return { stringValue: v };
+  if (typeof v === "boolean") return { booleanValue: v };
+  if (typeof v === "number") return (v % 1 === 0) ? { integerValue: String(v) } : { doubleValue: v };
+  if (Array.isArray(v)) return { arrayValue: { values: v.map(paraValor) } };
+  if (typeof v === "object") return { mapValue: { fields: paraCampos(v) } };
+  return { stringValue: String(v) };
+}
+function paraCampos(obj) {
+  var f = {};
+  Object.keys(obj).forEach(function (k) { if (obj[k] !== undefined) f[k] = paraValor(obj[k]); });
+  return f;
+}
+function deValor(v) {
+  if (!v) return null;
+  if ("stringValue" in v) return v.stringValue;
+  if ("booleanValue" in v) return v.booleanValue;
+  if ("integerValue" in v) return parseInt(v.integerValue, 10);
+  if ("doubleValue" in v) return v.doubleValue;
+  if ("arrayValue" in v) return ((v.arrayValue && v.arrayValue.values) || []).map(deValor);
+  if ("mapValue" in v) return deCampos((v.mapValue && v.mapValue.fields) || {});
+  return null;
+}
+function deCampos(fields) {
+  var o = {};
+  Object.keys(fields || {}).forEach(function (k) { o[k] = deValor(fields[k]); });
+  return o;
+}
+
 /* ---------- achar o que já veio ----------
    O Atos pode repetir o aviso: rede que cai no meio, pessoa que
    salva duas vezes, reenvio automático. Sem esta consulta, cada
-   repetição viraria uma pendência nova — e a lista do escritório
-   encheria de cópias da mesma coisa. */
-function acharPorOrigem(id, token) {
-  var r = UrlFetchApp.fetch(base() + ":runQuery", {
+   repetição viraria uma pendência nova. */
+function acharPorOrigem(id, token, uidRobo) {
+  /* O filtro por criadoPorUid não é enfeite: a regra do banco só
+     deixa o robô ler o que ELE criou no quadro alheio, e uma
+     consulta sem esse filtro é recusada inteira. */
+  var r = UrlFetchApp.fetch(base() + "/quadros/" + encodeURIComponent(prop("DESTINO_UID", "")) + ":runQuery", {
     method: "post",
     contentType: "application/json",
     muteHttpExceptions: true,
     headers: { Authorization: "Bearer " + token },
     payload: JSON.stringify({
       structuredQuery: {
-        from: [{ collectionId: "pendencias" }],
-        where: { fieldFilter: {
-          field: { fieldPath: "origemId" },
-          op: "EQUAL",
-          value: { stringValue: String(id) },
-        } },
+        from: [{ collectionId: "tarefas" }],
+        where: { compositeFilter: { op: "AND", filters: [
+          { fieldFilter: { field: { fieldPath: "criadoPorUid" }, op: "EQUAL", value: { stringValue: String(uidRobo) } } },
+          { fieldFilter: { field: { fieldPath: "origemId" }, op: "EQUAL", value: { stringValue: String(id) } } },
+        ] } },
         limit: 1,
       },
     }),
   });
+  if (r.getResponseCode() >= 300) throw new Error("não consegui consultar o quadro (HTTP " + r.getResponseCode() + "): " + r.getContentText());
   var j = JSON.parse(r.getContentText() || "[]");
   for (var i = 0; i < j.length; i++) {
     if (j[i].document) {
       return {
-        nome: j[i].document.name,
         id: String(j[i].document.name).split("/").pop(),
-        campos: j[i].document.fields || {},
+        dados: deCampos(j[i].document.fields || {}),
       };
     }
   }
@@ -169,115 +224,71 @@ function acharPorOrigem(id, token) {
 function criarPendencia(s) {
   var sessao = entrar();
 
-  var jaTem = acharPorOrigem(s.id, sessao.token);
+  var jaTem = acharPorOrigem(s.id, sessao.token, sessao.uid);
   if (jaTem) return { ok: true, repetido: true, pendencia: jaTem.id };
 
-  var titulo = tituloDe(s);
+  var agora = Date.now();
+  var prazo = dataDe(s.prazo);
+  var texto = textoDe(s);
   var doc = {
-    oque:          { stringValue: titulo },
-    porque:        { stringValue: descricaoDe(s) },
-    sugestao:      { stringValue: "" },
-    responsavel:   { stringValue: "" },
-    envolvidos:    { arrayValue: { values: [] } },
-    prazo:         { stringValue: dataDe(s.prazo) },
-    setorOrigem:   { stringValue: "" },
-    setorDestino:  { stringValue: prop("SETOR", "Legalização") },
-    podemVer:      { arrayValue: { values: [] } },
-    situacao:      { stringValue: "aberta" },
-    criadoPor:     { stringValue: sessao.uid },
-    vistas:        { arrayValue: { values: [{ stringValue: sessao.uid }] } },
-    deveDarCiencia:{ arrayValue: { values: [] } },
-    ciencia:       { arrayValue: { values: [] } },
-    ehRecado:      { booleanValue: false },
-    urgencia:      { stringValue: "normal" },
-
-    /* De onde veio, em dois campos simples em vez de um mapa: é o
-       que a consulta acima usa para não duplicar, e o que permite
-       fechar a pendência certa quando a solicitação terminar. */
-    origemSistema: { stringValue: "atos" },
-    origemId:      { stringValue: String(s.id) },
+    html: htmlDe(texto),
+    texto: texto,
+    setor: prop("SETOR_ID", ""),
+    /* Com prazo vai para "Com data"; sem prazo, para "Acompanhar" —
+       é uma solicitação que anda por dias, não tarefa de hoje. */
+    status: prazo ? "data" : "acompanhar",
+    prazo: prazo || null,
+    importante: false,
+    feito: false, feitoEm: null,
+    criadoEm: agora, statusEm: agora,
+    grifadoEm: null, revisadoEm: null,
+    notas: [{ t: "Aberta pelo Atos Societários a partir da solicitação de " + (s.empresa || "cliente") + ".", em: agora }],
+    anexos: [],
+    criadoPor: prop("EMAIL", ""),
+    /* Quem criou, para a regra do banco: um colega (o robô é um)
+       pode criar no quadro de alguém, assinando. */
+    criadoPorUid: sessao.uid,
+    origemSistema: "atos",
+    origemId: String(s.id),
   };
 
   var id = novoId();
-  var r = chamar(":commit", "post", {
-    writes: [{
-      update: {
-        name: "projects/" + prop("PROJETO", "hubtotali") +
-              "/databases/(default)/documents/pendencias/" + id,
-        fields: doc,
-      },
-      /* A hora é a do servidor, como em toda escrita do Hub: a
-         regra de lá confere isso, e janela medida por relógio de
-         quem escreve é janela que estica. */
-      updateTransforms: [{ fieldPath: "criadoEm", setToServerValue: "REQUEST_TIME" }],
-      currentDocument: { exists: false },
-    }],
-  }, sessao.token);
-
+  var r = chamar(colecao() + "?documentId=" + id, "post", { fields: paraCampos(doc) }, sessao.token);
   if (r.codigo >= 300) return { ok: false, erro: "o Hub recusou (HTTP " + r.codigo + "): " + r.texto };
-
-  anotar(id, "Aberta pelo Atos Societários a partir da solicitação de " +
-             (s.empresa || "cliente") + ".", sessao);
   return { ok: true, pendencia: id };
 }
 
-/* ---------- resolver ---------- */
-
-function resolverPendencia(s, nota) {
+/* ---------- riscar e reabrir ----------
+   Quem criou no quadro alheio só pode mexer em feito, feitoEm,
+   revisadoEm e notas — é exatamente o que estas duas fazem. */
+function riscarPendencia(s, nota) {
   var sessao = entrar();
-  var achada = acharPorOrigem(s.id, sessao.token);
+  var achada = acharPorOrigem(s.id, sessao.token, sessao.uid);
   if (!achada) return { ok: true, semPendencia: true };
+  if (achada.dados.feito === true) return { ok: true, jaEstavaRiscada: true };
 
-  var situacao = (achada.campos.situacao || {}).stringValue || "";
-  if (situacao === "resolvida") return { ok: true, jaEstavaResolvida: true };
-
-  var r = chamar("/pendencias/" + achada.id + "?updateMask.fieldPaths=situacao", "patch",
-    { fields: { situacao: { stringValue: "resolvida" } } }, sessao.token);
-
+  var agora = Date.now();
+  var notas = (achada.dados.notas || []).concat([{ t: nota || "Finalizada no Atos Societários.", em: agora }]);
+  var r = chamar(colecao() + "/" + achada.id +
+                 "?updateMask.fieldPaths=feito&updateMask.fieldPaths=feitoEm&updateMask.fieldPaths=revisadoEm&updateMask.fieldPaths=notas",
+                 "patch", { fields: paraCampos({ feito: true, feitoEm: agora, revisadoEm: null, notas: notas }) }, sessao.token);
   if (r.codigo >= 300) return { ok: false, erro: "o Hub recusou (HTTP " + r.codigo + "): " + r.texto };
-
-  anotar(achada.id, nota || "Finalizada no Atos Societários.", sessao);
   return { ok: true, pendencia: achada.id };
 }
 
-/* ---------- reabrir ----------
-   Solicitação reaberta no Atos (finalizada por engano, ou que voltou
-   com problema): a pendência volta a "aberta". A regra do Hub deixa
-   quem abriu a pendência (o robô) mexer só na situação — é isso. */
 function reabrirPendencia(s) {
   var sessao = entrar();
-  var achada = acharPorOrigem(s.id, sessao.token);
+  var achada = acharPorOrigem(s.id, sessao.token, sessao.uid);
   if (!achada) return { ok: true, semPendencia: true };
-  var situacao = (achada.campos.situacao || {}).stringValue || "";
-  if (situacao !== "resolvida") return { ok: true, jaEstavaAberta: true };
-  var r = chamar("/pendencias/" + achada.id + "?updateMask.fieldPaths=situacao", "patch",
-    { fields: { situacao: { stringValue: "aberta" } } }, sessao.token);
-  if (r.codigo >= 300) return { ok: false, erro: "o Hub recusou (HTTP " + r.codigo + "): " + r.texto };
-  anotar(achada.id, "Reaberta no Atos Societários.", sessao);
-  return { ok: true, pendencia: achada.id };
-}
+  if (achada.dados.feito !== true) return { ok: true, jaEstavaAberta: true };
 
-/* ---------- a linha do tempo ----------
-   Entra como anotação do sistema: quem lê a pendência precisa
-   saber que quem mexeu foi a integração, e não uma pessoa. */
-function anotar(idPendencia, texto, sessao) {
-  chamar(":commit", "post", {
-    writes: [{
-      update: {
-        name: "projects/" + prop("PROJETO", "hubtotali") +
-              "/databases/(default)/documents/pendencias/" + idPendencia + "/andamento/" + novoId(),
-        fields: {
-          autor:       { stringValue: sessao.uid },
-          autorNome:   { stringValue: "Atos Societários" },
-          texto:       { stringValue: texto },
-          doSistema:   { booleanValue: true },
-          mencionados: { arrayValue: { values: [] } },
-        },
-      },
-      updateTransforms: [{ fieldPath: "criadoEm", setToServerValue: "REQUEST_TIME" }],
-      currentDocument: { exists: false },
-    }],
-  }, sessao.token);
+  var agora = Date.now();
+  var notas = (achada.dados.notas || []).concat([{ t: "Reaberta no Atos Societários.", em: agora }]);
+  var r = chamar(colecao() + "/" + achada.id +
+                 "?updateMask.fieldPaths=feito&updateMask.fieldPaths=feitoEm&updateMask.fieldPaths=notas",
+                 "patch", { fields: paraCampos({ feito: false, feitoEm: null, notas: notas }) }, sessao.token);
+  if (r.codigo >= 300) return { ok: false, erro: "o Hub recusou (HTTP " + r.codigo + "): " + r.texto };
+  return { ok: true, pendencia: achada.id };
 }
 
 /* ---------- traduções ---------- */
@@ -290,37 +301,33 @@ var TIPOS = {
   out: "Outro",
 };
 
-function tituloDe(s) {
-  /* O Atos manda o nome do tipo pronto (tipoNome). A tabela abaixo
-     é a rede de segurança para quem mandar só o código — e para
-     códigos que o Atos passe a usar depois deste script existir. */
+function textoDe(s) {
   var tipo = String(s.tipoNome || "").trim() ||
              TIPOS[String(s.tipo || "")] || String(s.tipo || "Solicitação");
   var empresa = String(s.empresa || "").trim() || "sem empresa";
-  var t = tipo + " — " + empresa;
-  /* O Hub recusa título acima de 300; cortar aqui é melhor que
-     tomar recusa e perder o aviso. */
-  return t.length > 300 ? t.slice(0, 297) + "..." : t;
-}
-
-function descricaoDe(s) {
-  var linhas = [];
-  /* O pedido, como o cliente fez (ex.: "Mudar endereço, Entrada ou
-     saída de sócio") — o Atos manda desde a versão 1.53. */
-  if (s.pedido)  linhas.push("Pedido: " + s.pedido);
-  if (s.cnpj)    linhas.push("CNPJ: " + s.cnpj);
-  if (s.contato) linhas.push("Contato: " + s.contato + (s.fone ? " (" + s.fone + ")" : ""));
+  var linhas = [tipo + " — " + empresa];
+  if (s.pedido)      linhas.push("Pedido: " + s.pedido);
+  if (s.cnpj)        linhas.push("CNPJ: " + s.cnpj);
+  if (s.contato)     linhas.push("Contato: " + s.contato + (s.fone ? " (" + s.fone + ")" : ""));
   if (s.responsavel) linhas.push("Responsável no Atos: " + s.responsavel);
-  if (s.obs)     linhas.push("");
-  if (s.obs)     linhas.push(String(s.obs));
+  if (s.obs)         linhas.push(String(s.obs));
   var t = linhas.join("\n");
-  return t.length > 2000 ? t.slice(0, 1997) + "..." : t;
+  /* O quadro aceita até 6000; cortar aqui é melhor que tomar recusa. */
+  return t.length > 2500 ? t.slice(0, 2497) + "..." : t;
 }
 
-/* O Hub guarda prazo como aaaa-mm-dd e recusa mais de 10 letras. */
+/* O quadro guarda o texto também em HTML simples: a primeira linha
+   em negrito, as demais com quebra de linha. Nada além de b e br. */
+function htmlDe(texto) {
+  var esc = function (x) { return String(x).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); };
+  var linhas = texto.split("\n");
+  return "<b>" + esc(linhas[0]) + "</b>" + linhas.slice(1).map(function (l) { return "<br>" + esc(l); }).join("");
+}
+
+/* O quadro guarda prazo como aaaa-mm-dd. */
 function dataDe(v) {
   var t = String(v || "").slice(0, 10);
-  return t.length === 10 ? t : "";
+  return /^\d{4}-\d{2}-\d{2}$/.test(t) ? t : "";
 }
 
 var LETRAS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -333,9 +340,10 @@ function novoId() {
 
 /* ---------- conferência ----------
    Roda à mão no editor do Apps Script, antes de ligar o Atos: diz
-   se o robô entra e se o Hub responde, sem criar nada. */
+   se o robô entra e se o quadro de destino responde, sem criar nada. */
 function conferir() {
   var sessao = entrar();
-  var r = chamar("/pendencias?pageSize=1", "get", null, sessao.token);
-  Logger.log("entrou como " + sessao.uid + " · Hub respondeu " + r.codigo);
+  var r = chamar(colecao() + "?pageSize=1", "get", null, sessao.token);
+  Logger.log("entrou como " + sessao.uid + " · quadro " + prop("DESTINO_UID", "(sem DESTINO_UID)") + " respondeu " + r.codigo +
+             (r.codigo === 403 ? " — o robô só CRIA no quadro alheio; 403 ao LISTAR é o esperado. Teste criando pelo Atos." : ""));
 }

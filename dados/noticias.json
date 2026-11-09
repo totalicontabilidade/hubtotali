@@ -1,0 +1,1149 @@
+{
+ "formato": "hub-totali-noticias",
+ "versao": 1,
+ "atualizadoEm": "2026-11-09T15:43:00.130Z",
+ "categorias": [
+  {
+   "id": "reforma",
+   "nome": "Reforma Tributária"
+  },
+  {
+   "id": "simples",
+   "nome": "Simples e MEI"
+  },
+  {
+   "id": "tributos",
+   "nome": "Tributos federais"
+  },
+  {
+   "id": "trabalhista",
+   "nome": "Trabalhista e Previdência"
+  },
+  {
+   "id": "contabil",
+   "nome": "Contábil e normas"
+  },
+  {
+   "id": "empresas",
+   "nome": "Empresas e cadastros"
+  },
+  {
+   "id": "legislacao",
+   "nome": "Legislação"
+  },
+  {
+   "id": "sergipe",
+   "nome": "Sergipe"
+  }
+ ],
+ "fontes": [
+  {
+   "id": "receita",
+   "sigla": "RFB",
+   "nome": "Receita Federal",
+   "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
+   "ok": true,
+   "quantas": 30,
+   "ultimaVez": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "simples",
+   "sigla": "SN",
+   "nome": "Simples Nacional",
+   "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
+   "ok": true,
+   "quantas": 379,
+   "ultimaVez": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "esocial",
+   "sigla": "eSocial",
+   "nome": "Portal eSocial",
+   "site": "https://www.gov.br/esocial/pt-br/noticias",
+   "ok": true,
+   "quantas": 30,
+   "ultimaVez": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "fazenda",
+   "sigla": "MF",
+   "nome": "Ministério da Fazenda",
+   "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
+   "ok": true,
+   "quantas": 15,
+   "ultimaVez": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "cfc",
+   "sigla": "CFC",
+   "nome": "Conselho Federal de Contabilidade",
+   "site": "https://cfc.org.br/noticias/",
+   "ok": true,
+   "quantas": 10,
+   "ultimaVez": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "fenacon",
+   "sigla": "Fenacon",
+   "nome": "Fenacon",
+   "site": "https://fenacon.org.br/noticias/",
+   "ok": true,
+   "quantas": 9,
+   "ultimaVez": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "sefaz-se",
+   "sigla": "SEFAZ/SE",
+   "nome": "Secretaria da Fazenda de Sergipe",
+   "site": "https://www.sefaz.se.gov.br/",
+   "ok": true,
+   "quantas": 6,
+   "ultimaVez": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "camara",
+   "sigla": "Câmara",
+   "nome": "Agência Câmara (Economia)",
+   "site": "https://www.camara.leg.br/noticias",
+   "ok": true,
+   "quantas": 1,
+   "ultimaVez": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "senado",
+   "sigla": "Senado",
+   "nome": "Agência Senado",
+   "site": "https://www12.senado.leg.br/noticias",
+   "ok": true,
+   "quantas": 2,
+   "ultimaVez": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "ebc",
+   "sigla": "EBC",
+   "nome": "Agência Brasil (Economia)",
+   "site": "https://agenciabrasil.ebc.com.br/economia",
+   "ok": true,
+   "quantas": 1,
+   "ultimaVez": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "govbr",
+   "sigla": "gov.br",
+   "nome": "Portal gov.br",
+   "site": "https://www.gov.br/pt-br/noticias",
+   "ok": true,
+   "quantas": 0,
+   "ultimaVez": "2026-11-09T15:43:00.130Z"
+  }
+ ],
+ "noticias": [
+  {
+   "id": "d2y2fx",
+   "titulo": "CFC, CPC e CVM abrem consulta pública sobre novas regras para informações financeiras",
+   "link": "https://cfc.org.br/noticias/cfc-cpc-e-cvm-abrem-consulta-publica-sobre-novas-regras-para-informacoes-financeiras/",
+   "resumo": "Profissionais da contabilidade e demais interessados têm até 7 de dezembro de 2026 para apresentar sugestões à proposta de revisão da Orientação Técnica OCPC 06 (R1), que trata da elaboração e apresentação de informações financeiras pro forma. A consulta pública conjunta é…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-09T15:38:49.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "773zll",
+   "titulo": "Receita Federal abre consulta pública sobre alteração da IN do Adicional da CSLL",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-abre-consulta-publica-sobre-alteracao-da-in-do-adicional-da-csll",
+   "resumo": "O objetivo é introduzir elementos do Side-by-Side Package acordado internacionalmente. As submissões podem ser enviadas no período de 06 de novembro a 16 de novembro de 2026.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-09T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1iwvjmn",
+   "titulo": "COMUNICADO",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/comunicado",
+   "resumo": "Comissão e grupo de trabalho são criados para fortalecer a gestão do concurso público e aperfeiçoar o conteúdo das provas.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-09T15:00:00.000Z",
+   "categorias": [
+    "tributos",
+    "trabalhista"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "cmg9bp",
+   "titulo": "Receita Federal divulga portaria para concurso público das carreiras tributárias",
+   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/receita-federal-divulga-portaria-para-concurso-publico-das-carreiras-tributarias",
+   "resumo": "Comissão e grupo de trabalho são criados para fortalecer a gestão do concurso público e aperfeiçoar o conteúdo das provas",
+   "fonte": "fazenda",
+   "fonteNome": "Ministério da Fazenda",
+   "sigla": "MF",
+   "publicadoEm": "2026-11-09T15:00:00.000Z",
+   "categorias": [
+    "tributos",
+    "trabalhista",
+    "legislacao"
+   ],
+   "relevancia": 0,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "i3upxc",
+   "titulo": "Mercado eleva projeção da Selic para 13,75% em 2026",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/mercado-eleva-projecao-da-selic-para-1375-em-2026",
+   "resumo": "O mercado financeiro elevou de 13,5% para 13,75% ao ano a projeção para a taxa básica de juros (Selic) ao final de 2026, segundo o Boletim Focus divulgado nesta segunda-feira (9) pelo Banco Central. Com a revisão, a expectativa dos analistas passou a coincidir com o atual…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-09T13:26:00.000Z",
+   "categorias": [],
+   "relevancia": 1,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1ev4njd",
+   "titulo": "CFC abre audiência pública para revisão de quatro normas de auditoria",
+   "link": "https://cfc.org.br/noticias/cfc-abre-audiencia-publica-para-revisao-de-quatro-normas-de-auditoria/",
+   "resumo": "O Conselho Federal de Contabilidade (CFC) abriu audiência pública para receber contribuições sobre a revisão de quatro Normas Brasileiras de Contabilidade (NBCs) relacionadas à auditoria e a outros trabalhos contábeis. As propostas, reunidas nas Revisões NBCs nº 50 a 53,…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-09T12:42:39.000Z",
+   "categorias": [
+    "trabalhista",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "11mzlz5",
+   "titulo": "Artesão de baixa renda pode se tornar segurado especial da Previdência",
+   "link": "https://www12.senado.leg.br/noticias/audios/2026/11/artesao-de-baixa-renda-pode-se-tornar-segurado-especial-da-previdencia",
+   "resumo": "",
+   "fonte": "senado",
+   "fonteNome": "Agência Senado",
+   "sigla": "Senado",
+   "publicadoEm": "2026-11-09T12:34:36.000Z",
+   "categorias": [
+    "legislacao",
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "vabqa6",
+   "titulo": "Conquistou a aprovação no Exame de Suficiência? Confira os próximos passos para exercer a profissão",
+   "link": "https://cfc.org.br/noticias/conquistou-a-aprovacao-no-exame-de-suficiencia-confira-os-proximos-passos-para-exercer-a-profissao/",
+   "resumo": "O registro no Conselho Regional de Contabilidade é necessário para exercer a profissão e permite aproveitar oportunidades no mercado de trabalho A aprovação na segunda edição de 2026 do Exame de Suficiência representa uma conquista importante para quem deseja ingressar na…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-09T12:03:04.000Z",
+   "categorias": [
+    "trabalhista",
+    "contabil",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1b4brfw",
+   "titulo": "Conheça as regras sobre perdão de dívidas tributárias para MEIs",
+   "link": "https://fenacon.org.br/noticias/conheca-as-regras-sobre-perdao-de-dividas-tributarias-para-meis/",
+   "resumo": "Procuradoria-Geral da Fazenda Nacional detalha as regras sobre o perdão total das dívidas da contribuição mensal dos MEIs. O benefício será aplicado aos débitos federais, mas não aos impostos estaduais e municipais A Procuradoria-Geral da Fazenda Nacional (PGFN), em conjunto…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-09T05:19:38.000Z",
+   "categorias": [
+    "tributos",
+    "trabalhista"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "9x7lbq",
+   "titulo": "Para 75% dos MEIs, estar formalizado ajudou a vender mais",
+   "link": "https://fenacon.org.br/noticias/para-75-dos-meis-estar-formalizado-ajudou-a-vender-mais/",
+   "resumo": "Resultado é o melhor da série histórica de pesquisa do Sebrae. Emissão de nota fiscal e acesso a benefícios do INSS são as principais motivações para se formalizar A formalização ajuda o microempreendedor individual (MEI) a vender mais. A constatação é da pesquisa Perfil do…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-09T05:18:45.000Z",
+   "categorias": [
+    "simples",
+    "trabalhista",
+    "empresas"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "18cfhps",
+   "titulo": "CNC esclarece impactos do fim da escala 6×1 e alerta para prazo curto de adaptação das empresas",
+   "link": "https://fenacon.org.br/noticias/cnc-esclarece-impactos-do-fim-da-escala-6x1-e-alerta-para-prazo-curto-de-adaptacao-das-empresas/",
+   "resumo": "Em live com especialistas da Diretoria Jurídica e Sindical, Confederação detalhou as novas regras da jornada de trabalho, respondeu a dúvidas de empresários de todo o País e destacou os desafios para reorganizar escalas, preservar empregos e adequar negociações coletivas A…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-09T05:02:18.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "ntlbhk",
+   "titulo": "VP da Fenacon (CO) representa empresas de contabilidade em campanha para destinação de recursos ao Hospital do Câncer de MT",
+   "link": "https://fenacon.org.br/noticias/vp-da-fenacon-co-representa-empresas-de-contabilidade-em-campanha-para-destinacao-de-recursos-ao-hospital-do-cancer-de-mt/",
+   "resumo": "O vice-presidente da Fenacon na região Centro-Oeste, Marco Aurélio Coelho, participou de uma coletiva de imprensa na sexta-feira (06.11), em Cuiabá, para divulgar uma iniciativa para destinar parte do Imposto de Renda para a compra de equipamentos para o Hospital do Câncer de…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-08T23:35:08.000Z",
+   "categorias": [
+    "tributos",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "sk5obi",
+   "titulo": "IBS e CBS: A controvérsia sobre a exportação de serviços",
+   "link": "https://fenacon.org.br/reforma-tributaria/ibs-e-cbs-a-controversia-sobre-a-exportacao-de-servicos/",
+   "resumo": "Nova regra da reforma tributária abre espaço para diferentes interpretações sobre a tributação de serviços prestados no Brasil a clientes estrangeiros. Por Marcelo Carvalho Pereira A reforma tributária do consumo tinha tudo encerrar uma das mais longas controvérsias do…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-08T20:01:22.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1117860",
+   "titulo": "Vai à CAE a isenção de tarifa de energia para usinas de biomassa de casca de arroz",
+   "link": "https://www12.senado.leg.br/noticias/audios/2026/11/cra-aprova-isencao-de-tarifa-de-energia-para-usinas-de-biomassa-de-casca-de-arroz",
+   "resumo": "",
+   "fonte": "senado",
+   "fonteNome": "Agência Senado",
+   "sigla": "Senado",
+   "publicadoEm": "2026-11-06T21:38:42.000Z",
+   "categorias": [
+    "legislacao",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "5kkkgn",
+   "titulo": "Capacitação sobre Contabilidade Eleitoral acontece na próxima quarta-feira",
+   "link": "https://cfc.org.br/noticias/capacitacao-sobre-contabilidade-eleitoral-acontece-na-proxima-quarta-feira/",
+   "resumo": "A próxima edição do projeto “Atualização em Destaque” abordará o tema “Análise e julgamento de contas”. O evento virtual ocorre na próxima quarta-feira (11), às 15h, por meio da Plataforma EduCont do Sistema CFC/CRCs. A aula faz parte de uma série de cinco encontros sobre…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-06T15:30:24.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "m16yde",
+   "titulo": "Receita Federal concorre ao Prêmio de Inovação da Enap 2026. Vote e apoie nossas iniciativas!",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-concorre-ao-premio-de-inovacao-da-enap-2026-vote-e-apoie-nossas-iniciativas",
+   "resumo": "Esta é uma oportunidade para reconhecer iniciativas que estão transformando a prestação de serviços públicos.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-06T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "2ilizr",
+   "titulo": "Câmara Técnica de Normas Contábeis e de Demonstrativos Fiscais da Federação debate evolução da Contabilidade Aplicada ao Setor Público no Brasil",
+   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/camara-tecnica-de-normas-contabeis-e-de-demonstrativos-fiscais-da-federacao-debate-evolucao-da-contabilidade-aplicada-ao-setor-publico-no-brasil",
+   "resumo": "Fórum integra o ciclo de construção, teste, implementação e disseminação das normas contábeis que orientam a gestão pública brasileira",
+   "fonte": "fazenda",
+   "fonteNome": "Ministério da Fazenda",
+   "sigla": "MF",
+   "publicadoEm": "2026-11-06T15:00:00.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1ezv1e9",
+   "titulo": "Operação Fronteira da Receita Federal apreende cerca de R$ 1,5 milhão em mercadorias em Montes Claros e região",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-da-receita-federal-apreende-cerca-de-r-1-5-milhao-em-mercadorias-em-montes-claros-e-regiao",
+   "resumo": "Fiscalização mobilizou 29 servidores e alcançou oito estabelecimentos comerciais, com foco no combate à circulação de produtos irregulares.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-06T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "185l04w",
+   "titulo": "Operação Fronteira: Receita Federal encontra haxixe em livro e apreende peças de armas em Viracopos",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-receita-federal-encontra-haxixe-em-livro-e-apreende-pecas-de-armas-em-viracopos",
+   "resumo": "Fiscalização de remessas internacionais apreendeu 5,74 kg da droga e 20 peças de armas de fogo.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-06T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "sjlgig",
+   "titulo": "Projeto do CFC fortalece a governança e promove melhorias na gestão do CRCAP",
+   "link": "https://cfc.org.br/noticias/projeto-do-cfc-fortalece-a-governanca-e-promove-melhorias-na-gestao-do-crcap/",
+   "resumo": "Para fortalecer a Política de Governança do Conselho Regional de Contabilidade do Amapá (CRCAP), a Comissão Nacional de Governança Aplicada e Gestão Estratégica do Sistema CFC/CRCs realizou dois dias de atividades na sede do regional. A iniciativa integra o trabalho da…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-06T14:10:31.000Z",
+   "categorias": [
+    "trabalhista",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1kynigf",
+   "titulo": "Conferência Nacional de Perícia Contábil acontece no próximo mês",
+   "link": "https://cfc.org.br/noticias/conferencia-nacional-de-pericia-contabil-acontece-no-proximo-mes/",
+   "resumo": "Nos dias 2 e 3 de dezembro, o Conselho Federal de Contabilidade (CFC) e a Fundação Brasileira de Contabilidade (FBC) promovem a Conferência Nacional de Perícia Contábil (CNPC). O evento será realizado em Brasília/DF e reunirá palestrantes renomados na área. A iniciativa soma…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-06T12:33:08.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 0,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "16h1mah",
+   "titulo": "Novo módulo de qualificação sobre Contabilidade Imobiliária e Construtoras é liberado pelo CFC",
+   "link": "https://cfc.org.br/noticias/novo-modulo-de-qualificacao-sobre-contabilidade-imobiliaria-e-construtoras-e-liberado-pelo-cfc/",
+   "resumo": "Sociedade de Propósito Específico (SPE) e Sociedade em Conta de Participação (SCP) são os assuntos do quinto módulo da Qualificação Avançada em Contabilidade Imobiliária e Construtoras. A aula já está disponível na Plataforma EduCont do Sistema CFC/CRCs. Iniciativa do…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-06T12:25:50.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "l12fh6",
+   "titulo": "VA e VR deverão ser aceitos em qualquer maquininha habilitada a partir deste sábado (7)",
+   "link": "https://fenacon.org.br/noticias/va-e-vr-deverao-ser-aceitos-em-qualquer-maquininha-habilitada-a-partir-deste-sabado-7/",
+   "resumo": "Interoperabilidade entre cartões de vale-alimentação e vale-refeição está prevista para entrar em vigor integralmente em 7 de novembro, ampliando as possibilidades de uso dos benefícios; estabelecimentos precisam estar habilitados no PAT Por Comunicação Fenacon Os cartões de…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-06T04:12:49.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1r11cpi",
+   "titulo": "Ministro diz que novos impostos não trazem aumento de carga tributária",
+   "link": "https://fenacon.org.br/rede-de-noticias/ministro-diz-que-novos-impostos-nao-trazem-aumento-de-carga-tributaria/",
+   "resumo": "Imposto Seletivo e CBS levam racionalidade à tributação, diz Durigan O ministro da Fazenda, Dario Durigan, afirmou nesta quinta-feira (5) que os dois novos impostos que entram em vigor a partir do início de 2027 não representam aumento de carga tributária. Segundo ele, o…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-06T03:49:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "vqj5zu",
+   "titulo": "Reforma tributária: alíquota única simplifica a margem de lucro e a precificação nas pequenas empresas",
+   "link": "https://fenacon.org.br/reforma-tributaria/reforma-tributaria-aliquota-unica-simplifica-a-margem-de-lucro-e-a-precificacao-nas-pequenas-empresas/",
+   "resumo": "Unificação dos tributos de consumo põe fim à complexidade de regras de ICMS e ISS, permitindo que micro e pequenos empresários calculem o custo real do negócio Com a implantação do novo IVA Dual (composto pela CBS federal e pelo IBS estadual/municipal), a reforma tributária…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-06T03:46:32.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "2mb0df",
+   "titulo": "Comissão aprova socorro fiscal e renegociação de dívidas para agroexportadores",
+   "link": "https://fenacon.org.br/noticias/comissao-aprova-socorro-fiscal-e-renegociacao-de-dividas-para-agroexportadores/",
+   "resumo": "Proposta segue em análise na Câmara dos Deputados A Comissão de Agricultura, Pecuária, Abastecimento e Desenvolvimento Rural da Câmara dos Deputados aprovou proposta que cria o Programa Emergencial de Retomada do Setor Agroexportador (Peragro) e o Programa Especial de…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-06T03:46:00.000Z",
+   "categorias": [
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1is7i45",
+   "titulo": "Reforma Tributária: Ibracon abre pesquisa para avaliar desafios da Auditoria Independente",
+   "link": "https://cfc.org.br/noticias/reforma-tributaria-ibracon-abre-pesquisa-para-avaliar-desafios-da-auditoria-independente/",
+   "resumo": "Os profissionais da Contabilidade podem colaborar na identificação dos principais impactos, desafios e necessidades percebidos pelo setor de auditorias diante das mudanças trazidas pelo novo cenário tributário. Eles podem participar da pesquisa que o Instituto de Auditoria…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-05T18:41:43.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "wcnt23",
+   "titulo": "Vice-presidente do CFC assume presidência de comitê internacional de prevenção à lavagem de dinheiro",
+   "link": "https://cfc.org.br/noticias/vice-presidente-do-cfc-assume-presidencia-de-comite-internacional-de-prevencao-a-lavagem-de-dinheiro/",
+   "resumo": "Nomeação de Sandra Campos para liderar grupo técnico da Associação Interamericana de Contabilidade reforça a participação brasileira no combate a crimes financeiros e na promoção da ética e da transparência nas Américas A vice-presidente de Fiscalização, Ética e Disciplina do…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-05T16:41:21.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1xk1m3y",
+   "titulo": "Governo Federal define alíquotas do Imposto Seletivo para 2027 por meio de medida provisória",
+   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/governo-federal-define-aliquotas-do-imposto-seletivo-para-2027-por-meio-de-medida-provisoria",
+   "resumo": "Medida estabelece regime de implementação gradual do novo tributo, com início previsto para 2 de fevereiro de 2027, e preserva o nível global de arrecadação previsto na Reforma Tributária",
+   "fonte": "fazenda",
+   "fonteNome": "Ministério da Fazenda",
+   "sigla": "MF",
+   "publicadoEm": "2026-11-05T15:00:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "os8vvm",
+   "titulo": "Receita Federal apreende bebidas alcoólicas de alto valor e produtos de origem natural em caminhão",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-apreende-bebidas-alcoolicas-de-alto-valor-e-produtos-de-origem-natural-em-caminhao",
+   "resumo": "Fiscalização em Santana do Livramento identifica bebidas de alto valor e mercadoria oculta em caminhão.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-05T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1seuhva",
+   "titulo": "Operação Fronteira: Thor ajuda Receita Federal a encontrar partes de fuzil em Viracopos",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-thor-ajuda-receita-federal-a-encontrar-partes-de-fuzil-em-viracopos",
+   "resumo": "Treinado para localizar drogas, cão sinalizou encomenda com peças de armamento; ação resultou na apreensão de 25 peças de armas de fogo.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-05T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "8a5rt8",
+   "titulo": "Operação Fronteira Receita Federal já soma cerca de R$ 30 milhões em apreensões",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-receita-federal-ja-soma-cerca-de-r-30-milhoes-em-apreensoes",
+   "resumo": "Iniciativa é a maior ação conjunta de vigilância nas fronteiras terrestres, marítimas e aéreas do país.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-05T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "spp3lq",
+   "titulo": "CFC e Tribunais de Contas propõem pacto fiscal à Presidência e governos estaduais",
+   "link": "https://cfc.org.br/noticias/cfc-e-tribunais-de-contas-propoem-pacto-fiscal-a-presidencia-e-governos-estaduais/",
+   "resumo": "O Conselho Federal de Contabilidade (CFC) e a Associação dos Membros dos Tribunais de Contas do Brasil (Atricon) divulgaram, nesta quarta-feira (4), uma carta aberta conjunta dirigida ao Presidente da República e aos governadores eleitos e reeleitos. No documento, as…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-05T14:09:51.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "javqma",
+   "titulo": "Receita Federal lança novo Subportal de Controle de Carga e Trânsito (CCT)",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-lanca-novo-subportal-de-controle-de-carga-e-transito-cct",
+   "resumo": "Espaço foi totalmente reestruturado e apresenta uma visão macro inédita do fluxo de controle de cargas na importação, além de manuais para os modais aéreo e rodoviário.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-04T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "h8580o",
+   "titulo": "Receita Federal participa da Operação IFRIT",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-participa-da-operacao-ifrit",
+   "resumo": "Operação conjunta voltada à desarticulação de organização criminosa transnacional dedicada ao tráfico de drogas e armas, com atuação na faixa de fronteira, ramificações nacionais e internacionais, movimentação superior a R$ 500 milhões, cooptação de agentes públicos e elevado…",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-04T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "igmz8s",
+   "titulo": "PGFN esclarece regras sobre perdão de dívidas tributárias para Microempreendedor Individual",
+   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/pgfn-esclarece-regras-sobre-perdao-de-dividas-tributarias-para-microempreendedor-individual",
+   "resumo": "Cancelamento será feito de forma automática nos sistemas a partir do dia 1º de janeiro de 2027",
+   "fonte": "fazenda",
+   "fonteNome": "Ministério da Fazenda",
+   "sigla": "MF",
+   "publicadoEm": "2026-11-04T15:00:00.000Z",
+   "categorias": [
+    "simples",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1jcgp84",
+   "titulo": "Receita Federal e Ministério Público do Paraná deflagram 2ª fase da Operação Enxágue e Operação Catéter",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-e-ministerio-publico-do-parana-deflagram-2a-fase-da-operacao-enxague-e-operacao-cateter",
+   "resumo": "Investigações apuram organizações criminosas que usavam empresas de fachada para sonegar ICMS e lavar dinheiro no comércio de subprodutos de origem animal. Justiça determinou o sequestro de mais de R$ 271 milhões em bens e valores.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-04T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "128xu0i",
+   "titulo": "Receita Federal, PRF e Guarda Municipal interceptam ônibus abarrotados com mercadorias descaminhadas/contrabandeadas",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-prf-e-guarda-municipal-interceptam-onibus-abarrotados-com-mercadorias-descaminhadas-contrabandeadas",
+   "resumo": "Duas ações distintas resultaram na retenção de coletivos com destino a São Paulo; cargas irregulares somam R$ 1,5 milhão em produtos estrangeiros e emagrecedores.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-04T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "f66m24",
+   "titulo": "Operação Fármacos II: RFB identifica R$ 1,8 bilhão em créditos farmacêuticos incompatíveis e orienta contribuintes à regularização até 20/01/2027",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-farmacos-ii-rfb-identifica-r-1-8-bilhao-em-creditos-farmaceuticos-incompativeis-e-orienta-contribuintes-a-regularizacao-ate-20-01-2027",
+   "resumo": "Segunda fase da Operação Fármacos alcança cerca de 1,6 mil contribuintes e detecta pedidos apresentados por empresas de atividades econômicas sem vínculo com o benefício fiscal destinado ao setor farmacêutico.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-03T15:00:00.000Z",
+   "categorias": [
+    "tributos",
+    "trabalhista"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1cdl2ln",
+   "titulo": "Deflagrada edição 2026 da Operação Fronteira Receita Federal",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/deflagrada-edicao-2026-da-operacao-fronteira-receita-federal",
+   "resumo": "Iniciativa é a maior ação conjunta de vigilância nas fronteiras terrestres, marítimas e aéreas do país.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-03T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1kwhyed",
+   "titulo": "Contribuintes com Selo Confia e Sintonia podem regularizar pendências sem multa de mora",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/contribuintes-com-selo-confia-e-sintonia-podem-regularizar-pendencias-sem-multa-de-mora",
+   "resumo": "Receita Federal detalha regras do programa de autorregularização, reforça prazos e alerta que não envia cobranças urgentes com ameaças de cancelamento de CPF/CNPJ.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-03T15:00:00.000Z",
+   "categorias": [
+    "tributos",
+    "empresas"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1dh4r2i",
+   "titulo": "Receita Federal prorroga prazo para adesão a editais de transação tributária até 30 de dezembro",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-prorroga-prazo-para-adesao-a-editais-de-transacao-tributaria-ate-30-de-dezembro",
+   "resumo": "Medida amplia oportunidade para que contribuintes regularizem débitos em discussão administrativa com condições diferenciadas e descontos previstos nos editais.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-03T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "10avgzc",
+   "titulo": "Guia do Viajante passa por ampla atualização",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/guia-do-viajante-passa-por-ampla-atualizacao",
+   "resumo": "Melhorias do Guia do Viajante no site da Receita Federal incluem orientações sobre a nova sistemática do Registro Automático da Declaração Eletrônica de Bens do Viajante (e-DBV).",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-03T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "n82dxo",
+   "titulo": "Receita Federal deflagra maior ação conjunta de vigilância nas fronteiras terrestres, marítimas e aéreas do país",
+   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/receita-federal-deflagra-maior-acao-conjunta-de-vigilancia-nas-fronteiras-terrestres-maritimas-e-aereas-do-pais",
+   "resumo": "Edição 2026 da Operação Fronteira, lançada pelo secretário Barreirinhas, conta com diversas instituições de segurança pública, inclusive internacionais",
+   "fonte": "fazenda",
+   "fonteNome": "Ministério da Fazenda",
+   "sigla": "MF",
+   "publicadoEm": "2026-11-03T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 0,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1h4n5hg",
+   "titulo": "Sefaz apresenta prestação de contas do 2º quadrimestre na Alese e destaca volume recorde de investimentos em Sergipe",
+   "link": "https://www.sefaz.se.gov.br/Lists/Noticias/DispForm.aspx?ID=2873",
+   "resumo": "Title: Sefaz apresenta prestação de contas do 2º quadrimestre na Alese e destaca volume recorde de investimentos em Sergipe Publicacao: 29/10/2026 12:20 Foto: https://www.sefaz.se.gov.br/Imagens/noticias/29-10-2026/1.jpeg Visibilidade: Intranet, Internet",
+   "fonte": "sefaz-se",
+   "fonteNome": "Secretaria da Fazenda de Sergipe",
+   "sigla": "SEFAZ/SE",
+   "publicadoEm": "2026-10-29T15:23:13.000Z",
+   "categorias": [
+    "sergipe"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "u4f3d1",
+   "titulo": "Mais de 1 milhão de contribuintes já optaram pelo regime regular do IBS e da CBS",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/mais-de-1-milhao-de-contribuintes-ja-optaram-pelo-regime-regular-do-ibs-e-da-cbs",
+   "resumo": "Prazo para realizar a opção termina nesta sexta-feira, 30 de outubro.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-10-29T15:00:00.000Z",
+   "categorias": [
+    "tributos",
+    "reforma"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "momj51",
+   "titulo": "Receita Federal e CGIBS discutem ampliação do prazo de opção pelo regime específico da CBS e do IBS para as cooperativas até 30 de novembro",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/receita-federal-e-cgibs-discutem-ampliacao-do-prazo-de-opcao-pelo-regime-especifico-da-cbs-e-do-ibs-para-as-cooperativas-ate-30-de-novembro",
+   "resumo": "Novo prazo deverá ser formalizado por meio de alteração normativa, assegurando mais tempo para que as cooperativas realizem os procedimentos necessários à opção.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-10-29T15:00:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "5q1304",
+   "titulo": "Governo discute ampliar até 30/11 o prazo de opção pelo regime da CBS e do IBS para cooperativas",
+   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/outubro/governo-discute-ampliar-ate-30-11-o-prazo-de-opcao-pelo-regime-da-cbs-e-do-ibs-para-cooperativas",
+   "resumo": "Novo prazo deverá ser formalizado pela Receita Federal e pelo CGIBS, dando mais tempo para que as cooperativas realizem os procedimentos necessários",
+   "fonte": "fazenda",
+   "fonteNome": "Ministério da Fazenda",
+   "sigla": "MF",
+   "publicadoEm": "2026-10-29T15:00:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1qtwog1",
+   "titulo": "PGFN debate estratégias para reduzir litígios no mercado regulado de carbono",
+   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/outubro/pgfn-debate-estrategias-para-reduzir-litigios-no-mercado-regulado-de-carbono",
+   "resumo": "Em palestra no 3º Encontro Nacional da Consultoria da Procuradoria-Geral da Fazenda Nacional, secretária Cristina Reis (SEMC) detalha fases de implementação do SBCE e alinha elaboração de normas infralegais",
+   "fonte": "fazenda",
+   "fonteNome": "Ministério da Fazenda",
+   "sigla": "MF",
+   "publicadoEm": "2026-10-29T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 0,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1acu5s",
+   "titulo": "Ação conjunta entre Receita Federal e Polícia Civil do Ceará apreende 146 kg de drogas em transportadora de Fortaleza",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/acao-conjunta-entre-receita-federal-e-policia-civil-do-ceara-apreende-146-kg-de-drogas-em-transportadora-de-fortaleza",
+   "resumo": "Os entorpecentes estavam declarados como equipamento de som. Duas pessoas foram presas.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-10-28T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "ymwjre",
+   "titulo": "Receita Federal apreende mais de 17 toneladas de barbatanas de tubarão em porto de Santa Catarina",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/receita-federal-apreende-mais-de-17-toneladas-de-barbatanas-de-tubarao-em-porto-de-santa-catarina",
+   "resumo": "A carga estava ocultada acondicionada em sacos de ráfia com a inscrição “sardinhas congeladas¨\".",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-10-27T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1j05lb0",
+   "titulo": "Receita Federal destaca Programa Confia em seminário regional sobre conformidade cooperativa na Guatemala",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/receita-federal-destaca-programa-confia-em-seminario-regional-sobre-conformidade-cooperativa-na-guatemala",
+   "resumo": "Experiência brasileira em conformidade cooperativa ganha destaque em seminário internacional promovido pelo BID na Guatemala.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-10-27T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "h472gr",
+   "titulo": "Receita Federal leva à OCDE debate sobre tecnologias de privacidade e inteligência artificial",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/receita-federal-leva-a-ocde-debate-sobre-tecnologias-de-privacidade-e-inteligencia-artificial",
+   "resumo": "Evento organizado reuniu administrações tributárias e institutos internacionais e abordou tecnologias de preservação de privacidade e seu uso com IA.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-10-26T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1bowuub",
+   "titulo": "Receita Federal e Polícia Militar apreendem carga estimada em R$ 1 milhão em ônibus de turismo na região de Sertaneja/PR",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/receita-federal-e-policia-militar-apreendem-carga-estimada-em-r-1-milhao-em-onibus-de-turismo-na-regiao-de-sertaneja-pr",
+   "resumo": "Ação conjunta realizada na madrugada de sábado (24) identificou mercadorias sem comprovação de regularização fiscal e aduaneira, reforçando o combate ao descaminho e aos crimes transfronteiriços.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-10-26T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1aue4yf",
+   "titulo": "Receita Federal apreende 32 ovos de aves nativas transportados clandestinamente em ônibus",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/receita-federal-apreende-32-ovos-de-aves-nativas-transportados-clandestinamente-em-onibus",
+   "resumo": "Ovos foram encontrados em incubadora transportada em mala e ocultos nas jaquetas de casal de passageiros chineses; cada unidade pode chegar a 50 mil euros na Europa.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-10-26T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1sflo6m",
+   "titulo": "Novas medidas simplificam obrigações da Reforma Tributária para nanoempreendedores e MEIs",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/novas-medidas-simplificam-obrigacoes-da-reforma-tributaria-para-nanoempreendedores-e-meis",
+   "resumo": "Decreto nº 13.140/2026 e Resolução CGSN nº 195/2026 reduzem burocracias, dispensam exigências fiscais para nanoempreendedores e facilitam o cumprimento das novas regras tributárias pelos MEIs.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-10-23T15:00:00.000Z",
+   "categorias": [
+    "reforma",
+    "simples",
+    "tributos",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "h4f147",
+   "titulo": "Receita Federal abre consulta ao lote residual de restituição do IRPF 2026 nesta sexta-feira (23)",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/receita-federal-abre-consulta-ao-lote-residual-de-restituicao-do-irpf-2026-nesta-sexta-feira-23",
+   "resumo": "Consulta ao lote residual estará disponível a partir das 9h desta sexta-feira (23); crédito de R$ 531,6 milhões será realizado em 30 de outubro, contemplando 184.442 restituições.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-10-22T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1lk6ygp",
+   "titulo": "Receita Federal comenta nesta quinta-feira (22) a arrecadação do mês de setembro",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/receita-federal-comenta-nesta-quinta-feira-22-a-arrecadacao-do-mes-de-setembro",
+   "resumo": "Coletiva sobre a arrecadação de setembro será realizada nesta quinta-feira, às 11h, com transmissão ao vivo pelo YouTube.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-10-21T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1xq0nhu",
+   "titulo": "Receita Federal bate recordes na restituição do IRPF e reforça a orientação e o respeito aos direitos dos contribuintes",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/receita-federal-bate-recordes-na-restituicao-do-irpf-e-reforca-a-orientacao-e-o-respeito-aos-direitos-dos-contribuintes",
+   "resumo": "O direito do contribuinte à orientação antes de qualquer atividade fiscalizatória é garantido em lei, com a aprovação da LC 225/2026.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-10-20T15:00:00.000Z",
+   "categorias": [
+    "tributos",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1l4weme",
+   "titulo": "Receita Federal inaugura nova era de julgamentos em larga escala",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/receita-federal-inaugura-nova-era-de-julgamentos-em-larga-escala",
+   "resumo": "Nova solução representa um salto tecnológico e permite o julgamento conjunto de mais de 15 mil processos repetitivos em uma única sessão, ampliando a eficiência, a uniformidade das decisões e a celeridade para os contribuintes.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-10-20T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "10qu2vg",
+   "titulo": "Ferramentas Download e Relatórios Gerenciais apresentam instabilidade",
+   "link": "https://www.gov.br/esocial/pt-br/noticias/ferramentas-download-e-relatorios-gerenciais-apresentam-instabilidade",
+   "resumo": "Alguns pedidos não estão retornando resultados e outros apresentam erro ao tentar baixar os arquivos gerados. Relatório Gerencial também é afetado.",
+   "fonte": "esocial",
+   "fonteNome": "Portal eSocial",
+   "sigla": "eSocial",
+   "publicadoEm": "2026-08-27T20:11:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1y332vn",
+   "titulo": "Publicado Roteiro da Opção pelo Simples Nacional Para o Ano de 2027",
+   "link": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/NoticiaCompleta.aspx?id=bff8b291-7a89-42fa-94e7-8cacfd617f25",
+   "resumo": "Veja as principais modificações na forma de opção, que agora deverá ser realizada no mês de setembro/2026",
+   "fonte": "simples",
+   "fonteNome": "Simples Nacional",
+   "sigla": "SN",
+   "publicadoEm": "2026-08-21T15:00:00.000Z",
+   "categorias": [
+    "simples"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "1u9r4qf",
+   "titulo": "CGSN atualiza regras do Simples Nacional para adequação à Reforma Tributária do Consumo",
+   "link": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/NoticiaCompleta.aspx?id=e595d010-1e04-4c3b-95d9-185fc58594b5",
+   "resumo": "Novas regras incorporam IBS e CBS ao regime, atualizam procedimentos e estabelecem novos prazos de opção para 2027",
+   "fonte": "simples",
+   "fonteNome": "Simples Nacional",
+   "sigla": "SN",
+   "publicadoEm": "2026-08-12T15:00:00.000Z",
+   "categorias": [
+    "reforma",
+    "simples",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "jzn0wz",
+   "titulo": "Parada do eSocial em 31/07/2026, 19h: manutenção programada para implantação do CNPJ alfanumérico",
+   "link": "https://www.gov.br/esocial/pt-br/noticias/parada-do-esocial-em-31-07-2026-19h-manutencao-programada-para-implantacao-do-cnpj-alfanumerico",
+   "resumo": "A parada tem por objetivo manutenção programada do sistema e ocorrerá às 19h do dia 31/07/2026, às 19h do dia seguinte. Todos os módulos serão impactados.",
+   "fonte": "esocial",
+   "fonteNome": "Portal eSocial",
+   "sigla": "eSocial",
+   "publicadoEm": "2026-07-30T18:56:00.000Z",
+   "categorias": [
+    "trabalhista",
+    "empresas"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "bearxx",
+   "titulo": "Antecipação de atividades para implantação do CNPJ Alfanumérico",
+   "link": "https://www.gov.br/esocial/pt-br/noticias/receita-federal/antecipacao-de-atividades-para-implantacao-do-cnpj-alfanumerico",
+   "resumo": "Antecipação de etapas técnicas altera o período de disponibilidade da base do CNPJ, mantendo inalteradas as demais condições previstas para a implantação do novo formato.",
+   "fonte": "esocial",
+   "fonteNome": "Portal eSocial",
+   "sigla": "eSocial",
+   "publicadoEm": "2026-07-15T17:06:00.000Z",
+   "categorias": [
+    "trabalhista",
+    "empresas"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-09T15:43:00.130Z"
+  }
+ ]
+}

@@ -94,7 +94,102 @@ const Agenda = (function () {
 
     /* ---------- MUNICIPAL ---------- */
     { nome:"ISS Itabaiana",     quem:"serviços do mês",           dia:10, ajuste:"adia" },
+
+    /* ---------- ANUAIS ----------
+       Entram só no mês delas (mesUnico: 0 = janeiro). Eram a
+       lacuna da agenda: tudo o que vence uma vez por ano, e que é
+       justamente o que a rotina mensal faz esquecer. Datas da
+       Receita e do CGSN; as marcadas "conferir" são as que a
+       Receita costuma mover por ato do ano. */
+    { nome:"DIMOB",             quem:"imobiliárias e construtoras", quando:"ultimoDiaUtil", mesUnico:1, conferir:true },
+    { nome:"DEFIS",             quem:"Simples: ano anterior",     dia:31, ajuste:"nenhum", mesUnico:2, regime:"simples" },
+    { nome:"DASN-SIMEI",        quem:"MEI: ano anterior",         dia:31, ajuste:"nenhum", mesUnico:4, regime:"simples" },
+    { nome:"IRPF",              quem:"declaração anual",          dia:31, ajuste:"antecipa", mesUnico:4, conferir:true },
+    { nome:"ECD",               quem:"escrituração contábil",     quando:"ultimoDiaUtil", mesUnico:5, regime:"normal", conferir:true },
+    { nome:"ECF",               quem:"escrituração fiscal",       quando:"ultimoDiaUtil", mesUnico:6, regime:"normal" },
+    { nome:"13º · 1ª parcela",  quem:"folha",                     dia:30, ajuste:"antecipa", mesUnico:10 },
+    { nome:"13º · 2ª parcela",  quem:"folha",                     dia:20, ajuste:"antecipa", mesUnico:11 },
   ];
+
+  /* ============================================================
+     A AGENDA OFICIAL DA RECEITA, PARA CONFERIR
+     ------------------------------------------------------------
+     A regra calcula; a Receita publica. Todo mês o robô do GitHub
+     (ferramentas/buscar-agenda.js) lê a agenda oficial e a grava
+     em dados/agenda-oficial.json. Aqui a lista calculada é cruzada
+     com ela: obrigação federal que a Receita lista no mesmo dia
+     ganha "confere"; em dia diferente, a data da Receita manda e
+     a tela avisa. O que a Receita lista e a regra não conhece
+     volta em "extras", para aparecer no painel do mês.
+
+     Cada regra federal diz como se reconhece na agenda oficial:
+     pela declaração (texto do nome) ou pelo pagamento (código de
+     receita ou grupo). Estado e município não entram: a Receita
+     não os publica.
+     ============================================================ */
+  var RECONHECE = {
+    "EFD-Reinf":          { decl: /EFD-Reinf/i },
+    "DCTFWeb":            { decl: /^DCTFWeb/i },
+    "DIRBI":              { decl: /^Dirbi/i },
+    "PGDAS-D":            { decl: /^PGDAS-D/i },
+    "EFD-Contribuições":  { decl: /^EFD-Contribui/i },
+    "DAS do Simples":     { grupo: /^Simples Nacional$/i },
+    "INSS e IRRF":        { codigo: ["0561"] },
+    "PIS e COFINS":       { codigo: ["8109", "2172"] },
+    "IRPJ e CSLL":        { codigo: ["2089", "2372"] },
+    "INSS do 13º":        { codigo: ["1162"] },
+    "DEFIS":              { decl: /^DEFIS/i },
+    "DASN-SIMEI":         { decl: /^DASN/i },
+    "ECD":                { decl: /^ECD/i },
+    "ECF":                { decl: /^ECF/i },
+    "DIMOB":              { decl: /^Dimob/i },
+    "IRPF":               { decl: /^DIRPF|Imposto sobre a Renda da Pessoa F/i },
+  };
+
+  /* Declarações da agenda oficial que não interessam ao escritório
+     e não devem virar "extra" na tela. */
+  var IGNORAR_OFICIAL = /DeCripto|\bDME\b|\bDOI\b|\bDCP\b|SisObraPref|e-Financeira|Siscoserv|DBF\b/i;
+
+  function diaDeIso(iso) { return String(iso).slice(8, 10); }
+
+  /* lista: a saída de doMes(). oficial: o mês de dados/agenda-oficial.json
+     com o mesmo ano e mês. Devolve { itens, extras, ade }. */
+  function cruzar(lista, oficial) {
+    if (!oficial || !Array.isArray(oficial.dias)) return { itens: lista, extras: [], ade: "" };
+    var itens = lista.map(function (i) {
+      var como = RECONHECE[i.nome];
+      if (!como) return i;
+      var achado = null;
+      oficial.dias.forEach(function (d) {
+        if (achado) return;
+        var bateDecl = como.decl && (d.declaracoes || []).some(function (x) { return como.decl.test(x.nome); });
+        var batePag = (como.codigo || como.grupo) && (d.pagamentos || []).some(function (p) {
+          return (como.codigo && como.codigo.indexOf(p.codigo) !== -1) || (como.grupo && como.grupo.test(p.grupo));
+        });
+        if (bateDecl || batePag) achado = d;
+      });
+      if (!achado) return i;
+      var dia = diaDeIso(achado.data);
+      var saida = {};
+      Object.keys(i).forEach(function (k) { saida[k] = i[k]; });
+      saida.oficialDia = dia;
+      saida.oficialUrl = achado.url;
+      saida.confere = dia === i.dia;
+      return saida;
+    });
+
+    /* O que a Receita lista e a regra não tem. */
+    var conhecidas = Object.keys(RECONHECE).map(function (k) { return RECONHECE[k].decl; }).filter(Boolean);
+    var extras = [];
+    oficial.dias.forEach(function (d) {
+      (d.declaracoes || []).forEach(function (x) {
+        if (IGNORAR_OFICIAL.test(x.nome)) return;
+        if (conhecidas.some(function (re) { return re.test(x.nome); })) return;
+        extras.push({ dia: diaDeIso(d.data), nome: x.nome.split(/ [–-] /)[0], completo: x.nome, periodo: x.periodo, url: d.url });
+      });
+    });
+    return { itens: itens, extras: extras, ade: oficial.ade || "" };
+  }
 
   /* ---------- feriados ----------
      Os fixos são lista; os móveis saem todos da Páscoa. Uso o
@@ -259,6 +354,6 @@ const Agenda = (function () {
     .sort(function (a, b) { return a._ordem - b._ordem; });
   }
 
-  return { doMes: doMes, ehDiaUtil: ehDiaUtil, feriados: feriados, REGRAS: REGRAS };
+  return { doMes: doMes, cruzar: cruzar, ehDiaUtil: ehDiaUtil, feriados: feriados, REGRAS: REGRAS, RECONHECE: RECONHECE };
 
 })();
