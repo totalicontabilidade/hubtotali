@@ -18,16 +18,19 @@ que grava o resultado em arquivos da própria pasta.
 
 ---
 
-## As três vistas
+## As cinco vistas
 
-A barra da esquerda troca entre elas. A Agenda e os órgãos abrem num painel
-por cima, porque são consulta rápida.
+A barra da esquerda, com ícone **e nome** em cada botão, troca entre elas. Uma
+vista de cada vez ocupa a tela toda; nada abre por cima de nada. Clicar na
+marca (na barra ou no cabeçalho) volta ao Início. A faixa de recados da
+administração fica embaixo de todas.
 
-**Início.** À esquerda os sistemas da casa (favoritos, grupos de cartões, a
-gaveta dos órgãos) e a agenda do mês. À direita dois cartões: **Hoje**, com o
-que atrasou, o que é para hoje, a barra do dia e uma caixa para anotar uma
-pendência sem sair dali; e **Notícias oficiais**, com as últimas que importam.
-Embaixo, a faixa de recados da administração.
+**Início** é o resumo do dia, na ordem em que importa de manhã. À esquerda,
+**Minhas pendências**: o que atrasou, o que é para hoje, o que vence ainda esta
+semana, a barra do dia e uma caixa para anotar sem sair dali; clicar numa
+pendência abre o quadro com ela em destaque. À direita, **Próximos
+vencimentos** (dez dias da agenda tributária), **Meus favoritos** (ou os mais
+usados, para quem não marcou nenhum) e **Notícias oficiais** (cinco manchetes).
 
 **Pendências.** O quadro inteiro, uma pessoa por quadro: quatro blocos de
 prazo (Hoje, Esta semana, Com data, Acompanhar), setores com cores e
@@ -35,8 +38,23 @@ palavras-chave, calendário, comentários, anexos em PDF, clientes com CNPJ,
 ditado e entendimento da frase. Veio do sistema *Pendências Totali* e está
 descrito na seção própria, mais abaixo.
 
+**Sistemas.** Todos os links da casa, na ordem da administração: favoritos,
+mais usados (contados neste navegador), os grupos à vista e os grupos de
+gaveta (órgãos, impostos e consultas) abertos ali mesmo, com um rótulo por
+grupo. A busca do cabeçalho (tecla `/`) procura nesta lista e leva para cá.
+
 **Notícias.** Todas as notícias lidas das fontes oficiais, agrupadas por dia,
 com filtro por assunto e por fonte e busca. Cada uma abre no site original.
+
+**Agenda.** O mês inteiro em lista por dia — Hoje, Amanhã, Próximos 7 dias,
+Depois e, no fim, o que já venceu —, com setas para o mês anterior e o
+seguinte. Lista, e não grade de calendário: para achar uma data, lista é mais
+rápida; o dia da semana já está escrito em cada cartão.
+
+A organização seguiu o que a pesquisa de usabilidade recomenda para páginas
+iniciais de uso diário: rótulo visível na navegação (ícone sozinho só se
+aprende para casa, lupa e impressora), tarefas da pessoa antes de tudo, poucas
+notícias e sempre datadas, favoritos com esse nome e não "links rápidos".
 
 ---
 
@@ -268,12 +286,36 @@ já está aplicada para os endereços do Hub.
 
 ---
 
+## Os clientes da casa
+
+A administração (aba **Equipe e acessos → Clientes da casa**) importa o
+relatório de clientes do sistema contábil — `.xlsx` ou `.csv`, com as colunas
+Nome e CNPJ/CPF — ou cola as linhas. O `.xlsx` é lido no próprio navegador,
+sem biblioteca (`js/planilha.js`: o arquivo é um zip com XML dentro, e o
+navegador sabe descompactar e ler XML). A lista vai para `hub/clientes` e
+**todo quadro de pendências a enxerga**: o nome da empresa escrito numa
+pendência vira um chip com o CNPJ, inclusive sem o "LTDA" do fim. No quadro,
+os clientes da casa aparecem marcados "da casa": a pessoa só lhes dá apelidos,
+e acrescenta os seus próprios. A importação substitui a lista inteira; os
+apelidos de cada um ficam.
+
 ## O quadro antigo e a migração
 
 Até 09/11/2026 o Hub tinha um quadro único do escritório (pendência com
 responsável, linha do tempo, recados com ciência). Ele saiu da tela; as
 coleções `pendencias` e `pendencias_reservadas` continuam no banco, só
 leitura, e a cópia de segurança continua trazendo-as.
+
+**Trazer as pendências antigas para os quadros novos** se faz pela
+administração (aba **Equipe e acessos → Quadro antigo**). O botão lê todas,
+decide o dono de cada uma — quem fazia; sem responsável, a única pessoa do
+setor de destino; sem isso, quem pediu — mostra o plano por pessoa e, com a
+confirmação, cria cada pendência no quadro do dono: o "o quê" em negrito, o
+porquê e a sugestão embaixo, a linha do tempo como comentários, prazo em "Com
+data", urgente marcada como importante, resolvida já riscada. Recados ficam de
+fora (viraram a faixa de avisos). Pode rodar de novo: o que já foi trazido
+(`origemSistema: "hub-antigo"`, `origemId`) não duplica. Quem decide é
+`js/migracao-quadro.js`, testado em `testes/teste-migracao.js`.
 
 Quem usava o Pendências Totali à parte traz o quadro pelo **Exportar /
 importar → Importar cópia**, dentro do Hub, logado na própria conta. A
@@ -301,6 +343,7 @@ Os testes, sem internet e sem instalar nada:
 node testes/teste-frases.js
 node testes/teste-noticias.js
 node testes/teste-agenda.js
+node testes/teste-migracao.js
 ```
 
 ---

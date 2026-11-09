@@ -50,7 +50,7 @@
 <script src="js/so-https.js"></script>
 <script src="js/quebra-moldura.js"></script>
 
-<a class="pular" href="#centro">Ir para os sistemas</a>
+<a class="pular" href="#vista-inicio">Ir para o conteúdo</a>
 
 <!-- O portão. A lista de sistemas da casa é privada: o banco só a
      entrega a quem está na equipe, então a tela do Hub só aparece
@@ -83,56 +83,72 @@
   </form>
 </main>
 
-<!-- A TELA TEM TRÊS VISTAS, e a barra da esquerda troca entre elas:
-     Início (sistemas, o cartão Hoje e as notícias), Pendências (o
-     quadro inteiro) e Notícias (todas, com filtro). A Agenda e os
-     órgãos abrem num painel por cima, porque são consulta rápida.
+<!-- A TELA TEM CINCO VISTAS, e a barra da esquerda troca entre elas:
+     Início (o resumo do dia), Pendências (o quadro inteiro), Sistemas
+     (todos os links da casa), Notícias (todas, com filtro) e Agenda
+     (o mês inteiro, conferido com a Receita). Cada uma ocupa a tela
+     toda à direita da barra; a faixa de avisos fica embaixo de todas.
      O atributo data-vista diz qual está aberta. -->
 <div class="tela" id="tela" data-vista="inicio" hidden>
 
   <nav class="nav" aria-label="Seções do Hub">
-    <img class="nav__logo" src="assets/simbolo-escuro.png" alt="" width="32" height="32">
-    <button class="nav__b on" type="button" id="nav-inicio" aria-label="Início" title="Início">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
-           stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 10l9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
-    </button>
-    <button class="nav__b" type="button" id="nav-pendencias" aria-label="Pendências" title="Pendências">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M9 11l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 10h18"/></svg>
-    </button>
-    <button class="nav__b" type="button" id="nav-noticias" aria-label="Notícias oficiais" title="Notícias oficiais">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 5h13a2 2 0 0 1 2 2v11a2 2 0 0 0 2-2V9"/><path d="M4 5v13a2 2 0 0 0 2 2h13"/>
-        <path d="M8 9h5M8 13h7M8 17h7"/></svg>
-    </button>
-    <button class="nav__b" type="button" id="nav-agenda" aria-label="Agenda do mês" title="Agenda do mês">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
-        <rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
-    </button>
-    <button class="nav__b" type="button" id="nav-todos" aria-label="Todos os sistemas" title="Todos os sistemas">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
-        <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/>
-        <rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+    <!-- A marca é um botão: clicar nela volta ao Início, como em
+         qualquer site. O nome ao lado some quando a barra encolhe. -->
+    <button class="nav__marca" type="button" id="nav-logo" title="Voltar ao Início">
+      <img src="assets/simbolo-escuro.png" alt="" width="30" height="30">
+      <span class="nav__marca-t">Hub Totali</span>
     </button>
 
-    <a class="nav__b nav__b--fim" href="admin.html" id="nav-admin"
-       aria-label="Administração" title="Administração">
+    <button class="nav__b on" type="button" id="nav-inicio" title="Início">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
-           stroke-linecap="round" stroke-linejoin="round">
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 10l9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+      <span class="nav__rot">Início</span>
+    </button>
+    <button class="nav__b" type="button" id="nav-pendencias" title="Pendências">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M9 11l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 10h18"/></svg>
+      <span class="nav__rot">Pendências</span>
+    </button>
+    <button class="nav__b" type="button" id="nav-sistemas" title="Sistemas">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+        <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/>
+        <rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      <span class="nav__rot">Sistemas</span>
+    </button>
+    <button class="nav__b" type="button" id="nav-noticias" title="Notícias oficiais">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 5h13a2 2 0 0 1 2 2v11a2 2 0 0 0 2-2V9"/><path d="M4 5v13a2 2 0 0 0 2 2h13"/>
+        <path d="M8 9h5M8 13h7M8 17h7"/></svg>
+      <span class="nav__rot">Notícias</span>
+    </button>
+    <button class="nav__b" type="button" id="nav-agenda" title="Agenda tributária">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+      <span class="nav__rot">Agenda</span>
+    </button>
+
+    <a class="nav__b nav__b--fim" href="admin.html" id="nav-admin" title="Administração">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <circle cx="12" cy="12" r="3"/>
         <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      <span class="nav__rot">Administração</span>
     </a>
 
     <img class="nav__totali" src="assets/totali-branca.png" alt="Totali Soluções Contábeis">
   </nav>
 
   <header class="cab">
-    <img class="cab__logo" src="assets/logo-hub.png" alt="Hub Totali">
-    <span class="marca__nome" id="marca-nome" hidden>Hub Totali</span>
-    <!-- O nome da vista aberta, para quem não está no Início saber
-         onde está. No Início fica escondido: a tela fala por si. -->
-    <span class="cab__vista" id="cab-vista" hidden></span>
+    <button class="cab__marca" type="button" id="cab-logo" title="Voltar ao Início">
+      <img class="cab__logo" src="assets/logo-hub.png" alt="Hub Totali">
+      <span class="marca__nome" id="marca-nome" hidden>Hub Totali</span>
+    </button>
+    <!-- Onde a pessoa está. Muda com a barra. -->
+    <div class="cab__onde">
+      <span class="cab__vista" id="cab-vista">Início</span>
+      <span class="cab__sub" id="cab-sub"></span>
+    </div>
     <div class="busca">
       <svg class="busca__lupa" viewBox="0 0 24 24" fill="none" stroke="currentColor"
            stroke-width="2" stroke-linecap="round" aria-hidden="true">
@@ -159,41 +175,61 @@
   </header>
 
   <!-- ===================== INÍCIO ===================== -->
-  <main class="centro" id="centro"></main>
-
-  <aside class="trilho" id="trilho" aria-label="Hoje e notícias">
-
-    <!-- O que a pessoa precisa ver ao abrir o Hub de manhã: o que
-         atrasou, o que é para hoje, e uma caixa para anotar sem sair
-         daqui. O quadro inteiro é a vista Pendências. -->
-    <section class="cartao cartao--hoje" id="pend-hoje" aria-label="Minhas pendências de hoje">
-      <div class="cartao__cab">
-        <span class="cartao__t">Hoje</span>
-        <span class="cartao__sub" id="pend-hoje-txt"></span>
-        <button class="cartao__acao" type="button" id="pend-hoje-abrir">Abrir o quadro ›</button>
+  <!-- O resumo do dia, na ordem em que importa de manhã: o que está
+       atrasado e o que é para hoje (com uma caixa para anotar sem
+       sair daqui), os vencimentos dos próximos dias, os sistemas que
+       a pessoa marcou e as notícias que valem a pena. Cada cartão
+       tem o seu "ver tudo", que leva à vista inteira. -->
+  <section class="vista vista--inicio" id="vista-inicio" aria-label="Início">
+    <div class="ini">
+      <div class="ini__principal">
+        <section class="cartao cartao--hoje" id="pend-hoje" aria-label="Minhas pendências">
+          <div class="cartao__cab">
+            <span class="cartao__t">Minhas pendências</span>
+            <span class="cartao__sub" id="pend-hoje-txt"></span>
+            <button class="cartao__acao" type="button" id="pend-hoje-abrir">Abrir o quadro ›</button>
+          </div>
+          <div class="hj__barra" role="progressbar" aria-label="Progresso de hoje" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="pend-hoje-prog"></i></div>
+          <div class="hj__nova">
+            <input class="hj__cx" type="text" id="pend-hoje-nova" maxlength="400"
+                   placeholder="Anotar pendência… (ex.: DAE da Alfa até sexta no fiscal)"
+                   aria-label="Anotar pendência">
+            <span class="hj__dica" id="pend-hoje-dica" hidden></span>
+          </div>
+          <div id="pend-hoje-lista"></div>
+          <div class="hj__pe" id="pend-hoje-pe"></div>
+        </section>
       </div>
-      <div class="hj__barra" role="progressbar" aria-label="Progresso de hoje" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="pend-hoje-prog"></i></div>
-      <div class="hj__nova">
-        <input class="hj__cx" type="text" id="pend-hoje-nova" maxlength="400"
-               placeholder="Anotar pendência… (ex.: DAE da Alfa até sexta no fiscal)"
-               aria-label="Anotar pendência">
-        <span class="hj__dica" id="pend-hoje-dica" hidden></span>
-      </div>
-      <div id="pend-hoje-lista"></div>
-    </section>
 
-    <!-- As notícias que importam, das fontes oficiais. O arquivo é
-         atualizado de hora em hora pelo robô; a tela só lê. -->
-    <section class="cartao cartao--noticias" id="noticias-rail" aria-label="Notícias oficiais">
-      <div class="cartao__cab">
-        <span class="cartao__t">Notícias oficiais</span>
-        <button class="cartao__acao" type="button" id="noticias-ver-todas">Ver todas ›</button>
-      </div>
-      <div id="noticias-rail-lista"></div>
-      <div class="cartao__pe" id="noticias-rail-pe"></div>
-    </section>
+      <div class="ini__lado">
+        <section class="cartao cartao--prazos" id="prox-prazos" aria-label="Próximos vencimentos">
+          <div class="cartao__cab">
+            <span class="cartao__t">Próximos vencimentos</span>
+            <span class="cartao__sub" id="prox-prazos-sub"></span>
+            <button class="cartao__acao" type="button" id="prox-prazos-abrir">Agenda ›</button>
+          </div>
+          <div id="prox-prazos-lista"></div>
+        </section>
 
-  </aside>
+        <section class="cartao cartao--favoritos" id="ini-favoritos" aria-label="Meus sistemas">
+          <div class="cartao__cab">
+            <span class="cartao__t" id="ini-favoritos-t">Meus favoritos</span>
+            <button class="cartao__acao" type="button" id="ini-favoritos-abrir">Todos os sistemas ›</button>
+          </div>
+          <div id="ini-favoritos-lista"></div>
+        </section>
+
+        <section class="cartao cartao--noticias" id="noticias-rail" aria-label="Notícias oficiais">
+          <div class="cartao__cab">
+            <span class="cartao__t">Notícias oficiais</span>
+            <button class="cartao__acao" type="button" id="noticias-ver-todas">Ver todas ›</button>
+          </div>
+          <div id="noticias-rail-lista"></div>
+          <div class="cartao__pe" id="noticias-rail-pe"></div>
+        </section>
+      </div>
+    </div>
+  </section>
 
   <!-- ===================== PENDÊNCIAS ===================== -->
   <!-- O quadro, inteiro, como no Pendências Totali. A classe .pend
@@ -274,7 +310,7 @@
       </form>
       <input id="cliBusca" class="pbusca pbusca--cheia" type="search" placeholder="Buscar por nome, apelido ou CNPJ" aria-label="Buscar cliente">
       <div class="lcli" id="lsCli"></div>
-      <div class="dica">Também dá para cadastrar escrevendo a pendência assim: “DAE da Empresa Alfa (Empresa Alfa é uma empresa que o CNPJ é 12.345.678/0001-95)”. O parêntese some e a empresa fica gravada.</div>
+      <div class="dica">Os clientes da casa vêm da administração do Hub e valem para todo mundo: aqui você pode dar apelidos a eles e acrescentar os seus. Também dá para cadastrar escrevendo a pendência assim: “DAE da Empresa Alfa (Empresa Alfa é uma empresa que o CNPJ é 12.345.678/0001-95)”.</div>
       <div class="linha"><span class="esp"></span><button class="sec" id="fechaCli" type="button">Fechar</button></div>
     </div>
   </div>
@@ -307,6 +343,16 @@
   <div class="toast" id="toast" hidden></div>
   </section>
 
+  <!-- ===================== SISTEMAS ===================== -->
+  <!-- Todos os links da casa, na ordem da administração: os
+       favoritos da pessoa em cima, depois os grupos à vista e, por
+       fim, os grupos "de gaveta" (órgãos, impostos e consultas),
+       abertos aqui mesmo em vez de numa janela por cima. A busca do
+       cabeçalho procura nesta lista. -->
+  <section class="vista vista--sistemas" id="vista-sistemas" hidden aria-label="Sistemas">
+    <div class="sis" id="centro"></div>
+  </section>
+
   <!-- ===================== NOTÍCIAS ===================== -->
   <section class="vista vista--noticias" id="vista-noticias" hidden aria-label="Notícias oficiais">
     <div class="vn">
@@ -328,19 +374,16 @@
     </div>
   </section>
 
+  <!-- ===================== AGENDA ===================== -->
+  <!-- O mês inteiro, em lista por dia: hoje, amanhã, esta semana,
+       depois — e o que já venceu, apagado mas à vista. As obrigações
+       federais são conferidas com a agenda oficial da Receita. -->
+  <section class="vista vista--agenda" id="vista-agenda" hidden aria-label="Agenda tributária">
+    <div class="ag" id="agenda-vista"></div>
+  </section>
+
   <div class="avisos" id="avisos" aria-label="Avisos"></div>
 
-</div>
-
-<!-- Painel dos órgãos e da agenda do mês -->
-<div class="painel" id="painel" role="dialog" aria-modal="true" aria-labelledby="painel-t">
-  <div class="painel__caixa">
-    <div class="painel__cab">
-      <span class="painel__t" id="painel-t">Órgãos, impostos e consultas</span>
-      <button class="painel__x" type="button" id="painel-x" aria-label="Fechar">×</button>
-    </div>
-    <div id="painel-corpo"></div>
-  </div>
 </div>
 
 <!-- A ordem importa: o Hub (dados, agenda) antes do quadro, porque

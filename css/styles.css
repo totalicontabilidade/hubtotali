@@ -8,10 +8,12 @@
 
    O QUE ESTÁ DECIDIDO AQUI, e por quê:
 
-   TRÊS ZONAS, cada uma com um assunto. Barra de navegação
-   escura à esquerda; sistemas e agenda no centro; pendências
-   no trilho da direita; avisos numa faixa fina no rodapé. Nada
-   se mistura, e nenhuma zona pode crescer para dentro da outra.
+   UMA BARRA, CINCO VISTAS (desde 09/11/2026). Barra de navegação
+   escura à esquerda, com ícone E nome — a equipe usa o Hub o dia
+   inteiro, e "uma palavra vale mil ícones" (NN/g). À direita, uma
+   vista de cada vez, ocupando a tela toda: Início, Pendências,
+   Sistemas, Notícias, Agenda. Avisos numa faixa fina no rodapé.
+   Nada se mistura, e nenhuma zona cresce para dentro da outra.
 
    ITEM SEM MOLDURA. O sistema é ícone, nome e legenda soltos
    sobre o fundo — sem retângulo em volta de retângulo, que foi
@@ -74,11 +76,15 @@ a{color:inherit;text-decoration:none}
 
 /* ============================================================
    1 · A planta
+   ------------------------------------------------------------
+   Duas colunas: a barra (184px, com ícone e nome) e a vista
+   aberta. Três linhas: cabeçalho, vista, faixa de avisos. A vista
+   rola por dentro; a planta não rola nunca.
    ============================================================ */
 .tela{
   height:100vh;
   display:grid;
-  grid-template-columns:64px minmax(0,1fr) 400px;
+  grid-template-columns:184px minmax(0,1fr);
   grid-template-rows:auto minmax(0,1fr) auto;
   overflow:hidden;
   position:relative;
@@ -93,54 +99,63 @@ a{color:inherit;text-decoration:none}
 }
 .tela > *{position:relative;z-index:1}
 
-/* ---------- barra de navegação ---------- */
+/* ---------- barra de navegação ----------
+   Ícone com o nome ao lado, alinhados à esquerda: o olho varre a
+   borda esquerda e lê. A pesquisa é unânime nisso — ícone sozinho
+   só serve para casa, lupa e impressora; o resto a pessoa tem de
+   adivinhar e depois lembrar. */
 .nav{grid-row:1/-1;grid-column:1;background:var(--nav);
-     display:flex;flex-direction:column;align-items:center;gap:5px;padding:14px 0}
-.nav__logo{width:32px;height:32px;object-fit:contain;margin-bottom:12px}
-.nav__b{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
-        color:var(--nav-txt);transition:background .14s,color .14s}
+     display:flex;flex-direction:column;align-items:stretch;gap:3px;padding:14px 10px}
+.nav__marca{display:flex;align-items:center;gap:10px;padding:4px 8px 16px;color:#fff;
+            text-align:left;border-radius:10px}
+.nav__marca img{width:30px;height:30px;object-fit:contain;flex:none}
+.nav__marca-t{font-size:15px;font-weight:720;letter-spacing:-.01em;white-space:nowrap}
+.nav__marca:hover .nav__marca-t{text-decoration:underline;text-underline-offset:3px}
+.nav__b{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:11px;
+        color:var(--nav-txt);font-size:13.5px;font-weight:600;text-align:left;
+        transition:background .14s,color .14s;position:relative}
 .nav__b:hover{background:rgba(255,255,255,.10);color:#fff}
 .nav__b.on{background:rgba(255,255,255,.15);color:#fff}
-.nav__b svg{width:19px;height:19px}
-/* A logo da Totali fecha o trilho, empurrada para o pé. Some no
-   celular: lá o trilho vira barra de navegação e cada pixel de
-   largura é para o polegar. */
-/* A porta da administração fica separada dos quatro botões de
-   navegação por um vão: ela não é "mais uma seção", é outra
-   natureza de coisa — sai do Hub e vai para a tela de quem edita.
-   O vão é o que diz isso sem precisar de rótulo. */
+.nav__b svg{width:19px;height:19px;flex:none}
+.nav__rot{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+/* A porta da administração fica separada por um vão: ela não é
+   "mais uma seção", é outra natureza de coisa — sai do Hub e vai
+   para a tela de quem edita. */
 .nav__b--fim{margin-top:auto;opacity:.6}
 .nav__b--fim:hover{opacity:1}
-
-.nav__totali{margin-top:14px;width:44px;height:auto;opacity:.75;
-             transition:opacity .16s}
+.nav__totali{margin:16px auto 0;width:44px;height:auto;opacity:.75;transition:opacity .16s}
 .nav__totali:hover{opacity:1}
 
-/* O pisca de quem acabou de ser apontado pela barra. Um contorno
-   que aparece e some — nada de sacudir a caixa, que atrapalha
-   quem está lendo ao lado. */
+/* O selo de pendências fica no fim da linha, ao lado do nome. */
+.nav__selo{margin-left:auto;min-width:19px;height:19px;padding:0 6px;border-radius:99px;
+           background:var(--estado);color:#fff;font-size:11px;font-weight:700;line-height:19px;
+           text-align:center;flex:none}
+.nav__selo--alerta{background:var(--alerta)}
+.nav__selo--neutro{background:rgba(255,255,255,.25)}
+
+/* O pisca de quem acabou de ser apontado. */
 @keyframes achei{
   0%  {box-shadow:0 0 0 0 rgba(44,90,143,0)}
   25% {box-shadow:0 0 0 3px rgba(44,90,143,.42)}
   100%{box-shadow:0 0 0 0 rgba(44,90,143,0)}
 }
 .achei{animation:achei 1.05s ease-out;border-radius:14px}
-
-/* Quem prefere o computador sem animação não recebe nenhuma. */
 @media (prefers-reduced-motion:reduce){
   .achei{animation:none;outline:2px solid var(--estado);outline-offset:2px}
 }
 
 /* ---------- cabeçalho ---------- */
-.cab{grid-column:2/-1;grid-row:1;display:flex;align-items:center;gap:18px;padding:12px 24px;
+.cab{grid-column:2;grid-row:1;display:flex;align-items:center;gap:18px;padding:11px 24px;
      background:rgba(255,255,255,.74);border-bottom:1px solid rgba(255,255,255,.7);
      -webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4)}
-.cab__logo{height:38px;width:auto}
+.cab__marca{display:flex;align-items:center;border-radius:9px;padding:2px}
+.cab__marca:hover{background:rgba(255,255,255,.9)}
+.cab__logo{height:36px;width:auto}
+.cab__onde{display:flex;flex-direction:column;min-width:0;padding-left:16px;border-left:1px solid var(--fio-2)}
+.cab__vista{font-size:16px;font-weight:720;color:var(--txt);letter-spacing:-.01em;line-height:1.2}
+.cab__sub{font-size:11.5px;color:var(--txt-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cab__sub:empty{display:none}
 .rel{margin-left:auto;display:flex;align-items:center;gap:13px}
-/* Hora em largura fixa: sem isso, cada minuto empurra a data um
-   pixel para o lado e o canto da tela treme o dia inteiro. */
-/* Trocados de tamanho: a saudação é o que a pessoa lê primeiro, a
-   hora é só referência. Quem abre o Hub não veio ver a hora. */
 .rel__h{font-family:var(--mono);font-size:14.5px;font-weight:660;font-variant-numeric:tabular-nums;color:var(--txt-2)}
 .rel__d{font-size:10px;color:var(--txt-3);text-transform:uppercase;letter-spacing:.07em;margin-top:2px}
 .rel__risco{width:1px;height:28px;background:var(--fio)}
@@ -151,11 +166,9 @@ a{color:inherit;text-decoration:none}
 .rel__sub{font-size:11.5px;color:var(--txt-2);margin-top:2px}
 .rel__sub b{color:var(--alerta);font-weight:700}
 
-/* ---------- centro e trilho ---------- */
-.centro{grid-column:2;grid-row:2;overflow:auto;padding:18px 24px;
-        display:flex;flex-direction:column;gap:12px}
-.trilho{grid-column:3;grid-row:2;overflow:auto;padding:18px 18px 18px 14px;
-        display:flex;flex-direction:column;gap:12px}
+/* ---------- a vista ----------
+   Uma por vez, à direita da barra, rolando por dentro. */
+.vista{grid-column:2;grid-row:2;overflow:auto;min-width:0;padding:18px 24px 28px}
 
 /* ============================================================
    2 · Blocos e sistemas
@@ -357,67 +370,60 @@ a{color:inherit;text-decoration:none}
 }
 
 /* ============================================================
-   5 · O painel dos órgãos
-   ============================================================ */
-.painel{position:fixed;inset:0;z-index:80;display:none;place-items:center;padding:24px;
-        background:rgba(13,25,38,.45)}
-.painel.on{display:grid}
-.painel__caixa{background:#fff;border-radius:18px;width:100%;max-width:860px;max-height:82vh;
-               overflow:auto;padding:22px 24px;box-shadow:0 30px 70px rgba(13,25,38,.3)}
-.painel__cab{display:flex;align-items:center;margin-bottom:16px}
-.painel__t{font-size:17px;font-weight:730}
-.painel__x{margin-left:auto;font-size:24px;line-height:1;color:var(--txt-3);padding:0 6px}
-.painel__x:hover{color:var(--txt)}
-.painel__g + .painel__g{margin-top:18px}
-.painel__rot{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.17em;
-             text-transform:uppercase;color:var(--txt-3);display:block;margin-bottom:9px}
-/* ============================================================
    6 · Responsivo — mobile first
    ============================================================ */
+/* Tela média (notebook pequeno): a barra encolhe para ícone com o
+   nome embaixo, em letra miúda. O nome continua, só muda de lugar. */
+@media (max-width:1180px){
+  .tela{grid-template-columns:84px minmax(0,1fr)}
+  .nav{padding:12px 6px;gap:2px}
+  .nav__marca{justify-content:center;padding:2px 0 12px}
+  .nav__marca-t{display:none}
+  .nav__b{flex-direction:column;gap:5px;padding:9px 4px;font-size:10.5px;font-weight:640;text-align:center}
+  .nav__b svg{width:20px;height:20px}
+  .nav__rot{max-width:100%}
+  .nav__selo{position:absolute;top:4px;right:8px;margin:0;min-width:17px;height:17px;line-height:17px;font-size:10px;padding:0 4px}
+  .nav__totali{width:36px}
+}
+
 @media (max-width:900px){
   .tela{height:auto;min-height:100vh;grid-template-columns:1fr;
-        grid-template-rows:auto auto auto auto;overflow:visible;padding-bottom:64px}
+        grid-template-rows:auto auto auto;overflow:visible;padding-bottom:64px}
 
   /* A barra vai para o rodapé: polegar não alcança o topo de um
-     telefone de seis polegadas, alcança o pé. */
+     telefone de seis polegadas, alcança o pé. Os nomes ficam, em
+     letra miúda embaixo do ícone. */
   .nav{grid-row:auto;grid-column:1;position:fixed;left:0;right:0;bottom:0;top:auto;
-       flex-direction:row;justify-content:space-around;align-items:center;
-       height:60px;padding:0 8px;z-index:60;box-shadow:0 -2px 16px rgba(13,25,38,.18)}
-  .nav__logo,.nav__totali{display:none}
-  .nav__b{width:52px;height:44px;border-radius:11px}
-  /* Deitada, a barra distribui os cinco por igual: o vão que
-     separava a administração no computador não existe aqui, e
-     "margin-top:auto" numa linha empurraria o ícone para baixo. */
+       flex-direction:row;justify-content:space-around;align-items:stretch;
+       height:62px;padding:4px 4px 6px;z-index:60;box-shadow:0 -2px 16px rgba(13,25,38,.18)}
+  .nav__marca,.nav__totali{display:none}
+  .nav__b{flex:1 1 0;min-width:0;flex-direction:column;justify-content:center;gap:3px;padding:4px 2px;
+          border-radius:10px;font-size:10px}
+  .nav__b svg{width:21px;height:21px}
   .nav__b--fim{margin-top:0;opacity:.6}
+  .nav__selo{top:2px;right:calc(50% - 20px)}
 
   .cab{grid-column:1;grid-row:1;padding:10px 16px;gap:12px;flex-wrap:wrap}
-  .cab__logo{height:32px}
+  .cab__logo{height:30px}
+  .cab__onde{padding-left:10px}
+  .cab__vista{font-size:14.5px}
+  .cab__sub{display:none}
 
-  /* Pendências antes dos sistemas: no telefone não há largura
-     para as duas lado a lado, e aí quem vem primeiro é quem
-     importa mais. */
-  .trilho{grid-column:1;grid-row:2;padding:14px 16px 0;overflow:visible}
-  .centro{grid-column:1;grid-row:3;padding:14px 16px;overflow:visible;gap:10px}
-  .avisos{grid-column:1;grid-row:4;padding:0 16px;overflow-x:auto}
+  .vista{grid-column:1;grid-row:2;overflow:visible;padding:14px 16px}
+  .avisos{grid-column:1;grid-row:3;padding:0 16px;overflow-x:auto}
 
   .grade{grid-template-columns:1fr}
-  /* UMA COLUNA. Os 96px de antes eram a largura de um cartão que
-     tinha só um dia e um nome; agora cada cartão traz o dia, o dia
-     da semana e a lista das obrigações daquela data — em 96px,
-     "EFD-Contribuições" quebraria em quatro linhas. */
   .agenda{grid-template-columns:1fr;gap:8px}
 }
 
 @media (max-width:420px){
   .cab{padding:9px 13px}
-  .cab__logo{height:28px}
+  .cab__logo{height:26px}
   .rel__h{font-size:13.5px}
   .rel__ola{font-size:15.5px}
-  .centro,.trilho{padding:12px 13px}
+  .vista{padding:12px 13px}
   .avisos{padding:0 13px}
   .agenda{grid-template-columns:1fr 1fr}
-  .painel{padding:0}
-  .painel__caixa{max-height:100vh;border-radius:0;height:100vh}
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -536,7 +542,7 @@ a{color:inherit;text-decoration:none}
 }
 
 /* Sair fica no canto, discreto: é uma saída, não um convite. */
-.cab__sair{margin-left:14px;border:1px solid var(--fio-2);border-radius:8px;
+.cab__sair{margin-left:0;border:1px solid var(--fio-2);border-radius:8px;
            background:transparent;color:var(--txt-3);font:inherit;
            font-size:12.5px;padding:6px 11px;cursor:pointer;
            transition:color .14s,border-color .14s}
@@ -573,50 +579,111 @@ a{color:inherit;text-decoration:none}
 @media (max-width:900px){
   .busca{display:none}
 }
-/* O selo de pendências no ícone da barra. Fica no canto de cima,
-   mordendo a borda do botão, que é onde a convenção manda e onde
-   o olho já procura. */
-.nav__b{position:relative}
-.nav__selo{position:absolute;top:-2px;right:-2px;min-width:17px;height:17px;
-           padding:0 4px;border-radius:99px;background:var(--estado);color:#fff;
-           font-size:10.5px;font-weight:700;line-height:17px;text-align:center;
-           box-shadow:0 0 0 2px var(--nav)}
-.nav__selo--alerta{background:var(--alerta)}
-/* O mês fechado, no painel: o que já venceu recua sem sumir. */
-.agenda--cheia{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
-.prazo--passou{opacity:.5}
-.prazo--passou .prazo__d{color:var(--txt-3)}
 
 /* ============================================================
    7 · As vistas
    ------------------------------------------------------------
-   Início, Pendências e Notícias dividem a mesma planta. O Início
-   usa o centro e o trilho; as outras duas ocupam a largura toda
-   (colunas 2 até o fim) com rolagem própria. A barra decide qual
-   está à vista pelo atributo data-vista da .tela; o resto some.
+   Cinco, uma à vista por vez. O atributo hidden de cada <section>
+   decide; o data-vista da .tela serve para o CSS que precisa saber
+   qual está aberta (a emenda do quadro, por exemplo).
    ============================================================ */
-.vista{grid-column:2/-1;grid-row:2;overflow:auto;min-width:0}
-.vista--noticias{padding:18px 24px 28px}
-.tela[data-vista="pendencias"] .centro,.tela[data-vista="pendencias"] .trilho,
-.tela[data-vista="noticias"]   .centro,.tela[data-vista="noticias"]   .trilho{display:none}
-.tela[data-vista="inicio"] .vista{display:none}
-/* Fora do Início a busca de sistemas não procura nada que esteja à
-   vista; ela continua existindo pelo atalho "/", que volta ao Início. */
-.cab__vista{font-size:15px;font-weight:700;color:var(--txt-2);letter-spacing:-.01em;
-            padding-left:14px;border-left:1px solid var(--fio-2)}
+.vista--inicio{padding-bottom:32px}
+
+/* ---------- Início: o resumo do dia ----------
+   Duas colunas: as pendências da pessoa, largas, à esquerda; à
+   direita, os vencimentos próximos, os favoritos e as notícias.
+   Em tela estreita vira uma coluna, na mesma ordem de importância. */
+.ini{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(320px,.9fr);gap:16px;
+     max-width:1480px;margin:0 auto;align-items:start}
+.ini__principal,.ini__lado{display:flex;flex-direction:column;gap:14px;min-width:0}
+@media (max-width:1100px){
+  .ini{grid-template-columns:1fr}
+}
+.cartao--hoje .cartao__t{font-size:16px}
+.cartao--hoje .hj__i{padding:10px 8px 10px 10px}
+.cartao--hoje .hj__o{font-size:13.5px}
+.hj__pe{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;padding-top:9px;border-top:1px solid var(--fio);
+        font-size:11.5px;color:var(--txt-3)}
+.hj__pe:empty{display:none}
+.hj__pe b{color:var(--txt-2);font-weight:700}
+.hj__faixa--semana .hj__faixa-t{color:#6f4bb6}
+.hj__faixa--semana .hj__faixa-n{background:#efe9f9;color:#6f4bb6}
+.hj__i--semana{border-left-color:#b9a6e3}
+.hj__i--semana .hj__chk{border-color:#b9a6e3}
+
+/* ---------- Início: próximos vencimentos ---------- */
+.px{display:flex;flex-direction:column;gap:4px}
+.px__i{display:flex;align-items:flex-start;gap:10px;padding:7px 8px;border-radius:10px;background:rgba(255,255,255,.6);
+       border-left:3px solid var(--fio-2)}
+.px__i--hoje{border-left-color:var(--alerta)}
+.px__i--perto{border-left-color:var(--estado)}
+.px__d{flex:none;width:38px;text-align:center;font-family:var(--mono);font-weight:730;font-size:16px;line-height:1.05;
+       color:var(--txt-2)}
+.px__d small{display:block;font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--txt-3);margin-top:2px}
+.px__i--hoje .px__d{color:var(--alerta)}
+.px__i--perto .px__d{color:var(--estado)}
+.px__txt{min-width:0;flex:1}
+.px__n{font-size:12.5px;font-weight:640;line-height:1.3}
+.px__m{display:flex;gap:6px;flex-wrap:wrap;align-items:baseline;margin-top:2px;font-size:10.5px;color:var(--txt-3)}
+.px__quando{font-weight:700;color:var(--txt-2)}
+.px__i--hoje .px__quando{color:var(--alerta)}
+.px__mais{display:block;width:100%;text-align:left;padding:7px 8px;border-radius:9px;font-size:12.5px;font-weight:640;color:var(--estado)}
+.px__mais:hover{background:var(--estado-luz)}
+
+/* ---------- Início: favoritos compactos ---------- */
+.fv{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:2px 6px}
+.fv .item{padding:7px 8px;gap:9px}
+.fv .ico{width:32px;height:32px;border-radius:9px}
+.fv .ico img{width:22px;height:22px}
+.fv .ico--sigla{font-size:11px}
+.fv .item__n{font-size:12.5px}
+.fv .item__x{display:none}
+.fv .item-caixa .item{padding-right:8px}
+.fv .estrela{display:none}
+
+/* ---------- Sistemas: a lista inteira ---------- */
+.sis{max-width:1400px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.sis__rot{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.17em;
+          text-transform:uppercase;color:var(--txt-3);display:block;margin:4px 0 8px}
+.bloco--gaveta .bloco__cab{margin-bottom:6px}
+.sis__g + .sis__g{margin-top:12px;padding-top:12px;border-top:1px solid var(--fio)}
+
+/* ---------- Agenda: o mês em lista ---------- */
+.ag{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+.ag__cab{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.ag__t{font-size:22px;font-weight:760;letter-spacing:-.02em}
+.ag__t::first-letter{text-transform:uppercase}
+.ag__nav{display:flex;align-items:center;gap:4px;margin-left:auto}
+.ag__b{border:1px solid var(--fio-2);background:#fff;color:var(--txt-2);border-radius:9px;padding:6px 11px;
+       font-size:12.5px;font-weight:640;transition:border-color .14s,color .14s}
+.ag__b:hover{border-color:var(--estado);color:var(--estado)}
+.ag__b:disabled{opacity:.4;cursor:default}
+.ag__sec{display:flex;flex-direction:column;gap:8px}
+.ag__sec-t{display:flex;align-items:baseline;gap:8px;font-size:12px;font-weight:730;letter-spacing:.06em;
+           text-transform:uppercase;color:var(--txt-2);padding-left:2px}
+.ag__sec-t small{font-family:var(--mono);font-size:10.5px;font-weight:600;color:var(--txt-3);letter-spacing:0;text-transform:none}
+.ag__sec--hoje .ag__sec-t{color:var(--alerta)}
+.ag__sec--amanha .ag__sec-t,.ag__sec--semana .ag__sec-t{color:var(--estado)}
+.ag__sec--venceu .prazo{opacity:.55}
+.ag__sec--venceu .prazo__d{color:var(--txt-3)}
+.ag__vazio{font-size:13px;color:var(--txt-2);padding:14px 2px}
+.ag .agenda{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.ag .prazo{background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.85);box-shadow:0 4px 16px rgba(13,25,38,.04)}
+@media (max-width:900px){
+  .ag .agenda{grid-template-columns:1fr}
+}
 
 /* ============================================================
-   8 · Os cartões do trilho: Hoje e Notícias
+   8 · Os cartões do Início
    ------------------------------------------------------------
-   Dois cartões empilhados, cada um com cabeçalho, conteúdo e uma
-   ação no canto. O de cima é o de hoje: é o que a pessoa veio
-   ver. As notícias ficam abaixo e crescem até o fim do trilho.
+   Cada um com cabeçalho, conteúdo e uma ação no canto que leva à
+   vista inteira. O de pendências é o maior e vem primeiro: é o
+   que a pessoa veio ver de manhã.
    ============================================================ */
 .cartao{background:rgba(255,255,255,.76);border:1px solid rgba(255,255,255,.85);border-radius:var(--r);
         padding:14px 15px 12px;box-shadow:0 6px 22px rgba(13,25,38,.05);
         -webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);
         display:flex;flex-direction:column;flex:0 0 auto;min-height:0}
-.cartao--noticias{flex:1 0 auto}
 .cartao__cab{display:flex;align-items:baseline;gap:8px;margin-bottom:8px;flex-wrap:wrap}
 .cartao__t{font-size:14px;font-weight:730}
 .cartao__sub{font-size:11.5px;color:var(--txt-3);min-width:0}
@@ -734,9 +801,6 @@ a{color:inherit;text-decoration:none}
 .vn__fonte:hover{color:var(--estado);border-color:var(--estado)}
 .vn__fonte--fora{color:#8a6100;border-bottom-style:dashed}
 .vn__nota{font-size:11.5px;color:var(--txt-3);line-height:1.5}
-
-/* Selo neutro: notícias novas não são alerta, são novidade. */
-.nav__selo--neutro{background:var(--txt-2)}
 
 /* ============================================================
    9 · O quadro dentro do Hub: o que a folha dele não sabe

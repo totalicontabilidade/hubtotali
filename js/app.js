@@ -21,6 +21,12 @@
    3. A TELA DESENHA NA HORA com a última cópia guardada no
       navegador e se atualiza sozinha se o servidor tiver algo
       mais novo. Ninguém espera rede para ver o Hub.
+
+   4. CINCO VISTAS, UMA POR VEZ (desde 09/11/2026). Início é o
+      resumo do dia; Pendências é o quadro; Sistemas é a lista da
+      casa inteira; Notícias e Agenda têm as suas. Nada abre por
+      cima de nada: a antiga janela dos órgãos e a da agenda do
+      mês viraram vistas, com lugar e nome na barra.
    ============================================================ */
 
 (function () {
@@ -119,6 +125,7 @@
       a.target = "_blank";
       a.rel = "noopener noreferrer";
       a.setAttribute("aria-label", i.nome);
+      a.addEventListener("click", function () { contarUso(i.nome); });
     }
     a.appendChild(icone(i));
     var t = el("div", "item__txt");
@@ -699,9 +706,77 @@
     centro.appendChild(b);
   }
 
+  /* ---------- Mais usados ----------
+     Contado neste navegador, sem banco: é só uma pista de onde a
+     pessoa clica mais, e a pista vale para a máquina em que ela
+     clicou. Entra como bloco quando há o que mostrar e fica no
+     lugar de sempre — o resto da lista não se mexe, então a memória
+     do olho não se perde. */
+  var CHAVE_USO = "hub-totali:uso";
+
+  function lerUso() {
+    try { var u = JSON.parse(window.localStorage.getItem(CHAVE_USO) || "{}"); return (u && typeof u === "object") ? u : {}; }
+    catch (e) { return {}; }
+  }
+
+  function contarUso(nome) {
+    try {
+      var u = lerUso();
+      u[nome] = (u[nome] || 0) + 1;
+      window.localStorage.setItem(CHAVE_USO, JSON.stringify(u));
+    } catch (e) {}
+  }
+
+  function maisUsados(quantos) {
+    var u = lerUso();
+    return Object.keys(u)
+      .filter(function (n) { return u[n] >= 2 && appDaCasa(n); })
+      .sort(function (a, b) { return u[b] - u[a]; })
+      .slice(0, quantos)
+      .map(appDaCasa);
+  }
+
+  function desenharMaisUsados(centro) {
+    var lista = maisUsados(8);
+    if (lista.length < 3) return;
+    var b = bloco("Mais usados", lista.length);
+    var grade = el("div", "grade");
+    lista.forEach(function (i) { grade.appendChild(item(i)); });
+    b.appendChild(grade);
+    centro.appendChild(b);
+  }
+
+  /* O cartão de sistemas do Início: os favoritos, compactos. Quem
+     não marcou nenhum vê os mais usados; quem nunca clicou em nada
+     vê um convite. */
+  function desenharFavoritosInicio() {
+    var alvo = document.getElementById("ini-favoritos-lista");
+    var titulo = document.getElementById("ini-favoritos-t");
+    if (!alvo) return;
+    alvo.textContent = "";
+    var daCasa = FAVORITOS.marcados.map(appDaCasa).filter(Boolean);
+    var lista = daCasa.concat(FAVORITOS.meus.map(function (m) {
+      return { nome: m.nome, url: m.url, logoDados: m.logoDados };
+    }));
+    var rotulo = "Meus favoritos";
+    if (!lista.length) { lista = maisUsados(6); if (lista.length) rotulo = "Mais usados"; }
+    if (titulo) titulo.textContent = rotulo;
+    if (!lista.length) {
+      var v = el("div", "cartao__vazio");
+      v.appendChild(el("div", "cartao__vazio-t", "Nenhum favorito ainda."));
+      v.appendChild(el("div", "cartao__vazio-x", "Em Sistemas, clique na estrela dos que você mais usa e eles aparecem aqui."));
+      alvo.appendChild(v);
+      return;
+    }
+    var grade = el("div", "fv");
+    lista.slice(0, 10).forEach(function (i) { grade.appendChild(item(i, true)); });
+    alvo.appendChild(grade);
+  }
+
   function desenharCentro() {
     var centro = document.getElementById("centro");
     centro.textContent = "";
+    desenharFavoritosInicio();
 
     if (FILTRO.trim()) { desenharBusca(centro); return; }
 
@@ -710,32 +785,37 @@
        para achar o que já tinha escolhido — e aí não adiantou
        escolher. */
     desenharFavoritos(centro);
+    desenharMaisUsados(centro);
 
     /* A ORDEM É A DA ADMINISTRAÇÃO. Os grupos de estilo "gaveta"
-       formam UM cartão só ("Órgãos, impostos e consultas"), que
-       ocupa o lugar do primeiro grupo-gaveta da lista. Para subir
-       o cartão, basta subir esse grupo na administração. */
+       formam UM bloco ("Órgãos, impostos e consultas"), ABERTO aqui
+       mesmo, com um rótulo por grupo, no lugar do primeiro
+       grupo-gaveta da lista. Antes era um botão que abria uma
+       janela por cima; numa vista só de sistemas, a janela não faz
+       falta — rolar é mais rápido que abrir e fechar. */
     var resto = guardados();
-    var quantos = resto.reduce(function (n, s) { return n + (s.itens || []).length; }, 0);
     var gavetaFeita = false;
 
     function desenharGaveta() {
-      var gav = el("button", "gaveta");
-      gav.type = "button";
-      gav.appendChild(el("span", "gaveta__c", String(quantos)));
-      var t = el("div");
-      t.appendChild(el("div", "gaveta__t", TITULO_GAVETA));
-      t.appendChild(el("div", "gaveta__s",
-        resto.map(function (s) { return s.titulo; }).join(" · ")));
-      gav.appendChild(t);
-      gav.appendChild(el("span", "gaveta__seta", "›"));
-      gav.addEventListener("click", abrirPainel);
-      centro.appendChild(gav);
+      var quantos = resto.reduce(function (n, s) { return n + (s.itens || []).length; }, 0);
+      if (!quantos) return;
+      var b = bloco(TITULO_GAVETA, quantos);
+      b.classList.add("bloco--gaveta");
+      resto.forEach(function (s) {
+        if (!s.itens || !s.itens.length) return;
+        var g = el("div", "sis__g");
+        g.appendChild(el("span", "sis__rot", s.titulo));
+        var grade = el("div", "grade");
+        s.itens.forEach(function (i) { grade.appendChild(item(i)); });
+        g.appendChild(grade);
+        b.appendChild(g);
+      });
+      centro.appendChild(b);
     }
 
     SETORES_ATUAIS.forEach(function (s) {
       if (s.estilo === "gaveta") {
-        if (!gavetaFeita && quantos) { gavetaFeita = true; desenharGaveta(); }
+        if (!gavetaFeita) { gavetaFeita = true; desenharGaveta(); }
         return;
       }
       if (!s.itens || !s.itens.length) return;
@@ -745,68 +825,6 @@
       b.appendChild(grade);
       centro.appendChild(b);
     });
-
-    /* A agenda vem do motor de regras (js/agenda.js), que calcula
-       os vencimentos do mês corrente e se refaz sozinho na virada
-       do mês. Se alguém quiser mandar uma lista fixa pelo banco,
-       ela vence — mas o normal é a calculada. */
-    if (AGENDA_ATUAL.length) {
-      /* SEM "cresce". A classe existia para o último bloco ocupar
-         a sobra da tela quando a agenda era baixinha. Agora ela
-         tem sete cartões e é mais alta que a sobra — e "cresce"
-         também deixa ENCOLHER, o que fazia o bloco ficar 175px
-         menor que o próprio conteúdo, com as últimas linhas caindo
-         para fora do fundo branco. */
-      var ba = bloco("Agenda do mês", null, false);
-      ba.id = "bloco-agenda";
-      var cabAg = ba.querySelector(".bloco__cab");
-      if (AGENDA_ADE) {
-        var selo = el("span", "agenda__selo", "conferida com a Receita");
-        selo.title = "As obrigações federais foram cruzadas com a agenda oficial (" + AGENDA_ADE + ").";
-        cabAg.appendChild(selo);
-      }
-      var verMes = el("button", "agenda__ver", "mês inteiro ›");
-      verMes.type = "button";
-      verMes.addEventListener("click", abrirAgendaCheia);
-      cabAg.appendChild(verMes);
-      cabAg.appendChild(el("span", "bloco__n",
-        new Date().toLocaleDateString("pt-BR", { month: "long" })));
-      /* UM CARTÃO POR DATA, não por obrigação. Dezoito cartões
-         soltos viravam um paredão em que nada se destacava — e
-         cinco deles vencem no mesmo dia 15, o que a tela não
-         dizia. Agrupados, são oito, e a pergunta que a pessoa faz
-         de manhã ("o que vence hoje?") tem resposta numa olhada.
-
-         O agrupamento usa LISTA, não objeto: chaves como "08" e
-         "09" têm zero à esquerda, e o JavaScript as ordena como
-         texto, jogando-as para depois do dia 30. */
-      var grupos = [];
-      AGENDA_ATUAL.forEach(function (p) {
-        var g = grupos[grupos.length - 1];
-        if (!g || g.dia !== p.dia) { g = { dia: p.dia, semana: p.semana, estado: p.estado, itens: [] }; grupos.push(g); }
-        /* O estado mais urgente do dia manda na cor do grupo. */
-        if (p.estado === "hoje") g.estado = "hoje";
-        else if (p.estado === "perto" && g.estado !== "hoje") g.estado = "perto";
-        g.itens.push(p);
-      });
-
-      var ag = el("div", "agenda");
-      grupos.forEach(function (g) {
-        var x = el("div", "prazo" + (g.estado ? " prazo--" + g.estado : ""));
-
-        var cab = el("div", "prazo__cab");
-        cab.appendChild(el("span", "prazo__d", g.dia));
-        if (g.semana) cab.appendChild(el("span", "prazo__s", g.semana));
-        x.appendChild(cab);
-
-        var lista = el("ul", "prazo__lista");
-        g.itens.forEach(function (i) { lista.appendChild(itemDaAgenda(i)); });
-        x.appendChild(lista);
-        ag.appendChild(x);
-      });
-      ba.appendChild(ag);
-      centro.appendChild(ba);
-    }
   }
 
   /* Um item da agenda: nome, regime, explicação — e o que a Receita
@@ -959,88 +977,142 @@
      letreiro daria um tranco a cada recomeço. */
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(medirAvisos);
 
-  /* ---------- painel dos órgãos ---------- */
-  var painel = document.getElementById("painel");
+  /* ---------- a agenda: a vista e o cartão do Início ----------
+     A agenda calculada (js/agenda.js) é cruzada com a oficial da
+     Receita (agendaDoMes, mais abaixo). Daqui saem duas coisas: a
+     vista Agenda, com o mês inteiro em lista por dia — hoje,
+     amanhã, próximos dias, depois, e o que já venceu apagado —, e
+     o cartão "Próximos vencimentos" do Início, com os dez dias
+     seguintes. Lista, e não grade de calendário: para achar uma
+     data, lista é mais rápida (Hund, Dowell & Müller, 2014), e a
+     grade só ganharia para achar dia da semana, que já está escrito
+     em cada cartão. */
+  var AGENDA_DESLOC = 0;   /* meses depois (ou antes) do atual, na vista */
 
-  function abrirPainel() {
-    var corpo = document.getElementById("painel-corpo");
-    corpo.textContent = "";
-    /* O título precisa ser reposto: a agenda do mês usa a mesma
-       janela e troca o título — sem isto, abrir a agenda e depois
-       este cartão mostrava "Agenda de ..." em cima dos órgãos. */
-    document.getElementById("painel-t").textContent = TITULO_GAVETA;
-    guardados().forEach(function (s) {
-      if (!s.itens || !s.itens.length) return;
-      var b = el("div", "painel__g");
-      b.appendChild(el("span", "painel__rot", s.titulo));
-      var grade = el("div", "grade");
-      s.itens.forEach(function (i) { grade.appendChild(item(i)); });
-      b.appendChild(grade);
-      corpo.appendChild(b);
-    });
-    painel.classList.add("on");
-    document.getElementById("painel-x").focus();
+  function mesRef(desloc) {
+    var h = new Date();
+    return new Date(h.getFullYear(), h.getMonth() + desloc, 1);
   }
-  /* ---------- a agenda do mês inteiro ----------
-     A agenda do centro esconde o que já venceu, e faz bem: prazo
-     vencido no meio dos próximos atrapalha quem está procurando o
-     de amanhã. Só que "o que eu já paguei este mês?" também é
-     pergunta legítima, e para ela não havia resposta em lugar
-     nenhum.
 
-     Este painel mostra o mês fechado, do dia 1 ao 31, com o que
-     passou em cinza. Reaproveita a mesma gaveta dos sistemas: é
-     mais uma coisa que se abre por cima e se fecha no Esc, e não
-     havia motivo para inventar outra. */
-  function abrirAgendaCheia() {
-    if (typeof Agenda === "undefined") return;
+  function rotuloQuando(faltam) {
+    if (faltam < 0) return faltam === -1 ? "venceu ontem" : "venceu há " + (-faltam) + " dias";
+    if (faltam === 0) return "hoje";
+    if (faltam === 1) return "amanhã";
+    return "em " + faltam + " dias";
+  }
 
-    var corpo = document.getElementById("painel-corpo");
-    corpo.textContent = "";
-    document.getElementById("painel-t").textContent =
-      "Agenda de " + new Date().toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
+  /* Os itens de um mês com a data inteira e quantos dias faltam,
+     contados do dia de hoje de verdade (agendaDoMes conta do dia de
+     referência, que aqui é o 1º para trazer o mês fechado). */
+  function itensDoMes(ref) {
+    var ag = agendaDoMes(new Date(ref.getFullYear(), ref.getMonth(), 1));
+    var hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+    var lista = ag.itens.map(function (i) {
+      var d = new Date(ref.getFullYear(), ref.getMonth(), parseInt(i.dia, 10));
+      var faltam = Math.round((d - hoje) / 86400000);
+      var n = {};
+      Object.keys(i).forEach(function (k) { n[k] = i[k]; });
+      n.data = d;
+      n.faltam = faltam;
+      n.estado = faltam === 0 ? "hoje" : (faltam > 0 && faltam <= 5 ? "perto" : "");
+      return n;
+    }).sort(function (a, b) { return (a.data - b.data) || String(a.nome).localeCompare(String(b.nome), "pt-BR"); });
+    return { itens: lista, extras: ag.extras || [], ade: ag.ade || "" };
+  }
 
-    /* doMes() já esconde o que passou. Para ver o mês fechado,
-       pergunto a ele com data de referência no dia 1. */
-    var hoje = new Date();
-    var ag = agendaDoMes(new Date(hoje.getFullYear(), hoje.getMonth(), 1));
-    var tudo = ag.itens;
-    var diaHoje = hoje.getDate();
-
+  /* Cartões por DIA, com as obrigações daquele dia dentro. */
+  function gradeDeDias(itens) {
     var grupos = [];
-    tudo.forEach(function (p) {
+    itens.forEach(function (p) {
       var g = grupos[grupos.length - 1];
-      if (!g || g.dia !== p.dia) { g = { dia: p.dia, semana: p.semana, itens: [] }; grupos.push(g); }
+      if (!g || g.dia !== p.dia) { g = { dia: p.dia, semana: p.semana, estado: p.estado, itens: [] }; grupos.push(g); }
+      if (p.estado === "hoje") g.estado = "hoje";
+      else if (p.estado === "perto" && g.estado !== "hoje") g.estado = "perto";
       g.itens.push(p);
     });
-
-    var caixa = el("div", "agenda agenda--cheia");
+    var ag = el("div", "agenda");
     grupos.forEach(function (g) {
-      var passou = parseInt(g.dia, 10) < diaHoje;
-      var ehHoje = parseInt(g.dia, 10) === diaHoje;
-      var x = el("div", "prazo" + (passou ? " prazo--passou" : "") + (ehHoje ? " prazo--hoje" : ""));
-
+      var x = el("div", "prazo" + (g.estado ? " prazo--" + g.estado : ""));
       var cab = el("div", "prazo__cab");
       cab.appendChild(el("span", "prazo__d", g.dia));
       if (g.semana) cab.appendChild(el("span", "prazo__s", g.semana));
-      if (passou) cab.appendChild(el("span", "prazo__s", "· venceu"));
       x.appendChild(cab);
-
       var lista = el("ul", "prazo__lista");
       g.itens.forEach(function (i) { lista.appendChild(itemDaAgenda(i)); });
       x.appendChild(lista);
-      caixa.appendChild(x);
+      ag.appendChild(x);
+    });
+    return ag;
+  }
+
+  function desenharAgendaVista() {
+    var alvo = document.getElementById("agenda-vista");
+    if (!alvo || typeof Agenda === "undefined") return;
+    alvo.textContent = "";
+
+    var ref = mesRef(AGENDA_DESLOC);
+    var m = itensDoMes(ref);
+    var hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+    var mesAtual = AGENDA_DESLOC === 0;
+
+    var cab = el("div", "ag__cab");
+    cab.appendChild(el("h2", "ag__t", ref.toLocaleDateString("pt-BR", { month: "long", year: "numeric" })));
+    if (m.ade) {
+      var selo = el("span", "agenda__selo", "conferida com a Receita");
+      selo.title = "As obrigações federais foram cruzadas com a agenda oficial (" + m.ade + ").";
+      cab.appendChild(selo);
+    }
+    var nav = el("div", "ag__nav");
+    function botao(rotulo, desloc, titulo) {
+      var b = el("button", "ag__b", rotulo);
+      b.type = "button";
+      b.title = titulo;
+      b.addEventListener("click", function () { AGENDA_DESLOC = desloc; desenharAgendaVista(); });
+      return b;
+    }
+    var ant = botao("‹ mês anterior", AGENDA_DESLOC - 1, "Mês anterior");
+    ant.disabled = AGENDA_DESLOC <= -6;
+    nav.appendChild(ant);
+    var hj = botao("Hoje", 0, "Voltar ao mês atual");
+    hj.disabled = mesAtual;
+    nav.appendChild(hj);
+    var prox = botao("mês seguinte ›", AGENDA_DESLOC + 1, "Mês seguinte");
+    prox.disabled = AGENDA_DESLOC >= 12;
+    nav.appendChild(prox);
+    cab.appendChild(nav);
+    alvo.appendChild(cab);
+
+    if (!m.itens.length) {
+      alvo.appendChild(el("div", "ag__vazio", "Nenhuma obrigação calculada para este mês."));
+      return;
+    }
+
+    /* As seções, na ordem em que a pessoa pergunta: o que é hoje,
+       o que é amanhã, o que vem nos próximos dias, o resto do mês
+       — e, no fim, o que já venceu, para a pergunta "eu paguei?". */
+    var secoes = [
+      { id: "hoje",   titulo: "Hoje",              teste: function (i) { return i.faltam === 0; } },
+      { id: "amanha", titulo: "Amanhã",            teste: function (i) { return i.faltam === 1; } },
+      { id: "semana", titulo: "Próximos 7 dias",   teste: function (i) { return i.faltam > 1 && i.faltam <= 7; } },
+      { id: "depois", titulo: "Depois",            teste: function (i) { return i.faltam > 7; } },
+      { id: "venceu", titulo: "Já venceu",         teste: function (i) { return i.faltam < 0; } },
+    ];
+    secoes.forEach(function (s) {
+      var itens = m.itens.filter(s.teste);
+      if (!itens.length) return;
+      var sec = el("section", "ag__sec ag__sec--" + s.id);
+      var tit = el("div", "ag__sec-t", s.titulo);
+      tit.appendChild(el("small", null, itens.length + (itens.length === 1 ? " obrigação" : " obrigações")));
+      sec.appendChild(tit);
+      sec.appendChild(gradeDeDias(itens));
+      alvo.appendChild(sec);
     });
 
-    corpo.appendChild(caixa);
-
-    /* O que a Receita publicou e a regra não conhece, e a nota de
-       onde a conferência vem. Fora do grid, em lista simples. */
     var rodape = el("div", "agenda__rodape");
-    if (ag.ade) {
-      var extras = (ag.extras || []).filter(function (x) { return parseInt(x.dia, 10) >= diaHoje; });
+    if (m.ade) {
+      var extras = m.extras.filter(function (x) { return !mesAtual || parseInt(x.dia, 10) >= hoje.getDate(); });
       rodape.appendChild(el("p", "agenda__nota",
-        "Obrigações federais conferidas com a agenda oficial da Receita Federal (" + ag.ade + "). " +
+        "Obrigações federais conferidas com a agenda oficial da Receita Federal (" + m.ade + "). " +
         "Estado e município saem só da regra."));
       if (extras.length) {
         var det = document.createElement("details");
@@ -1062,31 +1134,63 @@
       rodape.appendChild(el("p", "agenda__nota",
         "Datas calculadas por regra. A agenda oficial da Receita ainda não foi lida para este mês."));
     }
-    corpo.appendChild(rodape);
-    painel.classList.add("on");
-    document.getElementById("painel-x").focus();
+    alvo.appendChild(rodape);
   }
 
-  function fecharPainel() { painel.classList.remove("on"); }
+  /* O cartão do Início: os dez dias seguintes, de hoje em diante,
+     emendando o mês que vem quando o atual está acabando. */
+  function desenharProximos() {
+    var alvo = document.getElementById("prox-prazos-lista");
+    var sub = document.getElementById("prox-prazos-sub");
+    if (!alvo || typeof Agenda === "undefined") return;
+    var DIAS = 10, LIMITE = 7;
+    var itens = itensDoMes(mesRef(0)).itens.concat(itensDoMes(mesRef(1)).itens)
+      .filter(function (i) { return i.faltam >= 0 && i.faltam <= DIAS; });
+    alvo.textContent = "";
+    if (sub) sub.textContent = "próximos " + DIAS + " dias";
+    if (!itens.length) {
+      var v = el("div", "cartao__vazio");
+      v.appendChild(el("div", "cartao__vazio-t", "Nada vence nos próximos dez dias."));
+      v.appendChild(el("div", "cartao__vazio-x", "A agenda do mês inteiro está na barra, em Agenda."));
+      alvo.appendChild(v);
+      return;
+    }
+    var lista = el("div", "px");
+    itens.slice(0, LIMITE).forEach(function (i) {
+      var x = el("div", "px__i" + (i.estado ? " px__i--" + i.estado : ""));
+      var d = el("div", "px__d", i.dia);
+      d.appendChild(el("small", null, i.semana || ""));
+      x.appendChild(d);
+      var txt = el("div", "px__txt");
+      txt.appendChild(el("div", "px__n", i.nome));
+      var meta = el("div", "px__m");
+      meta.appendChild(el("span", "px__quando", rotuloQuando(i.faltam)));
+      if (i.regime && i.regime !== "todos") {
+        meta.appendChild(el("span", "prazo__r prazo__r--" + i.regime, i.regime === "simples" ? "Simples" : "Normal"));
+      }
+      if (i.oficialDia && i.confere) {
+        var ok = el("span", "prazo__ok", "✓");
+        ok.title = "Confere com a agenda da Receita Federal";
+        meta.appendChild(ok);
+      }
+      if (i.conferir) meta.appendChild(el("span", "prazo__conferir", "conferir"));
+      if (i.diaCalculado) meta.appendChild(el("span", "prazo__q--receita", "a Receita publicou dia " + i.dia));
+      txt.appendChild(meta);
+      x.appendChild(txt);
+      lista.appendChild(x);
+    });
+    alvo.appendChild(lista);
+    if (itens.length > LIMITE) {
+      var mais = el("button", "px__mais", "+ " + (itens.length - LIMITE) + " na agenda");
+      mais.type = "button";
+      mais.addEventListener("click", function () { mostrarVista("agenda"); });
+      alvo.appendChild(mais);
+    }
+  }
 
-  document.getElementById("painel-x").addEventListener("click", fecharPainel);
-  painel.addEventListener("click", function (ev) { if (ev.target === painel) fecharPainel(); });
-  document.addEventListener("keydown", function (ev) {
-    if (ev.key === "Escape") fecharPainel();
-  });
-  var botaoTodos = document.getElementById("nav-todos");
-  if (botaoTodos) botaoTodos.addEventListener("click", abrirPainel);
-
-  /* ---------- os outros botões da barra ----------
-     Eles existiam desenhados e não faziam nada: o cursor virava
-     mãozinha, a pessoa clicava e a tela ficava parada. Botão que
-     não responde é pior do que botão que não existe, porque ensina
-     a equipe a desconfiar da tela inteira.
-
-     O Hub cabe em uma tela só, então nenhum deles troca de página:
-     eles levam o olho até o pedaço certo e acendem para dizer onde
-     você está. No celular, onde tudo vira uma coluna comprida, é
-     justamente aí que rolar sozinho ajuda. */
+  /* ---------- as vistas ----------
+     Cinco, e a barra troca entre elas. Cada <section class="vista">
+     tem o id vista-<nome>; o botão da barra, nav-<nome>. */
   function acender(botao) {
     var todos = document.querySelectorAll(".nav__b");
     var i;
@@ -1094,47 +1198,35 @@
     if (botao) botao.classList.add("on");
   }
 
-  function levarA(alvo, botao) {
-    if (!alvo) return;
-    acender(botao);
-    alvo.scrollIntoView({ behavior: "smooth", block: "start" });
-
-    /* No computador o Hub inteiro cabe na tela, então rolar não
-       move nada e o clique pareceria perdido. O alvo pisca uma vez
-       para dizer "é este aqui". No celular a rolagem já responde
-       sozinha, e o pisca só confirma onde parou. */
-    alvo.classList.remove("achei");
-    void alvo.offsetWidth;
-    alvo.classList.add("achei");
-    window.setTimeout(function () { alvo.classList.remove("achei"); }, 1100);
-  }
-
-  function ligarBotao(id, achar) {
-    var b = document.getElementById(id);
-    if (!b) return;
-    b.addEventListener("click", function () { levarA(achar(), b); });
-  }
-
-  /* ---------- as vistas ----------
-     Início, Pendências e Notícias dividem a mesma planta; a barra
-     troca entre elas. A Agenda e os órgãos continuam sendo painel
-     por cima: consulta rápida não merece uma vista. */
   var VISTA = "inicio";
-  var NOMES_DAS_VISTAS = { inicio: "", pendencias: "Pendências", noticias: "Notícias oficiais" };
+  var NOMES_DAS_VISTAS = {
+    inicio: "Início", pendencias: "Pendências", sistemas: "Sistemas",
+    noticias: "Notícias oficiais", agenda: "Agenda tributária",
+  };
+  var SUBS_DAS_VISTAS = {
+    inicio: "o seu dia num olhar",
+    pendencias: "o seu quadro, por prazo e setor",
+    sistemas: "todos os links da casa",
+    noticias: "só fontes oficiais, lidas de hora em hora",
+    agenda: "vencimentos do mês, conferidos com a Receita",
+  };
 
   function mostrarVista(nome) {
     if (!NOMES_DAS_VISTAS.hasOwnProperty(nome)) nome = "inicio";
     VISTA = nome;
     var tela = document.getElementById("tela");
     tela.setAttribute("data-vista", nome);
-    document.getElementById("centro").hidden = nome !== "inicio";
-    document.getElementById("trilho").hidden = nome !== "inicio";
-    document.getElementById("vista-pendencias").hidden = nome !== "pendencias";
-    document.getElementById("vista-noticias").hidden = nome !== "noticias";
+    Object.keys(NOMES_DAS_VISTAS).forEach(function (v) {
+      var sec = document.getElementById("vista-" + v);
+      if (sec) sec.hidden = v !== nome;
+    });
     var rotulo = document.getElementById("cab-vista");
-    if (rotulo) { rotulo.textContent = NOMES_DAS_VISTAS[nome]; rotulo.hidden = !NOMES_DAS_VISTAS[nome]; }
+    if (rotulo) rotulo.textContent = NOMES_DAS_VISTAS[nome];
+    var sub = document.getElementById("cab-sub");
+    if (sub) sub.textContent = SUBS_DAS_VISTAS[nome] || "";
     acender(document.getElementById("nav-" + nome));
     if (nome === "noticias" && typeof Noticias !== "undefined") Noticias.aoAbrirTela();
+    if (nome === "agenda") desenharAgendaVista();
     /* Voltar ao Início aplica o que ficou esperando a tela livre. */
     if (nome === "inicio") window.setTimeout(aplicarSeLivre, 50);
     try { window.sessionStorage.setItem("hub-totali:vista", nome); } catch (e) {}
@@ -1147,24 +1239,25 @@
 
   window.Hub = { mostrarVista: mostrarVista, irParaPendencia: irParaPendencia, vista: function () { return VISTA; } };
 
-  ligarBotao("nav-inicio", function () { mostrarVista("inicio"); return null; });
-
   (function ligarVistas() {
-    var bp = document.getElementById("nav-pendencias");
-    if (bp) bp.addEventListener("click", function () { mostrarVista("pendencias"); });
-    var bn = document.getElementById("nav-noticias");
-    if (bn) bn.addEventListener("click", function () { mostrarVista("noticias"); });
-    var abrir = document.getElementById("pend-hoje-abrir");
-    if (abrir) abrir.addEventListener("click", function () { mostrarVista("pendencias"); });
-    var todas = document.getElementById("noticias-ver-todas");
-    if (todas) todas.addEventListener("click", function () { mostrarVista("noticias"); });
-  })();
-
-  (function ligarAgendaCheia() {
-    var b = document.getElementById("nav-agenda");
-    if (!b) return;
-    b.title = "O mês inteiro, com o que já venceu";
-    b.addEventListener("click", function () { acender(b); abrirAgendaCheia(); });
+    function liga(id, vista) {
+      var b = document.getElementById(id);
+      if (b) b.addEventListener("click", function () { mostrarVista(vista); });
+    }
+    liga("nav-inicio", "inicio");
+    liga("nav-pendencias", "pendencias");
+    liga("nav-sistemas", "sistemas");
+    liga("nav-noticias", "noticias");
+    liga("nav-agenda", "agenda");
+    /* As duas marcas — a da barra e a do cabeçalho — voltam ao
+       Início, como em qualquer site. */
+    liga("nav-logo", "inicio");
+    liga("cab-logo", "inicio");
+    /* Os "ver tudo" dos cartões do Início. */
+    liga("pend-hoje-abrir", "pendencias");
+    liga("noticias-ver-todas", "noticias");
+    liga("prox-prazos-abrir", "agenda");
+    liga("ini-favoritos-abrir", "sistemas");
   })();
 
   /* ---------- quem está usando ----------
@@ -1344,8 +1437,6 @@
     if (img.complete && img.naturalWidth === 0) trocar();
   })();
 
-  /* ---------- início ---------- */
-
   /* ---------- a agenda oficial da Receita ----------
      dados/agenda-oficial.json é gravado pelo robô (ferramentas/
      buscar-agenda.js). Com ele em mãos, a lista calculada é cruzada
@@ -1407,6 +1498,8 @@
     AGENDA_EXTRAS = ag.extras;
     AGENDA_ADE = ag.ade;
     desenharCentro();
+    desenharProximos();
+    if (VISTA === "agenda") desenharAgendaVista();
     desenharAvisos();
   }
 
@@ -1490,7 +1583,6 @@
      só valia para as pendências: a lista de sistemas redesenhava o
      centro sem perguntar nada a ninguém. */
   function telaEmUso() {
-    if (document.querySelector("#painel.on")) return true;
     if (typeof PendenciasHub !== "undefined" && PendenciasHub.emUso()) return true;
     if (FORM_FAVORITO_ABERTO) return true;
     if (FILTRO && FILTRO.trim()) return true;
@@ -1649,12 +1741,13 @@
       if (a && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)) return;
       if (a && a.isContentEditable) return;
       ev.preventDefault();
-      if (VISTA !== "inicio") mostrarVista("inicio");
+      if (VISTA !== "sistemas") mostrarVista("sistemas");
       cx.focus();
       cx.select();
     });
-    /* Digitar na busca fora do Início também volta para lá. */
-    cx.addEventListener("focus", function () { if (VISTA !== "inicio") mostrarVista("inicio"); });
+    /* A busca procura sistemas, então clicar nela leva à vista
+       Sistemas, onde os resultados aparecem. */
+    cx.addEventListener("focus", function () { if (VISTA !== "sistemas") mostrarVista("sistemas"); });
   })();
 
   (function ligarSair() {

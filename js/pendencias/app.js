@@ -1119,7 +1119,10 @@ function preencherFormCli(c,nomeSugerido){
   $('cliAp').value=c?(c.apelidos||[]).join(', '):(nomeSugerido||'');
   $('cliSalvar').textContent=c?'Salvar alteração':'Cadastrar';
   $('cliCancelar').hidden=!c;
-  $('cliAviso').textContent=''; $('cliAviso').className='dica';
+  // cliente da casa: nome e CNPJ são da administração do Hub; aqui só os apelidos
+  const daCasa=!!(c&&c.daCasa);
+  $('cliNome').readOnly=daCasa; $('cliDoc').readOnly=daCasa;
+  $('cliAviso').textContent=daCasa?'Cliente da casa: o nome e o CNPJ vêm da administração do Hub. Aqui você só muda os apelidos.':''; $('cliAviso').className='dica';
 }
 function desenharClientes(){
   const q=norm($('cliBusca').value.trim()), qd=soDoc($('cliBusca').value);
@@ -1132,10 +1135,10 @@ function desenharClientes(){
     box.appendChild(el('div',{class:'ic-cli'},[
       el('div',{class:'n',text:c.nome}),
       el('div',{class:'bts'},[
-        el('button',{class:'sec mini',type:'button',onclick:()=>{ preencherFormCli(c); $('cliDoc').focus(); }},['Editar']),
-        botaoConfirmar('Excluir','Excluir?',()=>salvarClientes(clientes.filter(x=>x.id!==c.id)),'sec mini')
+        el('button',{class:'sec mini',type:'button',onclick:()=>{ preencherFormCli(c); (c.daCasa?$('cliAp'):$('cliDoc')).focus(); }},[c.daCasa?'Apelidos':'Editar']),
+        c.daCasa?el('span',{class:'dica',text:'da casa'}):botaoConfirmar('Excluir','Excluir?',()=>salvarClientes(clientes.filter(x=>x.id!==c.id)),'sec mini')
       ]),
-      el('div',{class:'d',text:rotDoc(c.cnpj)+' '+fmtDoc(c.cnpj)+(c.cod?' · cód. '+c.cod:'')+(ap.length?' · também: '+ap.join(', '):'')})
+      el('div',{class:'d',text:rotDoc(c.cnpj)+' '+fmtDoc(c.cnpj)+(c.regime?' · '+c.regime:'')+(c.cidade?' · '+c.cidade:'')+(c.cod?' · cód. '+c.cod:'')+(ap.length?' · também: '+ap.join(', '):'')})
     ]));
   });
 }
@@ -1150,7 +1153,7 @@ $('formCli').addEventListener('submit',e=>{
   if(outro){ av.textContent='Esse CNPJ já está cadastrado em '+outro.nome+'.'; av.className='dica aviso-doc'; return; }
   const apelidos=$('cliAp').value.split(',').map(s=>s.trim()).filter(Boolean).filter((a,i,arr)=>arr.findIndex(b=>norm(b)===norm(a))===i);
   const antigo=cliEditando?clientes.find(c=>c.id===cliEditando):null;
-  const reg=Object.assign({},antigo||{},{id:cliEditando||('c'+Date.now().toString(36)),nome,cnpj:d,apelidos});
+  const reg=Object.assign({},antigo||{},{id:cliEditando||('c'+Date.now().toString(36)),nome:antigo&&antigo.daCasa?antigo.nome:nome,cnpj:antigo&&antigo.daCasa?antigo.cnpj:d,apelidos});
   salvarClientes(cliEditando?clientes.map(c=>c.id===cliEditando?reg:c):clientes.concat([reg]));
   aviso((cliEditando?'Alterado: ':'Cadastrado: ')+nome+(docOk(d)?'':' (confira o CNPJ: o dígito não bate)'));
   preencherFormCli(null);

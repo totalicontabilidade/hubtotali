@@ -1934,6 +1934,8 @@
     ligarAcoes();
     ligarAbas();
     ligarEquipe();
+    ligarClientesDaCasa();
+    ligarQuadroAntigo();
     desenhar();
   }
 
@@ -2632,6 +2634,273 @@
         b.disabled = false;
         b.textContent = "Cadastrar";
       });
+    });
+  }
+
+  /* ---------- Clientes da casa ---------- */
+
+  function fmtDoc(d) {
+    d = String(d || "");
+    if (d.length === 14) return d.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, "$1.$2.$3/$4-$5");
+    if (d.length === 11) return d.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4");
+    return d;
+  }
+
+  function desenharClientesDaCasa(lista) {
+    var alvo = $("cli-lista");
+    if (!alvo) return;
+    alvo.textContent = "";
+    $("cli-conta").textContent = lista.length
+      ? lista.length + (lista.length === 1 ? " empresa" : " empresas")
+      : "nenhuma empresa ainda";
+    if (!lista.length) {
+      alvo.appendChild(elemento("div", "vazio", "Nenhum cliente da casa ainda. Importe a planilha do sistema contábil."));
+      return;
+    }
+    var regimes = {};
+    lista.forEach(function (c) { var r = c.regime || "sem regime"; regimes[r] = (regimes[r] || 0) + 1; });
+    alvo.appendChild(elemento("p", "admin__nota",
+      Object.keys(regimes).sort().map(function (r) { return regimes[r] + " " + r; }).join(" · ")));
+    var det = document.createElement("details");
+    det.className = "cli-detalhe";
+    var sum = document.createElement("summary");
+    sum.textContent = "Ver a lista";
+    det.appendChild(sum);
+    var ul = elemento("ul", "cli-ul");
+    lista.forEach(function (c) {
+      var li = elemento("li");
+      li.appendChild(elemento("b", null, c.nome));
+      li.appendChild(document.createTextNode(" · " + fmtDoc(c.cnpj) +
+        (c.regime ? " · " + c.regime : "") + (c.cidade ? " · " + c.cidade : "")));
+      ul.appendChild(li);
+    });
+    det.appendChild(ul);
+    alvo.appendChild(det);
+  }
+
+  function mostrarPreviaClientes(lista, origem) {
+    var p = $("cli-previa");
+    p.textContent = "";
+    p.hidden = false;
+    $("cli-erro").hidden = true;
+    if (!lista.length) {
+      p.appendChild(elemento("p", "erro", "Não achei nenhuma empresa com CNPJ ou CPF " + origem +
+        ". A planilha precisa de uma coluna de nome e uma de CNPJ/CPF."));
+      return;
+    }
+    var atual = Dados.clientesDaCasa();
+    var atuais = {}, lidos = {};
+    atual.forEach(function (c) { atuais[c.cnpj] = true; });
+    lista.forEach(function (c) { lidos[c.cnpj] = true; });
+    var novas = lista.filter(function (c) { return !atuais[c.cnpj]; }).length;
+    var somem = atual.filter(function (c) { return !lidos[c.cnpj]; }).length;
+    p.appendChild(elemento("p", "admin__nota", "Li " + lista.length + " empresas " + origem +
+      (atual.length ? ": " + novas + " novas; " + somem + " da lista atual não vieram e sairiam." : ".") +
+      " A lista da casa passa a ser exatamente esta."));
+    p.appendChild(elemento("p", "admin__nota",
+      lista.slice(0, 3).map(function (c) { return c.nome + " (" + fmtDoc(c.cnpj) + ")"; }).join(" · ") +
+      (lista.length > 3 ? " …" : "")));
+    var acoes = elemento("div", "painel__acoes");
+    var ok = elemento("button", "btn btn--principal",
+      "Substituir a lista por estas " + lista.length + " empresas");
+    ok.type = "button";
+    ok.addEventListener("click", function () {
+      ok.disabled = true;
+      Dados.gravarClientesDaCasa(lista).then(function (l) {
+        p.hidden = true;
+        desenharClientesDaCasa(l);
+        recado("Clientes da casa: " + l.length + " empresas gravadas. Os quadros já as reconhecem.");
+      }).catch(function (e) {
+        $("cli-erro").textContent = e.message;
+        $("cli-erro").hidden = false;
+        ok.disabled = false;
+      });
+    });
+    var nao = elemento("button", "btn btn--fantasma", "Cancelar");
+    nao.type = "button";
+    nao.addEventListener("click", function () { p.hidden = true; });
+    acoes.appendChild(ok);
+    acoes.appendChild(nao);
+    p.appendChild(acoes);
+  }
+
+  function ligarClientesDaCasa() {
+    if (!$("sec-clientes")) return;
+    Dados.carregarClientesDaCasa().then(desenharClientesDaCasa);
+
+    $("btn-cli-arquivo").addEventListener("click", function () { $("cli-arquivo").click(); });
+    $("cli-arquivo").addEventListener("change", function () {
+      var f = this.files && this.files[0];
+      this.value = "";
+      if (!f) return;
+      $("cli-erro").hidden = true;
+      var leitura = /\.xlsx$/i.test(f.name)
+        ? f.arrayBuffer().then(Planilha.lerXlsx)
+        : f.text().then(Planilha.lerCsv);
+      leitura.then(function (linhas) {
+        mostrarPreviaClientes(Planilha.paraClientes(linhas), "em “" + f.name + "”");
+      }).catch(function (e) {
+        $("cli-erro").textContent = "Não consegui ler o arquivo: " + e.message;
+        $("cli-erro").hidden = false;
+      });
+    });
+    $("btn-cli-colar").addEventListener("click", function () {
+      var cx = $("cli-colar-caixa");
+      cx.hidden = !cx.hidden;
+      if (!cx.hidden) $("cli-texto").focus();
+    });
+    $("btn-cli-ler").addEventListener("click", function () {
+      mostrarPreviaClientes(Planilha.paraClientes(Planilha.lerCsv($("cli-texto").value)), "no texto colado");
+    });
+    $("btn-cli-baixar").addEventListener("click", function () {
+      var lista = Dados.clientesDaCasa();
+      var linhas = ["Nome;CNPJ / CPF;Regime tributário;Estado;Cidade"].concat(lista.map(function (c) {
+        return [c.nome, fmtDoc(c.cnpj), c.regime || "", c.uf || "", c.cidade || ""].join(";");
+      }));
+      var endereco = URL.createObjectURL(new Blob(["\uFEFF" + linhas.join("\r\n")], { type: "text/csv;charset=utf-8" }));
+      var a = document.createElement("a");
+      a.href = endereco;
+      a.download = "clientes-da-casa.csv";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.setTimeout(function () { URL.revokeObjectURL(endereco); }, 30000);
+    });
+  }
+
+  /* ---------- Quadro antigo → quadros por pessoa ---------- */
+
+  function nomeDaEquipe(uid) {
+    var p = equipe.filter(function (x) { return x.uid === uid; })[0];
+    return p ? (p.nome || p.email) : ("(" + uid + ")");
+  }
+
+  function ligarQuadroAntigo() {
+    if (!$("sec-quadro-antigo")) return;
+    $("btn-qa-conferir").addEventListener("click", conferirQuadroAntigo);
+  }
+
+  function conferirQuadroAntigo() {
+    var b = $("btn-qa-conferir"), nota = $("qa-nota"), erro = $("qa-erro"), previa = $("qa-previa");
+    erro.hidden = true;
+    previa.hidden = true;
+    previa.textContent = "";
+    b.disabled = true;
+    if (!Dados.temBanco()) {
+      erro.textContent = "Modo de teste, sem banco: não há quadro antigo para ler aqui. No Hub publicado, com a conta de administrador, o botão lê o banco de verdade.";
+      erro.hidden = false; b.disabled = false; return;
+    }
+    var s = Dados.sessao();
+    if (!s) { erro.textContent = "Sessão expirada. Entre de novo."; erro.hidden = false; b.disabled = false; return; }
+
+    var antigo = null;
+    var pEquipe = equipe.length ? Promise.resolve(equipe)
+      : Dados.listarEquipe().then(function (l) { equipe = l; return l; });
+
+    pEquipe.then(function () {
+      nota.textContent = "lendo…";
+      return Dados.lerQuadroAntigo(function (o) { nota.textContent = "lendo " + o + "…"; });
+    }).then(function (a) {
+      antigo = a;
+      var ctx = {
+        equipe: equipe.map(function (p) {
+          return { uid: p.uid, nome: p.nome, email: p.email, setores: setoresDe(p), ativo: p.ativo !== false };
+        }),
+        euUid: s.uid, euEmail: s.email, agora: Date.now(),
+      };
+      /* Os quadros de destino: o que já têm (para não duplicar) e
+         os setores deles (para a pendência nascer colorida). */
+      var donos = {};
+      (a.pendencias || []).concat(a.reservadas || []).forEach(function (p) {
+        var d = MigracaoQuadro.donoDe(p, ctx);
+        if (d && !p.ehRecado) donos[d.uid] = true;
+      });
+      nota.textContent = "conferindo os quadros…";
+      return Promise.all(Object.keys(donos).map(function (uid) {
+        return Promise.all([Dados.lerTarefasDe(uid), Dados.lerSetoresDe(uid)]).then(function (r) {
+          return { uid: uid, origens: r[0].map(function (x) { return x.origemId; }).filter(Boolean), setores: r[1] };
+        });
+      })).then(function (rs) {
+        ctx.existentes = {};
+        ctx.setoresDoDono = {};
+        rs.forEach(function (r) { ctx.existentes[r.uid] = r.origens; ctx.setoresDoDono[r.uid] = r.setores; });
+        return MigracaoQuadro.planejar(a, ctx);
+      });
+    }).then(function (plano) {
+      nota.textContent = "";
+      desenharPlanoAntigo(plano, antigo);
+    }).catch(function (e) {
+      nota.textContent = "";
+      erro.textContent = e.message;
+      erro.hidden = false;
+    }).then(function () { b.disabled = false; });
+  }
+
+  function desenharPlanoAntigo(plano, antigo) {
+    var previa = $("qa-previa");
+    previa.hidden = false;
+    previa.textContent = "";
+    var reservadas = (antigo.reservadas || []).length;
+    var total = (antigo.pendencias || []).length + reservadas;
+    var linhas = ["No quadro antigo há " + total + (total === 1 ? " pendência" : " pendências") +
+                  (reservadas ? " (" + reservadas + " reservadas que você pode ver)" : "") + "."];
+    if (plano.jaTrazidas) linhas.push(plano.jaTrazidas + " já foram trazidas antes e não se repetem.");
+    if (plano.recados) linhas.push(plano.recados + (plano.recados === 1 ? " é recado" : " são recados") + " e ficam de fora.");
+    if (plano.semDono) linhas.push(plano.semDono + " sem ninguém para receber (sem responsável, sem setor, sem autor) ficam no banco como estão.");
+    linhas.forEach(function (l) { previa.appendChild(elemento("p", "admin__nota", l)); });
+
+    if (!plano.itens.length) {
+      previa.appendChild(elemento("p", "faixa faixa--nota", "Nada para trazer."));
+      return;
+    }
+
+    var ul = elemento("ul", "qa-ul");
+    Object.keys(plano.porDono).sort(function (a, b) { return plano.porDono[b] - plano.porDono[a]; }).forEach(function (uid) {
+      var itens = plano.itens.filter(function (i) { return i.uid === uid; });
+      var abertas = itens.filter(function (i) { return !i.doc.feito; }).length;
+      var li = elemento("li");
+      li.appendChild(elemento("b", null, nomeDaEquipe(uid)));
+      li.appendChild(document.createTextNode(": " + itens.length + (itens.length === 1 ? " pendência" : " pendências") +
+        " (" + abertas + (abertas === 1 ? " aberta, " : " abertas, ") + (itens.length - abertas) + (itens.length - abertas === 1 ? " riscada)" : " riscadas)")));
+      var sub = elemento("ul", "qa-sub");
+      itens.slice(0, 60).forEach(function (i) {
+        var x = elemento("li", i.doc.feito ? "qa-feita" : "");
+        x.textContent = i.doc.texto.split("\n")[0] + (i.como !== "responsável" ? " — " + i.como : "");
+        sub.appendChild(x);
+      });
+      li.appendChild(sub);
+      ul.appendChild(li);
+    });
+    previa.appendChild(ul);
+
+    var acoes = elemento("div", "painel__acoes");
+    var ok = elemento("button", "btn btn--principal",
+      "Trazer " + plano.itens.length + (plano.itens.length === 1 ? " pendência" : " pendências") + " para os quadros");
+    ok.type = "button";
+    ok.addEventListener("click", function () { executarPlanoAntigo(plano, ok); });
+    acoes.appendChild(ok);
+    previa.appendChild(acoes);
+    previa.appendChild(elemento("p", "admin__nota qa-andamento"));
+  }
+
+  function executarPlanoAntigo(plano, botao) {
+    botao.disabled = true;
+    var and = $("qa-previa").querySelector(".qa-andamento");
+    var feitas = 0, erros = [];
+    plano.itens.reduce(function (fila, item) {
+      return fila.then(function () {
+        and.textContent = "gravando " + (feitas + erros.length + 1) + " de " + plano.itens.length + "…";
+        return Dados.criarTarefaEm(item.uid, MigracaoQuadro.novoId(), item.doc)
+          .then(function () { feitas++; }, function (e) { erros.push(item.doc.texto.split("\n")[0] + ": " + e.message); });
+      });
+    }, Promise.resolve()).then(function () {
+      and.textContent = feitas + (feitas === 1 ? " trazida" : " trazidas") + (erros.length ? " · " + erros.length + " com erro" : "") + ".";
+      if (erros.length) {
+        $("qa-erro").textContent = erros.slice(0, 5).join(" | ");
+        $("qa-erro").hidden = false;
+      }
+      recado(feitas + (feitas === 1 ? " pendência trazida" : " pendências trazidas") + " do quadro antigo.");
+      botao.textContent = "Feito";
     });
   }
 

@@ -25,7 +25,7 @@ const Noticias = (function () {
   var ARQUIVO = "dados/noticias.json";
   var CHAVE_VISTA = "hub-totali:noticias-vista-em";
   var CHAVE_FILTRO = "hub-totali:noticias-filtro";
-  var NO_CARTAO = 7;
+  var NO_CARTAO = 5;
 
   var DADOS = null;
   var ERRO = "";

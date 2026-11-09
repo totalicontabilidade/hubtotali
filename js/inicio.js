@@ -1,11 +1,12 @@
 /* ============================================================
-   Hub Totali · o cartão "Hoje" da tela inicial
+   Hub Totali · o cartão "Minhas pendências" da tela inicial
    ------------------------------------------------------------
-   O quadro de pendências inteiro mora na tela "Pendências". A
+   O quadro de pendências inteiro mora na vista "Pendências". A
    tela inicial não repete o quadro: mostra o que a pessoa precisa
    ver ao abrir o Hub de manhã — o que está atrasado, o que é para
-   hoje, quanto já riscou — e uma caixa para anotar uma pendência
-   nova sem sair daqui.
+   hoje, o que vence ainda esta semana, quanto já riscou — e uma
+   caixa para anotar uma pendência nova sem sair daqui. Clicar numa
+   pendência abre o quadro com ela em destaque.
 
    Os dados vêm do próprio quadro (window.PendenciasHub e o evento
    "pendencias:mudou"); este arquivo só desenha. A caixa de criar
@@ -95,8 +96,9 @@ const Inicio = (function () {
 
     /* Só redesenha se mudou: a lista é redesenhada a cada minuto
        pelo quadro, e piscar por nada incomoda. */
-    var assinatura = JSON.stringify([r.feitasHoje, r.listaAtrasadas.map(function (t) { return [t.id, t.texto, t.prazo, t.setor, (t.notas || []).length]; }),
-                                     r.listaHoje.map(function (t) { return [t.id, t.texto, t.prazo, t.setor, (t.notas || []).length]; }), r.semana]);
+    function marca(t) { return [t.id, t.texto, t.prazo, t.setor, (t.notas || []).length]; }
+    var assinatura = JSON.stringify([r.feitasHoje, r.abertas, r.listaAtrasadas.map(marca), r.listaHoje.map(marca),
+                                     (r.listaSemana || []).map(marca)]);
     if (assinatura === ULTIMO_DESENHO) return;
     ULTIMO_DESENHO = assinatura;
 
@@ -112,8 +114,9 @@ const Inicio = (function () {
     }
 
     alvo.textContent = "";
-    var LIMITE = 8;
+    var LIMITE = 14;
     var mostradas = 0;
+    var semana = r.listaSemana || [];
 
     if (r.listaAtrasadas.length) {
       alvo.appendChild(faixa("Atrasadas", r.listaAtrasadas.length, "atraso"));
@@ -123,22 +126,46 @@ const Inicio = (function () {
       alvo.appendChild(faixa("Para hoje", r.listaHoje.length, "hoje"));
       r.listaHoje.slice(0, LIMITE - mostradas).forEach(function (t) { alvo.appendChild(linha(t, "hoje")); mostradas++; });
     }
-    var sobrando = (r.listaAtrasadas.length + r.listaHoje.length) - mostradas;
+    if (!r.listaAtrasadas.length && !r.listaHoje.length) {
+      var v = el("div", "cartao__vazio");
+      v.appendChild(el("div", "cartao__vazio-t", r.feitasHoje ? "Tudo riscado por hoje." : "Nada para hoje."));
+      v.appendChild(el("div", "cartao__vazio-x", semana.length
+        ? "O que vence ainda esta semana está logo abaixo."
+        : "Anote a primeira na caixa acima: o prazo e o setor saem da própria frase."));
+      alvo.appendChild(v);
+    }
+    /* O resto da semana entra depois do dia: é o que a pessoa
+       precisa ver para decidir o que puxar para hoje. */
+    if (semana.length && mostradas < LIMITE) {
+      alvo.appendChild(faixa("Esta semana", semana.length, "semana"));
+      semana.slice(0, LIMITE - mostradas).forEach(function (t) { alvo.appendChild(linha(t, "semana")); mostradas++; });
+    }
+    var sobrando = (r.listaAtrasadas.length + r.listaHoje.length + semana.length) - mostradas;
     if (sobrando > 0) {
       var mais = el("button", "hj__mais", "+ " + sobrando + " no quadro");
       mais.type = "button";
       mais.addEventListener("click", function () { if (typeof Hub !== "undefined") Hub.mostrarVista("pendencias"); });
       alvo.appendChild(mais);
     }
-    if (!r.listaAtrasadas.length && !r.listaHoje.length) {
-      var v = el("div", "cartao__vazio");
-      v.appendChild(el("div", "cartao__vazio-t", r.feitasHoje ? "Tudo riscado por hoje." : "Nada para hoje."));
-      v.appendChild(el("div", "cartao__vazio-x", r.semana
-        ? r.semana + (r.semana === 1 ? " pendência vence" : " pendências vencem") + " ainda esta semana."
-        : "Anote a primeira na caixa acima: o prazo e o setor saem da própria frase."));
-      alvo.appendChild(v);
-    } else if (r.semana) {
-      alvo.appendChild(el("div", "hj__semana", "Esta semana: mais " + r.semana + (r.semana === 1 ? " pendência" : " pendências")));
+
+    /* O pé: o que existe no quadro além do que está à vista. */
+    var pe = document.getElementById("pend-hoje-pe");
+    if (pe) {
+      pe.textContent = "";
+      var outras = Math.max(0, r.abertas - r.atrasadas - r.hoje - semana.length);
+      var s1 = el("span"); s1.appendChild(el("b", null, String(r.abertas)));
+      s1.appendChild(document.createTextNode(r.abertas === 1 ? " pendência aberta no quadro" : " pendências abertas no quadro"));
+      pe.appendChild(s1);
+      if (outras) {
+        var s2 = el("span"); s2.appendChild(el("b", null, String(outras)));
+        s2.appendChild(document.createTextNode(outras === 1 ? " em acompanhar ou com data depois desta semana" : " em acompanhar ou com data depois desta semana"));
+        pe.appendChild(s2);
+      }
+      if (r.feitasHoje) {
+        var s3 = el("span"); s3.appendChild(el("b", null, String(r.feitasHoje)));
+        s3.appendChild(document.createTextNode(r.feitasHoje === 1 ? " riscada hoje" : " riscadas hoje"));
+        pe.appendChild(s3);
+      }
     }
   }
 

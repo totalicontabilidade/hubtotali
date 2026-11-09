@@ -131,6 +131,8 @@
         <button class="atalho" type="button" data-alvo="sec-nova-pessoa">Nova pessoa</button>
         <button class="atalho" type="button" data-alvo="sec-equipe">Equipe</button>
         <button class="atalho" type="button" data-alvo="sec-setores">Setores</button>
+        <button class="atalho" type="button" data-alvo="sec-clientes">Clientes da casa</button>
+        <button class="atalho" type="button" data-alvo="sec-quadro-antigo">Quadro antigo</button>
         <button class="atalho" type="button" data-alvo="sec-copia">Cópia de segurança</button>
       </div>
     </nav>
@@ -232,6 +234,61 @@
       <p class="erro" id="dep-erro" hidden></p>
     </section>
 
+    <!-- ---------- Clientes da casa ----------
+         A lista de empresas que todo quadro de pendências reconhece.
+         Vem da planilha que o sistema contábil exporta; aqui ela é
+         lida no navegador (sem biblioteca) e gravada em hub/clientes. -->
+    <section class="painel" id="sec-clientes">
+      <div class="painel__cabeca">
+        <h2 class="painel__titulo">Clientes da casa</h2>
+        <span class="painel__nota" id="cli-conta"></span>
+      </div>
+      <p class="admin__nota">
+        As empresas que <strong>todo quadro de pendências</strong> reconhece pelo nome e pelo CNPJ.
+        Importe o relatório de clientes do sistema contábil (<code>.xlsx</code> ou <code>.csv</code>, com as colunas
+        Nome e CNPJ/CPF) ou cole as linhas. A importação <strong>substitui a lista inteira</strong>; os apelidos que
+        cada pessoa deu no próprio quadro ficam.
+      </p>
+      <div class="painel__acoes">
+        <button class="btn btn--principal" type="button" id="btn-cli-arquivo">Importar planilha…</button>
+        <input type="file" id="cli-arquivo" hidden
+               accept=".xlsx,.csv,.txt,text/csv,text/plain,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+        <button class="btn" type="button" id="btn-cli-colar">Colar linhas</button>
+        <button class="btn btn--fantasma" type="button" id="btn-cli-baixar">Baixar a lista atual</button>
+      </div>
+      <div class="cli-colar" id="cli-colar-caixa" hidden>
+        <textarea class="campo__caixa cli-texto" id="cli-texto" rows="6"
+                  placeholder="Uma empresa por linha: Nome; CNPJ; Regime; UF; Cidade (pode colar direto do Excel)"></textarea>
+        <div class="painel__acoes"><button class="btn btn--principal" type="button" id="btn-cli-ler">Ler as linhas</button></div>
+      </div>
+      <div class="cli-previa" id="cli-previa" hidden></div>
+      <p class="erro" id="cli-erro" hidden></p>
+      <div id="cli-lista"></div>
+    </section>
+
+    <!-- ---------- Quadro antigo ----------
+         As pendências do quadro do escritório (antes de 09/11/2026)
+         continuam no banco, só leitura. Daqui elas vão para o quadro
+         de cada dono. Quem decide o destino é js/migracao-quadro.js. -->
+    <section class="painel" id="sec-quadro-antigo">
+      <div class="painel__cabeca">
+        <h2 class="painel__titulo">Quadro antigo</h2>
+        <span class="painel__nota" id="qa-nota"></span>
+      </div>
+      <p class="admin__nota">
+        As pendências do quadro do escritório, de antes do quadro por pessoa, continuam guardadas no banco.
+        Este botão lê todas, descobre o <strong>dono</strong> de cada uma — quem fazia; sem responsável, a única
+        pessoa do setor de destino; sem isso, quem pediu — e as cria no quadro dessa pessoa, com a conversa
+        como comentários. Resolvidas entram riscadas. Recados ficam de fora. Pode rodar mais de uma vez:
+        o que já foi trazido não duplica.
+      </p>
+      <div class="painel__acoes">
+        <button class="btn btn--principal" type="button" id="btn-qa-conferir">Conferir o que há para trazer</button>
+      </div>
+      <div class="qa-previa" id="qa-previa" hidden></div>
+      <p class="erro" id="qa-erro" hidden></p>
+    </section>
+
     <section class="painel" id="sec-copia">
       <div class="painel__cabeca">
         <h2 class="painel__titulo">Cópia de segurança</h2>
@@ -303,6 +360,8 @@
 <script src="js/config-hub.js"></script>
 <script src="js/sistemas.js"></script>
 <script src="js/dados.js"></script>
+<script src="js/planilha.js"></script>
+<script src="js/migracao-quadro.js"></script>
 <script src="js/admin.js"></script>
 </body>
 </html>

@@ -1506,6 +1506,235 @@ const Dados = (function () {
     });
   }
 
+
+  /* ============================================================
+     Os clientes da casa (desde 09/11/2026)
+     ------------------------------------------------------------
+     Uma lista só, mantida pela administração (hub/clientes), que
+     todo quadro de pendências enxerga: nome, CNPJ, regime, cidade.
+     Cada pessoa dá apelidos aos clientes no próprio quadro e
+     acrescenta os seus; a lista da casa, só o administrador muda.
+     A regra do banco é a de /hub/{doc}: equipe lê, administrador
+     escreve — não precisou de regra nova.
+     ============================================================ */
+  var CHAVE_CLIENTES = "hub-totali:clientes-casa";
+  var CLIENTES_CASA = [];
+
+  function soDigitos(s) { return String(s || "").replace(/\D/g, ""); }
+
+  function limparClientes(lista) {
+    var vistos = {}, saida = [];
+    (lista || []).forEach(function (c) {
+      if (!c) return;
+      var nome = String(c.nome || "").replace(/\s+/g, " ").trim();
+      var doc = soDigitos(c.cnpj || c.doc);
+      if (!nome || nome.length > 160) return;
+      if (doc.length !== 14 && doc.length !== 11) return;
+      if (vistos[doc]) return;
+      vistos[doc] = true;
+      var x = { id: "casa-" + doc, nome: nome, cnpj: doc };
+      if (c.regime) x.regime = String(c.regime).trim().slice(0, 40);
+      if (c.cidade) x.cidade = String(c.cidade).trim().slice(0, 60);
+      if (c.uf) x.uf = String(c.uf).trim().slice(0, 2).toUpperCase();
+      saida.push(x);
+    });
+    saida.sort(function (a, b) { return a.nome.localeCompare(b.nome, "pt-BR"); });
+    return saida;
+  }
+
+  function trocarClientes(lista) {
+    var antes = JSON.stringify(CLIENTES_CASA);
+    CLIENTES_CASA = lista;
+    if (JSON.stringify(lista) !== antes) {
+      try { window.dispatchEvent(new CustomEvent("hub:clientes", { detail: { lista: lista } })); } catch (e) {}
+    }
+    return lista;
+  }
+
+  /* lerCache() só aceita a forma da lista de sistemas; esta é outra. */
+  function lerListaGuardada(chave) {
+    try { var d = JSON.parse(window.localStorage.getItem(chave) || "null"); return Array.isArray(d) ? d : null; }
+    catch (e) { return null; }
+  }
+
+  function carregarClientesDaCasa() {
+    var doCache = lerListaGuardada(CHAVE_CLIENTES);
+    if (Array.isArray(doCache)) trocarClientes(limparClientes(doCache));
+    if (!temBanco() || !lerSessao()) return Promise.resolve(CLIENTES_CASA);
+    return fetch(DOC_HUB("clientes"), { headers: comAutorizacao(), cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (doc) {
+        if (!doc || !doc.fields || !doc.fields.json) return CLIENTES_CASA;
+        var lista = limparClientes(JSON.parse(doc.fields.json.stringValue));
+        gravarCache(CHAVE_CLIENTES, lista);
+        return trocarClientes(lista);
+      })
+      .catch(function () { return CLIENTES_CASA; });
+  }
+
+  function gravarClientesDaCasa(lista) {
+    var limpa = limparClientes(lista);
+    if (!temBanco()) { gravarCache(CHAVE_CLIENTES, limpa); return Promise.resolve(trocarClientes(limpa)); }
+    if (!lerSessao()) return Promise.reject(new Error("Sessão expirada. Entre de novo."));
+    return fetch(DOC_HUB("clientes"), {
+      method: "PATCH",
+      headers: comAutorizacao({ "Content-Type": "application/json" }),
+      body: JSON.stringify({ fields: {
+        json:         { stringValue: JSON.stringify(limpa) },
+        quantos:      { integerValue: String(limpa.length) },
+        atualizadoEm: { timestampValue: new Date().toISOString() },
+      } }),
+    }).then(function (r) {
+      if (r.status === 403) throw new Error("Sem permissão para gravar os clientes da casa.");
+      if (!r.ok) throw new Error("Não consegui salvar os clientes (HTTP " + r.status + ").");
+      gravarCache(CHAVE_CLIENTES, limpa);
+      return trocarClientes(limpa);
+    });
+  }
+
+  /* ============================================================
+     O quadro antigo → os quadros por pessoa (caminho até o banco)
+     ------------------------------------------------------------
+     Lê as coleções antigas (pendencias, pendencias_reservadas, com
+     a linha do tempo e a ficha dos anexos), lê o que já existe no
+     quadro de alguém e grava uma tarefa nele. Quem decide o que
+     vira o quê é js/migracao-quadro.js; a administração junta as
+     duas pontas. A regra do banco deixa o administrador ler tudo
+     isso, e criar no quadro alheio assinando com o próprio uid.
+     ============================================================ */
+  function deValorSolto(fields) {
+    function valor(v) {
+      if (!v) return null;
+      if ("stringValue" in v) return v.stringValue;
+      if ("booleanValue" in v) return v.booleanValue;
+      if ("integerValue" in v) return parseInt(v.integerValue, 10);
+      if ("doubleValue" in v) return v.doubleValue;
+      if ("nullValue" in v) return null;
+      if ("timestampValue" in v) return v.timestampValue;
+      if ("arrayValue" in v) return ((v.arrayValue && v.arrayValue.values) || []).map(valor);
+      if ("mapValue" in v) return deValorSolto((v.mapValue && v.mapValue.fields) || {});
+      return null;
+    }
+    var o = {};
+    Object.keys(fields || {}).forEach(function (k) { o[k] = valor(fields[k]); });
+    return o;
+  }
+
+  function paraValorSolto(v) {
+    if (v === null || v === undefined) return { nullValue: null };
+    if (typeof v === "string") return { stringValue: v };
+    if (typeof v === "boolean") return { booleanValue: v };
+    if (typeof v === "number") return (v % 1 === 0) ? { integerValue: String(v) } : { doubleValue: v };
+    if (Array.isArray(v)) return { arrayValue: { values: v.map(paraValorSolto) } };
+    if (typeof v === "object") return { mapValue: { fields: paraCamposSolto(v) } };
+    return { stringValue: String(v) };
+  }
+  function paraCamposSolto(obj) {
+    var f = {};
+    Object.keys(obj).forEach(function (k) { if (obj[k] !== undefined) f[k] = paraValorSolto(obj[k]); });
+    return f;
+  }
+
+  function pegarCaminho(caminho) {
+    return fetch(BASE_DOCS() + caminho, { headers: comAutorizacao(), cache: "no-store" })
+      .then(function (r) {
+        if (r.status === 404) return {};
+        if (r.status === 403) throw new Error("Sem permissão para ler " + caminho.split("?")[0] + ".");
+        if (!r.ok) throw new Error("HTTP " + r.status + " em " + caminho.split("?")[0]);
+        return r.json();
+      });
+  }
+
+  function docsDe(j) {
+    return ((j && j.documents) || []).map(function (d) {
+      var o = deValorSolto(d.fields);
+      o._id = d.name.split("/").pop();
+      return o;
+    });
+  }
+
+  function paginas(caminho, acumulado, token) {
+    return pegarCaminho(caminho + (token ? "&pageToken=" + encodeURIComponent(token) : "")).then(function (j) {
+      var lista = acumulado.concat(docsDe(j));
+      return j.nextPageToken ? paginas(caminho, lista, j.nextPageToken) : lista;
+    });
+  }
+
+  function lerQuadroAntigo(avisar) {
+    if (!temBanco()) return Promise.reject(new Error("Sem banco ligado: no modo de teste não há quadro antigo para ler."));
+    var s = lerSessao();
+    if (!s) return Promise.reject(new Error("Sessão expirada. Entre de novo."));
+    function aviso(x) { if (typeof avisar === "function") avisar(x); }
+    var saida = { pendencias: [], reservadas: [] };
+
+    function conversas(colecao, lista) {
+      return lista.reduce(function (fila, p) {
+        return fila.then(function () {
+          aviso("conversa de “" + String(p.oque || "").slice(0, 30) + "”");
+          var base = "/" + colecao + "/" + encodeURIComponent(p._id);
+          return pegarCaminho(base + "/andamento?pageSize=200")
+            .then(function (j) { p._andamento = docsDe(j); })
+            .then(function () { return pegarCaminho(base + "/anexos?pageSize=50"); })
+            .then(function (j) { p._anexos = docsDe(j); });
+        });
+      }, Promise.resolve());
+    }
+
+    aviso("pendências do quadro antigo");
+    return paginas("/pendencias?pageSize=300", []).then(function (l) {
+      saida.pendencias = l;
+      aviso("pendências reservadas");
+      return fetch(base_runQuery(), {
+        method: "POST", headers: comAutorizacao({ "Content-Type": "application/json" }),
+        body: JSON.stringify({ structuredQuery: {
+          from: [{ collectionId: "pendencias_reservadas" }],
+          where: { fieldFilter: { field: { fieldPath: "podemVer" }, op: "ARRAY_CONTAINS", value: { stringValue: s.uid } } },
+          limit: 500 } }),
+      })
+        .then(function (r) { return r.ok ? r.json() : []; })
+        .then(function (j) {
+          saida.reservadas = (j || []).filter(function (l) { return l.document; }).map(function (l) {
+            var o = deValorSolto(l.document.fields);
+            o._id = l.document.name.split("/").pop();
+            o._reservada = true;
+            return o;
+          });
+        })
+        .catch(function () { saida.reservadas = []; });
+    })
+      .then(function () { return conversas("pendencias", saida.pendencias); })
+      .then(function () { return conversas("pendencias_reservadas", saida.reservadas); })
+      .then(function () { return saida; });
+  }
+
+  /* Só o que serve para não duplicar: o id e a origem de cada tarefa. */
+  function lerTarefasDe(uid) {
+    return paginas("/quadros/" + encodeURIComponent(uid) +
+                   "/tarefas?pageSize=300&mask.fieldPaths=origemId&mask.fieldPaths=origemSistema", []);
+  }
+
+  function lerSetoresDe(uid) {
+    return pegarCaminho("/quadros/" + encodeURIComponent(uid) + "/config/setores").then(function (d) {
+      if (!d || !d.fields || !d.fields.json) return [];
+      try {
+        var v = JSON.parse(d.fields.json.stringValue);
+        return (v && Array.isArray(v.lista)) ? v.lista : [];
+      } catch (e) { return []; }
+    });
+  }
+
+  function criarTarefaEm(uid, id, doc) {
+    return fetch(BASE_DOCS() + "/quadros/" + encodeURIComponent(uid) + "/tarefas?documentId=" + encodeURIComponent(id), {
+      method: "POST",
+      headers: comAutorizacao({ "Content-Type": "application/json" }),
+      body: JSON.stringify({ fields: paraCamposSolto(doc) }),
+    }).then(function (r) {
+      if (r.status === 403) throw new Error("O banco recusou a gravação no quadro (403). As regras novas do Firestore estão publicadas?");
+      if (!r.ok) return r.text().then(function (x) { throw new Error("HTTP " + r.status + ": " + x.slice(0, 200)); });
+      return id;
+    });
+  }
+
   return {
     temBanco: temBanco,
     semente: semente,
@@ -1542,6 +1771,15 @@ const Dados = (function () {
     SETORES_PADRAO: SETORES_PADRAO,
     carregarSetores: carregarSetores,
     gravarSetores: gravarSetores,
+
+    /* Os clientes da casa, e o caminho do quadro antigo (administração). */
+    carregarClientesDaCasa: carregarClientesDaCasa,
+    gravarClientesDaCasa: gravarClientesDaCasa,
+    clientesDaCasa: function () { return CLIENTES_CASA.slice(); },
+    lerQuadroAntigo: lerQuadroAntigo,
+    lerTarefasDe: lerTarefasDe,
+    lerSetoresDe: lerSetoresDe,
+    criarTarefaEm: criarTarefaEm,
   };
 
 })();

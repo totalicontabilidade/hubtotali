@@ -490,3 +490,18 @@ body.so-recados .oficina{grid-template-columns:minmax(0,1fr)}
     grid-template-areas:"peg logo nome" ". . leg" ". . url" ". . mover" ". . fim"}
   .linha .linha__fim{justify-content:flex-start}
 }
+
+/* ---------- Clientes da casa e quadro antigo ---------- */
+.cli-colar{padding:12px 14px 0}
+.cli-texto{width:100%;min-height:120px;resize:vertical;font-family:ui-monospace,Consolas,monospace;font-size:12.5px}
+.cli-previa,.qa-previa{padding:4px 14px 10px;border-top:1px solid var(--fio)}
+.cli-previa .painel__acoes,.qa-previa .painel__acoes{padding-left:0;padding-right:0;border-top:0}
+#cli-lista{padding:0 14px 12px}
+.cli-detalhe summary{cursor:pointer;font-size:13px;font-weight:640;color:var(--txt-2);padding:6px 0}
+.cli-ul,.qa-ul{margin:6px 0 0;padding-left:18px;font-size:13px;line-height:1.55;color:var(--txt-2)}
+.cli-ul b,.qa-ul b{color:var(--txt)}
+.cli-ul{columns:2;column-gap:28px}
+.qa-ul > li{margin-bottom:10px}
+.qa-sub{margin:4px 0 0;padding-left:16px;font-size:12.5px;color:var(--txt-2)}
+.qa-feita{text-decoration:line-through;color:var(--txt-3)}
+@media (max-width:640px){ .cli-ul{columns:1} }
