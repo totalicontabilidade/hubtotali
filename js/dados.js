@@ -357,6 +357,9 @@ const Dados = (function () {
   }
 
   function salvarAvisos(lista, quem) {
+    /* Sem banco, os recados vão junto com a lista, no salvar() que
+       vem logo depois — tudo no mesmo navegador. */
+    if (!temBanco()) return Promise.resolve({ local: true });
     var s = lerSessao();
     if (!s) return Promise.reject(new Error("Sessão expirada. Entre de novo."));
     var limpa = (lista || []).slice(0, 40).map(function (a) {
