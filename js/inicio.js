@@ -62,7 +62,8 @@ const Inicio = (function () {
     txt.appendChild(el("div", "hj__o", p.textoDe(t)));
     var meta = el("div", "hj__m");
     if (tipo === "nova" || (t.criadoPorUid && t.criadoPorUid !== p.meuUid())) {
-      meta.appendChild(el("span", "hj__de", "de " + (t.criadoPorNome || p.nomeDe(t.criadoPorUid) || "colega")));
+      meta.appendChild(el("span", "hj__de", t.origemSistema === "hub-antigo" ? "do quadro antigo" :
+        t.origemSistema === "atos" ? "do Atos Societários" : "de " + (t.criadoPorNome || p.nomeDe(t.criadoPorUid) || "colega")));
     }
     if (t.setor) {
       var s = el("span", "hj__setor", p.nomeSetor(t.setor));

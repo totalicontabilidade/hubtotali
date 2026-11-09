@@ -50,7 +50,9 @@ const pessoa=uid=>equipe.find(p=>p.uid===uid)||null;
 const nomeDe=uid=>{ const p=pessoa(uid); return p?(p.nome||p.email):(uid?'alguém que saiu da equipe':''); };
 const primeiroNome=uid=>String(nomeDe(uid)||'').split(/\s+/)[0];
 const deOutro=t=>!!(t.criadoPorUid&&t.criadoPorUid!==meuUid());
-const colegas=()=>equipe.filter(p=>p.uid!==meuUid()&&p.ativo!==false);
+// o robô do Atos está na equipe (precisa estar, para gravar), mas não é colega para quem se manda pendência
+const ehRobo=p=>/^atos@/i.test(p.email||'')||/^rob[oô]/i.test(p.nome||'');
+const colegas=()=>equipe.filter(p=>p.uid!==meuUid()&&p.ativo!==false&&!ehRobo(p));
 let calRef=new Date(), calModo=window.innerWidth<900?'semana':'mes', diaFiltro=null, calSel=null, navMin=false, blocoFoco=null;
 try{ blocoFoco=localStorage.getItem('pend.foco')||null; setorAtivo=localStorage.getItem('pend.setor')||'todos'; colMobile=localStorage.getItem('pend.col')||'hoje'; calModo=localStorage.getItem('pend.calModo')||calModo; navMin=localStorage.getItem('pend.navMin')==='1'; }catch(e){}
 
@@ -433,7 +435,7 @@ function refrescarPessoas(){
   const uids=equipe.map(p=>p.uid);
   return Promise.all([store.listarEnviadas(uids),store.listarAcompanho(uids)]).then(r=>{
     const a=JSON.stringify([enviadas,acompanho]);
-    enviadas=r[0]||[]; acompanho=r[1]||[];
+    enviadas=(r[0]||[]).filter(t=>t.origemSistema!=='hub-antigo'); acompanho=r[1]||[];
     if(JSON.stringify([enviadas,acompanho])!==a) agendar();
   }).catch(()=>{});
 }
@@ -611,8 +613,9 @@ function card(t,st,agora){
 function marcarVisto(t){ if(deOutro(t)&&!t.vistoEm) mudar(t.id,{vistoEm:Date.now()}); }
 function faixaDeQuem(t){
   if(!deOutro(t)) return null;
+  const antigo=t.origemSistema==='hub-antigo', atos=t.origemSistema==='atos';
   const nome=t.criadoPorNome||nomeDe(t.criadoPorUid)||'um colega';
-  const kids=[el('span',{class:'de-nome'},['de ',el('b',{text:nome})])];
+  const kids=[antigo?el('span',{class:'de-nome'},['do ',el('b',{text:'quadro antigo do Hub'})]):atos?el('span',{class:'de-nome'},['do ',el('b',{text:'Atos Societários'})]):el('span',{class:'de-nome'},['de ',el('b',{text:nome})])];
   if(t.criadoEm) kids.push(el('span',{class:'de-quando',text:ddmm(t.criadoEm)}));
   if(!t.vistoEm) kids.push(el('span',{class:'de-nova',text:'nova'}),el('span',{class:'esp'}),el('button',{class:'de-visto',type:'button',title:'Avisar '+nome+' que você viu',onclick:()=>marcarVisto(t)},['Visto ✓']));
   else kids.push(el('span',{class:'esp'}),el('span',{class:'de-vista',text:'vista em '+ddmm(t.vistoEm)}));
