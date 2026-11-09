@@ -786,16 +786,30 @@
       alvo.appendChild(grupo(s.titulo, s.itens, s.itens.length));
     });
 
+    /* Os grupos de gaveta entram fechados, um por linha, e abrem
+       ali mesmo: a tela não fica com um vão embaixo e a pessoa não
+       precisa trocar de vista para chegar a um órgão. */
     var naGaveta = guardados().reduce(function (n, s) { return n + (s.itens || []).length; }, 0);
     if (naGaveta) {
-      var mais = el("button", "si__mais");
-      mais.type = "button";
-      mais.appendChild(el("b", null, String(naGaveta)));
-      mais.appendChild(el("span", null, TITULO_GAVETA + " — " + guardados().map(function (s) { return s.titulo; }).join(", ")));
-      mais.appendChild(el("span", null, "›"));
-      mais.title = "Abrir a lista inteira";
-      mais.addEventListener("click", function () { mostrarVista("sistemas"); });
-      alvo.appendChild(mais);
+      var caixa = el("div", "si__gav-caixa");
+      var rot = el("div", "si__rot", TITULO_GAVETA);
+      rot.appendChild(el("small", null, String(naGaveta)));
+      rot.className = "si__rot si__rot--gaveta";
+      caixa.appendChild(rot);
+      guardados().forEach(function (s) {
+        if (!s.itens || !s.itens.length) return;
+        var det = document.createElement("details");
+        det.className = "si__gav";
+        var sum = document.createElement("summary");
+        sum.appendChild(document.createTextNode(s.titulo));
+        sum.appendChild(el("small", null, String(s.itens.length)));
+        det.appendChild(sum);
+        var grade = el("div", "fv");
+        s.itens.forEach(function (i) { grade.appendChild(item(i, true)); });
+        det.appendChild(grade);
+        caixa.appendChild(det);
+      });
+      alvo.appendChild(caixa);
     }
     if (sub) sub.textContent = total ? total + " à vista · " + naGaveta + " na gaveta" : "";
 

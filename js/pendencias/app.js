@@ -1039,8 +1039,12 @@ function renderCal(){
   const dias=calModo==='mes'?diasDoMes(calRef):diasDaSemana(calRef);
   const mesRef=calModo==='mes'?calRef.getMonth():null;
   const titulo=(calModo==='mes'?calRef:dias[3]).toLocaleDateString('pt-BR',{month:'long',year:'numeric'});
+  // fora do mês (ou da semana) de hoje, um atalho pequeno para voltar
+  const agoraD=new Date();
+  const foraDeHoje=calModo==='mes'?(calRef.getMonth()!==agoraD.getMonth()||calRef.getFullYear()!==agoraD.getFullYear()):!dias.some(d=>diaISO(d)===hoje);
   box.appendChild(el('div',{class:'cal-h'},[
     el('button',{class:'mes',type:'button',title:'Voltar para hoje',onclick:()=>{calRef=new Date();render();}},[titulo]),
+    foraDeHoje?el('button',{class:'volta',type:'button',title:'Voltar para hoje',onclick:()=>{calRef=new Date();render();}},['hoje']):null,
     el('button',{class:'cb',type:'button','aria-label':'Anterior',title:'Anterior',html:ICAL.ant,onclick:()=>{mudarRef(-1,calModo);render();}}),
     el('button',{class:'cb',type:'button','aria-label':'Próximo',title:'Próximo',html:ICAL.prox,onclick:()=>{mudarRef(1,calModo);render();}}),
     el('button',{class:'cb',type:'button','aria-label':calModo==='mes'?'Mostrar só a semana':'Mostrar o mês',title:calModo==='mes'?'Mostrar só a semana':'Mostrar o mês',html:calModo==='mes'?ICAL.semana:ICAL.mes,onclick:()=>{calModo=calModo==='mes'?'semana':'mes';try{localStorage.setItem('pend.calModo',calModo)}catch(e){};render();}}),

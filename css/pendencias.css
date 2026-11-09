@@ -198,6 +198,8 @@
 .pend .cal-h{display:flex;align-items:center;gap:2px;padding:0 2px 0 8px}
 .pend .cal-h .mes{font-weight:700;font-size:14px;flex:1;border:0;background:transparent;color:var(--side-fg);text-align:left;padding:0}
 .pend .cal-h .mes::first-letter{text-transform:uppercase}
+.pend .cal-h .volta{border:0;background:var(--side-hover);color:var(--side-fg);font-size:11px;font-weight:700;border-radius:99px;padding:2px 8px;margin-right:2px;line-height:16px}
+.pend .cal-h .volta:hover{background:var(--side-fg);color:var(--side)}
 .pend .cb{width:28px;height:28px;border:0;border-radius:7px;background:transparent;color:var(--side-muted);display:grid;place-items:center;padding:0}
 .pend .cb:hover{background:var(--side-hover);color:var(--side-fg)}
 .pend .cg{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;text-align:center}
