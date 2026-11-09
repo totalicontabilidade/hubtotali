@@ -1297,8 +1297,18 @@ const Dados = (function () {
     }).catch(function () { return { admin: false, tem: {} }; });
   }
 
+  /* Sem banco (modo de teste) a equipe é inventada: três colegas para
+     testar mandar pendência, acompanhar e comentar. O uid de teste é
+     o próprio e-mail, que é a chave do quadro local. */
+  var EQUIPE_DE_TESTE = [
+    { uid: "local", nome: "Eu (teste)", email: "teste@local", setores: ["Diretoria"], ativo: true, papel: "admin" },
+    { uid: "ana@local", nome: "Ana (teste)", email: "ana@local", setores: ["Fiscal"], ativo: true, papel: "equipe" },
+    { uid: "bruno@local", nome: "Bruno (teste)", email: "bruno@local", setores: ["Contábil"], ativo: true, papel: "equipe" },
+    { uid: "carla@local", nome: "Carla (teste)", email: "carla@local", setores: ["Legalização"], ativo: true, papel: "equipe" },
+  ];
+
   function listarEquipe() {
-    if (!temBanco()) return Promise.resolve([]);
+    if (!temBanco()) return Promise.resolve(EQUIPE_DE_TESTE.map(function (p) { return Object.assign({}, p); }));
     return fetch(BASE_DOCS() + "/equipe?pageSize=200", { headers: comAutorizacao(), cache: "no-store" })
       .then(function (r) {
         if (r.status === 403) throw new Error("Sem permissão para ler a equipe.");

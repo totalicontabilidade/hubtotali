@@ -14,7 +14,16 @@
      de segurança do Hub não deixa entrar script de fora;
    · uma ponte com o resto do Hub (window.PendenciasHub, no fim):
      o resumo do dia no cabeçalho, o cartão "Hoje" da tela
-     inicial e a criação rápida de pendência saem daqui.
+     inicial e a criação rápida de pendência saem daqui;
+   · PENDÊNCIA ENTRE PESSOAS (desde 09/11/2026), que o quadro
+     original não tinha e o Hub antigo tinha: "Para quem" manda a
+     pendência para o quadro de um ou mais colegas (assinada por
+     quem mandou); "Quem acompanha" põe colegas em envolvidos, e
+     eles a veem e comentam; o dono marca VISTO; quem mandou vê
+     em "Enviadas" se foi vista, riscada, comentada. Tudo isso
+     mora em quadros/{uid}/tarefas, nos campos criadoPorUid,
+     criadoPorNome, envolvidos, vistoEm e loteId, e a regra do
+     banco decide quem lê e quem mexe.
 
    O mapa dos blocos está no README, em "O quadro de pendências".
    ============================================================ */
@@ -33,6 +42,15 @@ let db=null, assets=null; const store=window.Armazenamento; let tarefas=[], seto
 let novosAnexos=[], edAnexos=null;
 let comentando=null; const notasAbertas=new Set();
 let setorAtivo='todos', busca='', editando=null, novaStatus='hoje', colMobile='hoje';
+// pessoas: a equipe do Hub, para quem a nova pendência vai, quem acompanha, e as listas de fora do meu quadro
+let equipe=[], novaPara=[], novaAcomp=[], enviadas=[], acompanho=[], abaQ='quadro', comentandoFora=null;
+const meuUid=()=>(store&&store.usuario&&store.usuario.uid)||'';
+const meuNome=()=>(store&&store.usuario&&(store.usuario.nome||store.usuario.email))||'';
+const pessoa=uid=>equipe.find(p=>p.uid===uid)||null;
+const nomeDe=uid=>{ const p=pessoa(uid); return p?(p.nome||p.email):(uid?'alguém que saiu da equipe':''); };
+const primeiroNome=uid=>String(nomeDe(uid)||'').split(/\s+/)[0];
+const deOutro=t=>!!(t.criadoPorUid&&t.criadoPorUid!==meuUid());
+const colegas=()=>equipe.filter(p=>p.uid!==meuUid()&&p.ativo!==false);
 let calRef=new Date(), calModo=window.innerWidth<900?'semana':'mes', diaFiltro=null, calSel=null, navMin=false, blocoFoco=null;
 try{ blocoFoco=localStorage.getItem('pend.foco')||null; setorAtivo=localStorage.getItem('pend.setor')||'todos'; colMobile=localStorage.getItem('pend.col')||'hoje'; calModo=localStorage.getItem('pend.calModo')||calModo; navMin=localStorage.getItem('pend.navMin')==='1'; }catch(e){}
 
@@ -341,10 +359,16 @@ function render(){
     tr.appendChild(el('button',{type:'button',class:'st-'+s.id,'aria-pressed':String(colMobile===s.id),onclick:()=>{colMobile=s.id;try{localStorage.setItem('pend.col',s.id)}catch(e){};render();}},[el('span',{class:'dot'}),s.curto,el('span',{class:'n',text:' '+n})]));
   });
 
+  // abas (meu quadro / enviadas / acompanho)
+  renderAbas();
+  const foraDoQuadro=abaQ!=='quadro';
+  $('quadro').hidden=foraDoQuadro; $('feitas').hidden=foraDoQuadro; $('trocar').hidden=foraDoQuadro||!!blocoFoco;
+  const lp=$('listaPessoas'); if(lp){ lp.hidden=!foraDoQuadro; if(foraDoQuadro) renderFora(); }
+  pintarPara();
+
   // quadro
   const quadro=$('quadro'); quadro.textContent=''; quadro.dataset.col=blocoFoco||colMobile;
   quadro.classList.toggle('foco',!!blocoFoco);
-  $('trocar').hidden=!!blocoFoco;
   const focar=id=>{ blocoFoco=id; if(id) colMobile=id; try{ localStorage.setItem('pend.foco',id||''); if(id) localStorage.setItem('pend.col',id); }catch(e){}; render(); if(id) quadro.scrollIntoView({block:'start',behavior:'smooth'}); };
   STATUS.filter(s=>!blocoFoco||s.id===blocoFoco).forEach(s=>{
     const pz=t=>t.status==='data'&&t.prazo?t.prazo:'9';
@@ -397,6 +421,89 @@ function render(){
     ]));
   });
   avisarHub();
+}
+
+/* ---------- as abas do quadro: Meu quadro · Enviadas · Acompanho ----------
+   Enviadas: o que eu mandei para colegas — se viram, riscaram,
+   comentaram. Acompanho: o que colegas me puseram para acompanhar.
+   As duas vêm de fora do meu quadro, por consulta aos quadros da
+   equipe, e se refazem a cada minuto junto com o resto. */
+function refrescarPessoas(){
+  if(!db||!store.listarEnviadas||!equipe.length) return Promise.resolve();
+  const uids=equipe.map(p=>p.uid);
+  return Promise.all([store.listarEnviadas(uids),store.listarAcompanho(uids)]).then(r=>{
+    const a=JSON.stringify([enviadas,acompanho]);
+    enviadas=r[0]||[]; acompanho=r[1]||[];
+    if(JSON.stringify([enviadas,acompanho])!==a) agendar();
+  }).catch(()=>{});
+}
+function renderAbas(){
+  const box=$('abasQ'); if(!box) return;
+  box.textContent='';
+  if(!colegas().length){ box.hidden=true; if(abaQ!=='quadro') abaQ='quadro'; return; }
+  box.hidden=false;
+  const abertasEnv=enviadas.filter(t=>!t.feito).length, semVisto=enviadas.filter(t=>!t.feito&&!t.vistoEm).length;
+  const novasParaMim=tarefas.filter(t=>!t.feito&&deOutro(t)&&!t.vistoEm).length;
+  const abas=[
+    {id:'quadro',rot:'Meu quadro',n:tarefas.filter(t=>!t.feito).length,alerta:novasParaMim},
+    {id:'enviadas',rot:'Enviadas',n:abertasEnv,alerta:0,dica:semVisto?semVisto+' ainda não vista'+(semVisto>1?'s':''):''},
+    {id:'acompanho',rot:'Acompanho',n:acompanho.filter(t=>!t.feito).length,alerta:0}
+  ];
+  abas.forEach(a=>box.appendChild(el('button',{type:'button',class:'aba-q','aria-pressed':String(abaQ===a.id),title:a.dica||'',onclick:()=>{ abaQ=a.id; render(); }},[a.rot,el('span',{class:'n',text:String(a.n)}),a.alerta?el('span',{class:'novo',text:a.alerta+' nova'+(a.alerta>1?'s':'')}):null])));
+}
+function statusCurto(t){
+  if(t.feito) return 'riscada'+(t.feitoEm?' em '+ddmm(t.feitoEm):'');
+  if(t.status==='data'&&t.prazo) return chipPrazo(t.prazo,Date.now()).textContent;
+  return (STATUS.find(s=>s.id===t.status)||{}).curto||'';
+}
+function itemFora(t,modo){
+  const dono=nomeDe(t.donoUid);
+  const podeRiscar=modo==='enviadas';
+  const acoes=[el('button',{class:'ic',title:'Comentar','aria-label':'Comentar',html:ICON.nota,onclick:()=>{ comentandoFora=comentandoFora===t.id?null:t.id; render(); }})];
+  if(podeRiscar) acoes.push(t.feito
+    ?el('button',{class:'ic',title:'Desfazer risco','aria-label':'Desfazer risco',html:ICON.undo,onclick:()=>mudarFora(t,{feito:false,feitoEm:null})})
+    :el('button',{class:'ic',title:'Riscar (feito)','aria-label':'Riscar',html:ICON.check,onclick:()=>mudarFora(t,{feito:true,feitoEm:Date.now(),revisadoEm:null})}));
+  const notas=(t.notas||[]);
+  const ultima=notas.length?notas[notas.length-1]:null;
+  const vistoTx=modo==='enviadas'?(t.vistoEm?'vista por '+primeiroNome(t.donoUid)+' em '+ddmm(t.vistoEm):'ainda não vista'):('de '+(t.criadoPorNome||nomeDe(t.criadoPorUid)||'colega'));
+  return el('article',{class:'fora'+(t.feito?' feita':'')+(modo==='enviadas'&&!t.vistoEm&&!t.feito?' nao-vista':''),'data-id':t.id},[
+    el('div',{class:'fora-cab'},[el('span',{class:'fora-dono'},[modo==='enviadas'?'para ':'no quadro de ',el('b',{text:dono})]),el('span',{class:'fora-st',text:statusCurto(t)}),el('span',{class:'fora-visto',text:vistoTx}),el('span',{class:'esp'}),el('div',{class:'acoes'},acoes)]),
+    txtEl('txt',t),
+    ultima?el('div',{class:'fora-nota'},[el('span',{html:ICON.nota}),el('span',{class:'nt'},[ultima.por&&ultima.porUid!==meuUid()?el('b',{class:'por',text:ultima.por+': '}):null,ultima.t]),el('span',{class:'nd',text:quandoNota(ultima.em)}),notas.length>1?el('span',{class:'nd',text:'· '+notas.length+' comentários'}):null]):null,
+    comentandoFora===t.id?caixaNotaFora(t):null
+  ]);
+}
+function mudarFora(t,campos){
+  const i=(t.donoUid===meuUid()?null:null);
+  return gravar(t.id,async()=>{ await store.alterarTarefaEm(t.donoUid,t.id,campos); await refrescarPessoas(); render(); });
+}
+function caixaNotaFora(t){
+  const inp=el('input',{type:'text',maxlength:'300',placeholder:'Comentário para '+primeiroNome(t.donoUid)+' ver','aria-label':'Novo comentário'});
+  const salvar=()=>{ const v=inp.value.trim(); if(!v){ inp.focus(); return; } comentandoFora=null; mudarFora(t,{notas:(t.notas||[]).concat([novaNota(v)])}); };
+  inp.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); salvar(); } if(e.key==='Escape'){ e.preventDefault(); comentandoFora=null; render(); } });
+  setTimeout(()=>inp.focus(),0);
+  return el('div',{class:'nova-nota'},[inp,el('div',{class:'linha'},[el('span',{class:'esp'}),el('button',{class:'sec',type:'button',onclick:()=>{ comentandoFora=null; render(); }},['Cancelar']),el('button',{class:'prim',type:'button',onclick:salvar},['Comentar'])])]);
+}
+function renderFora(){
+  const box=$('listaPessoas'); if(!box) return;
+  box.textContent='';
+  const lista=(abaQ==='enviadas'?enviadas:acompanho).slice().sort((a,b)=>(a.feito?1:0)-(b.feito?1:0)||(b.criadoEm||0)-(a.criadoEm||0));
+  const q=busca.trim().toLowerCase();
+  const vis=lista.filter(t=>!q||(t.texto||'').toLowerCase().includes(q)||nomeDe(t.donoUid).toLowerCase().includes(q));
+  if(!vis.length){
+    box.appendChild(el('div',{class:'pvazio grande',text:abaQ==='enviadas'
+      ?'Você ainda não mandou pendência para ninguém. Em "Para quem", na caixa de nova pendência, escolha quem recebe.'
+      :'Ninguém pôs você para acompanhar uma pendência ainda.'}));
+    return;
+  }
+  // agrupadas por pessoa, abertas antes das riscadas
+  const porPessoa=new Map();
+  vis.forEach(t=>{ const k=abaQ==='enviadas'?t.donoUid:(t.donoUid); if(!porPessoa.has(k)) porPessoa.set(k,[]); porPessoa.get(k).push(t); });
+  Array.from(porPessoa.entries()).sort((a,b)=>nomeDe(a[0]).localeCompare(nomeDe(b[0]),'pt-BR')).forEach(([uid,ts])=>{
+    const abertas=ts.filter(t=>!t.feito).length;
+    box.appendChild(el('div',{class:'grp'},[el('span',{class:'mono',style:'--sc:var(--acomp)',text:nomeDe(uid).charAt(0).toUpperCase()}),nomeDe(uid),el('span',{class:'q',text:abertas+' aberta'+(abertas===1?'':'s')+(ts.length>abertas?' · '+(ts.length-abertas)+' riscada'+(ts.length-abertas===1?'':'s'):'')})]));
+    box.appendChild(el('div',{class:'cards'},ts.map(t=>itemFora(t,abaQ))));
+  });
 }
 
 function pedidosFaxina(agora){
@@ -473,8 +580,9 @@ function card(t,st,agora){
   // ir para "Com data" pede a data: abre a edição já nesse prazo
   const mover=STATUS.filter(s=>s.id!==st).map(s=>el('button',{class:'mv st-'+s.id,title:'Mover para '+s.titulo,'aria-label':'Mover para '+s.titulo,onclick:()=>{ if(s.id==='data') abrirEdicao(t.id,'data'); else mudar(t.id,{status:s.id,statusEm:Date.now(),prazo:null}); }},[el('span',{class:'dot'}),el('span',{class:'lbl',text:s.curto})]));
   const urg=st==='data'&&t.prazo===diaISO(agora);
-  return el('article',{class:'card'+(t.importante?' imp':'')+(urg?' urg':'')+(diasAtraso?' atrasada':''),'data-id':t.id},[
+  return el('article',{class:'card'+(t.importante?' imp':'')+(urg?' urg':'')+(diasAtraso?' atrasada':'')+(deOutro(t)&&!t.vistoEm?' nova':''),'data-id':t.id},[
     diasAtraso?el('div',{class:'selo'},[el('span',{html:ICON.alerta}),'ATRASADA HÁ '+diasAtraso+(diasAtraso===1?' DIA':' DIAS')+' · venceu '+ddmmISO(t.prazo)]):null,
+    faixaDeQuem(t),
     el('button',{class:'chk',title:'Riscar (feito)','aria-label':'Riscar como feito',html:ICON.check,onclick:()=>mudar(t.id,{feito:true,feitoEm:Date.now(),revisadoEm:null})}),
     txtEl('txt',t,{ondblclick:()=>abrirEdicao(t.id)}),
     chipsAnexos(t.anexos),
@@ -484,6 +592,7 @@ function card(t,st,agora){
       setorAtivo==='todos'?tagSetor(t):null,
       t.prazo?chipPrazo(t.prazo,agora):null,
       desde?el('span',{class:'desde',text:desde}):null,
+      chipAcompanham(t),
       el('div',{class:'acoes'},[
         el('button',{class:'ic',title:'Comentar (ex.: esperando retorno)','aria-label':'Comentar',html:ICON.nota,onclick:()=>abrirNota(t.id)}),
         el('button',{class:'ic'+(t.importante?' on':''),title:t.importante?'Tirar do topo':'Importante (fica no topo)','aria-label':'Importante','aria-pressed':String(!!t.importante),html:ICON.star(!!t.importante),onclick:()=>mudar(t.id,{importante:!t.importante})}),
@@ -494,6 +603,28 @@ function card(t,st,agora){
     el('div',{class:'mover'},[el('span',{class:'mvl',text:'Mover para'}),...mover])
   ]);
 }
+/* ---------- de quem veio, quem acompanha, visto ----------
+   A pendência que um colega mandou chega com uma faixa no alto:
+   quem mandou e, enquanto o dono não a viu, "nova". Clicar em
+   "Visto" avisa quem mandou — é a ciência do quadro antigo, sem
+   cerimônia. */
+function marcarVisto(t){ if(deOutro(t)&&!t.vistoEm) mudar(t.id,{vistoEm:Date.now()}); }
+function faixaDeQuem(t){
+  if(!deOutro(t)) return null;
+  const nome=t.criadoPorNome||nomeDe(t.criadoPorUid)||'um colega';
+  const kids=[el('span',{class:'de-nome'},['de ',el('b',{text:nome})])];
+  if(t.criadoEm) kids.push(el('span',{class:'de-quando',text:ddmm(t.criadoEm)}));
+  if(!t.vistoEm) kids.push(el('span',{class:'de-nova',text:'nova'}),el('span',{class:'esp'}),el('button',{class:'de-visto',type:'button',title:'Avisar '+nome+' que você viu',onclick:()=>marcarVisto(t)},['Visto ✓']));
+  else kids.push(el('span',{class:'esp'}),el('span',{class:'de-vista',text:'vista em '+ddmm(t.vistoEm)}));
+  return el('div',{class:'de'},kids);
+}
+function chipAcompanham(t){
+  const lista=(t.envolvidos||[]).filter(u=>u!==meuUid());
+  if(!lista.length) return null;
+  const nomes=lista.map(primeiroNome).filter(Boolean);
+  return el('span',{class:'acomp',title:'Acompanham: '+lista.map(nomeDe).join(', ')},['👁 '+(nomes.length<=2?nomes.join(' e '):nomes.length+' acompanham')]);
+}
+
 /* comentários da pendência ("esperando retorno do cliente"…) */
 const SUGESTOES=['Esperando retorno do cliente','Aguardando documento','Aguardando pagamento','Enviado, falta confirmar'];
 function quandoNota(ts){ const d=new Date(ts); const h=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'); return ehHoje(ts)?'hoje '+h:ddmm(ts)+' '+h; }
@@ -503,7 +634,8 @@ function blocoNotas(t,podeApagar){
   const mostrar=aberto?notas.map((n,i)=>[n,i]):[[notas[notas.length-1],notas.length-1]];
   const box=el('div',{class:'notas'});
   mostrar.forEach(([n,i])=>{
-    const kids=[el('span',{html:ICON.nota}),realcar(el('span',{class:'nt',text:n.t})),el('span',{class:'nd',text:quandoNota(n.em)})];
+    const deColega=n.porUid&&n.porUid!==meuUid();
+    const kids=[el('span',{html:ICON.nota}),realcar(el('span',{class:'nt'},[deColega?el('b',{class:'por',text:(n.por||nomeDe(n.porUid)||'colega')+': '}):null,n.t])),el('span',{class:'nd',text:quandoNota(n.em)})];
     if(podeApagar&&aberto){
       let armado=false,tm; const b=el('button',{class:'x',type:'button',title:'Apagar comentário','aria-label':'Apagar comentário'},['×']);
       b.addEventListener('click',()=>{ if(!armado){ armado=true; b.textContent='Apagar?'; b.classList.add('conf'); tm=setTimeout(()=>{armado=false;b.textContent='×';b.classList.remove('conf');},3000); return; } clearTimeout(tm); mudar(t.id,{notas:notas.filter((_,k)=>k!==i)}); });
@@ -515,7 +647,10 @@ function blocoNotas(t,podeApagar){
   else if(podeApagar&&!aberto) box.appendChild(el('button',{class:'vertodas',type:'button',onclick:()=>{ notasAbertas.add(t.id); render(); }},['Apagar comentário']));
   return box;
 }
+// um comentário leva quem escreveu: no quadro de uma pessoa só isso não importava; entre pessoas, importa
+function novaNota(v){ const n={t:v,em:Date.now()}; if(meuUid()){ n.porUid=meuUid(); n.por=meuNome(); } return n; }
 function abrirNota(id){
+  const t=tarefas.find(x=>x.id===id); if(t) marcarVisto(t);
   comentando=id; render();
   const i=document.querySelector('.nova-nota input'); if(i) i.focus();
 }
@@ -524,7 +659,7 @@ function caixaNota(t){
   const inp=el('input',{type:'text',maxlength:'300',placeholder:'Comentário (ex.: esperando retorno do cliente)','aria-label':'Novo comentário'});
   const salvar=txt=>{
     const v=(txt||inp.value).trim(); if(!v){ inp.focus(); return; }
-    mudar(t.id,{notas:(t.notas||[]).concat([{t:v,em:Date.now()}])});
+    mudar(t.id,{notas:(t.notas||[]).concat([novaNota(v)])});
     fecharNota();
   };
   inp.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); salvar(); } if(e.key==='Escape'){ e.preventDefault(); fecharNota(); } });
@@ -547,6 +682,7 @@ function tagSetor(t){ return el('span',{class:'tag',style:'--sc:'+corSetor(t.set
 function abrirEdicao(id,forcarStatus){
   if(editando&&editando!==id) descartarEdicao();
   const t=tarefas.find(x=>x.id===id);
+  if(t) marcarVisto(t);
   comentando=null; editando=id; edAnexos={lista:((t&&t.anexos)||[]).map(a=>Object.assign({},a)),originais:((t&&t.anexos)||[]).map(a=>a.id),st:forcarStatus||(t&&t.status)||'hoje'};
   render();
   if(forcarStatus==='data'){ const d=document.querySelector('.edit input[type="date"]'); if(d){ d.focus(); try{ d.showPicker&&d.showPicker(); }catch(e){} } return; }
@@ -623,6 +759,60 @@ const segNova=segmento(()=>novaStatus,v=>{ manualStatus=true; escolherStatusNova
 $('novaStatus').replaceWith(segNova);
 $('novaData').hidden=true;
 novaTxt.addEventListener('paste',colarSoTexto);
+
+/* ---------- para quem, e quem acompanha ----------
+   O botão diz para onde a pendência vai ("Para mim", "Para Ana",
+   "Para 3 pessoas"). Abre uma lista da equipe em duas colunas de
+   caixas: quem recebe (ganha a pendência no próprio quadro) e quem
+   acompanha (vê e comenta, sem receber). */
+function rotuloPara(){
+  if(!novaPara.length) return 'Para mim';
+  if(novaPara.length===1) return 'Para '+primeiroNome(novaPara[0]);
+  return 'Para '+novaPara.length+' pessoas';
+}
+function pintarPara(){
+  const b=$('novaPara'); if(!b) return;
+  b.textContent=''; b.append(el('span',{class:'ico',text:'👤'}),rotuloPara()+(novaAcomp.length?' · '+novaAcomp.length+' acompanha'+(novaAcomp.length>1?'m':''):''));
+  b.classList.toggle('on',!!(novaPara.length||novaAcomp.length));
+  b.hidden=!colegas().length;
+}
+function listaPessoas(selecionadas,aoMudar,excluir){
+  const box=el('div',{class:'pp-lista'});
+  colegas().filter(p=>!excluir||!excluir.includes(p.uid)).forEach(p=>{
+    const cb=el('input',{type:'checkbox'}); cb.checked=selecionadas.includes(p.uid);
+    cb.addEventListener('change',()=>{ const i=selecionadas.indexOf(p.uid); if(cb.checked&&i<0) selecionadas.push(p.uid); if(!cb.checked&&i>=0) selecionadas.splice(i,1); aoMudar(); });
+    box.appendChild(el('label',{class:'pp-item'},[cb,el('span',{class:'pp-ini',text:(p.nome||p.email||'?').charAt(0).toUpperCase()}),el('span',{class:'pp-nome'},[p.nome||p.email,(p.setores&&p.setores.length)?el('small',{text:' · '+p.setores.join(', ')}):null])]));
+  });
+  if(!box.children.length) box.appendChild(el('div',{class:'dica',text:'Ninguém mais na equipe.'}));
+  return box;
+}
+function abrirPara(){
+  const pop=$('pessoasPop'); if(!pop) return;
+  if(!pop.hidden){ pop.hidden=true; return; }
+  pop.textContent='';
+  const refazer=()=>{ pintarPara(); };
+  pop.appendChild(el('div',{class:'pp-col'},[el('h4',{text:'Quem recebe'}),el('div',{class:'dica',text:'Ganha a pendência no próprio quadro. Sem ninguém marcado, fica no seu.'}),listaPessoas(novaPara,refazer)]));
+  pop.appendChild(el('div',{class:'pp-col'},[el('h4',{text:'Quem acompanha'}),el('div',{class:'dica',text:'Vê a pendência em "Acompanho" e pode comentar.'}),listaPessoas(novaAcomp,refazer)]));
+  pop.appendChild(el('div',{class:'linha pp-pe'},[el('button',{class:'sec',type:'button',onclick:()=>{ novaPara=[]; novaAcomp=[]; pintarPara(); pop.hidden=true; }},['Só para mim']),el('span',{class:'esp'}),el('button',{class:'prim',type:'button',onclick:()=>{ pop.hidden=true; novaTxt.focus(); }},['Pronto'])]));
+  pop.hidden=false;
+}
+if($('novaPara')) $('novaPara').addEventListener('click',abrirPara);
+document.addEventListener('click',e=>{ const pop=$('pessoasPop'); if(pop&&!pop.hidden&&!pop.contains(e.target)&&e.target!==$('novaPara')&&!$('novaPara').contains(e.target)) pop.hidden=true; });
+
+/* Cria a pendência onde ela tem de nascer: no meu quadro, ou no
+   quadro de cada pessoa marcada (uma cópia por pessoa, com o mesmo
+   loteId). Quem mandou assina; quem acompanha vai em envolvidos. */
+function criarOnde(doc,para,acomp){
+  const base=Object.assign({},doc,{envolvidos:(acomp||[]).filter(u=>u!==meuUid()),criadoPorNome:meuNome()||null,vistoEm:null,loteId:null});
+  const destinos=(para||[]).filter(u=>u&&u!==meuUid());
+  if(!destinos.length) return gravar('nova',()=>store.criarTarefa(base)).then(()=>({onde:'eu'}));
+  const lote=destinos.length>1?('l'+Date.now().toString(36)):null;
+  return gravar('nova',async()=>{
+    for(const uid of destinos){ await store.criarTarefaEm(uid,Object.assign({},base,{loteId:lote,envolvidos:base.envolvidos.filter(u=>u!==uid)})); }
+    aviso('Enviada para '+destinos.map(primeiroNome).join(', ')+'.');
+    refrescarPessoas();
+  }).then(()=>({onde:destinos}));
+}
 
 /* ---------- falar (ditado do aparelho) e entender prazo, data e setor pela frase ---------- */
 const MESES=['janeiro','fevereiro','marco','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
@@ -778,7 +968,9 @@ function adicionar(){
   if(autoStatus!==null) escolherStatusNova(statusAntes||'hoje',true);
   if(autoSetor) $('novaSetor').dataset.escolhido='';
   zerarEntendimento();
-  gravar('nova',()=>store.criarTarefa(doc));
+  const para=novaPara.slice(), acomp=novaAcomp.slice();
+  novaPara=[]; novaAcomp=[]; pintarPara();
+  criarOnde(doc,para,acomp);
   if(colMobile!==novaStatus){ colMobile=novaStatus; try{localStorage.setItem('pend.col',novaStatus)}catch(e){} }
   novaTxt.focus();
 }
@@ -1223,10 +1415,17 @@ function resumoHub(){
   const semana=abertas.filter(t=>colunaDe(t,agora)==='semana');
   const feitasHoje=tarefas.filter(t=>t.feito&&ehHoje(t.feitoEm));
   const ordem=(a,b)=>(a.prazo||'9').localeCompare(b.prazo||'9')||(b.importante?1:0)-(a.importante?1:0)||(a.criadoEm||0)-(b.criadoEm||0);
+  const novasParaMim=abertas.filter(t=>deOutro(t)&&!t.vistoEm);
+  const envAbertas=enviadas.filter(t=>!t.feito);
   return {
     carregado, abertas:abertas.length, atrasadas:atrasadas.length, hoje:paraHoje.length, semana:semana.length, feitasHoje:feitasHoje.length,
     listaAtrasadas:atrasadas.sort(ordem), listaHoje:paraHoje.sort(ordem), listaSemana:semana.sort(ordem),
-    setores:setores.slice()
+    setores:setores.slice(),
+    // entre pessoas
+    novasParaMim:novasParaMim.length, listaNovas:novasParaMim.slice().sort(ordem),
+    enviadas:{total:enviadas.length, abertas:envAbertas.length, semVisto:envAbertas.filter(t=>!t.vistoEm).length, lista:envAbertas.slice()},
+    acompanho:acompanho.filter(t=>!t.feito).length,
+    equipe:equipe.slice()
   };
 }
 function avisarHub(){
@@ -1241,17 +1440,27 @@ window.PendenciasHub={
   riscar:id=>mudar(id,{feito:true,feitoEm:Date.now(),revisadoEm:null}),
   desfazer:id=>mudar(id,{feito:false,feitoEm:null}),
   // cria a partir de uma frase, entendendo prazo e setor como a caixa do quadro faz
-  adicionarRapido(frase){
+  adicionarRapido(frase){ return window.PendenciasHub.criar({frase}); },
+  // a criação completa, usada pela tela inicial: texto (ou frase a entender), bloco, prazo, setor,
+  // importante, para quem (uids) e quem acompanha (uids)
+  criar(d){
     if(!db) return Promise.reject(new Error('sem armazenamento'));
-    const bruto=String(frase||'').trim(); if(!bruto) return Promise.reject(new Error('vazio'));
-    const r=entender(bruto);
-    const texto=cortarComandos(bruto,false).trim()||bruto;
+    const bruto=String(d.frase||d.texto||'').trim(); if(!bruto) return Promise.reject(new Error('vazio'));
+    const r=d.frase?entender(bruto):{};
+    const texto=d.frase?(cortarComandos(bruto,false).trim()||bruto):bruto;
     const html=escaparHtml(texto).replace(/\n/g,'<br>');
     const agora=Date.now();
-    const status=r.status||'hoje';
-    const doc={html,texto,setor:r.setor||'',status,importante:false,feito:false,feitoEm:null,criadoEm:agora,statusEm:agora,grifadoEm:null,revisadoEm:null,prazo:status==='data'?r.prazo:null,anexos:[],criadoPor:(store&&store.usuario&&store.usuario.email)||null};
-    return gravar('nova',()=>store.criarTarefa(doc)).then(()=>({status,prazo:doc.prazo,setor:r.setor||'',rotulo:rotuloPrazo(r)||'Hoje'}));
+    let status=d.status||r.status||'hoje', prazo=d.prazo||r.prazo||null;
+    if(prazo&&!d.status) status='data';
+    if(status!=='data') prazo=null;
+    const setor=d.setor!==undefined&&d.setor!==null?d.setor:(r.setor||'');
+    const doc={html,texto,setor,status,importante:!!d.importante,feito:false,feitoEm:null,criadoEm:agora,statusEm:agora,grifadoEm:null,revisadoEm:null,prazo,anexos:[],criadoPor:(store&&store.usuario&&store.usuario.email)||null};
+    return criarOnde(doc,d.para||[],d.envolvidos||[]).then(x=>({status,prazo,setor,rotulo:rotuloPrazo({status,prazo})||'Hoje',onde:x.onde}));
   },
+  entender:frase=>entender(String(frase||'')),
+  equipe:()=>equipe.slice(), colegas:()=>colegas(), meuUid:()=>meuUid(), nomeDe:uid=>nomeDe(uid),
+  marcarVisto:id=>{ const t=tarefas.find(x=>x.id===id); if(t) marcarVisto(t); },
+  mostrarAba(aba){ abaQ=aba||'quadro'; render(); },
   // leva até a pendência no quadro e a destaca por um instante
   irPara(id){
     setorAtivo='todos'; diaFiltro=null; busca=''; $('pendBusca').value='';
@@ -1269,7 +1478,7 @@ window.PendenciasHub={
     if((novaTxt.textContent||'').trim()||novosAnexos.length) return true;
     return false;
   },
-  atualizar(){ return (store&&store.atualizar)?store.atualizar():Promise.resolve(); },
+  atualizar(){ return Promise.all([(store&&store.atualizar)?store.atualizar():Promise.resolve(),refrescarPessoas()]); },
   tarefas:()=>tarefas.slice(), setores:()=>setores.slice()
 };
 
@@ -1285,6 +1494,11 @@ render();
   try{ if(!store) throw new Error('sem armazenamento'); await store.iniciar(); db=store; }catch(e){ db=null; console.error(e); }
   if(!db){ $('semDb').hidden=false; carregado=true; render(); return; }
   assets=store.arquivos||null; $('btnPdf').hidden=!assets;
+  // a equipe: para quem mandar, quem acompanha, e o nome de quem mandou
+  const carregarEquipe=()=>(typeof Dados!=='undefined'&&Dados.listarEquipe?Dados.listarEquipe():Promise.resolve([])).then(l=>{ equipe=(l||[]).filter(p=>p&&p.uid); pintarPara(); return refrescarPessoas(); }).catch(()=>{});
+  carregarEquipe().then(()=>agendar());
+  setInterval(()=>{ if(!document.hidden) refrescarPessoas(); },60000);
+  window.addEventListener('pendencias:equipe-mudou',carregarEquipe);
   store.ouvirTarefas(lista=>{ tarefas=lista.map(t=>Object.assign({},t)); carregado=true; agendar(); },e=>aviso(msgErro(e)));
   store.ouvirConfig('clientes',d=>{
     clientes=(d&&Array.isArray(d.lista))?d.lista.filter(x=>x&&x.id&&x.nome&&x.cnpj):[];

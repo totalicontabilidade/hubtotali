@@ -355,7 +355,18 @@ service cloud.firestore {
              && (!('criadoPor' in d) || d.criadoPor == null || (d.criadoPor is string && d.criadoPor.size() <= 200))
              && d.criadoPorUid is string && d.criadoPorUid.size() <= 128
              && (!('origemId' in d) || d.origemId == null || (d.origemId is string && d.origemId.size() <= 120))
-             && (!('origemSistema' in d) || d.origemSistema == null || (d.origemSistema is string && d.origemSistema.size() <= 40));
+             && (!('origemSistema' in d) || d.origemSistema == null || (d.origemSistema is string && d.origemSistema.size() <= 40))
+             // Pendência entre pessoas (desde 09/11/2026): quem mandou, quem
+             // acompanha, quando o dono viu e o lote de um envio a vários.
+             && (!('criadoPorNome' in d) || d.criadoPorNome == null || (d.criadoPorNome is string && d.criadoPorNome.size() <= 120))
+             && (!('envolvidos' in d) || (d.envolvidos is list && d.envolvidos.size() <= 60))
+             && (!('vistoEm' in d) || d.vistoEm == null || d.vistoEm is number)
+             && (!('loteId' in d) || d.loteId == null || (d.loteId is string && d.loteId.size() <= 60));
+    }
+
+    // Quem acompanha a pendência (está em "envolvidos").
+    function acompanha(dados) {
+      return 'envolvidos' in dados && dados.envolvidos is list && request.auth.uid in dados.envolvidos;
     }
 
     match /quadros/{uid}/tarefas/{id} {
@@ -364,17 +375,24 @@ service cloud.firestore {
       // pendência antes de criar outra. Para listar, a consulta
       // precisa filtrar por criadoPorUid == o próprio uid, senão o
       // banco recusa inteira — e é assim que o receber.gs pergunta.
-      allow read:   if daEquipe() && (meuUid(uid) || ehAdmin() || meuUid(resource.data.criadoPorUid));
+      // Lê: o dono, o administrador, quem mandou e quem acompanha.
+      // Para LISTAR, a consulta precisa filtrar pelo mesmo critério
+      // (criadoPorUid == eu, ou envolvidos contém eu), senão o banco
+      // recusa inteira.
+      allow read:   if daEquipe() && (meuUid(uid) || ehAdmin() || meuUid(resource.data.criadoPorUid) || acompanha(resource.data));
       allow create: if daEquipe()
                     && (meuUid(uid) || meuUid(request.resource.data.criadoPorUid))
                     && formaDeTarefa();
-      // O dono muda o que quiser; quem criou no quadro alheio só
-      // risca, desrisca e comenta — e não muda quem criou.
+      // O dono muda o que quiser. Quem mandou risca, desrisca, comenta,
+      // corrige o pedido (texto, prazo, importância) e muda quem
+      // acompanha — mas não muda quem criou. Quem só acompanha, comenta.
       allow update: if daEquipe() && formaDeTarefa()
                     && request.resource.data.criadoPorUid == resource.data.criadoPorUid
                     && (meuUid(uid)
                         || (meuUid(resource.data.criadoPorUid)
-                            && mudou().hasOnly(['feito', 'feitoEm', 'revisadoEm', 'notas'])));
+                            && mudou().hasOnly(['feito', 'feitoEm', 'revisadoEm', 'notas', 'envolvidos',
+                                                'texto', 'html', 'prazo', 'importante', 'status', 'statusEm']))
+                        || (acompanha(resource.data) && mudou().hasOnly(['notas'])));
       allow delete: if daEquipe() && meuUid(uid);
     }
 

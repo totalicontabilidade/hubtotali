@@ -372,3 +372,53 @@
 /* no lugar dos atributos style do HTML original, que a política de segurança do Hub não aceita */
 .pend .pbusca--cheia{max-width:none;flex:1}
 .pend .ic--x{font-size:20px}
+
+/* ---------- pendências entre pessoas (desde 09/11/2026) ---------- */
+.pend .fb.para{width:auto;padding:0 10px;gap:6px;font-weight:600;font-size:13px;color:var(--muted)}
+.pend .fb.para.on{border-color:var(--accent);color:var(--accent);background:var(--acomp-bg)}
+.pend .fb.para .ico{font-size:13px}
+.pend .pp{display:grid;grid-template-columns:1fr 1fr;gap:12px;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:12px}
+.pend .pp h4{margin:0 0 2px;font-size:13.5px}
+.pend .pp .pp-pe{grid-column:1/-1}
+.pend .pp-lista{display:flex;flex-direction:column;gap:2px;margin-top:6px;max-height:220px;overflow:auto}
+.pend .pp-item{display:flex;align-items:center;gap:8px;padding:5px 6px;border-radius:8px;cursor:pointer;font-size:13.5px}
+.pend .pp-item:hover{background:var(--surface)}
+.pend .pp-item input{accent-color:var(--accent)}
+.pend .pp-ini{width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:800;flex:none}
+.pend .pp-nome small{color:var(--muted);font-size:11.5px}
+@media (max-width:700px){ .pend .pp{grid-template-columns:1fr} }
+
+.pend .de{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;font-size:12px;color:var(--acomp-ink);background:var(--acomp-bg);border-radius:8px;padding:4px 8px;margin:-2px 0 2px}
+.pend .de .de-nome{white-space:nowrap}
+.pend .de .de-nome b{font-weight:700}
+.pend .de .de-quando{color:var(--muted)}
+.pend .de .de-nova{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--accent);color:#fff;border-radius:99px;padding:1px 7px}
+.pend .de .de-visto{border:1px solid var(--accent);color:var(--accent);background:var(--surface);border-radius:8px;padding:2px 9px;font-size:12px;font-weight:700}
+.pend .de .de-visto:hover{background:var(--accent);color:#fff}
+.pend .de .de-vista{font-size:11.5px;color:var(--muted)}
+.pend .card.nova{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.pend .acomp{font-size:11.5px;color:var(--acomp-ink);background:var(--acomp-bg);border-radius:99px;padding:1px 8px}
+.pend .nota .por{font-style:normal;font-weight:700;color:var(--acomp-ink)}
+
+.pend .abas-q{display:flex;gap:4px;border-bottom:1px solid var(--line);padding-bottom:0}
+.pend .aba-q{border:0;background:transparent;padding:8px 12px;font-weight:600;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;display:inline-flex;align-items:center;gap:7px;font-size:14px}
+.pend .aba-q:hover{color:var(--fg)}
+.pend .aba-q[aria-pressed="true"]{color:var(--fg);border-bottom-color:var(--accent)}
+.pend .aba-q .n{font-size:12px;background:var(--surface-2);border-radius:99px;padding:0 7px;line-height:18px;font-variant-numeric:tabular-nums}
+.pend .aba-q .novo{font-size:10.5px;font-weight:800;background:var(--accent);color:#fff;border-radius:99px;padding:1px 7px}
+
+.pend .lista-p{display:flex;flex-direction:column;gap:8px}
+.pend .lista-p .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(360px,100%),1fr));gap:8px}
+.pend .fora{background:var(--surface);border-radius:var(--r);padding:10px 12px;display:flex;flex-direction:column;gap:6px;box-shadow:0 1px 2px rgba(20,30,60,.06);border:1px solid transparent}
+.pend .fora.nao-vista{border-color:var(--semana)}
+.pend .fora.feita .txt{text-decoration:line-through;color:var(--muted)}
+.pend .fora-cab{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:12px;color:var(--muted)}
+.pend .fora-dono b{color:var(--fg)}
+.pend .fora-st{font-weight:600;color:var(--acomp-ink)}
+.pend .fora.nao-vista .fora-visto{color:var(--semana-ink);font-weight:700}
+.pend .fora-nota{display:flex;gap:7px;align-items:flex-start;font-size:13px;background:var(--surface-2);border:1px solid var(--line);border-radius:9px;padding:6px 8px}
+.pend .fora-nota svg{width:14px;height:14px;flex:none;margin-top:2px;color:var(--muted)}
+.pend .fora-nota .nt{flex:1;min-width:0;font-style:italic}
+.pend .fora-nota .nd{font-size:11px;color:var(--muted);white-space:nowrap}
+.pend .fora .nova-nota{grid-column:auto}
+.pend .pvazio.grande{background:var(--surface);border-radius:var(--r);padding:22px 18px;color:var(--muted);opacity:1;font-size:14px}

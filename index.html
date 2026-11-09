@@ -93,10 +93,11 @@
 
   <nav class="nav" aria-label="Seções do Hub">
     <!-- A marca é um botão: clicar nela volta ao Início, como em
-         qualquer site. O nome ao lado some quando a barra encolhe. -->
+         qualquer site. É a logo inteira, na versão para fundo escuro;
+         quando a barra encolhe fica só o símbolo. -->
     <button class="nav__marca" type="button" id="nav-logo" title="Voltar ao Início">
-      <img src="assets/simbolo-escuro.png" alt="" width="30" height="30">
-      <span class="nav__marca-t">Hub Totali</span>
+      <img class="nav__marca-cheia" src="assets/logo-hub-escuro.png" alt="Hub Totali">
+      <img class="nav__marca-so" src="assets/simbolo-escuro.png" alt="Hub Totali" width="30" height="30">
     </button>
 
     <button class="nav__b on" type="button" id="nav-inicio" title="Início">
@@ -140,6 +141,8 @@
   </nav>
 
   <header class="cab">
+    <!-- No computador a marca já está na barra; aqui ela só aparece
+         no celular, onde a barra vira rodapé sem marca. -->
     <button class="cab__marca" type="button" id="cab-logo" title="Voltar ao Início">
       <img class="cab__logo" src="assets/logo-hub.png" alt="Hub Totali">
       <span class="marca__nome" id="marca-nome" hidden>Hub Totali</span>
@@ -182,7 +185,10 @@
        tem o seu "ver tudo", que leva à vista inteira. -->
   <section class="vista vista--inicio" id="vista-inicio" aria-label="Início">
     <div class="ini">
-      <div class="ini__principal">
+      <!-- Coluna 1: o que é meu para hoje, com a caixa completa de
+           nova pendência (prazo, bloco, setor, para quem), e os
+           vencimentos próximos. -->
+      <div class="ini__col ini__a">
         <section class="cartao cartao--hoje" id="pend-hoje" aria-label="Minhas pendências">
           <div class="cartao__cab">
             <span class="cartao__t">Minhas pendências</span>
@@ -190,18 +196,32 @@
             <button class="cartao__acao" type="button" id="pend-hoje-abrir">Abrir o quadro ›</button>
           </div>
           <div class="hj__barra" role="progressbar" aria-label="Progresso de hoje" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="pend-hoje-prog"></i></div>
-          <div class="hj__nova">
-            <input class="hj__cx" type="text" id="pend-hoje-nova" maxlength="400"
-                   placeholder="Anotar pendência… (ex.: DAE da Alfa até sexta no fiscal)"
-                   aria-label="Anotar pendência">
+          <form class="hj__form" id="pend-form" autocomplete="off">
+            <div class="hj__nova">
+              <input class="hj__cx" type="text" id="pend-hoje-nova" maxlength="400"
+                     placeholder="Nova pendência… (ex.: DAE da Alfa até sexta no fiscal)"
+                     aria-label="Nova pendência">
+            </div>
+            <div class="hj__op" id="pend-opcoes" hidden>
+              <select class="hj__sel" id="pf-bloco" aria-label="Quando">
+                <option value="hoje">Hoje</option>
+                <option value="semana">Esta semana</option>
+                <option value="data">Com data</option>
+                <option value="acompanhar">Acompanhar</option>
+              </select>
+              <input class="hj__sel" type="date" id="pf-data" aria-label="Resolver até" hidden>
+              <select class="hj__sel" id="pf-setor" aria-label="Setor"></select>
+              <select class="hj__sel" id="pf-para" aria-label="Para quem"></select>
+              <button class="hj__imp" type="button" id="pf-imp" aria-pressed="false" title="Importante: fica no topo">★</button>
+              <button class="hj__ok" type="submit" id="pf-ok">Anotar</button>
+            </div>
+            <div class="hj__pessoas" id="pf-pessoas" hidden></div>
             <span class="hj__dica" id="pend-hoje-dica" hidden></span>
-          </div>
+          </form>
           <div id="pend-hoje-lista"></div>
           <div class="hj__pe" id="pend-hoje-pe"></div>
         </section>
-      </div>
 
-      <div class="ini__lado">
         <section class="cartao cartao--prazos" id="prox-prazos" aria-label="Próximos vencimentos">
           <div class="cartao__cab">
             <span class="cartao__t">Próximos vencimentos</span>
@@ -210,15 +230,24 @@
           </div>
           <div id="prox-prazos-lista"></div>
         </section>
+      </div>
 
-        <section class="cartao cartao--favoritos" id="ini-favoritos" aria-label="Meus sistemas">
+      <!-- Coluna 2: os sistemas, em destaque. A lista da casa está
+           aqui para ser escolhida sem trocar de tela; os grupos de
+           gaveta ficam a um clique, na vista Sistemas. -->
+      <div class="ini__col ini__b">
+        <section class="cartao cartao--sistemas" id="ini-sistemas" aria-label="Sistemas">
           <div class="cartao__cab">
-            <span class="cartao__t" id="ini-favoritos-t">Meus favoritos</span>
-            <button class="cartao__acao" type="button" id="ini-favoritos-abrir">Todos os sistemas ›</button>
+            <span class="cartao__t">Sistemas</span>
+            <span class="cartao__sub" id="ini-sistemas-sub"></span>
+            <button class="cartao__acao" type="button" id="ini-favoritos-abrir">Todos ›</button>
           </div>
-          <div id="ini-favoritos-lista"></div>
+          <div id="ini-sistemas-lista"></div>
         </section>
+      </div>
 
+      <!-- Coluna 3: as notícias que importam. -->
+      <div class="ini__col ini__c">
         <section class="cartao cartao--noticias" id="noticias-rail" aria-label="Notícias oficiais">
           <div class="cartao__cab">
             <span class="cartao__t">Notícias oficiais</span>
@@ -269,12 +298,19 @@
           <button class="fb pdf" id="btnPdf" type="button" title="Anexar PDF (ou arraste o arquivo para cá)" hidden></button>
           <input type="file" id="arqPdf" accept="application/pdf,.pdf" multiple hidden>
           <span class="esp"></span>
+          <button class="fb para" id="novaPara" type="button" title="Para quem vai, e quem acompanha" hidden>Para mim</button>
           <input type="date" id="novaData" aria-label="Resolver até" title="Resolver até">
           <select id="novaSetor" aria-label="Setor"></select>
           <div id="novaStatus"></div>
           <button class="prim" id="btnAdd">Adicionar</button>
         </div>
+        <div class="pp" id="pessoasPop" hidden role="group" aria-label="Para quem vai e quem acompanha"></div>
       </section>
+
+      <!-- Meu quadro · Enviadas · Acompanho. As duas últimas são o
+           que está em quadros de colegas: o que eu mandei e o que me
+           puseram para acompanhar. -->
+      <div class="abas-q" id="abasQ" role="tablist" hidden></div>
 
       <div class="linha">
         <input class="pbusca" id="pendBusca" type="search" placeholder="Buscar nas pendências" aria-label="Buscar nas pendências">
@@ -285,6 +321,7 @@
 
       <div class="seg trocar" id="trocar" role="group" aria-label="Mostrar prazo"></div>
       <main class="quadro" id="quadro" data-col="hoje"></main>
+      <section class="lista-p" id="listaPessoas" hidden aria-label="Pendências em quadros de colegas"></section>
 
       <details class="feitas" id="feitas"><summary id="feitasTit">Riscadas</summary><div class="lf" id="listaFeitas"></div></details>
     </div>

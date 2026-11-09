@@ -52,6 +52,7 @@
     }
     function meuUid() { return sessao().uid; }
     function colecao() { return base() + "/quadros/" + encodeURIComponent(meuUid()) + "/tarefas"; }
+    function colecaoDe(uid) { return base() + "/quadros/" + encodeURIComponent(uid) + "/tarefas"; }
     function cabecalhos(extra) {
       var h = { "Authorization": "Bearer " + sessao().idToken };
       Object.keys(extra || {}).forEach(function (k) { h[k] = extra[k]; });
@@ -173,6 +174,24 @@
         });
     }
 
+    function consultarVarios(uids, where) {
+      return Promise.all(uids.map(function (uid) {
+        return fetch(base() + "/quadros/" + encodeURIComponent(uid) + ":runQuery", {
+          method: "POST", headers: cabecalhos({ "Content-Type": "application/json" }),
+          body: JSON.stringify({ structuredQuery: { from: [{ collectionId: "tarefas" }], where: where, limit: 300 } }),
+        })
+          .then(function (r) { return r.ok ? r.json() : []; })
+          .then(function (j) {
+            return (j || []).filter(function (l) { return l.document; }).map(function (l) {
+              var t = deDocumento(l.document);
+              t.donoUid = uid;
+              return t;
+            });
+          })
+          .catch(function () { return []; });
+      })).then(function (listas) { return [].concat.apply([], listas); });
+    }
+
     var atualizando = null;
     function atualizarTudo() {
       if (document.hidden || atualizando) return atualizando || Promise.resolve();
@@ -265,6 +284,43 @@
           .then(conferir)
           .then(function () {})
           .catch(function (e) { return buscarTarefas().catch(function () {}).then(function () { throw e; }); });
+      },
+
+      /* ---------- pendências entre pessoas ----------
+         Criar no quadro de um colega (assinando), mexer no que eu
+         mandei e listar o que mandei ou acompanho. As listas são uma
+         consulta por quadro, filtrada pelo que a regra exige — o
+         time é pequeno, e isso dispensa índice de grupo. */
+      criarTarefaEm: function (uid, dados) {
+        var id = novoId();
+        var doc = Object.assign({}, dados);
+        delete doc.id;
+        doc.criadoPorUid = meuUid();
+        return fetch(colecaoDe(uid) + "?documentId=" + encodeURIComponent(id), {
+          method: "POST", headers: cabecalhos({ "Content-Type": "application/json" }),
+          body: JSON.stringify({ fields: paraCampos(doc) }),
+        }).then(conferir).then(function () { return id; });
+      },
+      alterarTarefaEm: function (uid, id, campos) {
+        var chaves = Object.keys(campos).filter(function (k) { return k !== "id" && k !== "donoUid"; });
+        if (!chaves.length) return Promise.resolve();
+        var mask = chaves.map(function (k) { return "updateMask.fieldPaths=" + encodeURIComponent(k); }).join("&");
+        var limpos = {};
+        chaves.forEach(function (k) { limpos[k] = campos[k]; });
+        return fetch(colecaoDe(uid) + "/" + encodeURIComponent(id) + "?" + mask + "&currentDocument.exists=true", {
+          method: "PATCH", headers: cabecalhos({ "Content-Type": "application/json" }),
+          body: JSON.stringify({ fields: paraCampos(limpos) }),
+        }).then(conferir).then(function () {});
+      },
+      listarEnviadas: function (uids) {
+        var eu = meuUid();
+        return consultarVarios(uids.filter(function (u) { return u !== eu; }),
+          { fieldFilter: { field: { fieldPath: "criadoPorUid" }, op: "EQUAL", value: { stringValue: eu } } });
+      },
+      listarAcompanho: function (uids) {
+        var eu = meuUid();
+        return consultarVarios(uids.filter(function (u) { return u !== eu; }),
+          { fieldFilter: { field: { fieldPath: "envolvidos" }, op: "ARRAY_CONTAINS", value: { stringValue: eu } } });
       },
 
       apagarTarefa: function (id) {

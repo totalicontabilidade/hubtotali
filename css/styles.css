@@ -105,12 +105,24 @@ a{color:inherit;text-decoration:none}
    só serve para casa, lupa e impressora; o resto a pessoa tem de
    adivinhar e depois lembrar. */
 .nav{grid-row:1/-1;grid-column:1;background:var(--nav);
-     display:flex;flex-direction:column;align-items:stretch;gap:3px;padding:14px 10px}
-.nav__marca{display:flex;align-items:center;gap:10px;padding:4px 8px 16px;color:#fff;
-            text-align:left;border-radius:10px}
-.nav__marca img{width:30px;height:30px;object-fit:contain;flex:none}
-.nav__marca-t{font-size:15px;font-weight:720;letter-spacing:-.01em;white-space:nowrap}
-.nav__marca:hover .nav__marca-t{text-decoration:underline;text-underline-offset:3px}
+     display:flex;flex-direction:column;align-items:stretch;gap:3px;padding:14px 10px;
+     position:relative;overflow:hidden}
+/* A silhueta do símbolo, como na tela de entrada: ocupa o vão entre
+   os botões e a administração, cortada pelas bordas, no mesmo tom
+   apagado. É marca, não informação — o espaço fica ocupado sem pedir
+   leitura. */
+.nav::after{content:"";position:absolute;z-index:0;pointer-events:none;
+  left:50%;bottom:112px;width:230px;height:230px;transform:translateX(-50%);
+  background:#1b304a;
+  -webkit-mask-image:url(../assets/simbolo.png);mask-image:url(../assets/simbolo.png);
+  -webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-position:center;mask-position:center}
+.nav > *{position:relative;z-index:1}
+.nav__marca{display:flex;align-items:center;justify-content:center;padding:6px 6px 18px;border-radius:10px;
+            transition:opacity .14s}
+.nav__marca:hover{opacity:.85}
+.nav__marca-cheia{height:40px;width:auto;object-fit:contain}
+.nav__marca-so{display:none;width:30px;height:30px;object-fit:contain}
 .nav__b{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:11px;
         color:var(--nav-txt);font-size:13.5px;font-weight:600;text-align:left;
         transition:background .14s,color .14s;position:relative}
@@ -148,10 +160,11 @@ a{color:inherit;text-decoration:none}
 .cab{grid-column:2;grid-row:1;display:flex;align-items:center;gap:18px;padding:11px 24px;
      background:rgba(255,255,255,.74);border-bottom:1px solid rgba(255,255,255,.7);
      -webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4)}
-.cab__marca{display:flex;align-items:center;border-radius:9px;padding:2px}
-.cab__marca:hover{background:rgba(255,255,255,.9)}
-.cab__logo{height:36px;width:auto}
-.cab__onde{display:flex;flex-direction:column;min-width:0;padding-left:16px;border-left:1px solid var(--fio-2)}
+/* A marca do cabeçalho só existe no celular: no computador ela
+   está na barra, e duas marcas na mesma tela é uma a mais. */
+.cab__marca{display:none;align-items:center;border-radius:9px;padding:2px}
+.cab__logo{height:30px;width:auto}
+.cab__onde{display:flex;flex-direction:column;min-width:0}
 .cab__vista{font-size:16px;font-weight:720;color:var(--txt);letter-spacing:-.01em;line-height:1.2}
 .cab__sub{font-size:11.5px;color:var(--txt-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cab__sub:empty{display:none}
@@ -377,8 +390,10 @@ a{color:inherit;text-decoration:none}
 @media (max-width:1180px){
   .tela{grid-template-columns:84px minmax(0,1fr)}
   .nav{padding:12px 6px;gap:2px}
-  .nav__marca{justify-content:center;padding:2px 0 12px}
-  .nav__marca-t{display:none}
+  .nav::after{width:120px;height:120px;bottom:104px}
+  .nav__marca{padding:2px 0 12px}
+  .nav__marca-cheia{display:none}
+  .nav__marca-so{display:block}
   .nav__b{flex-direction:column;gap:5px;padding:9px 4px;font-size:10.5px;font-weight:640;text-align:center}
   .nav__b svg{width:20px;height:20px}
   .nav__rot{max-width:100%}
@@ -397,6 +412,7 @@ a{color:inherit;text-decoration:none}
        flex-direction:row;justify-content:space-around;align-items:stretch;
        height:62px;padding:4px 4px 6px;z-index:60;box-shadow:0 -2px 16px rgba(13,25,38,.18)}
   .nav__marca,.nav__totali{display:none}
+  .nav::after{display:none}
   .nav__b{flex:1 1 0;min-width:0;flex-direction:column;justify-content:center;gap:3px;padding:4px 2px;
           border-radius:10px;font-size:10px}
   .nav__b svg{width:21px;height:21px}
@@ -404,8 +420,8 @@ a{color:inherit;text-decoration:none}
   .nav__selo{top:2px;right:calc(50% - 20px)}
 
   .cab{grid-column:1;grid-row:1;padding:10px 16px;gap:12px;flex-wrap:wrap}
-  .cab__logo{height:30px}
-  .cab__onde{padding-left:10px}
+  .cab__marca{display:flex}
+  .cab__onde{padding-left:10px;border-left:1px solid var(--fio-2)}
   .cab__vista{font-size:14.5px}
   .cab__sub{display:none}
 
@@ -593,15 +609,68 @@ a{color:inherit;text-decoration:none}
    Duas colunas: as pendências da pessoa, largas, à esquerda; à
    direita, os vencimentos próximos, os favoritos e as notícias.
    Em tela estreita vira uma coluna, na mesma ordem de importância. */
-.ini{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(320px,.9fr);gap:16px;
-     max-width:1480px;margin:0 auto;align-items:start}
-.ini__principal,.ini__lado{display:flex;flex-direction:column;gap:14px;min-width:0}
-@media (max-width:1100px){
-  .ini{grid-template-columns:1fr}
+/* Três colunas: minhas pendências e vencimentos · sistemas · notícias.
+   Em tela média, as notícias descem para baixo das pendências e os
+   sistemas ficam inteiros à direita; no celular, uma coluna. */
+.ini{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr) minmax(280px,.72fr);
+     grid-template-areas:"a b c";gap:16px;max-width:1600px;margin:0 auto;align-items:start}
+.ini__col{display:flex;flex-direction:column;gap:14px;min-width:0}
+.ini__a{grid-area:a}.ini__b{grid-area:b}.ini__c{grid-area:c}
+@media (max-width:1400px){
+  .ini{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"a b" "c b"}
+}
+@media (max-width:1000px){
+  .ini{grid-template-columns:1fr;grid-template-areas:"a" "b" "c"}
 }
 .cartao--hoje .cartao__t{font-size:16px}
-.cartao--hoje .hj__i{padding:10px 8px 10px 10px}
+.cartao--hoje .hj__i{padding:8px 8px 8px 10px}
 .cartao--hoje .hj__o{font-size:13.5px}
+
+/* ---------- a caixa completa de nova pendência ----------
+   Uma linha quando fechada; ao receber foco abre as opções: quando,
+   data, setor, para quem, importante. O que a frase já diz ("até
+   sexta no fiscal") preenche as opções sozinho. */
+.hj__form{display:flex;flex-direction:column;gap:6px;margin-bottom:8px}
+.hj__form .hj__nova{margin:0}
+.hj__op{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.hj__sel{border:1px solid var(--fio-2);border-radius:9px;padding:6px 8px;font:inherit;font-size:12.5px;color:var(--txt);background:#fff;max-width:100%}
+.hj__sel:focus{outline:2px solid var(--estado);outline-offset:1px;border-color:var(--estado)}
+.hj__imp{width:32px;height:32px;border:1px solid var(--fio-2);border-radius:9px;background:#fff;color:var(--txt-3);font-size:16px;line-height:1}
+.hj__imp[aria-pressed="true"]{color:#d9a520;border-color:#d9a520;background:#fdf6e0}
+.hj__ok{margin-left:auto;height:32px;border-radius:9px;background:var(--marca);color:#fff;font-weight:700;font-size:13px;padding:0 14px}
+.hj__ok:hover{opacity:.9}
+.hj__pessoas{display:flex;flex-direction:column;gap:6px;background:var(--base);border-radius:10px;padding:8px 10px}
+.hj__pessoas-t{font-size:11px;font-weight:730;letter-spacing:.05em;text-transform:uppercase;color:var(--txt-3)}
+.hj__chips{display:flex;flex-wrap:wrap;gap:5px}
+.pchip{border:1px solid var(--fio-2);background:#fff;color:var(--txt-2);border-radius:99px;padding:4px 10px;font-size:12.5px;font-weight:620;
+       display:inline-flex;align-items:center;gap:6px}
+.pchip:hover{border-color:var(--estado);color:var(--estado)}
+.pchip[aria-pressed="true"]{background:var(--marca);border-color:var(--marca);color:#fff}
+.pchip__ini{width:18px;height:18px;border-radius:50%;background:var(--estado);color:#fff;display:grid;place-items:center;font-size:10px;font-weight:800}
+.pchip[aria-pressed="true"] .pchip__ini{background:rgba(255,255,255,.3)}
+
+/* novas de colegas e enviadas, no cartão */
+.hj__faixa--novas .hj__faixa-t{color:var(--estado)}
+.hj__faixa--novas .hj__faixa-n{background:var(--estado-luz);color:var(--estado)}
+.hj__i--nova{border-left-color:var(--estado);background:var(--estado-luz)}
+.hj__de{font-weight:650;color:var(--estado)}
+.hj__env{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:8px;padding:8px 10px;border-radius:10px;background:var(--base);font-size:12.5px;color:var(--txt-2)}
+.hj__env b{color:var(--txt)}
+.hj__env-ver{margin-left:auto;font-weight:650;color:var(--estado);padding:2px 6px;border-radius:7px}
+.hj__env-ver:hover{background:var(--estado-luz)}
+
+/* ---------- o cartão de sistemas do Início ---------- */
+.cartao--sistemas .cartao__t{font-size:16px}
+.si__g{margin-top:6px}
+.si__g + .si__g{margin-top:10px;padding-top:10px;border-top:1px solid var(--fio)}
+.si__rot{display:flex;align-items:baseline;gap:8px;font-size:11px;font-weight:730;letter-spacing:.06em;text-transform:uppercase;color:var(--txt-3);margin-bottom:4px}
+.si__rot small{font-family:var(--mono);font-weight:600;letter-spacing:0;text-transform:none}
+.si__mais{display:flex;align-items:center;gap:10px;width:100%;text-align:left;margin-top:10px;padding:10px 12px;border-radius:11px;
+          background:var(--base);border:1px dashed var(--fio-2);color:var(--txt-2);font-size:13px;font-weight:620}
+.si__mais:hover{border-color:var(--estado);color:var(--estado)}
+.si__mais b{font-family:var(--mono);background:var(--marca);color:#fff;border-radius:8px;padding:2px 8px;font-size:12px}
+.si__mais span:last-child{margin-left:auto;font-size:18px;line-height:1}
+.fv{grid-template-columns:repeat(auto-fill,minmax(165px,1fr))}
 .hj__pe{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;padding-top:9px;border-top:1px solid var(--fio);
         font-size:11.5px;color:var(--txt-3)}
 .hj__pe:empty{display:none}
@@ -855,5 +924,5 @@ a{color:inherit;text-decoration:none}
   .cab{row-gap:6px}
   .cab__sair{order:2;margin-left:auto}
   .rel{order:3;flex-basis:100%;margin-left:0;justify-content:flex-start}
-  .cab__logo{order:1}
+  .cab__marca{order:1}
 }

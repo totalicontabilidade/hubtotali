@@ -10,7 +10,12 @@
 
   function criar(opcoes) {
     const email = (opcoes.usuario && opcoes.usuario.email) || 'local';
+    const meuUid = (opcoes.usuario && opcoes.usuario.uid) || email;
     const prefixo = 'pendencias:' + email + ':';
+    // o quadro de outra pessoa, no modo de teste: pela chave dela (uid = e-mail de teste)
+    const prefixoDe = uid => (uid === meuUid ? prefixo : 'pendencias:' + uid + ':');
+    const lerDe = (uid, k) => { try { return JSON.parse(localStorage.getItem(prefixoDe(uid) + k) || 'null'); } catch (e) { return null; } };
+    const gravarDe = (uid, k, v) => localStorage.setItem(prefixoDe(uid) + k, JSON.stringify(v));
     const ouvTarefas = new Set();
     const ouvConfig = {};
 
@@ -80,6 +85,31 @@
       },
       apagarTarefa(id) {
         return tentar(() => { const m = mapa(); delete m[id]; gravar('tarefas', m); avisarTarefas(); });
+      },
+
+      // pendências entre pessoas (simuladas no navegador)
+      criarTarefaEm(uid, dados) {
+        return tentar(() => {
+          const m = lerDe(uid, 'tarefas') || {}, id = novoId();
+          m[id] = Object.assign({}, dados, { criadoPorUid: meuUid }); delete m[id].id;
+          gravarDe(uid, 'tarefas', m); if (uid === meuUid) avisarTarefas(); return id;
+        });
+      },
+      alterarTarefaEm(uid, id, campos) {
+        return tentar(() => {
+          const m = lerDe(uid, 'tarefas') || {};
+          if (!m[id]) { const e = new Error('Pendência não encontrada'); e.code = 'nao_existe'; throw e; }
+          Object.assign(m[id], campos); delete m[id].id; delete m[id].donoUid;
+          gravarDe(uid, 'tarefas', m); if (uid === meuUid) avisarTarefas();
+        });
+      },
+      listarEnviadas(uids) {
+        return Promise.resolve([].concat(...uids.filter(u => u !== meuUid).map(uid =>
+          Object.entries(lerDe(uid, 'tarefas') || {}).filter(([, t]) => t.criadoPorUid === meuUid).map(([id, t]) => Object.assign({}, t, { id, donoUid: uid })))));
+      },
+      listarAcompanho(uids) {
+        return Promise.resolve([].concat(...uids.filter(u => u !== meuUid).map(uid =>
+          Object.entries(lerDe(uid, 'tarefas') || {}).filter(([, t]) => Array.isArray(t.envolvidos) && t.envolvidos.includes(meuUid)).map(([id, t]) => Object.assign({}, t, { id, donoUid: uid })))));
       },
 
       ouvirConfig(nome, cb) {

@@ -746,31 +746,65 @@
     centro.appendChild(b);
   }
 
-  /* O cartão de sistemas do Início: os favoritos, compactos. Quem
-     não marcou nenhum vê os mais usados; quem nunca clicou em nada
-     vê um convite. */
+  /* O cartão de sistemas do Início. Os favoritos em cima, depois
+     cada grupo "à vista" da administração, com todos os seus
+     sistemas em formato compacto — para escolher sem trocar de
+     tela. Os grupos de gaveta (órgãos, impostos e consultas) ficam
+     a um clique, na vista Sistemas. Quem não marcou favorito vê os
+     mais usados no lugar. */
   function desenharFavoritosInicio() {
-    var alvo = document.getElementById("ini-favoritos-lista");
-    var titulo = document.getElementById("ini-favoritos-t");
+    var alvo = document.getElementById("ini-sistemas-lista");
+    var sub = document.getElementById("ini-sistemas-sub");
     if (!alvo) return;
     alvo.textContent = "";
+
+    function grupo(rotulo, lista, quantos) {
+      var g = el("div", "si__g");
+      var r = el("div", "si__rot", rotulo);
+      if (quantos !== undefined) r.appendChild(el("small", null, String(quantos)));
+      g.appendChild(r);
+      var grade = el("div", "fv");
+      lista.forEach(function (i) { grade.appendChild(item(i, true)); });
+      g.appendChild(grade);
+      return g;
+    }
+
     var daCasa = FAVORITOS.marcados.map(appDaCasa).filter(Boolean);
-    var lista = daCasa.concat(FAVORITOS.meus.map(function (m) {
+    var favoritos = daCasa.concat(FAVORITOS.meus.map(function (m) {
       return { nome: m.nome, url: m.url, logoDados: m.logoDados };
     }));
-    var rotulo = "Meus favoritos";
-    if (!lista.length) { lista = maisUsados(6); if (lista.length) rotulo = "Mais usados"; }
-    if (titulo) titulo.textContent = rotulo;
-    if (!lista.length) {
-      var v = el("div", "cartao__vazio");
-      v.appendChild(el("div", "cartao__vazio-t", "Nenhum favorito ainda."));
-      v.appendChild(el("div", "cartao__vazio-x", "Em Sistemas, clique na estrela dos que você mais usa e eles aparecem aqui."));
-      alvo.appendChild(v);
-      return;
+    if (favoritos.length) alvo.appendChild(grupo("Meus favoritos", favoritos.slice(0, 12), favoritos.length));
+    else {
+      var usados = maisUsados(6);
+      if (usados.length) alvo.appendChild(grupo("Mais usados", usados));
     }
-    var grade = el("div", "fv");
-    lista.slice(0, 10).forEach(function (i) { grade.appendChild(item(i, true)); });
-    alvo.appendChild(grade);
+
+    var total = 0;
+    SETORES_ATUAIS.forEach(function (s) {
+      if (s.estilo === "gaveta" || !s.itens || !s.itens.length) return;
+      total += s.itens.length;
+      alvo.appendChild(grupo(s.titulo, s.itens, s.itens.length));
+    });
+
+    var naGaveta = guardados().reduce(function (n, s) { return n + (s.itens || []).length; }, 0);
+    if (naGaveta) {
+      var mais = el("button", "si__mais");
+      mais.type = "button";
+      mais.appendChild(el("b", null, String(naGaveta)));
+      mais.appendChild(el("span", null, TITULO_GAVETA + " — " + guardados().map(function (s) { return s.titulo; }).join(", ")));
+      mais.appendChild(el("span", null, "›"));
+      mais.title = "Abrir a lista inteira";
+      mais.addEventListener("click", function () { mostrarVista("sistemas"); });
+      alvo.appendChild(mais);
+    }
+    if (sub) sub.textContent = total ? total + " à vista · " + naGaveta + " na gaveta" : "";
+
+    if (!alvo.children.length) {
+      var v = el("div", "cartao__vazio");
+      v.appendChild(el("div", "cartao__vazio-t", "Nenhum sistema cadastrado ainda."));
+      v.appendChild(el("div", "cartao__vazio-x", "A administração cadastra os sistemas da casa; eles aparecem aqui."));
+      alvo.appendChild(v);
+    }
   }
 
   function desenharCentro() {

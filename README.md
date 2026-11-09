@@ -286,6 +286,28 @@ já está aplicada para os endereços do Hub.
 
 ---
 
+## Pendências entre pessoas
+
+O quadro é de cada um, mas o trabalho é da equipe. Por isso (desde 09/11/2026)
+a nova pendência tem **Para quem** e **Quem acompanha**, no quadro e na caixa
+da tela inicial:
+
+- **Para quem** manda a pendência para o quadro de um colega — ou de vários,
+  uma cópia para cada (mesmo `loteId`). Ela chega com a faixa "de Fulano ·
+  nova" e um botão **Visto**; o dono cuida dela como de qualquer outra. Quem
+  mandou vê na aba **Enviadas** se foi vista, riscada e comentada, e pode
+  comentar e riscar de lá.
+- **Quem acompanha** (`envolvidos`) vê a pendência na aba **Acompanho** e pode
+  comentar, sem recebê-la.
+- Os comentários levam quem escreveu (`por`, `porUid`); o nome aparece quando
+  não é o dono do quadro.
+
+A regra do banco é quem garante: o dono muda tudo; quem mandou mexe só no que
+é do pedido (texto, prazo, importância, acompanhantes, riscar, comentar); quem
+acompanha só comenta; listar o que está no quadro alheio exige filtrar por
+`criadoPorUid` ou `envolvidos`. Recado para a equipe inteira continua sendo a
+faixa de avisos da administração.
+
 ## Os clientes da casa
 
 A administração (aba **Equipe e acessos → Clientes da casa**) importa o
