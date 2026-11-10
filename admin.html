@@ -19,14 +19,16 @@
 
      A lista é fechada nos nossos dois domínios de propósito. Abrir
      para qualquer host daria a esta página o poder de conversar com
-     a internet inteira, e ela não precisa disso para nada. -->
+     a internet inteira, e ela não precisa disso para nada. O 'self'
+     é para a aba Acompanhamento ler dados/noticias.json e
+     dados/agenda-oficial.json, os arquivos que o robô grava. -->
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
   script-src 'self';
   style-src 'self';
   img-src 'self' data: https://unavatar.io https://totalicontabilidade.github.io https://*.totalicontabilidade.com.br;
   font-src 'self';
-  connect-src https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://totalicontabilidade.github.io https://*.totalicontabilidade.com.br;
+  connect-src 'self' https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://totalicontabilidade.github.io https://*.totalicontabilidade.com.br;
   object-src 'none';
   base-uri 'none';
   form-action 'none'">
@@ -107,13 +109,15 @@
     As instruções para ligar o banco estão dentro desse arquivo.
   </p>
 
-  <!-- Duas frentes na mesma página: o que aparece no Hub, e quem
-       pode entrar nele. Abas porque são assuntos que não se
-       misturam — quem veio cadastrar gente não quer tropeçar na
-       lista de links. -->
+  <!-- Três frentes na mesma página: o que aparece no Hub (sistemas
+       e recados), quem pode entrar nele, e o acompanhamento — o que
+       o Hub faz sozinho e como a equipe está. Abas porque são
+       assuntos que não se misturam: quem veio cadastrar gente não
+       quer tropeçar na lista de links. -->
   <div class="abas" id="abas">
-    <button class="aba on" type="button" data-painel="painel-sistemas">Tela inicial</button>
+    <button class="aba on" type="button" data-painel="painel-sistemas">Sistemas e recados</button>
     <button class="aba" type="button" data-painel="painel-equipe">Equipe e acessos</button>
+    <button class="aba" type="button" data-painel="painel-acompanhamento">Acompanhamento</button>
   </div>
 
   <div id="painel-equipe" class="painel-aba" hidden>
@@ -324,12 +328,13 @@
        — não havia como pô-lo em outro lugar. -->
   <div id="painel-sistemas" class="painel-aba">
     <div class="admin__cabeca">
-      <h1 class="admin__titulo">Tela inicial do Hub</h1>
+      <h1 class="admin__titulo">Sistemas e recados do Hub</h1>
       <p class="admin__nota">
         <strong id="total-sistemas"></strong>
-        À esquerda está a tela de cima para baixo, na ordem em que a equipe vê. Clique num bloco para editar.
-        Arraste pelo pegador <span class="dica-pegador" aria-hidden="true">⠿</span> ou use as setas para mudar a ordem.
-        Nada é gravado até você clicar em <strong>Salvar</strong>.
+        À esquerda estão os blocos na ordem em que a equipe vê — na aba <strong>Sistemas</strong> do Hub e,
+        resumidos, no Início. Clique num bloco para editar. Arraste pelo pegador
+        <span class="dica-pegador" aria-hidden="true">⠿</span> ou use as setas para mudar a ordem.
+        Os <strong>recados</strong> estão no fim da lista. Nada é gravado até você clicar em <strong>Salvar</strong>.
       </p>
     </div>
 
@@ -351,6 +356,66 @@
 
       <section class="detalhe" id="detalhe" aria-live="polite"></section>
     </div>
+  </div>
+
+  <!-- ---------- Acompanhamento ----------
+       Só leitura. O que o Hub faz sozinho (o robô das notícias e
+       da agenda, o recebedor do Atos) e como a equipe está — em
+       números. O texto das pendências não aparece aqui: ele é de
+       quem tem o quadro. -->
+  <div id="painel-acompanhamento" class="painel-aba" hidden>
+    <div class="admin__cabeca">
+      <h1 class="admin__titulo">Acompanhamento</h1>
+      <p class="admin__nota">
+        Como a equipe está e o que o Hub faz sozinho. Só números: o texto das pendências fica no quadro de cada pessoa.
+      </p>
+    </div>
+
+    <section class="painel" id="sec-quadros">
+      <div class="painel__cabeca">
+        <h2 class="painel__titulo">Quadros da equipe</h2>
+        <span class="painel__nota" id="quadros-nota"></span>
+        <div class="painel__direita">
+          <button class="btn btn--pequeno" type="button" id="btn-quadros">Atualizar</button>
+        </div>
+      </div>
+      <p class="admin__nota">
+        Abertas, atrasadas e para hoje em cada quadro; <strong>não vistas</strong> são as que um colega mandou e a pessoa
+        ainda não marcou como visto. Quem está com atraso aparece primeiro.
+      </p>
+      <div id="quadros-lista"></div>
+    </section>
+
+    <section class="painel" id="sec-robo">
+      <div class="painel__cabeca">
+        <h2 class="painel__titulo">Notícias e agenda</h2>
+        <span class="painel__nota" id="robo-nota"></span>
+      </div>
+      <p class="admin__nota">
+        Um robô no GitHub lê as fontes oficiais <strong>de meia em meia hora</strong> em dia útil (07:05 às 19:35) e uma vez
+        no sábado, e grava os arquivos que o Hub abre. O GitHub não garante a hora — em dia cheio atrasa ou pula
+        rodadas. Se as notícias estiverem paradas há mais de uma hora em horário de expediente, rode na mão pelo botão abaixo
+        (Run workflow, no canto direito da página que abre).
+      </p>
+      <div id="robo-lista"></div>
+      <div class="painel__acoes">
+        <a class="btn" href="https://github.com/totalicontabilidade/hubtotali/actions/workflows/atualizar.yml"
+           target="_blank" rel="noopener noreferrer">Abrir o robô no GitHub</a>
+      </div>
+    </section>
+
+    <section class="painel" id="sec-atos">
+      <div class="painel__cabeca">
+        <h2 class="painel__titulo">Atos Societários</h2>
+        <span class="painel__nota" id="atos-nota"></span>
+      </div>
+      <p class="admin__nota">
+        Cada aviso do sistema de atos vira uma pendência no quadro de quem cuida da Legalização, assinada pela conta do
+        robô. O destino está no recebedor (Apps Script, propriedade <code>DESTINO_UID</code>); quem é da Legalização
+        está na aba Equipe.
+      </p>
+      <div id="atos-lista"></div>
+    </section>
   </div>
 
 </main>

@@ -267,13 +267,39 @@ input,select,textarea{font:inherit;color:inherit}
 
 /* ---------- Recados ---------- */
 .aviso-linha{
-  display:flex;align-items:center;gap:9px;
+  display:flex;align-items:center;gap:9px;flex-wrap:wrap;
   padding:9px 14px;border-bottom:1px solid var(--fio);
 }
 .aviso-linha:last-child{border-bottom:0}
 .aviso-linha .cx-aviso-titulo{width:210px;flex:none}
 .aviso-linha .cx-aviso-texto{flex:1;min-width:160px}
 .aviso-linha .campo__caixa{height:32px}
+.aviso-meta{flex-basis:100%;display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--txt-3)}
+.aviso-leu{border-bottom:1px dotted var(--fio-2);cursor:default}
+.aviso-faltam{color:#8a6100}
+
+/* ---------- Acompanhamento ---------- */
+.tab-quadros{width:100%;border-collapse:collapse;font-size:13px}
+.tab-quadros th,.tab-quadros td{padding:9px 14px;border-bottom:1px solid var(--fio);text-align:left;vertical-align:middle}
+.tab-quadros th{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--txt-3);background:var(--papel-2)}
+.tab-quadros .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tab-quadros__setor{display:block;font-size:11.5px;color:var(--txt-3)}
+.tab-quadros__ruim{color:#8d2f28;font-weight:700}
+.tab-quadros__atencao{color:#8a6100;font-weight:700}
+.tab-quadros__bom{color:#2a6b42}
+.tab-quadros__quando{color:var(--txt-3);font-size:12px}
+.tab-quadros__total td{font-weight:700;background:var(--papel-2);border-bottom:0}
+.robo{padding:10px 14px;display:flex;flex-direction:column;gap:8px;font-size:13px}
+.robo__linha{display:flex;gap:10px;flex-wrap:wrap;align-items:baseline}
+.robo__linha b{color:var(--navy)}
+.robo__linha--atencao span{color:#8a6100}
+.robo__fontes{display:flex;gap:6px;flex-wrap:wrap}
+.robo__fonte{font-size:11.5px;padding:3px 9px;border-radius:99px;background:#e4f3ea;color:#2a6b42;cursor:default}
+.robo__fonte--fora{background:#fdf3dc;color:#8a6100}
+.robo__nota{font-size:12px;color:var(--txt-2);line-height:1.5}
+@media (max-width:700px){
+  .tab-quadros th:nth-child(6),.tab-quadros td:nth-child(6),.tab-quadros th:nth-child(7),.tab-quadros td:nth-child(7){display:none}
+}
 
 /* ---------- Abas ---------- */
 .abas{display:flex;gap:4px;margin-bottom:20px;border-bottom:1px solid var(--fio)}

@@ -357,18 +357,17 @@ const Dados = (function () {
   }
 
   function salvarAvisos(lista, quem) {
-    /* Sem banco, os recados vão junto com a lista, no salvar() que
-       vem logo depois — tudo no mesmo navegador. */
-    if (!temBanco()) return Promise.resolve({ local: true });
+    var limpa = (lista || []).slice(0, 40).map(limparRecado);
+    /* Sem banco, os recados ficam neste navegador, dentro dos dados
+       locais — é de onde carregar() os lê de volta. */
+    if (!temBanco()) {
+      var locais = completar(lerCache(CHAVE_LOCAL) || semente());
+      locais.avisos = limpa;
+      gravarCache(CHAVE_LOCAL, locais);
+      return Promise.resolve(limpa);
+    }
     var s = lerSessao();
     if (!s) return Promise.reject(new Error("Sessão expirada. Entre de novo."));
-    var limpa = (lista || []).slice(0, 40).map(function (a) {
-      return {
-        tipo:   String(a.tipo || "aviso").slice(0, 20),
-        titulo: String(a.titulo || "").slice(0, 120),
-        texto:  String(a.texto || "").slice(0, 400),
-      };
-    });
     return fetch(DOC_HUB("avisos"), {
       method: "PATCH",
       headers: comAutorizacao({ "Content-Type": "application/json" }),
@@ -385,12 +384,128 @@ const Dados = (function () {
     });
   }
 
+  /* Cada recado leva, desde 10/11/2026, quem escreveu e quando: é
+     o que a aba Recados mostra e o que deixa cada pessoa marcar o
+     que já leu. Recado antigo, sem id, ganha um a partir do texto —
+     estável, para a marca de lido não se perder a cada leitura. */
+  function idDoRecado(a) {
+    if (a && a.id) return String(a.id).slice(0, 40);
+    var s = String((a && a.titulo) || "") + "|" + String((a && a.texto) || ""), h = 0;
+    for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
+    return "r" + h.toString(36);
+  }
+  function limparRecado(a) {
+    var r = {
+      id:     idDoRecado(a),
+      tipo:   String(a.tipo || "aviso").slice(0, 20),
+      titulo: String(a.titulo || "").slice(0, 120),
+      texto:  String(a.texto || "").slice(0, 600),
+    };
+    if (a.em) r.em = String(a.em).slice(0, 30);
+    if (a.por) r.por = String(a.por).slice(0, 60);
+    if (a.porUid) r.porUid = String(a.porUid).slice(0, 128);
+    return r;
+  }
+
   /* Quem pode mexer nos recados: administrador, quem está no setor
      Gerência, ou quem recebeu a liberação "avisos". A mesma conta
      que a regra do banco faz — e a regra é que manda. Isto aqui só
      evita mostrar um botão que acabaria em 403. */
   function possoAvisar() {
     return minhasLiberacoes().then(function (m) { return !!m.tem.avisos; });
+  }
+
+  /* ---------- O que cada pessoa já leu dos recados ----------
+
+     Um documento por pessoa (quadros/{uid}/config/recados), com os
+     ids lidos e quando. Só a própria pessoa escreve; a equipe
+     inteira lê — é o que deixa quem escreveu o recado ver quem já
+     viu, sem precisar perguntar. Sem banco, fica no navegador. */
+  var CHAVE_LIDOS = "hub-totali:recados-lidos";
+
+  function docLidosDe(uid) { return "/quadros/" + encodeURIComponent(uid) + "/config/recados"; }
+
+  function lidosDoDoc(d) {
+    if (!d || !d.fields || !d.fields.json) return {};
+    try { var v = JSON.parse(d.fields.json.stringValue); return (v && v.lidos && typeof v.lidos === "object") ? v.lidos : {}; }
+    catch (e) { return {}; }
+  }
+
+  function objetoGuardado(chave) {
+    try { var v = JSON.parse(window.localStorage.getItem(chave) || "null"); return (v && typeof v === "object") ? v : {}; }
+    catch (e) { return {}; }
+  }
+
+  function lerRecadosLidos() {
+    if (!temBanco()) return Promise.resolve(objetoGuardado(CHAVE_LIDOS));
+    var s = lerSessao();
+    if (!s || !s.uid) return Promise.resolve({});
+    return pegarCaminho(docLidosDe(s.uid)).then(lidosDoDoc).catch(function () { return {}; });
+  }
+
+  function marcarRecadosLidos(ids, lidosAtuais) {
+    var lidos = Object.assign({}, lidosAtuais || {});
+    var agora = new Date().toISOString();
+    (ids || []).forEach(function (id) { if (id && !lidos[id]) lidos[id] = agora; });
+    /* Só os últimos cem: id de recado apagado não precisa viver para sempre. */
+    var chaves = Object.keys(lidos).sort(function (a, b) { return String(lidos[b]).localeCompare(String(lidos[a])); }).slice(0, 100);
+    var enxuto = {}; chaves.forEach(function (k) { enxuto[k] = lidos[k]; });
+    if (!temBanco()) {
+      try { window.localStorage.setItem(CHAVE_LIDOS, JSON.stringify(enxuto)); } catch (e) {}
+      return Promise.resolve(enxuto);
+    }
+    var s = lerSessao();
+    if (!s || !s.uid) return Promise.reject(new Error("Sessão expirada. Entre de novo."));
+    return fetch(BASE_DOCS() + docLidosDe(s.uid), {
+      method: "PATCH",
+      headers: comAutorizacao({ "Content-Type": "application/json" }),
+      body: JSON.stringify({ fields: {
+        json:         { stringValue: JSON.stringify({ lidos: enxuto }) },
+        atualizadoEm: { timestampValue: new Date().toISOString() },
+      } }),
+    }).then(function (r) {
+      if (!r.ok) throw new Error("Não consegui marcar como lido (HTTP " + r.status + ").");
+      return enxuto;
+    });
+  }
+
+  /* { uid: { id: quando } } para a equipe inteira — quem leu o quê. */
+  function lerLidosDaEquipe(uids) {
+    if (!temBanco()) return Promise.resolve({ local: objetoGuardado(CHAVE_LIDOS) });
+    var out = {};
+    return Promise.all((uids || []).map(function (uid) {
+      return pegarCaminho(docLidosDe(uid)).then(function (d) { out[uid] = lidosDoDoc(d); }).catch(function () { out[uid] = {}; });
+    })).then(function () { return out; });
+  }
+
+  /* ---------- Resumo do quadro de cada pessoa (administração) ----------
+     Só contagens: abertas, atrasadas, para hoje, chegadas e ainda não
+     vistas, riscadas nos últimos sete dias. O texto das pendências
+     não sai daqui. */
+  function resumoDoQuadro(uid) {
+    var campos = ["feito", "feitoEm", "status", "prazo", "vistoEm", "criadoPorUid", "importante", "criadoEm", "origemSistema"];
+    var mask = campos.map(function (c) { return "mask.fieldPaths=" + c; }).join("&");
+    return paginas("/quadros/" + encodeURIComponent(uid) + "/tarefas?pageSize=300&" + mask, []).then(function (ts) {
+      var hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+      var hojeISO = hoje.getFullYear() + "-" + String(hoje.getMonth() + 1).padStart(2, "0") + "-" + String(hoje.getDate()).padStart(2, "0");
+      var semana = Date.now() - 7 * 864e5;
+      var r = { total: ts.length, abertas: 0, atrasadas: 0, hoje: 0, naoVistas: 0, riscadasNaSemana: 0, importantes: 0, ultimaMexida: 0, doAtos: 0, doAtosAbertas: 0 };
+      ts.forEach(function (t) {
+        var em = Math.max(Number(t.criadoEm) || 0, Number(t.feitoEm) || 0, Number(t.vistoEm) || 0);
+        if (em > r.ultimaMexida) r.ultimaMexida = em;
+        if (t.origemSistema === "atos") { r.doAtos++; if (!t.feito) r.doAtosAbertas++; }
+        if (t.feito) { if ((Number(t.feitoEm) || 0) >= semana) r.riscadasNaSemana++; return; }
+        r.abertas++;
+        if (t.importante) r.importantes++;
+        if (t.criadoPorUid && t.criadoPorUid !== uid && !t.vistoEm) r.naoVistas++;
+        if (t.status === "hoje") r.hoje++;
+        else if (t.status === "data" && t.prazo) {
+          if (t.prazo < hojeISO) r.atrasadas++;
+          else if (t.prazo === hojeISO) r.hoje++;
+        }
+      });
+      return r;
+    });
   }
 
   /* ---------- Os favoritos de cada pessoa ----------
@@ -1258,8 +1373,8 @@ const Dados = (function () {
       nota: "Tirar sistemas do Hub." },
     { id: "grupos", nome: "Criar e editar grupos",
       nota: "Criar, renomear, reordenar e excluir os grupos de sistemas." },
-    { id: "avisos", nome: "Recados e prazos",
-      nota: "A barra inferior do Hub." },
+    { id: "avisos", nome: "Recados",
+      nota: "Escrever e apagar recados para a equipe (aba Recados do Hub)." },
   ];
 
   function limparLiberacoes(lista) {
@@ -1771,6 +1886,11 @@ const Dados = (function () {
        o destino possível de uma pendência. */
     salvarAvisos: salvarAvisos,
     possoAvisar: possoAvisar,
+    idDoRecado: idDoRecado,
+    lerRecadosLidos: lerRecadosLidos,
+    marcarRecadosLidos: marcarRecadosLidos,
+    lerLidosDaEquipe: lerLidosDaEquipe,
+    resumoDoQuadro: resumoDoQuadro,
     LIBERACOES: LIBERACOES,
     limparLiberacoes: limparLiberacoes,
     minhasLiberacoes: minhasLiberacoes,

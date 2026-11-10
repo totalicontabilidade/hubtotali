@@ -141,13 +141,15 @@ const Noticias = (function () {
     lista.forEach(function (n) { alvo.appendChild(item(n, true)); });
     if (rodape) {
       rodape.textContent = "";
+      /* Só a hora. Fonte que não respondeu é assunto da vista
+         Notícias (lá fica "sem resposta desde…"): no Início virava
+         alarme para quem só queria as manchetes. */
       var quando = DADOS.atualizadoEm ? "atualizado " + haQuanto(DADOS.atualizadoEm) : "";
       var foraDoAr = (DADOS.fontes || []).filter(function (f) { return !f.ok; });
-      rodape.appendChild(el("span", "cartao__nota", quando));
-      if (foraDoAr.length) {
-        rodape.appendChild(el("span", "cartao__nota cartao__nota--aviso",
-          foraDoAr.length === 1 ? foraDoAr[0].sigla + " sem resposta" : foraDoAr.length + " fontes sem resposta"));
-      }
+      var nota = el("span", "cartao__nota", quando);
+      nota.setAttribute("data-relogio", "cartao");
+      if (foraDoAr.length) nota.title = foraDoAr.map(function (f) { return f.sigla; }).join(", ") + " sem resposta na última leitura";
+      rodape.appendChild(nota);
     }
     pintarSelo();
   }
@@ -262,7 +264,8 @@ const Noticias = (function () {
         a.className = "vn__fonte" + (f.ok ? "" : " vn__fonte--fora");
         if (url) { a.href = url; a.target = "_blank"; a.rel = "noopener noreferrer"; }
         a.textContent = f.nome;
-        a.title = f.ok ? (f.quantas + " na última leitura") : ("Sem resposta: " + (f.erro || "") + (f.ultimaVez ? " · última vez " + haQuanto(f.ultimaVez) : ""));
+        a.title = f.ok ? (f.quantas + " na última leitura") : ("Sem resposta na última leitura (" + (f.erro || "") + ")" + (f.ultimaVez ? " · respondeu pela última vez " + haQuanto(f.ultimaVez) : ""));
+        if (!f.ok) a.textContent = f.nome + (f.ultimaVez ? " (sem resposta desde " + new Date(f.ultimaVez).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" }) + ")" : " (sem resposta)");
         fontes.appendChild(a);
       });
     }
@@ -326,8 +329,21 @@ const Noticias = (function () {
   function iniciar() {
     ligar();
     carregar();
-    /* De meia em meia hora, com a aba visível; e ao voltar a ela. */
-    window.setInterval(function () { if (!document.hidden) carregar(); }, 30 * 60 * 1000);
+    /* De dez em dez minutos, com a aba visível; e ao voltar a ela.
+       O robô grava de meia em meia hora, e o GitHub Pages segura o
+       arquivo por até dez minutos — dez aqui é o que faz "atualizado
+       há 20 min" ser verdade. */
+    window.setInterval(function () { if (!document.hidden) carregar(); }, 10 * 60 * 1000);
+    /* E o relógio do "há X min" anda sozinho, sem rede. */
+    window.setInterval(function () {
+      if (document.hidden || !DADOS || !DADOS.atualizadoEm) return;
+      var n = document.querySelector('[data-relogio="cartao"]');
+      if (n) n.textContent = "atualizado " + haQuanto(DADOS.atualizadoEm);
+      var q = document.getElementById("noticias-atualizado");
+      if (q && !document.getElementById("vista-noticias").hidden) {
+        q.textContent = "Atualizado " + haQuanto(DADOS.atualizadoEm) + " · " + (DADOS.fontes || []).filter(function (f) { return f.ok; }).length + " fontes oficiais";
+      }
+    }, 60 * 1000);
     document.addEventListener("visibilitychange", function () { if (!document.hidden) carregar(); });
   }
 

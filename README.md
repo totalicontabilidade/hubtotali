@@ -18,12 +18,12 @@ que grava o resultado em arquivos da própria pasta.
 
 ---
 
-## As cinco vistas
+## As seis vistas
 
 A barra da esquerda, com ícone **e nome** em cada botão, troca entre elas. Uma
-vista de cada vez ocupa a tela toda; nada abre por cima de nada. Clicar na
-marca (na barra ou no cabeçalho) volta ao Início. A faixa de recados da
-administração fica embaixo de todas.
+vista de cada vez ocupa a tela toda; a única coisa que abre por cima é o
+cartão de recado novo, uma vez por recado. Clicar na marca (na barra ou no
+cabeçalho) volta ao Início.
 
 **Início** é o resumo do dia, na ordem em que importa de manhã. À esquerda,
 **Minhas pendências**: o que atrasou, o que é para hoje, o que vence ainda esta
@@ -37,6 +37,17 @@ prazo (Hoje, Esta semana, Com data, Acompanhar), setores com cores e
 palavras-chave, calendário, comentários, anexos em PDF, clientes com CNPJ,
 ditado e entendimento da frase. Veio do sistema *Pendências Totali* e está
 descrito na seção própria, mais abaixo.
+
+**Recados.** Os avisos da casa, para a equipe inteira: quem escreveu, quando,
+e **lido por N de M** (os nomes na dica). Cada pessoa marca o que leu; o que
+ainda não leu aparece num **cartão na frente da tela** assim que o Hub abre —
+uma vez por recado: "Entendi" marca como lido e ele não volta; "Ler depois"
+(ou Esc) adia só até fechar a aba. Administração, Gerência e quem tem a
+liberação escrevem e apagam ali mesmo. A faixa de baixo (o letreiro) saiu em
+10/11/2026: aviso que corre ninguém lê, e nunca se sabia quem tinha visto.
+Os recados ficam em `hub/avisos` (id, tipo, título, texto, `em`, `por`,
+`porUid`); o que cada um leu, em `quadros/{uid}/config/recados`, que a equipe
+inteira lê e só a própria pessoa escreve (`js/recados.js`).
 
 **Sistemas.** Todos os links da casa, na ordem da administração: favoritos,
 mais usados (contados neste navegador), os grupos à vista e os grupos de
@@ -237,13 +248,21 @@ Abra `admin.html`, entre com o e-mail e a senha, e edite na própria tela:
 - **arrastar para reordenar**, inclusive de um grupo para outro;
 - **escolher se o setor fica à vista** (cartões) **ou recolhido** (gaveta);
 - **trocar o logo** de um sistema, enviando uma imagem;
-- **editar os recados** da faixa inferior do Hub;
+- **editar os recados** da vista Recados, com autor, data e quem já leu
+  (e quem falta);
 - **cadastrar gente**, setores da casa e **liberações**;
+- **importar os clientes da casa** e **trazer o quadro antigo**;
 - **baixar a cópia de segurança**: sistemas, equipe e os quadros de pendências
-  de todo mundo (dos PDFs vai só a ficha).
+  de todo mundo (dos PDFs vai só a ficha);
+- **acompanhar** (aba Acompanhamento, só leitura): os quadros da equipe em
+  números — abertas, atrasadas, para hoje, não vistas, riscadas na semana, quem
+  está com atraso primeiro —, o estado do robô de notícias e agenda (quando
+  gravou, que fonte não respondeu, e o atalho para rodar na mão no GitHub) e
+  o que chegou do Atos Societários. O texto das pendências não aparece: a
+  leitura vai com máscara de campos.
 
-Nada da aba "Tela inicial" é gravado até você clicar em **Salvar**. As abas de
-equipe gravam na hora.
+Nada da aba "Sistemas e recados" é gravado até você clicar em **Salvar**. As
+abas de equipe e de acompanhamento gravam na hora ou só leem.
 
 ### Liberações
 
@@ -309,8 +328,8 @@ da tela inicial:
 A regra do banco é quem garante: o dono muda tudo; quem mandou mexe só no que
 é do pedido (texto, prazo, importância, acompanhantes, riscar, comentar) e só
 apaga o que ainda não foi visto; quem acompanha só comenta; listar o que está no quadro alheio exige filtrar por
-`criadoPorUid` ou `envolvidos`. Recado para a equipe inteira continua sendo a
-faixa de avisos da administração.
+`criadoPorUid` ou `envolvidos`. Recado para a equipe inteira é a vista
+Recados, não o quadro.
 
 ## Os clientes da casa
 
@@ -339,7 +358,7 @@ setor de destino; sem isso, quem pediu — mostra o plano por pessoa e, com a
 confirmação, cria cada pendência no quadro do dono: o "o quê" em negrito, o
 porquê e a sugestão embaixo, a linha do tempo como comentários, prazo em "Com
 data", urgente marcada como importante, resolvida já riscada. Recados ficam de
-fora (viraram a faixa de avisos). Pode rodar de novo: o que já foi trazido
+fora (o lugar deles é a vista Recados). Pode rodar de novo: o que já foi trazido
 (`origemSistema: "hub-antigo"`, `origemId`) não duplica. Quem decide é
 `js/migracao-quadro.js`, testado em `testes/teste-migracao.js`.
 

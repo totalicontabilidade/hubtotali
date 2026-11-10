@@ -1233,7 +1233,7 @@
 
     alvo.appendChild(linhaDoMapa({
       chave: "favoritos", icone: "estrela", fixa: true,
-      titulo: "Meus favoritos", sub: "Sempre no topo · cada pessoa monta o seu",
+      titulo: "Meus favoritos", sub: "Sempre no topo, em Sistemas e no Início · cada pessoa monta o seu",
       alvo: { nivel: "inicio", primeira: primeira },
     }));
 
@@ -1262,14 +1262,14 @@
 
     alvo.appendChild(linhaDoMapa({
       chave: "agenda", icone: "agenda", fixa: true,
-      titulo: "Agenda do mês", sub: "Calculada sozinha",
+      titulo: "Agenda do mês", sub: "Aba Agenda · calculada e conferida com a Receita",
       alvo: { nivel: "fim" },
     }));
 
     if (pode("avisos")) {
       alvo.appendChild(linhaDoMapa({
         chave: "recados", icone: "recado",
-        titulo: "Recados e prazos", sub: "Barra de baixo",
+        titulo: "Recados", sub: "Aba Recados · cartão ao abrir o Hub",
         conta: (dados.avisos || []).length,
         alvo: { nivel: "fim" },
       }));
@@ -1353,15 +1353,16 @@
       if (pode("avisos")) { desenharRecados(alvo); return; }
     }
     if (SELECAO === "favoritos") {
-      alvo.appendChild(cabecaDoDetalhe("Tela inicial · sempre o primeiro bloco", "Meus favoritos",
+      alvo.appendChild(cabecaDoDetalhe("Sistemas · sempre o primeiro bloco", "Meus favoritos",
         "Cada pessoa monta os seus no próprio Hub, clicando na estrela de um sistema — ou guardando um link " +
-        "só dela. Não se edita por aqui, e fica sempre no topo da tela, antes de tudo."));
+        "só dela. Não se edita por aqui, e fica sempre no topo, na aba Sistemas e no cartão de sistemas do Início."));
       return;
     }
     if (SELECAO === "agenda") {
-      alvo.appendChild(cabecaDoDetalhe("Tela inicial · depois dos sistemas", "Agenda do mês",
-        "Calculada sozinha a partir das regras de vencimento e refeita na virada do mês. " +
-        "Não há o que editar aqui: para mudar uma regra de prazo, é no código (js/agenda.js)."));
+      alvo.appendChild(cabecaDoDetalhe("Aba Agenda · e os próximos vencimentos no Início", "Agenda do mês",
+        "Calculada sozinha a partir das regras de vencimento, refeita na virada do mês e conferida com a agenda " +
+        "oficial da Receita (dados/agenda-oficial.json, que o robô atualiza). Não há o que editar aqui: para mudar " +
+        "uma regra de prazo, é no código (js/agenda.js). O estado do robô está na aba Acompanhamento."));
       return;
     }
     if (SELECAO === "gaveta") { desenharGaveta(alvo); return; }
@@ -1598,10 +1599,28 @@
     alvo.appendChild(caixa);
   }
 
+  var RECADOS_LIDOS = null;      /* { uid: { id: quando } } */
+  var RECADOS_EQUIPE = [];
+  var RECADOS_LIDOS_EM = 0;
+
+  function carregarLidosDosRecados() {
+    if (Date.now() - RECADOS_LIDOS_EM < 60000) return;
+    RECADOS_LIDOS_EM = Date.now();
+    Dados.listarEquipe().then(function (lista) {
+      RECADOS_EQUIPE = (lista || []).filter(function (p) { return p.ativo !== false && p.robo !== true; });
+      return Dados.lerLidosDaEquipe(RECADOS_EQUIPE.map(function (p) { return p.uid; }));
+    }).then(function (m) {
+      RECADOS_LIDOS = m || {};
+      if (SELECAO === "recados" || !mexeEmSistemas()) desenharDetalhe();
+    }).catch(function () {});
+  }
+
   function desenharRecados(alvo) {
-    alvo.appendChild(cabecaDoDetalhe("Tela inicial · barra de baixo", "Recados e prazos",
-      "O que estiver aqui aparece na barra inferior do Hub, para a equipe inteira. " +
-      "Só os três primeiros cabem na faixa — o resto fica contado num “+” ao lado."));
+    alvo.appendChild(cabecaDoDetalhe("Aba Recados · e o cartão ao abrir o Hub", "Recados",
+      "O que estiver aqui aparece na aba Recados do Hub, para a equipe inteira, e o que a pessoa ainda não leu " +
+      "aparece num cartão na frente da tela assim que ela abre o Hub — uma vez por recado. Cada um marca como lido; " +
+      "aqui dá para ver quem já leu. Quem tem a liberação também escreve direto pelo Hub."));
+    carregarLidosDosRecados();
 
     var caixa = elemento("div", "detalhe__lista");
     var listaCab = elemento("div", "detalhe__lista-cab");
@@ -1621,11 +1640,19 @@
     novo.type = "button";
     novo.addEventListener("click", function () {
       dados.avisos = dados.avisos || [];
-      dados.avisos.push({ tipo: "aviso", titulo: "", texto: "" });
+      var s = Dados.sessao();
+      /* Assinado e datado: é o que o Hub mostra e o que põe o recado no topo. */
+      dados.avisos.unshift({
+        id: "r" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+        tipo: "aviso", titulo: "", texto: "",
+        em: new Date().toISOString(),
+        por: (s && s.email) ? s.email.split("@")[0] : "administração",
+        porUid: (s && s.uid) || "",
+      });
       marcarPendente();
       desenhar();
-      var todos = $("detalhe").querySelectorAll(".cx-aviso-titulo");
-      if (todos.length) todos[todos.length - 1].focus();
+      var primeiro = $("detalhe").querySelector(".cx-aviso-titulo");
+      if (primeiro) primeiro.focus();
     });
     acoes.appendChild(novo);
     caixa.appendChild(acoes);
@@ -1693,6 +1720,24 @@
       desenhar();
     });
     linha.appendChild(apagar);
+
+    /* Quem escreveu, quando, e quem já leu. */
+    var meta = elemento("div", "aviso-meta");
+    var quando = aviso.em ? new Date(aviso.em).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" }) : "";
+    meta.appendChild(elemento("span", null, (aviso.por ? "por " + aviso.por : "sem autor (recado antigo)") + (quando ? " · " + quando : "")));
+    if (RECADOS_LIDOS && RECADOS_EQUIPE.length) {
+      var id = Dados.idDoRecado(aviso);
+      var leram = RECADOS_EQUIPE.filter(function (p) { var l = RECADOS_LIDOS[p.uid]; return l && l[id]; });
+      var faltam = RECADOS_EQUIPE.filter(function (p) { return leram.indexOf(p) === -1; });
+      var leu = elemento("span", "aviso-leu", "lido por " + leram.length + " de " + RECADOS_EQUIPE.length);
+      leu.title = (leram.length ? "Leram: " + leram.map(function (p) { return p.nome; }).join(", ") : "Ninguém leu ainda") +
+                  (faltam.length ? ". Faltam: " + faltam.map(function (p) { return p.nome; }).join(", ") : "");
+      meta.appendChild(leu);
+      if (faltam.length && faltam.length <= 4) meta.appendChild(elemento("span", "aviso-faltam", "faltam " + faltam.map(function (p) { return String(p.nome || "").split(" ")[0]; }).join(", ")));
+    } else if (!aviso.id) {
+      meta.appendChild(elemento("span", null, "recado de antes da aba Recados"));
+    }
+    linha.appendChild(meta);
 
     return linha;
   }
@@ -2921,7 +2966,177 @@
            sentido pedir a lista ao banco em toda visita a esta
            página só para mexer num link. */
         if (aba.dataset.painel === "painel-equipe" && !equipe.length) carregarEquipe();
+        if (aba.dataset.painel === "painel-acompanhamento") carregarAcompanhamento(false);
       });
+    });
+    var ba = $("btn-quadros");
+    if (ba) ba.addEventListener("click", function () { carregarAcompanhamento(true); });
+  }
+
+  /* ============================================================
+     ACOMPANHAMENTO
+     ------------------------------------------------------------
+     Só leitura, e só números. Os quadros vêm com máscara de campos
+     (Dados.resumoDoQuadro): o texto das pendências nem sai do banco.
+     ============================================================ */
+
+  var ACOMP_EM = 0;
+
+  function carregarAcompanhamento(forcar) {
+    if (!forcar && Date.now() - ACOMP_EM < 60000) return;
+    ACOMP_EM = Date.now();
+    desenharRobo();
+    desenharQuadros();
+  }
+
+  function quandoFoi(iso) {
+    var t = Date.parse(iso);
+    if (isNaN(t)) return "—";
+    var m = Math.round((Date.now() - t) / 60000), rel;
+    if (m < 2) rel = "agora"; else if (m < 60) rel = "há " + m + " min";
+    else if (m < 48 * 60) rel = "há " + Math.round(m / 60) + " h"; else rel = "há " + Math.round(m / 1440) + " dias";
+    return rel + " (" + new Date(t).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }) + ")";
+  }
+
+  function desenharRobo() {
+    var box = $("robo-lista"), nota = $("robo-nota");
+    if (!box) return;
+    box.textContent = "";
+    Promise.all([
+      fetch("dados/noticias.json", { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+      fetch("dados/agenda-oficial.json", { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+    ]).then(function (r) {
+      var n = r[0], a = r[1];
+      var linhas = elemento("div", "robo");
+      if (n) {
+        var idade = (Date.now() - Date.parse(n.atualizadoEm)) / 60000;
+        var hora = new Date().getHours(), dia = new Date().getDay();
+        var expediente = dia >= 1 && dia <= 5 && hora >= 7 && hora < 20;
+        var parado = expediente && idade > 75;
+        var l1 = elemento("div", "robo__linha" + (parado ? " robo__linha--atencao" : ""));
+        l1.appendChild(elemento("b", null, "Notícias"));
+        l1.appendChild(elemento("span", null, "atualizadas " + quandoFoi(n.atualizadoEm) + " · " + (n.noticias || []).length + " notícias" +
+          (parado ? " · parado há mais de uma hora em horário de expediente" : "")));
+        linhas.appendChild(l1);
+        var fontes = elemento("div", "robo__fontes");
+        (n.fontes || []).forEach(function (f) {
+          var t = elemento("span", "robo__fonte" + (f.ok ? "" : " robo__fonte--fora"), f.sigla || f.nome);
+          t.title = f.ok ? (f.nome + ": " + f.quantas + " na última leitura")
+                         : (f.nome + ": sem resposta (" + (f.erro || "") + ")" + (f.ultimaVez ? " · respondeu pela última vez " + quandoFoi(f.ultimaVez) : ""));
+          fontes.appendChild(t);
+        });
+        var fora = (n.fontes || []).filter(function (f) { return !f.ok; });
+        linhas.appendChild(fontes);
+        if (fora.length) linhas.appendChild(elemento("div", "robo__nota",
+          fora.map(function (f) { return f.nome; }).join(", ") + " não respondeu ao robô na última leitura. " +
+          "Site que bloqueia acesso de fora do Brasil (é o caso da SEFAZ/SE) não responde ao GitHub; as notícias antigas dele continuam na lista."));
+        if (nota) nota.textContent = (n.fontes || []).filter(function (f) { return f.ok; }).length + " de " + (n.fontes || []).length + " fontes respondendo";
+      } else {
+        linhas.appendChild(elemento("div", "vazio", "Não consegui ler dados/noticias.json."));
+      }
+      if (a) {
+        var l2 = elemento("div", "robo__linha");
+        l2.appendChild(elemento("b", null, "Agenda oficial"));
+        var meses = (a.meses || []).map(function (m) {
+          if (m.mes && m.ano) return String(m.mes).padStart(2, "0") + "/" + m.ano;
+          return m.nome || m.id || m.ade || "";
+        }).filter(Boolean).join(", ");
+        l2.appendChild(elemento("span", null, "conferida " + quandoFoi(a.atualizadoEm) + (meses ? " · " + meses : "") + " · " + (a.fonte || "Receita Federal")));
+        linhas.appendChild(l2);
+      }
+      box.appendChild(linhas);
+    });
+  }
+
+  function desenharQuadros() {
+    var box = $("quadros-lista"), nota = $("quadros-nota");
+    if (!box) return;
+    box.textContent = "";
+    if (!Dados.temBanco()) {
+      box.appendChild(elemento("div", "vazio", "Sem banco (modo de teste) não há quadros da equipe para acompanhar."));
+      desenharAtos([]);
+      return;
+    }
+    box.appendChild(elemento("div", "vazio", "Lendo os quadros…"));
+    var pessoas = [];
+    Dados.listarEquipe().then(function (lista) {
+      pessoas = (lista || []).filter(function (p) { return p.ativo !== false && p.robo !== true; });
+      return Promise.all(pessoas.map(function (p) {
+        return Dados.resumoDoQuadro(p.uid).then(function (r) { return { p: p, r: r }; })
+          .catch(function (e) { return { p: p, erro: e.message }; });
+      }));
+    }).then(function (linhas) {
+      box.textContent = "";
+      linhas.sort(function (a, b) {
+        var ra = a.r || {}, rb = b.r || {};
+        return (rb.atrasadas || 0) - (ra.atrasadas || 0) || (rb.naoVistas || 0) - (ra.naoVistas || 0) || (rb.abertas || 0) - (ra.abertas || 0)
+          || String(a.p.nome).localeCompare(String(b.p.nome), "pt-BR");
+      });
+      var tab = elemento("table", "tab-quadros");
+      var cab = elemento("tr");
+      ["Pessoa", "Abertas", "Atrasadas", "Para hoje", "Não vistas", "Riscadas na semana", "Última mexida"].forEach(function (t, i) {
+        cab.appendChild(elemento("th", i ? "num" : null, t));
+      });
+      tab.appendChild(cab);
+      var tot = { abertas: 0, atrasadas: 0, hoje: 0, naoVistas: 0, riscadasNaSemana: 0 };
+      var doAtos = [];
+      linhas.forEach(function (l) {
+        var tr = elemento("tr");
+        var nome = elemento("td", null, l.p.nome || l.p.email || l.p.uid);
+        var set = setoresDe(l.p);
+        if (set.length) nome.appendChild(elemento("span", "tab-quadros__setor", set.join(", ")));
+        tr.appendChild(nome);
+        if (!l.r) {
+          var e = elemento("td", null, l.erro || "sem leitura"); e.colSpan = 6; tr.appendChild(e); tab.appendChild(tr); return;
+        }
+        var r = l.r;
+        [["abertas", ""], ["atrasadas", "tab-quadros__ruim"], ["hoje", ""], ["naoVistas", "tab-quadros__atencao"], ["riscadasNaSemana", "tab-quadros__bom"]].forEach(function (c) {
+          var td = elemento("td", "num" + (r[c[0]] && c[1] ? " " + c[1] : ""), String(r[c[0]]));
+          tr.appendChild(td);
+          tot[c[0]] += r[c[0]];
+        });
+        tr.appendChild(elemento("td", "num tab-quadros__quando", r.ultimaMexida ? quandoFoi(new Date(r.ultimaMexida).toISOString()).replace(/ \(.*\)$/, "") : "—"));
+        tab.appendChild(tr);
+        if (r.doAtos) doAtos.push({ nome: l.p.nome, n: r.doAtos, abertas: r.doAtosAbertas });
+      });
+      var tr = elemento("tr", "tab-quadros__total");
+      tr.appendChild(elemento("td", null, "Equipe"));
+      ["abertas", "atrasadas", "hoje", "naoVistas", "riscadasNaSemana"].forEach(function (c) { tr.appendChild(elemento("td", "num", String(tot[c]))); });
+      tr.appendChild(elemento("td", null, ""));
+      tab.appendChild(tr);
+      box.appendChild(tab);
+      if (nota) nota.textContent = pessoas.length + " pessoas · lido " + new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+      desenharAtos(doAtos);
+    }).catch(function (e) {
+      box.textContent = "";
+      box.appendChild(elemento("div", "vazio", e.message || "Não consegui ler os quadros."));
+    });
+  }
+
+  function desenharAtos(doAtos) {
+    var box = $("atos-lista"), nota = $("atos-nota");
+    if (!box) return;
+    box.textContent = "";
+    Dados.listarEquipe().then(function (lista) {
+      var robos = (lista || []).filter(function (p) { return p.robo === true; });
+      var legal = (lista || []).filter(function (p) { return p.ativo !== false && p.robo !== true && setoresDe(p).indexOf("Legalização") !== -1; });
+      var ul = elemento("ul", "qa-ul");
+      var li1 = elemento("li");
+      li1.appendChild(elemento("b", null, "Conta do robô: "));
+      li1.appendChild(document.createTextNode(robos.length ? robos.map(function (p) { return (p.nome || "") + " (" + (p.email || "") + (p.ativo === false ? ", desligada" : "") + ")"; }).join(", ") : "nenhuma conta marcada como robô na equipe."));
+      ul.appendChild(li1);
+      var li2 = elemento("li");
+      li2.appendChild(elemento("b", null, "Legalização: "));
+      li2.appendChild(document.createTextNode(legal.length ? legal.map(function (p) { return p.nome; }).join(", ") : "ninguém com esse setor no cadastro."));
+      ul.appendChild(li2);
+      var li3 = elemento("li");
+      li3.appendChild(elemento("b", null, "Pendências vindas do Atos: "));
+      li3.appendChild(document.createTextNode(doAtos && doAtos.length
+        ? doAtos.map(function (d) { return d.n + " no quadro de " + d.nome + " (" + d.abertas + " aberta" + (d.abertas === 1 ? "" : "s") + ")"; }).join("; ") + "."
+        : "nenhuma ainda."));
+      ul.appendChild(li3);
+      box.appendChild(ul);
+      if (nota) nota.textContent = doAtos && doAtos.length ? doAtos.reduce(function (s, d) { return s + d.n; }, 0) + " recebidas" : "";
     });
   }
 

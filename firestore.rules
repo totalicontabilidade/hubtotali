@@ -258,7 +258,7 @@ service cloud.firestore {
       allow read:  if daEquipe();
       allow write: if (ehAdmin() || ehGerencia() || liberado('avisos'))
                       && request.resource.data.json is string
-                      && request.resource.data.json.size() <= 20000;
+                      && request.resource.data.json.size() <= 40000;
     }
 
     // ---------- os favoritos de cada pessoa ----------
@@ -402,9 +402,12 @@ service cloud.firestore {
     }
 
     match /quadros/{uid}/config/{nome} {
-      allow read:  if daEquipe() && (meuUid(uid) || ehAdmin());
+      // "recados" é o que a pessoa já leu dos recados da casa: a
+      // equipe inteira lê (é como quem escreveu vê quem já viu),
+      // só a própria pessoa escreve.
+      allow read:  if daEquipe() && (meuUid(uid) || ehAdmin() || nome == 'recados');
       allow write: if daEquipe() && meuUid(uid)
-                   && nome in ['setores', 'clientes']
+                   && nome in ['setores', 'clientes', 'recados']
                    && request.resource.data.json is string
                    && request.resource.data.json.size() <= 500000;
     }
