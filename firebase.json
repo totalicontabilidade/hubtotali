@@ -1,0 +1,10 @@
+{
+  "functions": [
+    {
+      "source": "funcoes",
+      "codebase": "ponte",
+      "runtime": "nodejs20",
+      "ignore": ["node_modules", ".git", "*.log"]
+    }
+  ]
+}

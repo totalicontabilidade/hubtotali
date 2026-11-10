@@ -5,3 +5,9 @@ desktop.ini
 
 # Configuração local do Claude Code (não é do projeto)
 .claude/
+
+# Cloud Functions (a ponte da SEFAZ)
+funcoes/node_modules/
+.firebase/
+firebase-debug.log
+firebase-debug.*.log

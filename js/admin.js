@@ -3088,8 +3088,8 @@
         var fontes = elemento("div", "robo__fontes");
         (n.fontes || []).forEach(function (f) {
           var t = elemento("span", "robo__fonte" + (f.ok ? "" : " robo__fonte--fora"), f.sigla || f.nome);
-          if (f.via === "local") t.classList.add("robo__fonte--local");
-          t.title = f.ok ? (f.nome + ": " + f.quantas + " na última leitura" + (f.via === "local" ? " — lida pelo robô local do escritório" + (f.lidaEm ? " " + quandoFoi(f.lidaEm) : "") : ""))
+          if (f.via) t.classList.add("robo__fonte--local");
+          t.title = f.ok ? (f.nome + ": " + f.quantas + " na última leitura" + (f.via === "ponte" ? " — pela ponte no Google Cloud (São Paulo)" : (f.via === "local" ? " — pelo robô local" : "")))
                          : (f.nome + ": sem resposta (" + (f.erro || "") + ")" + (f.ultimaVez ? " · respondeu pela última vez " + quandoFoi(f.ultimaVez) : ""));
           fontes.appendChild(t);
         });

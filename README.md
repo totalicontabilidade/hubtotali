@@ -154,18 +154,18 @@ mudou. O Hub só abre esse arquivo, e o recarrega a cada dez minutos. O GitHub
 não garante a hora da rodada — em dia cheio atrasa ou pula —, por isso as duas
 chances por hora; a hora da última gravação está em `atualizadoEm`.
 
-**O robô local (SEFAZ/SE).** O site da SEFAZ de Sergipe não responde a quem
-está fora do Brasil, e o GitHub está. Então quem a lê é
-`ferramentas/buscar-fonte-local.js`, rodando **no computador do escritório**
-por uma tarefa agendada do Windows ("Hub Totali - robo local", de meia em meia
-hora, chamando `ferramentas/robo-local.vbs` → `robo-local.cmd` numa cópia
-própria do repositório em `%LOCALAPPDATA%\HubTotali\robo`). Ele grava
-`dados/fontes/sefaz-se.json` e envia; esse envio dispara a rodada do GitHub na
-hora, e lá, quando a SEFAZ não responde, o arquivo local vale como leitura
-(`lerDeApoio`, até três dias de idade — mais que isso, o escritório ficou
-desligado e a fonte volta a "sem resposta", que é a verdade). O log está em
-`%LOCALAPPDATA%\HubTotali\robo-local.log`. Para pôr outra fonte no robô
-local, marque-a com `local: true` em `FONTES`.
+**A ponte (SEFAZ/SE).** O site da SEFAZ de Sergipe não responde a quem está
+fora do Brasil — a conexão nem abre —, e o GitHub está. Então a SEFAZ vai pela
+**ponte**: uma Cloud Function no projeto `hubtotali`, em São Paulo
+(`southamerica-east1`), que só busca páginas dos sites da lista `HOSTS` e
+devolve o texto, sem guardar nada (`funcoes/index.js`). O robô a chama quando a
+fonte tem `pelaPonte: true` e o endereço está em `PONTE_URL` (no workflow);
+rodando aqui do escritório, sem a variável, ele lê o site direto. Publicar ou
+atualizar a ponte: `firebase deploy --only functions` na raiz do Hub (o
+`firebase.json` aponta para `funcoes/`; a conta do Firebase CLI precisa ter o
+projeto). Não há segredo: o que protege é a lista fechada de sites, uma
+instância no máximo e um freio de sessenta pedidos por minuto. Para pôr outra
+fonte na ponte, acrescente o host em `HOSTS` e `pelaPonte: true` em `FONTES`.
 
 **As fontes**, todas oficiais — órgão de governo, casa legislativa, conselho
 de classe ou federação do setor:

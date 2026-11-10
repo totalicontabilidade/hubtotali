@@ -31,6 +31,10 @@ const fs = require("fs");
 const path = require("path");
 
 const SAIDA = path.join(__dirname, "..", "dados", "noticias.json");
+/* A ponte brasileira (funcoes/index.js): só para as fontes com
+   pelaPonte, e só quando o endereço vem do ambiente — rodando aqui
+   do escritório, o site responde direto e a ponte nem é chamada. */
+const PONTE_URL = String(process.env.PONTE_URL || "").replace(/\/+$/, "");
 const UA = "Mozilla/5.0 (compatible; HubTotali/1.0; +https://hub.totalicontabilidade.com.br)";
 const DIAS_GUARDADOS = 45;       // notícia some do arquivo depois disto
 const MAXIMO = 180;              // teto de notícias no arquivo
@@ -68,10 +72,10 @@ const FONTES = [
   { id: "sefaz-se", sigla: "SEFAZ/SE", nome: "Secretaria da Fazenda de Sergipe",
     url: "https://www.sefaz.se.gov.br/_layouts/15/listfeed.aspx?List=%7B47165FFB%2D27C2%2D4C86%2DB8E5%2DDE40B54B162E%7D",
     site: "https://www.sefaz.se.gov.br/", tipo: "rss", peneira: false, categoria: "sergipe",
-    /* Não responde a quem está fora do Brasil (o GitHub). Quem a lê
-       é o robô local (buscar-fonte-local.js), e o arquivo dele em
-       dados/fontes/sefaz-se.json vale quando o site não responde. */
-    local: true },
+    /* Não responde a quem está fora do Brasil (o GitHub): a conexão
+       nem abre. Vai pela ponte — a função no Google Cloud em São
+       Paulo (funcoes/index.js), cujo endereço está em PONTE_URL. */
+    pelaPonte: true },
   { id: "camara",   sigla: "Câmara",  nome: "Agência Câmara (Economia)",
     url: "https://www.camara.leg.br/noticias/rss/dinamico/ECONOMIA",
     site: "https://www.camara.leg.br/noticias", tipo: "rss", peneira: true, categoria: "legislacao" },
@@ -320,11 +324,17 @@ async function baixar(url) {
 
 async function lerFonte(f) {
   let bruto;
-  try { bruto = await baixar(f.url); }
-  catch (e) {
-    /* Uma segunda tentativa cobre a oscilação de rede de sempre. */
-    await new Promise(r => setTimeout(r, 3000));
-    bruto = await baixar(f.url);
+  if (f.pelaPonte && PONTE_URL) {
+    /* Pela ponte primeiro; se ela falhar, ainda tenta direto. */
+    try { bruto = await baixar(PONTE_URL + "?url=" + encodeURIComponent(f.url)); f._via = "ponte"; }
+    catch (e) { bruto = await baixar(f.url); f._via = undefined; }
+  } else {
+    try { bruto = await baixar(f.url); }
+    catch (e) {
+      /* Uma segunda tentativa cobre a oscilação de rede de sempre. */
+      await new Promise(r => setTimeout(r, 3000));
+      bruto = await baixar(f.url);
+    }
   }
   let itens;
   if (f.tipo === "simples") itens = lerSimples(bruto, f.url);
@@ -349,19 +359,6 @@ async function lerFonte(f) {
   }).filter(n => n.titulo && n.link && /^https?:/.test(n.link) && n._doRamo);
 }
 
-/* O que o robô local gravou para uma fonte (dados/fontes/<id>.json),
-   se existir e tiver menos de três dias. Mais velho que isso é sinal
-   de que o computador do escritório ficou desligado — e aí a fonte
-   fica mesmo como "sem resposta", que é a verdade. */
-function lerDeApoio(f) {
-  try {
-    const j = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "dados", "fontes", f.id + ".json"), "utf8"));
-    if (!j || !Array.isArray(j.noticias) || !j.atualizadoEm) return null;
-    if (Date.now() - Date.parse(j.atualizadoEm) > 3 * 864e5) return null;
-    return j;
-  } catch (e) { return null; }
-}
-
 function lerAnterior() {
   try { return JSON.parse(fs.readFileSync(SAIDA, "utf8")); }
   catch (e) { return { noticias: [], fontes: [] }; }
@@ -379,19 +376,13 @@ async function principal() {
     try {
       const lista = await lerFonte(f);
       lista.forEach(n => { delete n._doRamo; novas.push(n); });
-      estado.push({ id: f.id, sigla: f.sigla, nome: f.nome, site: f.site, ok: true, quantas: lista.length });
-      console.log("ok   " + f.nome + ": " + lista.length);
+      const ok = { id: f.id, sigla: f.sigla, nome: f.nome, site: f.site, ok: true, quantas: lista.length };
+      if (f._via) ok.via = f._via;
+      estado.push(ok);
+      console.log("ok   " + f.nome + ": " + lista.length + (f._via ? " (pela ponte)" : ""));
     } catch (e) {
-      const apoio = lerDeApoio(f);
-      if (apoio) {
-        apoio.noticias.forEach(n => { delete n._doRamo; novas.push(n); });
-        estado.push({ id: f.id, sigla: f.sigla, nome: f.nome, site: f.site, ok: true, quantas: apoio.noticias.length,
-                      via: "local", lidaEm: apoio.atualizadoEm });
-        console.log("ok   " + f.nome + ": " + apoio.noticias.length + " (pelo robô local, " + apoio.atualizadoEm + ")");
-      } else {
-        estado.push({ id: f.id, sigla: f.sigla, nome: f.nome, site: f.site, ok: false, erro: String(e.message || e).slice(0, 200) });
-        console.log("FALHA " + f.nome + ": " + (e.message || e));
-      }
+      estado.push({ id: f.id, sigla: f.sigla, nome: f.nome, site: f.site, ok: false, erro: String(e.message || e).slice(0, 200) });
+      console.log("FALHA " + f.nome + ": " + (e.message || e));
     }
   }));
 

@@ -25,11 +25,6 @@ on:
     - cron: "5,35 10-22 * * 1-5"
     - cron: "15 11 * * 6"
   workflow_dispatch:
-  # O robô local do escritório (SEFAZ/SE) manda dados/fontes/*.json;
-  # quando chega, a rodada sai na hora, em vez de esperar a próxima.
-  push:
-    paths:
-      - "dados/fontes/**"
 
 permissions:
   contents: write
@@ -50,6 +45,10 @@ jobs:
           node-version: "20"
 
       - name: Buscar notícias oficiais
+        # A SEFAZ/SE não responde a quem está fora do Brasil; vai pela
+        # ponte, uma função no Google Cloud em São Paulo (funcoes/).
+        env:
+          PONTE_URL: https://southamerica-east1-hubtotali.cloudfunctions.net/ponte
         run: node ferramentas/buscar-noticias.js
 
       - name: Buscar agenda oficial da Receita
