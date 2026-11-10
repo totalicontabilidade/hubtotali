@@ -76,6 +76,20 @@ afirmar("diz quem pediu quando não é o dono", /Pedido por Raoni/.test(r.doc.te
 r = MigracaoQuadro.converter({ _id: "d", oque: "Balancete", setorDestino: "Contábil", criadoPor: "u-raoni", situacao: "aberta" }, ctx);
 afirmar("setor com duas pessoas → quem pediu", r.uid === "u-raoni" && /quem pediu/.test(r.como), r);
 
+/* ---------- recado que era pendência ---------- */
+(function () {
+  const rec = { _id: "rec1", oque: "PLAY SERVIÇOS", porque: "Contabilizar 1º semestre", ehRecado: true, criadoPor: "u-rodrigo", criadoEm: 1760000000000,
+                _andamento: [{ texto: "feito", criadoEm: 1760100000000 }] };
+  const r = MigracaoQuadro.converterRecado(rec, ctx);
+  afirmar("recado que era pendência vai para quem criou, riscada", !r.pulada && r.itens.length === 1 && r.itens[0].uid === "u-rodrigo" && r.itens[0].doc.feito === true && r.itens[0].doc.feitoEm === 1760100000000, r);
+  afirmar("a primeira nota explica que era recado", /era pendência/.test(r.itens[0].doc.notas[0].t), r.itens[0].doc.notas[0]);
+  afirmar("origem continua a do recado", r.itens[0].doc.origemSistema === "hub-antigo" && r.itens[0].doc.origemId === "rec1", r.itens[0].doc);
+  const rec2 = Object.assign({}, rec, { _id: "rec2", responsavel: "u-hilany" });
+  const r2 = MigracaoQuadro.converterRecado(rec2, ctx);
+  afirmar("com responsável, vai para os dois quadros, riscada nos dois", r2.itens.length === 2 && r2.itens[0].uid === "u-hilany" && r2.itens[1].uid === "u-rodrigo" && r2.itens.every(i => i.doc.feito), r2.itens.map(i => i.uid));
+  afirmar("o recado continua pulado na migração normal", MigracaoQuadro.converter(rec, ctx).pulada === true);
+})();
+
 /* ---------- recado e sem dono ---------- */
 afirmar("recado é pulado", MigracaoQuadro.converter({ _id: "e", oque: "Aviso", ehRecado: true }, ctx).motivo === "recado");
 afirmar("sem ninguém é pulada", MigracaoQuadro.converter({ _id: "f", oque: "?" }, ctx).motivo === "sem dono");

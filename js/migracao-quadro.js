@@ -111,14 +111,15 @@
 
     var prazoTxt = String(p.prazo || "").slice(0, 10);
     var prazo = /^\d{4}-\d{2}-\d{2}$/.test(prazoTxt) ? prazoTxt : null;
-    var feito = p.situacao === "resolvida";
+    var feito = p.situacao === "resolvida" || p._eraRecado === true;
     var urgente = p.urgencia === "urgente";
 
     var andamento = (p._andamento || []).filter(function (a) {
       return a && a.texto && String(a.texto).trim() && !a.apagado;
     }).sort(function (a, b) { return (ms(a.criadoEm) || 0) - (ms(b.criadoEm) || 0); });
 
-    var primeira = "Trazida do quadro antigo do Hub em " + dataBr(agora) +
+    var primeira = (p._eraRecado ? "Estava no quadro antigo como recado, mas era pendência; trazida já concluída em "
+                                 : "Trazida do quadro antigo do Hub em ") + dataBr(agora) +
                    ". Pedida por " + quemPediu + " em " + dataBr(criadoEm);
     if (dono.como !== "responsável") primeira += " · entrou neste quadro como " + dono.como;
     if (p._reservada) primeira += " · era reservada";
@@ -176,6 +177,30 @@
     };
   }
 
+  /* Um recado do quadro antigo que, na verdade, era pendência — e já
+     foi resolvida. Vai riscada para o quadro do dono (responsável;
+     senão a única pessoa do setor; senão quem criou) e, se quem criou
+     é outra pessoa, uma cópia riscada no quadro dela também: a
+     pendência era dos dois. Devolve a lista do que criar. */
+  function converterRecado(p, ctx) {
+    var x = {};
+    Object.keys(p).forEach(function (k) { x[k] = p[k]; });
+    x.ehRecado = false;
+    x._eraRecado = true;
+    var itens = [];
+    var principal = converter(x, ctx);
+    if (principal.pulada) return { pulada: true, motivo: principal.motivo, itens: [] };
+    itens.push(principal);
+    if (x.criadoPor && x.criadoPor !== principal.uid && pessoa(ctx, x.criadoPor)) {
+      var y = {};
+      Object.keys(x).forEach(function (k) { y[k] = x[k]; });
+      y.responsavel = x.criadoPor;
+      var copia = converter(y, ctx);
+      if (!copia.pulada) { copia.como = "quem criou"; itens.push(copia); }
+    }
+    return { pulada: false, itens: itens };
+  }
+
   /* O plano inteiro: o que vai para quem, o que fica de fora, e
      o que já foi trazido antes (ctx.existentes[uid] é a lista de
      origemId já presentes naquele quadro). */
@@ -210,5 +235,5 @@
     return id;
   }
 
-  raiz.MigracaoQuadro = { converter: converter, donoDe: donoDe, planejar: planejar, slug: slug, novoId: novoId };
+  raiz.MigracaoQuadro = { converter: converter, converterRecado: converterRecado, donoDe: donoDe, planejar: planejar, slug: slug, novoId: novoId };
 })(typeof window !== "undefined" ? window : (typeof module !== "undefined" ? module.exports : this));

@@ -3020,23 +3020,88 @@
     /* Os antigos, uma vez só. */
     if (!desenharRecadosEquipe.antigosLidos) {
       desenharRecadosEquipe.antigosLidos = true;
-      Dados.lerRecadosAntigos().then(function (antigos) {
-        var det = $("rec-antigos"), lista = $("rec-antigos-lista");
-        if (!det || !lista || !antigos.length) return;
-        det.hidden = false;
-        det.querySelector("summary").textContent = "Recados de antes, do quadro antigo (" + antigos.length + ")";
-        antigos.forEach(function (rc) {
-          var linha = elemento("div", "rec-item rec-item--antigo");
-          linha.appendChild(elemento("p", "rec-item__t", rc.texto));
-          if (rc.porque) linha.appendChild(elemento("p", "rec-item__x", rc.porque));
-          var meta = elemento("div", "rec-item__meta");
-          var quando = rc.criadoEm ? new Date(rc.criadoEm).toLocaleDateString("pt-BR") : "";
-          meta.appendChild(elemento("span", null, "por " + (nomeNaEquipe(rc.criadoPor) || "alguém da equipe") + (quando ? " · " + quando : "") + (rc.setorDestino ? " · " + rc.setorDestino : "")));
-          linha.appendChild(meta);
-          lista.appendChild(linha);
-        });
-      }).catch(function () {});
+      desenharRecadosAntigos();
     }
+  }
+
+  /* Os recados do quadro antigo. Alguns eram pendências anotadas no
+     lugar errado: o botão leva cada um, já riscado, para o quadro de
+     quem é (MigracaoQuadro.converterRecado). O que já foi levado
+     aparece dito, sem botão — origemId é a chave. */
+  function desenharRecadosAntigos() {
+    var det = $("rec-antigos"), lista = $("rec-antigos-lista");
+    if (!det || !lista) return;
+    lista.textContent = "";
+    var antigos = [], gente = [], levados = {};
+    Promise.all([Dados.lerRecadosAntigos(), REC_EQUIPE.length ? Promise.resolve(REC_EQUIPE) : Dados.listarEquipe()]).then(function (r) {
+      antigos = r[0] || []; REC_EQUIPE = r[1] || REC_EQUIPE;
+      gente = REC_EQUIPE.filter(function (p) { return p.ativo !== false && p.robo !== true; });
+      if (!antigos.length) return null;
+      return Promise.all(gente.map(function (p) {
+        return Dados.lerTarefasDe(p.uid).then(function (ts) {
+          ts.forEach(function (t) { if (t.origemId) { (levados[t.origemId] = levados[t.origemId] || []).push(p); } });
+        }).catch(function () {});
+      }));
+    }).then(function () {
+      if (!antigos.length) return;
+      det.hidden = false;
+      det.querySelector("summary").textContent = "Recados de antes, do quadro antigo (" + antigos.length + ")";
+      antigos.forEach(function (rc) {
+        var linha = elemento("div", "rec-item rec-item--antigo");
+        linha.appendChild(elemento("p", "rec-item__t", rc.texto));
+        if (rc.porque) linha.appendChild(elemento("p", "rec-item__x", rc.porque));
+        var meta = elemento("div", "rec-item__meta");
+        var quando = rc.criadoEm ? new Date(rc.criadoEm).toLocaleDateString("pt-BR") : "";
+        meta.appendChild(elemento("span", null, "por " + (nomeNaEquipe(rc.criadoPor) || "alguém da equipe") + (quando ? " · " + quando : "") + (rc.setorDestino ? " · " + rc.setorDestino : "")));
+        var onde = levados[rc.id];
+        if (onde && onde.length) {
+          meta.appendChild(elemento("span", "rec-item__leu rec-item__leu--todos", "já está, riscada, no quadro de " + onde.map(function (p) { return String(p.nome || "").split(" ")[0]; }).join(" e ")));
+        } else if (LIB.admin) {
+          var b = elemento("button", "btn btn--pequeno", "Era pendência: levar riscada para o quadro");
+          b.type = "button";
+          b.title = "Cria a pendência, já concluída, no quadro de quem é (responsável; senão a única pessoa do setor; senão quem criou) e, se quem criou é outra pessoa, no quadro dela também.";
+          b.addEventListener("click", function () { levarRecadoComoPendencia(rc, b, meta); });
+          meta.appendChild(b);
+        }
+        linha.appendChild(meta);
+        lista.appendChild(linha);
+      });
+    }).catch(function (e) {
+      lista.appendChild(elemento("div", "vazio", e.message || "Não consegui ler os recados antigos."));
+    });
+  }
+
+  function levarRecadoComoPendencia(rc, botao, meta) {
+    var s = Dados.sessao();
+    if (!s) { recado("Sessão expirada. Entre de novo.", true); return; }
+    botao.disabled = true; botao.textContent = "Levando…";
+    var ctx = {
+      equipe: REC_EQUIPE.map(function (p) { return { uid: p.uid, nome: p.nome, email: p.email, setores: setoresDe(p), ativo: p.ativo !== false }; }),
+      euUid: s.uid, euEmail: s.email, agora: Date.now(), setoresDoDono: {},
+    };
+    var plano = MigracaoQuadro.converterRecado(rc._bruto, ctx);
+    if (plano.pulada || !plano.itens.length) { botao.textContent = "Sem dono para levar"; return; }
+    var nomes = plano.itens.map(function (i) { return String(nomeNaEquipe(i.uid) || i.uid).split(" ")[0]; });
+    if (!window.confirm("Levar “" + rc.texto.slice(0, 60) + "” como pendência concluída para o quadro de " + nomes.join(" e ") + "?")) {
+      botao.disabled = false; botao.textContent = "Era pendência: levar riscada para o quadro"; return;
+    }
+    /* Os setores de cada dono, para a pendência nascer colorida. */
+    Promise.all(plano.itens.map(function (i) { return Dados.lerSetoresDe(i.uid).then(function (st) { ctx.setoresDoDono[i.uid] = st; }).catch(function () {}); }))
+      .then(function () {
+        var plano2 = MigracaoQuadro.converterRecado(rc._bruto, ctx);
+        return plano2.itens.reduce(function (fila, item) {
+          return fila.then(function () { return Dados.criarTarefaEm(item.uid, MigracaoQuadro.novoId(), item.doc); });
+        }, Promise.resolve());
+      })
+      .then(function () {
+        botao.remove();
+        meta.appendChild(elemento("span", "rec-item__leu rec-item__leu--todos", "levada, riscada, para o quadro de " + nomes.join(" e ")));
+        recado("Pendência levada para o quadro de " + nomes.join(" e ") + ", já concluída.");
+      })
+      .catch(function (e) {
+        botao.disabled = false; botao.textContent = "Era pendência: levar riscada para o quadro";
+        recado(e.message || "Não consegui levar.", true);
+      });
   }
 
   /* ============================================================

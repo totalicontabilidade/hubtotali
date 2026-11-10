@@ -550,16 +550,22 @@ const Dados = (function () {
       .then(function (r) { if (!r.ok && r.status !== 404) throw new Error("Não consegui apagar (HTTP " + r.status + ")."); });
   }
 
-  /* Os recados do quadro antigo (pendencias com ehRecado), só leitura. */
+  /* Os recados do quadro antigo (pendencias com ehRecado), só leitura,
+     com a linha do tempo de cada um (_bruto): é o que a administração
+     usa para levar como pendência o que era pendência. */
   function lerRecadosAntigos() {
     if (!temBanco()) return Promise.resolve([]);
     return paginas("/pendencias?pageSize=300", []).then(function (l) {
-      return l.filter(function (p) { return p.ehRecado === true; })
-        .map(function (p) {
-          return { id: p._id, texto: String(p.oque || ""), porque: String(p.porque || ""), criadoPor: p.criadoPor || "",
-                   criadoEm: Number(p.criadoEm) || 0, setorDestino: p.setorDestino || "", antigo: true };
-        })
-        .sort(function (a, b) { return b.criadoEm - a.criadoEm; });
+      var recados = l.filter(function (p) { return p.ehRecado === true; });
+      return Promise.all(recados.map(function (p) {
+        return pegarCaminho("/pendencias/" + encodeURIComponent(p._id) + "/andamento?pageSize=200")
+          .then(function (j) { p._andamento = docsDe(j); }, function () { p._andamento = []; })
+          .then(function () {
+            return { id: p._id, texto: String(p.oque || ""), porque: String(p.porque || ""), criadoPor: p.criadoPor || "",
+                     responsavel: p.responsavel || "", criadoEm: Number(p.criadoEm) || 0, setorDestino: p.setorDestino || "",
+                     antigo: true, _bruto: p };
+          });
+      })).then(function (lista) { return lista.sort(function (a, b) { return b.criadoEm - a.criadoEm; }); });
     });
   }
 
