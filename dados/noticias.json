@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-09T15:49:08.995Z",
+ "atualizadoEm": "2026-11-10T00:14:14.000Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-09T15:49:08.995Z"
+   "ultimaVez": "2026-11-10T00:14:14.000Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-09T15:49:08.995Z"
+   "ultimaVez": "2026-11-10T00:14:14.000Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-09T15:49:08.995Z"
+   "ultimaVez": "2026-11-10T00:14:14.000Z"
   },
   {
    "id": "fazenda",
@@ -70,8 +70,8 @@
    "nome": "Ministério da Fazenda",
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
-   "quantas": 15,
-   "ultimaVez": "2026-11-09T15:49:08.995Z"
+   "quantas": 17,
+   "ultimaVez": "2026-11-10T00:14:14.000Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-09T15:49:08.995Z"
+   "ultimaVez": "2026-11-10T00:14:14.000Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-09T15:49:08.995Z"
+   "ultimaVez": "2026-11-10T00:14:14.000Z"
   },
   {
    "id": "sefaz-se",
@@ -107,7 +107,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-09T15:49:08.995Z"
+   "ultimaVez": "2026-11-10T00:14:14.000Z"
   },
   {
    "id": "senado",
@@ -115,8 +115,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 2,
-   "ultimaVez": "2026-11-09T15:49:08.995Z"
+   "quantas": 0,
+   "ultimaVez": "2026-11-10T00:14:14.000Z"
   },
   {
    "id": "ebc",
@@ -124,8 +124,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-09T15:49:08.995Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-10T00:14:14.000Z"
   },
   {
    "id": "govbr",
@@ -134,10 +134,40 @@
    "site": "https://www.gov.br/pt-br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-09T15:49:08.995Z"
+   "ultimaVez": "2026-11-10T00:14:14.000Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1m7m1p8",
+   "titulo": "CFC, Tesouro Nacional e CRCCE realizam a Semana Contábil e Fiscal para Estados e Municípios em Fortaleza",
+   "link": "https://cfc.org.br/noticias/cfc-tesouro-nacional-e-crcce-realizam-a-semana-contabil-e-fiscal-para-estados-e-municipios-em-fortaleza/",
+   "resumo": "A XXXV Secofem reúne cerca de 500 participantes até 13 de novembro, com 39 módulos de capacitação em Contabilidade Pública Um dos maiores eventos voltados para o fortalecimento da Contabilidade Pública começou nesta segunda-feira (9). A XXXV Semana Contábil e Fiscal para…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-09T21:32:15.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-10T00:14:14.000Z"
+  },
+  {
+   "id": "bxe9mk",
+   "titulo": "Confira o calendário de pagamento do IPVA de 2027 em São Paulo",
+   "link": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-11/confira-o-calendario-de-pagamento-do-ipva-de-2027-em-sao-paulo",
+   "resumo": "O Governo do Estado de São Paulo divulgou nesta segunda-feira (9) o calendário de pagamento do Imposto sobre a Propriedade de Veículos Automotores (IPVA) de 2027. Em janeiro, os contribuintes poderão quitar o imposto em cota única, com 3% de desconto , ou optar pelo…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-09T15:57:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-10T00:14:14.000Z"
+  },
   {
    "id": "d2y2fx",
    "titulo": "CFC, CPC e CVM abrem consulta pública sobre novas regras para informações financeiras",
@@ -169,6 +199,37 @@
    "vistaEm": "2026-11-09T15:43:00.130Z"
   },
   {
+   "id": "rgves6",
+   "titulo": "Receita Federal libera acesso às novas APIs de apuração da CBS",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-libera-acesso-as-novas-apis-de-apuracao-da-cbs",
+   "resumo": "Nova versão permite consultas incrementais de débitos e créditos apurados.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-09T15:00:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-10T00:14:14.000Z"
+  },
+  {
+   "id": "1sjn1id",
+   "titulo": "Receita Federal disponibiliza calculadora para apoiar contribuintes na análise de opções de transação tributária.",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-disponibiliza-calculadora-para-apoiar-contribuintes-na-analise-de-opcoes-de-transacao-tributaria",
+   "resumo": "Nova ferramenta permite informar o perfil do contribuinte, cadastrar débitos e comparar, de forma orientativa, modalidades de negociação oferecidas pela Receita Federal e pela PGFN.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-09T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-10T00:14:14.000Z"
+  },
+  {
    "id": "1iwvjmn",
    "titulo": "COMUNICADO",
    "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/comunicado",
@@ -183,6 +244,51 @@
    ],
    "relevancia": 1,
    "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "10qeobw",
+   "titulo": "Operação Fronteira registra oito prisões e R$ 3 milhões em apreensões na primeira semana em Santana do Livramento (RS)",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-registra-oito-prisoes-e-r-3-milhoes-em-apreensoes-na-primeira-semana-em-santana-do-livramento-rs",
+   "resumo": "Ações da Receita Federal incluem apreensão de drogas, retenção de mercadorias e veículos e operações integradas com forças de segurança no combate aos ilícitos na fronteira com o Uruguai.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-09T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-10T00:14:14.000Z"
+  },
+  {
+   "id": "9uoxpy",
+   "titulo": "Em seis dias, Operação Fronteira Receita Federal apreendeu mais de 3,5 toneladas de drogas",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/em-seis-dias-operacao-fronteira-receita-federal-apreendeu-mais-de-3-5-toneladas-de-drogas",
+   "resumo": "Mais de 60 pessoas já foram presas em ações conjuntas com órgãos de segurança e fiscalização em todo o país.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-09T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-10T00:14:14.000Z"
+  },
+  {
+   "id": "s9l9xo",
+   "titulo": "Operação Fronteira: Receita Federal apreende anabolizantes, cabelo humano e mais de 12 kg de drogas em Viracopos",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-receita-federal-apreende-anabolizantes-cabelo-humano-e-mais-de-12-kg-de-drogas-em-viracopos",
+   "resumo": "As encomendas vieram dos Estados Unidos e seguiam para diferentes destinos no Brasil.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-09T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-10T00:14:14.000Z"
   },
   {
    "id": "cmg9bp",
