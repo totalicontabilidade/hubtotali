@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-10T12:30:09.456Z",
+ "atualizadoEm": "2026-11-10T12:52:14.437Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-10T12:30:09.456Z"
+   "ultimaVez": "2026-11-10T12:52:14.437Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-10T12:30:09.456Z"
+   "ultimaVez": "2026-11-10T12:52:14.437Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-10T12:30:09.456Z"
+   "ultimaVez": "2026-11-10T12:52:14.437Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 17,
-   "ultimaVez": "2026-11-10T12:30:09.456Z"
+   "ultimaVez": "2026-11-10T12:52:14.437Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-10T12:30:09.456Z"
+   "ultimaVez": "2026-11-10T12:52:14.437Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-10T12:30:09.456Z"
+   "ultimaVez": "2026-11-10T12:52:14.437Z"
   },
   {
    "id": "sefaz-se",
@@ -98,7 +98,8 @@
    "site": "https://www.sefaz.se.gov.br/",
    "ok": true,
    "quantas": 6,
-   "ultimaVez": "2026-11-10T12:30:09.456Z"
+   "via": "ponte",
+   "ultimaVez": "2026-11-10T12:52:14.437Z"
   },
   {
    "id": "camara",
@@ -107,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-10T12:30:09.456Z"
+   "ultimaVez": "2026-11-10T12:52:14.437Z"
   },
   {
    "id": "senado",
@@ -116,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-10T12:30:09.456Z"
+   "ultimaVez": "2026-11-10T12:52:14.437Z"
   },
   {
    "id": "ebc",
@@ -125,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-10T12:30:09.456Z"
+   "ultimaVez": "2026-11-10T12:52:14.437Z"
   },
   {
    "id": "govbr",
@@ -134,10 +135,25 @@
    "site": "https://www.gov.br/pt-br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-10T12:30:09.456Z"
+   "ultimaVez": "2026-11-10T12:52:14.437Z"
   }
  ],
  "noticias": [
+  {
+   "id": "19dk861",
+   "titulo": "Governo prorroga até 9 de dezembro desoneração da gasolina e do etanol",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/governo-prorroga-ate-9-de-dezembro-desoneracao-da-gasolina-e-do-etanol",
+   "resumo": "O governo federal prorrogou até 9 de dezembro de 2026 a desoneração da gasolina e do etanol e manteve, até a mesma data, a subvenção ao etanol. As medidas constam em decreto publicado em edição extra no Diário Oficial da União (DOU). Em nota, a Presidência da República…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-10T12:33:00.000Z",
+   "categorias": [
+    "legislacao"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-10T12:52:14.437Z"
+  },
   {
    "id": "19atsnu",
    "titulo": "Receita Federal participa da Operação Recycling",
