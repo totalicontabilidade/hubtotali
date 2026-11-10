@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-10T17:35:19.877Z",
+ "atualizadoEm": "2026-11-10T18:05:41.382Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-10T17:35:19.877Z"
+   "ultimaVez": "2026-11-10T18:05:41.382Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-10T17:35:19.877Z"
+   "ultimaVez": "2026-11-10T18:05:41.382Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-10T17:35:19.877Z"
+   "ultimaVez": "2026-11-10T18:05:41.382Z"
   },
   {
    "id": "fazenda",
@@ -70,8 +70,8 @@
    "nome": "Ministério da Fazenda",
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
-   "quantas": 18,
-   "ultimaVez": "2026-11-10T17:35:19.877Z"
+   "quantas": 19,
+   "ultimaVez": "2026-11-10T18:05:41.382Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-10T17:35:19.877Z"
+   "ultimaVez": "2026-11-10T18:05:41.382Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-10T17:35:19.877Z"
+   "ultimaVez": "2026-11-10T18:05:41.382Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-10T17:35:19.877Z"
+   "ultimaVez": "2026-11-10T18:05:41.382Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-10T17:35:19.877Z"
+   "ultimaVez": "2026-11-10T18:05:41.382Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-10T17:35:19.877Z"
+   "ultimaVez": "2026-11-10T18:05:41.382Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-10T17:35:19.877Z"
+   "ultimaVez": "2026-11-10T18:05:41.382Z"
   },
   {
    "id": "govbr",
@@ -135,7 +135,7 @@
    "site": "https://www.gov.br/pt-br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-10T17:35:19.877Z"
+   "ultimaVez": "2026-11-10T18:05:41.382Z"
   }
  ],
  "noticias": [
@@ -154,6 +154,22 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-10T17:35:19.877Z"
+  },
+  {
+   "id": "v4rwg2",
+   "titulo": "Unidade da PGFN, em Maringá, retoma atendimento presencial",
+   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/unidade-da-pgfn-em-maringa-retoma-atendimento-presencial",
+   "resumo": "Serviço havia sido suspenso devido às chuvas na região",
+   "fonte": "fazenda",
+   "fonteNome": "Ministério da Fazenda",
+   "sigla": "MF",
+   "publicadoEm": "2026-11-10T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-10T18:05:41.382Z"
   },
   {
    "id": "6iqemd",
