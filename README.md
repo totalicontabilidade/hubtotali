@@ -80,8 +80,8 @@ atalhos como "Esperando retorno do cliente"), editar, excluir, mover de bloco,
 e os PDFs anexados. Uma pendência com data que vence hoje aparece em **Hoje**;
 vencida, aparece em Hoje com o selo de atraso; que vence nesta semana aparece
 em **Esta semana**. Riscadas somem do quadro no fim do dia e ficam na lista
-**Riscadas**; depois de uma semana o quadro pergunta se pode apagar
-(**faxina**).
+**Riscadas**, para consulta, sem prazo e sem pergunta: riscada é concluída.
+Apagar é à mão, cartão a cartão.
 
 O calendário da lateral filtra por dia e mostra pontinhos onde há prazo; o
 ícone de ampliar abre o mês inteiro com a agenda do dia escolhido.

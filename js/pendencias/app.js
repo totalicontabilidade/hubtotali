@@ -349,7 +349,6 @@ function render(){
   $('progTx').innerHTML='';
   $('progTx').append(el('b',{text:String(feitasHoje)}),feitasHoje===1?' riscada hoje · ':' riscadas hoje · ',el('b',{text:String(paraHoje)}),paraHoje===1?' falta para hoje':' faltam para hoje');
 
-  renderFaxina(agora);
 
   // pendência com data dentro desta semana (ou atrasada) aparece na coluna "Esta semana", em ordem de data
   const colDe=t=>colunaDe(t,agora);
@@ -521,42 +520,9 @@ function renderFora(){
   });
 }
 
-function pedidosFaxina(agora){
-  const lista=[];
-  tarefas.forEach(t=>{
-    const rev=t.revisadoEm||0;
-    if(t.feito&&t.feitoEm&&agora-Math.max(t.feitoEm,rev)>=SEMANA_MS) lista.push({t,tipo:'riscada',desde:t.feitoEm});
-    else if(!t.feito&&t.grifadoEm&&agora-Math.max(t.grifadoEm,rev)>=SEMANA_MS) lista.push({t,tipo:'grifada',desde:t.grifadoEm});
-  });
-  return lista.sort((a,b)=>a.desde-b.desde);
-}
-function renderFaxina(agora){
-  const box=$('faxina'); box.textContent='';
-  const lista=pedidosFaxina(agora);
-  box.hidden=!lista.length;
-  if(!lista.length) return;
-  const riscadas=lista.filter(p=>p.tipo==='riscada');
-  box.appendChild(el('div',{class:'linha'},[
-    el('div',{},[
-      el('h2',{text:lista.length===1?'Quer apagar esta pendência?':'Quer apagar estas '+lista.length+' pendências?'}),
-      el('div',{class:'sub',text:'Já faz mais de uma semana que foram riscadas ou grifadas. “Manter” pergunta de novo daqui a 7 dias.'})
-    ]),
-    el('span',{class:'esp'}),
-    riscadas.length>1?botaoConfirmar('Apagar as '+riscadas.length+' riscadas','Confirmar: apagar '+riscadas.length+'?',()=>riscadas.forEach(p=>apagar(p.t.id)),'sec perigo'):null
-  ]));
-  lista.slice(0,30).forEach(p=>{
-    const t=p.t;
-    box.appendChild(el('div',{class:'fx'},[
-      txtEl('t'+(p.tipo==='riscada'?' risc':''),t),
-      el('div',{class:'bts'},[
-        el('button',{class:'sec',onclick:()=>mudar(t.id,{revisadoEm:Date.now()})},['Manter']),
-        el('button',{class:'sec perigo',onclick:()=>apagar(t.id)},['Apagar'])
-      ]),
-      el('div',{class:'i',text:nomeSetor(t.setor)+' · '+(p.tipo==='riscada'?'riscada em ':'grifada em ')+ddmm(p.desde)+(p.tipo==='grifada'?', ainda aberta':'')})
-    ]));
-  });
-}
-
+/* Não há faxina: riscada é concluída, fica na lista Riscadas para
+   consulta e ninguém é cobrado para apagar (pedido do Raoni,
+   10/11/2026). Apagar continua existindo, à mão, cartão a cartão. */
 function botaoConfirmar(rotulo,rotuloConf,acao,cls){
   let armado=false,tm;
   const b=el('button',{class:cls,type:'button',text:rotulo});
