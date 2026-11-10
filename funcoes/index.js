@@ -46,9 +46,13 @@ function freio() {
 }
 
 exports.ponte = onRequest(
-  /* invoker "public": o robô do GitHub chama sem conta do Google;
-     a lista HOSTS e o freio são o que protegem. */
-  { region: "southamerica-east1", invoker: "public", timeoutSeconds: 40, memory: "256MiB", maxInstances: 1, cors: false },
+  /* Pública: o robô do GitHub chama sem conta do Google; a lista
+     HOSTS e o freio são o que protegem. O acesso público foi ligado
+     à mão no Cloud Run (Segurança → "Permitir acesso público"),
+     porque a CLI não consegue pôr allUsers neste projeto; por isso
+     não há `invoker: "public"` aqui — com ele, todo deploy falhava
+     ao tentar regravar essa permissão. */
+  { region: "southamerica-east1", timeoutSeconds: 40, memory: "256MiB", maxInstances: 1, cors: false },
   async (req, res) => {
     res.set("Cache-Control", "no-store");
     if (req.method !== "GET") { res.status(405).send("Só GET."); return; }
