@@ -67,7 +67,11 @@ const FONTES = [
     url: "https://fenacon.org.br/feed/", site: "https://fenacon.org.br/noticias/", tipo: "rss", peneira: false },
   { id: "sefaz-se", sigla: "SEFAZ/SE", nome: "Secretaria da Fazenda de Sergipe",
     url: "https://www.sefaz.se.gov.br/_layouts/15/listfeed.aspx?List=%7B47165FFB%2D27C2%2D4C86%2DB8E5%2DDE40B54B162E%7D",
-    site: "https://www.sefaz.se.gov.br/", tipo: "rss", peneira: false, categoria: "sergipe" },
+    site: "https://www.sefaz.se.gov.br/", tipo: "rss", peneira: false, categoria: "sergipe",
+    /* Não responde a quem está fora do Brasil (o GitHub). Quem a lê
+       é o robô local (buscar-fonte-local.js), e o arquivo dele em
+       dados/fontes/sefaz-se.json vale quando o site não responde. */
+    local: true },
   { id: "camara",   sigla: "Câmara",  nome: "Agência Câmara (Economia)",
     url: "https://www.camara.leg.br/noticias/rss/dinamico/ECONOMIA",
     site: "https://www.camara.leg.br/noticias", tipo: "rss", peneira: true, categoria: "legislacao" },
@@ -345,6 +349,19 @@ async function lerFonte(f) {
   }).filter(n => n.titulo && n.link && /^https?:/.test(n.link) && n._doRamo);
 }
 
+/* O que o robô local gravou para uma fonte (dados/fontes/<id>.json),
+   se existir e tiver menos de três dias. Mais velho que isso é sinal
+   de que o computador do escritório ficou desligado — e aí a fonte
+   fica mesmo como "sem resposta", que é a verdade. */
+function lerDeApoio(f) {
+  try {
+    const j = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "dados", "fontes", f.id + ".json"), "utf8"));
+    if (!j || !Array.isArray(j.noticias) || !j.atualizadoEm) return null;
+    if (Date.now() - Date.parse(j.atualizadoEm) > 3 * 864e5) return null;
+    return j;
+  } catch (e) { return null; }
+}
+
 function lerAnterior() {
   try { return JSON.parse(fs.readFileSync(SAIDA, "utf8")); }
   catch (e) { return { noticias: [], fontes: [] }; }
@@ -365,8 +382,16 @@ async function principal() {
       estado.push({ id: f.id, sigla: f.sigla, nome: f.nome, site: f.site, ok: true, quantas: lista.length });
       console.log("ok   " + f.nome + ": " + lista.length);
     } catch (e) {
-      estado.push({ id: f.id, sigla: f.sigla, nome: f.nome, site: f.site, ok: false, erro: String(e.message || e).slice(0, 200) });
-      console.log("FALHA " + f.nome + ": " + (e.message || e));
+      const apoio = lerDeApoio(f);
+      if (apoio) {
+        apoio.noticias.forEach(n => { delete n._doRamo; novas.push(n); });
+        estado.push({ id: f.id, sigla: f.sigla, nome: f.nome, site: f.site, ok: true, quantas: apoio.noticias.length,
+                      via: "local", lidaEm: apoio.atualizadoEm });
+        console.log("ok   " + f.nome + ": " + apoio.noticias.length + " (pelo robô local, " + apoio.atualizadoEm + ")");
+      } else {
+        estado.push({ id: f.id, sigla: f.sigla, nome: f.nome, site: f.site, ok: false, erro: String(e.message || e).slice(0, 200) });
+        console.log("FALHA " + f.nome + ": " + (e.message || e));
+      }
     }
   }));
 
@@ -452,4 +477,4 @@ if (require.main === module) {
   principal().catch(e => { console.error(e); process.exitCode = 1; });
 }
 
-module.exports = { lerFeed, lerSimples, lerPlone, classificar, quando, resumir, semTags, chaveDoLink, parecidas, DO_RAMO, CATEGORIAS, FONTES };
+module.exports = { lerFeed, lerSimples, lerPlone, lerFonte, classificar, quando, resumir, semTags, chaveDoLink, parecidas, DO_RAMO, CATEGORIAS, FONTES };

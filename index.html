@@ -83,12 +83,12 @@
   </form>
 </main>
 
-<!-- A TELA TEM SEIS VISTAS, e a barra da esquerda troca entre elas:
-     Início (o resumo do dia), Pendências (o quadro inteiro), Recados
-     (os avisos da casa, com lido por quem), Sistemas (todos os links
-     da casa), Notícias (todas, com filtro) e Agenda (o mês inteiro,
-     conferido com a Receita). Cada uma ocupa a tela toda à direita
-     da barra. O atributo data-vista diz qual está aberta. -->
+<!-- A TELA TEM CINCO VISTAS, e a barra da esquerda troca entre elas:
+     Início (o resumo do dia), Pendências (o quadro inteiro), Sistemas
+     (todos os links da casa), Notícias (todas, com filtro) e Agenda
+     (o mês inteiro, conferido com a Receita). Cada uma ocupa a tela
+     toda à direita da barra; a faixa de avisos fica embaixo de todas.
+     O atributo data-vista diz qual está aberta. -->
 <div class="tela" id="tela" data-vista="inicio" hidden>
 
   <nav class="nav" aria-label="Seções do Hub">
@@ -110,11 +110,6 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M9 11l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 10h18"/></svg>
       <span class="nav__rot">Pendências</span>
-    </button>
-    <button class="nav__b" type="button" id="nav-recados" title="Recados">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M15 9.5a3.5 3.5 0 0 1 0 5"/><path d="M17.5 7a7 7 0 0 1 0 10"/></svg>
-      <span class="nav__rot">Recados</span>
     </button>
     <button class="nav__b" type="button" id="nav-sistemas" title="Sistemas">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
@@ -385,14 +380,6 @@
   <div class="toast" id="toast" hidden></div>
   </section>
 
-  <!-- ===================== RECADOS ===================== -->
-  <!-- Os avisos da casa, para a equipe inteira: quem escreveu,
-       quando, e quem já leu. Recado novo também aparece no cartão
-       (o <dialog> lá embaixo) assim que o Hub abre. -->
-  <section class="vista vista--recados" id="vista-recados" hidden aria-label="Recados">
-    <div class="rc" id="recados-vista"></div>
-  </section>
-
   <!-- ===================== SISTEMAS ===================== -->
   <!-- Todos os links da casa, na ordem da administração: os
        favoritos da pessoa em cima, depois os grupos à vista e, por
@@ -432,21 +419,23 @@
     <div class="ag" id="agenda-vista"></div>
   </section>
 
+  <div class="avisos" id="avisos" aria-label="Avisos"></div>
+
 </div>
 
-<!-- O CARTÃO DOS RECADOS NOVOS. Aparece por cima de tudo uma vez
-     por recado: "Entendi" marca como lido; "Ler depois" (ou Esc)
-     guarda só até fechar a aba. Nativo, para o foco e o Esc virem
-     de graça. -->
+<!-- O CARTÃO DE RECADO. Os recados da administração para a equipe
+     (os que viviam no quadro antigo) aparecem aqui, por cima de
+     tudo, UMA vez para cada pessoa: "Entendi" marca como lido e o
+     recado não volta. Nativo, para o foco e o Esc virem de graça.
+     Não confundir com os avisos da faixa de baixo. -->
 <dialog class="rj" id="recados-janela" aria-labelledby="rj-titulo">
   <div class="rj__caixa">
     <header class="rj__cab">
-      <span class="rj__rot">Recado da casa</span>
-      <h2 class="rj__titulo" id="rj-titulo">Recado novo</h2>
+      <span class="rj__rot">Recado da administração</span>
+      <h2 class="rj__titulo" id="rj-titulo">Recado</h2>
     </header>
     <div class="rj__lista" id="rj-lista"></div>
     <footer class="rj__pe">
-      <button class="rj__depois" type="button" id="rj-depois">Ler depois</button>
       <button class="rj__ok" type="button" id="rj-ok">Entendi</button>
     </footer>
   </div>

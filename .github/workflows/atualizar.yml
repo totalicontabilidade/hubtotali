@@ -25,6 +25,11 @@ on:
     - cron: "5,35 10-22 * * 1-5"
     - cron: "15 11 * * 6"
   workflow_dispatch:
+  # O robô local do escritório (SEFAZ/SE) manda dados/fontes/*.json;
+  # quando chega, a rodada sai na hora, em vez de esperar a próxima.
+  push:
+    paths:
+      - "dados/fontes/**"
 
 permissions:
   contents: write

@@ -20,7 +20,7 @@
      A lista é fechada nos nossos dois domínios de propósito. Abrir
      para qualquer host daria a esta página o poder de conversar com
      a internet inteira, e ela não precisa disso para nada. O 'self'
-     é para a aba Acompanhamento ler dados/noticias.json e
+     é para a aba Recados e acompanhamento ler dados/noticias.json e
      dados/agenda-oficial.json, os arquivos que o robô grava. -->
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
@@ -109,15 +109,14 @@
     As instruções para ligar o banco estão dentro desse arquivo.
   </p>
 
-  <!-- Três frentes na mesma página: o que aparece no Hub (sistemas
-       e recados), quem pode entrar nele, e o acompanhamento — o que
-       o Hub faz sozinho e como a equipe está. Abas porque são
-       assuntos que não se misturam: quem veio cadastrar gente não
-       quer tropeçar na lista de links. -->
+  <!-- Duas frentes na mesma página: o que aparece no Hub, e quem
+       pode entrar nele. Abas porque são assuntos que não se
+       misturam — quem veio cadastrar gente não quer tropeçar na
+       lista de links. -->
   <div class="abas" id="abas">
-    <button class="aba on" type="button" data-painel="painel-sistemas">Sistemas e recados</button>
+    <button class="aba on" type="button" data-painel="painel-sistemas">Tela inicial</button>
     <button class="aba" type="button" data-painel="painel-equipe">Equipe e acessos</button>
-    <button class="aba" type="button" data-painel="painel-acompanhamento">Acompanhamento</button>
+    <button class="aba" type="button" data-painel="painel-acompanhamento">Recados e acompanhamento</button>
   </div>
 
   <div id="painel-equipe" class="painel-aba" hidden>
@@ -328,13 +327,12 @@
        — não havia como pô-lo em outro lugar. -->
   <div id="painel-sistemas" class="painel-aba">
     <div class="admin__cabeca">
-      <h1 class="admin__titulo">Sistemas e recados do Hub</h1>
+      <h1 class="admin__titulo">Tela inicial do Hub</h1>
       <p class="admin__nota">
         <strong id="total-sistemas"></strong>
-        À esquerda estão os blocos na ordem em que a equipe vê — na aba <strong>Sistemas</strong> do Hub e,
-        resumidos, no Início. Clique num bloco para editar. Arraste pelo pegador
-        <span class="dica-pegador" aria-hidden="true">⠿</span> ou use as setas para mudar a ordem.
-        Os <strong>recados</strong> estão no fim da lista. Nada é gravado até você clicar em <strong>Salvar</strong>.
+        À esquerda está a tela de cima para baixo, na ordem em que a equipe vê. Clique num bloco para editar.
+        Arraste pelo pegador <span class="dica-pegador" aria-hidden="true">⠿</span> ou use as setas para mudar a ordem.
+        Nada é gravado até você clicar em <strong>Salvar</strong>.
       </p>
     </div>
 
@@ -358,18 +356,42 @@
     </div>
   </div>
 
-  <!-- ---------- Acompanhamento ----------
-       Só leitura. O que o Hub faz sozinho (o robô das notícias e
-       da agenda, o recebedor do Atos) e como a equipe está — em
-       números. O texto das pendências não aparece aqui: ele é de
-       quem tem o quadro. -->
+  <!-- ---------- Recados e acompanhamento ----------
+       Os recados da administração para a equipe (os que viviam no
+       quadro antigo junto com as pendências): escritos só aqui,
+       vistos uma vez por pessoa no cartão do Hub. E, embaixo, só
+       leitura: o que o Hub faz sozinho e como a equipe está, em
+       números. O texto das pendências não aparece aqui. -->
   <div id="painel-acompanhamento" class="painel-aba" hidden>
     <div class="admin__cabeca">
-      <h1 class="admin__titulo">Acompanhamento</h1>
+      <h1 class="admin__titulo">Recados e acompanhamento</h1>
       <p class="admin__nota">
-        Como a equipe está e o que o Hub faz sozinho. Só números: o texto das pendências fica no quadro de cada pessoa.
+        Recado é para a equipe inteira e aparece <strong>uma vez</strong> para cada pessoa, num cartão, assim que ela
+        abre o Hub. Diferente dos avisos da barra de baixo, que ficam lá até você tirar (aba Tela inicial).
       </p>
     </div>
+
+    <section class="painel" id="sec-recados">
+      <div class="painel__cabeca">
+        <h2 class="painel__titulo">Recados para a equipe</h2>
+        <span class="painel__nota" id="rec-nota"></span>
+      </div>
+      <div class="rec-novo" id="rec-novo">
+        <textarea class="campo__caixa rec-texto" id="rec-texto" rows="3" maxlength="600"
+                  placeholder="O recado, como você falaria para a equipe. Ex.: Sexta não haverá expediente à tarde."></textarea>
+        <div class="painel__acoes">
+          <span class="rec-dica">Grava na hora. Cada pessoa vê uma vez e marca “Entendi”; aqui você acompanha quem já viu.</span>
+          <button class="btn btn--principal" type="button" id="btn-rec-mandar">Mandar para a equipe</button>
+        </div>
+      </div>
+      <p class="erro" id="rec-erro" hidden></p>
+      <div id="rec-lista"></div>
+      <details class="rec-antigos" id="rec-antigos" hidden>
+        <summary>Recados de antes, do quadro antigo</summary>
+        <p class="admin__nota">Já foram lidos por todos na época; ficam aqui só como registro. Não voltam ao Hub.</p>
+        <div id="rec-antigos-lista"></div>
+      </details>
+    </section>
 
     <section class="painel" id="sec-quadros">
       <div class="painel__cabeca">
@@ -381,7 +403,7 @@
       </div>
       <p class="admin__nota">
         Abertas, atrasadas e para hoje em cada quadro; <strong>não vistas</strong> são as que um colega mandou e a pessoa
-        ainda não marcou como visto. Quem está com atraso aparece primeiro.
+        ainda não marcou como visto. Quem está com atraso aparece primeiro. Só números: o texto fica no quadro de cada um.
       </p>
       <div id="quadros-lista"></div>
     </section>
@@ -395,7 +417,8 @@
         Um robô no GitHub lê as fontes oficiais <strong>de meia em meia hora</strong> em dia útil (07:05 às 19:35) e uma vez
         no sábado, e grava os arquivos que o Hub abre. O GitHub não garante a hora — em dia cheio atrasa ou pula
         rodadas. Se as notícias estiverem paradas há mais de uma hora em horário de expediente, rode na mão pelo botão abaixo
-        (Run workflow, no canto direito da página que abre).
+        (Run workflow, no canto direito da página que abre). A SEFAZ/SE não atende ao GitHub, que fica fora do Brasil:
+        ela é lida por um robô neste computador do escritório, que manda o resultado para o mesmo lugar.
       </p>
       <div id="robo-lista"></div>
       <div class="painel__acoes">

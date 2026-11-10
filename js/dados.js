@@ -357,17 +357,18 @@ const Dados = (function () {
   }
 
   function salvarAvisos(lista, quem) {
-    var limpa = (lista || []).slice(0, 40).map(limparRecado);
-    /* Sem banco, os recados ficam neste navegador, dentro dos dados
-       locais — é de onde carregar() os lê de volta. */
-    if (!temBanco()) {
-      var locais = completar(lerCache(CHAVE_LOCAL) || semente());
-      locais.avisos = limpa;
-      gravarCache(CHAVE_LOCAL, locais);
-      return Promise.resolve(limpa);
-    }
+    /* Sem banco, os recados vão junto com a lista, no salvar() que
+       vem logo depois — tudo no mesmo navegador. */
+    if (!temBanco()) return Promise.resolve({ local: true });
     var s = lerSessao();
     if (!s) return Promise.reject(new Error("Sessão expirada. Entre de novo."));
+    var limpa = (lista || []).slice(0, 40).map(function (a) {
+      return {
+        tipo:   String(a.tipo || "aviso").slice(0, 20),
+        titulo: String(a.titulo || "").slice(0, 120),
+        texto:  String(a.texto || "").slice(0, 400),
+      };
+    });
     return fetch(DOC_HUB("avisos"), {
       method: "PATCH",
       headers: comAutorizacao({ "Content-Type": "application/json" }),
@@ -384,29 +385,6 @@ const Dados = (function () {
     });
   }
 
-  /* Cada recado leva, desde 10/11/2026, quem escreveu e quando: é
-     o que a aba Recados mostra e o que deixa cada pessoa marcar o
-     que já leu. Recado antigo, sem id, ganha um a partir do texto —
-     estável, para a marca de lido não se perder a cada leitura. */
-  function idDoRecado(a) {
-    if (a && a.id) return String(a.id).slice(0, 40);
-    var s = String((a && a.titulo) || "") + "|" + String((a && a.texto) || ""), h = 0;
-    for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
-    return "r" + h.toString(36);
-  }
-  function limparRecado(a) {
-    var r = {
-      id:     idDoRecado(a),
-      tipo:   String(a.tipo || "aviso").slice(0, 20),
-      titulo: String(a.titulo || "").slice(0, 120),
-      texto:  String(a.texto || "").slice(0, 600),
-    };
-    if (a.em) r.em = String(a.em).slice(0, 30);
-    if (a.por) r.por = String(a.por).slice(0, 60);
-    if (a.porUid) r.porUid = String(a.porUid).slice(0, 128);
-    return r;
-  }
-
   /* Quem pode mexer nos recados: administrador, quem está no setor
      Gerência, ou quem recebeu a liberação "avisos". A mesma conta
      que a regra do banco faz — e a regra é que manda. Isto aqui só
@@ -418,7 +396,7 @@ const Dados = (function () {
   /* ---------- O que cada pessoa já leu dos recados ----------
 
      Um documento por pessoa (quadros/{uid}/config/recados), com os
-     ids lidos e quando. Só a própria pessoa escreve; a equipe
+     ids dos recados da administração que ela já leu, e quando. Só a própria pessoa escreve; a equipe
      inteira lê — é o que deixa quem escreveu o recado ver quem já
      viu, sem precisar perguntar. Sem banco, fica no navegador. */
   var CHAVE_LIDOS = "hub-totali:recados-lidos";
@@ -507,6 +485,81 @@ const Dados = (function () {
         }
       });
       return r;
+    });
+  }
+
+
+  /* ---------- Os recados da administração ----------
+
+     São os recados que viviam no quadro antigo junto com as
+     pendências (ehRecado). Voltaram em 10/11/2026 como coleção
+     própria: só a administração escreve (admin.html), a equipe lê,
+     e cada pessoa vê o recado UMA vez, num cartão ao abrir o Hub
+     (js/recados.js); o que já leu fica em config/recados, acima.
+     Os antigos continuam em `pendencias`, só leitura, e aparecem na
+     administração como já feitos. Sem banco, ficam no navegador. */
+  var CHAVE_RECADOS_LOCAIS = "hub-totali:recados-locais";
+
+  function recadosLocais() {
+    try { var v = JSON.parse(window.localStorage.getItem(CHAVE_RECADOS_LOCAIS) || "[]"); return Array.isArray(v) ? v : []; }
+    catch (e) { return []; }
+  }
+
+  function listarRecados() {
+    if (!temBanco()) return Promise.resolve(recadosLocais());
+    return paginas("/recados?pageSize=100", []).then(function (l) {
+      return l.map(function (r) { r.id = r._id; return r; })
+        .sort(function (a, b) { return (Number(b.criadoEm) || 0) - (Number(a.criadoEm) || 0); });
+    });
+  }
+
+  function criarRecado(texto) {
+    var s = lerSessao();
+    texto = String(texto || "").trim().slice(0, 600);
+    if (!texto) return Promise.reject(new Error("Escreva o recado."));
+    var doc = { texto: texto, criadoEm: Date.now(), criadoPor: (s && s.uid) || "local", criadoPorNome: "" };
+    return meuCadastro().then(function (eu) {
+      doc.criadoPorNome = (eu && eu.nome) || ((s && s.email) ? s.email.split("@")[0] : "administração");
+      if (!temBanco()) {
+        var lista = recadosLocais();
+        doc.id = "r" + Date.now().toString(36);
+        lista.unshift(doc);
+        try { window.localStorage.setItem(CHAVE_RECADOS_LOCAIS, JSON.stringify(lista)); } catch (e) {}
+        return doc;
+      }
+      if (!s) throw new Error("Sessão expirada. Entre de novo.");
+      return fetch(BASE_DOCS() + "/recados", {
+        method: "POST",
+        headers: comAutorizacao({ "Content-Type": "application/json" }),
+        body: JSON.stringify({ fields: paraCamposSolto(doc) }),
+      }).then(function (r) {
+        if (r.status === 403) throw new Error("O banco recusou o recado (403): só administrador escreve, e as regras precisam estar publicadas.");
+        if (!r.ok) throw new Error("Não consegui gravar o recado (HTTP " + r.status + ").");
+        return r.json();
+      }).then(function (j) { doc.id = j.name.split("/").pop(); return doc; });
+    });
+  }
+
+  function apagarRecado(id) {
+    if (!temBanco()) {
+      var lista = recadosLocais().filter(function (r) { return r.id !== id; });
+      try { window.localStorage.setItem(CHAVE_RECADOS_LOCAIS, JSON.stringify(lista)); } catch (e) {}
+      return Promise.resolve();
+    }
+    return fetch(BASE_DOCS() + "/recados/" + encodeURIComponent(id), { method: "DELETE", headers: comAutorizacao() })
+      .then(function (r) { if (!r.ok && r.status !== 404) throw new Error("Não consegui apagar (HTTP " + r.status + ")."); });
+  }
+
+  /* Os recados do quadro antigo (pendencias com ehRecado), só leitura. */
+  function lerRecadosAntigos() {
+    if (!temBanco()) return Promise.resolve([]);
+    return paginas("/pendencias?pageSize=300", []).then(function (l) {
+      return l.filter(function (p) { return p.ehRecado === true; })
+        .map(function (p) {
+          return { id: p._id, texto: String(p.oque || ""), porque: String(p.porque || ""), criadoPor: p.criadoPor || "",
+                   criadoEm: Number(p.criadoEm) || 0, setorDestino: p.setorDestino || "", antigo: true };
+        })
+        .sort(function (a, b) { return b.criadoEm - a.criadoEm; });
     });
   }
 
@@ -1375,8 +1428,8 @@ const Dados = (function () {
       nota: "Tirar sistemas do Hub." },
     { id: "grupos", nome: "Criar e editar grupos",
       nota: "Criar, renomear, reordenar e excluir os grupos de sistemas." },
-    { id: "avisos", nome: "Recados",
-      nota: "Escrever e apagar recados para a equipe (aba Recados do Hub)." },
+    { id: "avisos", nome: "Recados e prazos",
+      nota: "A barra inferior do Hub." },
   ];
 
   function limparLiberacoes(lista) {
@@ -1888,11 +1941,14 @@ const Dados = (function () {
        o destino possível de uma pendência. */
     salvarAvisos: salvarAvisos,
     possoAvisar: possoAvisar,
-    idDoRecado: idDoRecado,
     lerRecadosLidos: lerRecadosLidos,
     marcarRecadosLidos: marcarRecadosLidos,
     lerLidosDaEquipe: lerLidosDaEquipe,
     resumoDoQuadro: resumoDoQuadro,
+    listarRecados: listarRecados,
+    criarRecado: criarRecado,
+    apagarRecado: apagarRecado,
+    lerRecadosAntigos: lerRecadosAntigos,
     LIBERACOES: LIBERACOES,
     limparLiberacoes: limparLiberacoes,
     minhasLiberacoes: minhasLiberacoes,

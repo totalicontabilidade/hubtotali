@@ -18,12 +18,12 @@ que grava o resultado em arquivos da própria pasta.
 
 ---
 
-## As seis vistas
+## As cinco vistas
 
 A barra da esquerda, com ícone **e nome** em cada botão, troca entre elas. Uma
-vista de cada vez ocupa a tela toda; a única coisa que abre por cima é o
-cartão de recado novo, uma vez por recado. Clicar na marca (na barra ou no
-cabeçalho) volta ao Início.
+vista de cada vez ocupa a tela toda; nada abre por cima de nada. Clicar na
+marca (na barra ou no cabeçalho) volta ao Início. A faixa de recados da
+administração fica embaixo de todas.
 
 **Início** é o resumo do dia, na ordem em que importa de manhã. À esquerda,
 **Minhas pendências**: o que atrasou, o que é para hoje, o que vence ainda esta
@@ -37,17 +37,6 @@ prazo (Hoje, Esta semana, Com data, Acompanhar), setores com cores e
 palavras-chave, calendário, comentários, anexos em PDF, clientes com CNPJ,
 ditado e entendimento da frase. Veio do sistema *Pendências Totali* e está
 descrito na seção própria, mais abaixo.
-
-**Recados.** Os avisos da casa, para a equipe inteira: quem escreveu, quando,
-e **lido por N de M** (os nomes na dica). Cada pessoa marca o que leu; o que
-ainda não leu aparece num **cartão na frente da tela** assim que o Hub abre —
-uma vez por recado: "Entendi" marca como lido e ele não volta; "Ler depois"
-(ou Esc) adia só até fechar a aba. Administração, Gerência e quem tem a
-liberação escrevem e apagam ali mesmo. A faixa de baixo (o letreiro) saiu em
-10/11/2026: aviso que corre ninguém lê, e nunca se sabia quem tinha visto.
-Os recados ficam em `hub/avisos` (id, tipo, título, texto, `em`, `por`,
-`porUid`); o que cada um leu, em `quadros/{uid}/config/recados`, que a equipe
-inteira lê e só a própria pessoa escreve (`js/recados.js`).
 
 **Sistemas.** Todos os links da casa, na ordem da administração: favoritos,
 mais usados (contados neste navegador), os grupos à vista e os grupos de
@@ -160,10 +149,23 @@ dos três.
 O Hub não fala com site nenhum. Quem lê as fontes é
 `ferramentas/buscar-noticias.js`, rodando no GitHub Actions
 (`.github/workflows/atualizar.yml`) de meia em meia hora nos dias úteis (07:05
-às 19:35) e uma vez no sábado, e gravando `dados/noticias.json` só quando algo
-mudou. O Hub só abre esse arquivo. O GitHub não garante a hora da rodada —
-em dia cheio atrasa ou pula —, por isso as duas chances por hora; a hora da
-última atualização fica em `atualizadoEm` dentro do arquivo.
+às 19:35) e uma vez no sábado, gravando `dados/noticias.json` só quando algo
+mudou. O Hub só abre esse arquivo, e o recarrega a cada dez minutos. O GitHub
+não garante a hora da rodada — em dia cheio atrasa ou pula —, por isso as duas
+chances por hora; a hora da última gravação está em `atualizadoEm`.
+
+**O robô local (SEFAZ/SE).** O site da SEFAZ de Sergipe não responde a quem
+está fora do Brasil, e o GitHub está. Então quem a lê é
+`ferramentas/buscar-fonte-local.js`, rodando **no computador do escritório**
+por uma tarefa agendada do Windows ("Hub Totali - robo local", de meia em meia
+hora, chamando `ferramentas/robo-local.vbs` → `robo-local.cmd` numa cópia
+própria do repositório em `%LOCALAPPDATA%\HubTotali\robo`). Ele grava
+`dados/fontes/sefaz-se.json` e envia; esse envio dispara a rodada do GitHub na
+hora, e lá, quando a SEFAZ não responde, o arquivo local vale como leitura
+(`lerDeApoio`, até três dias de idade — mais que isso, o escritório ficou
+desligado e a fonte volta a "sem resposta", que é a verdade). O log está em
+`%LOCALAPPDATA%\HubTotali\robo-local.log`. Para pôr outra fonte no robô
+local, marque-a com `local: true` em `FONTES`.
 
 **As fontes**, todas oficiais — órgão de governo, casa legislativa, conselho
 de classe ou federação do setor:
@@ -248,21 +250,20 @@ Abra `admin.html`, entre com o e-mail e a senha, e edite na própria tela:
 - **arrastar para reordenar**, inclusive de um grupo para outro;
 - **escolher se o setor fica à vista** (cartões) **ou recolhido** (gaveta);
 - **trocar o logo** de um sistema, enviando uma imagem;
-- **editar os recados** da vista Recados, com autor, data e quem já leu
-  (e quem falta);
+- **editar os avisos** da faixa inferior do Hub;
 - **cadastrar gente**, setores da casa e **liberações**;
 - **importar os clientes da casa** e **trazer o quadro antigo**;
 - **baixar a cópia de segurança**: sistemas, equipe e os quadros de pendências
   de todo mundo (dos PDFs vai só a ficha);
-- **acompanhar** (aba Acompanhamento, só leitura): os quadros da equipe em
-  números — abertas, atrasadas, para hoje, não vistas, riscadas na semana, quem
-  está com atraso primeiro —, o estado do robô de notícias e agenda (quando
-  gravou, que fonte não respondeu, e o atalho para rodar na mão no GitHub) e
-  o que chegou do Atos Societários. O texto das pendências não aparece: a
-  leitura vai com máscara de campos.
+- **mandar recados** para a equipe e ver quem já viu (aba Recados e
+  acompanhamento), e **acompanhar**, só leitura: os quadros da equipe em
+  números — abertas, atrasadas, para hoje, não vistas, riscadas na semana —,
+  o estado do robô de notícias e agenda (quando gravou, que fonte não
+  respondeu, atalho para rodar na mão no GitHub) e o que chegou do Atos.
+  O texto das pendências não aparece: a leitura vai com máscara de campos.
 
-Nada da aba "Sistemas e recados" é gravado até você clicar em **Salvar**. As
-abas de equipe e de acompanhamento gravam na hora ou só leem.
+Nada da aba "Tela inicial" é gravado até você clicar em **Salvar**. As outras
+abas gravam na hora ou só leem.
 
 ### Liberações
 
@@ -328,8 +329,29 @@ da tela inicial:
 A regra do banco é quem garante: o dono muda tudo; quem mandou mexe só no que
 é do pedido (texto, prazo, importância, acompanhantes, riscar, comentar) e só
 apaga o que ainda não foi visto; quem acompanha só comenta; listar o que está no quadro alheio exige filtrar por
-`criadoPorUid` ou `envolvidos`. Recado para a equipe inteira é a vista
-Recados, não o quadro.
+`criadoPorUid` ou `envolvidos`. Para a equipe inteira há duas coisas, e são
+diferentes: o **aviso** da faixa de baixo (fica lá até a administração tirar) e
+o **recado** da administração, que cada pessoa vê uma vez (seção abaixo).
+
+## Recados da administração
+
+No quadro antigo, junto com as pendências, havia o **recado**: um aviso da
+administração para a equipe inteira, que não era tarefa de ninguém. Voltou em
+10/11/2026 como coleção própria (`recados/{id}`: `texto`, `criadoEm`,
+`criadoPor`, `criadoPorNome`), **escrito só pela administração** (admin.html,
+aba Recados e acompanhamento) e visto **uma vez** por cada pessoa: assim que
+ela abre o Hub, os recados que ainda não viu aparecem num cartão por cima da
+tela (`<dialog>`, `js/recados.js`); "Entendi" (ou Esc) marca como lido e o
+recado não volta. O que cada um leu fica em `quadros/{uid}/config/recados`
+(a equipe lê, só a pessoa escreve), e é daí que a administração vê "visto por
+N de M" e quem falta. Recado não se edita — apaga-se e escreve-se outro, para
+ninguém ter "lido" um texto que depois mudou. Recado com mais de trinta dias
+não pula na frente de quem entra na equipe depois. Os recados de antes
+continuam em `pendencias` (só leitura) e aparecem na administração fechados
+numa gaveta, como registro.
+
+Não confundir com os **avisos** da faixa de baixo do Hub (`hub/avisos`): esses
+ficam lá o tempo todo, sem leitura marcada, e se editam na aba Tela inicial.
 
 ## Os clientes da casa
 
@@ -358,7 +380,8 @@ setor de destino; sem isso, quem pediu — mostra o plano por pessoa e, com a
 confirmação, cria cada pendência no quadro do dono: o "o quê" em negrito, o
 porquê e a sugestão embaixo, a linha do tempo como comentários, prazo em "Com
 data", urgente marcada como importante, resolvida já riscada. Recados ficam de
-fora (o lugar deles é a vista Recados). Pode rodar de novo: o que já foi trazido
+fora: voltaram como coleção própria (seção "Recados da administração"), e os
+antigos aparecem lá só como registro. Pode rodar de novo: o que já foi trazido
 (`origemSistema: "hub-antigo"`, `origemId`) não duplica. Quem decide é
 `js/migracao-quadro.js`, testado em `testes/teste-migracao.js`.
 

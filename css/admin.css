@@ -267,16 +267,13 @@ input,select,textarea{font:inherit;color:inherit}
 
 /* ---------- Recados ---------- */
 .aviso-linha{
-  display:flex;align-items:center;gap:9px;flex-wrap:wrap;
+  display:flex;align-items:center;gap:9px;
   padding:9px 14px;border-bottom:1px solid var(--fio);
 }
 .aviso-linha:last-child{border-bottom:0}
 .aviso-linha .cx-aviso-titulo{width:210px;flex:none}
 .aviso-linha .cx-aviso-texto{flex:1;min-width:160px}
 .aviso-linha .campo__caixa{height:32px}
-.aviso-meta{flex-basis:100%;display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--txt-3)}
-.aviso-leu{border-bottom:1px dotted var(--fio-2);cursor:default}
-.aviso-faltam{color:#8a6100}
 
 /* ---------- Acompanhamento ---------- */
 .tab-quadros{width:100%;border-collapse:collapse;font-size:13px}
@@ -296,10 +293,30 @@ input,select,textarea{font:inherit;color:inherit}
 .robo__fontes{display:flex;gap:6px;flex-wrap:wrap}
 .robo__fonte{font-size:11.5px;padding:3px 9px;border-radius:99px;background:#e4f3ea;color:#2a6b42;cursor:default}
 .robo__fonte--fora{background:#fdf3dc;color:#8a6100}
+.robo__fonte--local{box-shadow:inset 0 0 0 1px #2a6b42}
 .robo__nota{font-size:12px;color:var(--txt-2);line-height:1.5}
 @media (max-width:700px){
   .tab-quadros th:nth-child(6),.tab-quadros td:nth-child(6),.tab-quadros th:nth-child(7),.tab-quadros td:nth-child(7){display:none}
 }
+
+/* ---------- Recados para a equipe ---------- */
+.rec-novo{padding:12px 14px 0}
+.rec-texto{width:100%;resize:vertical;min-height:70px;font-size:13.5px;line-height:1.45}
+.rec-novo .painel__acoes{padding-left:0;padding-right:0;border-top:0;align-items:center;justify-content:space-between}
+.rec-dica{font-size:12px;color:var(--txt-3)}
+.rec-item{padding:11px 14px;border-top:1px solid var(--fio);display:flex;flex-direction:column;gap:5px}
+.rec-item__t{font-size:13.5px;color:var(--txt);line-height:1.5;white-space:pre-line}
+.rec-item__x{font-size:12.5px;color:var(--txt-2);line-height:1.5}
+.rec-item__meta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--txt-3)}
+.rec-item__meta .icone-btn{margin-left:auto}
+.rec-item__leu{border-bottom:1px dotted var(--fio-2);cursor:default}
+.rec-item__leu--todos{color:#2a6b42}
+.rec-item__faltam{color:#8a6100}
+.rec-item--antigo .rec-item__t{color:var(--txt-2)}
+.rec-antigos{border-top:1px solid var(--fio);padding:8px 14px 10px}
+.rec-antigos summary{cursor:pointer;font-size:13px;font-weight:640;color:var(--txt-2);padding:4px 0}
+.rec-antigos .admin__nota{margin:4px 0 6px}
+.rec-antigos .rec-item{padding-left:0;padding-right:0}
 
 /* ---------- Abas ---------- */
 .abas{display:flex;gap:4px;margin-bottom:20px;border-bottom:1px solid var(--fio)}

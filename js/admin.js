@@ -1233,7 +1233,7 @@
 
     alvo.appendChild(linhaDoMapa({
       chave: "favoritos", icone: "estrela", fixa: true,
-      titulo: "Meus favoritos", sub: "Sempre no topo, em Sistemas e no Início · cada pessoa monta o seu",
+      titulo: "Meus favoritos", sub: "Sempre no topo · cada pessoa monta o seu",
       alvo: { nivel: "inicio", primeira: primeira },
     }));
 
@@ -1262,14 +1262,14 @@
 
     alvo.appendChild(linhaDoMapa({
       chave: "agenda", icone: "agenda", fixa: true,
-      titulo: "Agenda do mês", sub: "Aba Agenda · calculada e conferida com a Receita",
+      titulo: "Agenda do mês", sub: "Calculada sozinha",
       alvo: { nivel: "fim" },
     }));
 
     if (pode("avisos")) {
       alvo.appendChild(linhaDoMapa({
         chave: "recados", icone: "recado",
-        titulo: "Recados", sub: "Aba Recados · cartão ao abrir o Hub",
+        titulo: "Recados e prazos", sub: "Barra de baixo",
         conta: (dados.avisos || []).length,
         alvo: { nivel: "fim" },
       }));
@@ -1353,16 +1353,15 @@
       if (pode("avisos")) { desenharRecados(alvo); return; }
     }
     if (SELECAO === "favoritos") {
-      alvo.appendChild(cabecaDoDetalhe("Sistemas · sempre o primeiro bloco", "Meus favoritos",
+      alvo.appendChild(cabecaDoDetalhe("Tela inicial · sempre o primeiro bloco", "Meus favoritos",
         "Cada pessoa monta os seus no próprio Hub, clicando na estrela de um sistema — ou guardando um link " +
-        "só dela. Não se edita por aqui, e fica sempre no topo, na aba Sistemas e no cartão de sistemas do Início."));
+        "só dela. Não se edita por aqui, e fica sempre no topo da tela, antes de tudo."));
       return;
     }
     if (SELECAO === "agenda") {
-      alvo.appendChild(cabecaDoDetalhe("Aba Agenda · e os próximos vencimentos no Início", "Agenda do mês",
-        "Calculada sozinha a partir das regras de vencimento, refeita na virada do mês e conferida com a agenda " +
-        "oficial da Receita (dados/agenda-oficial.json, que o robô atualiza). Não há o que editar aqui: para mudar " +
-        "uma regra de prazo, é no código (js/agenda.js). O estado do robô está na aba Acompanhamento."));
+      alvo.appendChild(cabecaDoDetalhe("Tela inicial · depois dos sistemas", "Agenda do mês",
+        "Calculada sozinha a partir das regras de vencimento e refeita na virada do mês. " +
+        "Não há o que editar aqui: para mudar uma regra de prazo, é no código (js/agenda.js)."));
       return;
     }
     if (SELECAO === "gaveta") { desenharGaveta(alvo); return; }
@@ -1599,28 +1598,10 @@
     alvo.appendChild(caixa);
   }
 
-  var RECADOS_LIDOS = null;      /* { uid: { id: quando } } */
-  var RECADOS_EQUIPE = [];
-  var RECADOS_LIDOS_EM = 0;
-
-  function carregarLidosDosRecados() {
-    if (Date.now() - RECADOS_LIDOS_EM < 60000) return;
-    RECADOS_LIDOS_EM = Date.now();
-    Dados.listarEquipe().then(function (lista) {
-      RECADOS_EQUIPE = (lista || []).filter(function (p) { return p.ativo !== false && p.robo !== true; });
-      return Dados.lerLidosDaEquipe(RECADOS_EQUIPE.map(function (p) { return p.uid; }));
-    }).then(function (m) {
-      RECADOS_LIDOS = m || {};
-      if (SELECAO === "recados" || !mexeEmSistemas()) desenharDetalhe();
-    }).catch(function () {});
-  }
-
   function desenharRecados(alvo) {
-    alvo.appendChild(cabecaDoDetalhe("Aba Recados · e o cartão ao abrir o Hub", "Recados",
-      "O que estiver aqui aparece na aba Recados do Hub, para a equipe inteira, e o que a pessoa ainda não leu " +
-      "aparece num cartão na frente da tela assim que ela abre o Hub — uma vez por recado. Cada um marca como lido; " +
-      "aqui dá para ver quem já leu. Quem tem a liberação também escreve direto pelo Hub."));
-    carregarLidosDosRecados();
+    alvo.appendChild(cabecaDoDetalhe("Tela inicial · barra de baixo", "Recados e prazos",
+      "O que estiver aqui aparece na barra inferior do Hub, para a equipe inteira. " +
+      "Só os três primeiros cabem na faixa — o resto fica contado num “+” ao lado."));
 
     var caixa = elemento("div", "detalhe__lista");
     var listaCab = elemento("div", "detalhe__lista-cab");
@@ -1640,19 +1621,11 @@
     novo.type = "button";
     novo.addEventListener("click", function () {
       dados.avisos = dados.avisos || [];
-      var s = Dados.sessao();
-      /* Assinado e datado: é o que o Hub mostra e o que põe o recado no topo. */
-      dados.avisos.unshift({
-        id: "r" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
-        tipo: "aviso", titulo: "", texto: "",
-        em: new Date().toISOString(),
-        por: (s && s.email) ? s.email.split("@")[0] : "administração",
-        porUid: (s && s.uid) || "",
-      });
+      dados.avisos.push({ tipo: "aviso", titulo: "", texto: "" });
       marcarPendente();
       desenhar();
-      var primeiro = $("detalhe").querySelector(".cx-aviso-titulo");
-      if (primeiro) primeiro.focus();
+      var todos = $("detalhe").querySelectorAll(".cx-aviso-titulo");
+      if (todos.length) todos[todos.length - 1].focus();
     });
     acoes.appendChild(novo);
     caixa.appendChild(acoes);
@@ -1720,24 +1693,6 @@
       desenhar();
     });
     linha.appendChild(apagar);
-
-    /* Quem escreveu, quando, e quem já leu. */
-    var meta = elemento("div", "aviso-meta");
-    var quando = aviso.em ? new Date(aviso.em).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" }) : "";
-    meta.appendChild(elemento("span", null, (aviso.por ? "por " + aviso.por : "sem autor (recado antigo)") + (quando ? " · " + quando : "")));
-    if (RECADOS_LIDOS && RECADOS_EQUIPE.length) {
-      var id = Dados.idDoRecado(aviso);
-      var leram = RECADOS_EQUIPE.filter(function (p) { var l = RECADOS_LIDOS[p.uid]; return l && l[id]; });
-      var faltam = RECADOS_EQUIPE.filter(function (p) { return leram.indexOf(p) === -1; });
-      var leu = elemento("span", "aviso-leu", "lido por " + leram.length + " de " + RECADOS_EQUIPE.length);
-      leu.title = (leram.length ? "Leram: " + leram.map(function (p) { return p.nome; }).join(", ") : "Ninguém leu ainda") +
-                  (faltam.length ? ". Faltam: " + faltam.map(function (p) { return p.nome; }).join(", ") : "");
-      meta.appendChild(leu);
-      if (faltam.length && faltam.length <= 4) meta.appendChild(elemento("span", "aviso-faltam", "faltam " + faltam.map(function (p) { return String(p.nome || "").split(" ")[0]; }).join(", ")));
-    } else if (!aviso.id) {
-      meta.appendChild(elemento("span", null, "recado de antes da aba Recados"));
-    }
-    linha.appendChild(meta);
 
     return linha;
   }
@@ -1981,6 +1936,7 @@
     ligarEquipe();
     ligarClientesDaCasa();
     ligarQuadroAntigo();
+    ligarRecadosEquipe();
     desenhar();
   }
 
@@ -2974,6 +2930,116 @@
   }
 
   /* ============================================================
+     RECADOS PARA A EQUIPE
+     ------------------------------------------------------------
+     Escritos só aqui, gravados na hora (Dados.criarRecado). O Hub
+     mostra cada um uma vez por pessoa, num cartão; o que cada
+     pessoa já leu está em quadros/{uid}/config/recados, e é daí que
+     sai o "lido por N de M". Os do quadro antigo entram como
+     registro, fechados numa gaveta.
+     ============================================================ */
+
+  var REC_EQUIPE = [];
+
+  function ligarRecadosEquipe() {
+    if (ligarRecadosEquipe.pronto) return;
+    ligarRecadosEquipe.pronto = true;
+    var b = $("btn-rec-mandar"), t = $("rec-texto");
+    if (!b || !t) return;
+    if (!LIB.admin) { $("rec-novo").hidden = true; }
+    function erro(x) { var e = $("rec-erro"); e.textContent = x || ""; e.hidden = !x; }
+    b.addEventListener("click", function () {
+      var texto = t.value.trim();
+      if (!texto) { t.focus(); return; }
+      b.disabled = true; b.textContent = "Mandando…"; erro("");
+      Dados.criarRecado(texto).then(function () {
+        t.value = "";
+        recado("Recado mandado. Cada pessoa vê ao abrir o Hub.");
+        desenharRecadosEquipe(true);
+      }).catch(function (e) { erro(e.message || "Não consegui mandar."); })
+        .then(function () { b.disabled = false; b.textContent = "Mandar para a equipe"; });
+    });
+    t.addEventListener("keydown", function (e) { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); b.click(); } });
+  }
+
+  function nomeNaEquipe(uid) {
+    var p = REC_EQUIPE.filter(function (x) { return x.uid === uid; })[0];
+    return p ? (p.nome || p.email || uid) : "";
+  }
+
+  function desenharRecadosEquipe(forcar) {
+    var box = $("rec-lista"), nota = $("rec-nota");
+    if (!box) return;
+    if (!forcar && desenharRecadosEquipe.em && Date.now() - desenharRecadosEquipe.em < 30000) return;
+    desenharRecadosEquipe.em = Date.now();
+    box.textContent = "";
+    box.appendChild(elemento("div", "vazio", "Lendo os recados…"));
+    var gente = [];
+    Promise.all([Dados.listarEquipe(), Dados.listarRecados()]).then(function (r) {
+      REC_EQUIPE = r[0] || [];
+      gente = REC_EQUIPE.filter(function (p) { return p.ativo !== false && p.robo !== true; });
+      var lista = r[1] || [];
+      return Dados.lerLidosDaEquipe(gente.map(function (p) { return p.uid; })).then(function (lidos) { return { lista: lista, lidos: lidos || {} }; });
+    }).then(function (x) {
+      box.textContent = "";
+      if (!x.lista.length) {
+        box.appendChild(elemento("div", "vazio", "Nenhum recado mandado ainda."));
+      }
+      x.lista.forEach(function (rc) {
+        var linha = elemento("div", "rec-item");
+        var txt = elemento("p", "rec-item__t", rc.texto);
+        linha.appendChild(txt);
+        var meta = elemento("div", "rec-item__meta");
+        var quando = rc.criadoEm ? new Date(Number(rc.criadoEm)).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" }) : "";
+        meta.appendChild(elemento("span", null, "por " + (rc.criadoPorNome || nomeNaEquipe(rc.criadoPor) || "administração") + (quando ? " · " + quando : "")));
+        var leram = gente.filter(function (p) { var l = x.lidos[p.uid]; return l && l[rc.id]; });
+        var faltam = gente.filter(function (p) { return leram.indexOf(p) === -1; });
+        var leu = elemento("span", "rec-item__leu" + (faltam.length ? "" : " rec-item__leu--todos"), "visto por " + leram.length + " de " + gente.length);
+        leu.title = (leram.length ? "Viram: " + leram.map(function (p) { return p.nome; }).join(", ") : "Ninguém viu ainda") +
+                    (faltam.length ? ". Faltam: " + faltam.map(function (p) { return p.nome; }).join(", ") : "");
+        meta.appendChild(leu);
+        if (faltam.length && faltam.length <= 5) meta.appendChild(elemento("span", "rec-item__faltam", "faltam " + faltam.map(function (p) { return String(p.nome || "").split(" ")[0]; }).join(", ")));
+        if (LIB.admin) {
+          var ap = botaoIcone("lixo", "Apagar o recado", true);
+          ap.addEventListener("click", function () {
+            if (!window.confirm("Apagar este recado? Quem ainda não viu deixa de ver.")) return;
+            Dados.apagarRecado(rc.id).then(function () { desenharRecadosEquipe(true); })
+              .catch(function (e) { recado(e.message || "Não consegui apagar.", true); });
+          });
+          meta.appendChild(ap);
+        }
+        linha.appendChild(meta);
+        box.appendChild(linha);
+      });
+      if (nota) nota.textContent = x.lista.length ? x.lista.length + " recado" + (x.lista.length > 1 ? "s" : "") : "";
+    }).catch(function (e) {
+      box.textContent = "";
+      box.appendChild(elemento("div", "vazio", e.message || "Não consegui ler os recados."));
+    });
+
+    /* Os antigos, uma vez só. */
+    if (!desenharRecadosEquipe.antigosLidos) {
+      desenharRecadosEquipe.antigosLidos = true;
+      Dados.lerRecadosAntigos().then(function (antigos) {
+        var det = $("rec-antigos"), lista = $("rec-antigos-lista");
+        if (!det || !lista || !antigos.length) return;
+        det.hidden = false;
+        det.querySelector("summary").textContent = "Recados de antes, do quadro antigo (" + antigos.length + ")";
+        antigos.forEach(function (rc) {
+          var linha = elemento("div", "rec-item rec-item--antigo");
+          linha.appendChild(elemento("p", "rec-item__t", rc.texto));
+          if (rc.porque) linha.appendChild(elemento("p", "rec-item__x", rc.porque));
+          var meta = elemento("div", "rec-item__meta");
+          var quando = rc.criadoEm ? new Date(rc.criadoEm).toLocaleDateString("pt-BR") : "";
+          meta.appendChild(elemento("span", null, "por " + (nomeNaEquipe(rc.criadoPor) || "alguém da equipe") + (quando ? " · " + quando : "") + (rc.setorDestino ? " · " + rc.setorDestino : "")));
+          linha.appendChild(meta);
+          lista.appendChild(linha);
+        });
+      }).catch(function () {});
+    }
+  }
+
+  /* ============================================================
      ACOMPANHAMENTO
      ------------------------------------------------------------
      Só leitura, e só números. Os quadros vêm com máscara de campos
@@ -2983,6 +3049,7 @@
   var ACOMP_EM = 0;
 
   function carregarAcompanhamento(forcar) {
+    desenharRecadosEquipe(forcar);
     if (!forcar && Date.now() - ACOMP_EM < 60000) return;
     ACOMP_EM = Date.now();
     desenharRobo();
@@ -3021,7 +3088,8 @@
         var fontes = elemento("div", "robo__fontes");
         (n.fontes || []).forEach(function (f) {
           var t = elemento("span", "robo__fonte" + (f.ok ? "" : " robo__fonte--fora"), f.sigla || f.nome);
-          t.title = f.ok ? (f.nome + ": " + f.quantas + " na última leitura")
+          if (f.via === "local") t.classList.add("robo__fonte--local");
+          t.title = f.ok ? (f.nome + ": " + f.quantas + " na última leitura" + (f.via === "local" ? " — lida pelo robô local do escritório" + (f.lidaEm ? " " + quandoFoi(f.lidaEm) : "") : ""))
                          : (f.nome + ": sem resposta (" + (f.erro || "") + ")" + (f.ultimaVez ? " · respondeu pela última vez " + quandoFoi(f.ultimaVez) : ""));
           fontes.appendChild(t);
         });
@@ -3139,6 +3207,7 @@
       if (nota) nota.textContent = doAtos && doAtos.length ? doAtos.reduce(function (s, d) { return s + d.n; }, 0) + " recebidas" : "";
     });
   }
+
 
   /* ---------- Início ---------- */
 

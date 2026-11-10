@@ -78,14 +78,14 @@ a{color:inherit;text-decoration:none}
    1 · A planta
    ------------------------------------------------------------
    Duas colunas: a barra (184px, com ícone e nome) e a vista
-   aberta. Duas linhas: cabeçalho e vista. A vista
+   aberta. Três linhas: cabeçalho, vista, faixa de avisos. A vista
    rola por dentro; a planta não rola nunca.
    ============================================================ */
 .tela{
   height:100vh;
   display:grid;
   grid-template-columns:184px minmax(0,1fr);
-  grid-template-rows:auto minmax(0,1fr);
+  grid-template-rows:auto minmax(0,1fr) auto;
   overflow:hidden;
   position:relative;
 }
@@ -321,60 +321,73 @@ a{color:inherit;text-decoration:none}
 .prazo__q{font-size:10px;color:var(--txt-3);line-height:1.3;flex-basis:100%}
 
 /* ============================================================
-   4 · Recados — a vista e o cartão de recado novo
+   4 · Avisos — faixa de altura fixa no rodapé
    ------------------------------------------------------------
-   A faixa de baixo (o letreiro) saiu em 10/11/2026: aviso que
-   corre ninguém lê, e nunca se sabia quem tinha visto. Agora os
-   recados têm aba, autor, data e "lido por N de M"; o novo
-   aparece uma vez num cartão por cima da tela.
+   Uma linha, sempre a mesma altura, nunca cresce. Se um dia
+   houver dez avisos, os últimos esperam a vez em vez de
+   empurrarem a tela. É o lugar de informação que a pessoa
+   precisa ver mas não precisa agir.
    ============================================================ */
-.rc{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
-.rc__cab{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.rc__t{font-size:22px;font-weight:760;letter-spacing:-.02em}
-.rc__sub{font-size:12.5px;color:var(--txt-3);margin-top:3px}
-.rc__btn{border:1px solid var(--marca);background:var(--marca);color:#fff;border-radius:10px;padding:9px 14px;
-         font:inherit;font-size:13px;font-weight:680;cursor:pointer}
-.rc__btn:hover{background:#1b304a}
-.rc__btn:disabled{opacity:.6;cursor:default}
-.rc__btn--sec{background:#fff;color:var(--txt-2);border-color:var(--fio-2)}
-.rc__btn--sec:hover{background:#fff;border-color:var(--estado);color:var(--estado)}
-.rc__btn--mini{padding:6px 10px;font-size:12px;align-self:flex-start;margin-top:4px}
-.rc__form{background:#fff;border:1px solid var(--fio);border-radius:var(--r);padding:12px 14px;display:flex;flex-direction:column;gap:8px;
-          box-shadow:0 1px 2px rgba(13,25,38,.04)}
-.rc__form-linha{display:flex;gap:8px}
-.rc__sel,.rc__in,.rc__ta{border:1px solid var(--fio-2);border-radius:10px;padding:8px 11px;font:inherit;font-size:13.5px;color:var(--txt);background:#fff}
-.rc__in{flex:1;min-width:0}
-.rc__ta{resize:vertical;min-height:44px;line-height:1.45}
-.rc__sel:focus,.rc__in:focus,.rc__ta:focus{outline:2px solid var(--estado);outline-offset:1px;border-color:var(--estado)}
-.rc__form-pe{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.rc__dica{font-size:11.5px;color:var(--txt-3)}
-.rc__lista{display:flex;flex-direction:column;gap:8px}
-.rc__item{background:#fff;border:1px solid var(--fio);border-left:4px solid var(--estado);border-radius:var(--r);padding:12px 14px 12px 16px;
-          display:flex;flex-direction:column;gap:5px;box-shadow:0 1px 2px rgba(13,25,38,.04)}
-.rc__item--prazo{border-left-color:#e0a92e}
-.rc__item--ok{border-left-color:#3b8f5a}
-.rc__item--novo{box-shadow:0 0 0 2px var(--estado-luz),0 1px 2px rgba(13,25,38,.04)}
-.rc__meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:11.5px;color:var(--txt-3)}
-.rc__tipo{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-          padding:2px 7px;border-radius:99px;background:var(--estado-luz);color:var(--estado)}
-.rc__tipo--prazo{background:#fdf3dc;color:#8a6100}
-.rc__tipo--ok{background:#e4f3ea;color:#2a6b42}
-.rc__novo{font-size:10.5px;font-weight:760;color:var(--estado);text-transform:uppercase;letter-spacing:.06em}
-.rc__esp{flex:1}
-.rc__leu{font-size:11.5px;color:var(--txt-3);cursor:default;border-bottom:1px dotted var(--fio-2)}
-.rc__ic{border:0;background:transparent;color:var(--txt-3);font-size:18px;line-height:1;width:26px;height:26px;border-radius:7px;cursor:pointer}
-.rc__ic:hover{background:rgba(13,25,38,.06);color:var(--alerta)}
-.rc__ic--conf{width:auto;padding:0 8px;background:var(--alerta);color:#fff;font-size:12px;font-weight:700}
-.rc__ic--conf:hover{background:var(--alerta);color:#fff}
-.rc__it{font-size:15px;font-weight:720;letter-spacing:-.01em;color:var(--txt)}
-.rc__item--novo .rc__it{font-weight:780}
-.rc__ix{font-size:13.5px;color:var(--txt-2);line-height:1.5;white-space:pre-line}
-.rc__vazio{padding:28px;text-align:center;color:var(--txt-2);font-size:13.5px;background:rgba(255,255,255,.7);border:1px dashed var(--fio-2);border-radius:var(--r)}
-.rc__nota{font-size:11.5px;color:var(--txt-3);line-height:1.5}
+/* A BARRA DEIXA DE SER RODAPÉ APAGADO.
 
-/* O cartão. Fundo escurecido, caixa branca com a borda dourada da
-   marca em cima; o botão principal é "Entendi", que marca como
-   lido — "Ler depois" fica discreto. */
+   Ela era transluçida, com texto cinza de 12px sobre o fundo da
+   página — feita para não atrapalhar, e cumprindo isso bem demais:
+   o aviso do escritório passava despercebido todo dia.
+
+   Agora é uma faixa sólida na cor da marca, com texto branco. Não
+   ocupa um pixel a mais da tela: o que mudou foi o peso, não o
+   tamanho. O ponto é dourado porque azul sobre azul-marinho
+   desaparece, e o dourado já é da marca. */
+.avisos{grid-column:2/-1;grid-row:3;display:flex;align-items:center;height:44px;padding:0 24px;
+        background:var(--marca);border-top:1px solid rgba(255,255,255,.12);
+        overflow:hidden}
+.avisos__rot{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.15em;
+             text-transform:uppercase;color:rgba(255,255,255,.62);flex:none;margin-right:16px}
+.av{display:flex;align-items:baseline;gap:7px;white-space:nowrap;flex:none}
+.av__p{width:6px;height:6px;border-radius:50%;background:#e0a92e;flex:none;position:relative;top:-2px}
+.av__t{font-size:13px;font-weight:680;color:#fff}
+.av__x{font-size:12.5px;color:rgba(255,255,255,.72)}
+.av__sep{width:1px;height:15px;background:rgba(255,255,255,.22);margin:0 16px;flex:none}
+
+/* O letreiro. A janela recorta; o trilho anda. Parado, é a faixa de
+   sempre. Correndo, o trilho leva a lista duas vezes e anda a
+   largura de uma — a segunda cópia chega exatamente onde a primeira
+   começou, e a volta não dá salto. As bordas esmaecem para o texto
+   entrar e sair em vez de ser cortado a faca. */
+.avisos__janela{flex:1;min-width:0;overflow:hidden;align-self:stretch;display:flex;align-items:center}
+.avisos__trilho{display:flex;align-items:center;flex:none}
+.avisos__copia{display:flex;align-items:center;flex:none}
+.av__sep--volta{display:none}
+.avisos--corre .av__sep--volta{display:block;margin:0 22px}
+.avisos--corre .avisos__janela{
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
+/* will-change põe o trilho numa camada própria da placa de vídeo:
+   sem isso o navegador redesenha as letras a cada quadro, e o texto
+   em movimento treme de leve — é esse tremor que cansa a vista,
+   mais do que a velocidade. */
+.avisos--corre .avisos__trilho{animation:avisos-passa var(--avisos-dur,30s) linear infinite;
+                               will-change:transform;backface-visibility:hidden}
+/* Para com o mouse em cima: quem quer ler até o fim não corre atrás. */
+.avisos--corre:hover .avisos__trilho{animation-play-state:paused}
+@keyframes avisos-passa{
+  from{transform:translateX(0)}
+  to{transform:translateX(calc(-1 * var(--avisos-dist,0px)))}
+}
+/* Quem pediu menos movimento ao sistema: nada anda, e a faixa rola
+   com o mouse ou o dedo. */
+@media (prefers-reduced-motion:reduce){
+  .avisos--corre .avisos__trilho{animation:none}
+  .avisos--corre .avisos__janela{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
+  .avisos--corre .avisos__copia[aria-hidden]{display:none}
+}
+
+/* ============================================================
+   5 · O cartão de recado da administração
+   ------------------------------------------------------------
+   Aparece por cima de tudo, uma vez por recado e por pessoa.
+   Borda dourada da marca em cima; um botão só, "Entendi".
+   ============================================================ */
 .rj{border:0;padding:0;background:transparent;max-width:min(560px,calc(100vw - 32px));width:100%}
 .rj::backdrop{background:rgba(13,25,38,.55);backdrop-filter:blur(2px)}
 .rj__caixa{background:#fff;border-radius:16px;border-top:4px solid #e0a92e;box-shadow:0 24px 60px rgba(13,25,38,.35);
@@ -394,6 +407,8 @@ a{color:inherit;text-decoration:none}
 .rj__ok:hover{background:#1b304a}
 .rj__depois{border:1px solid transparent;background:transparent;color:var(--txt-2);border-radius:10px;padding:10px 12px;font:inherit;font-size:13px;cursor:pointer}
 .rj__depois:hover{background:rgba(13,25,38,.06)}
+
+.rj__de{font-size:11.5px;color:var(--txt-3)}
 
 /* ============================================================
    6 · Responsivo — mobile first
@@ -416,7 +431,7 @@ a{color:inherit;text-decoration:none}
 
 @media (max-width:900px){
   .tela{height:auto;min-height:100vh;grid-template-columns:1fr;
-        grid-template-rows:auto auto;overflow:visible;padding-bottom:64px}
+        grid-template-rows:auto auto auto;overflow:visible;padding-bottom:64px}
 
   /* A barra vai para o rodapé: polegar não alcança o topo de um
      telefone de seis polegadas, alcança o pé. Os nomes ficam, em
@@ -439,7 +454,7 @@ a{color:inherit;text-decoration:none}
   .cab__sub{display:none}
 
   .vista{grid-column:1;grid-row:2;overflow:visible;padding:14px 16px}
-  .rc__form-linha{flex-direction:column}
+  .avisos{grid-column:1;grid-row:3;padding:0 16px;overflow-x:auto}
 
   .grade{grid-template-columns:1fr}
   .agenda{grid-template-columns:1fr;gap:8px}
@@ -451,6 +466,7 @@ a{color:inherit;text-decoration:none}
   .rel__h{font-size:13.5px}
   .rel__ola{font-size:15.5px}
   .vista{padding:12px 13px}
+  .avisos{padding:0 13px}
   .agenda{grid-template-columns:1fr 1fr}
 }
 
