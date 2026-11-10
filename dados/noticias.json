@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-10T21:05:18.013Z",
+ "atualizadoEm": "2026-11-10T21:35:18.387Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-10T21:05:18.013Z"
+   "ultimaVez": "2026-11-10T21:35:18.387Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-10T21:05:18.013Z"
+   "ultimaVez": "2026-11-10T21:35:18.387Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-10T21:05:18.013Z"
+   "ultimaVez": "2026-11-10T21:35:18.387Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 19,
-   "ultimaVez": "2026-11-10T21:05:18.013Z"
+   "ultimaVez": "2026-11-10T21:35:18.387Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-10T21:05:18.013Z"
+   "ultimaVez": "2026-11-10T21:35:18.387Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-10T21:05:18.013Z"
+   "ultimaVez": "2026-11-10T21:35:18.387Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-10T21:05:18.013Z"
+   "ultimaVez": "2026-11-10T21:35:18.387Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-10T21:05:18.013Z"
+   "ultimaVez": "2026-11-10T21:35:18.387Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 0,
-   "ultimaVez": "2026-11-10T21:05:18.013Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-10T21:35:18.387Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-10T21:05:18.013Z"
+   "ultimaVez": "2026-11-10T21:35:18.387Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,45 @@
    "site": "https://www.gov.br/pt-br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-10T21:05:18.013Z"
+   "ultimaVez": "2026-11-10T21:35:18.387Z"
   }
  ],
  "noticias": [
+  {
+   "id": "nr2bap",
+   "titulo": "Deputados admitem rever isenções se IVA superar 26,5%",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/deputados-admitem-rever-isencoes-se-iva-superar-265",
+   "resumo": "Os deputados que participam da regulamentação da reforma tributária admitem rever benefícios fiscais concedidos a determinados setores caso a alíquota de referência do novo Imposto sobre Valor Agregado (IVA) ultrapasse 26,5%. A possibilidade foi discutida nesta terça-feira…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-10T21:20:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "trabalhista",
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-10T21:35:18.387Z"
+  },
+  {
+   "id": "1fy78s0",
+   "titulo": "Senado recebe acórdão do TCU que propõe alíquota de 11,3% para a CBS",
+   "link": "https://www12.senado.leg.br/noticias/materias/2026/11/10/senado-recebe-acordao-do-tcu-que-propoe-aliquota-de-11-3-para-a-cbs",
+   "resumo": "",
+   "fonte": "senado",
+   "fonteNome": "Agência Senado",
+   "sigla": "Senado",
+   "publicadoEm": "2026-11-10T21:11:18.000Z",
+   "categorias": [
+    "legislacao",
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-10T21:35:18.387Z"
+  },
   {
    "id": "4ghk42",
    "titulo": "Trabalhador poderá autorizar bancos a consultar extrato do FGTS",
