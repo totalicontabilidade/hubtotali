@@ -497,7 +497,9 @@ const Dados = (function () {
         if (t.feito) { if ((Number(t.feitoEm) || 0) >= semana) r.riscadasNaSemana++; return; }
         r.abertas++;
         if (t.importante) r.importantes++;
-        if (t.criadoPorUid && t.criadoPorUid !== uid && !t.vistoEm) r.naoVistas++;
+        /* O que veio do quadro antigo foi assinado por quem rodou a
+           migração, não por um colega: não é "chegou e não viu". */
+        if (t.criadoPorUid && t.criadoPorUid !== uid && !t.vistoEm && t.origemSistema !== "hub-antigo") r.naoVistas++;
         if (t.status === "hoje") r.hoje++;
         else if (t.status === "data" && t.prazo) {
           if (t.prazo < hojeISO) r.atrasadas++;
