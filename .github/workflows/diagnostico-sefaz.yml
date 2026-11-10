@@ -1,0 +1,12 @@
+name: Diagnostico SEFAZ (temporario)
+on:
+  workflow_dispatch:
+jobs:
+  testar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: curl na SEFAZ
+        run: |
+          curl -sS -o /dev/null -w "HTTP %{http_code} em %{time_total}s via %{remote_ip}\n" --max-time 25 -A "Mozilla/5.0" "https://www.sefaz.se.gov.br/_layouts/15/listfeed.aspx?List=%7B47165FFB%2D27C2%2D4C86%2DB8E5%2DDE40B54B162E%7D" || echo "curl falhou com codigo $?"
+          curl -sSv --max-time 25 -A "Mozilla/5.0" "https://www.sefaz.se.gov.br/" -o /dev/null 2>&1 | grep -iE "connected|SSL|TLS|certificate|error|refused|timed|HTTP/" | head -20
+          echo "--- IP de saida:"; curl -s https://api.ipify.org; echo
