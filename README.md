@@ -148,8 +148,11 @@ dos três.
 
 O Hub não fala com site nenhum. Quem lê as fontes é
 `ferramentas/buscar-noticias.js`, rodando no GitHub Actions
-(`.github/workflows/atualizar.yml`) de hora em hora nos dias úteis, e gravando
-`dados/noticias.json`. O Hub só abre esse arquivo.
+(`.github/workflows/atualizar.yml`) de meia em meia hora nos dias úteis (07:05
+às 19:35) e uma vez no sábado, e gravando `dados/noticias.json` só quando algo
+mudou. O Hub só abre esse arquivo. O GitHub não garante a hora da rodada —
+em dia cheio atrasa ou pula —, por isso as duas chances por hora; a hora da
+última atualização fica em `atualizadoEm` dentro do arquivo.
 
 **As fontes**, todas oficiais — órgão de governo, casa legislativa, conselho
 de classe ou federação do setor:

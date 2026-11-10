@@ -19,7 +19,10 @@ name: Atualizar notícias e agenda
 
 on:
   schedule:
-    - cron: "15 10-22 * * 1-5"
+    # De meia em meia hora em dia útil (07:05 às 19:35 em Brasília) e uma vez
+    # no sábado. O GitHub não garante a hora: em dia cheio atrasa ou pula
+    # rodadas, por isso duas chances por hora — só grava quando algo mudou.
+    - cron: "5,35 10-22 * * 1-5"
     - cron: "15 11 * * 6"
   workflow_dispatch:
 
