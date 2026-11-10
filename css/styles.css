@@ -130,6 +130,7 @@ a{color:inherit;text-decoration:none}
 .nav__b.on{background:rgba(255,255,255,.15);color:#fff}
 .nav__b svg{width:19px;height:19px;flex:none}
 .nav__rot{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.nav__curto{display:none}
 /* A porta da administração fica separada por um vão: ela não é
    "mais uma seção", é outra natureza de coisa — sai do Hub e vai
    para a tela de quem edita. */
@@ -445,6 +446,9 @@ a{color:inherit;text-decoration:none}
           border-radius:10px;font-size:10px}
   .nav__b svg{width:21px;height:21px}
   .nav__b--fim{margin-top:0;opacity:.6}
+  /* "Administração" não cabe embaixo do ícone num telefone. */
+  .nav__longo{display:none}
+  .nav__curto{display:inline}
   .nav__selo{top:2px;right:calc(50% - 20px)}
 
   .cab{grid-column:1;grid-row:1;padding:10px 16px;gap:12px;flex-wrap:wrap}

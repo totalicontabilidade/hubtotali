@@ -78,7 +78,7 @@
 .pend .nav-it.gerir{color:var(--side-muted);font-size:14px}
 .pend .nav-it.gerir .mono{background:transparent;border:1.5px dashed currentColor;color:inherit}
 
-.pend .prin{display:flex;flex-direction:column;gap:14px;min-width:0}
+.pend .prin{display:flex;flex-direction:column;gap:14px;min-width:0;container:prin/inline-size}
 .pend .linha{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .pend .esp{flex:1}
 .pend .pbusca{height:38px;border-radius:10px;border:1px solid var(--line);background:var(--surface);padding:0 12px;width:100%;max-width:320px}
@@ -263,6 +263,14 @@
 .pend .nota .nt{flex:1;min-width:0;overflow-wrap:break-word;font-style:italic}
 .pend .nota .nd{font-size:11px;color:var(--muted);white-space:nowrap;margin-top:1px}
 .pend .nota .x{border:0;background:transparent;color:var(--muted);font-size:14px;line-height:1;padding:0 3px;border-radius:5px}
+/* Coluna estreita: a data desce para baixo do texto, em vez de espremer o comentário. */
+.pend .notas{container-type:inline-size}
+@container (max-width:250px){
+  .pend .nota{flex-wrap:wrap}
+  .pend .nota .nt{flex:1 1 calc(100% - 21px)}
+  .pend .nota .nd{margin-left:21px}
+  .pend .nota .x{margin-left:auto}
+}
 .pend .nota .x.conf{background:var(--perigo);color:#fff;font-size:11px;font-weight:700;padding:2px 6px}
 .pend .vertodas{border:0;background:transparent;color:var(--accent);font-size:12px;font-weight:600;padding:0 2px;align-self:flex-start}
 .pend .nova-nota{grid-column:2/-1;display:flex;flex-direction:column;gap:7px;min-width:0}
@@ -329,7 +337,10 @@
 .pend .banner{background:var(--hoje-bg);color:var(--hoje-ink);border-radius:10px;padding:10px 14px;font-weight:500}
 .pend .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom, 0px));background:var(--fg);color:var(--bg);padding:9px 16px;border-radius:10px;font-size:14px;z-index:30;max-width:calc(100% - 32px)}
 
-@media (max-width:1279px){ .pend .quadro{grid-template-columns:repeat(2,minmax(0,1fr))} }
+/* Quatro colunas só quando cabem ~240 px cada. A conta é pelo espaço do
+   quadro (ao lado do menu do Hub e do calendário), não pela janela:
+   numa tela de 1366 px as quatro colunas ficavam com 199 px. */
+@container prin (max-width:979px){ .pend .quadro{grid-template-columns:repeat(2,minmax(0,1fr))} }
 @media (max-width:899px){
   .pend .app{grid-template-columns:minmax(0,1fr);gap:14px}
   .pend .lado{position:static;padding:16px 12px 12px;gap:12px}
@@ -357,10 +368,10 @@
 .pend #bkStatus:empty{display:none}
 
 @media (max-width:520px){
-  .pend .nova .seg,.pend .edit .seg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%}
-  .pend .nova .seg button,.pend .edit .seg button{justify-content:center;padding:8px 6px}
-  .pend .nova .seg button:nth-child(3),.pend .edit .seg button:nth-child(3){border-left:0}
-  .pend .nova .seg button:nth-child(n+3),.pend .edit .seg button:nth-child(n+3){border-top:1px solid var(--line)}
+  .pend .nova .seg,.pend .edit .seg,.pend .seg.trocar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%}
+  .pend .nova .seg button,.pend .edit .seg button,.pend .seg.trocar button{justify-content:center;padding:8px 6px;white-space:nowrap}
+  .pend .nova .seg button:nth-child(3),.pend .edit .seg button:nth-child(3),.pend .seg.trocar button:nth-child(3){border-left:0}
+  .pend .nova .seg button:nth-child(n+3),.pend .edit .seg button:nth-child(n+3),.pend .seg.trocar button:nth-child(n+3){border-top:1px solid var(--line)}
 }
 
 /* no lugar dos atributos style do HTML original, que a política de segurança do Hub não aceita */
@@ -368,9 +379,10 @@
 .pend .ic--x{font-size:20px}
 
 /* ---------- pendências entre pessoas (desde 09/11/2026) ---------- */
-.pend .fb.para{width:auto;padding:0 10px;gap:6px;font-weight:600;font-size:13px;color:var(--muted)}
+.pend .fb.para{display:inline-flex;align-items:center;white-space:nowrap;width:auto;padding:0 10px;gap:6px;font-weight:600;font-size:13px;color:var(--muted)}
 .pend .fb.para.on{border-color:var(--accent);color:var(--accent);background:var(--acomp-bg)}
-.pend .fb.para .ico{font-size:13px}
+/* o .ico da tela inicial é uma caixa de 40 px; aqui é só o bonequinho */
+.pend .fb.para .ico{all:unset;font-size:13px;line-height:1}
 .pend .pp{display:grid;grid-template-columns:1fr 1fr;gap:12px;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:12px}
 .pend .pp h4{margin:0 0 2px;font-size:13.5px}
 .pend .pp .pp-pe{grid-column:1/-1}
@@ -394,8 +406,8 @@
 .pend .acomp{font-size:11.5px;color:var(--acomp-ink);background:var(--acomp-bg);border-radius:99px;padding:1px 8px}
 .pend .nota .por{font-style:normal;font-weight:700;color:var(--acomp-ink)}
 
-.pend .abas-q{display:flex;gap:4px;border-bottom:1px solid var(--line);padding-bottom:0}
-.pend .aba-q{border:0;background:transparent;padding:8px 12px;font-weight:600;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;display:inline-flex;align-items:center;gap:7px;font-size:14px}
+.pend .abas-q{display:flex;gap:4px;border-bottom:1px solid var(--line);padding-bottom:0;overflow-x:auto;scrollbar-width:none}
+.pend .aba-q{flex:none;white-space:nowrap;border:0;background:transparent;padding:8px 12px;font-weight:600;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;display:inline-flex;align-items:center;gap:7px;font-size:14px}
 .pend .aba-q:hover{color:var(--fg)}
 .pend .aba-q[aria-pressed="true"]{color:var(--fg);border-bottom-color:var(--accent)}
 .pend .aba-q .n{font-size:12px;background:var(--surface-2);border-radius:99px;padding:0 7px;line-height:18px;font-variant-numeric:tabular-nums}
@@ -416,3 +428,9 @@
 .pend .fora-nota .nd{font-size:11px;color:var(--muted);white-space:nowrap}
 .pend .fora .nova-nota{grid-column:auto}
 .pend .pvazio.grande{background:var(--surface);border-radius:var(--r);padding:22px 18px;color:var(--muted);opacity:1;font-size:14px}
+
+/* telefone: as três abas (Meu quadro, Enviadas, Acompanho) numa linha só */
+@media (max-width:520px){
+  .pend .abas-q{gap:2px}
+  .pend .aba-q{padding:8px 7px;gap:5px;font-size:13.5px}
+}
