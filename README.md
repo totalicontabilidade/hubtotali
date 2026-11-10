@@ -150,9 +150,19 @@ O Hub não fala com site nenhum. Quem lê as fontes é
 `ferramentas/buscar-noticias.js`, rodando no GitHub Actions
 (`.github/workflows/atualizar.yml`) de meia em meia hora nos dias úteis (07:05
 às 19:35) e uma vez no sábado, gravando `dados/noticias.json` só quando algo
-mudou. O Hub só abre esse arquivo, e o recarrega a cada dez minutos. O GitHub
-não garante a hora da rodada — em dia cheio atrasa ou pula —, por isso as duas
-chances por hora; a hora da última gravação está em `atualizadoEm`.
+mudou. O Hub só abre esse arquivo, e o recarrega a cada dez minutos. A hora da
+última gravação está em `atualizadoEm`.
+
+**O relógio.** O agendamento do próprio GitHub não é confiável: atrasa e pula
+rodadas (em 10/11/2026 não fez nenhuma das oito da manhã). Quem manda o robô
+rodar é a função `relogio` (`funcoes/index.js`), no Google Cloud Scheduler, de
+meia em meia hora em dia útil das 7h05 às 19h35 de Brasília; ela só aperta o
+"Run workflow" pela API do GitHub. Para isso usa o segredo `GITHUB_DISPARO`, um
+token do GitHub restrito ao repositório `hubtotali` com só "Actions: leitura e
+escrita", guardado com `firebase.cmd functions:secrets:set GITHUB_DISPARO
+--project hubtotali`. Se o token vencer, gere outro do mesmo jeito, grave por
+cima com o mesmo comando e publique as funções de novo. O agendamento do GitHub
+continua no workflow como reserva, e o sábado de manhã fica só com ele.
 
 **A ponte (SEFAZ/SE).** O site da SEFAZ de Sergipe não responde a quem está
 fora do Brasil — a conexão nem abre —, e o GitHub está. Então a SEFAZ vai pela

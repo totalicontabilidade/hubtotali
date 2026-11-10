@@ -17,10 +17,17 @@
    Publicar: `firebase.cmd deploy --only functions` na raiz do Hub
    (firebase.json aponta para esta pasta). O endereço fica em
    PONTE_URL no workflow .github/workflows/atualizar.yml.
+
+   O RELÓGIO (mais abaixo) é a segunda função: o agendamento do
+   próprio GitHub pula rodadas à vontade (em 10/11/2026 não fez
+   nenhuma das oito da manhã), então o Google Cloud Scheduler, que
+   é pontual, é quem manda o robô rodar de meia em meia hora.
    ============================================================ */
 "use strict";
 
 const { onRequest } = require("firebase-functions/v2/https");
+const { onSchedule } = require("firebase-functions/v2/scheduler");
+const { defineSecret } = require("firebase-functions/params");
 
 /* Os sites que a ponte aceita buscar. Fonte nova que bloqueie o
    GitHub entra aqui E ganha `pelaPonte: true` em FONTES do robô. */
@@ -66,5 +73,42 @@ exports.ponte = onRequest(
     } catch (e) {
       res.status(502).send("A ponte não conseguiu buscar: " + (e.name === "AbortError" ? "tempo esgotado" : (e.message || e)));
     } finally { clearTimeout(t); }
+  }
+);
+
+/* ============================================================
+   relogio — dispara o robô de notícias no GitHub
+   ------------------------------------------------------------
+   De meia em meia hora em dia útil, das 7h05 às 19h35 de Brasília,
+   pede ao GitHub para rodar o workflow "Atualizar notícias e
+   agenda" (o mesmo botão "Run workflow" da aba Actions). O robô
+   continua sendo o do GitHub; aqui é só o despertador.
+
+   GITHUB_DISPARO é um token do GitHub de permissão mínima: só o
+   repositório hubtotali e só "Actions: leitura e escrita". Fica
+   no Secret Manager do projeto, nunca no código:
+     firebase.cmd functions:secrets:set GITHUB_DISPARO --project hubtotali
+   Se o token vencer ou for revogado, o relógio falha (aparece no
+   log da função) e o agendamento do próprio GitHub segue como reserva.
+   ============================================================ */
+const GITHUB_DISPARO = defineSecret("GITHUB_DISPARO");
+const WORKFLOW = "https://api.github.com/repos/totalicontabilidade/hubtotali/actions/workflows/atualizar.yml/dispatches";
+
+exports.relogio = onSchedule(
+  { region: "southamerica-east1", schedule: "5,35 7-19 * * 1-5", timeZone: "America/Sao_Paulo",
+    secrets: [GITHUB_DISPARO], timeoutSeconds: 30, memory: "256MiB", maxInstances: 1, retryCount: 1 },
+  async () => {
+    const r = await fetch(WORKFLOW, {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + GITHUB_DISPARO.value(),
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+        "User-Agent": "HubTotali-relogio",
+      },
+      body: JSON.stringify({ ref: "main" }),
+    });
+    /* 204 = o GitHub aceitou e pôs o robô na fila. */
+    if (r.status !== 204) throw new Error("O GitHub recusou o disparo: HTTP " + r.status + " " + (await r.text()).slice(0, 300));
   }
 );
