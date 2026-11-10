@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-10T12:52:14.437Z",
+ "atualizadoEm": "2026-11-10T13:54:36.165Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-10T12:52:14.437Z"
+   "ultimaVez": "2026-11-10T13:54:36.165Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-10T12:52:14.437Z"
+   "ultimaVez": "2026-11-10T13:54:36.165Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-10T12:52:14.437Z"
+   "ultimaVez": "2026-11-10T13:54:36.165Z"
   },
   {
    "id": "fazenda",
@@ -70,8 +70,8 @@
    "nome": "Ministério da Fazenda",
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
-   "quantas": 17,
-   "ultimaVez": "2026-11-10T12:52:14.437Z"
+   "quantas": 19,
+   "ultimaVez": "2026-11-10T13:54:36.165Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-10T12:52:14.437Z"
+   "ultimaVez": "2026-11-10T13:54:36.165Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-10T12:52:14.437Z"
+   "ultimaVez": "2026-11-10T13:54:36.165Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-10T12:52:14.437Z"
+   "ultimaVez": "2026-11-10T13:54:36.165Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-10T12:52:14.437Z"
+   "ultimaVez": "2026-11-10T13:54:36.165Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-10T12:52:14.437Z"
+   "ultimaVez": "2026-11-10T13:54:36.165Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-10T12:52:14.437Z"
+   "ultimaVez": "2026-11-10T13:54:36.165Z"
   },
   {
    "id": "govbr",
@@ -135,24 +135,42 @@
    "site": "https://www.gov.br/pt-br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-10T12:52:14.437Z"
+   "ultimaVez": "2026-11-10T13:54:36.165Z"
   }
  ],
  "noticias": [
   {
-   "id": "19dk861",
-   "titulo": "Governo prorroga até 9 de dezembro desoneração da gasolina e do etanol",
-   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/governo-prorroga-ate-9-de-dezembro-desoneracao-da-gasolina-e-do-etanol",
-   "resumo": "O governo federal prorrogou até 9 de dezembro de 2026 a desoneração da gasolina e do etanol e manteve, até a mesma data, a subvenção ao etanol. As medidas constam em decreto publicado em edição extra no Diário Oficial da União (DOU). Em nota, a Presidência da República…",
-   "fonte": "ebc",
-   "fonteNome": "Agência Brasil (Economia)",
-   "sigla": "EBC",
-   "publicadoEm": "2026-11-10T12:33:00.000Z",
+   "id": "lmph4l",
+   "titulo": "Governo Federal prorroga até 9 de dezembro a desoneração da gasolina e do etanol",
+   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/governo-federal-prorroga-ate-9-de-dezembro-a-desoneracao-da-gasolina-e-do-etanol",
+   "resumo": "Decreto mantém zerados por mais 30 dias os tributos federais sobre a gasolina e etanol hidratado. Medida busca conter os efeitos da alta dos preços internacionais do petróleo sobre os combustíveis e proteger os consumidores brasileiros",
+   "fonte": "fazenda",
+   "fonteNome": "Ministério da Fazenda",
+   "sigla": "MF",
+   "publicadoEm": "2026-11-10T13:54:36.497Z",
+   "semHora": true,
    "categorias": [
+    "tributos",
     "legislacao"
    ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-10T12:52:14.437Z"
+   "relevancia": 2,
+   "vistaEm": "2026-11-10T13:54:36.165Z"
+  },
+  {
+   "id": "xq79k5",
+   "titulo": "Receita Federal atualiza Ambiente Beta da DeRE",
+   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/receita-federal-atualiza-ambiente-beta-da-dere",
+   "resumo": "A atualização será realizada sem interrupção dos serviços",
+   "fonte": "fazenda",
+   "fonteNome": "Ministério da Fazenda",
+   "sigla": "MF",
+   "publicadoEm": "2026-11-10T13:54:36.496Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-10T13:54:36.165Z"
   },
   {
    "id": "19atsnu",
@@ -772,6 +790,21 @@
    "vistaEm": "2026-11-09T15:43:00.130Z"
   },
   {
+   "id": "ud3412",
+   "titulo": "Secretaria de Estado da Fazenda divulga resultado do chamamento público para contratação de operação de crédito",
+   "link": "https://www.sefaz.se.gov.br/Lists/Noticias/DispForm.aspx?ID=2878",
+   "resumo": "Title: Secretaria de Estado da Fazenda divulga resultado do chamamento público para contratação de operação de crédito Publicacao: 05/11/2026 17:05 Foto: https://www.sefaz.se.gov.br/Imagens/noticias/05-11-2026/7.png Visibilidade: Intranet, Internet",
+   "fonte": "sefaz-se",
+   "fonteNome": "Secretaria da Fazenda de Sergipe",
+   "sigla": "SEFAZ/SE",
+   "publicadoEm": "2026-11-05T20:15:39.000Z",
+   "categorias": [
+    "sergipe"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-10T13:54:36.165Z"
+  },
+  {
    "id": "1is7i45",
    "titulo": "Reforma Tributária: Ibracon abre pesquisa para avaliar desafios da Auditoria Independente",
    "link": "https://cfc.org.br/noticias/reforma-tributaria-ibracon-abre-pesquisa-para-avaliar-desafios-da-auditoria-independente/",
@@ -787,6 +820,53 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "ud3411",
+   "titulo": "Projetos de Lei que criam Refis para ICMS, IPVA e ITCMD são aprovados na Alese",
+   "link": "https://www.sefaz.se.gov.br/Lists/Noticias/DispForm.aspx?ID=2877",
+   "resumo": "Title: Projetos de Lei que criam Refis para ICMS, IPVA e ITCMD são aprovados na Alese Publicacao: 05/11/2026 14:20 Foto: https://www.sefaz.se.gov.br/Imagens/noticias/05-11-2026/6.jpeg Visibilidade: Intranet, Internet",
+   "fonte": "sefaz-se",
+   "fonteNome": "Secretaria da Fazenda de Sergipe",
+   "sigla": "SEFAZ/SE",
+   "publicadoEm": "2026-11-05T17:21:24.000Z",
+   "categorias": [
+    "sergipe",
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-10T13:54:36.165Z"
+  },
+  {
+   "id": "ud3410",
+   "titulo": "Operações de crédito vão ampliar investimentos e modernizar a gestão em Sergipe",
+   "link": "https://www.sefaz.se.gov.br/Lists/Noticias/DispForm.aspx?ID=2876",
+   "resumo": "Title: Operações de crédito vão ampliar investimentos e modernizar a gestão em Sergipe Publicacao: 05/11/2026 14:15 Foto: https://www.sefaz.se.gov.br/Imagens/noticias/05-11-2026/4.jpeg Visibilidade: Intranet, Internet",
+   "fonte": "sefaz-se",
+   "fonteNome": "Secretaria da Fazenda de Sergipe",
+   "sigla": "SEFAZ/SE",
+   "publicadoEm": "2026-11-05T17:19:18.000Z",
+   "categorias": [
+    "sergipe"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-10T13:54:36.165Z"
+  },
+  {
+   "id": "ud340z",
+   "titulo": "Iniciativa do Governo de Sergipe garante isenção de taxas administrativas para taxistas",
+   "link": "https://www.sefaz.se.gov.br/Lists/Noticias/DispForm.aspx?ID=2875",
+   "resumo": "Title: Iniciativa do Governo de Sergipe garante isenção de taxas administrativas para taxistas Publicacao: 05/11/2026 14:15 Foto: https://www.sefaz.se.gov.br/Imagens/noticias/05-11-2026/2.jpeg Visibilidade: Intranet, Internet",
+   "fonte": "sefaz-se",
+   "fonteNome": "Secretaria da Fazenda de Sergipe",
+   "sigla": "SEFAZ/SE",
+   "publicadoEm": "2026-11-05T17:16:23.000Z",
+   "categorias": [
+    "tributos",
+    "sergipe"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-10T13:54:36.165Z"
   },
   {
    "id": "wcnt23",
@@ -883,6 +963,22 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-09T15:43:00.130Z"
+  },
+  {
+   "id": "ud340y",
+   "titulo": "Sefaz, Fames e Semfaz promovem 1º Encontro das Administrações Tributárias de Sergipe",
+   "link": "https://www.sefaz.se.gov.br/Lists/Noticias/DispForm.aspx?ID=2874",
+   "resumo": "Title: Sefaz, Fames e Semfaz promovem 1º Encontro das Administrações Tributárias de Sergipe Publicacao: 05/11/2026 07:25 Foto: https://www.sefaz.se.gov.br/Imagens/noticias/05-11-2026/1.jpeg Visibilidade: Intranet, Internet",
+   "fonte": "sefaz-se",
+   "fonteNome": "Secretaria da Fazenda de Sergipe",
+   "sigla": "SEFAZ/SE",
+   "publicadoEm": "2026-11-05T10:24:20.000Z",
+   "categorias": [
+    "tributos",
+    "sergipe"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-10T13:54:36.165Z"
   },
   {
    "id": "javqma",

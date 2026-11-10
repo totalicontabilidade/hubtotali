@@ -103,6 +103,7 @@ afirmar("títulos diferentes não são",
 /* ---------- o endereço como chave ---------- */
 afirmar("chave do link ignora www e barra final", m.chaveDoLink("https://www.cfc.org.br/noticias/a/") === m.chaveDoLink("https://cfc.org.br/noticias/a"));
 afirmar("chave do link preserva o id do Simples", m.chaveDoLink("https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/NoticiaCompleta.aspx?id=1") !== m.chaveDoLink("https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/NoticiaCompleta.aspx?id=2"));
+afirmar("chave do link preserva o ID das listas da SEFAZ/SE", m.chaveDoLink("https://www.sefaz.se.gov.br/Lists/Noticias/DispForm.aspx?ID=2877") !== m.chaveDoLink("https://www.sefaz.se.gov.br/Lists/Noticias/DispForm.aspx?ID=2878"));
 
 console.log(falhas ? falhas + " caso(s) falharam." : "Todos os casos passaram.");
 process.exitCode = falhas ? 1 : 0;

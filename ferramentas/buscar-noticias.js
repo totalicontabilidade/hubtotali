@@ -281,8 +281,11 @@ function chaveDoLink(url) {
   try {
     const u = new URL(url);
     u.hash = "";
-    /* A busca (?id=...) só conta onde ela é o que distingue a notícia. */
-    var busca = u.pathname.indexOf("NoticiaCompleta") !== -1 ? u.search.toLowerCase() : "";
+    /* A busca (?id=...) só conta onde ela é o que distingue a notícia:
+       o Simples Nacional (NoticiaCompleta) e as listas do SharePoint da
+       SEFAZ/SE (DispForm.aspx?ID=2878) — sem ela, todas as notícias da
+       SEFAZ viravam uma só e sobrava a última do feed. */
+    var busca = /NoticiaCompleta|\/DispForm\.aspx$/i.test(u.pathname) ? u.search.toLowerCase() : "";
     return (u.host.replace(/^www\./, "") + u.pathname).toLowerCase().replace(/\/+$/, "") + busca;
   } catch (e) { return String(url).toLowerCase(); }
 }
