@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-10T11:01:42.402Z",
+ "atualizadoEm": "2026-11-10T11:56:06.122Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-10T11:01:42.402Z"
+   "ultimaVez": "2026-11-10T11:56:06.122Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-10T11:01:42.402Z"
+   "ultimaVez": "2026-11-10T11:56:06.122Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-10T11:01:42.402Z"
+   "ultimaVez": "2026-11-10T11:56:06.122Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 17,
-   "ultimaVez": "2026-11-10T11:01:42.402Z"
+   "ultimaVez": "2026-11-10T11:56:06.122Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-10T11:01:42.402Z"
+   "ultimaVez": "2026-11-10T11:56:06.122Z"
   },
   {
    "id": "fenacon",
@@ -89,16 +89,18 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-10T11:01:42.402Z"
+   "ultimaVez": "2026-11-10T11:56:06.122Z"
   },
   {
    "id": "sefaz-se",
    "sigla": "SEFAZ/SE",
    "nome": "Secretaria da Fazenda de Sergipe",
    "site": "https://www.sefaz.se.gov.br/",
-   "ok": false,
-   "erro": "fetch failed",
-   "ultimaVez": "2026-11-09T15:43:00.130Z"
+   "ok": true,
+   "quantas": 6,
+   "via": "local",
+   "lidaEm": "2026-11-10T11:54:59.087Z",
+   "ultimaVez": "2026-11-10T11:56:06.122Z"
   },
   {
    "id": "camara",
@@ -107,7 +109,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-10T11:01:42.402Z"
+   "ultimaVez": "2026-11-10T11:56:06.122Z"
   },
   {
    "id": "senado",
@@ -116,7 +118,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-10T11:01:42.402Z"
+   "ultimaVez": "2026-11-10T11:56:06.122Z"
   },
   {
    "id": "ebc",
@@ -125,7 +127,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-10T11:01:42.402Z"
+   "ultimaVez": "2026-11-10T11:56:06.122Z"
   },
   {
    "id": "govbr",
@@ -134,10 +136,41 @@
    "site": "https://www.gov.br/pt-br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-10T11:01:42.402Z"
+   "ultimaVez": "2026-11-10T11:56:06.122Z"
   }
  ],
  "noticias": [
+  {
+   "id": "19atsnu",
+   "titulo": "Receita Federal participa da Operação Recycling",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-participa-da-operacao-recycling",
+   "resumo": "Investigação conjunta da Receita Federal e da Polícia Federal identificou estrutura suspeita de lavagem de dinheiro oriunda do tráfico internacional de drogas que operava no litoral catarinense.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-10T15:00:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-10T11:56:06.122Z"
+  },
+  {
+   "id": "1el94bm",
+   "titulo": "Reforma Tributária: Atualização do Ambiente Beta da DeRE",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/reforma-tributaria-atualizacao-do-ambiente-beta-da-dere",
+   "resumo": "A atualização será realizada sem interrupção dos serviços.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-10T15:00:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-10T11:56:06.122Z"
+  },
   {
    "id": "cund1z",
    "titulo": "Presidente da Fenacon concede entrevista à Jovem Pan News sobre o início da CBS em 2027",
