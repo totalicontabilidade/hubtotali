@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-10T11:56:06.122Z",
+ "atualizadoEm": "2026-11-10T12:30:09.456Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-10T11:56:06.122Z"
+   "ultimaVez": "2026-11-10T12:30:09.456Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-10T11:56:06.122Z"
+   "ultimaVez": "2026-11-10T12:30:09.456Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-10T11:56:06.122Z"
+   "ultimaVez": "2026-11-10T12:30:09.456Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 17,
-   "ultimaVez": "2026-11-10T11:56:06.122Z"
+   "ultimaVez": "2026-11-10T12:30:09.456Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-10T11:56:06.122Z"
+   "ultimaVez": "2026-11-10T12:30:09.456Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-10T11:56:06.122Z"
+   "ultimaVez": "2026-11-10T12:30:09.456Z"
   },
   {
    "id": "sefaz-se",
@@ -98,9 +98,7 @@
    "site": "https://www.sefaz.se.gov.br/",
    "ok": true,
    "quantas": 6,
-   "via": "local",
-   "lidaEm": "2026-11-10T11:54:59.087Z",
-   "ultimaVez": "2026-11-10T11:56:06.122Z"
+   "ultimaVez": "2026-11-10T12:30:09.456Z"
   },
   {
    "id": "camara",
@@ -109,7 +107,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-10T11:56:06.122Z"
+   "ultimaVez": "2026-11-10T12:30:09.456Z"
   },
   {
    "id": "senado",
@@ -118,7 +116,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-10T11:56:06.122Z"
+   "ultimaVez": "2026-11-10T12:30:09.456Z"
   },
   {
    "id": "ebc",
@@ -127,7 +125,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-10T11:56:06.122Z"
+   "ultimaVez": "2026-11-10T12:30:09.456Z"
   },
   {
    "id": "govbr",
@@ -136,7 +134,7 @@
    "site": "https://www.gov.br/pt-br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-10T11:56:06.122Z"
+   "ultimaVez": "2026-11-10T12:30:09.456Z"
   }
  ],
  "noticias": [
@@ -148,7 +146,8 @@
    "fonte": "receita",
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
-   "publicadoEm": "2026-11-10T15:00:00.000Z",
+   "publicadoEm": "2026-11-10T12:30:09.456Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -163,7 +162,8 @@
    "fonte": "receita",
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
-   "publicadoEm": "2026-11-10T15:00:00.000Z",
+   "publicadoEm": "2026-11-10T12:30:09.456Z",
+   "semHora": true,
    "categorias": [
     "reforma",
     "tributos"
@@ -287,6 +287,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-11-09T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -302,6 +303,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-11-09T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "reforma",
     "tributos"
@@ -318,6 +320,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-11-09T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -333,6 +336,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-11-09T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos",
     "trabalhista"
@@ -349,6 +353,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-11-09T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -364,6 +369,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-11-09T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -379,6 +385,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-11-09T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -394,6 +401,7 @@
    "fonteNome": "Ministério da Fazenda",
    "sigla": "MF",
    "publicadoEm": "2026-11-09T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos",
     "trabalhista",
@@ -584,6 +592,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-11-06T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -599,6 +608,7 @@
    "fonteNome": "Ministério da Fazenda",
    "sigla": "MF",
    "publicadoEm": "2026-11-06T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "contabil"
    ],
@@ -614,6 +624,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-11-06T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -629,6 +640,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-11-06T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -784,6 +796,7 @@
    "fonteNome": "Ministério da Fazenda",
    "sigla": "MF",
    "publicadoEm": "2026-11-05T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "reforma",
     "tributos",
@@ -801,6 +814,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-11-05T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -816,6 +830,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-11-05T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -831,6 +846,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-11-05T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -861,6 +877,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-11-04T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -876,6 +893,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-11-04T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -891,6 +909,7 @@
    "fonteNome": "Ministério da Fazenda",
    "sigla": "MF",
    "publicadoEm": "2026-11-04T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "simples",
     "tributos"
@@ -907,6 +926,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-11-04T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -922,6 +942,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-11-04T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -937,6 +958,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-11-03T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos",
     "trabalhista"
@@ -953,6 +975,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-11-03T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -968,6 +991,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-11-03T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos",
     "empresas"
@@ -984,6 +1008,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-11-03T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -999,6 +1024,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-11-03T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -1014,6 +1040,7 @@
    "fonteNome": "Ministério da Fazenda",
    "sigla": "MF",
    "publicadoEm": "2026-11-03T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -1044,6 +1071,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-10-29T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos",
     "reforma"
@@ -1060,6 +1088,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-10-29T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "reforma",
     "tributos"
@@ -1076,6 +1105,7 @@
    "fonteNome": "Ministério da Fazenda",
    "sigla": "MF",
    "publicadoEm": "2026-10-29T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "reforma",
     "tributos"
@@ -1092,6 +1122,7 @@
    "fonteNome": "Ministério da Fazenda",
    "sigla": "MF",
    "publicadoEm": "2026-10-29T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -1107,6 +1138,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-10-28T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -1122,6 +1154,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-10-27T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -1137,6 +1170,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-10-27T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -1152,6 +1186,7 @@
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
    "publicadoEm": "2026-10-26T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "tributos"
    ],
@@ -1291,6 +1326,7 @@
    "fonteNome": "Simples Nacional",
    "sigla": "SN",
    "publicadoEm": "2026-08-21T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "simples"
    ],
@@ -1306,6 +1342,7 @@
    "fonteNome": "Simples Nacional",
    "sigla": "SN",
    "publicadoEm": "2026-08-12T15:00:00.000Z",
+   "semHora": true,
    "categorias": [
     "reforma",
     "simples",

@@ -226,15 +226,28 @@ function lerPlone(html) {
 /* "05/11/2026 17:05" e "05/11/2026" são do Brasil e o Date não
    entende; o resto (RFC 822, ISO) ele entende. Sem data, fica a de
    agora — a notícia acabou de aparecer no feed, afinal. */
+/* Data do feed em ISO. Data só com o dia (a Receita publica assim)
+   vira meio-dia de Brasília — mas NUNCA no futuro: de manhã, a
+   notícia de hoje fica com a hora em que o robô a viu, senão a tela
+   diria "agora" numa notícia que o arquivo trouxe há meia hora. */
 function quando(texto) {
   const t = String(texto || "").trim();
+  const agora = Date.now();
   const br = t.match(/^(\d{2})\/(\d{2})\/(\d{4})(?:\s+(\d{2}):(\d{2}))?/);
-  if (br) {
-    const d = new Date(Date.UTC(+br[3], +br[2] - 1, +br[1], (br[4] ? +br[4] : 12) + 3, br[5] ? +br[5] : 0));
-    return d.toISOString();
-  }
-  const n = Date.parse(t);
-  return isNaN(n) ? new Date().toISOString() : new Date(n).toISOString();
+  let n;
+  if (br) n = Date.UTC(+br[3], +br[2] - 1, +br[1], (br[4] ? +br[4] : 12) + 3, br[5] ? +br[5] : 0);
+  else n = Date.parse(t);
+  if (isNaN(n) || n > agora) n = agora;
+  return new Date(n).toISOString();
+}
+
+/* Verdade quando o feed não disse a hora (só o dia, ou nada): a hora
+   guardada é a do robô, e a mais antiga que se conheceu é a que vale. */
+function semHora(texto) {
+  const t = String(texto || "").trim();
+  const br = t.match(/^(\d{2})\/(\d{2})\/(\d{4})(?:\s+(\d{2}):(\d{2}))?/);
+  if (br) return !br[4];
+  return isNaN(Date.parse(t));
 }
 
 function resumir(html, titulo) {
@@ -352,6 +365,7 @@ async function lerFonte(f) {
       titulo, link: i.link, resumo,
       fonte: f.id, fonteNome: f.nome, sigla: f.sigla,
       publicadoEm: quando(i.data),
+      semHora: semHora(i.data) || undefined,
       categorias,
       relevancia: relevancia(f, texto, categorias),
       _doRamo: !f.peneira || DO_RAMO.test(texto),
@@ -395,9 +409,13 @@ async function principal() {
   novas.forEach(n => {
     const velha = porId.get(n.id);
     n.vistaEm = velha && velha.vistaEm ? velha.vistaEm : new Date(agora).toISOString();
-    /* Notícia sem data no feed herda a que já tinha, para não
-       "renascer" como de hoje a cada rodada. */
-    if (velha && Math.abs(Date.parse(n.publicadoEm) - agora) < 120000 && velha.publicadoEm) n.publicadoEm = velha.publicadoEm;
+    /* Notícia sem hora no feed fica com a hora mais antiga que se
+       conheceu dela, para não "renascer" como de agora a cada rodada
+       — e nunca com hora no futuro. */
+    if (velha && velha.publicadoEm && (n.semHora || velha.semHora || Math.abs(Date.parse(n.publicadoEm) - agora) < 120000)) {
+      const antes = Math.min(Date.parse(velha.publicadoEm) || agora, Date.parse(n.publicadoEm) || agora, agora);
+      n.publicadoEm = new Date(antes).toISOString();
+    }
     porId.set(n.id, n);
   });
 
@@ -468,4 +486,4 @@ if (require.main === module) {
   principal().catch(e => { console.error(e); process.exitCode = 1; });
 }
 
-module.exports = { lerFeed, lerSimples, lerPlone, lerFonte, classificar, quando, resumir, semTags, chaveDoLink, parecidas, DO_RAMO, CATEGORIAS, FONTES };
+module.exports = { lerFeed, lerSimples, lerPlone, lerFonte, classificar, quando, semHora, resumir, semTags, chaveDoLink, parecidas, DO_RAMO, CATEGORIAS, FONTES };

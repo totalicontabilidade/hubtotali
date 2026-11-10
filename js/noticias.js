@@ -51,7 +51,7 @@ const Noticias = (function () {
   function haQuanto(iso) {
     var t = Date.parse(iso);
     if (isNaN(t)) return "";
-    var m = Math.round((Date.now() - t) / 60000);
+    var m = Math.max(0, Math.round((Date.now() - t) / 60000));
     if (m < 2) return "agora";
     if (m < 60) return "há " + m + " min";
     var h = Math.round(m / 60);

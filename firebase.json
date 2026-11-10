@@ -3,7 +3,7 @@
     {
       "source": "funcoes",
       "codebase": "ponte",
-      "runtime": "nodejs20",
+      "runtime": "nodejs22",
       "ignore": ["node_modules", ".git", "*.log"]
     }
   ]

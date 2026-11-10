@@ -14,7 +14,7 @@
    também seria — o que protege é a lista e o teto de uso
    (maxInstances e o freio por minuto abaixo).
 
-   Publicar: `firebase deploy --only functions` na raiz do Hub
+   Publicar: `firebase.cmd deploy --only functions` na raiz do Hub
    (firebase.json aponta para esta pasta). O endereço fica em
    PONTE_URL no workflow .github/workflows/atualizar.yml.
    ============================================================ */

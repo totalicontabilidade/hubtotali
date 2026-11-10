@@ -161,7 +161,7 @@ fora do Brasil — a conexão nem abre —, e o GitHub está. Então a SEFAZ vai
 devolve o texto, sem guardar nada (`funcoes/index.js`). O robô a chama quando a
 fonte tem `pelaPonte: true` e o endereço está em `PONTE_URL` (no workflow);
 rodando aqui do escritório, sem a variável, ele lê o site direto. Publicar ou
-atualizar a ponte: `firebase deploy --only functions` na raiz do Hub (o
+atualizar a ponte: `firebase.cmd deploy --only functions` na raiz do Hub (Node 22; o
 `firebase.json` aponta para `funcoes/`; a conta do Firebase CLI precisa ter o
 projeto). Não há segredo: o que protege é a lista fechada de sites, uma
 instância no máximo e um freio de sessenta pedidos por minuto. Para pôr outra
