@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-10T17:05:22.518Z",
+ "atualizadoEm": "2026-11-10T17:35:19.877Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-10T17:05:22.518Z"
+   "ultimaVez": "2026-11-10T17:35:19.877Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-10T17:05:22.518Z"
+   "ultimaVez": "2026-11-10T17:35:19.877Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-10T17:05:22.518Z"
+   "ultimaVez": "2026-11-10T17:35:19.877Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 18,
-   "ultimaVez": "2026-11-10T17:05:22.518Z"
+   "ultimaVez": "2026-11-10T17:35:19.877Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-10T17:05:22.518Z"
+   "ultimaVez": "2026-11-10T17:35:19.877Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-10T17:05:22.518Z"
+   "ultimaVez": "2026-11-10T17:35:19.877Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-10T17:05:22.518Z"
+   "ultimaVez": "2026-11-10T17:35:19.877Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-10T17:05:22.518Z"
+   "ultimaVez": "2026-11-10T17:35:19.877Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-10T17:05:22.518Z"
+   "ultimaVez": "2026-11-10T17:35:19.877Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-10T17:05:22.518Z"
+   "ultimaVez": "2026-11-10T17:35:19.877Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://www.gov.br/pt-br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-10T17:05:22.518Z"
+   "ultimaVez": "2026-11-10T17:35:19.877Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1o3t9lm",
+   "titulo": "Ministérios da Fazenda da Espanha e do Brasil assinam Memorando de Entendimento para impulsionar a tributação dos super-ricos",
+   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/ministerios-da-fazenda-da-espanha-e-do-brasil-assinam-memorando-de-entendimento-para-impulsionar-a-tributacao-dos-super-ricos",
+   "resumo": "Documento prevê aumentar colaboração entre os países em matéria de progressividade fiscal. Objetivo é impulsionar uma coligação internacional que avance na tributação efetiva dos grandes patrimónios como medida necessária para combater a desigualdade global e reforçar a…",
+   "fonte": "fazenda",
+   "fonteNome": "Ministério da Fazenda",
+   "sigla": "MF",
+   "publicadoEm": "2026-11-10T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-10T17:35:19.877Z"
+  },
   {
    "id": "6iqemd",
    "titulo": "Operação Fronteira em Piumhi: Receita Federal apreende 2,4 milhões em mercadorias",
