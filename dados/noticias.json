@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-10T16:35:20.462Z",
+ "atualizadoEm": "2026-11-10T17:05:22.518Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-10T16:35:20.462Z"
+   "ultimaVez": "2026-11-10T17:05:22.518Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-10T16:35:20.462Z"
+   "ultimaVez": "2026-11-10T17:05:22.518Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-10T16:35:20.462Z"
+   "ultimaVez": "2026-11-10T17:05:22.518Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 18,
-   "ultimaVez": "2026-11-10T16:35:20.462Z"
+   "ultimaVez": "2026-11-10T17:05:22.518Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-10T16:35:20.462Z"
+   "ultimaVez": "2026-11-10T17:05:22.518Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-10T16:35:20.462Z"
+   "ultimaVez": "2026-11-10T17:05:22.518Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-10T16:35:20.462Z"
+   "ultimaVez": "2026-11-10T17:05:22.518Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-10T16:35:20.462Z"
+   "ultimaVez": "2026-11-10T17:05:22.518Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-10T16:35:20.462Z"
+   "ultimaVez": "2026-11-10T17:05:22.518Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-10T16:35:20.462Z"
+   "ultimaVez": "2026-11-10T17:05:22.518Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://www.gov.br/pt-br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-10T16:35:20.462Z"
+   "ultimaVez": "2026-11-10T17:05:22.518Z"
   }
  ],
  "noticias": [
+  {
+   "id": "6iqemd",
+   "titulo": "Operação Fronteira em Piumhi: Receita Federal apreende 2,4 milhões em mercadorias",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-em-piumhi-receita-federal-apreende-2-4-milhoes-em-mercadorias",
+   "resumo": "Fiscalização foi realizada em quatro estabelecimentos comerciais e um galpão.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-10T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-10T17:05:22.518Z"
+  },
   {
    "id": "shzo1b",
    "titulo": "Ata do Copom indica que desaceleração da economia não conteve inflação",
