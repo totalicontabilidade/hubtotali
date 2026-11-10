@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-10T13:54:36.165Z",
+ "atualizadoEm": "2026-11-10T15:05:14.972Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-10T13:54:36.165Z"
+   "ultimaVez": "2026-11-10T15:05:14.972Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-10T13:54:36.165Z"
+   "ultimaVez": "2026-11-10T15:05:14.972Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-10T13:54:36.165Z"
+   "ultimaVez": "2026-11-10T15:05:14.972Z"
   },
   {
    "id": "fazenda",
@@ -70,8 +70,8 @@
    "nome": "Ministério da Fazenda",
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
-   "quantas": 19,
-   "ultimaVez": "2026-11-10T13:54:36.165Z"
+   "quantas": 18,
+   "ultimaVez": "2026-11-10T15:05:14.972Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-10T13:54:36.165Z"
+   "ultimaVez": "2026-11-10T15:05:14.972Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-10T13:54:36.165Z"
+   "ultimaVez": "2026-11-10T15:05:14.972Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-10T13:54:36.165Z"
+   "ultimaVez": "2026-11-10T15:05:14.972Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-10T13:54:36.165Z"
+   "ultimaVez": "2026-11-10T15:05:14.972Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-10T13:54:36.165Z"
+   "ultimaVez": "2026-11-10T15:05:14.972Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 2,
-   "ultimaVez": "2026-11-10T13:54:36.165Z"
+   "quantas": 3,
+   "ultimaVez": "2026-11-10T15:05:14.972Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,23 @@
    "site": "https://www.gov.br/pt-br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-10T13:54:36.165Z"
+   "ultimaVez": "2026-11-10T15:05:14.972Z"
   }
  ],
  "noticias": [
+  {
+   "id": "shzo1b",
+   "titulo": "Ata do Copom indica que desaceleração da economia não conteve inflação",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/ata-do-copom-indica-que-desaceleracao-da-economia-nao-conteve-inflacao",
+   "resumo": "A ata do Comitê de Política Monetária (Copom) divulgada nesta terça-feira (10) indica que a atividade econômica brasileira dá sinais mais claros de desaceleração, enquanto a inflação continua pressionada. Nesse cenário, o Banco Central reforçou a avaliação de que a Selic…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-10T14:20:00.000Z",
+   "categorias": [],
+   "relevancia": 1,
+   "vistaEm": "2026-11-10T15:05:14.972Z"
+  },
   {
    "id": "lmph4l",
    "titulo": "Governo Federal prorroga até 9 de dezembro a desoneração da gasolina e do etanol",
