@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-10T19:05:18.124Z",
+ "atualizadoEm": "2026-11-10T21:05:18.013Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-10T19:05:18.124Z"
+   "ultimaVez": "2026-11-10T21:05:18.013Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-10T19:05:18.124Z"
+   "ultimaVez": "2026-11-10T21:05:18.013Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-10T19:05:18.124Z"
+   "ultimaVez": "2026-11-10T21:05:18.013Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 19,
-   "ultimaVez": "2026-11-10T19:05:18.124Z"
+   "ultimaVez": "2026-11-10T21:05:18.013Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-10T19:05:18.124Z"
+   "ultimaVez": "2026-11-10T21:05:18.013Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-10T19:05:18.124Z"
+   "ultimaVez": "2026-11-10T21:05:18.013Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-10T19:05:18.124Z"
+   "ultimaVez": "2026-11-10T21:05:18.013Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-10T19:05:18.124Z"
+   "ultimaVez": "2026-11-10T21:05:18.013Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-10T19:05:18.124Z"
+   "ultimaVez": "2026-11-10T21:05:18.013Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 2,
-   "ultimaVez": "2026-11-10T19:05:18.124Z"
+   "quantas": 3,
+   "ultimaVez": "2026-11-10T21:05:18.013Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,41 @@
    "site": "https://www.gov.br/pt-br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-10T19:05:18.124Z"
+   "ultimaVez": "2026-11-10T21:05:18.013Z"
   }
  ],
  "noticias": [
+  {
+   "id": "4ghk42",
+   "titulo": "Trabalhador poderá autorizar bancos a consultar extrato do FGTS",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/trabalhador-podera-autorizar-bancos-consultar-extrato-do-fgts",
+   "resumo": "A Caixa Econômica Federal passou a permitir nesta terça-feira (10) que trabalhadores autorizem instituições financeiras a consultar informações do extrato do Fundo de Garantia do Tempo de Serviço (FGTS). O serviço pode ser usado para comprovar renda ou vínculo empregatício em…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-10T20:49:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-10T21:05:18.013Z"
+  },
+  {
+   "id": "km8sxs",
+   "titulo": "Receita Federal realiza coletiva de imprensa sobre a Operação Fronteira Receita Federal no Rio Grande do Sul",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/aviso-de-pauta-receita-federal-realiza-coletiva-de-imprensa-sobre-a-operacao-fronteira-receita-federal-no-rio-grande-do-sul",
+   "resumo": "A coletiva contará com a presença do secretário especial Robinson Barreirinhas.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-10T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-10T21:05:18.013Z"
+  },
   {
    "id": "1o3t9lm",
    "titulo": "Ministérios da Fazenda da Espanha e do Brasil assinam Memorando de Entendimento para impulsionar a tributação dos super-ricos",
