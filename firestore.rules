@@ -393,7 +393,12 @@ service cloud.firestore {
                             && mudou().hasOnly(['feito', 'feitoEm', 'revisadoEm', 'notas', 'envolvidos',
                                                 'texto', 'html', 'prazo', 'importante', 'status', 'statusEm']))
                         || (acompanha(resource.data) && mudou().hasOnly(['notas'])));
-      allow delete: if daEquipe() && meuUid(uid);
+      // Apaga: o dono; e quem mandou, enquanto o dono ainda não viu
+      // (desfaz um envio errado sem incomodar ninguém).
+      allow delete: if daEquipe()
+                    && (meuUid(uid)
+                        || (meuUid(resource.data.criadoPorUid)
+                            && (!('vistoEm' in resource.data) || resource.data.vistoEm == null)));
     }
 
     match /quadros/{uid}/config/{nome} {

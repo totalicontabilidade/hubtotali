@@ -312,6 +312,11 @@
           body: JSON.stringify({ fields: paraCampos(limpos) }),
         }).then(conferir).then(function () {});
       },
+      apagarTarefaEm: function (uid, id) {
+        return fetch(colecaoDe(uid) + "/" + encodeURIComponent(id), { method: "DELETE", headers: cabecalhos() })
+          .then(function (r) { if (r.status === 404) return null; return conferir(r); })
+          .then(function () {});
+      },
       listarEnviadas: function (uids) {
         var eu = meuUid();
         return consultarVarios(uids.filter(function (u) { return u !== eu; }),

@@ -296,15 +296,16 @@ da tela inicial:
   uma cópia para cada (mesmo `loteId`). Ela chega com a faixa "de Fulano ·
   nova" e um botão **Visto**; o dono cuida dela como de qualquer outra. Quem
   mandou vê na aba **Enviadas** se foi vista, riscada e comentada, e pode
-  comentar e riscar de lá.
+  comentar e riscar de lá — e apagar, enquanto o dono ainda não viu (depois
+  disso, só o dono apaga).
 - **Quem acompanha** (`envolvidos`) vê a pendência na aba **Acompanho** e pode
   comentar, sem recebê-la.
 - Os comentários levam quem escreveu (`por`, `porUid`); o nome aparece quando
   não é o dono do quadro.
 
 A regra do banco é quem garante: o dono muda tudo; quem mandou mexe só no que
-é do pedido (texto, prazo, importância, acompanhantes, riscar, comentar); quem
-acompanha só comenta; listar o que está no quadro alheio exige filtrar por
+é do pedido (texto, prazo, importância, acompanhantes, riscar, comentar) e só
+apaga o que ainda não foi visto; quem acompanha só comenta; listar o que está no quadro alheio exige filtrar por
 `criadoPorUid` ou `envolvidos`. Recado para a equipe inteira continua sendo a
 faixa de avisos da administração.
 

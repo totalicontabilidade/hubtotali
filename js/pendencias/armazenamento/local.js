@@ -103,6 +103,13 @@
           gravarDe(uid, 'tarefas', m); if (uid === meuUid) avisarTarefas();
         });
       },
+      apagarTarefaEm(uid, id) {
+        return tentar(() => {
+          const m = lerDe(uid, 'tarefas') || {};
+          if (m[id] && m[id].vistoEm && uid !== meuUid) { const e = new Error('Já foi vista: só o dono do quadro apaga'); e.code = 'sem_permissao'; throw e; }
+          delete m[id]; gravarDe(uid, 'tarefas', m); if (uid === meuUid) avisarTarefas();
+        });
+      },
       listarEnviadas(uids) {
         return Promise.resolve([].concat(...uids.filter(u => u !== meuUid).map(uid =>
           Object.entries(lerDe(uid, 'tarefas') || {}).filter(([, t]) => t.criadoPorUid === meuUid).map(([id, t]) => Object.assign({}, t, { id, donoUid: uid })))));

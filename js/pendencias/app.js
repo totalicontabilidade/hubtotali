@@ -465,6 +465,8 @@ function itemFora(t,modo){
   if(podeRiscar) acoes.push(t.feito
     ?el('button',{class:'ic',title:'Desfazer risco','aria-label':'Desfazer risco',html:ICON.undo,onclick:()=>mudarFora(t,{feito:false,feitoEm:null})})
     :el('button',{class:'ic',title:'Riscar (feito)','aria-label':'Riscar',html:ICON.check,onclick:()=>mudarFora(t,{feito:true,feitoEm:Date.now(),revisadoEm:null})}));
+  // quem mandou desfaz o envio enquanto o dono ainda não viu; depois, só o dono apaga
+  if(modo==='enviadas'&&!t.vistoEm) acoes.push(botaoExcluirFora(t));
   const notas=(t.notas||[]);
   const ultima=notas.length?notas[notas.length-1]:null;
   const vistoTx=modo==='enviadas'?(t.vistoEm?'vista por '+primeiroNome(t.donoUid)+' em '+ddmm(t.vistoEm):'ainda não vista'):('de '+(t.criadoPorNome||nomeDe(t.criadoPorUid)||'colega'));
@@ -476,8 +478,19 @@ function itemFora(t,modo){
   ]);
 }
 function mudarFora(t,campos){
-  const i=(t.donoUid===meuUid()?null:null);
   return gravar(t.id,async()=>{ await store.alterarTarefaEm(t.donoUid,t.id,campos); await refrescarPessoas(); render(); });
+}
+function apagarFora(t){
+  return gravar(t.id,async()=>{ await store.apagarTarefaEm(t.donoUid,t.id); await refrescarPessoas(); render(); });
+}
+function botaoExcluirFora(t){
+  let armado=false,tm;
+  const b=el('button',{class:'ic',title:'Apagar (ainda não foi vista)','aria-label':'Apagar',html:ICON.del});
+  b.addEventListener('click',()=>{
+    if(!armado){ armado=true; b.className='ic conf'; b.textContent='Apagar?'; tm=setTimeout(()=>{armado=false;b.className='ic';b.innerHTML=ICON.del;},3500); return; }
+    clearTimeout(tm); apagarFora(t);
+  });
+  return b;
 }
 function caixaNotaFora(t){
   const inp=el('input',{type:'text',maxlength:'300',placeholder:'Comentário para '+primeiroNome(t.donoUid)+' ver','aria-label':'Novo comentário'});
