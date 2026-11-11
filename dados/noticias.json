@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-11T19:05:24.718Z",
+ "atualizadoEm": "2026-11-11T20:05:19.016Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-11T19:05:24.718Z"
+   "ultimaVez": "2026-11-11T20:05:19.016Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-11T19:05:24.718Z"
+   "ultimaVez": "2026-11-11T20:05:19.016Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-11T19:05:24.718Z"
+   "ultimaVez": "2026-11-11T20:05:19.016Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 19,
-   "ultimaVez": "2026-11-11T19:05:24.718Z"
+   "ultimaVez": "2026-11-11T20:05:19.016Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-11T19:05:24.718Z"
+   "ultimaVez": "2026-11-11T20:05:19.016Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-11T19:05:24.718Z"
+   "ultimaVez": "2026-11-11T20:05:19.016Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-11T19:05:24.718Z"
+   "ultimaVez": "2026-11-11T20:05:19.016Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-11T19:05:24.718Z"
+   "ultimaVez": "2026-11-11T20:05:19.016Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-11T19:05:24.718Z"
+   "ultimaVez": "2026-11-11T20:05:19.016Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-11T19:05:24.718Z"
+   "ultimaVez": "2026-11-11T20:05:19.016Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,25 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-11T19:05:24.718Z"
+   "ultimaVez": "2026-11-11T20:05:19.016Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1w9f78",
+   "titulo": "Parlamentares e representante do Tesouro Nacional recebem homenagem pelos 80 anos do Sistema CFC/CRCs",
+   "link": "https://cfc.org.br/noticias/parlamentares-e-representante-do-tesouro-nacional-recebem-homenagem-pelos-80-anos-do-sistema-cfc-crcs/",
+   "resumo": "O reconhecimento à atuação em defesa dos profissionais da contabilidade, ao fortalecimento da representação da classe no Congresso Nacional e aos avanços da contabilidade pública marcou a 1.138ª Reunião Plenária Ordinária do Conselho Federal de Contabilidade (CFC), realizada…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-11T19:49:49.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 0,
+   "vistaEm": "2026-11-11T20:05:19.016Z"
+  },
   {
    "id": "15b1x77",
    "titulo": "CFC propõe medidas para garantir segurança aos profissionais da contabilidade na transição da reforma tributária",
