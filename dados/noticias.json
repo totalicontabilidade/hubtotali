@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-11T21:07:05.219Z",
+ "atualizadoEm": "2026-11-11T21:35:16.978Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-11T21:07:05.219Z"
+   "ultimaVez": "2026-11-11T21:35:16.978Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-11T21:07:05.219Z"
+   "ultimaVez": "2026-11-11T21:35:16.978Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-11T21:07:05.219Z"
+   "ultimaVez": "2026-11-11T21:35:16.978Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 19,
-   "ultimaVez": "2026-11-11T21:07:05.219Z"
+   "ultimaVez": "2026-11-11T21:35:16.978Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-11T21:07:05.219Z"
+   "ultimaVez": "2026-11-11T21:35:16.978Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-11T21:07:05.219Z"
+   "ultimaVez": "2026-11-11T21:35:16.978Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-11T21:07:05.219Z"
+   "ultimaVez": "2026-11-11T21:35:16.978Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-11T21:07:05.219Z"
+   "ultimaVez": "2026-11-11T21:35:16.978Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-11T21:07:05.219Z"
+   "ultimaVez": "2026-11-11T21:35:16.978Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 2,
-   "ultimaVez": "2026-11-11T21:07:05.219Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-11T21:35:16.978Z"
   },
   {
    "id": "govbr",
@@ -135,7 +135,7 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-11T21:07:05.219Z"
+   "ultimaVez": "2026-11-11T21:35:16.978Z"
   }
  ],
  "noticias": [
@@ -186,6 +186,22 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-11T17:05:19.067Z"
+  },
+  {
+   "id": "1xp5qe9",
+   "titulo": "Proposta que facilita transição tributária será enviada ao Congresso",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/proposta-que-facilita-transicao-tributaria-sera-enviada-ao-Congresso",
+   "resumo": "O governo federal vai encaminhar ao Congresso Nacional uma proposta para criar uma regra de transição na cobrança da Contribuição sobre Bens e Serviços (CBS), novo tributo federal da reforma tributária . A medida permitirá que as empresas façam um cálculo estimado do imposto…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-11T16:32:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-11T21:35:16.978Z"
   },
   {
    "id": "1l5ltfa",
