@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-11T15:35:18.403Z",
+ "atualizadoEm": "2026-11-11T16:05:21.106Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-11T15:35:18.403Z"
+   "ultimaVez": "2026-11-11T16:05:21.106Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-11T15:35:18.403Z"
+   "ultimaVez": "2026-11-11T16:05:21.106Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-11T15:35:18.403Z"
+   "ultimaVez": "2026-11-11T16:05:21.106Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 19,
-   "ultimaVez": "2026-11-11T15:35:18.403Z"
+   "ultimaVez": "2026-11-11T16:05:21.106Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-11T15:35:18.403Z"
+   "ultimaVez": "2026-11-11T16:05:21.106Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-11T15:35:18.403Z"
+   "ultimaVez": "2026-11-11T16:05:21.106Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-11T15:35:18.403Z"
+   "ultimaVez": "2026-11-11T16:05:21.106Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-11T15:35:18.403Z"
+   "ultimaVez": "2026-11-11T16:05:21.106Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-11T15:35:18.403Z"
+   "ultimaVez": "2026-11-11T16:05:21.106Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-11T15:35:18.403Z"
+   "ultimaVez": "2026-11-11T16:05:21.106Z"
   },
   {
    "id": "govbr",
@@ -134,8 +134,8 @@
    "nome": "Agência Gov (governo federal)",
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-11T15:35:18.403Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-11T16:05:21.106Z"
   }
  ],
  "noticias": [
@@ -388,6 +388,22 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-11T10:05:19.467Z"
+  },
+  {
+   "id": "q43lfd",
+   "titulo": "Correios põe à venda mais 15 bens imóveis, com parcelamento e uso do FGTS",
+   "link": "https://agenciagov.ebc.com.br/noticias/202611/correios-licita-15-imoveis-com-possibilidade-de-parcelamento-em-ate-12x-financiamento-e-uso-do-fgts",
+   "resumo": "Nesta quinta, dia 12, e no dia 26, a empresa licita terrenos e prédios comerciais em 11 estados; lances já estão abertos pela VIP Leilões",
+   "fonte": "govbr",
+   "fonteNome": "Agência Gov (governo federal)",
+   "sigla": "Gov",
+   "publicadoEm": "2026-11-11T03:00:00.000Z",
+   "categorias": [
+    "tributos",
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-11T16:05:21.106Z"
   },
   {
    "id": "akemkl",
