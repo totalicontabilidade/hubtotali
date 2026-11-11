@@ -80,7 +80,8 @@ atalhos como "Esperando retorno do cliente"), editar, excluir, mover de bloco,
 e os PDFs anexados. Uma pendência com data que vence hoje aparece em **Hoje**;
 vencida, aparece em Hoje com o selo de atraso; que vence nesta semana aparece
 em **Esta semana**. Riscadas somem do quadro no fim do dia e ficam na lista
-**Riscadas**, para consulta, sem prazo e sem pergunta: riscada é concluída.
+**Riscadas**, para consulta, sem prazo e sem pergunta: riscada é concluída. Clicar
+numa riscada abre de quem veio, todos os comentários, os anexos e as datas.
 Apagar é à mão, cartão a cartão.
 
 O calendário da lateral filtra por dia e mostra pontinhos onde há prazo; o
@@ -394,6 +395,16 @@ fora: voltaram como coleção própria (seção "Recados da administração"), e
 antigos aparecem lá só como registro. Pode rodar de novo: o que já foi trazido
 (`origemSistema: "hub-antigo"`, `origemId`) não duplica. Quem decide é
 `js/migracao-quadro.js`, testado em `testes/teste-migracao.js`.
+
+**Os anexos do quadro antigo** não foram copiados: os arquivos continuam no
+Storage, em `pendencias/{id}/...`, onde a equipe lê. Desde 11/11/2026, quando
+cada pessoa abre o próprio quadro, o Hub procura as fichas de anexo das
+pendências que vieram do antigo e grava nelas uma ficha com o `caminho` do
+arquivo (id `antigo-…`), tirando a nota "Tinha N anexos". Cada pendência é
+conferida uma vez (`anexosAntigosEm`). PDF abre no painel, imagem também, e o
+resto (planilha, documento) se baixa. Esses anexos não vão na cópia de
+segurança do quadro, porque o arquivo é da pendência antiga, e nunca são
+apagados daqui.
 
 Quem usava o Pendências Totali à parte traz o quadro pelo **Exportar /
 importar → Importar cópia**, dentro do Hub, logado na própria conta. A

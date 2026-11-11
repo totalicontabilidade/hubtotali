@@ -28,7 +28,10 @@
      urgencia "urgente"   → marcada como importante
      situacao resolvida   → riscada, com a hora do último comentário
      linha do tempo       → comentários, com o nome de quem escreveu
-     anexos               → só uma nota: continuam na cópia de segurança
+     anexos               → só uma nota; desde 11/11/2026 o próprio quadro
+                            de cada pessoa troca a nota por fichas que
+                            apontam para o arquivo antigo (app.js,
+                            trazerAnexosAntigos)
    ============================================================ */
 (function (raiz) {
   "use strict";

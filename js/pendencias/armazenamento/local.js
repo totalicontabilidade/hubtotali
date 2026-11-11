@@ -135,6 +135,8 @@
         },
         apagar: id => tx('readwrite', st => st.delete(prefixo + id)),
         ler: id => tx('readonly', st => st.get(prefixo + id)).then(b => { if (!b) throw new Error('PDF não encontrado'); return b; }),
+        /* Anexo do quadro antigo, guardado pelo caminho que tinha no Storage. */
+        lerCaminho: caminho => tx('readonly', st => st.get(String(caminho))).then(b => { if (!b) throw new Error('Arquivo não encontrado'); return b; }),
         url: () => null // sem endereço direto: o sistema abre pelo ler()
       }
     };

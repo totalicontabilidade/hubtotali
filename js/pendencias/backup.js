@@ -51,7 +51,8 @@
     const arquivos = [];
     if (store.arquivos) {
       const anexos = [];
-      tarefas.forEach(t => (t.anexos || []).forEach(a => { if (a && a.id && !anexos.some(x => x.id === a.id)) anexos.push(a); }));
+      /* Anexo do quadro antigo (com caminho) não vai na cópia: o arquivo é da pendência antiga e continua no Storage. */
+      tarefas.forEach(t => (t.anexos || []).forEach(a => { if (a && a.id && !a.caminho && !anexos.some(x => x.id === a.id)) anexos.push(a); }));
       for (let i = 0; i < anexos.length; i++) {
         progresso('Juntando PDFs ' + (i + 1) + ' de ' + anexos.length + '…');
         try {
@@ -115,7 +116,7 @@
       const t = lista[i];
       const d = Object.assign({}, t); delete d.id;
       const anexos = d.anexos || [];
-      d.anexos = anexos.filter(x => mapaArq[x.id]).map(x => Object.assign({}, x, { id: mapaArq[x.id] }));
+      d.anexos = anexos.filter(x => x.caminho || mapaArq[x.id]).map(x => x.caminho ? Object.assign({}, x) : Object.assign({}, x, { id: mapaArq[x.id] }));
       r.anexosPerdidos += anexos.length - d.anexos.length;
       await store.criarTarefa(d); r.novas++;
     }

@@ -40,7 +40,7 @@ const SEM='_sem', SEMANA_MS=7*864e5;
 const $=id=>document.getElementById(id);
 let db=null, assets=null; const store=window.Armazenamento; let tarefas=[], setores=[], clientes=[], carregado=false;
 let novosAnexos=[], edAnexos=null;
-let comentando=null; const notasAbertas=new Set();
+let comentando=null; const notasAbertas=new Set(); const feitasAbertas=new Set();
 let setorAtivo='todos', busca='', editando=null, novaStatus='hoje', colMobile='hoje';
 // pessoas: a equipe do Hub, para quem a nova pendência vai, quem acompanha, e as listas de fora do meu quadro
 let equipe=[], novaPara=[], novaAcomp=[], enviadas=[], acompanho=[], abaQ='quadro', comentandoFora=null;
@@ -61,6 +61,7 @@ const ICON={
   star:on=>'<svg width="17" height="17" viewBox="0 0 24 24" fill="'+(on?'currentColor':'none')+'" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg>',
   edit:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>',
   del:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>',
+  seta:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
   undo:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 010 12h-3"/></svg>',
   up:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 15l6-6 6 6"/></svg>',
   down:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>',
@@ -105,7 +106,7 @@ const ref=id=>({update:campos=>store.alterarTarefa(id,campos),delete:()=>store.a
 const mudar=(id,dados)=>gravar(id,()=>ref(id).update(dados));
 const apagar=id=>{
   const t=tarefas.find(x=>x.id===id);
-  const ids=((t&&t.anexos)||[]).map(a=>a.id).filter(Boolean);
+  const ids=((t&&t.anexos)||[]).filter(a=>!a.caminho).map(a=>a.id).filter(Boolean);
   return gravar(id,async()=>{ await ref(id).delete(); if(assets) for(const a of ids){ try{ await assets.apagar(a); }catch(e){} } });
 };
 function diaISO(d){ const x=new Date(d); return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0'); }
@@ -148,15 +149,19 @@ async function enviarPdfs(files,destino,redesenhar){
     redesenhar();
   }
 }
-const limparAnexo=a=>({id:a.id,nome:a.nome,tam:a.tam||0});
-function soltarAsset(id){ if(assets&&id) assets.apagar(id).catch(()=>{}); }
+const limparAnexo=a=>{ const o={id:a.id,nome:a.nome,tam:a.tam||0}; if(a.caminho) o.caminho=a.caminho; return o; };
+// anexo do quadro antigo (id "antigo-…"): o arquivo é da pendência antiga e não se apaga daqui
+function soltarAsset(id){ if(assets&&id&&!String(id).startsWith('antigo-')) assets.apagar(id).catch(()=>{}); }
+function acharAnexo(id){ for(const t of tarefas){ const a=(t.anexos||[]).find(x=>x.id===id); if(a) return a; } return null; }
+// o PDF do quadro novo vem da pasta da pessoa; o do quadro antigo, do caminho que ele sempre teve
+const lerAnexo=a=>a&&a.caminho?assets.lerCaminho(a.caminho):assets.ler(a.id);
 // endereço do PDF para abrir em nova aba ('#' quando só dá para ler pelo armazenamento, como no modo local)
 function urlArquivo(id){ return (assets&&assets.url&&assets.url(id))||'#'; }
 async function abrirEmAba(id){
   const u=assets&&assets.url&&assets.url(id);
   if(u){ window.open(u,'_blank','noopener'); return; }
   const janela=window.open('','_blank');
-  try{ const b=await assets.ler(id); const o=URL.createObjectURL(b); if(janela) janela.location.href=o; else window.open(o,'_blank'); }
+  try{ const b=await lerAnexo(acharAnexo(id)||{id}); const o=URL.createObjectURL(b); if(janela) janela.location.href=o; else window.open(o,'_blank'); }
   catch(e){ if(janela) janela.close(); aviso('Não consegui abrir o PDF.'); }
 }
 document.addEventListener('click',e=>{
@@ -411,11 +416,32 @@ function render(){
   $('feitasTit').textContent='Riscadas ('+feitas.length+')';
   const lf=$('listaFeitas'); lf.textContent='';
   if(!feitas.length) lf.appendChild(el('div',{class:'dica',text:'Quando riscar uma pendência, ela aparece aqui. As de hoje continuam riscadas no quadro até o fim do dia.'}));
+  /* A riscada abre: clicar no texto (ou na setinha) mostra de quem
+     veio, os comentários todos e os anexos, para consulta. Só leitura —
+     para mexer, desfaz o risco. */
   feitas.slice(0,150).forEach(t=>{
-    lf.appendChild(el('div',{class:'fi'},[
+    const aberta=feitasAbertas.has(t.id);
+    const nN=(t.notas||[]).length, nA=(t.anexos||[]).length;
+    const resumo=[nomeSetor(t.setor),'riscada em '+ddmm(t.feitoEm||Date.now())];
+    if(nN) resumo.push(nN+(nN===1?' comentário':' comentários'));
+    if(nA) resumo.push(nA+(nA===1?' anexo':' anexos'));
+    const alternar=()=>{ if(aberta){ feitasAbertas.delete(t.id); notasAbertas.delete(t.id); } else { feitasAbertas.add(t.id); notasAbertas.add(t.id); } render(); };
+    const texto=txtEl('txt',t,{class:'txt fi-txt',title:aberta?'Fechar':'Ver comentários e anexos',onclick:e=>{ if(e.target.closest&&e.target.closest('.cli,a')) return; alternar(); }});
+    const datas=['criada em '+ddmm(t.criadoEm||t.feitoEm||Date.now())];
+    if(t.prazo) datas.push('prazo '+ddmmISO(t.prazo));
+    datas.push('riscada em '+ddmm(t.feitoEm||Date.now())+' '+quandoNota(t.feitoEm||Date.now()).slice(-5));
+    const det=aberta?el('div',{class:'fi-det'},[
+      faixaDeQuem(t),
+      chipsAnexos(t.anexos),
+      blocoNotas(t,false),
+      (!nN&&!nA)?el('div',{class:'dica',text:'Sem comentários nem anexos.'}):null,
+      el('div',{class:'info',text:datas.join(' · ')})
+    ]):null;
+    lf.appendChild(el('div',{class:'fi'+(aberta?' aberta':'')},[
       el('span',{class:'ok',html:ICON.check.replace('width="12" height="12"','width="16" height="16"')}),
-      el('div',{},[txtEl('txt',t),el('div',{class:'info',text:nomeSetor(t.setor)+' · riscada em '+ddmm(t.feitoEm||Date.now())})]),
+      el('div',{},[texto,el('div',{class:'info',text:resumo.join(' · ')}),det]),
       el('div',{class:'acoes'},[
+        el('button',{class:'ic fi-seta'+(aberta?' on':''),type:'button',title:aberta?'Fechar':'Ver comentários e anexos','aria-label':aberta?'Fechar':'Ver comentários e anexos','aria-expanded':String(aberta),html:ICON.seta,onclick:alternar}),
         el('button',{class:'ic',title:'Desfazer risco','aria-label':'Desfazer risco',html:ICON.undo,onclick:()=>mudar(t.id,{feito:false,feitoEm:null})}),
         botaoExcluir(t)
       ])
@@ -1099,6 +1125,37 @@ function renderGrande(){
 }
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&!$('calg').hidden&&$('veu').hidden) fecharGrande(); });
 
+/* ---------- os anexos do quadro antigo ----------
+   A migração de 09/11/2026 trouxe texto e comentários, mas deixou os
+   anexos para trás, só com uma nota. Os arquivos nunca saíram do
+   Storage (pendencias/{id}/...), e a equipe lê ali. Então, no quadro
+   de cada pessoa, a pendência que veio do antigo ganha a ficha dos
+   seus anexos apontando para o arquivo de sempre, e a nota "Tinha N
+   anexos" sai. Uma vez por pendência: anexosAntigosEm marca que já
+   foi conferida, com ou sem anexo. Se a leitura falhar, tenta de
+   novo na próxima vez que o quadro abrir. */
+const antigosTentados=new Set();
+const NOTA_ANEXOS=/^Tinha \d+ anexos? no quadro antigo/;
+async function trazerAnexosAntigos(){
+  if(!assets||!assets.lerCaminho||typeof Dados==='undefined'||!Dados.anexosDoQuadroAntigo) return;
+  const alvo=tarefas.filter(t=>t.origemSistema==='hub-antigo'&&t.origemId&&!t.anexosAntigosEm&&!antigosTentados.has(t.id));
+  for(const t of alvo){
+    antigosTentados.add(t.id);
+    let fichas;
+    try{ fichas=await Dados.anexosDoQuadroAntigo(t.origemId); }catch(e){ antigosTentados.delete(t.id); console.warn('anexos do quadro antigo',e); continue; }
+    const atual=(tarefas.find(x=>x.id===t.id)||t);
+    const ja=atual.anexos||[];
+    const novos=fichas.filter(f=>!ja.some(a=>a.id==='antigo-'+f.fichaId))
+      .map(f=>({id:'antigo-'+f.fichaId,nome:f.nome+(f.desconsiderado?' (desconsiderado)':''),tam:f.tamanho,caminho:f.caminho}));
+    const mud={anexosAntigosEm:Date.now()};
+    if(novos.length){
+      mud.anexos=ja.map(limparAnexo).concat(novos).slice(0,30);
+      mud.notas=(atual.notas||[]).filter(n=>!(n&&NOTA_ANEXOS.test(String(n.t||''))));
+    }
+    await mudar(t.id,mud);
+  }
+}
+
 /* ---------- visualizador de PDF: o do próprio navegador, num quadro ao lado ----------
    Antes era o pdf.js vindo de uma CDN. O Hub não carrega script de
    fora, e o Chrome e o Edge já trazem um leitor de PDF com zoom,
@@ -1115,11 +1172,23 @@ async function abrirPdf(a){
   const corpo=$('pdfCorpo'); corpo.textContent='';
   const meu={}; pdfAtual=meu;
   try{
-    const b=await assets.ler(a.id);
+    const b=await lerAnexo(a);
     if(pdfAtual!==meu) return;
     if(pdfUrl) URL.revokeObjectURL(pdfUrl);
-    pdfUrl=URL.createObjectURL(b.type==='application/pdf'?b:new Blob([b],{type:'application/pdf'}));
-    corpo.appendChild(el('iframe',{class:'pdf-quadro',title:a.nome||'PDF',src:pdfUrl+'#navpanes=0'}));
+    // o quadro antigo aceitava qualquer arquivo: imagem aparece aqui, o resto se baixa
+    const nome=a.nome||'';
+    const ehImg=!!a.caminho&&(/^image\//.test(b.type)||/\.(png|jpe?g|gif|webp|bmp)$/i.test(nome));
+    const ehPdf=!a.caminho||b.type==='application/pdf'||/\.pdf$/i.test(nome);
+    if(ehImg){
+      pdfUrl=URL.createObjectURL(b);
+      corpo.appendChild(el('img',{class:'pdf-img',alt:nome||'imagem',src:pdfUrl}));
+    }else if(ehPdf){
+      pdfUrl=URL.createObjectURL(b.type==='application/pdf'?b:new Blob([b],{type:'application/pdf'}));
+      corpo.appendChild(el('iframe',{class:'pdf-quadro',title:nome||'PDF',src:pdfUrl+'#navpanes=0'}));
+    }else{
+      pdfUrl=URL.createObjectURL(b);
+      corpo.appendChild(el('div',{class:'msg'},['Este anexo não é PDF, então não abre aqui.',el('a',{class:'sec',href:pdfUrl,download:nome||'anexo',style:'display:inline-flex;align-items:center;text-decoration:none'},['Baixar '+(nome||'o arquivo')])]));
+    }
     $('pdfInfo').textContent=tamanho(a.tam||b.size);
   }catch(e){
     if(pdfAtual!==meu) return;
@@ -1485,7 +1554,7 @@ render();
   carregarEquipe().then(()=>agendar());
   setInterval(()=>{ if(!document.hidden) refrescarPessoas(); },60000);
   window.addEventListener('pendencias:equipe-mudou',carregarEquipe);
-  store.ouvirTarefas(lista=>{ tarefas=lista.map(t=>Object.assign({},t)); carregado=true; agendar(); },e=>aviso(msgErro(e)));
+  store.ouvirTarefas(lista=>{ tarefas=lista.map(t=>Object.assign({},t)); carregado=true; agendar(); trazerAnexosAntigos(); },e=>aviso(msgErro(e)));
   store.ouvirConfig('clientes',d=>{
     clientes=(d&&Array.isArray(d.lista))?d.lista.filter(x=>x&&x.id&&x.nome&&x.cnpj):[];
     $('qCli').textContent=clientes.length?String(clientes.length):'';

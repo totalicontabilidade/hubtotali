@@ -388,6 +388,17 @@
             })
             .then(function (r) { if (!r.ok) throw erroHttp(r); return r.blob(); });
         },
+        /* Anexo do quadro antigo: o arquivo nunca saiu de onde estava
+           (pendencias/{id}/...), e a regra do Storage deixa a equipe
+           ler ali. A pendência nova guarda só o caminho. */
+        lerCaminho: function (caminho) {
+          if (!/^pendencias\//.test(String(caminho || ""))) return Promise.reject(new Error("Caminho de anexo antigo inválido."));
+          var url = "https://firebasestorage.googleapis.com/v0/b/" + encodeURIComponent(cfg.STORAGE_BUCKET) +
+                    "/o/" + encodeURIComponent(caminho) + "?alt=media";
+          return fetch(url, { headers: cabecalhos() })
+            .catch(function () { throw new Error("Não consegui falar com o Storage."); })
+            .then(function (r) { if (!r.ok) throw erroHttp(r); return r.blob(); });
+        },
         /* Sem endereço direto: o arquivo só abre com a sessão. */
         url: function () { return null; },
       } : null,

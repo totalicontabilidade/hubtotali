@@ -174,6 +174,13 @@
 .pend .fi .txt{color:var(--muted);text-decoration:line-through;text-decoration-thickness:2px}
 .pend .fi .ok{color:var(--feito);margin-top:2px}
 .pend .fi .info{font-size:12px;color:var(--muted);margin-top:2px}
+.pend .fi .fi-txt{cursor:pointer}
+.pend .fi .fi-txt:hover{color:var(--fg)}
+.pend .fi .fi-seta svg{transition:transform .15s}
+.pend .fi .fi-seta.on svg{transform:rotate(180deg)}
+.pend .fi.aberta{background:var(--surface-2);border-radius:10px;padding:10px 8px;margin:4px -8px}
+.pend .fi-det{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.pend .fi-det .notas{grid-column:auto}
 
 .pend .veu{position:fixed;inset:0;background:rgba(10,14,22,.5);display:grid;place-items:center;padding:max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));z-index:20}
 .pend .ppainel{background:var(--surface);border-radius:16px;width:100%;max-width:480px;max-height:85vh;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:12px}
@@ -434,3 +441,6 @@
   .pend .abas-q{gap:2px}
   .pend .aba-q{padding:8px 7px;gap:5px;font-size:13.5px}
 }
+
+/* anexo antigo que é imagem, no mesmo painel do PDF */
+.pend .pdf-img{display:block;max-width:100%;height:auto;margin:0 auto;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.2);border-radius:2px}

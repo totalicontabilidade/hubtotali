@@ -569,6 +569,29 @@ const Dados = (function () {
     });
   }
 
+  /* As fichas dos anexos de uma pendência do quadro antigo, para o
+     quadro novo apontar para os arquivos (que continuam no Storage,
+     em pendencias/{id}/...). Primeiro a pendência comum; se não há
+     ficha ali, a reservada (que só quem podia ver consegue ler).
+     Ficha apagada fica de fora: o arquivo já não existe. */
+  function anexosDoQuadroAntigo(origemId) {
+    if (!temBanco() || !origemId) return Promise.resolve([]);
+    var id = encodeURIComponent(String(origemId));
+    function lista(colecao) {
+      return pegarCaminho("/" + colecao + "/" + id + "/anexos?pageSize=50").then(docsDe);
+    }
+    return lista("pendencias")
+      .then(function (l) { return l.length ? l : lista("pendencias_reservadas").catch(function () { return []; }); })
+      .then(function (l) {
+        return l.filter(function (a) { return a && a.caminho && !a.apagado; })
+          .sort(function (a, b) { return String(a.em || "").localeCompare(String(b.em || "")); })
+          .map(function (a) {
+            return { fichaId: a._id, nome: String(a.nome || "anexo"), tamanho: Number(a.tamanho) || 0,
+                     caminho: String(a.caminho), desconsiderado: !!a.desconsiderado };
+          });
+      });
+  }
+
   /* ---------- Os favoritos de cada pessoa ----------
 
      Um documento por pessoa, com o uid dela no nome. Ninguém lê o
@@ -1955,6 +1978,7 @@ const Dados = (function () {
     criarRecado: criarRecado,
     apagarRecado: apagarRecado,
     lerRecadosAntigos: lerRecadosAntigos,
+    anexosDoQuadroAntigo: anexosDoQuadroAntigo,
     LIBERACOES: LIBERACOES,
     limparLiberacoes: limparLiberacoes,
     minhasLiberacoes: minhasLiberacoes,
