@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-11T15:05:20.366Z",
+ "atualizadoEm": "2026-11-11T15:35:18.403Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-11T15:05:20.366Z"
+   "ultimaVez": "2026-11-11T15:35:18.403Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-11T15:05:20.366Z"
+   "ultimaVez": "2026-11-11T15:35:18.403Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-11T15:05:20.366Z"
+   "ultimaVez": "2026-11-11T15:35:18.403Z"
   },
   {
    "id": "fazenda",
@@ -70,8 +70,8 @@
    "nome": "Ministério da Fazenda",
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
-   "quantas": 18,
-   "ultimaVez": "2026-11-11T15:05:20.366Z"
+   "quantas": 19,
+   "ultimaVez": "2026-11-11T15:35:18.403Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-11T15:05:20.366Z"
+   "ultimaVez": "2026-11-11T15:35:18.403Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-11T15:05:20.366Z"
+   "ultimaVez": "2026-11-11T15:35:18.403Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-11T15:05:20.366Z"
+   "ultimaVez": "2026-11-11T15:35:18.403Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-11T15:05:20.366Z"
+   "ultimaVez": "2026-11-11T15:35:18.403Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-11T15:05:20.366Z"
+   "ultimaVez": "2026-11-11T15:35:18.403Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-11T15:05:20.366Z"
+   "ultimaVez": "2026-11-11T15:35:18.403Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,27 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-11T15:05:20.366Z"
+   "ultimaVez": "2026-11-11T15:35:18.403Z"
   }
  ],
  "noticias": [
+  {
+   "id": "fzi8du",
+   "titulo": "Receita Federal e órgãos parceiros detalham próximos passos da Reforma Tributária",
+   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/receita-federal-e-orgaos-parceiros-detalham-proximos-passos-da-reforma-tributaria",
+   "resumo": "O foco é promover transparência na divulgação das ações que dão prosseguimento à migração do país para o novo modelo de tributação do consumo",
+   "fonte": "fazenda",
+   "fonteNome": "Ministério da Fazenda",
+   "sigla": "MF",
+   "publicadoEm": "2026-11-11T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-11T15:35:18.403Z"
+  },
   {
    "id": "9nkbu0",
    "titulo": "CAS garante créditos de tributos sobre consumo para entidades filantrópicas",
