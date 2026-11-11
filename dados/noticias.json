@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-11T10:35:17.354Z",
+ "atualizadoEm": "2026-11-11T11:05:17.690Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-11T10:35:17.354Z"
+   "ultimaVez": "2026-11-11T11:05:17.690Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-11T10:35:17.354Z"
+   "ultimaVez": "2026-11-11T11:05:17.690Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-11T10:35:17.354Z"
+   "ultimaVez": "2026-11-11T11:05:17.690Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 19,
-   "ultimaVez": "2026-11-11T10:35:17.354Z"
+   "ultimaVez": "2026-11-11T11:05:17.690Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-11T10:35:17.354Z"
+   "ultimaVez": "2026-11-11T11:05:17.690Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-11T10:35:17.354Z"
+   "ultimaVez": "2026-11-11T11:05:17.690Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-11T10:35:17.354Z"
+   "ultimaVez": "2026-11-11T11:05:17.690Z"
   },
   {
    "id": "camara",
@@ -108,16 +108,16 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-11T10:35:17.354Z"
+   "ultimaVez": "2026-11-11T11:05:17.690Z"
   },
   {
    "id": "senado",
    "sigla": "Senado",
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
-   "ok": false,
-   "erro": "fetch failed",
-   "ultimaVez": "2026-11-11T10:05:19.467Z"
+   "ok": true,
+   "quantas": 1,
+   "ultimaVez": "2026-11-11T11:05:17.690Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-11T10:35:17.354Z"
+   "ultimaVez": "2026-11-11T11:05:17.690Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://www.gov.br/pt-br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-11T10:35:17.354Z"
+   "ultimaVez": "2026-11-11T11:05:17.690Z"
   }
  ],
  "noticias": [
+  {
+   "id": "6gmyym",
+   "titulo": "Receita Federal apreende drogas e medicamentos irregulares em ações de combate aos ilícitos no Acre e em Rondônia",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-apreende-drogas-e-medicamentos-irregulares-em-acoes-de-combate-aos-ilicitos-no-acre-e-em-rondonia",
+   "resumo": "Operações realizadas pela Receita Federal no Acre e em Rondônia resultaram na apreensão de drogas e medicamentos de comercialização irregular, reforçando a atuação do órgão no combate ao tráfico e à circulação ilícita de mercadorias nas regiões de fronteira.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-11T11:05:19.052Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-11T11:05:17.690Z"
+  },
   {
    "id": "1fb5r8u",
    "titulo": "Fenacon, CFC, Receita Federal, CGIBS e Sebrae realizam entrevista coletiva sobre a Reforma Tributária do Consumo",
