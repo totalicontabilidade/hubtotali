@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-10T23:58:08.144Z",
+ "atualizadoEm": "2026-11-11T10:05:19.467Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-10T23:58:08.144Z"
+   "ultimaVez": "2026-11-11T10:05:19.467Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-10T23:58:08.144Z"
+   "ultimaVez": "2026-11-11T10:05:19.467Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-10T23:58:08.144Z"
+   "ultimaVez": "2026-11-11T10:05:19.467Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 19,
-   "ultimaVez": "2026-11-10T23:58:08.144Z"
+   "ultimaVez": "2026-11-11T10:05:19.467Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-10T23:58:08.144Z"
+   "ultimaVez": "2026-11-11T10:05:19.467Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-10T23:58:08.144Z"
+   "ultimaVez": "2026-11-11T10:05:19.467Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-10T23:58:08.144Z"
+   "ultimaVez": "2026-11-11T10:05:19.467Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-10T23:58:08.144Z"
+   "ultimaVez": "2026-11-11T10:05:19.467Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-10T23:58:08.144Z"
+   "ultimaVez": "2026-11-11T10:05:19.467Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-10T23:58:08.144Z"
+   "ultimaVez": "2026-11-11T10:05:19.467Z"
   },
   {
    "id": "govbr",
@@ -135,27 +135,145 @@
    "site": "https://www.gov.br/pt-br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-10T23:58:08.144Z"
+   "ultimaVez": "2026-11-11T10:05:19.467Z"
   }
  ],
  "noticias": [
   {
-   "id": "nr2bap",
+   "id": "1fb5r8u",
+   "titulo": "Fenacon, CFC, Receita Federal, CGIBS e Sebrae realizam entrevista coletiva sobre a Reforma Tributária do Consumo",
+   "link": "https://fenacon.org.br/noticias/fenacon-cfc-receita-federal-cgibs-e-sebrae-realizam-entrevista-coletiva-sobre-a-reforma-tributaria-do-consumo/",
+   "resumo": "A Receita Federal, o Conselho Federal de Contabilidade (CFC), o Comitê Gestor do Imposto sobre Bens e Serviços (CGIBS), o Serviço Brasileiro de Apoio às Micro e Pequenas Empresas (Sebrae) e a Federação Nacional das Empresas de Serviços Contábeis e das Empresas de…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-11T05:10:33.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-11T10:05:19.467Z"
+  },
+  {
+   "id": "ylr3l0",
+   "titulo": "Receita Federal atualiza Ambiente Beta da DeRE",
+   "link": "https://fenacon.org.br/reforma-tributaria/receita-federal-atualiza-ambiente-beta-da-dere/",
+   "resumo": "A Receita Federal do Brasil (RFB) e o Comitê Gestor do IBS (CGIBS) informam que o ambiente de Produção Beta da Declaração de Regimes Específicos (DeRE) será atualizado em 11 de novembro de 2026, às 7h. Informações importantes Disponibilidade do ambiente A atualização será…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-11T04:55:45.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-11T10:05:19.467Z"
+  },
+  {
+   "id": "19zz49g",
+   "titulo": "Senado recebe acórdão do TCU que propõe alíquota de 11,3% para a CBS",
+   "link": "https://fenacon.org.br/reforma-tributaria/senado-recebe-acordao-do-tcu-que-propoe-aliquota-de-113-para-a-cbs/",
+   "resumo": "O presidente do Tribunal de Contas da União (TCU), ministro Vital do Rêgo, entregou nesta terça-feira (10) ao presidente do Senado, Davi Alcolumbre, o acórdão da decisão que recomenda uma alíquota de 11,3% para a Contribuição Social sobre Bens e Serviços (CBS). Esse tributo…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-11T04:47:09.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-11T10:05:19.467Z"
+  },
+  {
+   "id": "1cvxcc7",
+   "titulo": "CNPJ Técnico: o que é e quem precisará da inscrição com a Reforma Tributária",
+   "link": "https://fenacon.org.br/reforma-tributaria/cnpj-tecnico-o-que-e-e-quem-precisara-da-inscricao-com-a-reforma-tributaria/",
+   "resumo": "Instrumento não cria nova empresa, mas exigirá atenção de produtores rurais e locadores de imóveis A partir de 1º de janeiro de 2027, pessoas físicas que exercem atividades econômicas habituais com operações de bens ou prestação de serviços e que não se enquadrem nos limites…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-11T03:38:50.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "empresas"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-11T10:05:19.467Z"
+  },
+  {
+   "id": "1v1iwzl",
+   "titulo": "Seminário Reforma Tributária pelo Brasil reúne profissionais da contabilidade em Aracaju",
+   "link": "https://fenacon.org.br/noticias/seminario-reforma-tributaria-pelo-brasil-reune-profissionais-da-contabilidade-em-aracaju/",
+   "resumo": "Nesta segunda-feira (9 de novembro), Aracaju recebeu o Seminário Reforma Tributária pelo Brasil, iniciativa nacional da Federação Nacional das Empresas de Serviços Contábeis e das Empresas de Assessoramento, Perícias, Informações e Pesquisas (Fenacon) e do Conselho Federal de…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-11T03:07:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "contabil",
+    "sergipe"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-11T10:05:19.467Z"
+  },
+  {
+   "id": "1gh5jge",
    "titulo": "Deputados admitem rever isenções se IVA superar 26,5%",
-   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/deputados-admitem-rever-isencoes-se-iva-superar-265",
-   "resumo": "Os deputados que participam da regulamentação da reforma tributária admitem rever benefícios fiscais concedidos a determinados setores caso a alíquota de referência do novo Imposto sobre Valor Agregado (IVA) ultrapasse 26,5%. A possibilidade foi discutida nesta terça-feira…",
-   "fonte": "ebc",
-   "fonteNome": "Agência Brasil (Economia)",
-   "sigla": "EBC",
-   "publicadoEm": "2026-11-10T21:20:00.000Z",
+   "link": "https://fenacon.org.br/reforma-tributaria/deputados-admitem-rever-isencoes-se-iva-superar-265/",
+   "resumo": "Parlamentares descartam adiar regulamentação da reforma tributária Os deputados que participam da regulamentação da reforma tributária admitem rever benefícios fiscais concedidos a determinados setores caso a alíquota de referência do novo Imposto sobre Valor Agregado (IVA)…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-11T03:05:31.000Z",
    "categorias": [
     "reforma",
     "tributos",
     "trabalhista",
     "legislacao"
    ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-10T21:35:18.387Z"
+   "relevancia": 3,
+   "vistaEm": "2026-11-11T10:05:19.467Z"
+  },
+  {
+   "id": "akemkl",
+   "titulo": "CFC e Sistema Fenacon unem esforços para apresentar contribuições técnicas à Receita Federal sobre a Reforma Tributária",
+   "link": "https://fenacon.org.br/noticias/cfc-e-sistema-fenacon-unem-esforcos-para-apresentar-contribuicoes-tecnicas-a-receita-federal-sobre-a-reforma-tributaria/",
+   "resumo": "O Conselho Federal de Contabilidade (CFC) e o Sistema Fenacon estão reunindo contribuições dos profissionais, entidades e empresas de tecnologia para construir uma manifestação técnica conjunta à Receita Federal sobre os desafios da implementação da Reforma Tributária. O…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-11T02:17:50.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-11T10:05:19.467Z"
+  },
+  {
+   "id": "mfkzmi",
+   "titulo": "SESCAP-LDR recebe edição do Seminário Reforma Tributária pelo Brasil",
+   "link": "https://fenacon.org.br/noticias/sescap-ldr-recebe-edicao-do-seminario-reforma-tributaria-pelo-brasil/",
+   "resumo": "Nesta terça-feira, 10 de novembro de 2026, a cidade de Londrina recebeu o Seminário Reforma Tributária pelo Brasil. O evento reuniu profissionais da contabilidade, empresários e especialistas no setor para discutir as profundas transformações no sistema tributário nacional. A…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-11T01:42:12.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-11T10:05:19.467Z"
   },
   {
    "id": "1mw4m0x",
@@ -173,23 +291,6 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-10T22:35:17.759Z"
-  },
-  {
-   "id": "1fy78s0",
-   "titulo": "Senado recebe acórdão do TCU que propõe alíquota de 11,3% para a CBS",
-   "link": "https://www12.senado.leg.br/noticias/materias/2026/11/10/senado-recebe-acordao-do-tcu-que-propoe-aliquota-de-11-3-para-a-cbs",
-   "resumo": "",
-   "fonte": "senado",
-   "fonteNome": "Agência Senado",
-   "sigla": "Senado",
-   "publicadoEm": "2026-11-10T21:11:18.000Z",
-   "categorias": [
-    "legislacao",
-    "reforma",
-    "tributos"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-10T21:35:18.387Z"
   },
   {
    "id": "4ghk42",
@@ -328,22 +429,6 @@
    "categorias": [
     "tributos",
     "legislacao"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-10T13:54:36.165Z"
-  },
-  {
-   "id": "xq79k5",
-   "titulo": "Receita Federal atualiza Ambiente Beta da DeRE",
-   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/receita-federal-atualiza-ambiente-beta-da-dere",
-   "resumo": "A atualização será realizada sem interrupção dos serviços",
-   "fonte": "fazenda",
-   "fonteNome": "Ministério da Fazenda",
-   "sigla": "MF",
-   "publicadoEm": "2026-11-10T13:54:36.496Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-10T13:54:36.165Z"
