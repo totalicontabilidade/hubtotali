@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-11T12:35:19.386Z",
+ "atualizadoEm": "2026-11-11T13:05:19.478Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-11T12:35:19.386Z"
+   "ultimaVez": "2026-11-11T13:05:19.478Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-11T12:35:19.386Z"
+   "ultimaVez": "2026-11-11T13:05:19.478Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-11T12:35:19.386Z"
+   "ultimaVez": "2026-11-11T13:05:19.478Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 19,
-   "ultimaVez": "2026-11-11T12:35:19.386Z"
+   "ultimaVez": "2026-11-11T13:05:19.478Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-11T12:35:19.386Z"
+   "ultimaVez": "2026-11-11T13:05:19.478Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-11T12:35:19.386Z"
+   "ultimaVez": "2026-11-11T13:05:19.478Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-11T12:35:19.386Z"
+   "ultimaVez": "2026-11-11T13:05:19.478Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-11T12:35:19.386Z"
+   "ultimaVez": "2026-11-11T13:05:19.478Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 0,
-   "ultimaVez": "2026-11-11T12:35:19.386Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-11T13:05:19.478Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-11T12:35:19.386Z"
+   "ultimaVez": "2026-11-11T13:05:19.478Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,44 @@
    "site": "https://www.gov.br/pt-br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-11T12:35:19.386Z"
+   "ultimaVez": "2026-11-11T13:05:19.478Z"
   }
  ],
  "noticias": [
+  {
+   "id": "u48brr",
+   "titulo": "CFC e Fenacon entregam à Receita nove propostas para a reforma tributária",
+   "link": "https://cfc.org.br/noticias/cfc-e-fenacon-entregam-a-receita-nove-propostas-para-a-reforma-tributaria/",
+   "resumo": "O Conselho Federal de Contabilidade (CFC) entregou nesta terça-feira (10) ao secretário especial da Receita Federal, Robinson Barreirinhas, uma manifestação técnica conjunta com a Fenacon, federação que representa empresas de contabilidade e assessoramento. O documento…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-11T13:00:30.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-11T13:05:19.478Z"
+  },
+  {
+   "id": "xyozfk",
+   "titulo": "TCU apresenta ao Senado proposta de alíquota de 11,3% para CBS, novo tributo",
+   "link": "https://www12.senado.leg.br/noticias/videos/2026/11/tcu-apresenta-ao-senado-proposta-de-aliquota-de-11-3-para-cbs-novo-tributo",
+   "resumo": "",
+   "fonte": "senado",
+   "fonteNome": "Agência Senado",
+   "sigla": "Senado",
+   "publicadoEm": "2026-11-11T12:58:42.000Z",
+   "categorias": [
+    "legislacao",
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-11T13:05:19.478Z"
+  },
   {
    "id": "s14n9v",
    "titulo": "Receita Federal e Polícia Federal apreendem 15 mil litros de acetato de etila destinados à exportação ilegal para a Bolívia",
