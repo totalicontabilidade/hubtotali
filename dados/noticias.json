@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-11T12:05:19.894Z",
+ "atualizadoEm": "2026-11-11T12:35:19.386Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-11T12:05:19.894Z"
+   "ultimaVez": "2026-11-11T12:35:19.386Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-11T12:05:19.894Z"
+   "ultimaVez": "2026-11-11T12:35:19.386Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-11T12:05:19.894Z"
+   "ultimaVez": "2026-11-11T12:35:19.386Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 19,
-   "ultimaVez": "2026-11-11T12:05:19.894Z"
+   "ultimaVez": "2026-11-11T12:35:19.386Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-11T12:05:19.894Z"
+   "ultimaVez": "2026-11-11T12:35:19.386Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-11T12:05:19.894Z"
+   "ultimaVez": "2026-11-11T12:35:19.386Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-11T12:05:19.894Z"
+   "ultimaVez": "2026-11-11T12:35:19.386Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-11T12:05:19.894Z"
+   "ultimaVez": "2026-11-11T12:35:19.386Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-11T12:05:19.894Z"
+   "ultimaVez": "2026-11-11T12:35:19.386Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-11T12:05:19.894Z"
+   "ultimaVez": "2026-11-11T12:35:19.386Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://www.gov.br/pt-br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-11T12:05:19.894Z"
+   "ultimaVez": "2026-11-11T12:35:19.386Z"
   }
  ],
  "noticias": [
+  {
+   "id": "s14n9v",
+   "titulo": "Receita Federal e Polícia Federal apreendem 15 mil litros de acetato de etila destinados à exportação ilegal para a Bolívia",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-e-policia-federal-apreendem-15-mil-litros-de-acetato-de-etila-destinados-a-exportacao-ilegal-para-a-bolivia",
+   "resumo": "Ação conjunta em Corumbá/MS impediu o envio clandestino de produto químico controlado com potencial para refinar cerca de 34 toneladas de cocaína.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-11T12:35:21.363Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-11T12:35:19.386Z"
+  },
   {
    "id": "kqy8kj",
    "titulo": "Operação Fronteira acumula R$ 8,7 milhões em apreensões e nove prisões no Rio Grande do Sul",
