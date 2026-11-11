@@ -513,41 +513,150 @@ const Dados = (function () {
     });
   }
 
-  function criarRecado(texto) {
+  /* ANEXOS DE RECADO. Até cinco arquivos, de qualquer tipo, vinte
+     megas cada, em recados/{id}/{n}-{nome} no Storage: a equipe lê,
+     só a administração envia e apaga (storage.rules). O id do recado
+     nasce aqui, antes, para os arquivos subirem primeiro e o recado
+     só existir já com eles; se o recado não grava, os arquivos que
+     subiram são apagados. Sem banco (modo de teste), os arquivos
+     ficam só na memória desta aba. */
+  var ANEXOS_POR_RECADO = 5;
+  var TAMANHO_DO_ANEXO = 20 * 1024 * 1024;
+  var ARQUIVOS_LOCAIS = {};
+
+  function urlDoStorage(caminho, conteudo) {
+    return "https://firebasestorage.googleapis.com/v0/b/" + encodeURIComponent(cfg.STORAGE_BUCKET) +
+           "/o/" + encodeURIComponent(caminho) + (conteudo ? "?alt=media" : "");
+  }
+
+  function nomeDeArquivo(nome) {
+    var n = String(nome || "arquivo").normalize("NFD").replace(/[̀-ͯ]/g, "")
+      .replace(/[^\w.\- ]+/g, "_").replace(/\s+/g, " ").trim();
+    return (n || "arquivo").slice(-80);
+  }
+
+  function idDeRecado() {
+    var letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", b = new Uint8Array(20), id = "";
+    window.crypto.getRandomValues(b);
+    for (var i = 0; i < b.length; i++) id += letras.charAt(b[i] % letras.length);
+    return id;
+  }
+
+  function enviarAoStorage(caminho, f) {
+    var url = "https://firebasestorage.googleapis.com/v0/b/" + encodeURIComponent(cfg.STORAGE_BUCKET) +
+              "/o?uploadType=media&name=" + encodeURIComponent(caminho);
+    return fetch(url, { method: "POST", headers: comAutorizacao({ "Content-Type": f.type || "application/octet-stream" }), body: f })
+      .then(function (r) {
+        if (r.status === 403) throw new Error("O Storage recusou “" + f.name + "” (403): as regras do Storage precisam estar publicadas.");
+        if (!r.ok) throw new Error("Não consegui enviar “" + f.name + "” (HTTP " + r.status + ").");
+      });
+  }
+
+  function apagarDoStorage(caminho) {
+    if (!temBanco() || !cfg.STORAGE_BUCKET) { delete ARQUIVOS_LOCAIS[caminho]; return Promise.resolve(); }
+    return fetch(urlDoStorage(caminho), { method: "DELETE", headers: comAutorizacao() })
+      .then(function (r) { if (!r.ok && r.status !== 404) throw new Error("HTTP " + r.status); });
+  }
+
+  /* O arquivo de um anexo, com a sessão de quem clicou: nada de
+     endereço público. Só as pastas que a equipe pode ler. */
+  function lerArquivo(caminho) {
+    caminho = String(caminho || "");
+    if (!/^(recados|pendencias)\//.test(caminho)) return Promise.reject(new Error("Caminho de anexo inválido."));
+    if (ARQUIVOS_LOCAIS[caminho]) return Promise.resolve(ARQUIVOS_LOCAIS[caminho]);
+    if (!temBanco() || !cfg.STORAGE_BUCKET) return Promise.reject(new Error("O arquivo não está neste navegador."));
+    return fetch(urlDoStorage(caminho, true), { headers: comAutorizacao() })
+      .catch(function () { throw new Error("Não consegui falar com o Storage."); })
+      .then(function (r) {
+        if (r.status === 404) throw new Error("O arquivo não existe mais.");
+        if (!r.ok) throw new Error("Não consegui abrir o arquivo (HTTP " + r.status + ").");
+        return r.blob();
+      });
+  }
+
+  /* Abre o anexo numa aba (PDF e imagem) ou baixa (o resto). A aba
+     abre na hora do clique, vazia, para o bloqueador de janelas não
+     barrar; o arquivo entra nela quando chega. */
+  function abrirArquivo(anexo) {
+    var nome = String((anexo && anexo.nome) || "arquivo");
+    var ver = /\.(pdf|png|jpe?g|gif|webp)$/i.test(nome) || /^(application\/pdf|image\/)/.test(String((anexo && anexo.tipo) || ""));
+    var janela = ver ? window.open("", "_blank") : null;
+    return lerArquivo(anexo && anexo.caminho).then(function (b) {
+      var u = URL.createObjectURL(b);
+      if (ver && janela) { janela.location.href = u; }
+      else {
+        var a = document.createElement("a");
+        a.href = u; a.download = nome; a.rel = "noopener";
+        document.body.appendChild(a); a.click(); a.remove();
+      }
+      window.setTimeout(function () { URL.revokeObjectURL(u); }, 120000);
+    }, function (e) { if (janela) janela.close(); throw e; });
+  }
+
+  function criarRecado(texto, arquivos) {
     var s = lerSessao();
     texto = String(texto || "").trim().slice(0, 600);
+    arquivos = Array.prototype.slice.call(arquivos || []);
     if (!texto) return Promise.reject(new Error("Escreva o recado."));
+    if (arquivos.length > ANEXOS_POR_RECADO) return Promise.reject(new Error("No máximo " + ANEXOS_POR_RECADO + " anexos por recado."));
+    var grande = arquivos.filter(function (f) { return f.size >= TAMANHO_DO_ANEXO; })[0];
+    if (grande) return Promise.reject(new Error("“" + grande.name + "” passa de 20 MB."));
+    if (arquivos.length && temBanco() && !cfg.STORAGE_BUCKET) return Promise.reject(new Error("O Storage não está ligado: sem anexos por enquanto."));
+
+    var id = idDeRecado();
+    var anexos = arquivos.map(function (f, i) {
+      return { nome: String(f.name || "arquivo").slice(0, 160), tamanho: Number(f.size) || 0, tipo: String(f.type || "").slice(0, 100),
+               caminho: "recados/" + id + "/" + (i + 1) + "-" + nomeDeArquivo(f.name) };
+    });
     var doc = { texto: texto, criadoEm: Date.now(), criadoPor: (s && s.uid) || "local", criadoPorNome: "" };
+    if (anexos.length) doc.anexos = anexos;
     return meuCadastro().then(function (eu) {
       doc.criadoPorNome = (eu && eu.nome) || ((s && s.email) ? s.email.split("@")[0] : "administração");
       if (!temBanco()) {
         var lista = recadosLocais();
-        doc.id = "r" + Date.now().toString(36);
+        anexos.forEach(function (a, i) { ARQUIVOS_LOCAIS[a.caminho] = arquivos[i]; });
+        doc.id = id;
         lista.unshift(doc);
         try { window.localStorage.setItem(CHAVE_RECADOS_LOCAIS, JSON.stringify(lista)); } catch (e) {}
         return doc;
       }
       if (!s) throw new Error("Sessão expirada. Entre de novo.");
-      return fetch(BASE_DOCS() + "/recados", {
-        method: "POST",
-        headers: comAutorizacao({ "Content-Type": "application/json" }),
-        body: JSON.stringify({ fields: paraCamposSolto(doc) }),
+      var subiram = [];
+      return anexos.reduce(function (fila, a, i) {
+        return fila.then(function () { return enviarAoStorage(a.caminho, arquivos[i]).then(function () { subiram.push(a.caminho); }); });
+      }, Promise.resolve()).then(function () {
+        return fetch(BASE_DOCS() + "/recados?documentId=" + encodeURIComponent(id), {
+          method: "POST",
+          headers: comAutorizacao({ "Content-Type": "application/json" }),
+          body: JSON.stringify({ fields: paraCamposSolto(doc) }),
+        });
       }).then(function (r) {
         if (r.status === 403) throw new Error("O banco recusou o recado (403): só administrador escreve, e as regras precisam estar publicadas.");
         if (!r.ok) throw new Error("Não consegui gravar o recado (HTTP " + r.status + ").");
-        return r.json();
-      }).then(function (j) { doc.id = j.name.split("/").pop(); return doc; });
+        doc.id = id;
+        return doc;
+      }).catch(function (e) {
+        return Promise.all(subiram.map(function (c) { return apagarDoStorage(c).catch(function () {}); }))
+          .then(function () { throw e; });
+      });
     });
   }
 
-  function apagarRecado(id) {
+  /* Apagar o recado leva os arquivos dele junto. Arquivo que não
+     sai não segura o recado: o que importa é ele sumir do Hub. */
+  function apagarRecado(id, anexos) {
+    var caminhos = (anexos || []).map(function (a) { return a && a.caminho; })
+      .filter(function (c) { return /^recados\//.test(String(c || "")); });
+    var antes = Promise.all(caminhos.map(function (c) { return apagarDoStorage(c).catch(function () {}); }));
     if (!temBanco()) {
-      var lista = recadosLocais().filter(function (r) { return r.id !== id; });
-      try { window.localStorage.setItem(CHAVE_RECADOS_LOCAIS, JSON.stringify(lista)); } catch (e) {}
-      return Promise.resolve();
+      return antes.then(function () {
+        var lista = recadosLocais().filter(function (r) { return r.id !== id; });
+        try { window.localStorage.setItem(CHAVE_RECADOS_LOCAIS, JSON.stringify(lista)); } catch (e) {}
+      });
     }
-    return fetch(BASE_DOCS() + "/recados/" + encodeURIComponent(id), { method: "DELETE", headers: comAutorizacao() })
-      .then(function (r) { if (!r.ok && r.status !== 404) throw new Error("Não consegui apagar (HTTP " + r.status + ")."); });
+    return antes.then(function () {
+      return fetch(BASE_DOCS() + "/recados/" + encodeURIComponent(id), { method: "DELETE", headers: comAutorizacao() });
+    }).then(function (r) { if (!r.ok && r.status !== 404) throw new Error("Não consegui apagar (HTTP " + r.status + ")."); });
   }
 
   /* Os recados do quadro antigo (pendencias com ehRecado), só leitura,
@@ -1977,6 +2086,8 @@ const Dados = (function () {
     listarRecados: listarRecados,
     criarRecado: criarRecado,
     apagarRecado: apagarRecado,
+    lerArquivo: lerArquivo,
+    abrirArquivo: abrirArquivo,
     lerRecadosAntigos: lerRecadosAntigos,
     anexosDoQuadroAntigo: anexosDoQuadroAntigo,
     LIBERACOES: LIBERACOES,

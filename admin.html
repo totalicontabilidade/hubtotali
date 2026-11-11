@@ -28,7 +28,7 @@
   style-src 'self';
   img-src 'self' data: https://unavatar.io https://totalicontabilidade.github.io https://*.totalicontabilidade.com.br;
   font-src 'self';
-  connect-src 'self' https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://totalicontabilidade.github.io https://*.totalicontabilidade.com.br;
+  connect-src 'self' https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://firebasestorage.googleapis.com https://totalicontabilidade.github.io https://*.totalicontabilidade.com.br;
   object-src 'none';
   base-uri 'none';
   form-action 'none'">
@@ -379,7 +379,12 @@
       <div class="rec-novo" id="rec-novo">
         <textarea class="campo__caixa rec-texto" id="rec-texto" rows="3" maxlength="600"
                   placeholder="O recado, como você falaria para a equipe. Ex.: Sexta não haverá expediente à tarde."></textarea>
+        <div class="rec-anexos" id="rec-anexos"></div>
         <div class="painel__acoes">
+          <label class="btn btn--pequeno rec-anexar" title="Até 5 arquivos, de até 20 MB cada">
+            <input type="file" id="rec-arquivo" multiple hidden>
+            Anexar arquivo
+          </label>
           <span class="rec-dica">Grava na hora. Cada pessoa vê uma vez e marca “Entendi”; aqui você acompanha quem já viu.</span>
           <button class="btn btn--principal" type="button" id="btn-rec-mandar">Mandar para a equipe</button>
         </div>

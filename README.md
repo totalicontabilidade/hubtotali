@@ -361,6 +361,16 @@ não pula na frente de quem entra na equipe depois. Os recados de antes
 continuam em `pendencias` (só leitura) e aparecem na administração fechados
 numa gaveta, como registro.
 
+Recado pode levar **anexo**: até cinco arquivos de qualquer tipo, 20 MB cada.
+Eles sobem antes, para o Storage em `recados/{id}/{n}-{nome}`, e só então o
+recado é gravado, com a ficha de cada arquivo em `anexos` (`nome`, `tamanho`,
+`tipo`, `caminho`). Se o recado não grava, os arquivos que subiram são
+apagados. A equipe lê e só administrador envia ou apaga (storage.rules).
+Apagar o recado apaga os arquivos dele. No cartão do Hub e na administração,
+PDF e imagem abrem numa aba e o resto é baixado, sempre com a sessão de quem
+clicou (`Dados.abrirArquivo`). Os recados de antes mostram os arquivos que
+tinham no quadro antigo, que continuam em `pendencias/{id}/...`.
+
 Não confundir com os **avisos** da faixa de baixo do Hub (`hub/avisos`): esses
 ficam lá o tempo todo, sem leitura marcada, e se editam na aba Tela inicial.
 

@@ -40,6 +40,35 @@ const Recados = (function () {
     return d.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" }) + " às " + hora;
   }
 
+  function tamanho(n) {
+    n = Number(n) || 0;
+    if (n >= 1048576) return (n / 1048576).toFixed(1).replace(".", ",") + " MB";
+    return Math.max(1, Math.round(n / 1024)) + " KB";
+  }
+
+  /* Os arquivos que a administração mandou junto. Abrir não fecha o
+     cartão: a pessoa vê o arquivo e depois marca "Entendi". */
+  function anexos(lista) {
+    var box = el("div", "rj__anexos");
+    lista.forEach(function (a) {
+      if (!a || !a.caminho) return;
+      var b = el("button", "rj__anexo");
+      b.type = "button";
+      b.title = "Abrir " + (a.nome || "o anexo");
+      b.appendChild(el("span", "rj__anexo-n", a.nome || "anexo"));
+      if (a.tamanho) b.appendChild(el("span", "rj__anexo-t", tamanho(a.tamanho)));
+      b.addEventListener("click", function () {
+        var aviso = b.parentNode.querySelector(".rj__anexo-erro");
+        if (aviso) aviso.remove();
+        Dados.abrirArquivo(a).catch(function (e) {
+          box.appendChild(el("p", "rj__anexo-erro", e.message || "Não consegui abrir o arquivo."));
+        });
+      });
+      box.appendChild(b);
+    });
+    return box;
+  }
+
   function pendentes(lista) {
     var limite = Date.now() - DIAS_DE_VALIDADE * 864e5;
     return (lista || []).filter(function (r) {
@@ -60,6 +89,7 @@ const Recados = (function () {
       MOSTRADOS[r.id] = true;
       var x = el("article", "rj__item");
       x.appendChild(el("p", "rj__x", r.texto));
+      if (r.anexos && r.anexos.length) x.appendChild(anexos(r.anexos));
       x.appendChild(el("div", "rj__de", (r.criadoPorNome ? "de " + r.criadoPorNome : "da administração") + (r.criadoEm ? " · " + quando(r.criadoEm) : "")));
       lista.appendChild(x);
     });

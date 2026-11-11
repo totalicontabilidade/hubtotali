@@ -146,6 +146,26 @@ service firebase.storage {
       allow delete: if daEquipe() && request.auth.uid == uid;
     }
 
+    // ---------- os anexos dos recados da administração ----------
+    // recados/{id}/{arquivo}: a equipe inteira lê (o recado é para
+    // todos); só administrador envia e apaga — o mesmo de quem
+    // escreve o recado no banco. Qualquer tipo de arquivo, vinte
+    // megas cada. Sobrescrever, nunca: create só onde não há nada.
+    function ehAdmin() {
+      return daEquipe()
+             && (request.auth.uid == 'UMBvjqMpw2bEbpvBIZnhE5iwlB23'
+                 || firestore.get(/databases/(default)/documents/equipe/$(request.auth.uid)).data.papel == 'admin');
+    }
+
+    match /recados/{id}/{arquivo} {
+      allow read:   if daEquipe();
+      allow create: if ehAdmin()
+                    && resource == null
+                    && request.resource.size < 20 * 1024 * 1024;
+      allow update: if false;
+      allow delete: if ehAdmin();
+    }
+
     // Nada mais neste balde é acessível por ninguém.
     match /{tudo=**} {
       allow read, write: if false;

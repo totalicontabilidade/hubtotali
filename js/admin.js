@@ -155,6 +155,9 @@
              'stroke-linecap="round"><path d="M12 6v12M6 12h12"/></svg>',
   };
 
+  ICONES.clipe = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" ' +
+                 'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5l-8.6 8.6a5 5 0 0 1-7.1-7.1l8.6-8.6a3.3 3.3 0 0 1 4.7 4.7l-8.6 8.6a1.7 1.7 0 0 1-2.4-2.4l7.9-7.9"/></svg>';
+
   function botaoIcone(icone, titulo, perigo) {
     var b = elemento("button", "icone-btn" + (perigo ? " icone-btn--perigo" : ""));
     b.type = "button";
@@ -2944,22 +2947,74 @@
   function ligarRecadosEquipe() {
     if (ligarRecadosEquipe.pronto) return;
     ligarRecadosEquipe.pronto = true;
-    var b = $("btn-rec-mandar"), t = $("rec-texto");
+    var b = $("btn-rec-mandar"), t = $("rec-texto"), inp = $("rec-arquivo"), box = $("rec-anexos");
     if (!b || !t) return;
     if (!LIB.admin) { $("rec-novo").hidden = true; }
     function erro(x) { var e = $("rec-erro"); e.textContent = x || ""; e.hidden = !x; }
+    /* Os arquivos escolhidos esperam aqui até o recado sair. */
+    var escolhidos = [];
+    function desenharEscolhidos() {
+      if (!box) return;
+      box.textContent = "";
+      escolhidos.forEach(function (f, i) {
+        var c = elemento("span", "rec-anexo rec-anexo--novo");
+        c.appendChild(elemento("span", "rec-anexo__n", f.name));
+        c.appendChild(elemento("span", "rec-anexo__t", tamanhoLegivel(f.size)));
+        var x = elemento("button", "rec-anexo__x", "×");
+        x.type = "button"; x.title = "Tirar " + f.name; x.setAttribute("aria-label", "Tirar " + f.name);
+        x.addEventListener("click", function () { escolhidos.splice(i, 1); desenharEscolhidos(); });
+        c.appendChild(x);
+        box.appendChild(c);
+      });
+    }
+    if (inp) inp.addEventListener("change", function () {
+      var novos = Array.prototype.slice.call(inp.files || []);
+      inp.value = "";
+      var grande = novos.filter(function (f) { return f.size >= 20 * 1024 * 1024; });
+      novos = novos.filter(function (f) { return f.size < 20 * 1024 * 1024; });
+      escolhidos = escolhidos.concat(novos);
+      var demais = escolhidos.length > 5;
+      escolhidos = escolhidos.slice(0, 5);
+      erro(grande.length ? "“" + grande[0].name + "” passa de 20 MB e ficou de fora." : demais ? "No máximo 5 anexos por recado." : "");
+      desenharEscolhidos();
+    });
     b.addEventListener("click", function () {
       var texto = t.value.trim();
       if (!texto) { t.focus(); return; }
-      b.disabled = true; b.textContent = "Mandando…"; erro("");
-      Dados.criarRecado(texto).then(function () {
-        t.value = "";
+      b.disabled = true; b.textContent = escolhidos.length ? "Enviando os anexos…" : "Mandando…"; erro("");
+      Dados.criarRecado(texto, escolhidos).then(function () {
+        t.value = ""; escolhidos = []; desenharEscolhidos();
         recado("Recado mandado. Cada pessoa vê ao abrir o Hub.");
         desenharRecadosEquipe(true);
       }).catch(function (e) { erro(e.message || "Não consegui mandar."); })
         .then(function () { b.disabled = false; b.textContent = "Mandar para a equipe"; });
     });
     t.addEventListener("keydown", function (e) { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); b.click(); } });
+  }
+
+  function tamanhoLegivel(n) {
+    n = Number(n) || 0;
+    if (n >= 1048576) return (n / 1048576).toFixed(1).replace(".", ",") + " MB";
+    return Math.max(1, Math.round(n / 1024)) + " KB";
+  }
+
+  /* Os anexos de um recado, como botões: um clique abre (PDF e
+     imagem numa aba) ou baixa (o resto), com a sessão de quem clicou. */
+  function anexosDoRecado(lista) {
+    var box = elemento("div", "rec-anexos");
+    (lista || []).forEach(function (a) {
+      var c = elemento("button", "rec-anexo" + (a.desconsiderado ? " rec-anexo--fora" : ""));
+      c.type = "button";
+      c.title = "Abrir " + a.nome;
+      c.innerHTML = ICONES.clipe;
+      c.appendChild(elemento("span", "rec-anexo__n", a.nome + (a.desconsiderado ? " (desconsiderado)" : "")));
+      if (a.tamanho) c.appendChild(elemento("span", "rec-anexo__t", tamanhoLegivel(a.tamanho)));
+      c.addEventListener("click", function () {
+        Dados.abrirArquivo(a).catch(function (e) { recado(e.message || "Não consegui abrir o arquivo.", true); });
+      });
+      box.appendChild(c);
+    });
+    return box;
   }
 
   function nomeNaEquipe(uid) {
@@ -2989,6 +3044,7 @@
         var linha = elemento("div", "rec-item");
         var txt = elemento("p", "rec-item__t", rc.texto);
         linha.appendChild(txt);
+        if (rc.anexos && rc.anexos.length) linha.appendChild(anexosDoRecado(rc.anexos));
         var meta = elemento("div", "rec-item__meta");
         var quando = rc.criadoEm ? new Date(Number(rc.criadoEm)).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" }) : "";
         meta.appendChild(elemento("span", null, "por " + (rc.criadoPorNome || nomeNaEquipe(rc.criadoPor) || "administração") + (quando ? " · " + quando : "")));
@@ -3002,8 +3058,8 @@
         if (LIB.admin) {
           var ap = botaoIcone("lixo", "Apagar o recado", true);
           ap.addEventListener("click", function () {
-            if (!window.confirm("Apagar este recado? Quem ainda não viu deixa de ver.")) return;
-            Dados.apagarRecado(rc.id).then(function () { desenharRecadosEquipe(true); })
+            if (!window.confirm("Apagar este recado" + (rc.anexos && rc.anexos.length ? " e os anexos dele" : "") + "? Quem ainda não viu deixa de ver.")) return;
+            Dados.apagarRecado(rc.id, rc.anexos).then(function () { desenharRecadosEquipe(true); })
               .catch(function (e) { recado(e.message || "Não consegui apagar.", true); });
           });
           meta.appendChild(ap);
@@ -3050,6 +3106,11 @@
         var linha = elemento("div", "rec-item rec-item--antigo");
         linha.appendChild(elemento("p", "rec-item__t", rc.texto));
         if (rc.porque) linha.appendChild(elemento("p", "rec-item__x", rc.porque));
+        /* Os arquivos continuam no Storage, na pasta da pendência
+           antiga; a ficha de cada um está em pendencias/{id}/anexos. */
+        Dados.anexosDoQuadroAntigo(rc.id).then(function (l) {
+          if (l && l.length) linha.insertBefore(anexosDoRecado(l), meta);
+        }).catch(function () {});
         var meta = elemento("div", "rec-item__meta");
         var quando = rc.criadoEm ? new Date(rc.criadoEm).toLocaleDateString("pt-BR") : "";
         meta.appendChild(elemento("span", null, "por " + (nomeNaEquipe(rc.criadoPor) || "alguém da equipe") + (quando ? " · " + quando : "") + (rc.setorDestino ? " · " + rc.setorDestino : "")));

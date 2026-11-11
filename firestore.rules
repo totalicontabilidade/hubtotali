@@ -425,7 +425,12 @@ service cloud.firestore {
                     && request.resource.data.texto.size() > 0
                     && request.resource.data.texto.size() <= 600
                     && request.resource.data.criadoEm is number
-                    && request.resource.data.criadoPorNome is string;
+                    && request.resource.data.criadoPorNome is string
+                    // Os anexos (até cinco) moram no Storage, em
+                    // recados/{id}/...; aqui fica só a ficha de cada um.
+                    && (!('anexos' in request.resource.data)
+                        || (request.resource.data.anexos is list
+                            && request.resource.data.anexos.size() <= 5));
       allow update: if false;
       allow delete: if ehAdmin();
     }
