@@ -189,10 +189,10 @@ de classe ou federação do setor:
 | CFC | RSS | sim |
 | Fenacon | RSS | sim |
 | SEFAZ/SE | RSS do SharePoint | sim |
-| Agência Câmara (Economia) | RSS | só o que é do ramo |
+| Agência Câmara (últimas notícias) | RSS | só o que é do ramo |
 | Agência Senado | RSS | só o que é do ramo |
 | Agência Brasil (Economia) | RSS | só o que é do ramo |
-| Portal gov.br | RSS | só o que é do ramo |
+| Agência Gov (governo federal, antes no portal gov.br) | RSS | só o que é do ramo |
 
 "Do ramo" é uma lista de palavras (tributo, Simples, eSocial, FGTS, reforma
 tributária, CNPJ…) em `DO_RAMO`. Cada notícia recebe etiquetas de assunto

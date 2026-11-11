@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-11T13:05:19.478Z",
+ "atualizadoEm": "2026-11-11T14:03:29.300Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-11T13:05:19.478Z"
+   "ultimaVez": "2026-11-11T14:03:29.300Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-11T13:05:19.478Z"
+   "ultimaVez": "2026-11-11T14:03:29.300Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-11T13:05:19.478Z"
+   "ultimaVez": "2026-11-11T14:03:29.300Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 19,
-   "ultimaVez": "2026-11-11T13:05:19.478Z"
+   "ultimaVez": "2026-11-11T14:03:29.300Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-11T13:05:19.478Z"
+   "ultimaVez": "2026-11-11T14:03:29.300Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-11T13:05:19.478Z"
+   "ultimaVez": "2026-11-11T14:03:29.300Z"
   },
   {
    "id": "sefaz-se",
@@ -99,16 +99,16 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-11T13:05:19.478Z"
+   "ultimaVez": "2026-11-11T14:03:29.300Z"
   },
   {
    "id": "camara",
    "sigla": "Câmara",
-   "nome": "Agência Câmara (Economia)",
+   "nome": "Agência Câmara",
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-11T13:05:19.478Z"
+   "quantas": 0,
+   "ultimaVez": "2026-11-11T14:03:29.300Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-11T13:05:19.478Z"
+   "ultimaVez": "2026-11-11T14:03:29.300Z"
   },
   {
    "id": "ebc",
@@ -126,19 +126,35 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-11T13:05:19.478Z"
+   "ultimaVez": "2026-11-11T14:03:29.300Z"
   },
   {
    "id": "govbr",
-   "sigla": "gov.br",
-   "nome": "Portal gov.br",
-   "site": "https://www.gov.br/pt-br/noticias",
+   "sigla": "Gov",
+   "nome": "Agência Gov (governo federal)",
+   "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
-   "quantas": 0,
-   "ultimaVez": "2026-11-11T13:05:19.478Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-11T14:03:29.300Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1o44tf0",
+   "titulo": "Operação conjunta apreende carga milionária de celulares e medicamentos emagrecedores no Paraná",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-conjunta-apreende-carga-milionaria-de-celulares-e-medicamentos-emagrecedores-no-parana",
+   "resumo": "Fiscalização realizada em São Miguel do Iguaçu resultou na apreensão de 1.900 celulares, 20 mil ampolas medicamentos emagrecedores e uma pistola com acessórios e munições.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-11T14:03:29.899Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-11T14:03:29.300Z"
+  },
   {
    "id": "u48brr",
    "titulo": "CFC e Fenacon entregam à Receita nove propostas para a reforma tributária",

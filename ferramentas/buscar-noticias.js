@@ -76,8 +76,12 @@ const FONTES = [
        nem abre. Vai pela ponte — a função no Google Cloud em São
        Paulo (funcoes/index.js), cujo endereço está em PONTE_URL. */
     pelaPonte: true },
-  { id: "camara",   sigla: "Câmara",  nome: "Agência Câmara (Economia)",
-    url: "https://www.camara.leg.br/noticias/rss/dinamico/ECONOMIA",
+  /* Todas as últimas notícias, e não só o tema Economia: o tributo e
+     o trabalho saem em qualquer tema, e a peneira (DO_RAMO) já separa
+     o que é do escritório. O feed traz as 20 mais novas, e o robô de
+     meia em meia hora não deixa nenhuma passar. */
+  { id: "camara",   sigla: "Câmara",  nome: "Agência Câmara",
+    url: "https://www.camara.leg.br/noticias/rss/ultimas-noticias",
     site: "https://www.camara.leg.br/noticias", tipo: "rss", peneira: true, categoria: "legislacao" },
   { id: "senado",   sigla: "Senado",  nome: "Agência Senado",
     url: "https://www12.senado.leg.br/noticias/rss.xml",
@@ -85,9 +89,12 @@ const FONTES = [
   { id: "ebc",      sigla: "EBC",     nome: "Agência Brasil (Economia)",
     url: "https://agenciabrasil.ebc.com.br/rss/economia/feed.xml",
     site: "https://agenciabrasil.ebc.com.br/economia", tipo: "rss", peneira: true },
-  { id: "govbr",    sigla: "gov.br",  nome: "Portal gov.br",
-    url: "https://www.gov.br/pt-br/noticias/RSS",
-    site: "https://www.gov.br/pt-br/noticias", tipo: "rss", peneira: true },
+  /* As notícias do governo federal saíram do portal gov.br (a página
+     de lá só redireciona, e o RSS antigo parou em 2023) e foram para
+     a Agência Gov, da EBC. O id continua "govbr" para a cor e o filtro. */
+  { id: "govbr",    sigla: "Gov",     nome: "Agência Gov (governo federal)",
+    url: "https://agenciagov.ebc.com.br/rss.xml",
+    site: "https://agenciagov.ebc.com.br/", tipo: "rss", peneira: true },
 ];
 
 /* ---------- os assuntos ----------
