@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-11T17:05:19.067Z",
+ "atualizadoEm": "2026-11-11T18:35:19.518Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-11T17:05:19.067Z"
+   "ultimaVez": "2026-11-11T18:35:19.518Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-11T17:05:19.067Z"
+   "ultimaVez": "2026-11-11T18:35:19.518Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-11T17:05:19.067Z"
+   "ultimaVez": "2026-11-11T18:35:19.518Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 19,
-   "ultimaVez": "2026-11-11T17:05:19.067Z"
+   "ultimaVez": "2026-11-11T18:35:19.518Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-11T17:05:19.067Z"
+   "ultimaVez": "2026-11-11T18:35:19.518Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-11T17:05:19.067Z"
+   "ultimaVez": "2026-11-11T18:35:19.518Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-11T17:05:19.067Z"
+   "ultimaVez": "2026-11-11T18:35:19.518Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-11T17:05:19.067Z"
+   "ultimaVez": "2026-11-11T18:35:19.518Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-11T17:05:19.067Z"
+   "ultimaVez": "2026-11-11T18:35:19.518Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-11T17:05:19.067Z"
+   "ultimaVez": "2026-11-11T18:35:19.518Z"
   },
   {
    "id": "govbr",
@@ -134,11 +134,28 @@
    "nome": "Agência Gov (governo federal)",
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
-   "quantas": 3,
-   "ultimaVez": "2026-11-11T17:05:19.067Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-11T18:35:19.518Z"
   }
  ],
  "noticias": [
+  {
+   "id": "15b1x77",
+   "titulo": "CFC propõe medidas para garantir segurança aos profissionais da contabilidade na transição da reforma tributária",
+   "link": "https://cfc.org.br/noticias/cfc-propoe-medidas-para-garantir-seguranca-aos-profissionais-da-contabilidade-na-transicao-da-reforma-tributaria/",
+   "resumo": "A segurança jurídica, a preparação dos profissionais da contabilidade e a redução dos riscos para as empresas estiveram no centro das propostas apresentadas pelo Conselho Federal de Contabilidade (CFC) durante coletiva de imprensa, nesta quarta-feira (11), sobre a…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-11T18:22:23.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-11T18:35:19.518Z"
+  },
   {
    "id": "1t4ihqp",
    "titulo": "Reforma tributária: governo apresentará texto para facilitar adaptação",
