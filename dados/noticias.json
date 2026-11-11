@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-11T21:35:16.978Z",
+ "atualizadoEm": "2026-11-11T22:35:18.176Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-11T21:35:16.978Z"
+   "ultimaVez": "2026-11-11T22:35:18.176Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-11T21:35:16.978Z"
+   "ultimaVez": "2026-11-11T22:35:18.176Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-11T21:35:16.978Z"
+   "ultimaVez": "2026-11-11T22:35:18.176Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 19,
-   "ultimaVez": "2026-11-11T21:35:16.978Z"
+   "ultimaVez": "2026-11-11T22:35:18.176Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-11T21:35:16.978Z"
+   "ultimaVez": "2026-11-11T22:35:18.176Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-11T21:35:16.978Z"
+   "ultimaVez": "2026-11-11T22:35:18.176Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-11T21:35:16.978Z"
+   "ultimaVez": "2026-11-11T22:35:18.176Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-11T21:35:16.978Z"
+   "ultimaVez": "2026-11-11T22:35:18.176Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-11T21:35:16.978Z"
+   "ultimaVez": "2026-11-11T22:35:18.176Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-11T21:35:16.978Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-11T22:35:18.176Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-11T21:35:16.978Z"
+   "ultimaVez": "2026-11-11T22:35:18.176Z"
   }
  ],
  "noticias": [
+  {
+   "id": "f0nmri",
+   "titulo": "Receita retém R$ 35 milhões em itens irregulares no Porto de Vitória",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/receita-retem-r-35-milhoes-em-itens-irregulares-no-porto-de-vitoria",
+   "resumo": "Cerca de 400 mil itens irregulares avaliados em R$ 35 milhões foram retidos pela Receita Federal desde o início de novembro do Porto de Vitória. O órgão divulgou nesta quarta-feira (11) um balanço parcial da Operação Fronteira na capital capixaba. Segundo a Receita, foram…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-11T22:10:00.000Z",
+   "categorias": [
+    "tributos",
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-11T22:35:18.176Z"
+  },
   {
    "id": "1w9f78",
    "titulo": "Parlamentares e representante do Tesouro Nacional recebem homenagem pelos 80 anos do Sistema CFC/CRCs",
