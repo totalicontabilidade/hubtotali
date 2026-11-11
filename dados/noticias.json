@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-11T11:35:21.797Z",
+ "atualizadoEm": "2026-11-11T12:05:19.894Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-11T11:35:21.797Z"
+   "ultimaVez": "2026-11-11T12:05:19.894Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-11T11:35:21.797Z"
+   "ultimaVez": "2026-11-11T12:05:19.894Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-11T11:35:21.797Z"
+   "ultimaVez": "2026-11-11T12:05:19.894Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 19,
-   "ultimaVez": "2026-11-11T11:35:21.797Z"
+   "ultimaVez": "2026-11-11T12:05:19.894Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-11T11:35:21.797Z"
+   "ultimaVez": "2026-11-11T12:05:19.894Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-11T11:35:21.797Z"
+   "ultimaVez": "2026-11-11T12:05:19.894Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-11T11:35:21.797Z"
+   "ultimaVez": "2026-11-11T12:05:19.894Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-11T11:35:21.797Z"
+   "ultimaVez": "2026-11-11T12:05:19.894Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-11T11:35:21.797Z"
+   "quantas": 0,
+   "ultimaVez": "2026-11-11T12:05:19.894Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-11T11:35:21.797Z"
+   "ultimaVez": "2026-11-11T12:05:19.894Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://www.gov.br/pt-br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-11T11:35:21.797Z"
+   "ultimaVez": "2026-11-11T12:05:19.894Z"
   }
  ],
  "noticias": [
+  {
+   "id": "kqy8kj",
+   "titulo": "Operação Fronteira acumula R$ 8,7 milhões em apreensões e nove prisões no Rio Grande do Sul",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-acumula-r-8-7-milhoes-em-apreensoes-e-nove-prisoes-no-rio-grande-do-sul",
+   "resumo": "Desde o início da Operação Fronteira, em 3 de novembro, as ações da Receita Federal no Rio Grande do Sul já resultaram em R$ 8,75 milhões em mercadorias apreendidas e nove prisões, fortalecendo o combate ao contrabando, ao descaminho, ao tráfico de drogas e a outros ilícitos…",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-11T12:05:21.696Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-11T12:05:19.894Z"
+  },
   {
    "id": "z3sseb",
    "titulo": "Aviso de Pauta - Coletiva de Imprensa",
