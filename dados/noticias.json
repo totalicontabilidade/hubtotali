@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-12T00:25:46.510Z",
+ "atualizadoEm": "2026-11-12T10:05:18.793Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T00:25:46.510Z"
+   "ultimaVez": "2026-11-12T10:05:18.793Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-12T00:25:46.510Z"
+   "ultimaVez": "2026-11-12T10:05:18.793Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T00:25:46.510Z"
+   "ultimaVez": "2026-11-12T10:05:18.793Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 19,
-   "ultimaVez": "2026-11-12T00:25:46.510Z"
+   "ultimaVez": "2026-11-12T10:05:18.793Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-12T00:25:46.510Z"
+   "ultimaVez": "2026-11-12T10:05:18.793Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-12T00:25:46.510Z"
+   "ultimaVez": "2026-11-12T10:05:18.793Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-12T00:25:46.510Z"
+   "ultimaVez": "2026-11-12T10:05:18.793Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-12T00:25:46.510Z"
+   "ultimaVez": "2026-11-12T10:05:18.793Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-12T00:25:46.510Z"
+   "ultimaVez": "2026-11-12T10:05:18.793Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-12T00:25:46.510Z"
+   "ultimaVez": "2026-11-12T10:05:18.793Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,118 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-12T00:25:46.510Z"
+   "ultimaVez": "2026-11-12T10:05:18.793Z"
   }
  ],
  "noticias": [
+  {
+   "id": "er4q9",
+   "titulo": "Fenacon reforça compromisso com a segurança jurídica e a preparação das empresas para a Reforma Tributária",
+   "link": "https://fenacon.org.br/noticias/fenacon-reforca-compromisso-com-a-seguranca-juridica-e-a-preparacao-das-empresas-para-a-reforma-tributaria/",
+   "resumo": "Durante coletiva de imprensa da Receita Federal, presidente Reynaldo Lima Jr. destacou o diálogo institucional, a necessidade de solucionar entraves técnicos e a importância de apoiar micro e pequenas empresas na transição para o novo sistema tributário A Federação Nacional…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-12T03:43:36.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-12T10:05:18.793Z"
+  },
+  {
+   "id": "52rni9",
+   "titulo": "Fisco adia para março de 2027 exigências da reforma tributária para empresas do Simples",
+   "link": "https://fenacon.org.br/noticias/fisco-adia-para-marco-de-2027-exigencias-da-reforma-tributaria-para-empresas-do-simples/",
+   "resumo": "Início da reforma está mantido para janeiro de 2027. Secretário Robinson Barreirinhas anunciou programa que prevê orientação e correção preventiva, sem punição a contribuintes de boa-fé durante a transição A Receita Federal (RF) vai adiar para 1º de março de 2027 a exigência…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-12T03:42:30.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-12T10:05:18.793Z"
+  },
+  {
+   "id": "1k0xg48",
+   "titulo": "CAS garante créditos de tributos sobre consumo para entidades filantrópicas",
+   "link": "https://fenacon.org.br/reforma-tributaria/cas-garante-creditos-de-tributos-sobre-consumo-para-entidades-filantropicas/",
+   "resumo": "A Comissão de Assuntos Sociais (CAS) do Senado aprovou nesta quarta-feira (11) projeto que permite a entidades filantrópicas de educação, saúde e assistência social manterem os créditos dos tributos pagos na compra de bens e serviços após a reforma tributária. A regra também…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-12T03:16:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-12T10:05:18.793Z"
+  },
+  {
+   "id": "b7l9l0",
+   "titulo": "CCT estende incentivos fiscais a startups e micro e pequenas empresas",
+   "link": "https://fenacon.org.br/noticias/cct-estende-incentivos-fiscais-a-startups-e-micro-e-pequenas-empresas/",
+   "resumo": "Incentivos fiscais da chamada Lei do Bem, para investimentos em pesquisa e desenvolvimento de inovação, podem ser estendidos a startups e a microempresas e empresas de pequeno porte optantes pelo Simples Nacional. A Comissão de Ciência, Tecnologia, Inovação e Informática…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-12T03:15:00.000Z",
+   "categorias": [
+    "simples",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-12T10:05:18.793Z"
+  },
+  {
+   "id": "1lqaps9",
+   "titulo": "Setor de serviços varia -0,1% em setembro, impactado pelos transportes",
+   "link": "https://fenacon.org.br/noticias/setor-de-servicos-varia-01-em-setembro-impactado-pelos-transportes/",
+   "resumo": "Em 12 meses, atividades crescem 1,9%, revela o IBGE O setor de serviços, o que mais emprega na economia, variou -0,1% na passagem em setembro, na comparação com agosto. O resultado foi impactado negativamente principalmente pelas atividades de transportes e de informação e…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-12T03:15:00.000Z",
+   "categorias": [],
+   "relevancia": 2,
+   "vistaEm": "2026-11-12T10:05:18.793Z"
+  },
+  {
+   "id": "cxexse",
+   "titulo": "Proposta que facilita transição tributária será enviada ao Congresso",
+   "link": "https://fenacon.org.br/reforma-tributaria/proposta-que-facilita-transicao-tributaria-sera-enviada-ao-congresso/",
+   "resumo": "Regra permitirá cálculo por estimativa e ajustes posteriores O governo federal vai encaminhar ao Congresso Nacional uma proposta para criar uma regra de transição na cobrança da Contribuição sobre Bens e Serviços (CBS), novo tributo federal da reforma tributária. A medida…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-12T03:08:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-12T10:05:18.793Z"
+  },
+  {
+   "id": "nhbme8",
+   "titulo": "O contrato que ninguém lê: o risco invisível da contabilidade terceirizada",
+   "link": "https://fenacon.org.br/noticias/o-contrato-que-ninguem-le-o-risco-invisivel-da-contabilidade-terceirizada/",
+   "resumo": "Durante anos, a contratação de um escritório de contabilidade foi tratada, na maioria das empresas brasileiras, como uma decisão de preço. Por Junior Rozante Durante anos, a contratação de um escritório de contabilidade foi tratada, na maioria das empresas brasileiras, como…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-12T01:39:26.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-12T10:05:18.793Z"
+  },
   {
    "id": "12pxvpr",
    "titulo": "Pacote fiscal prevê 120 dias para Congresso discutir supersalários",
@@ -220,22 +328,6 @@
    "vistaEm": "2026-11-11T17:05:19.067Z"
   },
   {
-   "id": "1xp5qe9",
-   "titulo": "Proposta que facilita transição tributária será enviada ao Congresso",
-   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/proposta-que-facilita-transicao-tributaria-sera-enviada-ao-Congresso",
-   "resumo": "O governo federal vai encaminhar ao Congresso Nacional uma proposta para criar uma regra de transição na cobrança da Contribuição sobre Bens e Serviços (CBS), novo tributo federal da reforma tributária . A medida permitirá que as empresas façam um cálculo estimado do imposto…",
-   "fonte": "ebc",
-   "fonteNome": "Agência Brasil (Economia)",
-   "sigla": "EBC",
-   "publicadoEm": "2026-11-11T16:32:00.000Z",
-   "categorias": [
-    "reforma",
-    "tributos"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-11T21:35:16.978Z"
-  },
-  {
    "id": "1l5ltfa",
    "titulo": "Prevbarco amplia atendimento previdenciário no sul do Amapá",
    "link": "https://agenciagov.ebc.com.br/noticias/202611/prevbarco-amplia-atendimento-previdenciario-no-sul-do-amapa",
@@ -282,22 +374,6 @@
    ],
    "relevancia": 1,
    "vistaEm": "2026-11-11T19:05:24.718Z"
-  },
-  {
-   "id": "9nkbu0",
-   "titulo": "CAS garante créditos de tributos sobre consumo para entidades filantrópicas",
-   "link": "https://www12.senado.leg.br/noticias/materias/2026/11/11/cas-garante-creditos-de-tributos-sobre-consumo-para-entidades-filantropicas",
-   "resumo": "",
-   "fonte": "senado",
-   "fonteNome": "Agência Senado",
-   "sigla": "Senado",
-   "publicadoEm": "2026-11-11T14:04:58.000Z",
-   "categorias": [
-    "legislacao",
-    "tributos"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-11T14:35:19.865Z"
   },
   {
    "id": "1o44tf0",
