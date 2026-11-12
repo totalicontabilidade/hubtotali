@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-12T15:05:20.892Z",
+ "atualizadoEm": "2026-11-12T15:35:19.326Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T15:05:20.892Z"
+   "ultimaVez": "2026-11-12T15:35:19.326Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-12T15:05:20.892Z"
+   "ultimaVez": "2026-11-12T15:35:19.326Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T15:05:20.892Z"
+   "ultimaVez": "2026-11-12T15:35:19.326Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 19,
-   "ultimaVez": "2026-11-12T15:05:20.892Z"
+   "ultimaVez": "2026-11-12T15:35:19.326Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-12T15:05:20.892Z"
+   "ultimaVez": "2026-11-12T15:35:19.326Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-12T15:05:20.892Z"
+   "ultimaVez": "2026-11-12T15:35:19.326Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-12T15:05:20.892Z"
+   "ultimaVez": "2026-11-12T15:35:19.326Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-12T15:05:20.892Z"
+   "ultimaVez": "2026-11-12T15:35:19.326Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-12T15:05:20.892Z"
+   "ultimaVez": "2026-11-12T15:35:19.326Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-12T15:05:20.892Z"
+   "ultimaVez": "2026-11-12T15:35:19.326Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,25 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-12T15:05:20.892Z"
+   "ultimaVez": "2026-11-12T15:35:19.326Z"
   }
  ],
  "noticias": [
+  {
+   "id": "k3smm7",
+   "titulo": "CFC Mulher ganha novo reforço",
+   "link": "https://cfc.org.br/noticias/cfc-mulher-ganha-novo-reforco/",
+   "resumo": "O CFC Mulher ganhou um reforço em sua nova missão de inserir as profissionais da contabilidade em posições estratégicas por meio da capacitação. A coordenadora do projeto, Welynádia Pereira, e o presidente do Conselho Federal de Contabilidade (CFC), Joaquim Bezerra,…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-12T15:15:29.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-12T15:35:19.326Z"
+  },
   {
    "id": "3quvzc",
    "titulo": "Revisão de Pronunciamentos Técnicos nº 31 traz alterações com vigência para 2027",
