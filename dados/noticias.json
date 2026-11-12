@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-12T12:35:17.797Z",
+ "atualizadoEm": "2026-11-12T13:05:20.319Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T12:35:17.797Z"
+   "ultimaVez": "2026-11-12T13:05:20.319Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-12T12:35:17.797Z"
+   "ultimaVez": "2026-11-12T13:05:20.319Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T12:35:17.797Z"
+   "ultimaVez": "2026-11-12T13:05:20.319Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 19,
-   "ultimaVez": "2026-11-12T12:35:17.797Z"
+   "ultimaVez": "2026-11-12T13:05:20.319Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-12T12:35:17.797Z"
+   "ultimaVez": "2026-11-12T13:05:20.319Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-12T12:35:17.797Z"
+   "ultimaVez": "2026-11-12T13:05:20.319Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-12T12:35:17.797Z"
+   "ultimaVez": "2026-11-12T13:05:20.319Z"
   },
   {
    "id": "camara",
@@ -108,15 +108,15 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-12T12:35:17.797Z"
+   "ultimaVez": "2026-11-12T13:05:20.319Z"
   },
   {
    "id": "senado",
    "sigla": "Senado",
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
-   "ok": true,
-   "quantas": 0,
+   "ok": false,
+   "erro": "fetch failed",
    "ultimaVez": "2026-11-12T12:35:17.797Z"
   },
   {
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-12T12:35:17.797Z"
+   "ultimaVez": "2026-11-12T13:05:20.319Z"
   },
   {
    "id": "govbr",
@@ -134,11 +134,26 @@
    "nome": "Agência Gov (governo federal)",
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-12T12:35:17.797Z"
+   "quantas": 0,
+   "ultimaVez": "2026-11-12T13:05:20.319Z"
   }
  ],
  "noticias": [
+  {
+   "id": "ud3413",
+   "titulo": "Sergipe já repassou mais de R$ 1,5 bilhão para os municípios em 2026",
+   "link": "https://www.sefaz.se.gov.br/Lists/Noticias/DispForm.aspx?ID=2879",
+   "resumo": "Title: Sergipe já repassou mais de R$ 1,5 bilhão para os municípios em 2026 Publicacao: 12/11/2026 09:35 Foto: https://www.sefaz.se.gov.br/Imagens/noticias/12-11-2026/1.png Visibilidade: Intranet, Internet",
+   "fonte": "sefaz-se",
+   "fonteNome": "Secretaria da Fazenda de Sergipe",
+   "sigla": "SEFAZ/SE",
+   "publicadoEm": "2026-11-12T12:37:11.000Z",
+   "categorias": [
+    "sergipe"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-12T13:05:20.319Z"
+  },
   {
    "id": "17t8rz1",
    "titulo": "Receita Federal e PF cumprem mandados contra esquema de fraudes tributárias superiores a R$ 185 milhões, ocultação patrimonial e fraudes em licitações",
