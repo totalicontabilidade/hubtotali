@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-12T13:05:20.319Z",
+ "atualizadoEm": "2026-11-12T13:35:17.400Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T13:05:20.319Z"
+   "ultimaVez": "2026-11-12T13:35:17.400Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-12T13:05:20.319Z"
+   "ultimaVez": "2026-11-12T13:35:17.400Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T13:05:20.319Z"
+   "ultimaVez": "2026-11-12T13:35:17.400Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 19,
-   "ultimaVez": "2026-11-12T13:05:20.319Z"
+   "ultimaVez": "2026-11-12T13:35:17.400Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-12T13:05:20.319Z"
+   "ultimaVez": "2026-11-12T13:35:17.400Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-12T13:05:20.319Z"
+   "ultimaVez": "2026-11-12T13:35:17.400Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-12T13:05:20.319Z"
+   "ultimaVez": "2026-11-12T13:35:17.400Z"
   },
   {
    "id": "camara",
@@ -108,16 +108,16 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-12T13:05:20.319Z"
+   "ultimaVez": "2026-11-12T13:35:17.400Z"
   },
   {
    "id": "senado",
    "sigla": "Senado",
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
-   "ok": false,
-   "erro": "fetch failed",
-   "ultimaVez": "2026-11-12T12:35:17.797Z"
+   "ok": true,
+   "quantas": 0,
+   "ultimaVez": "2026-11-12T13:35:17.400Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-12T13:05:20.319Z"
+   "ultimaVez": "2026-11-12T13:35:17.400Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,40 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-12T13:05:20.319Z"
+   "ultimaVez": "2026-11-12T13:35:17.400Z"
   }
  ],
  "noticias": [
+  {
+   "id": "s894g3",
+   "titulo": "INPC, inflação que corrige salários, acumula 4,49% em 12 meses",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/inpc-inflacao-que-corrige-salarios-acumula-449-em-12-meses",
+   "resumo": "O Índice Nacional de Preços ao Consumidor (INPC) fechou o mês de outubro em 0,22%. Com isso, o acumulado de 12 meses chega a 4,49%. Em setembro, a inflação de um ano estava em 4,29%. Os dados foram divulgados nesta quinta-feira (12) pelo Instituto Brasileiro de Geografia e…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-12T13:11:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-12T13:35:17.400Z"
+  },
+  {
+   "id": "1jstkkl",
+   "titulo": "Nova norma sobre recursos minerais recebe contribuições até o dia 7 de dezembro",
+   "link": "https://cfc.org.br/noticias/nova-norma-sobre-recursos-minerais-recebe-contribuicoes-ate-o-dia-7-de-dezembro/",
+   "resumo": "A Norma Brasileira de Contabilidade Técnica Geral (NBC TG) 34 – Exploração e Avaliação de Recursos Minerais está em audiência pública até o dia 7 de dezembro. Oferecida pelo Conselho Federal de Contabilidade (CFC), pelo Comitê de Pronunciamentos Contábeis (CPC) e pela…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-12T13:10:36.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-12T13:35:17.400Z"
+  },
   {
    "id": "ud3413",
    "titulo": "Sergipe já repassou mais de R$ 1,5 bilhão para os municípios em 2026",
