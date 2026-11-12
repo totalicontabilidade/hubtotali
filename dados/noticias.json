@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-12T20:35:19.840Z",
+ "atualizadoEm": "2026-11-12T21:05:19.624Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T20:35:19.840Z"
+   "ultimaVez": "2026-11-12T21:05:19.624Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-12T20:35:19.840Z"
+   "ultimaVez": "2026-11-12T21:05:19.624Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T20:35:19.840Z"
+   "ultimaVez": "2026-11-12T21:05:19.624Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 18,
-   "ultimaVez": "2026-11-12T20:35:19.840Z"
+   "ultimaVez": "2026-11-12T21:05:19.624Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-12T20:35:19.840Z"
+   "ultimaVez": "2026-11-12T21:05:19.624Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-12T20:35:19.840Z"
+   "ultimaVez": "2026-11-12T21:05:19.624Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 7,
    "via": "ponte",
-   "ultimaVez": "2026-11-12T20:35:19.840Z"
+   "ultimaVez": "2026-11-12T21:05:19.624Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-12T20:35:19.840Z"
+   "ultimaVez": "2026-11-12T21:05:19.624Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-12T20:35:19.840Z"
+   "ultimaVez": "2026-11-12T21:05:19.624Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 2,
-   "ultimaVez": "2026-11-12T20:35:19.840Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-12T21:05:19.624Z"
   },
   {
    "id": "govbr",
@@ -134,16 +134,31 @@
    "nome": "Agência Gov (governo federal)",
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
-   "quantas": 2,
-   "ultimaVez": "2026-11-12T20:35:19.840Z"
+   "quantas": 3,
+   "ultimaVez": "2026-11-12T21:05:19.624Z"
   }
  ],
  "noticias": [
   {
+   "id": "1foo7sl",
+   "titulo": "Mutirão de atendimentos do INSS oferece quase 8 mil vagas neste fim de semana (14 e 15)",
+   "link": "https://agenciagov.ebc.com.br/noticias/202611/mutirao-de-atendimentos-do-inss-oferece-quase-8-mil-vagas-neste-fim-de-semana-14-e-15",
+   "resumo": "Cidadãos podem agendar pelo Meu INSS ou pela Central 135",
+   "fonte": "govbr",
+   "fonteNome": "Agência Gov (governo federal)",
+   "sigla": "Gov",
+   "publicadoEm": "2026-11-12T20:26:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-12T21:05:19.624Z"
+  },
+  {
    "id": "15pg1iz",
    "titulo": "Fenacon alerta para impactos do PLP 299/2026 e defende revisão de medidas que ampliam a carga tributária",
    "link": "https://fenacon.org.br/noticias/fenacon-alerta-para-impactos-do-plp-299-2026-e-defende-revisao-de-medidas-que-ampliam-a-carga-tributaria/",
-   "resumo": "Entidade alerta para os riscos do aumento da carga tributária sobre o setor produtivo e defende medidas que conciliem responsabilidade fiscal, competitividade e crescimento econômico A Federação Nacional das Empresas de Serviços Contábeis e das Empresas de Assessoramento,…",
+   "resumo": "Entidade alerta para os riscos do aumento da carga tributária sobre o setor produtivo",
    "fonte": "fenacon",
    "fonteNome": "Fenacon",
    "sigla": "Fenacon",
