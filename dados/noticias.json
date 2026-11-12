@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-12T17:05:19.498Z",
+ "atualizadoEm": "2026-11-12T18:04:19.714Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T17:05:19.498Z"
+   "ultimaVez": "2026-11-12T18:04:19.714Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-12T17:05:19.498Z"
+   "ultimaVez": "2026-11-12T18:04:19.714Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T17:05:19.498Z"
+   "ultimaVez": "2026-11-12T18:04:19.714Z"
   },
   {
    "id": "fazenda",
@@ -70,8 +70,8 @@
    "nome": "Ministério da Fazenda",
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
-   "quantas": 19,
-   "ultimaVez": "2026-11-12T17:05:19.498Z"
+   "quantas": 18,
+   "ultimaVez": "2026-11-12T18:04:19.714Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-12T17:05:19.498Z"
+   "ultimaVez": "2026-11-12T18:04:19.714Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-12T17:05:19.498Z"
+   "ultimaVez": "2026-11-12T18:04:19.714Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 7,
    "via": "ponte",
-   "ultimaVez": "2026-11-12T17:05:19.498Z"
+   "ultimaVez": "2026-11-12T18:04:19.714Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-12T17:05:19.498Z"
+   "ultimaVez": "2026-11-12T18:04:19.714Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 0,
-   "ultimaVez": "2026-11-12T17:05:19.498Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-12T18:04:19.714Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-12T17:05:19.498Z"
+   "ultimaVez": "2026-11-12T18:04:19.714Z"
   },
   {
    "id": "govbr",
@@ -134,11 +134,57 @@
    "nome": "Agência Gov (governo federal)",
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
-   "quantas": 0,
-   "ultimaVez": "2026-11-12T17:05:19.498Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-12T18:04:19.714Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1kba4gj",
+   "titulo": "CFC fortalece diálogo com Justiça e Segurança Pública no combate ao crime organizado",
+   "link": "https://cfc.org.br/noticias/cfc-fortalece-dialogo-com-justica-e-seguranca-publica-no-combate-ao-crime-organizado/",
+   "resumo": "Em visita ao CFC, autoridades destacaram a importância dos profissionais da contabilidade nas investigações financeiras, no enfrentamento à lavagem de dinheiro e no fortalecimento do sistema de Justiça O papel estratégico dos profissionais da contabilidade no combate ao crime…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-12T17:57:22.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-12T18:04:19.714Z"
+  },
+  {
+   "id": "1fxlh94",
+   "titulo": "Previdência e Bolsa Família terão crédito de R$ 149 bi após aval do Congresso",
+   "link": "https://www12.senado.leg.br/noticias/materias/2026/11/12/previdencia-e-bolsa-familia-terao-credito-de-r-149-bi-apos-aval-do-congresso",
+   "resumo": "",
+   "fonte": "senado",
+   "fonteNome": "Agência Senado",
+   "sigla": "Senado",
+   "publicadoEm": "2026-11-12T17:41:35.000Z",
+   "categorias": [
+    "legislacao",
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-12T18:04:19.714Z"
+  },
+  {
+   "id": "13fgb6m",
+   "titulo": "INSS leva orientações previdenciárias à Aldeia Jaguapiru, em Dourados (MS)",
+   "link": "https://agenciagov.ebc.com.br/noticias/202611/inss-leva-orientacoes-previdenciarias-a-aldeia-jaguapiru-em-dourados-ms",
+   "resumo": "Atividade será realizada neste sábado (15) com informações sobre direitos e benefícios previdenciários",
+   "fonte": "govbr",
+   "fonteNome": "Agência Gov (governo federal)",
+   "sigla": "Gov",
+   "publicadoEm": "2026-11-12T17:22:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-12T18:04:19.714Z"
+  },
   {
    "id": "ud341r",
    "titulo": "Sefaz notifica 1.750 contribuintes na malha DIMP/PGDAS",
