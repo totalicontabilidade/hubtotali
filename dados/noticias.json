@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-12T14:05:20.746Z",
+ "atualizadoEm": "2026-11-12T15:05:20.892Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T14:05:20.746Z"
+   "ultimaVez": "2026-11-12T15:05:20.892Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-12T14:05:20.746Z"
+   "ultimaVez": "2026-11-12T15:05:20.892Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T14:05:20.746Z"
+   "ultimaVez": "2026-11-12T15:05:20.892Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 19,
-   "ultimaVez": "2026-11-12T14:05:20.746Z"
+   "ultimaVez": "2026-11-12T15:05:20.892Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-12T14:05:20.746Z"
+   "ultimaVez": "2026-11-12T15:05:20.892Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-12T14:05:20.746Z"
+   "ultimaVez": "2026-11-12T15:05:20.892Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-12T14:05:20.746Z"
+   "ultimaVez": "2026-11-12T15:05:20.892Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-12T14:05:20.746Z"
+   "ultimaVez": "2026-11-12T15:05:20.892Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-12T14:05:20.746Z"
+   "ultimaVez": "2026-11-12T15:05:20.892Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-12T14:05:20.746Z"
+   "ultimaVez": "2026-11-12T15:05:20.892Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,25 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-12T14:05:20.746Z"
+   "ultimaVez": "2026-11-12T15:05:20.892Z"
   }
  ],
  "noticias": [
+  {
+   "id": "3quvzc",
+   "titulo": "Revisão de Pronunciamentos Técnicos nº 31 traz alterações com vigência para 2027",
+   "link": "https://cfc.org.br/noticias/revisao-de-pronunciamentos-tecnicos-no-31-traz-alteracoes-com-vigencia-para-2027/",
+   "resumo": "O Conselho Federal de Contabilidade (CFC), o Comitê de Pronunciamentos Contábeis (CPC) e a Comissão de Valores Mobiliários (CVM) oferecem à consulta pública conjunta a minuta de Revisão de Pronunciamentos Técnicos nº 31. Profissionais da contabilidade e demais interessados…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-12T14:54:23.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-12T15:05:20.892Z"
+  },
   {
    "id": "1urnajc",
    "titulo": "Penúltimo módulo da capacitação em Contabilidade Imobiliária é liberado pelo CFC",
