@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-12T22:05:20.289Z",
+ "atualizadoEm": "2026-11-12T22:35:19.425Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T22:05:20.289Z"
+   "ultimaVez": "2026-11-12T22:35:19.425Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-12T22:05:20.289Z"
+   "ultimaVez": "2026-11-12T22:35:19.425Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T22:05:20.289Z"
+   "ultimaVez": "2026-11-12T22:35:19.425Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 18,
-   "ultimaVez": "2026-11-12T22:05:20.289Z"
+   "ultimaVez": "2026-11-12T22:35:19.425Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-12T22:05:20.289Z"
+   "ultimaVez": "2026-11-12T22:35:19.425Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-12T22:05:20.289Z"
+   "ultimaVez": "2026-11-12T22:35:19.425Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 7,
    "via": "ponte",
-   "ultimaVez": "2026-11-12T22:05:20.289Z"
+   "ultimaVez": "2026-11-12T22:35:19.425Z"
   },
   {
    "id": "camara",
@@ -107,8 +107,8 @@
    "nome": "Agência Câmara",
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
-   "quantas": 0,
-   "ultimaVez": "2026-11-12T22:05:20.289Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-12T22:35:19.425Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-12T22:05:20.289Z"
+   "ultimaVez": "2026-11-12T22:35:19.425Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-12T22:05:20.289Z"
+   "ultimaVez": "2026-11-12T22:35:19.425Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,27 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-12T22:05:20.289Z"
+   "ultimaVez": "2026-11-12T22:35:19.425Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1sn3bik",
+   "titulo": "Comissão de Finanças debate com Receita Federal regulamentação da reforma tributária",
+   "link": "https://www.camara.leg.br/noticias/1319043-comissao-de-financas-debate-com-receita-federal-regulamentacao-da-reforma-tributaria",
+   "resumo": "Debate vai abordar alíquotas, Imposto Seletivo e desafios operacionais do novo sistema tributário",
+   "fonte": "camara",
+   "fonteNome": "Agência Câmara",
+   "sigla": "Câmara",
+   "publicadoEm": "2026-11-12T22:04:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-12T22:35:19.425Z"
+  },
   {
    "id": "12hyhvx",
    "titulo": "Boulos: 'Encontro com a sociedade na COP31 é um tributo à participação social'",
