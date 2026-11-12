@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-12T18:05:18.586Z",
+ "atualizadoEm": "2026-11-12T18:35:20.928Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T18:05:18.586Z"
+   "ultimaVez": "2026-11-12T18:35:20.928Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-12T18:05:18.586Z"
+   "ultimaVez": "2026-11-12T18:35:20.928Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T18:05:18.586Z"
+   "ultimaVez": "2026-11-12T18:35:20.928Z"
   },
   {
    "id": "fazenda",
@@ -70,8 +70,8 @@
    "nome": "Ministério da Fazenda",
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
-   "quantas": 19,
-   "ultimaVez": "2026-11-12T18:05:18.586Z"
+   "quantas": 18,
+   "ultimaVez": "2026-11-12T18:35:20.928Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-12T18:05:18.586Z"
+   "ultimaVez": "2026-11-12T18:35:20.928Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-12T18:05:18.586Z"
+   "ultimaVez": "2026-11-12T18:35:20.928Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 7,
    "via": "ponte",
-   "ultimaVez": "2026-11-12T18:05:18.586Z"
+   "ultimaVez": "2026-11-12T18:35:20.928Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-12T18:05:18.586Z"
+   "ultimaVez": "2026-11-12T18:35:20.928Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-12T18:05:18.586Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-12T18:35:20.928Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-12T18:05:18.586Z"
+   "ultimaVez": "2026-11-12T18:35:20.928Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-12T18:05:18.586Z"
+   "ultimaVez": "2026-11-12T18:35:20.928Z"
   }
  ],
  "noticias": [
+  {
+   "id": "k1xvgg",
+   "titulo": "CCT aprova incentivos fiscais para empresas do Simples Nacional",
+   "link": "https://www12.senado.leg.br/noticias/videos/2026/11/cct-aprova-incentivos-fiscais-para-empresas-do-simples-nacional",
+   "resumo": "",
+   "fonte": "senado",
+   "fonteNome": "Agência Senado",
+   "sigla": "Senado",
+   "publicadoEm": "2026-11-12T18:23:43.000Z",
+   "categorias": [
+    "simples",
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-12T18:35:20.928Z"
+  },
   {
    "id": "1kba4gj",
    "titulo": "CFC fortalece diálogo com Justiça e Segurança Pública no combate ao crime organizado",
@@ -246,6 +262,24 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-12T14:05:20.746Z"
+  },
+  {
+   "id": "1qtz48e",
+   "titulo": "CFC e Receita Federal instalam sala de situação um dia após anúncio de Joaquim Bezerra",
+   "link": "https://cfc.org.br/noticias/cfc-e-receita-federal-instalam-sala-de-situacao-um-dia-apos-anuncio-de-joaquim-bezerra/",
+   "resumo": "Apenas um dia após o anúncio da criação de uma sala de situação para acompanhar os desafios da reforma tributária, o Conselho Federal de Contabilidade (CFC) e a Receita Federal deram início aos trabalhos. A primeira reunião ocorreu nesta quinta-feira (12), na sede do CFC, em…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-12T13:23:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "trabalhista",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-12T18:35:20.928Z"
   },
   {
    "id": "s894g3",
