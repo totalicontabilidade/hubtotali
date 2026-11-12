@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-12T12:05:18.181Z",
+ "atualizadoEm": "2026-11-12T12:35:17.797Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T12:05:18.181Z"
+   "ultimaVez": "2026-11-12T12:35:17.797Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-12T12:05:18.181Z"
+   "ultimaVez": "2026-11-12T12:35:17.797Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T12:05:18.181Z"
+   "ultimaVez": "2026-11-12T12:35:17.797Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 19,
-   "ultimaVez": "2026-11-12T12:05:18.181Z"
+   "ultimaVez": "2026-11-12T12:35:17.797Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-12T12:05:18.181Z"
+   "ultimaVez": "2026-11-12T12:35:17.797Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-12T12:05:18.181Z"
+   "ultimaVez": "2026-11-12T12:35:17.797Z"
   },
   {
    "id": "sefaz-se",
@@ -99,16 +99,16 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-12T12:05:18.181Z"
+   "ultimaVez": "2026-11-12T12:35:17.797Z"
   },
   {
    "id": "camara",
    "sigla": "Câmara",
    "nome": "Agência Câmara",
    "site": "https://www.camara.leg.br/noticias",
-   "ok": false,
-   "erro": "fetch failed",
-   "ultimaVez": "2026-11-12T10:05:18.793Z"
+   "ok": true,
+   "quantas": 0,
+   "ultimaVez": "2026-11-12T12:35:17.797Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-12T12:05:18.181Z"
+   "ultimaVez": "2026-11-12T12:35:17.797Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-12T12:05:18.181Z"
+   "ultimaVez": "2026-11-12T12:35:17.797Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-12T12:05:18.181Z"
+   "ultimaVez": "2026-11-12T12:35:17.797Z"
   }
  ],
  "noticias": [
+  {
+   "id": "17t8rz1",
+   "titulo": "Receita Federal e PF cumprem mandados contra esquema de fraudes tributárias superiores a R$ 185 milhões, ocultação patrimonial e fraudes em licitações",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-e-pf-cumprem-mandados-contra-esquema-de-fraudes-tributarias-superiores-a-r-185-milhoes-ocultacao-patrimonial-e-fraudes-em-licitacoes",
+   "resumo": "Operação Tax Mirage apura irregularidades envolvendo contribuintes de 10 estados do país.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-12T12:35:20.009Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-12T12:35:17.797Z"
+  },
   {
    "id": "er4q9",
    "titulo": "Fenacon reforça compromisso com a segurança jurídica e a preparação das empresas para a Reforma Tributária",
