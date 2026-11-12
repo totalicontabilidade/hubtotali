@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-12T18:35:20.928Z",
+ "atualizadoEm": "2026-11-12T20:05:19.298Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T18:35:20.928Z"
+   "ultimaVez": "2026-11-12T20:05:19.298Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-12T18:35:20.928Z"
+   "ultimaVez": "2026-11-12T20:05:19.298Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T18:35:20.928Z"
+   "ultimaVez": "2026-11-12T20:05:19.298Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 18,
-   "ultimaVez": "2026-11-12T18:35:20.928Z"
+   "ultimaVez": "2026-11-12T20:05:19.298Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-12T18:35:20.928Z"
+   "ultimaVez": "2026-11-12T20:05:19.298Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-12T18:35:20.928Z"
+   "ultimaVez": "2026-11-12T20:05:19.298Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 7,
    "via": "ponte",
-   "ultimaVez": "2026-11-12T18:35:20.928Z"
+   "ultimaVez": "2026-11-12T20:05:19.298Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-12T18:35:20.928Z"
+   "ultimaVez": "2026-11-12T20:05:19.298Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-12T18:35:20.928Z"
+   "ultimaVez": "2026-11-12T20:05:19.298Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-12T18:35:20.928Z"
+   "ultimaVez": "2026-11-12T20:05:19.298Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-12T18:35:20.928Z"
+   "ultimaVez": "2026-11-12T20:05:19.298Z"
   }
  ],
  "noticias": [
+  {
+   "id": "15pg1iz",
+   "titulo": "Fenacon alerta para impactos do PLP 299/2026 e defende revisão de medidas que ampliam a carga tributária",
+   "link": "https://fenacon.org.br/noticias/fenacon-alerta-para-impactos-do-plp-299-2026-e-defende-revisao-de-medidas-que-ampliam-a-carga-tributaria/",
+   "resumo": "Entidade alerta para os riscos do aumento da carga tributária sobre o setor produtivo e defende medidas que conciliem responsabilidade fiscal, competitividade e crescimento econômico A Federação Nacional das Empresas de Serviços Contábeis e das Empresas de Assessoramento,…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-12T19:41:15.000Z",
+   "categorias": [
+    "tributos",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-12T20:05:19.298Z"
+  },
   {
    "id": "k1xvgg",
    "titulo": "CCT aprova incentivos fiscais para empresas do Simples Nacional",
