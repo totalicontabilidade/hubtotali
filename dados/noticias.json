@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-13T19:05:20.591Z",
+ "atualizadoEm": "2026-11-13T19:35:24.995Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-13T19:05:20.591Z"
+   "ultimaVez": "2026-11-13T19:35:24.995Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-13T19:05:20.591Z"
+   "ultimaVez": "2026-11-13T19:35:24.995Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-13T19:05:20.591Z"
+   "ultimaVez": "2026-11-13T19:35:24.995Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 17,
-   "ultimaVez": "2026-11-13T19:05:20.591Z"
+   "ultimaVez": "2026-11-13T19:35:24.995Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-13T19:05:20.591Z"
+   "ultimaVez": "2026-11-13T19:35:24.995Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-13T19:05:20.591Z"
+   "ultimaVez": "2026-11-13T19:35:24.995Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-13T19:05:20.591Z"
+   "ultimaVez": "2026-11-13T19:35:24.995Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-13T19:05:20.591Z"
+   "ultimaVez": "2026-11-13T19:35:24.995Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 2,
-   "ultimaVez": "2026-11-13T19:05:20.591Z"
+   "quantas": 3,
+   "ultimaVez": "2026-11-13T19:35:24.995Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-13T19:05:20.591Z"
+   "ultimaVez": "2026-11-13T19:35:24.995Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,42 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-13T19:05:20.591Z"
+   "ultimaVez": "2026-11-13T19:35:24.995Z"
   }
  ],
  "noticias": [
+  {
+   "id": "u8wyy8",
+   "titulo": "Último módulo do curso sobre Contabilidade Eleitoral e Partidária é disponibilizado pelo CFC",
+   "link": "https://cfc.org.br/noticias/ultimo-modulo-do-curso-sobre-contabilidade-eleitoral-e-partidaria-e-disponibilizado-pelo-cfc/",
+   "resumo": "Os profissionais da contabilidade têm à sua disposição um curso completo de Contabilidade Eleitoral. Gratuita e on-line, a formação está disponível na Plataforma EduCont do Sistema CFC/CRCs e soma pontos no Programa de Educação Profissional Continuada do Conselho Federal de…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-13T19:29:28.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-13T19:35:24.995Z"
+  },
+  {
+   "id": "3i1gl8",
+   "titulo": "CAE: ministro da Fazenda debate alíquota da CBS na terça-feira",
+   "link": "https://www12.senado.leg.br/noticias/materias/2026/11/13/cae-ministro-da-fazenda-debate-aliquota-da-cbs-na-terca-feira",
+   "resumo": "",
+   "fonte": "senado",
+   "fonteNome": "Agência Senado",
+   "sigla": "Senado",
+   "publicadoEm": "2026-11-13T19:02:25.000Z",
+   "categorias": [
+    "legislacao",
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-13T19:35:24.995Z"
+  },
   {
    "id": "1q5qw73",
    "titulo": "Para onde vai a legislação trabalhista?",
@@ -154,6 +186,36 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-13T19:05:20.591Z"
+  },
+  {
+   "id": "ntp817",
+   "titulo": "MTE resgata 45 trabalhadores submetidos a condições degradantes em garimpo de quartzo na Bahia",
+   "link": "https://agenciagov.ebc.com.br/noticias/202611/mte-resgata-45-trabalhadores-submetidos-a-condicoes-degradantes-em-garimpo-de-quartzo-na-bahia",
+   "resumo": "Garimpeiros desciam por poços de mais de 30 metros sem segurança e trabalhavam sem salário fixo, água potável ou instalações sanitárias.",
+   "fonte": "govbr",
+   "fonteNome": "Agência Gov (governo federal)",
+   "sigla": "Gov",
+   "publicadoEm": "2026-11-13T18:48:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-13T19:35:24.995Z"
+  },
+  {
+   "id": "1xyzxj4",
+   "titulo": "Partiu São Paulo: Governo Federal garante destina verba para modernizar transporte",
+   "link": "https://agenciagov.ebc.com.br/noticias/202611/novo-pac-proposta-de-r-81-9-milhoes-visa-modernizar-transporte-publico-de-sao-paulo",
+   "resumo": "Projeto prevê qualificação de terminais e estações do Corredor Expresso Tiradentes para oferecer mais conforto e segurança aos passageiros; investimento terá recursos do FGTS",
+   "fonte": "govbr",
+   "fonteNome": "Agência Gov (governo federal)",
+   "sigla": "Gov",
+   "publicadoEm": "2026-11-13T18:34:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-13T19:35:24.995Z"
   },
   {
    "id": "1bg4z5a",
@@ -189,6 +251,22 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-13T15:05:19.869Z"
+  },
+  {
+   "id": "1q2iwre",
+   "titulo": "Operação Fronteira: Receita Federal apreende drogas e cigarros contrabandeados em Corumbá e Mundo Novo",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-receita-federal-apreende-drogas-e-cigarros-contrabandeados-em-corumba-e-mundo-novo",
+   "resumo": "Ações realizadas nesta quinta-feira (12) resultaram em apreensões avaliadas em mais de R$ 416 mil e contaram com o apoio de cães de faro e da integração com forças de segurança.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-13T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-13T19:35:24.995Z"
   },
   {
    "id": "11gcjk6",
