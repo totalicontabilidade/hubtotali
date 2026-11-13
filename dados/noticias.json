@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-13T20:05:18.748Z",
+ "atualizadoEm": "2026-11-13T20:35:18.415Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-13T20:05:18.748Z"
+   "ultimaVez": "2026-11-13T20:35:18.415Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-13T20:05:18.748Z"
+   "ultimaVez": "2026-11-13T20:35:18.415Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-13T20:05:18.748Z"
+   "ultimaVez": "2026-11-13T20:35:18.415Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 16,
-   "ultimaVez": "2026-11-13T20:05:18.748Z"
+   "ultimaVez": "2026-11-13T20:35:18.415Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-13T20:05:18.748Z"
+   "ultimaVez": "2026-11-13T20:35:18.415Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-13T20:05:18.748Z"
+   "ultimaVez": "2026-11-13T20:35:18.415Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-13T20:05:18.748Z"
+   "ultimaVez": "2026-11-13T20:35:18.415Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-13T20:05:18.748Z"
+   "ultimaVez": "2026-11-13T20:35:18.415Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 3,
-   "ultimaVez": "2026-11-13T20:05:18.748Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-13T20:35:18.415Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-13T20:05:18.748Z"
+   "ultimaVez": "2026-11-13T20:35:18.415Z"
   },
   {
    "id": "govbr",
@@ -134,11 +134,27 @@
    "nome": "Agência Gov (governo federal)",
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
-   "quantas": 3,
-   "ultimaVez": "2026-11-13T20:05:18.748Z"
+   "quantas": 4,
+   "ultimaVez": "2026-11-13T20:35:18.415Z"
   }
  ],
  "noticias": [
+  {
+   "id": "x80pc7",
+   "titulo": "Montadoras podem reduzir imposto sobre carro zero km com reciclagem de veículos velhos",
+   "link": "https://agenciagov.ebc.com.br/noticias/202611/mdic-incentiva-a-reciclagem-de-veiculos-com-reducao-de-ipi-para-carros-novos-elegiveis",
+   "resumo": "Nova portaria do Ministério Desenvolvimento, Indústria, Comércio e Serviços, como parte do Programa Mover, quer estimular destinação adequada e facilita a verificação da origem de peças usadas. Veja como aderir",
+   "fonte": "govbr",
+   "fonteNome": "Agência Gov (governo federal)",
+   "sigla": "Gov",
+   "publicadoEm": "2026-11-13T19:42:00.000Z",
+   "categorias": [
+    "tributos",
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-13T20:35:18.415Z"
+  },
   {
    "id": "1gdqzm3",
    "titulo": "Oportunidade: Conferência Nacional de Perícia Contábil abre inscrições para modalidade on-line",
@@ -204,7 +220,7 @@
   },
   {
    "id": "ntp817",
-   "titulo": "MTE resgata 45 trabalhadores submetidos a condições degradantes em garimpo de quartzo na Bahia",
+   "titulo": "MTE resgata 45 trabalhadores em condições degradantes em garimpo na Bahia",
    "link": "https://agenciagov.ebc.com.br/noticias/202611/mte-resgata-45-trabalhadores-submetidos-a-condicoes-degradantes-em-garimpo-de-quartzo-na-bahia",
    "resumo": "Garimpeiros desciam por poços de mais de 30 metros sem segurança e trabalhavam sem salário fixo, água potável ou instalações sanitárias.",
    "fonte": "govbr",
@@ -266,6 +282,22 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-13T15:05:19.869Z"
+  },
+  {
+   "id": "1berbil",
+   "titulo": "Operação Fronteira Receita Federal realiza encerramento operacional em Rio Grande (RS)",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-receita-federal-realiza-encerramento-operacional-em-rio-grande-rs",
+   "resumo": "Quinta edição da operação anual mobilizou mais de 500 servidores do órgão no combate à entrada de produtos irregulares no País",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-13T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-13T20:35:18.415Z"
   },
   {
    "id": "1q2iwre",
