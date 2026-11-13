@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-13T14:05:19.741Z",
+ "atualizadoEm": "2026-11-13T14:35:18.156Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-13T14:05:19.741Z"
+   "ultimaVez": "2026-11-13T14:35:18.156Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 380,
-   "ultimaVez": "2026-11-13T14:05:19.741Z"
+   "ultimaVez": "2026-11-13T14:35:18.156Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-13T14:05:19.741Z"
+   "ultimaVez": "2026-11-13T14:35:18.156Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 18,
-   "ultimaVez": "2026-11-13T14:05:19.741Z"
+   "ultimaVez": "2026-11-13T14:35:18.156Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-13T14:05:19.741Z"
+   "ultimaVez": "2026-11-13T14:35:18.156Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-13T14:05:19.741Z"
+   "ultimaVez": "2026-11-13T14:35:18.156Z"
   },
   {
    "id": "sefaz-se",
@@ -99,15 +99,15 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-13T14:05:19.741Z"
+   "ultimaVez": "2026-11-13T14:35:18.156Z"
   },
   {
    "id": "camara",
    "sigla": "Câmara",
    "nome": "Agência Câmara",
    "site": "https://www.camara.leg.br/noticias",
-   "ok": true,
-   "quantas": 1,
+   "ok": false,
+   "erro": "fetch failed",
    "ultimaVez": "2026-11-13T14:05:19.741Z"
   },
   {
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 0,
-   "ultimaVez": "2026-11-13T14:05:19.741Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-13T14:35:18.156Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-13T14:05:19.741Z"
+   "ultimaVez": "2026-11-13T14:35:18.156Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,27 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-13T14:05:19.741Z"
+   "ultimaVez": "2026-11-13T14:35:18.156Z"
   }
  ],
  "noticias": [
+  {
+   "id": "lnimwv",
+   "titulo": "Benefício tributário a entidades filantrópicas é aprovado pela CAS",
+   "link": "https://www12.senado.leg.br/noticias/audios/2026/11/beneficio-tributario-a-entidades-filantropicas-e-aprovado-pela-cas",
+   "resumo": "",
+   "fonte": "senado",
+   "fonteNome": "Agência Senado",
+   "sigla": "Senado",
+   "publicadoEm": "2026-11-13T14:28:47.000Z",
+   "categorias": [
+    "tributos",
+    "trabalhista",
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-13T14:35:18.156Z"
+  },
   {
    "id": "ud341t",
    "titulo": "Sefaz lança sistema Sauros para combater fraudes fiscais",
@@ -375,7 +392,7 @@
   },
   {
    "id": "1foo7sl",
-   "titulo": "Mutirão de atendimentos do INSS oferece quase 8 mil vagas neste fim de semana (14 e 15)",
+   "titulo": "Mutirão de atendimentos do INSS oferece quase 8 mil vagas neste fim de semana",
    "link": "https://agenciagov.ebc.com.br/noticias/202611/mutirao-de-atendimentos-do-inss-oferece-quase-8-mil-vagas-neste-fim-de-semana-14-e-15",
    "resumo": "Cidadãos podem agendar pelo Meu INSS ou pela Central 135",
    "fonte": "govbr",
