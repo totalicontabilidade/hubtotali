@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-13T18:35:18.416Z",
+ "atualizadoEm": "2026-11-13T19:05:20.591Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-13T18:35:18.416Z"
+   "ultimaVez": "2026-11-13T19:05:20.591Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-13T18:35:18.416Z"
+   "ultimaVez": "2026-11-13T19:05:20.591Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-13T18:35:18.416Z"
+   "ultimaVez": "2026-11-13T19:05:20.591Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 17,
-   "ultimaVez": "2026-11-13T18:35:18.416Z"
+   "ultimaVez": "2026-11-13T19:05:20.591Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-13T18:35:18.416Z"
+   "ultimaVez": "2026-11-13T19:05:20.591Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-13T18:35:18.416Z"
+   "ultimaVez": "2026-11-13T19:05:20.591Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-13T18:35:18.416Z"
+   "ultimaVez": "2026-11-13T19:05:20.591Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-13T18:35:18.416Z"
+   "ultimaVez": "2026-11-13T19:05:20.591Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-13T18:35:18.416Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-13T19:05:20.591Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-13T18:35:18.416Z"
+   "ultimaVez": "2026-11-13T19:05:20.591Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-13T18:35:18.416Z"
+   "ultimaVez": "2026-11-13T19:05:20.591Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1q5qw73",
+   "titulo": "Para onde vai a legislação trabalhista?",
+   "link": "https://www12.senado.leg.br/noticias/infomaterias/2026/11/para-onde-vai-a-legislacao-trabalhista",
+   "resumo": "",
+   "fonte": "senado",
+   "fonteNome": "Agência Senado",
+   "sigla": "Senado",
+   "publicadoEm": "2026-11-13T18:48:00.000Z",
+   "categorias": [
+    "legislacao",
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-13T19:05:20.591Z"
+  },
   {
    "id": "1bg4z5a",
    "titulo": "Comissão aprova isenção de imposto para bebidas à base de frutos regionais da Amazônia",
