@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-13T12:35:18.872Z",
+ "atualizadoEm": "2026-11-13T13:05:17.514Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-13T12:35:18.872Z"
+   "ultimaVez": "2026-11-13T13:05:17.514Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-13T12:35:18.872Z"
+   "ultimaVez": "2026-11-13T13:05:17.514Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-13T12:35:18.872Z"
+   "ultimaVez": "2026-11-13T13:05:17.514Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 18,
-   "ultimaVez": "2026-11-13T12:35:18.872Z"
+   "ultimaVez": "2026-11-13T13:05:17.514Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-13T12:35:18.872Z"
+   "ultimaVez": "2026-11-13T13:05:17.514Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-13T12:35:18.872Z"
+   "ultimaVez": "2026-11-13T13:05:17.514Z"
   },
   {
    "id": "sefaz-se",
@@ -97,9 +97,9 @@
    "nome": "Secretaria da Fazenda de Sergipe",
    "site": "https://www.sefaz.se.gov.br/",
    "ok": true,
-   "quantas": 7,
+   "quantas": 3,
    "via": "ponte",
-   "ultimaVez": "2026-11-13T12:35:18.872Z"
+   "ultimaVez": "2026-11-13T13:05:17.514Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-13T12:35:18.872Z"
+   "ultimaVez": "2026-11-13T13:05:17.514Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-13T12:35:18.872Z"
+   "ultimaVez": "2026-11-13T13:05:17.514Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-13T12:35:18.872Z"
+   "ultimaVez": "2026-11-13T13:05:17.514Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,25 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-13T12:35:18.872Z"
+   "ultimaVez": "2026-11-13T13:05:17.514Z"
   }
  ],
  "noticias": [
+  {
+   "id": "ud341s",
+   "titulo": "Governo de Sergipe divulga calendário de pagamento dos servidores do Executivo para o mês de novembro",
+   "link": "https://www.sefaz.se.gov.br/Lists/Noticias/DispForm.aspx?ID=2881",
+   "resumo": "Title: Governo de Sergipe divulga calendário de pagamento dos servidores do Executivo para o mês de novembro Publicacao: 13/11/2026 09:40 Foto: https://www.sefaz.se.gov.br/Imagens/noticias/13-11-2026/1.jpeg Visibilidade: Intranet, Internet",
+   "fonte": "sefaz-se",
+   "fonteNome": "Secretaria da Fazenda de Sergipe",
+   "sigla": "SEFAZ/SE",
+   "publicadoEm": "2026-11-13T12:40:18.000Z",
+   "categorias": [
+    "sergipe"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-13T13:05:17.514Z"
+  },
   {
    "id": "1ar5mwy",
    "titulo": "Processamento final das solicitações de Opção pelo Simples Nacional para 2027",
