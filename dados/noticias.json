@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-13T10:05:20.389Z",
+ "atualizadoEm": "2026-11-13T11:05:17.957Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-13T10:05:20.389Z"
+   "ultimaVez": "2026-11-13T11:05:17.957Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-13T10:05:20.389Z"
+   "ultimaVez": "2026-11-13T11:05:17.957Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-13T10:05:20.389Z"
+   "ultimaVez": "2026-11-13T11:05:17.957Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 18,
-   "ultimaVez": "2026-11-13T10:05:20.389Z"
+   "ultimaVez": "2026-11-13T11:05:17.957Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-13T10:05:20.389Z"
+   "ultimaVez": "2026-11-13T11:05:17.957Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-13T10:05:20.389Z"
+   "ultimaVez": "2026-11-13T11:05:17.957Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 7,
    "via": "ponte",
-   "ultimaVez": "2026-11-13T10:05:20.389Z"
+   "ultimaVez": "2026-11-13T11:05:17.957Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-13T10:05:20.389Z"
+   "ultimaVez": "2026-11-13T11:05:17.957Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-13T10:05:20.389Z"
+   "ultimaVez": "2026-11-13T11:05:17.957Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-13T10:05:20.389Z"
+   "ultimaVez": "2026-11-13T11:05:17.957Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-13T10:05:20.389Z"
+   "ultimaVez": "2026-11-13T11:05:17.957Z"
   }
  ],
  "noticias": [
+  {
+   "id": "njo8ou",
+   "titulo": "Receita Federal conquista primeiro e segundo lugares no 30º Concurso de Inovação da Enap",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-conquista-primeiro-e-segundo-lugares-no-30o-concurso-de-inovacao-da-enap",
+   "resumo": "Conquistas ganham ainda mais relevância diante da participação de centenas de iniciativas das administrações públicas federal, estadual e municipal.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-13T11:05:19.719Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-13T11:05:17.957Z"
+  },
   {
    "id": "15pg1iz",
    "titulo": "Fenacon alerta para impactos do PLP 299/2026 e defende revisão de medidas que ampliam a carga tributária",
