@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-13T20:35:18.415Z",
+ "atualizadoEm": "2026-11-13T21:05:19.880Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-13T20:35:18.415Z"
+   "ultimaVez": "2026-11-13T21:05:19.880Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-13T20:35:18.415Z"
+   "ultimaVez": "2026-11-13T21:05:19.880Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-13T20:35:18.415Z"
+   "ultimaVez": "2026-11-13T21:05:19.880Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 16,
-   "ultimaVez": "2026-11-13T20:35:18.415Z"
+   "ultimaVez": "2026-11-13T21:05:19.880Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-13T20:35:18.415Z"
+   "ultimaVez": "2026-11-13T21:05:19.880Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-13T20:35:18.415Z"
+   "ultimaVez": "2026-11-13T21:05:19.880Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-13T20:35:18.415Z"
+   "ultimaVez": "2026-11-13T21:05:19.880Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-13T20:35:18.415Z"
+   "ultimaVez": "2026-11-13T21:05:19.880Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-13T20:35:18.415Z"
+   "ultimaVez": "2026-11-13T21:05:19.880Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-13T20:35:18.415Z"
+   "ultimaVez": "2026-11-13T21:05:19.880Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,40 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-13T20:35:18.415Z"
+   "ultimaVez": "2026-11-13T21:05:19.880Z"
   }
  ],
  "noticias": [
+  {
+   "id": "hqfsks",
+   "titulo": "CFC e Conselhos Regionais se posicionam contra aumento da carga tributária e restrições à compensação de tributos",
+   "link": "https://cfc.org.br/noticias/cfc-e-conselhos-regionais-se-posicionam-contra-aumento-da-carga-tributaria-e-restricoes-a-compensacao-de-tributos/",
+   "resumo": "Em ofício ao Senado, Sistema CFC/CRCs pede mudanças no PLP 299/2026 e alerta para riscos à segurança jurídica, à competitividade das empresas e ao planejamento tributário O Conselho Federal de Contabilidade (CFC) e os 27 Conselhos Regionais de Contabilidade (CRCs)…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-13T20:52:37.000Z",
+   "categorias": [
+    "tributos",
+    "contabil",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-13T21:05:19.880Z"
+  },
+  {
+   "id": "1bf7wtx",
+   "titulo": "Escala 6×1: STF mantém cronograma e define regras de transição para acordos e convenções",
+   "link": "https://fenacon.org.br/noticias/escala-6x1-stf-mantem-cronograma-define-regras-transicao-acordos-convencoes/",
+   "resumo": "Cautelares da CNC e da CNI foram parcialmente acolhidas e trazem flexibilizações para as empresas na transição",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-13T20:46:02.000Z",
+   "categorias": [],
+   "relevancia": 2,
+   "vistaEm": "2026-11-13T21:05:19.880Z"
+  },
   {
    "id": "x80pc7",
    "titulo": "Montadoras podem reduzir imposto sobre carro zero km com reciclagem de veículos velhos",
