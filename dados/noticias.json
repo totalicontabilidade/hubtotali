@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-12T23:31:45.580Z",
+ "atualizadoEm": "2026-11-13T10:05:20.389Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T23:31:45.580Z"
+   "ultimaVez": "2026-11-13T10:05:20.389Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 379,
-   "ultimaVez": "2026-11-12T23:31:45.580Z"
+   "ultimaVez": "2026-11-13T10:05:20.389Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-12T23:31:45.580Z"
+   "ultimaVez": "2026-11-13T10:05:20.389Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 18,
-   "ultimaVez": "2026-11-12T23:31:45.580Z"
+   "ultimaVez": "2026-11-13T10:05:20.389Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-12T23:31:45.580Z"
+   "ultimaVez": "2026-11-13T10:05:20.389Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-12T23:31:45.580Z"
+   "ultimaVez": "2026-11-13T10:05:20.389Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 7,
    "via": "ponte",
-   "ultimaVez": "2026-11-12T23:31:45.580Z"
+   "ultimaVez": "2026-11-13T10:05:20.389Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-12T23:31:45.580Z"
+   "ultimaVez": "2026-11-13T10:05:20.389Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-12T23:31:45.580Z"
+   "ultimaVez": "2026-11-13T10:05:20.389Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-12T23:31:45.580Z"
+   "ultimaVez": "2026-11-13T10:05:20.389Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,151 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-12T23:31:45.580Z"
+   "ultimaVez": "2026-11-13T10:05:20.389Z"
   }
  ],
  "noticias": [
+  {
+   "id": "15pg1iz",
+   "titulo": "Fenacon alerta para impactos do PLP 299/2026 e defende revisão de medidas que ampliam a carga tributária",
+   "link": "https://fenacon.org.br/noticias/fenacon-alerta-para-impactos-do-plp-299-2026-e-defende-revisao-de-medidas-que-ampliam-a-carga-tributaria/",
+   "resumo": "Entidade alerta para os riscos do aumento da carga tributária sobre o setor produtivo",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-13T05:53:59.000Z",
+   "categorias": [
+    "tributos",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-12T20:05:19.298Z"
+  },
+  {
+   "id": "1udxl6q",
+   "titulo": "Ministério do Empreendedorismo lança Cartilha de Emendas Parlamentares 2027 para impulsionar pequenos negócios nos municípios",
+   "link": "https://fenacon.org.br/noticias/ministerio-do-empreendedorismo-lanca-cartilha-de-emendas-parlamentares-2027-para-impulsionar-pequenos-negocios-nos-municipios/",
+   "resumo": "Publicação orienta deputados e senadores sobre como destinar recursos ao PLOA 2027 em projetos de empreendedorismo feminino, inclusão socioprodutiva, artesanato e melhoria do ambiente de negócios O Ministério do Empreendedorismo, da Microempresa e da Empresa de Pequeno Porte…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-13T05:12:36.000Z",
+   "categorias": [],
+   "relevancia": 2,
+   "vistaEm": "2026-11-13T10:05:20.389Z"
+  },
+  {
+   "id": "1kck3vt",
+   "titulo": "Texto principal do ajuste fiscal é aprovado pelo Senado",
+   "link": "https://fenacon.org.br/noticias/texto-principal-do-ajuste-fiscal-e-aprovado-pelo-senado/",
+   "resumo": "O Plenário do Senado aprovou, nesta quinta-feira (12), o texto principal do projeto de ajuste fiscal do governo (PLP 299/2026). O texto aprovado, por 45 votos a 31, foi um substitutivo do senador Eduardo Braga (MDB-AM) ao projeto apresentado pelo senador Jaques Wagner (PT-BA)…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-13T04:45:25.000Z",
+   "categorias": [
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-13T10:05:20.389Z"
+  },
+  {
+   "id": "1y1e6gd",
+   "titulo": "Fenacon critica ajuste fiscal e diz que empresas não podem pagar a conta",
+   "link": "https://fenacon.org.br/noticias/fenacon-critica-ajuste-fiscal-e-diz-que-empresas-nao-podem-pagar-a-conta/",
+   "resumo": "Correio Braziliense destaca nota pública da entidade, que alerta para os impactos do aumento da carga tributária sobre o setor produtivo e defende a revisão de medidas previstas no PLP 299/2026 Por Raphael Pati A proposta de ajuste fiscal enviada pelo governo federal nesta…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-13T04:03:00.000Z",
+   "categorias": [
+    "tributos",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-13T10:05:20.389Z"
+  },
+  {
+   "id": "1vmnnfb",
+   "titulo": "Pesquisa inédita identifica fatores que afetam saúde mental e qualidade de vida no trabalho",
+   "link": "https://fenacon.org.br/noticias/pesquisa-inedita-identifica-fatores-que-afetam-saude-mental-e-qualidade-de-vida-no-trabalho/",
+   "resumo": "Levantamento pioneiro entre agências reguladoras aponta desafios de segurança ocupacional; resultados vão orientar plano de ação em cinco eixos Como parte do compromisso com a saúde, a qualidade de vida e a valorização das pessoas, a Agência Nacional de Mineração (ANM)…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-13T03:56:57.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-13T10:05:20.389Z"
+  },
+  {
+   "id": "1vd7rn9",
+   "titulo": "Comissão de Finanças debate com Receita Federal regulamentação da reforma tributária",
+   "link": "https://fenacon.org.br/reforma-tributaria/comissao-de-financas-debate-com-receita-federal-regulamentacao-da-reforma-tributaria/",
+   "resumo": "Debate vai abordar alíquotas, Imposto Seletivo e desafios operacionais do novo sistema tributário A Comissão de Finanças e Tributação da Câmara dos Deputados realiza, na quarta-feira (18), audiência pública para discutir a regulamentação da reforma tributária com o secretário…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-13T03:47:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-13T10:05:20.389Z"
+  },
+  {
+   "id": "jqa16x",
+   "titulo": "CGIBS aprova ajustes ao Regulamento do Imposto Sobre Bens e Serviços e prorroga a DeRE em Reunião Ordinária",
+   "link": "https://fenacon.org.br/reforma-tributaria/cgibs-aprova-ajustes-ao-regulamento-do-imposto-sobre-bens-e-servicos-e-prorroga-a-dere-em-reuniao-ordinaria/",
+   "resumo": "Conselho Superior também aprovou ato sobre CNPJ do produtor rural e do transportador autônomo O Conselho Superior do Comitê Gestor do IBS (CGIBS) aprovou, nesta terça-feira (10), em Joinville (SC), os ajustes à versão 2 do Regulamento do IBS e a prorrogação da Declaração de…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-13T03:24:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "empresas",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-13T10:05:20.389Z"
+  },
+  {
+   "id": "1fl2spf",
+   "titulo": "Reforma tributária: CNC reforça pedido por ajustes no cronograma de implementação",
+   "link": "https://fenacon.org.br/reforma-tributaria/reforma-tributaria-cnc-reforca-pedido-por-ajustes-no-cronograma-de-implementacao/",
+   "resumo": "É necessário mais tempo para compreender as regras, adaptar os sistemas, realizar testes sem multas e incorporar os novos procedimentos com segurança A Confederação Nacional do Comércio de Bens, Serviços e Turismo (CNC) reconhece os esforços da Receita Federal na condução da…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-13T03:19:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-13T10:05:20.389Z"
+  },
+  {
+   "id": "pi9vq0",
+   "titulo": "Fenacon e Sescon-MT participam da apresentação do programa Integra MT",
+   "link": "https://fenacon.org.br/noticias/fenacon-e-sescon-mt-participam-da-apresentacao-do-programa-integra-mt/",
+   "resumo": "A Fenacon e o Sescon-MT representaram as empresas de contabilidade na apresentação do novo modelo de autorregularização da Sefaz-MT, realizada nesta quarta-feira (11.11), na sede da secretaria em Cuiabá. A reunião contou com a participação do vice-presidente da Região…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-13T01:32:30.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-13T10:05:20.389Z"
+  },
   {
    "id": "6mpph",
    "titulo": "Caixa Seguridade informa ataque cibernético e vazamento de dados",
@@ -153,23 +294,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-12T23:31:45.580Z"
-  },
-  {
-   "id": "1sn3bik",
-   "titulo": "Comissão de Finanças debate com Receita Federal regulamentação da reforma tributária",
-   "link": "https://www.camara.leg.br/noticias/1319043-comissao-de-financas-debate-com-receita-federal-regulamentacao-da-reforma-tributaria",
-   "resumo": "Debate vai abordar alíquotas, Imposto Seletivo e desafios operacionais do novo sistema tributário",
-   "fonte": "camara",
-   "fonteNome": "Agência Câmara",
-   "sigla": "Câmara",
-   "publicadoEm": "2026-11-12T22:04:00.000Z",
-   "categorias": [
-    "reforma",
-    "tributos",
-    "legislacao"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-12T22:35:19.425Z"
   },
   {
    "id": "12hyhvx",
@@ -200,22 +324,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-12T21:05:19.624Z"
-  },
-  {
-   "id": "15pg1iz",
-   "titulo": "Fenacon alerta para impactos do PLP 299/2026 e defende revisão de medidas que ampliam a carga tributária",
-   "link": "https://fenacon.org.br/noticias/fenacon-alerta-para-impactos-do-plp-299-2026-e-defende-revisao-de-medidas-que-ampliam-a-carga-tributaria/",
-   "resumo": "Entidade alerta para os riscos do aumento da carga tributária sobre o setor produtivo",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-12T19:41:15.000Z",
-   "categorias": [
-    "tributos",
-    "legislacao"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-12T20:05:19.298Z"
   },
   {
    "id": "k1xvgg",
