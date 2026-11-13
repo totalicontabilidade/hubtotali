@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-13T19:35:24.995Z",
+ "atualizadoEm": "2026-11-13T20:05:18.748Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-13T19:35:24.995Z"
+   "ultimaVez": "2026-11-13T20:05:18.748Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-13T19:35:24.995Z"
+   "ultimaVez": "2026-11-13T20:05:18.748Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-13T19:35:24.995Z"
+   "ultimaVez": "2026-11-13T20:05:18.748Z"
   },
   {
    "id": "fazenda",
@@ -70,8 +70,8 @@
    "nome": "Ministério da Fazenda",
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
-   "quantas": 17,
-   "ultimaVez": "2026-11-13T19:35:24.995Z"
+   "quantas": 16,
+   "ultimaVez": "2026-11-13T20:05:18.748Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-13T19:35:24.995Z"
+   "ultimaVez": "2026-11-13T20:05:18.748Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-13T19:35:24.995Z"
+   "ultimaVez": "2026-11-13T20:05:18.748Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-13T19:35:24.995Z"
+   "ultimaVez": "2026-11-13T20:05:18.748Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-13T19:35:24.995Z"
+   "ultimaVez": "2026-11-13T20:05:18.748Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-13T19:35:24.995Z"
+   "ultimaVez": "2026-11-13T20:05:18.748Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-13T19:35:24.995Z"
+   "ultimaVez": "2026-11-13T20:05:18.748Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,25 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-13T19:35:24.995Z"
+   "ultimaVez": "2026-11-13T20:05:18.748Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1gdqzm3",
+   "titulo": "Oportunidade: Conferência Nacional de Perícia Contábil abre inscrições para modalidade on-line",
+   "link": "https://cfc.org.br/noticias/oportunidade-conferencia-nacional-de-pericia-contabil-abre-inscricoes-para-modalidade-on-line/",
+   "resumo": "Os profissionais da contabilidade que não puderem vir a Brasília nos dias 2 e 3 de dezembro terão a chance de participar da Conferência Nacional de Perícia Contábil (CNPC) a distância. A decisão atende aos pedidos de peritos de todo o país que solicitaram a abertura de…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-13T19:36:27.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-13T20:05:18.748Z"
+  },
   {
    "id": "u8wyy8",
    "titulo": "Último módulo do curso sobre Contabilidade Eleitoral e Partidária é disponibilizado pelo CFC",
@@ -204,7 +219,7 @@
   },
   {
    "id": "1xyzxj4",
-   "titulo": "Partiu São Paulo: Governo Federal garante destina verba para modernizar transporte",
+   "titulo": "Partiu São Paulo: Governo Federal garante verba para modernizar transporte",
    "link": "https://agenciagov.ebc.com.br/noticias/202611/novo-pac-proposta-de-r-81-9-milhoes-visa-modernizar-transporte-publico-de-sao-paulo",
    "resumo": "Projeto prevê qualificação de terminais e estações do Corredor Expresso Tiradentes para oferecer mais conforto e segurança aos passageiros; investimento terá recursos do FGTS",
    "fonte": "govbr",
