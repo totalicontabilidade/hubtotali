@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-13T18:05:17.909Z",
+ "atualizadoEm": "2026-11-13T18:35:18.416Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-13T18:05:17.909Z"
+   "ultimaVez": "2026-11-13T18:35:18.416Z"
   },
   {
    "id": "simples",
@@ -52,8 +52,8 @@
    "nome": "Simples Nacional",
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
-   "quantas": 380,
-   "ultimaVez": "2026-11-13T18:05:17.909Z"
+   "quantas": 381,
+   "ultimaVez": "2026-11-13T18:35:18.416Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-13T18:05:17.909Z"
+   "ultimaVez": "2026-11-13T18:35:18.416Z"
   },
   {
    "id": "fazenda",
@@ -70,8 +70,8 @@
    "nome": "Ministério da Fazenda",
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
-   "quantas": 18,
-   "ultimaVez": "2026-11-13T18:05:17.909Z"
+   "quantas": 17,
+   "ultimaVez": "2026-11-13T18:35:18.416Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-13T18:05:17.909Z"
+   "ultimaVez": "2026-11-13T18:35:18.416Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-13T18:05:17.909Z"
+   "ultimaVez": "2026-11-13T18:35:18.416Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-13T18:05:17.909Z"
+   "ultimaVez": "2026-11-13T18:35:18.416Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-13T18:05:17.909Z"
+   "ultimaVez": "2026-11-13T18:35:18.416Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-13T18:05:17.909Z"
+   "ultimaVez": "2026-11-13T18:35:18.416Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 2,
-   "ultimaVez": "2026-11-13T18:05:17.909Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-13T18:35:18.416Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-13T18:05:17.909Z"
+   "ultimaVez": "2026-11-13T18:35:18.416Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1bg4z5a",
+   "titulo": "Comissão aprova isenção de imposto para bebidas à base de frutos regionais da Amazônia",
+   "link": "https://www.camara.leg.br/noticias/1319232-comissao-aprova-isencao-de-imposto-para-bebidas-a-base-de-frutos-regionais-da-amazonia",
+   "resumo": "Isenção limita-se ao Imposto sobre Produtos Industrializados; a Câmara dos Deputados continua discutindo o assunto",
+   "fonte": "camara",
+   "fonteNome": "Agência Câmara",
+   "sigla": "Câmara",
+   "publicadoEm": "2026-11-13T15:02:00.000Z",
+   "categorias": [
+    "tributos",
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-13T15:05:19.869Z"
+  },
   {
    "id": "vjk72z",
    "titulo": "PGDAS-D é atualizado para atender à Reforma Tributária a partir de novembro de 2026",
@@ -172,22 +188,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-13T16:05:18.995Z"
-  },
-  {
-   "id": "1bg4z5a",
-   "titulo": "Comissão aprova isenção de imposto para bebidas à base de frutos regionais da Amazônia",
-   "link": "https://www.camara.leg.br/noticias/1319232-comissao-aprova-isencao-de-imposto-para-bebidas-a-base-de-frutos-regionais-da-amazonia",
-   "resumo": "Isenção limita-se ao Imposto sobre Produtos Industrializados; a Câmara dos Deputados continua discutindo o assunto",
-   "fonte": "camara",
-   "fonteNome": "Agência Câmara",
-   "sigla": "Câmara",
-   "publicadoEm": "2026-11-13T14:32:00.000Z",
-   "categorias": [
-    "tributos",
-    "legislacao"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-13T15:05:19.869Z"
   },
   {
    "id": "lnimwv",
