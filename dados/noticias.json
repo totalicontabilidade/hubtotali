@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-13T21:05:19.880Z",
+ "atualizadoEm": "2026-11-13T23:26:32.843Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-13T21:05:19.880Z"
+   "ultimaVez": "2026-11-13T23:26:32.843Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-13T21:05:19.880Z"
+   "ultimaVez": "2026-11-13T23:26:32.843Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-13T21:05:19.880Z"
+   "ultimaVez": "2026-11-13T23:26:32.843Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 16,
-   "ultimaVez": "2026-11-13T21:05:19.880Z"
+   "ultimaVez": "2026-11-13T23:26:32.843Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-13T21:05:19.880Z"
+   "ultimaVez": "2026-11-13T23:26:32.843Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-13T21:05:19.880Z"
+   "ultimaVez": "2026-11-13T23:26:32.843Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-13T21:05:19.880Z"
+   "ultimaVez": "2026-11-13T23:26:32.843Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-13T21:05:19.880Z"
+   "ultimaVez": "2026-11-13T23:26:32.843Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-13T21:05:19.880Z"
+   "ultimaVez": "2026-11-13T23:26:32.843Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-13T21:05:19.880Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-13T23:26:32.843Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,27 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-13T21:05:19.880Z"
+   "ultimaVez": "2026-11-13T23:26:32.843Z"
   }
  ],
  "noticias": [
+  {
+   "id": "ojbny7",
+   "titulo": "Receita cancelará dívidas de MEIs vencidas até esta sexta-feira",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/receita-cancelara-dividas-de-meis-vencidas-ate-esta-sexta-feira",
+   "resumo": "As dívidas de contribuição previdenciária dos Microempreendedores Individuais (MEIs) com vencimento até esta sexta-feira (13) serão perdoadas automaticamente pela Receita Federal , informou o órgão. O procedimento não exige pedido do contribuinte. Para manter o benefício,…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-13T23:08:00.000Z",
+   "categorias": [
+    "simples",
+    "tributos",
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-13T23:26:32.843Z"
+  },
   {
    "id": "hqfsks",
    "titulo": "CFC e Conselhos Regionais se posicionam contra aumento da carga tributária e restrições à compensação de tributos",
