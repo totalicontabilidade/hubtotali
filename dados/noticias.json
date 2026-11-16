@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-16T18:35:19.846Z",
+ "atualizadoEm": "2026-11-16T19:05:19.147Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-16T18:35:19.846Z"
+   "ultimaVez": "2026-11-16T19:05:19.147Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-16T18:35:19.846Z"
+   "ultimaVez": "2026-11-16T19:05:19.147Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-16T18:35:19.846Z"
+   "ultimaVez": "2026-11-16T19:05:19.147Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 14,
-   "ultimaVez": "2026-11-16T18:35:19.846Z"
+   "ultimaVez": "2026-11-16T19:05:19.147Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-16T18:35:19.846Z"
+   "ultimaVez": "2026-11-16T19:05:19.147Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-16T18:35:19.846Z"
+   "ultimaVez": "2026-11-16T19:05:19.147Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-16T18:35:19.846Z"
+   "ultimaVez": "2026-11-16T19:05:19.147Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-16T18:35:19.846Z"
+   "ultimaVez": "2026-11-16T19:05:19.147Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-16T18:35:19.846Z"
+   "ultimaVez": "2026-11-16T19:05:19.147Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-16T18:35:19.846Z"
+   "ultimaVez": "2026-11-16T19:05:19.147Z"
   },
   {
    "id": "govbr",
@@ -135,7 +135,7 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-16T18:35:19.846Z"
+   "ultimaVez": "2026-11-16T19:05:19.147Z"
   }
  ],
  "noticias": [
@@ -217,6 +217,22 @@
    ],
    "relevancia": 1,
    "vistaEm": "2026-11-16T15:05:26.747Z"
+  },
+  {
+   "id": "1vt8fk8",
+   "titulo": "Operação Fronteira Receita Federal 2026 retira de circulação R$ 581 milhões em mercadorias ilícitas e drogas",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-receita-federal-2026-retira-de-circulacao-r-581-milhoes-em-mercadorias-ilicitas-e-drogas",
+   "resumo": "Sexta edição da operação registrou recorde de apreensão de mercadorias e mobilizou mais de 600 servidores da Receita Federal e 1.400 agentes de órgãos parceiros.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-16T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-16T19:05:19.147Z"
   },
   {
    "id": "3bam4e",
@@ -2980,21 +2996,6 @@
     "simples",
     "tributos",
     "legislacao"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "h4f147",
-   "titulo": "Receita Federal abre consulta ao lote residual de restituição do IRPF 2026 nesta sexta-feira (23)",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/receita-federal-abre-consulta-ao-lote-residual-de-restituicao-do-irpf-2026-nesta-sexta-feira-23",
-   "resumo": "Consulta ao lote residual estará disponível a partir das 9h desta sexta-feira (23); crédito de R$ 531,6 milhões será realizado em 30 de outubro, contemplando 184.442 restituições.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-10-22T15:00:00.000Z",
-   "categorias": [
-    "tributos"
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-09T15:43:00.130Z"
