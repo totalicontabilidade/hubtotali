@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-16T11:35:18.439Z",
+ "atualizadoEm": "2026-11-16T13:05:25.681Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-16T11:35:18.439Z"
+   "ultimaVez": "2026-11-16T13:05:25.681Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-16T11:35:18.439Z"
+   "ultimaVez": "2026-11-16T13:05:25.681Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-16T11:35:18.439Z"
+   "ultimaVez": "2026-11-16T13:05:25.681Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 16,
-   "ultimaVez": "2026-11-16T11:35:18.439Z"
+   "ultimaVez": "2026-11-16T13:05:25.681Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-16T11:35:18.439Z"
+   "ultimaVez": "2026-11-16T13:05:25.681Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-16T11:35:18.439Z"
+   "ultimaVez": "2026-11-16T13:05:25.681Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-16T11:35:18.439Z"
+   "ultimaVez": "2026-11-16T13:05:25.681Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-16T11:35:18.439Z"
+   "ultimaVez": "2026-11-16T13:05:25.681Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-16T11:35:18.439Z"
+   "ultimaVez": "2026-11-16T13:05:25.681Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 2,
-   "ultimaVez": "2026-11-16T11:35:18.439Z"
+   "quantas": 3,
+   "ultimaVez": "2026-11-16T13:05:25.681Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,72 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-16T11:35:18.439Z"
+   "ultimaVez": "2026-11-16T13:05:25.681Z"
   }
  ],
  "noticias": [
+  {
+   "id": "19bwsuv",
+   "titulo": "Perdão das dívidas do MEI será automático: não é preciso fazer pedido",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/perdao-das-dividas-do-mei-sera-automatico-nao-e-preciso-fazer-pedido",
+   "resumo": "A Receita Federal vai cancelar de ofício as dívidas de contribuição previdenciária do Microempreendedor Individual (MEI) vencidas até 13 de outubro de 2026. Para manter o perdão, quem continuar na condição de MEI deverá pagar em dia o DAS de janeiro a junho de 2027.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-16T13:05:27.238Z",
+   "semHora": true,
+   "categorias": [
+    "simples",
+    "tributos",
+    "trabalhista"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-16T13:05:25.681Z"
+  },
+  {
+   "id": "1t5lr18",
+   "titulo": "Receita Federal apreende mais de 400 aparelhos celulares em fundo falso",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-apreende-mais-de-400-aparelhos-celulares-em-fundo-falso",
+   "resumo": "Mercadorias foram avaliadas em R$ 2,8 milhões. Ação foi no âmbito da Operação Fronteira Receita Federal.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-16T13:05:27.238Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-16T13:05:25.681Z"
+  },
+  {
+   "id": "1wmbpyb",
+   "titulo": "Ibracon lança volume 2 de obra sobre missão e responsabilidades da auditoria independente",
+   "link": "https://cfc.org.br/noticias/ibracon-lanca-volume-2-de-obra-sobre-missao-e-responsabilidades-da-auditoria-independente/",
+   "resumo": "O Instituto de Auditoria Independente do Brasil (Ibracon) realizará, em 9 de dezembro, o lançamento do segundo volume do livro Auditoria Independente: missão e responsabilidades – Estudos e Pareceres. A cerimônia ocorrerá no auditório do Conselho Federal de Contabilidade…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-16T12:48:08.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 0,
+   "vistaEm": "2026-11-16T13:05:25.681Z"
+  },
+  {
+   "id": "9jv8dd",
+   "titulo": "Mercado reduz projeções para inflação e crescimento da economia em 202",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/mercado-reduz-projecoes-para-inflacao-e-crescimento-da-economia-em-202",
+   "resumo": "O mercado financeiro reduziu as projeções para a inflação e o crescimento da economia brasileira em 2026. Ao mesmo tempo, elevou a estimativa para a cotação do dólar no fim do próximo ano. A previsão para a taxa básica de juros (Selic) permaneceu estável. As estimativas das…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-16T12:12:00.000Z",
+   "categorias": [],
+   "relevancia": 1,
+   "vistaEm": "2026-11-16T13:05:25.681Z"
+  },
   {
    "id": "130ezgp",
    "titulo": "Receita Federal apreende 30 mil vapes em Santa Catarina",
@@ -2936,22 +2998,6 @@
     "empresas"
    ],
    "relevancia": 1,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "bearxx",
-   "titulo": "Antecipação de atividades para implantação do CNPJ Alfanumérico",
-   "link": "https://www.gov.br/esocial/pt-br/noticias/receita-federal/antecipacao-de-atividades-para-implantacao-do-cnpj-alfanumerico",
-   "resumo": "Antecipação de etapas técnicas altera o período de disponibilidade da base do CNPJ, mantendo inalteradas as demais condições previstas para a implantação do novo formato.",
-   "fonte": "esocial",
-   "fonteNome": "Portal eSocial",
-   "sigla": "eSocial",
-   "publicadoEm": "2026-07-15T17:06:00.000Z",
-   "categorias": [
-    "trabalhista",
-    "empresas"
-   ],
-   "relevancia": 3,
    "vistaEm": "2026-11-09T15:43:00.130Z"
   }
  ]
