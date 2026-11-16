@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-16T20:05:21.842Z",
+ "atualizadoEm": "2026-11-16T20:35:19.547Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-16T20:05:21.842Z"
+   "ultimaVez": "2026-11-16T20:35:19.547Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-16T20:05:21.842Z"
+   "ultimaVez": "2026-11-16T20:35:19.547Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-16T20:05:21.842Z"
+   "ultimaVez": "2026-11-16T20:35:19.547Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 13,
-   "ultimaVez": "2026-11-16T20:05:21.842Z"
+   "ultimaVez": "2026-11-16T20:35:19.547Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-16T20:05:21.842Z"
+   "ultimaVez": "2026-11-16T20:35:19.547Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-16T20:05:21.842Z"
+   "ultimaVez": "2026-11-16T20:35:19.547Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-16T20:05:21.842Z"
+   "ultimaVez": "2026-11-16T20:35:19.547Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-16T20:05:21.842Z"
+   "ultimaVez": "2026-11-16T20:35:19.547Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-16T20:05:21.842Z"
+   "ultimaVez": "2026-11-16T20:35:19.547Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-16T20:05:21.842Z"
+   "ultimaVez": "2026-11-16T20:35:19.547Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,25 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-16T20:05:21.842Z"
+   "ultimaVez": "2026-11-16T20:35:19.547Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1ou1r65",
+   "titulo": "INSS realiza 45 atendimentos à população em situação de rua em São José do Rio Preto (SP)",
+   "link": "https://agenciagov.ebc.com.br/noticias/202611/inss-realiza-45-atendimentos-a-populacao-em-situacao-de-rua-em-sao-jose-do-rio-preto-sp",
+   "resumo": "Equipe da Previdência Social ofereceu orientações sobre benefícios, registrou requerimentos de BPC e aposentadorias e emitiu extratos durante o Pop Rua Jud",
+   "fonte": "govbr",
+   "fonteNome": "Agência Gov (governo federal)",
+   "sigla": "Gov",
+   "publicadoEm": "2026-11-16T19:30:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-16T20:35:19.547Z"
+  },
   {
    "id": "1e57xh5",
    "titulo": "INSS realiza 315 perícias médicas em mutirões no Paraná",
@@ -2973,21 +2988,6 @@
    "titulo": "Receita Federal e Polícia Militar apreendem carga estimada em R$ 1 milhão em ônibus de turismo na região de Sertaneja/PR",
    "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/receita-federal-e-policia-militar-apreendem-carga-estimada-em-r-1-milhao-em-onibus-de-turismo-na-regiao-de-sertaneja-pr",
    "resumo": "Ação conjunta realizada na madrugada de sábado (24) identificou mercadorias sem comprovação de regularização fiscal e aduaneira, reforçando o combate ao descaminho e aos crimes transfronteiriços.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-10-26T15:00:00.000Z",
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "1aue4yf",
-   "titulo": "Receita Federal apreende 32 ovos de aves nativas transportados clandestinamente em ônibus",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/receita-federal-apreende-32-ovos-de-aves-nativas-transportados-clandestinamente-em-onibus",
-   "resumo": "Ovos foram encontrados em incubadora transportada em mala e ocultos nas jaquetas de casal de passageiros chineses; cada unidade pode chegar a 50 mil euros na Europa.",
    "fonte": "receita",
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
