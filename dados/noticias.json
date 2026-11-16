@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-16T15:05:26.747Z",
+ "atualizadoEm": "2026-11-16T15:35:18.205Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-16T15:05:26.747Z"
+   "ultimaVez": "2026-11-16T15:35:18.205Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-16T15:05:26.747Z"
+   "ultimaVez": "2026-11-16T15:35:18.205Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-16T15:05:26.747Z"
+   "ultimaVez": "2026-11-16T15:35:18.205Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 15,
-   "ultimaVez": "2026-11-16T15:05:26.747Z"
+   "ultimaVez": "2026-11-16T15:35:18.205Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-16T15:05:26.747Z"
+   "ultimaVez": "2026-11-16T15:35:18.205Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-16T15:05:26.747Z"
+   "ultimaVez": "2026-11-16T15:35:18.205Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-16T15:05:26.747Z"
+   "ultimaVez": "2026-11-16T15:35:18.205Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-16T15:05:26.747Z"
+   "ultimaVez": "2026-11-16T15:35:18.205Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-16T15:05:26.747Z"
+   "ultimaVez": "2026-11-16T15:35:18.205Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-16T15:05:26.747Z"
+   "ultimaVez": "2026-11-16T15:35:18.205Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,25 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-16T15:05:26.747Z"
+   "ultimaVez": "2026-11-16T15:35:18.205Z"
   }
  ],
  "noticias": [
+  {
+   "id": "4sjlze",
+   "titulo": "Sistema CFC/CRCs orienta profissionais da contabilidade sobre regularização de pendências financeiras",
+   "link": "https://cfc.org.br/noticias/sistema-cfc-crcs-orienta-profissionais-da-contabilidade-sobre-regularizacao-de-pendencias-financeiras/",
+   "resumo": "O Sistema CFC/CRCs promove campanha de regularização de pendências financeiras, com orientações aos profissionais da contabilidade sobre a consulta de débitos e as opções disponíveis para pagamento. A campanha busca incentivar a solução das pendências e reforçar a importância…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-16T15:28:07.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-16T15:35:18.205Z"
+  },
   {
    "id": "1pr8j0z",
    "titulo": "Operação Fronteira Receita Federal 2026: Alfândega de Santos realiza quatro apreensões simultâneas no Porto de Santos",
@@ -2980,21 +2995,6 @@
     "tributos"
    ],
    "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "10qu2vg",
-   "titulo": "Ferramentas Download e Relatórios Gerenciais apresentam instabilidade",
-   "link": "https://www.gov.br/esocial/pt-br/noticias/ferramentas-download-e-relatorios-gerenciais-apresentam-instabilidade",
-   "resumo": "Alguns pedidos não estão retornando resultados e outros apresentam erro ao tentar baixar os arquivos gerados. Relatório Gerencial também é afetado.",
-   "fonte": "esocial",
-   "fonteNome": "Portal eSocial",
-   "sigla": "eSocial",
-   "publicadoEm": "2026-08-27T20:11:00.000Z",
-   "categorias": [
-    "trabalhista"
-   ],
-   "relevancia": 1,
    "vistaEm": "2026-11-09T15:43:00.130Z"
   }
  ]
