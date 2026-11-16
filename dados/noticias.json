@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-14T17:10:30.203Z",
+ "atualizadoEm": "2026-11-16T10:05:19.321Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-14T17:10:30.203Z"
+   "ultimaVez": "2026-11-16T10:05:19.321Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-14T17:10:30.203Z"
+   "ultimaVez": "2026-11-16T10:05:19.321Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-14T17:10:30.203Z"
+   "ultimaVez": "2026-11-16T10:05:19.321Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 16,
-   "ultimaVez": "2026-11-14T17:10:30.203Z"
+   "ultimaVez": "2026-11-16T10:05:19.321Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-14T17:10:30.203Z"
+   "ultimaVez": "2026-11-16T10:05:19.321Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-14T17:10:30.203Z"
+   "ultimaVez": "2026-11-16T10:05:19.321Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-14T17:10:30.203Z"
+   "ultimaVez": "2026-11-16T10:05:19.321Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-14T17:10:30.203Z"
+   "ultimaVez": "2026-11-16T10:05:19.321Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-14T17:10:30.203Z"
+   "ultimaVez": "2026-11-16T10:05:19.321Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 2,
-   "ultimaVez": "2026-11-14T17:10:30.203Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-16T10:05:19.321Z"
   },
   {
    "id": "govbr",
@@ -134,11 +134,91 @@
    "nome": "Agência Gov (governo federal)",
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-14T17:10:30.203Z"
+   "quantas": 0,
+   "ultimaVez": "2026-11-16T10:05:19.321Z"
   }
  ],
  "noticias": [
+  {
+   "id": "18z5o34",
+   "titulo": "CFC, Fenacon e Receita Federal instalam sala de situação para acompanhar desafios da reforma tributária",
+   "link": "https://fenacon.org.br/noticias/cfc-fenacon-e-receita-federal-instalam-sala-de-situacao-para-acompanhar-desafios-da-reforma-tributaria/",
+   "resumo": "Proposta apresentada pelo presidente do Conselho, Joaquim Bezerra, durante coletiva de imprensa já está em prática. Primeira reunião ocorreu na quinta-feira (12), com foco em soluções para os desafios da reforma tributária Apenas um dia após o anúncio da criação de uma sala…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-16T05:44:46.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-16T10:05:19.321Z"
+  },
+  {
+   "id": "gwt5yg",
+   "titulo": "Ato Conjunto RFB/CGIBS nº 7/2026 atualiza o cronograma de obrigatoriedade de emissão da NFS-e para IBS e CBS",
+   "link": "https://fenacon.org.br/reforma-tributaria/ato-conjunto-rfb-cgibs-no-7-2026-atualiza-o-cronograma-de-obrigatoriedade-de-emissao-da-nfs-e-para-ibs-e-cbs/",
+   "resumo": "O Comitê Gestor da Nota Fiscal de Serviço Eletrônica de padrão nacional (CGNFS-e) comunica aos municípios, contribuintes prestadores de serviços e desenvolvedores de sistemas que foi publicado, na edição de sexta (13 de novembro de 2026) do Diário Oficial da União (DOU), o…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-16T05:19:29.000Z",
+   "categorias": [
+    "reforma",
+    "empresas",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-16T10:05:19.321Z"
+  },
+  {
+   "id": "18fg01r",
+   "titulo": "Após pleito do Sescon-SP, prazo da DeRE é prorrogado; notas fiscais também têm novas datas",
+   "link": "https://fenacon.org.br/noticias/apos-pleito-do-sescon-sp-prazo-da-dere-e-prorrogado-notas-fiscais-tambem-tem-novas-datas/",
+   "resumo": "A primeira entrega dos eventos periódicos mensais, referente à competência novembro de 2026, foi adiada de 15 de novembro para 15 de dezembro, conforme o Ato Conjunto RFB/CGIBS nº 7 Uma conquista para as empresas contábeis que enfrentam dificuldades na adaptação à Declaração…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-16T04:36:09.000Z",
+   "categorias": [],
+   "relevancia": 2,
+   "vistaEm": "2026-11-16T10:05:19.321Z"
+  },
+  {
+   "id": "iu26h1",
+   "titulo": "Vale-transporte em dinheiro integra cálculo do FGTS, decide STJ",
+   "link": "https://fenacon.org.br/noticias/vale-transporte-em-dinheiro-integra-calculo-do-fgts-decide-stj/",
+   "resumo": "Para 1ª seção, pagamento em dinheiro não atende, em regra, à forma legal de concessão que permite excluir o benefício do cálculo do FGTS. A 1ª seção do STJ decidiu que o vale-transporte pago em dinheiro integra, em regra, a base de cálculo da contribuição para o FGTS. Ao…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-16T02:44:42.000Z",
+   "categorias": [
+    "tributos",
+    "trabalhista"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-16T10:05:19.321Z"
+  },
+  {
+   "id": "1il4tsq",
+   "titulo": "Maceió recebe o seminário Reforma Tributária pelo Brasil",
+   "link": "https://fenacon.org.br/reforma-tributaria/maceio-recebe-o-seminario-reforma-tributaria-pelo-brasil/",
+   "resumo": "No dia 10 de novembro, a capital alagoana foi palco da Edição Alagoas do projeto, reunindo profissionais da contabilidade e especialistas para debater os impactos e os desafios do novo sistema tributário brasileiro. O seminário foi promovido pela Fenacon e pelo CFC, com…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-16T01:21:21.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "contabil"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-16T10:05:19.321Z"
+  },
   {
    "id": "1lnwyfw",
    "titulo": "XXXV Secofem é finalizada com cerca de 500 participantes capacitados",
