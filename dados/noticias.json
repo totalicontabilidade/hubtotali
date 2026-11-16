@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-16T16:05:20.118Z",
+ "atualizadoEm": "2026-11-16T17:35:19.371Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-16T16:05:20.118Z"
+   "ultimaVez": "2026-11-16T17:35:19.371Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-16T16:05:20.118Z"
+   "ultimaVez": "2026-11-16T17:35:19.371Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-16T16:05:20.118Z"
+   "ultimaVez": "2026-11-16T17:35:19.371Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 15,
-   "ultimaVez": "2026-11-16T16:05:20.118Z"
+   "ultimaVez": "2026-11-16T17:35:19.371Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-16T16:05:20.118Z"
+   "ultimaVez": "2026-11-16T17:35:19.371Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-16T16:05:20.118Z"
+   "ultimaVez": "2026-11-16T17:35:19.371Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-16T16:05:20.118Z"
+   "ultimaVez": "2026-11-16T17:35:19.371Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-16T16:05:20.118Z"
+   "ultimaVez": "2026-11-16T17:35:19.371Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-16T16:05:20.118Z"
+   "ultimaVez": "2026-11-16T17:35:19.371Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-16T16:05:20.118Z"
+   "ultimaVez": "2026-11-16T17:35:19.371Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,25 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-16T16:05:20.118Z"
+   "ultimaVez": "2026-11-16T17:35:19.371Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1so6fwe",
+   "titulo": "Presidente da Fenacon concede entrevista à Jovem Pan News sobre o PLP 299/2026 em discussão no Senado",
+   "link": "https://fenacon.org.br/noticias/presidente-fenacon-concede-entrevista-jovem-pan-news-plp-299-2026/",
+   "resumo": "Para o dirigente, as medidas do Governo se acumularam no final do ano e deixam as empresas numa situação difícil para se adequarem à todas as exigências.",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-16T17:13:21.000Z",
+   "categorias": [
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-16T17:35:19.371Z"
+  },
   {
    "id": "4sjlze",
    "titulo": "Sistema CFC/CRCs orienta profissionais da contabilidade sobre regularização de pendências financeiras",
@@ -2979,22 +2994,6 @@
    "publicadoEm": "2026-10-21T15:00:00.000Z",
    "categorias": [
     "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "1xq0nhu",
-   "titulo": "Receita Federal bate recordes na restituição do IRPF e reforça a orientação e o respeito aos direitos dos contribuintes",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/receita-federal-bate-recordes-na-restituicao-do-irpf-e-reforca-a-orientacao-e-o-respeito-aos-direitos-dos-contribuintes",
-   "resumo": "O direito do contribuinte à orientação antes de qualquer atividade fiscalizatória é garantido em lei, com a aprovação da LC 225/2026.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-10-20T15:00:00.000Z",
-   "categorias": [
-    "tributos",
-    "legislacao"
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-09T15:43:00.130Z"
