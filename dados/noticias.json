@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-16T15:35:18.205Z",
+ "atualizadoEm": "2026-11-16T16:05:20.118Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-16T15:35:18.205Z"
+   "ultimaVez": "2026-11-16T16:05:20.118Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-16T15:35:18.205Z"
+   "ultimaVez": "2026-11-16T16:05:20.118Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-16T15:35:18.205Z"
+   "ultimaVez": "2026-11-16T16:05:20.118Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 15,
-   "ultimaVez": "2026-11-16T15:35:18.205Z"
+   "ultimaVez": "2026-11-16T16:05:20.118Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-16T15:35:18.205Z"
+   "ultimaVez": "2026-11-16T16:05:20.118Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-16T15:35:18.205Z"
+   "ultimaVez": "2026-11-16T16:05:20.118Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-16T15:35:18.205Z"
+   "ultimaVez": "2026-11-16T16:05:20.118Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-16T15:35:18.205Z"
+   "ultimaVez": "2026-11-16T16:05:20.118Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 2,
-   "ultimaVez": "2026-11-16T15:35:18.205Z"
+   "quantas": 0,
+   "ultimaVez": "2026-11-16T16:05:20.118Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-16T15:35:18.205Z"
+   "ultimaVez": "2026-11-16T16:05:20.118Z"
   },
   {
    "id": "govbr",
@@ -135,7 +135,7 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-16T15:35:18.205Z"
+   "ultimaVez": "2026-11-16T16:05:20.118Z"
   }
  ],
  "noticias": [
@@ -153,6 +153,23 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-16T15:35:18.205Z"
+  },
+  {
+   "id": "1l0prc4",
+   "titulo": "Receita Federal publica primeiro código-fonte aberto no GitHub e amplia transparência da Reforma Tributária",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-publica-primeiro-codigo-fonte-aberto-no-github-e-amplia-transparencia-da-reforma-tributaria",
+   "resumo": "Iniciativa fortalece a transparência, a segurança jurídica e a previsibilidade na implementação dos novos tributos sobre o consumo.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-16T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-16T16:05:20.118Z"
   },
   {
    "id": "1pr8j0z",
@@ -2978,21 +2995,6 @@
    "categorias": [
     "tributos",
     "legislacao"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "1l4weme",
-   "titulo": "Receita Federal inaugura nova era de julgamentos em larga escala",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/receita-federal-inaugura-nova-era-de-julgamentos-em-larga-escala",
-   "resumo": "Nova solução representa um salto tecnológico e permite o julgamento conjunto de mais de 15 mil processos repetitivos em uma única sessão, ampliando a eficiência, a uniformidade das decisões e a celeridade para os contribuintes.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-10-20T15:00:00.000Z",
-   "categorias": [
-    "tributos"
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-09T15:43:00.130Z"
