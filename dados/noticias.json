@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-16T21:05:23.257Z",
+ "atualizadoEm": "2026-11-16T21:35:20.197Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-16T21:05:23.257Z"
+   "ultimaVez": "2026-11-16T21:35:20.197Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-16T21:05:23.257Z"
+   "ultimaVez": "2026-11-16T21:35:20.197Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-16T21:05:23.257Z"
+   "ultimaVez": "2026-11-16T21:35:20.197Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 12,
-   "ultimaVez": "2026-11-16T21:05:23.257Z"
+   "ultimaVez": "2026-11-16T21:35:20.197Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-16T21:05:23.257Z"
+   "ultimaVez": "2026-11-16T21:35:20.197Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-16T21:05:23.257Z"
+   "ultimaVez": "2026-11-16T21:35:20.197Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-16T21:05:23.257Z"
+   "ultimaVez": "2026-11-16T21:35:20.197Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-16T21:05:23.257Z"
+   "ultimaVez": "2026-11-16T21:35:20.197Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-16T21:05:23.257Z"
+   "ultimaVez": "2026-11-16T21:35:20.197Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-16T21:05:23.257Z"
+   "ultimaVez": "2026-11-16T21:35:20.197Z"
   },
   {
    "id": "govbr",
@@ -134,8 +134,8 @@
    "nome": "Agência Gov (governo federal)",
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
-   "quantas": 3,
-   "ultimaVez": "2026-11-16T21:05:23.257Z"
+   "quantas": 4,
+   "ultimaVez": "2026-11-16T21:35:20.197Z"
   }
  ],
  "noticias": [
@@ -169,6 +169,21 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-16T20:05:21.842Z"
+  },
+  {
+   "id": "11eg8v1",
+   "titulo": "Além da educação financeira, educação previdenciária também se aprende na escola",
+   "link": "https://agenciagov.ebc.com.br/noticias/202611/alem-da-educacao-financeira-aprender-valor-passa-a-ofertar-tambem-educacao-previdenciaria",
+   "resumo": "Aprender Valor, projeto do Banco Central, inclui novos materiais didáticos em pacote que é ofertado às escolas. Conteúdo para o 8º e o 9º anos ajudam escolas a abordar planejamento em aulas de Matemática, Geografia e História",
+   "fonte": "govbr",
+   "fonteNome": "Agência Gov (governo federal)",
+   "sigla": "Gov",
+   "publicadoEm": "2026-11-16T19:05:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-16T21:35:20.197Z"
   },
   {
    "id": "bjgh4o",
@@ -2981,21 +2996,6 @@
     "tributos"
    ],
    "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "1bowuub",
-   "titulo": "Receita Federal e Polícia Militar apreendem carga estimada em R$ 1 milhão em ônibus de turismo na região de Sertaneja/PR",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/receita-federal-e-policia-militar-apreendem-carga-estimada-em-r-1-milhao-em-onibus-de-turismo-na-regiao-de-sertaneja-pr",
-   "resumo": "Ação conjunta realizada na madrugada de sábado (24) identificou mercadorias sem comprovação de regularização fiscal e aduaneira, reforçando o combate ao descaminho e aos crimes transfronteiriços.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-10-26T15:00:00.000Z",
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
    "vistaEm": "2026-11-09T15:43:00.130Z"
   }
  ]
