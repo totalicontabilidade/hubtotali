@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-16T14:35:25.043Z",
+ "atualizadoEm": "2026-11-16T15:05:26.747Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-16T14:35:25.043Z"
+   "ultimaVez": "2026-11-16T15:05:26.747Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-16T14:35:25.043Z"
+   "ultimaVez": "2026-11-16T15:05:26.747Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-16T14:35:25.043Z"
+   "ultimaVez": "2026-11-16T15:05:26.747Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 15,
-   "ultimaVez": "2026-11-16T14:35:25.043Z"
+   "ultimaVez": "2026-11-16T15:05:26.747Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-16T14:35:25.043Z"
+   "ultimaVez": "2026-11-16T15:05:26.747Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-16T14:35:25.043Z"
+   "ultimaVez": "2026-11-16T15:05:26.747Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-16T14:35:25.043Z"
+   "ultimaVez": "2026-11-16T15:05:26.747Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-16T14:35:25.043Z"
+   "ultimaVez": "2026-11-16T15:05:26.747Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-16T14:35:25.043Z"
+   "ultimaVez": "2026-11-16T15:05:26.747Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-16T14:35:25.043Z"
+   "ultimaVez": "2026-11-16T15:05:26.747Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-16T14:35:25.043Z"
+   "ultimaVez": "2026-11-16T15:05:26.747Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1pr8j0z",
+   "titulo": "Operação Fronteira Receita Federal 2026: Alfândega de Santos realiza quatro apreensões simultâneas no Porto de Santos",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-receita-federal-2026-alfandega-de-santos-realiza-quatro-apreensoes-simultaneas-no-porto-de-santos",
+   "resumo": "As apreensões ocorreram no dia 13 de novembro e incluem cigarros eletrônicos, cocaína, rolamentos e suplementos. Valores superam os R$ 27 milhões.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-16T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-16T15:05:26.747Z"
+  },
   {
    "id": "3bam4e",
    "titulo": "RFB prorroga prazo da consulta pública que altera a IN do Adicional da CSLL com o objetivo de introduzir elementos do Side-by-Side Package",
@@ -2979,22 +2995,6 @@
     "trabalhista"
    ],
    "relevancia": 1,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "1y332vn",
-   "titulo": "Publicado Roteiro da Opção pelo Simples Nacional Para o Ano de 2027",
-   "link": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/NoticiaCompleta.aspx?id=bff8b291-7a89-42fa-94e7-8cacfd617f25",
-   "resumo": "Veja as principais modificações na forma de opção, que agora deverá ser realizada no mês de setembro/2026",
-   "fonte": "simples",
-   "fonteNome": "Simples Nacional",
-   "sigla": "SN",
-   "publicadoEm": "2026-08-21T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "simples"
-   ],
-   "relevancia": 3,
    "vistaEm": "2026-11-09T15:43:00.130Z"
   }
  ]
