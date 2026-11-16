@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-16T14:05:19.533Z",
+ "atualizadoEm": "2026-11-16T14:35:25.043Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-16T14:05:19.533Z"
+   "ultimaVez": "2026-11-16T14:35:25.043Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-16T14:05:19.533Z"
+   "ultimaVez": "2026-11-16T14:35:25.043Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-16T14:05:19.533Z"
+   "ultimaVez": "2026-11-16T14:35:25.043Z"
   },
   {
    "id": "fazenda",
@@ -70,8 +70,8 @@
    "nome": "Ministério da Fazenda",
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
-   "quantas": 16,
-   "ultimaVez": "2026-11-16T14:05:19.533Z"
+   "quantas": 15,
+   "ultimaVez": "2026-11-16T14:35:25.043Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-16T14:05:19.533Z"
+   "ultimaVez": "2026-11-16T14:35:25.043Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-16T14:05:19.533Z"
+   "ultimaVez": "2026-11-16T14:35:25.043Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-16T14:05:19.533Z"
+   "ultimaVez": "2026-11-16T14:35:25.043Z"
   },
   {
    "id": "camara",
@@ -107,8 +107,8 @@
    "nome": "Agência Câmara",
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
-   "quantas": 2,
-   "ultimaVez": "2026-11-16T14:05:19.533Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-16T14:35:25.043Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-16T14:05:19.533Z"
+   "ultimaVez": "2026-11-16T14:35:25.043Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-16T14:05:19.533Z"
+   "ultimaVez": "2026-11-16T14:35:25.043Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-16T14:05:19.533Z"
+   "ultimaVez": "2026-11-16T14:35:25.043Z"
   }
  ],
  "noticias": [
+  {
+   "id": "3bam4e",
+   "titulo": "RFB prorroga prazo da consulta pública que altera a IN do Adicional da CSLL com o objetivo de introduzir elementos do Side-by-Side Package",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/rfb-prorroga-prazo-da-consulta-publica-que-altera-a-in-do-adicional-da-csll-com-o-objetivo-de-introduzir-elementos-do-side-by-side-package",
+   "resumo": "As submissões poderão ser enviadas até 22 de novembro de 2026.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-16T14:35:27.012Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-16T14:35:25.043Z"
+  },
   {
    "id": "19bwsuv",
    "titulo": "Perdão das dívidas do MEI será automático: não é preciso fazer pedido",
@@ -2977,24 +2993,6 @@
    "semHora": true,
    "categorias": [
     "simples"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "1u9r4qf",
-   "titulo": "CGSN atualiza regras do Simples Nacional para adequação à Reforma Tributária do Consumo",
-   "link": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/NoticiaCompleta.aspx?id=e595d010-1e04-4c3b-95d9-185fc58594b5",
-   "resumo": "Novas regras incorporam IBS e CBS ao regime, atualizam procedimentos e estabelecem novos prazos de opção para 2027",
-   "fonte": "simples",
-   "fonteNome": "Simples Nacional",
-   "sigla": "SN",
-   "publicadoEm": "2026-08-12T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "reforma",
-    "simples",
-    "tributos"
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-09T15:43:00.130Z"
