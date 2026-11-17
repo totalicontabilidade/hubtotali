@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-17T22:05:20.413Z",
+ "atualizadoEm": "2026-11-17T22:35:19.665Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T22:05:20.413Z"
+   "ultimaVez": "2026-11-17T22:35:19.665Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-17T22:05:20.413Z"
+   "ultimaVez": "2026-11-17T22:35:19.665Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T22:05:20.413Z"
+   "ultimaVez": "2026-11-17T22:35:19.665Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-17T22:05:20.413Z"
+   "ultimaVez": "2026-11-17T22:35:19.665Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-17T22:05:20.413Z"
+   "ultimaVez": "2026-11-17T22:35:19.665Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-17T22:05:20.413Z"
+   "ultimaVez": "2026-11-17T22:35:19.665Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-17T22:05:20.413Z"
+   "ultimaVez": "2026-11-17T22:35:19.665Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-17T22:05:20.413Z"
+   "ultimaVez": "2026-11-17T22:35:19.665Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-17T22:05:20.413Z"
+   "ultimaVez": "2026-11-17T22:35:19.665Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 5,
-   "ultimaVez": "2026-11-17T22:05:20.413Z"
+   "ultimaVez": "2026-11-17T22:35:19.665Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,25 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-17T22:05:20.413Z"
+   "ultimaVez": "2026-11-17T22:35:19.665Z"
   }
  ],
  "noticias": [
+  {
+   "id": "g82ha1",
+   "titulo": "Maria Clara Bugarim recebe maior honraria da IFAC e destaca protagonismo da contabilidade brasileira no cenário mundial",
+   "link": "https://cfc.org.br/noticias/maria-clara-bugarim-recebe-maior-honraria-da-ifac-e-destaca-protagonismo-da-contabilidade-brasileira-no-cenario-mundial/",
+   "resumo": "Presidente do CFC de 2006 a 2009 celebra reconhecimento internacional, compartilha conquista com a classe contábil e defende ética, transparência e formação profissional como pilares para o futuro da profissão. A contabilidade brasileira alcançou mais um marco de…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-17T22:24:43.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-17T22:35:19.665Z"
+  },
   {
    "id": "vj5why",
    "titulo": "Ministério quer aprimorar nexo técnico previdenciário e abre consulta pública",
@@ -2973,21 +2988,6 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-10T13:54:36.165Z"
-  },
-  {
-   "id": "wcnt23",
-   "titulo": "Vice-presidente do CFC assume presidência de comitê internacional de prevenção à lavagem de dinheiro",
-   "link": "https://cfc.org.br/noticias/vice-presidente-do-cfc-assume-presidencia-de-comite-internacional-de-prevencao-a-lavagem-de-dinheiro/",
-   "resumo": "Nomeação de Sandra Campos para liderar grupo técnico da Associação Interamericana de Contabilidade reforça a participação brasileira no combate a crimes financeiros e na promoção da ética e da transparência nas Américas A vice-presidente de Fiscalização, Ética e Disciplina do…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-05T16:41:21.000Z",
-   "categorias": [
-    "contabil"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
   }
  ]
 }
