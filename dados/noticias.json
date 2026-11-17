@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-17T17:35:19.360Z",
+ "atualizadoEm": "2026-11-17T18:05:28.942Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T17:35:19.360Z"
+   "ultimaVez": "2026-11-17T18:05:28.942Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-17T17:35:19.360Z"
+   "ultimaVez": "2026-11-17T18:05:28.942Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T17:35:19.360Z"
+   "ultimaVez": "2026-11-17T18:05:28.942Z"
   },
   {
    "id": "fazenda",
@@ -70,8 +70,8 @@
    "nome": "Ministério da Fazenda",
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
-   "quantas": 10,
-   "ultimaVez": "2026-11-17T17:35:19.360Z"
+   "quantas": 11,
+   "ultimaVez": "2026-11-17T18:05:28.942Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-17T17:35:19.360Z"
+   "ultimaVez": "2026-11-17T18:05:28.942Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-17T17:35:19.360Z"
+   "ultimaVez": "2026-11-17T18:05:28.942Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-17T17:35:19.360Z"
+   "ultimaVez": "2026-11-17T18:05:28.942Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-17T17:35:19.360Z"
+   "ultimaVez": "2026-11-17T18:05:28.942Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-17T17:35:19.360Z"
+   "ultimaVez": "2026-11-17T18:05:28.942Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-17T17:35:19.360Z"
+   "ultimaVez": "2026-11-17T18:05:28.942Z"
   },
   {
    "id": "govbr",
@@ -134,8 +134,8 @@
    "nome": "Agência Gov (governo federal)",
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
-   "quantas": 5,
-   "ultimaVez": "2026-11-17T17:35:19.360Z"
+   "quantas": 4,
+   "ultimaVez": "2026-11-17T18:05:28.942Z"
   }
  ],
  "noticias": [
@@ -171,6 +171,22 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-17T15:35:19.419Z"
+  },
+  {
+   "id": "vnujtn",
+   "titulo": "Receita Federal disponibiliza API para emissão do Recolhimento como Adquirente (RAD)",
+   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/receita-federal-disponibiliza-api-para-emissao-do-recolhimento-como-adquirente-rad",
+   "resumo": "A solução viabiliza a automação dos processos relacionados ao RAD, reduzindo etapas operacionais e ampliando a eficiência na apropriação de créditos tributários",
+   "fonte": "fazenda",
+   "fonteNome": "Ministério da Fazenda",
+   "sigla": "MF",
+   "publicadoEm": "2026-11-17T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-17T18:05:28.942Z"
   },
   {
    "id": "17oo9dw",
@@ -2976,23 +2992,6 @@
     "tributos"
    ],
    "relevancia": 1,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "f66m24",
-   "titulo": "Operação Fármacos II: RFB identifica R$ 1,8 bilhão em créditos farmacêuticos incompatíveis e orienta contribuintes à regularização até 20/01/2027",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-farmacos-ii-rfb-identifica-r-1-8-bilhao-em-creditos-farmaceuticos-incompativeis-e-orienta-contribuintes-a-regularizacao-ate-20-01-2027",
-   "resumo": "Segunda fase da Operação Fármacos alcança cerca de 1,6 mil contribuintes e detecta pedidos apresentados por empresas de atividades econômicas sem vínculo com o benefício fiscal destinado ao setor farmacêutico.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-03T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos",
-    "trabalhista"
-   ],
-   "relevancia": 3,
    "vistaEm": "2026-11-09T15:43:00.130Z"
   }
  ]
