@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-17T15:05:22.083Z",
+ "atualizadoEm": "2026-11-17T15:35:19.419Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T15:05:22.083Z"
+   "ultimaVez": "2026-11-17T15:35:19.419Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-17T15:05:22.083Z"
+   "ultimaVez": "2026-11-17T15:35:19.419Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T15:05:22.083Z"
+   "ultimaVez": "2026-11-17T15:35:19.419Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-17T15:05:22.083Z"
+   "ultimaVez": "2026-11-17T15:35:19.419Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-17T15:05:22.083Z"
+   "ultimaVez": "2026-11-17T15:35:19.419Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-17T15:05:22.083Z"
+   "ultimaVez": "2026-11-17T15:35:19.419Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-17T15:05:22.083Z"
+   "ultimaVez": "2026-11-17T15:35:19.419Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-17T15:05:22.083Z"
+   "ultimaVez": "2026-11-17T15:35:19.419Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-17T15:05:22.083Z"
+   "ultimaVez": "2026-11-17T15:35:19.419Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-17T15:05:22.083Z"
+   "ultimaVez": "2026-11-17T15:35:19.419Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-17T15:05:22.083Z"
+   "ultimaVez": "2026-11-17T15:35:19.419Z"
   }
  ],
  "noticias": [
+  {
+   "id": "z9yo6f",
+   "titulo": "Reforma tributária: Receita descarta punição a erros de boa-fé",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/reforma-tributaria-receita-descarta-punicao-erros-de-boa-fe",
+   "resumo": "O secretário da Receita Federal, Robinson Barreirinhas, afirmou nesta terça-feira (17) que os riscos e desafios da implementação da reforma tributária já foram identificados e que o governo pretende orientar os contribuintes durante a transição para o novo sistema. Em…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-17T15:30:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-17T15:35:19.419Z"
+  },
   {
    "id": "17oo9dw",
    "titulo": "Virando a Chave para a Reforma Tributária - API para emissão do RAD já está disponível",
@@ -2976,22 +2992,6 @@
    "categorias": [
     "tributos",
     "empresas"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "1dh4r2i",
-   "titulo": "Receita Federal prorroga prazo para adesão a editais de transação tributária até 30 de dezembro",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-prorroga-prazo-para-adesao-a-editais-de-transacao-tributaria-ate-30-de-dezembro",
-   "resumo": "Medida amplia oportunidade para que contribuintes regularizem débitos em discussão administrativa com condições diferenciadas e descontos previstos nos editais.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-03T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-09T15:43:00.130Z"
