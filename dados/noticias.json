@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-17T12:35:19.206Z",
+ "atualizadoEm": "2026-11-17T13:35:20.223Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T12:35:19.206Z"
+   "ultimaVez": "2026-11-17T13:35:20.223Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-17T12:35:19.206Z"
+   "ultimaVez": "2026-11-17T13:35:20.223Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T12:35:19.206Z"
+   "ultimaVez": "2026-11-17T13:35:20.223Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 11,
-   "ultimaVez": "2026-11-17T12:35:19.206Z"
+   "ultimaVez": "2026-11-17T13:35:20.223Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-17T12:35:19.206Z"
+   "ultimaVez": "2026-11-17T13:35:20.223Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-17T12:35:19.206Z"
+   "ultimaVez": "2026-11-17T13:35:20.223Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-17T12:35:19.206Z"
+   "ultimaVez": "2026-11-17T13:35:20.223Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-17T12:35:19.206Z"
+   "ultimaVez": "2026-11-17T13:35:20.223Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 0,
-   "ultimaVez": "2026-11-17T12:35:19.206Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-17T13:35:20.223Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-17T12:35:19.206Z"
+   "ultimaVez": "2026-11-17T13:35:20.223Z"
   },
   {
    "id": "govbr",
@@ -135,13 +135,47 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-17T12:35:19.206Z"
+   "ultimaVez": "2026-11-17T13:35:20.223Z"
   }
  ],
  "noticias": [
   {
+   "id": "1hc1v9p",
+   "titulo": "PL 5854/26 – Fenacon alerta que aumento da tributação sobre dividendos pode inviabilizar pequenas e médias empresas",
+   "link": "https://fenacon.org.br/noticias/pl-5854-26-fenacon-alerta-que-aumento-da-tributacao-sobre-dividendos-pode-inviabilizar-pequenas-e-medias-empresas/",
+   "resumo": "Em nota pública, Federação manifesta preocupação e alerta para impactos sobre o empreendedorismo, os investimentos e a geração de empregos",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-17T13:19:49.000Z",
+   "categorias": [
+    "tributos",
+    "trabalhista",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-17T13:35:20.223Z"
+  },
+  {
+   "id": "9du0c3",
+   "titulo": "Ao vivo: Durigan fala em comissão sobre alíquota da CBS – 17/11/26",
+   "link": "https://www12.senado.leg.br/noticias/videos/2026/11/ao-vivo-durigan-fala-em-comissao-sobre-aliquota-da-cbs-2013-17-11-26",
+   "resumo": "",
+   "fonte": "senado",
+   "fonteNome": "Agência Senado",
+   "sigla": "Senado",
+   "publicadoEm": "2026-11-17T13:00:07.000Z",
+   "categorias": [
+    "legislacao",
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-17T13:35:20.223Z"
+  },
+  {
    "id": "b34rgk",
-   "titulo": "Mulheres lideram 63% dos negócios da Rocinha, diz pesquisa",
+   "titulo": "Mulheres lideram 63% dos negócios na Rocinha, diz pesquisa",
    "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/mulheres-lideram-63-dos-negocios-da-rocinha-diz-pesquisa",
    "resumo": "Pesquisa feita com 1.670 empreendedores da Favela da Rocinha, na zona sudoeste do Rio de Janeiro, revela que as mulheres representam 63% dos responsáveis pelos empreendimentos analisados, enquanto pessoas negras, considerando pretas e pardas, correspondem a 70%. Para 74% dos…",
    "fonte": "ebc",
@@ -2959,37 +2993,6 @@
     "tributos"
    ],
    "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "n82dxo",
-   "titulo": "Receita Federal deflagra maior ação conjunta de vigilância nas fronteiras terrestres, marítimas e aéreas do país",
-   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/receita-federal-deflagra-maior-acao-conjunta-de-vigilancia-nas-fronteiras-terrestres-maritimas-e-aereas-do-pais",
-   "resumo": "Edição 2026 da Operação Fronteira, lançada pelo secretário Barreirinhas, conta com diversas instituições de segurança pública, inclusive internacionais",
-   "fonte": "fazenda",
-   "fonteNome": "Ministério da Fazenda",
-   "sigla": "MF",
-   "publicadoEm": "2026-11-03T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 0,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "1h4n5hg",
-   "titulo": "Sefaz apresenta prestação de contas do 2º quadrimestre na Alese e destaca volume recorde de investimentos em Sergipe",
-   "link": "https://www.sefaz.se.gov.br/Lists/Noticias/DispForm.aspx?ID=2873",
-   "resumo": "Title: Sefaz apresenta prestação de contas do 2º quadrimestre na Alese e destaca volume recorde de investimentos em Sergipe Publicacao: 29/10/2026 12:20 Foto: https://www.sefaz.se.gov.br/Imagens/noticias/29-10-2026/1.jpeg Visibilidade: Intranet, Internet",
-   "fonte": "sefaz-se",
-   "fonteNome": "Secretaria da Fazenda de Sergipe",
-   "sigla": "SEFAZ/SE",
-   "publicadoEm": "2026-10-29T15:23:13.000Z",
-   "categorias": [
-    "sergipe"
-   ],
-   "relevancia": 2,
    "vistaEm": "2026-11-09T15:43:00.130Z"
   }
  ]
