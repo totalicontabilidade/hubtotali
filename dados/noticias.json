@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-17T18:05:28.942Z",
+ "atualizadoEm": "2026-11-17T18:35:19.215Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T18:05:28.942Z"
+   "ultimaVez": "2026-11-17T18:35:19.215Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-17T18:05:28.942Z"
+   "ultimaVez": "2026-11-17T18:35:19.215Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T18:05:28.942Z"
+   "ultimaVez": "2026-11-17T18:35:19.215Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 11,
-   "ultimaVez": "2026-11-17T18:05:28.942Z"
+   "ultimaVez": "2026-11-17T18:35:19.215Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-17T18:05:28.942Z"
+   "ultimaVez": "2026-11-17T18:35:19.215Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-17T18:05:28.942Z"
+   "ultimaVez": "2026-11-17T18:35:19.215Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-17T18:05:28.942Z"
+   "ultimaVez": "2026-11-17T18:35:19.215Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-17T18:05:28.942Z"
+   "ultimaVez": "2026-11-17T18:35:19.215Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-17T18:05:28.942Z"
+   "quantas": 3,
+   "ultimaVez": "2026-11-17T18:35:19.215Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-17T18:05:28.942Z"
+   "ultimaVez": "2026-11-17T18:35:19.215Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,43 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-17T18:05:28.942Z"
+   "ultimaVez": "2026-11-17T18:35:19.215Z"
   }
  ],
  "noticias": [
+  {
+   "id": "ayf0oq",
+   "titulo": "Paim relembra comissão que propôs política de valorização do salário mínimo",
+   "link": "https://www12.senado.leg.br/noticias/materias/2026/11/17/paim-relembra-comissao-que-propos-politica-de-valorizacao-do-salario-minimo",
+   "resumo": "",
+   "fonte": "senado",
+   "fonteNome": "Agência Senado",
+   "sigla": "Senado",
+   "publicadoEm": "2026-11-17T18:28:54.000Z",
+   "categorias": [
+    "legislacao",
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-17T18:35:19.215Z"
+  },
+  {
+   "id": "1ya2gys",
+   "titulo": "Reforma Tributária: alíquota da CBS divide opiniões em debate na CAE",
+   "link": "https://www12.senado.leg.br/noticias/videos/2026/11/reforma-tributaria-aliquota-da-cbs-divide-opinioes-em-debate-na-cae",
+   "resumo": "",
+   "fonte": "senado",
+   "fonteNome": "Agência Senado",
+   "sigla": "Senado",
+   "publicadoEm": "2026-11-17T18:16:00.000Z",
+   "categorias": [
+    "legislacao",
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-17T18:35:19.215Z"
+  },
   {
    "id": "1szcmaq",
    "titulo": "Durigan defende alíquota da reforma e estima média efetiva de 8,5%",
@@ -2960,38 +2993,6 @@
     "tributos"
    ],
    "relevancia": 2,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "1jcgp84",
-   "titulo": "Receita Federal e Ministério Público do Paraná deflagram 2ª fase da Operação Enxágue e Operação Catéter",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-e-ministerio-publico-do-parana-deflagram-2a-fase-da-operacao-enxague-e-operacao-cateter",
-   "resumo": "Investigações apuram organizações criminosas que usavam empresas de fachada para sonegar ICMS e lavar dinheiro no comércio de subprodutos de origem animal. Justiça determinou o sequestro de mais de R$ 271 milhões em bens e valores.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-04T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "128xu0i",
-   "titulo": "Receita Federal, PRF e Guarda Municipal interceptam ônibus abarrotados com mercadorias descaminhadas/contrabandeadas",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-prf-e-guarda-municipal-interceptam-onibus-abarrotados-com-mercadorias-descaminhadas-contrabandeadas",
-   "resumo": "Duas ações distintas resultaram na retenção de coletivos com destino a São Paulo; cargas irregulares somam R$ 1,5 milhão em produtos estrangeiros e emagrecedores.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-04T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
    "vistaEm": "2026-11-09T15:43:00.130Z"
   }
  ]
