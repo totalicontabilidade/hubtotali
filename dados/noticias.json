@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-17T15:35:19.419Z",
+ "atualizadoEm": "2026-11-17T16:05:18.974Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T15:35:19.419Z"
+   "ultimaVez": "2026-11-17T16:05:18.974Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-17T15:35:19.419Z"
+   "ultimaVez": "2026-11-17T16:05:18.974Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T15:35:19.419Z"
+   "ultimaVez": "2026-11-17T16:05:18.974Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-17T15:35:19.419Z"
+   "ultimaVez": "2026-11-17T16:05:18.974Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-17T15:35:19.419Z"
+   "ultimaVez": "2026-11-17T16:05:18.974Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-17T15:35:19.419Z"
+   "ultimaVez": "2026-11-17T16:05:18.974Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-17T15:35:19.419Z"
+   "ultimaVez": "2026-11-17T16:05:18.974Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-17T15:35:19.419Z"
+   "ultimaVez": "2026-11-17T16:05:18.974Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-17T15:35:19.419Z"
+   "ultimaVez": "2026-11-17T16:05:18.974Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-17T15:35:19.419Z"
+   "ultimaVez": "2026-11-17T16:05:18.974Z"
   },
   {
    "id": "govbr",
@@ -134,8 +134,8 @@
    "nome": "Agência Gov (governo federal)",
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
-   "quantas": 4,
-   "ultimaVez": "2026-11-17T15:35:19.419Z"
+   "quantas": 5,
+   "ultimaVez": "2026-11-17T16:05:18.974Z"
   }
  ],
  "noticias": [
@@ -205,6 +205,21 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-17T13:35:20.223Z"
+  },
+  {
+   "id": "132n6gn",
+   "titulo": "Novembro Azul: INSS apoia homens durante tratamento de câncer",
+   "link": "https://agenciagov.ebc.com.br/noticias/202611/novembro-azul-inss-apoia-homens-durante-tratamento-de-cancer",
+   "resumo": "Neste Dia Mundial de Combate ao Câncer de Próstata, confira os benefícios que pessoas com câncer podem receber",
+   "fonte": "govbr",
+   "fonteNome": "Agência Gov (governo federal)",
+   "sigla": "Gov",
+   "publicadoEm": "2026-11-17T12:51:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-17T16:05:18.974Z"
   },
   {
    "id": "b34rgk",
@@ -2975,23 +2990,6 @@
    "semHora": true,
    "categorias": [
     "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "1kwhyed",
-   "titulo": "Contribuintes com Selo Confia e Sintonia podem regularizar pendências sem multa de mora",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/contribuintes-com-selo-confia-e-sintonia-podem-regularizar-pendencias-sem-multa-de-mora",
-   "resumo": "Receita Federal detalha regras do programa de autorregularização, reforça prazos e alerta que não envia cobranças urgentes com ameaças de cancelamento de CPF/CNPJ.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-03T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos",
-    "empresas"
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-09T15:43:00.130Z"
