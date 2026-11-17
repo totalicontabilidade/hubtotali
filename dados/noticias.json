@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-17T17:05:20.241Z",
+ "atualizadoEm": "2026-11-17T17:35:19.360Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T17:05:20.241Z"
+   "ultimaVez": "2026-11-17T17:35:19.360Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-17T17:05:20.241Z"
+   "ultimaVez": "2026-11-17T17:35:19.360Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T17:05:20.241Z"
+   "ultimaVez": "2026-11-17T17:35:19.360Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-17T17:05:20.241Z"
+   "ultimaVez": "2026-11-17T17:35:19.360Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-17T17:05:20.241Z"
+   "ultimaVez": "2026-11-17T17:35:19.360Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-17T17:05:20.241Z"
+   "ultimaVez": "2026-11-17T17:35:19.360Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-17T17:05:20.241Z"
+   "ultimaVez": "2026-11-17T17:35:19.360Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-17T17:05:20.241Z"
+   "ultimaVez": "2026-11-17T17:35:19.360Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-17T17:05:20.241Z"
+   "ultimaVez": "2026-11-17T17:35:19.360Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 3,
-   "ultimaVez": "2026-11-17T17:05:20.241Z"
+   "quantas": 4,
+   "ultimaVez": "2026-11-17T17:35:19.360Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,27 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 5,
-   "ultimaVez": "2026-11-17T17:05:20.241Z"
+   "ultimaVez": "2026-11-17T17:35:19.360Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1szcmaq",
+   "titulo": "Durigan defende alíquota da reforma e estima média efetiva de 8,5%",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/durigan-defende-aliquota-da-reforma-e-estima-media-efetiva-de-85",
+   "resumo": "O ministro da Fazenda, Dario Durigan, afirmou que a reforma tributária trará ganhos permanentes de responsabilidade fiscal, justiça social e transparência ao sistema tributário brasileiro. Ao defender o modelo aprovado, o ministro reiterou que a alíquota máxima estimada para…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-17T17:26:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-17T17:35:19.360Z"
+  },
   {
    "id": "z9yo6f",
    "titulo": "Reforma tributária: Receita descarta punição a erros de boa-fé",
@@ -2974,22 +2991,6 @@
    "categorias": [
     "tributos",
     "trabalhista"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "1cdl2ln",
-   "titulo": "Deflagrada edição 2026 da Operação Fronteira Receita Federal",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/deflagrada-edicao-2026-da-operacao-fronteira-receita-federal",
-   "resumo": "Iniciativa é a maior ação conjunta de vigilância nas fronteiras terrestres, marítimas e aéreas do país.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-03T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-09T15:43:00.130Z"
