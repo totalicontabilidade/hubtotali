@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-17T20:05:19.679Z",
+ "atualizadoEm": "2026-11-17T20:35:19.481Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T20:05:19.679Z"
+   "ultimaVez": "2026-11-17T20:35:19.481Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-17T20:05:19.679Z"
+   "ultimaVez": "2026-11-17T20:35:19.481Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T20:05:19.679Z"
+   "ultimaVez": "2026-11-17T20:35:19.481Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 11,
-   "ultimaVez": "2026-11-17T20:05:19.679Z"
+   "ultimaVez": "2026-11-17T20:35:19.481Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-17T20:05:19.679Z"
+   "ultimaVez": "2026-11-17T20:35:19.481Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-17T20:05:19.679Z"
+   "ultimaVez": "2026-11-17T20:35:19.481Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-17T20:05:19.679Z"
+   "ultimaVez": "2026-11-17T20:35:19.481Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-17T20:05:19.679Z"
+   "ultimaVez": "2026-11-17T20:35:19.481Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-17T20:05:19.679Z"
+   "ultimaVez": "2026-11-17T20:35:19.481Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 5,
-   "ultimaVez": "2026-11-17T20:05:19.679Z"
+   "ultimaVez": "2026-11-17T20:35:19.481Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-17T20:05:19.679Z"
+   "ultimaVez": "2026-11-17T20:35:19.481Z"
   }
  ],
  "noticias": [
+  {
+   "id": "blix3f",
+   "titulo": "No Senado, ministro da Fazenda defende novo tributo sobre o consumo",
+   "link": "https://www12.senado.leg.br/noticias/materias/2026/11/17/no-senado-ministro-da-fazenda-defende-novo-tributo-sobre-o-consumo",
+   "resumo": "",
+   "fonte": "senado",
+   "fonteNome": "Agência Senado",
+   "sigla": "Senado",
+   "publicadoEm": "2026-11-17T20:01:38.000Z",
+   "categorias": [
+    "legislacao",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-17T20:35:19.481Z"
+  },
   {
    "id": "10ni0a1",
    "titulo": "Deputados destacam proteção ao trabalhador e investimentos em habitação nos 60 anos de criação do FGTS",
@@ -332,7 +348,7 @@
   },
   {
    "id": "17oo9dw",
-   "titulo": "Virando a Chave para a Reforma Tributária - API para emissão do RAD já está disponível",
+   "titulo": "Virando a Chave na Reforma Tributária: API do RAD - documentação técnica já está disponível",
    "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/virando-a-chave-para-a-reforma-tributaria-api-para-emissao-do-rad-ja-esta-disponivel",
    "resumo": "Na prática, a solução viabiliza a automação dos processos relacionados ao RAD, reduzindo etapas operacionais e ampliando a eficiência na apropriação de créditos tributários.",
    "fonte": "receita",
@@ -2974,22 +2990,6 @@
     "legislacao"
    ],
    "relevancia": 2,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "os8vvm",
-   "titulo": "Receita Federal apreende bebidas alcoólicas de alto valor e produtos de origem natural em caminhão",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-apreende-bebidas-alcoolicas-de-alto-valor-e-produtos-de-origem-natural-em-caminhao",
-   "resumo": "Fiscalização em Santana do Livramento identifica bebidas de alto valor e mercadoria oculta em caminhão.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-05T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
    "vistaEm": "2026-11-09T15:43:00.130Z"
   }
  ]
