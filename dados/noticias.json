@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-17T10:35:19.329Z",
+ "atualizadoEm": "2026-11-17T11:35:24.082Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T10:35:19.329Z"
+   "ultimaVez": "2026-11-17T11:35:24.082Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-17T10:35:19.329Z"
+   "ultimaVez": "2026-11-17T11:35:24.082Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T10:35:19.329Z"
+   "ultimaVez": "2026-11-17T11:35:24.082Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 11,
-   "ultimaVez": "2026-11-17T10:35:19.329Z"
+   "ultimaVez": "2026-11-17T11:35:24.082Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-17T10:35:19.329Z"
+   "ultimaVez": "2026-11-17T11:35:24.082Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-17T10:35:19.329Z"
+   "ultimaVez": "2026-11-17T11:35:24.082Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-17T10:35:19.329Z"
+   "ultimaVez": "2026-11-17T11:35:24.082Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-17T10:35:19.329Z"
+   "ultimaVez": "2026-11-17T11:35:24.082Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-17T10:35:19.329Z"
+   "ultimaVez": "2026-11-17T11:35:24.082Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 3,
-   "ultimaVez": "2026-11-17T10:35:19.329Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-17T11:35:24.082Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,28 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-17T10:35:19.329Z"
+   "ultimaVez": "2026-11-17T11:35:24.082Z"
   }
  ],
  "noticias": [
+  {
+   "id": "d48v6g",
+   "titulo": "Ibracon debate impactos da Reforma Tributária na auditoria independente",
+   "link": "https://cfc.org.br/noticias/ibracon-debate-impactos-da-reforma-tributaria-na-auditoria-independente/",
+   "resumo": "Os impactos da Reforma Tributária sobre os trabalhos de auditoria independente serão tema de um webinar gratuito promovido pelo Instituto de Auditoria Independente do Brasil (Ibracon) no dia 24 de novembro, das 14h às 15h30. O encontro reunirá especialistas para discutir os…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-17T11:32:15.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "trabalhista",
+    "contabil"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-17T11:35:24.082Z"
+  },
   {
    "id": "1g26s9g",
    "titulo": "Durigan vai ao Senado explicar alíquota de 11,3% da CBS",
@@ -2977,23 +2995,6 @@
     "tributos"
    ],
    "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "5q1304",
-   "titulo": "Governo discute ampliar até 30/11 o prazo de opção pelo regime da CBS e do IBS para cooperativas",
-   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/outubro/governo-discute-ampliar-ate-30-11-o-prazo-de-opcao-pelo-regime-da-cbs-e-do-ibs-para-cooperativas",
-   "resumo": "Novo prazo deverá ser formalizado pela Receita Federal e pelo CGIBS, dando mais tempo para que as cooperativas realizem os procedimentos necessários",
-   "fonte": "fazenda",
-   "fonteNome": "Ministério da Fazenda",
-   "sigla": "MF",
-   "publicadoEm": "2026-10-29T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "reforma",
-    "tributos"
-   ],
-   "relevancia": 2,
    "vistaEm": "2026-11-09T15:43:00.130Z"
   }
  ]
