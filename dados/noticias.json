@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-17T19:02:11.187Z",
+ "atualizadoEm": "2026-11-17T19:35:19.496Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T19:02:11.187Z"
+   "ultimaVez": "2026-11-17T19:35:19.496Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-17T19:02:11.187Z"
+   "ultimaVez": "2026-11-17T19:35:19.496Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T19:02:11.187Z"
+   "ultimaVez": "2026-11-17T19:35:19.496Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 11,
-   "ultimaVez": "2026-11-17T19:02:11.187Z"
+   "ultimaVez": "2026-11-17T19:35:19.496Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-17T19:02:11.187Z"
+   "ultimaVez": "2026-11-17T19:35:19.496Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-17T19:02:11.187Z"
+   "ultimaVez": "2026-11-17T19:35:19.496Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-17T19:02:11.187Z"
+   "ultimaVez": "2026-11-17T19:35:19.496Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-17T19:02:11.187Z"
+   "ultimaVez": "2026-11-17T19:35:19.496Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-17T19:02:11.187Z"
+   "ultimaVez": "2026-11-17T19:35:19.496Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 5,
-   "ultimaVez": "2026-11-17T19:02:11.187Z"
+   "ultimaVez": "2026-11-17T19:35:19.496Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,25 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-17T19:02:11.187Z"
+   "ultimaVez": "2026-11-17T19:35:19.496Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1pif8jp",
+   "titulo": "Plataforma Crescimento Sustentável apoia pequenos negócios e amplia oportunidades para contadores",
+   "link": "https://cfc.org.br/noticias/plataforma-crescimento-sustentavel-apoia-pequenos-negocios-e-amplia-oportunidades-para-contadores/",
+   "resumo": "Transformar práticas de sustentabilidade em oportunidades de crescimento. Essa é a proposta da Plataforma Crescimento Sustentável, iniciativa do Sebrae Nacional em parceria com o Conselho Federal de Contabilidade (CFC), que será lançada no dia 19 de novembro, durante o evento…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-17T19:31:23.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-17T19:35:19.496Z"
+  },
   {
    "id": "nfotjg",
    "titulo": "Fenacon acompanha debates sobre inovação, autonomia e segurança jurídica nas relações de trabalho",
@@ -2976,21 +2991,6 @@
     "tributos"
    ],
    "relevancia": 1,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "spp3lq",
-   "titulo": "CFC e Tribunais de Contas propõem pacto fiscal à Presidência e governos estaduais",
-   "link": "https://cfc.org.br/noticias/cfc-e-tribunais-de-contas-propoem-pacto-fiscal-a-presidencia-e-governos-estaduais/",
-   "resumo": "O Conselho Federal de Contabilidade (CFC) e a Associação dos Membros dos Tribunais de Contas do Brasil (Atricon) divulgaram, nesta quarta-feira (4), uma carta aberta conjunta dirigida ao Presidente da República e aos governadores eleitos e reeleitos. No documento, as…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-05T14:09:51.000Z",
-   "categorias": [
-    "contabil"
-   ],
-   "relevancia": 2,
    "vistaEm": "2026-11-09T15:43:00.130Z"
   }
  ]
