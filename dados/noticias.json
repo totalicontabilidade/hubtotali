@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-17T20:35:19.481Z",
+ "atualizadoEm": "2026-11-17T21:35:25.548Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T20:35:19.481Z"
+   "ultimaVez": "2026-11-17T21:35:25.548Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-17T20:35:19.481Z"
+   "ultimaVez": "2026-11-17T21:35:25.548Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T20:35:19.481Z"
+   "ultimaVez": "2026-11-17T21:35:25.548Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 11,
-   "ultimaVez": "2026-11-17T20:35:19.481Z"
+   "ultimaVez": "2026-11-17T21:35:25.548Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-17T20:35:19.481Z"
+   "ultimaVez": "2026-11-17T21:35:25.548Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-17T20:35:19.481Z"
+   "ultimaVez": "2026-11-17T21:35:25.548Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-17T20:35:19.481Z"
+   "ultimaVez": "2026-11-17T21:35:25.548Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-17T20:35:19.481Z"
+   "ultimaVez": "2026-11-17T21:35:25.548Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-17T20:35:19.481Z"
+   "ultimaVez": "2026-11-17T21:35:25.548Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 5,
-   "ultimaVez": "2026-11-17T20:35:19.481Z"
+   "ultimaVez": "2026-11-17T21:35:25.548Z"
   },
   {
    "id": "govbr",
@@ -134,11 +134,26 @@
    "nome": "Agência Gov (governo federal)",
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
-   "quantas": 3,
-   "ultimaVez": "2026-11-17T20:35:19.481Z"
+   "quantas": 4,
+   "ultimaVez": "2026-11-17T21:35:25.548Z"
   }
  ],
  "noticias": [
+  {
+   "id": "vj5why",
+   "titulo": "Ministério quer aprimorar nexo técnico previdenciário e abre consulta pública",
+   "link": "https://agenciagov.ebc.com.br/noticias/202611/ministerio-da-previdencia-social-apresenta-projeto-que-vai-aprimorar-o-ntep",
+   "resumo": "Tema foi debatido na 331ª reunião do Conselho Nacional de Previdência Social realiza",
+   "fonte": "govbr",
+   "fonteNome": "Agência Gov (governo federal)",
+   "sigla": "Gov",
+   "publicadoEm": "2026-11-17T21:07:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-17T21:35:25.548Z"
+  },
   {
    "id": "blix3f",
    "titulo": "No Senado, ministro da Fazenda defende novo tributo sobre o consumo",
@@ -2970,24 +2985,6 @@
    "publicadoEm": "2026-11-05T16:41:21.000Z",
    "categorias": [
     "contabil"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "1xk1m3y",
-   "titulo": "Governo Federal define alíquotas do Imposto Seletivo para 2027 por meio de medida provisória",
-   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/governo-federal-define-aliquotas-do-imposto-seletivo-para-2027-por-meio-de-medida-provisoria",
-   "resumo": "Medida estabelece regime de implementação gradual do novo tributo, com início previsto para 2 de fevereiro de 2027, e preserva o nível global de arrecadação previsto na Reforma Tributária",
-   "fonte": "fazenda",
-   "fonteNome": "Ministério da Fazenda",
-   "sigla": "MF",
-   "publicadoEm": "2026-11-05T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "reforma",
-    "tributos",
-    "legislacao"
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-09T15:43:00.130Z"
