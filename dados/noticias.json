@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-17T03:05:10.312Z",
+ "atualizadoEm": "2026-11-17T10:05:20.641Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T03:05:10.312Z"
+   "ultimaVez": "2026-11-17T10:05:20.641Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-17T03:05:10.312Z"
+   "ultimaVez": "2026-11-17T10:05:20.641Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T03:05:10.312Z"
+   "ultimaVez": "2026-11-17T10:05:20.641Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 11,
-   "ultimaVez": "2026-11-17T03:05:10.312Z"
+   "ultimaVez": "2026-11-17T10:05:20.641Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-17T03:05:10.312Z"
+   "ultimaVez": "2026-11-17T10:05:20.641Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-17T03:05:10.312Z"
+   "ultimaVez": "2026-11-17T10:05:20.641Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-17T03:05:10.312Z"
+   "ultimaVez": "2026-11-17T10:05:20.641Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-17T03:05:10.312Z"
+   "ultimaVez": "2026-11-17T10:05:20.641Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-17T03:05:10.312Z"
+   "ultimaVez": "2026-11-17T10:05:20.641Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-17T03:05:10.312Z"
+   "ultimaVez": "2026-11-17T10:05:20.641Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,57 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-17T03:05:10.312Z"
+   "ultimaVez": "2026-11-17T10:05:20.641Z"
   }
  ],
  "noticias": [
+  {
+   "id": "pjxn6w",
+   "titulo": "Folha de S.Paulo repercute alerta da Fenacon sobre pacote fiscal",
+   "link": "https://fenacon.org.br/noticias/folha-de-s-paulo-repercute-alerta-da-fenacon-sobre-pacote-fiscal/",
+   "resumo": "Nota da Federação alerta para o aumento da carga tributária das médias empresas e os impactos das mudanças propostas nas regras do lucro presumido A Folha de S.Paulo destacou, nesta segunda-feira (16) o posicionamento da Fenacon sobre o pacote fiscal em tramitação no Senado,…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-17T05:01:02.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-17T10:05:20.641Z"
+  },
+  {
+   "id": "18dslfw",
+   "titulo": "Receita abre código-fonte para empresas usarem no cálculo de tributos de consumo",
+   "link": "https://fenacon.org.br/reforma-tributaria/receita-abre-codigo-fonte-para-empresas-usarem-no-calculo-de-tributos-de-consumo/",
+   "resumo": "A Calculadora de Tributos é uma ferramenta que materializa as regras de cálculo da Contribuição sobre Bens e Serviços. Ao abrir o código-fonte para empresas e desenvolvedores, a Receita pretende consolidar transparência e simplificar a transição na Reforma Tributária A…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-17T03:14:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-17T10:05:20.641Z"
+  },
+  {
+   "id": "1brl1xc",
+   "titulo": "Receita Federal esclarece quando a alocação de profissional contábil caracteriza cessão de mão de obra",
+   "link": "https://fenacon.org.br/noticias/receita-federal-esclarece-quando-a-alocacao-de-profissional-contabil-caracteriza-cessao-de-mao-de-obra/",
+   "resumo": "Solução de Consulta Cosit nº 182/2026 informa que a manutenção não eventual de contador nas dependências da contratante para atender demandas rotineiras impede a opção ou a permanência da empresa prestadora no Simples Nacional Por Comunicação Fenacon A Receita Federal…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-17T03:12:00.000Z",
+   "categorias": [
+    "simples",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-17T10:05:20.641Z"
+  },
   {
    "id": "yw0dvx",
    "titulo": "A CBS em 2027 e a tributação dos serviços: Os reflexos nos escritórios de advocacia",
@@ -154,6 +201,21 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-17T03:05:10.312Z"
+  },
+  {
+   "id": "1069abj",
+   "titulo": "Projeto proíbe uso da imagem de empregado em redes sociais da empresa sem previsão contratual",
+   "link": "https://fenacon.org.br/noticias/projeto-proibe-uso-da-imagem-de-empregado-em-redes-sociais-da-empresa-sem-previsao-contratual/",
+   "resumo": "Proposta enquadra a prática como desvio de função quando a atividade for incompatível com as atribuições do cargo contratado O Projeto de Lei 3655/26 proíbe a utilização da imagem do empregado nas mídias sociais do empregador quando a atividade for incompatível com o cargo…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-17T03:02:00.000Z",
+   "categorias": [
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-17T10:05:20.641Z"
   },
   {
    "id": "1ou1r65",
@@ -200,22 +262,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-16T21:35:20.197Z"
-  },
-  {
-   "id": "bjgh4o",
-   "titulo": "Receita abre código-fonte para empresas usarem no cálculo de tributos de consumo",
-   "link": "https://agenciagov.ebc.com.br/noticias/202611/receita-federal-publica-primeiro-codigo-fonte-aberto-no-github-e-amplia-transparencia-da-reforma-tributaria-1",
-   "resumo": "A Calculadora de Tributos é uma ferramenta que materializa as regras de cálculo da Contribuição sobre Bens e Serviços. Ao abrir o código-fonte para empresas e desenvolvedores, a Receita pretende consolidar transparência e simplificar a transição na Reforma Tributária",
-   "fonte": "govbr",
-   "fonteNome": "Agência Gov (governo federal)",
-   "sigla": "Gov",
-   "publicadoEm": "2026-11-16T17:41:00.000Z",
-   "categorias": [
-    "reforma",
-    "tributos"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-16T18:35:19.846Z"
   },
   {
    "id": "1so6fwe",
@@ -2948,54 +2994,6 @@
     "tributos"
    ],
    "relevancia": 0,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "1acu5s",
-   "titulo": "Ação conjunta entre Receita Federal e Polícia Civil do Ceará apreende 146 kg de drogas em transportadora de Fortaleza",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/acao-conjunta-entre-receita-federal-e-policia-civil-do-ceara-apreende-146-kg-de-drogas-em-transportadora-de-fortaleza",
-   "resumo": "Os entorpecentes estavam declarados como equipamento de som. Duas pessoas foram presas.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-10-28T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "ymwjre",
-   "titulo": "Receita Federal apreende mais de 17 toneladas de barbatanas de tubarão em porto de Santa Catarina",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/receita-federal-apreende-mais-de-17-toneladas-de-barbatanas-de-tubarao-em-porto-de-santa-catarina",
-   "resumo": "A carga estava ocultada acondicionada em sacos de ráfia com a inscrição “sardinhas congeladas¨\".",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-10-27T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "1j05lb0",
-   "titulo": "Receita Federal destaca Programa Confia em seminário regional sobre conformidade cooperativa na Guatemala",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/receita-federal-destaca-programa-confia-em-seminario-regional-sobre-conformidade-cooperativa-na-guatemala",
-   "resumo": "Experiência brasileira em conformidade cooperativa ganha destaque em seminário internacional promovido pelo BID na Guatemala.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-10-27T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
    "vistaEm": "2026-11-09T15:43:00.130Z"
   }
  ]
