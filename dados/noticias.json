@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-17T19:35:19.496Z",
+ "atualizadoEm": "2026-11-17T20:05:19.679Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T19:35:19.496Z"
+   "ultimaVez": "2026-11-17T20:05:19.679Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-17T19:35:19.496Z"
+   "ultimaVez": "2026-11-17T20:05:19.679Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T19:35:19.496Z"
+   "ultimaVez": "2026-11-17T20:05:19.679Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 11,
-   "ultimaVez": "2026-11-17T19:35:19.496Z"
+   "ultimaVez": "2026-11-17T20:05:19.679Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-17T19:35:19.496Z"
+   "ultimaVez": "2026-11-17T20:05:19.679Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-17T19:35:19.496Z"
+   "ultimaVez": "2026-11-17T20:05:19.679Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-17T19:35:19.496Z"
+   "ultimaVez": "2026-11-17T20:05:19.679Z"
   },
   {
    "id": "camara",
@@ -107,8 +107,8 @@
    "nome": "Agência Câmara",
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
-   "quantas": 0,
-   "ultimaVez": "2026-11-17T19:35:19.496Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-17T20:05:19.679Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-17T19:35:19.496Z"
+   "ultimaVez": "2026-11-17T20:05:19.679Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 5,
-   "ultimaVez": "2026-11-17T19:35:19.496Z"
+   "ultimaVez": "2026-11-17T20:05:19.679Z"
   },
   {
    "id": "govbr",
@@ -134,16 +134,32 @@
    "nome": "Agência Gov (governo federal)",
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
-   "quantas": 2,
-   "ultimaVez": "2026-11-17T19:35:19.496Z"
+   "quantas": 3,
+   "ultimaVez": "2026-11-17T20:05:19.679Z"
   }
  ],
  "noticias": [
   {
+   "id": "10ni0a1",
+   "titulo": "Deputados destacam proteção ao trabalhador e investimentos em habitação nos 60 anos de criação do FGTS",
+   "link": "https://www.camara.leg.br/noticias/1320243-deputados-destacam-protecao-ao-trabalhador-e-investimentos-em-habitacao-nos-60-anos-de-criacao-do-fgts",
+   "resumo": "Recursos não sacados pelos trabalhadores são investidos em programas de habitação, saneamento básico e infraestrutura urbana",
+   "fonte": "camara",
+   "fonteNome": "Agência Câmara",
+   "sigla": "Câmara",
+   "publicadoEm": "2026-11-17T19:50:00.000Z",
+   "categorias": [
+    "legislacao",
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-17T20:05:19.679Z"
+  },
+  {
    "id": "1pif8jp",
    "titulo": "Plataforma Crescimento Sustentável apoia pequenos negócios e amplia oportunidades para contadores",
    "link": "https://cfc.org.br/noticias/plataforma-crescimento-sustentavel-apoia-pequenos-negocios-e-amplia-oportunidades-para-contadores/",
-   "resumo": "Transformar práticas de sustentabilidade em oportunidades de crescimento. Essa é a proposta da Plataforma Crescimento Sustentável, iniciativa do Sebrae Nacional em parceria com o Conselho Federal de Contabilidade (CFC), que será lançada no dia 19 de novembro, durante o evento…",
+   "resumo": "Transformar práticas de sustentabilidade em oportunidades de crescimento e ampliar o campo de atuação dos profissionais da contabilidade. Essa é a proposta do novo módulo de Relatórios de Sustentabilidade da Plataforma Crescimento Sustentável, iniciativa do Sebrae Nacional,…",
    "fonte": "cfc",
    "fonteNome": "Conselho Federal de Contabilidade",
    "sigla": "CFC",
@@ -153,6 +169,21 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-17T19:35:19.496Z"
+  },
+  {
+   "id": "1kxtrlf",
+   "titulo": "Gestão compartilhada com trabalhadores garante vitalidade ao FGTS, diz ministério",
+   "link": "https://agenciagov.ebc.com.br/noticias/202611/fgts-completa-60-anos-com-papel-estrategico-na-protecao-dos-trabalhadores-e-no-desenvolvimento-do-pais",
+   "resumo": "Em sessão solene na Câmara para celebrar 60 anos do fundo, representantes do Ministério do Trabalho destacam que gestão tripartite - com trabalhadores, empresários e governo - tem garantido vitalidade ao FGTS",
+   "fonte": "govbr",
+   "fonteNome": "Agência Gov (governo federal)",
+   "sigla": "Gov",
+   "publicadoEm": "2026-11-17T19:01:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-17T20:05:19.679Z"
   },
   {
    "id": "nfotjg",
@@ -2950,38 +2981,6 @@
    "titulo": "Receita Federal apreende bebidas alcoólicas de alto valor e produtos de origem natural em caminhão",
    "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-apreende-bebidas-alcoolicas-de-alto-valor-e-produtos-de-origem-natural-em-caminhao",
    "resumo": "Fiscalização em Santana do Livramento identifica bebidas de alto valor e mercadoria oculta em caminhão.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-05T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "1seuhva",
-   "titulo": "Operação Fronteira: Thor ajuda Receita Federal a encontrar partes de fuzil em Viracopos",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-thor-ajuda-receita-federal-a-encontrar-partes-de-fuzil-em-viracopos",
-   "resumo": "Treinado para localizar drogas, cão sinalizou encomenda com peças de armamento; ação resultou na apreensão de 25 peças de armas de fogo.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-05T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "8a5rt8",
-   "titulo": "Operação Fronteira Receita Federal já soma cerca de R$ 30 milhões em apreensões",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-receita-federal-ja-soma-cerca-de-r-30-milhoes-em-apreensoes",
-   "resumo": "Iniciativa é a maior ação conjunta de vigilância nas fronteiras terrestres, marítimas e aéreas do país.",
    "fonte": "receita",
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
