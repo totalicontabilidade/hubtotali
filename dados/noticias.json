@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-17T18:35:19.215Z",
+ "atualizadoEm": "2026-11-17T19:02:11.187Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T18:35:19.215Z"
+   "ultimaVez": "2026-11-17T19:02:11.187Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-17T18:35:19.215Z"
+   "ultimaVez": "2026-11-17T19:02:11.187Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T18:35:19.215Z"
+   "ultimaVez": "2026-11-17T19:02:11.187Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 11,
-   "ultimaVez": "2026-11-17T18:35:19.215Z"
+   "ultimaVez": "2026-11-17T19:02:11.187Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-17T18:35:19.215Z"
+   "ultimaVez": "2026-11-17T19:02:11.187Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-17T18:35:19.215Z"
+   "ultimaVez": "2026-11-17T19:02:11.187Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-17T18:35:19.215Z"
+   "ultimaVez": "2026-11-17T19:02:11.187Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-17T18:35:19.215Z"
+   "ultimaVez": "2026-11-17T19:02:11.187Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-17T18:35:19.215Z"
+   "ultimaVez": "2026-11-17T19:02:11.187Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 4,
-   "ultimaVez": "2026-11-17T18:35:19.215Z"
+   "quantas": 5,
+   "ultimaVez": "2026-11-17T19:02:11.187Z"
   },
   {
    "id": "govbr",
@@ -134,11 +134,42 @@
    "nome": "Agência Gov (governo federal)",
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
-   "quantas": 4,
-   "ultimaVez": "2026-11-17T18:35:19.215Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-17T19:02:11.187Z"
   }
  ],
  "noticias": [
+  {
+   "id": "nfotjg",
+   "titulo": "Fenacon acompanha debates sobre inovação, autonomia e segurança jurídica nas relações de trabalho",
+   "link": "https://fenacon.org.br/noticias/fenacon-acompanha-debates-sobre-inovacao-autonomia-e-seguranca-juridica-nas-relacoes-de-trabalho/",
+   "resumo": "Seminário promovido pela CNC e pelo iFood, em São Paulo, reuniu especialistas e líderes do setor digital para discutir os desafios da economia de plataformas no Brasil",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-17T18:58:18.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-17T19:02:11.187Z"
+  },
+  {
+   "id": "b0cwaa",
+   "titulo": "Durigan prevê impacto inicial da reforma tributária sobre inflação",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/durigan-preve-impacto-inicial-da-reforma-tributaria-sobre-inflacao",
+   "resumo": "O ministro da Fazenda, Dario Durigan, afirmou, nesta terça-feira (17), que a implementação da reforma tributária pode gerar pequeno impacto inicial sobre a inflação. A observação foi em resposta à preocupação manifestada por senadores com uma eventual alta do índice. Segundo…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-17T18:56:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-17T19:02:11.187Z"
+  },
   {
    "id": "ayf0oq",
    "titulo": "Paim relembra comissão que propôs política de valorização do salário mínimo",
@@ -173,6 +204,21 @@
    "vistaEm": "2026-11-17T18:35:19.215Z"
   },
   {
+   "id": "1w050vy",
+   "titulo": "INSS oferece serviços previdenciários e assistenciais a moradores de Pacaraima e imigrantes venezuelanos",
+   "link": "https://agenciagov.ebc.com.br/noticias/202611/inss-oferece-servicos-previdenciarios-e-assistenciais-a-moradores-de-pacaraima-e-imigrantes-venezuelanos",
+   "resumo": "Atendimento segue até quinta-feira (19), com requerimentos de aposentadoria, pedidos de salário-maternidade e outros",
+   "fonte": "govbr",
+   "fonteNome": "Agência Gov (governo federal)",
+   "sigla": "Gov",
+   "publicadoEm": "2026-11-17T17:43:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-17T19:02:11.187Z"
+  },
+  {
    "id": "1szcmaq",
    "titulo": "Durigan defende alíquota da reforma e estima média efetiva de 8,5%",
    "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/durigan-defende-aliquota-da-reforma-e-estima-media-efetiva-de-85",
@@ -204,6 +250,23 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-17T15:35:19.419Z"
+  },
+  {
+   "id": "1s99o2b",
+   "titulo": "Receita Federal induz autorregularização de R$ 1,95 bilhão de grande contribuinte",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-induz-autorregularizacao-de-r-1-95-bilhao-de-grande-contribuinte",
+   "resumo": "Monitoramento contínuo, diálogo e presença fiscal levaram ao recolhimento espontâneo de tributos sem necessidade de nova autuação. O valor equivale a cerca de 2,5 milhões de benefícios médios mensais do Bolsa Família.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-17T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos",
+    "trabalhista"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-17T19:02:11.187Z"
   },
   {
    "id": "vnujtn",
@@ -2926,71 +2989,6 @@
    "publicadoEm": "2026-11-05T14:09:51.000Z",
    "categorias": [
     "contabil"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "ud340y",
-   "titulo": "Sefaz, Fames e Semfaz promovem 1º Encontro das Administrações Tributárias de Sergipe",
-   "link": "https://www.sefaz.se.gov.br/Lists/Noticias/DispForm.aspx?ID=2874",
-   "resumo": "Title: Sefaz, Fames e Semfaz promovem 1º Encontro das Administrações Tributárias de Sergipe Publicacao: 05/11/2026 07:25 Foto: https://www.sefaz.se.gov.br/Imagens/noticias/05-11-2026/1.jpeg Visibilidade: Intranet, Internet",
-   "fonte": "sefaz-se",
-   "fonteNome": "Secretaria da Fazenda de Sergipe",
-   "sigla": "SEFAZ/SE",
-   "publicadoEm": "2026-11-05T10:24:20.000Z",
-   "categorias": [
-    "tributos",
-    "sergipe"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-10T13:54:36.165Z"
-  },
-  {
-   "id": "javqma",
-   "titulo": "Receita Federal lança novo Subportal de Controle de Carga e Trânsito (CCT)",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-lanca-novo-subportal-de-controle-de-carga-e-transito-cct",
-   "resumo": "Espaço foi totalmente reestruturado e apresenta uma visão macro inédita do fluxo de controle de cargas na importação, além de manuais para os modais aéreo e rodoviário.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-04T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "h8580o",
-   "titulo": "Receita Federal participa da Operação IFRIT",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-participa-da-operacao-ifrit",
-   "resumo": "Operação conjunta voltada à desarticulação de organização criminosa transnacional dedicada ao tráfico de drogas e armas, com atuação na faixa de fronteira, ramificações nacionais e internacionais, movimentação superior a R$ 500 milhões, cooptação de agentes públicos e elevado…",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-04T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "igmz8s",
-   "titulo": "PGFN esclarece regras sobre perdão de dívidas tributárias para Microempreendedor Individual",
-   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/pgfn-esclarece-regras-sobre-perdao-de-dividas-tributarias-para-microempreendedor-individual",
-   "resumo": "Cancelamento será feito de forma automática nos sistemas a partir do dia 1º de janeiro de 2027",
-   "fonte": "fazenda",
-   "fonteNome": "Ministério da Fazenda",
-   "sigla": "MF",
-   "publicadoEm": "2026-11-04T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "simples",
-    "tributos"
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-09T15:43:00.130Z"
