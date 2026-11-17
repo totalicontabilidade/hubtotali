@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-17T10:05:20.641Z",
+ "atualizadoEm": "2026-11-17T10:35:19.329Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T10:05:20.641Z"
+   "ultimaVez": "2026-11-17T10:35:19.329Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-17T10:05:20.641Z"
+   "ultimaVez": "2026-11-17T10:35:19.329Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-17T10:05:20.641Z"
+   "ultimaVez": "2026-11-17T10:35:19.329Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 11,
-   "ultimaVez": "2026-11-17T10:05:20.641Z"
+   "ultimaVez": "2026-11-17T10:35:19.329Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-17T10:05:20.641Z"
+   "ultimaVez": "2026-11-17T10:35:19.329Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-17T10:05:20.641Z"
+   "ultimaVez": "2026-11-17T10:35:19.329Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-17T10:05:20.641Z"
+   "ultimaVez": "2026-11-17T10:35:19.329Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-17T10:05:20.641Z"
+   "ultimaVez": "2026-11-17T10:35:19.329Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-17T10:05:20.641Z"
+   "ultimaVez": "2026-11-17T10:35:19.329Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 2,
-   "ultimaVez": "2026-11-17T10:05:20.641Z"
+   "quantas": 3,
+   "ultimaVez": "2026-11-17T10:35:19.329Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-17T10:05:20.641Z"
+   "ultimaVez": "2026-11-17T10:35:19.329Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1g26s9g",
+   "titulo": "Durigan vai ao Senado explicar alíquota de 11,3% da CBS",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/durigan-vai-ao-senado-explicar-aliquota-de-113-da-cbs",
+   "resumo": "Em meio a questionamentos sobre a reforma tributária, o ministro da Fazenda, Dario Durigan, participa nesta terça-feira (17), às 10h, de audiência pública na Comissão de Assuntos Econômicos (CAE) do Senado para discutir a alíquota de referência da Contribuição sobre Bens e…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-17T10:15:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-17T10:35:19.329Z"
+  },
   {
    "id": "pjxn6w",
    "titulo": "Folha de S.Paulo repercute alerta da Fenacon sobre pacote fiscal",
@@ -2978,22 +2994,6 @@
     "tributos"
    ],
    "relevancia": 2,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "1qtwog1",
-   "titulo": "PGFN debate estratégias para reduzir litígios no mercado regulado de carbono",
-   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/outubro/pgfn-debate-estrategias-para-reduzir-litigios-no-mercado-regulado-de-carbono",
-   "resumo": "Em palestra no 3º Encontro Nacional da Consultoria da Procuradoria-Geral da Fazenda Nacional, secretária Cristina Reis (SEMC) detalha fases de implementação do SBCE e alinha elaboração de normas infralegais",
-   "fonte": "fazenda",
-   "fonteNome": "Ministério da Fazenda",
-   "sigla": "MF",
-   "publicadoEm": "2026-10-29T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 0,
    "vistaEm": "2026-11-09T15:43:00.130Z"
   }
  ]
