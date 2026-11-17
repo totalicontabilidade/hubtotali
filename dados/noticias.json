@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-16T22:05:17.765Z",
+ "atualizadoEm": "2026-11-17T03:05:10.312Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-16T22:05:17.765Z"
+   "ultimaVez": "2026-11-17T03:05:10.312Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-16T22:05:17.765Z"
+   "ultimaVez": "2026-11-17T03:05:10.312Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-16T22:05:17.765Z"
+   "ultimaVez": "2026-11-17T03:05:10.312Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 11,
-   "ultimaVez": "2026-11-16T22:05:17.765Z"
+   "ultimaVez": "2026-11-17T03:05:10.312Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-16T22:05:17.765Z"
+   "ultimaVez": "2026-11-17T03:05:10.312Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-16T22:05:17.765Z"
+   "ultimaVez": "2026-11-17T03:05:10.312Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-16T22:05:17.765Z"
+   "ultimaVez": "2026-11-17T03:05:10.312Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-16T22:05:17.765Z"
+   "ultimaVez": "2026-11-17T03:05:10.312Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-16T22:05:17.765Z"
+   "ultimaVez": "2026-11-17T03:05:10.312Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-16T22:05:17.765Z"
+   "ultimaVez": "2026-11-17T03:05:10.312Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-16T22:05:17.765Z"
+   "ultimaVez": "2026-11-17T03:05:10.312Z"
   }
  ],
  "noticias": [
+  {
+   "id": "yw0dvx",
+   "titulo": "A CBS em 2027 e a tributação dos serviços: Os reflexos nos escritórios de advocacia",
+   "link": "https://fenacon.org.br/reforma-tributaria/a-cbs-em-2027-e-a-tributacao-dos-servicos-os-reflexos-nos-escritorios-de-advocacia/",
+   "resumo": "A nova contribuição exigirá dos escritórios a revisão de custos, créditos e honorários para adequar a gestão à mudança no sistema tributário. Por Juliana Dias Guerra Nelson Ferreira Cruz A tributação do consumo no Brasil reúne tributos federais, estaduais e municipais, cujas…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-17T03:03:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-17T03:05:10.312Z"
+  },
   {
    "id": "1ou1r65",
    "titulo": "INSS realiza 45 atendimentos à população em situação de rua em São José do Rio Preto (SP)",
@@ -2980,22 +2996,6 @@
     "tributos"
    ],
    "relevancia": 1,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "h472gr",
-   "titulo": "Receita Federal leva à OCDE debate sobre tecnologias de privacidade e inteligência artificial",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/outubro/receita-federal-leva-a-ocde-debate-sobre-tecnologias-de-privacidade-e-inteligencia-artificial",
-   "resumo": "Evento organizado reuniu administrações tributárias e institutos internacionais e abordou tecnologias de preservação de privacidade e seu uso com IA.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-10-26T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 3,
    "vistaEm": "2026-11-09T15:43:00.130Z"
   }
  ]
