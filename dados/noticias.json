@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-18T16:05:18.970Z",
+ "atualizadoEm": "2026-11-18T17:35:19.795Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T16:05:18.970Z"
+   "ultimaVez": "2026-11-18T17:35:19.795Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-18T16:05:18.970Z"
+   "ultimaVez": "2026-11-18T17:35:19.795Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T16:05:18.970Z"
+   "ultimaVez": "2026-11-18T17:35:19.795Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-18T16:05:18.970Z"
+   "ultimaVez": "2026-11-18T17:35:19.795Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-18T16:05:18.970Z"
+   "ultimaVez": "2026-11-18T17:35:19.795Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-18T16:05:18.970Z"
+   "ultimaVez": "2026-11-18T17:35:19.795Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-18T16:05:18.970Z"
+   "ultimaVez": "2026-11-18T17:35:19.795Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-18T16:05:18.970Z"
+   "ultimaVez": "2026-11-18T17:35:19.795Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-18T16:05:18.970Z"
+   "ultimaVez": "2026-11-18T17:35:19.795Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-18T16:05:18.970Z"
+   "ultimaVez": "2026-11-18T17:35:19.795Z"
   },
   {
    "id": "govbr",
@@ -134,11 +134,26 @@
    "nome": "Agência Gov (governo federal)",
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-18T16:05:18.970Z"
+   "quantas": 0,
+   "ultimaVez": "2026-11-18T17:35:19.795Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1u7o5qb",
+   "titulo": "CFC fortalece diálogo com Embaixada do Brasil na Coreia do Sul e amplia perspectivas de cooperação internacional",
+   "link": "https://cfc.org.br/noticias/cfc-fortalece-dialogo-com-embaixada-do-brasil-na-coreia-do-sul-e-amplia-perspectivas-de-cooperacao-internacional/",
+   "resumo": "Encontro em Seul destacou o papel da contabilidade na segurança dos investimentos e abriu espaço para novas parcerias entre os dois países A contabilidade brasileira pode desempenhar um papel estratégico na ampliação dos negócios e investimentos entre Brasil e Coreia do Sul.…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-18T17:08:47.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-18T17:35:19.795Z"
+  },
   {
    "id": "1wfgwsm",
    "titulo": "Capacitações da Plataforma EduCont do Sistema CFC/CRCs geram mais de 70 pontos para o PEPC",
@@ -2979,21 +2994,6 @@
     "contabil"
    ],
    "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "1kynigf",
-   "titulo": "Conferência Nacional de Perícia Contábil acontece no próximo mês",
-   "link": "https://cfc.org.br/noticias/conferencia-nacional-de-pericia-contabil-acontece-no-proximo-mes/",
-   "resumo": "Nos dias 2 e 3 de dezembro, o Conselho Federal de Contabilidade (CFC) e a Fundação Brasileira de Contabilidade (FBC) promovem a Conferência Nacional de Perícia Contábil (CNPC). O evento será realizado em Brasília/DF e reunirá palestrantes renomados na área. A iniciativa soma…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-06T12:33:08.000Z",
-   "categorias": [
-    "contabil"
-   ],
-   "relevancia": 0,
    "vistaEm": "2026-11-09T15:43:00.130Z"
   }
  ]
