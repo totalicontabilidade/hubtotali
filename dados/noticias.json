@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-18T10:05:21.109Z",
+ "atualizadoEm": "2026-11-18T10:35:19.718Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T10:05:21.109Z"
+   "ultimaVez": "2026-11-18T10:35:19.718Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-18T10:05:21.109Z"
+   "ultimaVez": "2026-11-18T10:35:19.718Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T10:05:21.109Z"
+   "ultimaVez": "2026-11-18T10:35:19.718Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-18T10:05:21.109Z"
+   "ultimaVez": "2026-11-18T10:35:19.718Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-18T10:05:21.109Z"
+   "ultimaVez": "2026-11-18T10:35:19.718Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-18T10:05:21.109Z"
+   "ultimaVez": "2026-11-18T10:35:19.718Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-18T10:05:21.109Z"
+   "ultimaVez": "2026-11-18T10:35:19.718Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-18T10:05:21.109Z"
+   "ultimaVez": "2026-11-18T10:35:19.718Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-18T10:05:21.109Z"
+   "ultimaVez": "2026-11-18T10:35:19.718Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 5,
-   "ultimaVez": "2026-11-18T10:05:21.109Z"
+   "ultimaVez": "2026-11-18T10:35:19.718Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-18T10:05:21.109Z"
+   "ultimaVez": "2026-11-18T10:35:19.718Z"
   }
  ],
  "noticias": [
+  {
+   "id": "n5xz26",
+   "titulo": "Receita Federal participa da Operação Cash Out",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-participa-da-operacao-cash-out",
+   "resumo": "Investigação aponta que grupo empresarial teria utilizado estruturas nacionais e estrangeiras para exploração de apostas online, realização de operações financeiras internacionais e possível ocultação de receitas.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-18T10:35:22.242Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-18T10:35:19.718Z"
+  },
   {
    "id": "iwgmm",
    "titulo": "Durigan defende início da Reforma Tributária em 2027 e prevê alíquota média de 8,5% para a CBS",
@@ -2976,21 +2992,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "ud3412",
-   "titulo": "Secretaria de Estado da Fazenda divulga resultado do chamamento público para contratação de operação de crédito",
-   "link": "https://www.sefaz.se.gov.br/Lists/Noticias/DispForm.aspx?ID=2878",
-   "resumo": "Title: Secretaria de Estado da Fazenda divulga resultado do chamamento público para contratação de operação de crédito Publicacao: 05/11/2026 17:05 Foto: https://www.sefaz.se.gov.br/Imagens/noticias/05-11-2026/7.png Visibilidade: Intranet, Internet",
-   "fonte": "sefaz-se",
-   "fonteNome": "Secretaria da Fazenda de Sergipe",
-   "sigla": "SEFAZ/SE",
-   "publicadoEm": "2026-11-05T20:15:39.000Z",
-   "categorias": [
-    "sergipe"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-10T13:54:36.165Z"
   }
  ]
 }
