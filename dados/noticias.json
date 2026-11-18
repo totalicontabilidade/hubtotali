@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-18T21:35:20.801Z",
+ "atualizadoEm": "2026-11-18T22:35:20.704Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T21:35:20.801Z"
+   "ultimaVez": "2026-11-18T22:35:20.704Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-18T21:35:20.801Z"
+   "ultimaVez": "2026-11-18T22:35:20.704Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T21:35:20.801Z"
+   "ultimaVez": "2026-11-18T22:35:20.704Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 11,
-   "ultimaVez": "2026-11-18T21:35:20.801Z"
+   "ultimaVez": "2026-11-18T22:35:20.704Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-18T21:35:20.801Z"
+   "ultimaVez": "2026-11-18T22:35:20.704Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-18T21:35:20.801Z"
+   "ultimaVez": "2026-11-18T22:35:20.704Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-18T21:35:20.801Z"
+   "ultimaVez": "2026-11-18T22:35:20.704Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-18T21:35:20.801Z"
+   "ultimaVez": "2026-11-18T22:35:20.704Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-18T21:35:20.801Z"
+   "ultimaVez": "2026-11-18T22:35:20.704Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 5,
-   "ultimaVez": "2026-11-18T21:35:20.801Z"
+   "ultimaVez": "2026-11-18T22:35:20.704Z"
   },
   {
    "id": "govbr",
@@ -135,7 +135,7 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-18T21:35:20.801Z"
+   "ultimaVez": "2026-11-18T22:35:20.704Z"
   }
  ],
  "noticias": [
@@ -348,6 +348,22 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-18T20:05:18.868Z"
+  },
+  {
+   "id": "j6yege",
+   "titulo": "RFB e CGIBS alinham próximos passos da implementação da Reforma e reforçam compromisso com a conformidade tributária",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/rfb-e-cgibs-alinham-proximos-passos-da-implementacao-da-reforma-e-reforcam-compromisso-com-a-conformidade-tributaria",
+   "resumo": "Reunião reforçou a atuação conjunta, o programa de conformidade tributária e a oferta de canais de orientação e suporte aos contribuintes durante a transição para o novo modelo.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-18T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-18T22:35:20.704Z"
   },
   {
    "id": "1ltj6ih",
@@ -2980,23 +2996,6 @@
    "categorias": [
     "tributos",
     "trabalhista"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "9x7lbq",
-   "titulo": "Para 75% dos MEIs, estar formalizado ajudou a vender mais",
-   "link": "https://fenacon.org.br/noticias/para-75-dos-meis-estar-formalizado-ajudou-a-vender-mais/",
-   "resumo": "Resultado é o melhor da série histórica de pesquisa do Sebrae. Emissão de nota fiscal e acesso a benefícios do INSS são as principais motivações para se formalizar A formalização ajuda o microempreendedor individual (MEI) a vender mais. A constatação é da pesquisa Perfil do…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-09T05:18:45.000Z",
-   "categorias": [
-    "simples",
-    "trabalhista",
-    "empresas"
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-09T15:43:00.130Z"
