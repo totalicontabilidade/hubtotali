@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-18T19:35:17.730Z",
+ "atualizadoEm": "2026-11-18T20:05:18.868Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T19:35:17.730Z"
+   "ultimaVez": "2026-11-18T20:05:18.868Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-18T19:35:17.730Z"
+   "ultimaVez": "2026-11-18T20:05:18.868Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T19:35:17.730Z"
+   "ultimaVez": "2026-11-18T20:05:18.868Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 11,
-   "ultimaVez": "2026-11-18T19:35:17.730Z"
+   "ultimaVez": "2026-11-18T20:05:18.868Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-18T19:35:17.730Z"
+   "ultimaVez": "2026-11-18T20:05:18.868Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-18T19:35:17.730Z"
+   "ultimaVez": "2026-11-18T20:05:18.868Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-18T19:35:17.730Z"
+   "ultimaVez": "2026-11-18T20:05:18.868Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-18T19:35:17.730Z"
+   "ultimaVez": "2026-11-18T20:05:18.868Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-18T19:35:17.730Z"
+   "ultimaVez": "2026-11-18T20:05:18.868Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 5,
-   "ultimaVez": "2026-11-18T19:35:17.730Z"
+   "ultimaVez": "2026-11-18T20:05:18.868Z"
   },
   {
    "id": "govbr",
@@ -135,7 +135,7 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-18T19:35:17.730Z"
+   "ultimaVez": "2026-11-18T20:05:18.868Z"
   }
  ],
  "noticias": [
@@ -232,6 +232,24 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-18T15:35:21.603Z"
+  },
+  {
+   "id": "ebkwyh",
+   "titulo": "A Receita Federal divulga a atualização dos números referentes às solicitações de opção pelo Simples Nacional e pelo regime regular do IBS e da CBS",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/a-receita-federal-divulga-a-atualizacao-dos-numeros-referentes-as-solicitacoes-de-opcao-pelo-simples-nacional-e-pelo-regime-regular-do-ibs-e-da-cbs",
+   "resumo": "Após o processamento dos pedidos, foram registradas mais de 657 mil solicitações pelo Simples Nacional e 1 milhão pelo regime regular do IBS e da CBS.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-18T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "reforma",
+    "simples",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-18T20:05:18.868Z"
   },
   {
    "id": "1ltj6ih",
@@ -2977,22 +2995,6 @@
     "tributos"
    ],
    "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "2ilizr",
-   "titulo": "Câmara Técnica de Normas Contábeis e de Demonstrativos Fiscais da Federação debate evolução da Contabilidade Aplicada ao Setor Público no Brasil",
-   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/camara-tecnica-de-normas-contabeis-e-de-demonstrativos-fiscais-da-federacao-debate-evolucao-da-contabilidade-aplicada-ao-setor-publico-no-brasil",
-   "resumo": "Fórum integra o ciclo de construção, teste, implementação e disseminação das normas contábeis que orientam a gestão pública brasileira",
-   "fonte": "fazenda",
-   "fonteNome": "Ministério da Fazenda",
-   "sigla": "MF",
-   "publicadoEm": "2026-11-06T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "contabil"
-   ],
-   "relevancia": 1,
    "vistaEm": "2026-11-09T15:43:00.130Z"
   }
  ]
