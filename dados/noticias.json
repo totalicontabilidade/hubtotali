@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-18T18:05:20.121Z",
+ "atualizadoEm": "2026-11-18T18:35:21.399Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T18:05:20.121Z"
+   "ultimaVez": "2026-11-18T18:35:21.399Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-18T18:05:20.121Z"
+   "ultimaVez": "2026-11-18T18:35:21.399Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T18:05:20.121Z"
+   "ultimaVez": "2026-11-18T18:35:21.399Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-18T18:05:20.121Z"
+   "ultimaVez": "2026-11-18T18:35:21.399Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-18T18:05:20.121Z"
+   "ultimaVez": "2026-11-18T18:35:21.399Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-18T18:05:20.121Z"
+   "ultimaVez": "2026-11-18T18:35:21.399Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-18T18:05:20.121Z"
+   "ultimaVez": "2026-11-18T18:35:21.399Z"
   },
   {
    "id": "camara",
@@ -107,8 +107,8 @@
    "nome": "Agência Câmara",
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
-   "quantas": 0,
-   "ultimaVez": "2026-11-18T18:05:20.121Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-18T18:35:21.399Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-18T18:05:20.121Z"
+   "ultimaVez": "2026-11-18T18:35:21.399Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-18T18:05:20.121Z"
+   "ultimaVez": "2026-11-18T18:35:21.399Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-18T18:05:20.121Z"
+   "ultimaVez": "2026-11-18T18:35:21.399Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1ttcy4n",
+   "titulo": "Debatedores atribuem avanço do crime organizado nos mercados de bebidas e cigarros a impostos altos",
+   "link": "https://www.camara.leg.br/noticias/1320671-debatedores-atribuem-avanco-do-crime-organizado-nos-mercados-de-bebidas-e-cigarros-a-impostos-altos",
+   "resumo": "Baixa fiscalização e punições brandas também foram apontadas como causas do problema durante debate na Comissão Externa de Combate à Pirataria",
+   "fonte": "camara",
+   "fonteNome": "Agência Câmara",
+   "sigla": "Câmara",
+   "publicadoEm": "2026-11-18T18:02:00.000Z",
+   "categorias": [
+    "legislacao",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-18T18:35:21.399Z"
+  },
   {
    "id": "q1qmf5",
    "titulo": "Número de pessoas que contribuem para a Previdência pública é o maior desde 2012",
@@ -2968,22 +2984,6 @@
    "titulo": "Operação Fronteira da Receita Federal apreende cerca de R$ 1,5 milhão em mercadorias em Montes Claros e região",
    "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-da-receita-federal-apreende-cerca-de-r-1-5-milhao-em-mercadorias-em-montes-claros-e-regiao",
    "resumo": "Fiscalização mobilizou 29 servidores e alcançou oito estabelecimentos comerciais, com foco no combate à circulação de produtos irregulares.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-06T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "185l04w",
-   "titulo": "Operação Fronteira: Receita Federal encontra haxixe em livro e apreende peças de armas em Viracopos",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-receita-federal-encontra-haxixe-em-livro-e-apreende-pecas-de-armas-em-viracopos",
-   "resumo": "Fiscalização de remessas internacionais apreendeu 5,74 kg da droga e 20 peças de armas de fogo.",
    "fonte": "receita",
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
