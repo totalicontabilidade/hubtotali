@@ -88,6 +88,10 @@ function doPost(e) {
        é decisão do dono do quadro. */
     if (evento === "solicitacao.excluida")   return responder(riscarPendencia(s, "A solicitação foi excluída no Atos Societários."));
     if (evento === "solicitacao.reaberta")   return responder(reabrirPendencia(s));
+    /* Comentário escrito no grupo do WhatsApp do Atos ("comentário: …"):
+       entra na lista de comentários da pendência, com o nome de quem
+       escreveu. Desde 18/11/2026. */
+    if (evento === "solicitacao.comentario") return responder(comentarPendencia(s, corpo.comentario));
 
     /* Evento desconhecido não é erro: o Atos pode passar a mandar
        tipos novos, e um recebedor antigo deve ignorá-los em paz. */
@@ -287,6 +291,32 @@ function reabrirPendencia(s) {
   var r = chamar(colecao() + "/" + achada.id +
                  "?updateMask.fieldPaths=feito&updateMask.fieldPaths=feitoEm&updateMask.fieldPaths=notas",
                  "patch", { fields: paraCampos({ feito: false, feitoEm: null, notas: notas }) }, sessao.token);
+  if (r.codigo >= 300) return { ok: false, erro: "o Hub recusou (HTTP " + r.codigo + "): " + r.texto };
+  return { ok: true, pendencia: achada.id };
+}
+
+/* ---------- comentário ----------
+   Também só mexe em notas (o que a regra deixa quem criou fazer).
+   O id do comentário vai na nota: o Atos pode reenviar o mesmo
+   comentário quando a resposta se perde, e ele não pode aparecer
+   duas vezes. Sem pendência (ela ainda não nasceu), responde
+   semPendencia e o Atos tenta de novo mais tarde. */
+function comentarPendencia(s, c) {
+  c = c || {};
+  var texto = String(c.texto || "").trim();
+  if (!texto) return { ok: false, erro: "comentário vazio" };
+  var sessao = entrar();
+  var achada = acharPorOrigem(s.id, sessao.token, sessao.uid);
+  if (!achada) return { ok: true, semPendencia: true };
+  var notas = achada.dados.notas || [];
+  var idC = String(c.id || "");
+  if (idC && notas.some(function (n) { return n && n.origemId === idC; })) return { ok: true, repetido: true, pendencia: achada.id };
+  if (notas.length >= 200) return { ok: false, erro: "a pendência já tem 200 comentários" };
+  var quem = String(c.por || "").trim();
+  var nota = { t: texto.length > 2000 ? texto.slice(0, 1997) + "..." : texto, em: Date.now(),
+               por: quem ? quem + " (WhatsApp)" : "WhatsApp", porUid: sessao.uid, origemId: idC };
+  var r = chamar(colecao() + "/" + achada.id + "?updateMask.fieldPaths=notas",
+                 "patch", { fields: paraCampos({ notas: notas.concat([nota]) }) }, sessao.token);
   if (r.codigo >= 300) return { ok: false, erro: "o Hub recusou (HTTP " + r.codigo + "): " + r.texto };
   return { ok: true, pendencia: achada.id };
 }

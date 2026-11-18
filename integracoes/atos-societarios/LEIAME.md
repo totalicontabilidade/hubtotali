@@ -93,6 +93,10 @@ segredo. A partir daí:
 - **solicitação excluída** → riscada, com o comentário "excluída no Atos"
   (apagar de vez continua sendo decisão do dono do quadro);
 - **solicitação reaberta** → a pendência volta a ficar aberta, com comentário.
+- **comentário** (escrito no grupo do WhatsApp do Atos com *comentário: …*, desde
+  18/11/2026) → entra na lista de comentários da pendência, com o nome de quem
+  escreveu e "(WhatsApp)". Repetido não duplica; sem pendência ainda, o Atos tenta
+  de novo depois.
 
 **Depois de mudar o `receber.gs`**, cole de novo no Apps Script e publique uma
 **nova versão da mesma implantação** (Implantar → Gerenciar implantações →
