@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-18T18:35:21.399Z",
+ "atualizadoEm": "2026-11-18T19:05:24.517Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T18:35:21.399Z"
+   "ultimaVez": "2026-11-18T19:05:24.517Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-18T18:35:21.399Z"
+   "ultimaVez": "2026-11-18T19:05:24.517Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T18:35:21.399Z"
+   "ultimaVez": "2026-11-18T19:05:24.517Z"
   },
   {
    "id": "fazenda",
@@ -70,8 +70,8 @@
    "nome": "Ministério da Fazenda",
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
-   "quantas": 10,
-   "ultimaVez": "2026-11-18T18:35:21.399Z"
+   "quantas": 11,
+   "ultimaVez": "2026-11-18T19:05:24.517Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-18T18:35:21.399Z"
+   "ultimaVez": "2026-11-18T19:05:24.517Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-18T18:35:21.399Z"
+   "ultimaVez": "2026-11-18T19:05:24.517Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-18T18:35:21.399Z"
+   "ultimaVez": "2026-11-18T19:05:24.517Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-18T18:35:21.399Z"
+   "ultimaVez": "2026-11-18T19:05:24.517Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-18T18:35:21.399Z"
+   "ultimaVez": "2026-11-18T19:05:24.517Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-18T18:35:21.399Z"
+   "ultimaVez": "2026-11-18T19:05:24.517Z"
   },
   {
    "id": "govbr",
@@ -135,7 +135,7 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-18T18:35:21.399Z"
+   "ultimaVez": "2026-11-18T19:05:24.517Z"
   }
  ],
  "noticias": [
@@ -232,6 +232,22 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-18T15:35:21.603Z"
+  },
+  {
+   "id": "1ltj6ih",
+   "titulo": "Receita Federal, Ministério Público e Polícia Federal miram grupo que movimentou R$ 11 bilhões em 2025",
+   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/receita-federal-ministerio-publico-e-policia-federal-miram-grupo-que-movimentou-r-11-bilhoes-em-2025",
+   "resumo": "Estão sendo cumpridos nesta quarta-feira (18/11) 59 mandados de busca e apreensão contra uma organização criminosa do ramo de apostas",
+   "fonte": "fazenda",
+   "fonteNome": "Ministério da Fazenda",
+   "sigla": "MF",
+   "publicadoEm": "2026-11-18T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 0,
+   "vistaEm": "2026-11-18T19:05:24.517Z"
   },
   {
    "id": "1pegd0i",
@@ -2975,22 +2991,6 @@
    "semHora": true,
    "categorias": [
     "contabil"
-   ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "1ezv1e9",
-   "titulo": "Operação Fronteira da Receita Federal apreende cerca de R$ 1,5 milhão em mercadorias em Montes Claros e região",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-da-receita-federal-apreende-cerca-de-r-1-5-milhao-em-mercadorias-em-montes-claros-e-regiao",
-   "resumo": "Fiscalização mobilizou 29 servidores e alcançou oito estabelecimentos comerciais, com foco no combate à circulação de produtos irregulares.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-06T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
    ],
    "relevancia": 1,
    "vistaEm": "2026-11-09T15:43:00.130Z"
