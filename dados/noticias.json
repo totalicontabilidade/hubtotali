@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-18T20:35:18.899Z",
+ "atualizadoEm": "2026-11-18T21:05:20.638Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T20:35:18.899Z"
+   "ultimaVez": "2026-11-18T21:05:20.638Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-18T20:35:18.899Z"
+   "ultimaVez": "2026-11-18T21:05:20.638Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T20:35:18.899Z"
+   "ultimaVez": "2026-11-18T21:05:20.638Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 11,
-   "ultimaVez": "2026-11-18T20:35:18.899Z"
+   "ultimaVez": "2026-11-18T21:05:20.638Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-18T20:35:18.899Z"
+   "ultimaVez": "2026-11-18T21:05:20.638Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-18T20:35:18.899Z"
+   "ultimaVez": "2026-11-18T21:05:20.638Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-18T20:35:18.899Z"
+   "ultimaVez": "2026-11-18T21:05:20.638Z"
   },
   {
    "id": "camara",
@@ -107,8 +107,8 @@
    "nome": "Agência Câmara",
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-18T20:35:18.899Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-18T21:05:20.638Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-18T20:35:18.899Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-18T21:05:20.638Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 5,
-   "ultimaVez": "2026-11-18T20:35:18.899Z"
+   "ultimaVez": "2026-11-18T21:05:20.638Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,58 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-18T20:35:18.899Z"
+   "ultimaVez": "2026-11-18T21:05:20.638Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1epa3kp",
+   "titulo": "CFC, Fenacon, Receita Federal e Sebrae anunciam apoio direto a contadores e lançam canal para esclarecer dúvidas",
+   "link": "https://cfc.org.br/noticias/cfc-fenacon-receita-federal-e-sebrae-anunciam-apoio-direto-a-contadores-e-lancam-canal-para-esclarecer-duvidas/",
+   "resumo": "Segunda reunião da sala de situação apresenta medidas para auxiliar profissionais da contabilidade na adaptação das empresas às novas regras tributárias Os profissionais da contabilidade responsáveis por empresas enquadradas no regime regular receberão do Conselho Federal de…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-18T21:04:33.000Z",
+   "categorias": [
+    "tributos",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-18T21:05:20.638Z"
+  },
+  {
+   "id": "sq4d5d",
+   "titulo": "Projeto prevê parcelamento de dívidas e perdão de débitos para entidades sem fins lucrativos",
+   "link": "https://www.camara.leg.br/noticias/1311401-projeto-preve-parcelamento-de-dividas-e-perdao-de-debitos-para-entidades-sem-fins-lucrativos",
+   "resumo": "Proposta prevê descontos de até 100% em juros e multas e parcelamento em até 240 meses",
+   "fonte": "camara",
+   "fonteNome": "Agência Câmara",
+   "sigla": "Câmara",
+   "publicadoEm": "2026-11-18T20:54:00.000Z",
+   "categorias": [
+    "legislacao",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-18T21:05:20.638Z"
+  },
+  {
+   "id": "t8z95u",
+   "titulo": "CTFC vai apurar possíveis fraudes na Previdência e no crédito consignado",
+   "link": "https://www12.senado.leg.br/noticias/materias/2026/11/18/ctfc-vai-apurar-possiveis-fraudes-na-previdencia-e-no-credito-consignado",
+   "resumo": "",
+   "fonte": "senado",
+   "fonteNome": "Agência Senado",
+   "sigla": "Senado",
+   "publicadoEm": "2026-11-18T20:30:11.000Z",
+   "categorias": [
+    "legislacao",
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-18T21:05:20.638Z"
+  },
   {
    "id": "140ayzh",
    "titulo": "CAE debate redução da sonegação como saída para baixar alíquota da futura CBS",
@@ -2949,54 +2997,6 @@
     "trabalhista"
    ],
    "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "ntlbhk",
-   "titulo": "VP da Fenacon (CO) representa empresas de contabilidade em campanha para destinação de recursos ao Hospital do Câncer de MT",
-   "link": "https://fenacon.org.br/noticias/vp-da-fenacon-co-representa-empresas-de-contabilidade-em-campanha-para-destinacao-de-recursos-ao-hospital-do-cancer-de-mt/",
-   "resumo": "O vice-presidente da Fenacon na região Centro-Oeste, Marco Aurélio Coelho, participou de uma coletiva de imprensa na sexta-feira (06.11), em Cuiabá, para divulgar uma iniciativa para destinar parte do Imposto de Renda para a compra de equipamentos para o Hospital do Câncer de…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-08T23:35:08.000Z",
-   "categorias": [
-    "tributos",
-    "contabil"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "sk5obi",
-   "titulo": "IBS e CBS: A controvérsia sobre a exportação de serviços",
-   "link": "https://fenacon.org.br/reforma-tributaria/ibs-e-cbs-a-controversia-sobre-a-exportacao-de-servicos/",
-   "resumo": "Nova regra da reforma tributária abre espaço para diferentes interpretações sobre a tributação de serviços prestados no Brasil a clientes estrangeiros. Por Marcelo Carvalho Pereira A reforma tributária do consumo tinha tudo encerrar uma das mais longas controvérsias do…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-08T20:01:22.000Z",
-   "categorias": [
-    "reforma",
-    "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "1117860",
-   "titulo": "Vai à CAE a isenção de tarifa de energia para usinas de biomassa de casca de arroz",
-   "link": "https://www12.senado.leg.br/noticias/audios/2026/11/cra-aprova-isencao-de-tarifa-de-energia-para-usinas-de-biomassa-de-casca-de-arroz",
-   "resumo": "",
-   "fonte": "senado",
-   "fonteNome": "Agência Senado",
-   "sigla": "Senado",
-   "publicadoEm": "2026-11-06T21:38:42.000Z",
-   "categorias": [
-    "legislacao",
-    "tributos"
-   ],
-   "relevancia": 2,
    "vistaEm": "2026-11-09T15:43:00.130Z"
   }
  ]
