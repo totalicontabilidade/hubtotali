@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-18T20:05:18.868Z",
+ "atualizadoEm": "2026-11-18T20:35:18.899Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T20:05:18.868Z"
+   "ultimaVez": "2026-11-18T20:35:18.899Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-18T20:05:18.868Z"
+   "ultimaVez": "2026-11-18T20:35:18.899Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T20:05:18.868Z"
+   "ultimaVez": "2026-11-18T20:35:18.899Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 11,
-   "ultimaVez": "2026-11-18T20:05:18.868Z"
+   "ultimaVez": "2026-11-18T20:35:18.899Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-18T20:05:18.868Z"
+   "ultimaVez": "2026-11-18T20:35:18.899Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-18T20:05:18.868Z"
+   "ultimaVez": "2026-11-18T20:35:18.899Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-18T20:05:18.868Z"
+   "ultimaVez": "2026-11-18T20:35:18.899Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-18T20:05:18.868Z"
+   "ultimaVez": "2026-11-18T20:35:18.899Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 0,
-   "ultimaVez": "2026-11-18T20:05:18.868Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-18T20:35:18.899Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 5,
-   "ultimaVez": "2026-11-18T20:05:18.868Z"
+   "ultimaVez": "2026-11-18T20:35:18.899Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,43 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-18T20:05:18.868Z"
+   "ultimaVez": "2026-11-18T20:35:18.899Z"
   }
  ],
  "noticias": [
+  {
+   "id": "140ayzh",
+   "titulo": "CAE debate redução da sonegação como saída para baixar alíquota da futura CBS",
+   "link": "https://www12.senado.leg.br/noticias/materias/2026/11/18/cae-debate-reducao-da-sonegacao-como-saida-para-baixar-aliquota-da-futura-cbs",
+   "resumo": "",
+   "fonte": "senado",
+   "fonteNome": "Agência Senado",
+   "sigla": "Senado",
+   "publicadoEm": "2026-11-18T20:20:25.000Z",
+   "categorias": [
+    "legislacao",
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-18T20:35:18.899Z"
+  },
+  {
+   "id": "ozn0nr",
+   "titulo": "Senado pede explicações a TCU sobre alíquota de 11,3% da CBS",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/senado-pede-explicacoes-tcu-sobre-aliquota-de-113-da-cbs",
+   "resumo": "Após dois dias de audiência pública, a Comissão de Assuntos Econômicos (CAE) do Senado aprovou nesta quarta-feira (18) um requerimento para pedir explicações ao Tribunal de Contas da União (TCU) sobre a alíquota de referência de 11,3% da Contribuição sobre Bens e Serviços…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-18T20:07:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-18T20:35:18.899Z"
+  },
   {
    "id": "1ttcy4n",
    "titulo": "Debatedores atribuem avanço do crime organizado nos mercados de bebidas e cigarros a impostos altos",
@@ -2964,37 +2997,6 @@
     "tributos"
    ],
    "relevancia": 2,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "5kkkgn",
-   "titulo": "Capacitação sobre Contabilidade Eleitoral acontece na próxima quarta-feira",
-   "link": "https://cfc.org.br/noticias/capacitacao-sobre-contabilidade-eleitoral-acontece-na-proxima-quarta-feira/",
-   "resumo": "A próxima edição do projeto “Atualização em Destaque” abordará o tema “Análise e julgamento de contas”. O evento virtual ocorre na próxima quarta-feira (11), às 15h, por meio da Plataforma EduCont do Sistema CFC/CRCs. A aula faz parte de uma série de cinco encontros sobre…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-06T15:30:24.000Z",
-   "categorias": [
-    "contabil"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "m16yde",
-   "titulo": "Receita Federal concorre ao Prêmio de Inovação da Enap 2026. Vote e apoie nossas iniciativas!",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-concorre-ao-premio-de-inovacao-da-enap-2026-vote-e-apoie-nossas-iniciativas",
-   "resumo": "Esta é uma oportunidade para reconhecer iniciativas que estão transformando a prestação de serviços públicos.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-06T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 3,
    "vistaEm": "2026-11-09T15:43:00.130Z"
   }
  ]
