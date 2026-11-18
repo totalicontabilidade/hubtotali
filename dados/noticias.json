@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-18T15:35:21.603Z",
+ "atualizadoEm": "2026-11-18T16:05:18.970Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T15:35:21.603Z"
+   "ultimaVez": "2026-11-18T16:05:18.970Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-18T15:35:21.603Z"
+   "ultimaVez": "2026-11-18T16:05:18.970Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T15:35:21.603Z"
+   "ultimaVez": "2026-11-18T16:05:18.970Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-18T15:35:21.603Z"
+   "ultimaVez": "2026-11-18T16:05:18.970Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-18T15:35:21.603Z"
+   "ultimaVez": "2026-11-18T16:05:18.970Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-18T15:35:21.603Z"
+   "ultimaVez": "2026-11-18T16:05:18.970Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-18T15:35:21.603Z"
+   "ultimaVez": "2026-11-18T16:05:18.970Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-18T15:35:21.603Z"
+   "ultimaVez": "2026-11-18T16:05:18.970Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-18T15:35:21.603Z"
+   "ultimaVez": "2026-11-18T16:05:18.970Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 5,
-   "ultimaVez": "2026-11-18T15:35:21.603Z"
+   "quantas": 4,
+   "ultimaVez": "2026-11-18T16:05:18.970Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,41 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-18T15:35:21.603Z"
+   "ultimaVez": "2026-11-18T16:05:18.970Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1wfgwsm",
+   "titulo": "Capacitações da Plataforma EduCont do Sistema CFC/CRCs geram mais de 70 pontos para o PEPC",
+   "link": "https://cfc.org.br/noticias/capacitacoes-da-plataforma-educont-do-sistema-cfc-crcs-geram-mais-de-70-pontos-para-o-pepc/",
+   "resumo": "O prazo para o cumprimento dos 40 pontos no Programa de Educação Profissional Continuada do CFC é 31 de dezembro de 2026. Uma opção para os profissionais que ainda não atingiram o índice é a Plataforma EduCont do Sistema CFC/CRCs. O ambiente de ensino possui atualmente 41…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-18T15:50:01.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-18T16:05:18.970Z"
+  },
+  {
+   "id": "1abblhp",
+   "titulo": "Associados das entidades filiadas à Febrapam terão descontos em evento de perícia contábil",
+   "link": "https://cfc.org.br/noticias/associados-das-entidades-filiadas-a-febrapam-terao-descontos-em-evento-de-pericia-contabil/",
+   "resumo": "Os peritos contábeis associados das entidades filiadas à Federação Brasileira das Associações de Peritos, Árbitros, Mediadores e Conciliadores (Febrapam) terão um benefício especial. Esses profissionais vão ganhar 20% de desconto na Conferência Nacional de Perícia Contábil…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-18T15:38:32.000Z",
+   "categorias": [
+    "trabalhista",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-18T16:05:18.970Z"
+  },
   {
    "id": "18pasox",
    "titulo": "Ao vivo: CAE debate cálculo da alíquota da CBS - 18/11/26",
@@ -2963,36 +2994,6 @@
     "contabil"
    ],
    "relevancia": 0,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "16h1mah",
-   "titulo": "Novo módulo de qualificação sobre Contabilidade Imobiliária e Construtoras é liberado pelo CFC",
-   "link": "https://cfc.org.br/noticias/novo-modulo-de-qualificacao-sobre-contabilidade-imobiliaria-e-construtoras-e-liberado-pelo-cfc/",
-   "resumo": "Sociedade de Propósito Específico (SPE) e Sociedade em Conta de Participação (SCP) são os assuntos do quinto módulo da Qualificação Avançada em Contabilidade Imobiliária e Construtoras. A aula já está disponível na Plataforma EduCont do Sistema CFC/CRCs. Iniciativa do…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-06T12:25:50.000Z",
-   "categorias": [
-    "contabil"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "l12fh6",
-   "titulo": "VA e VR deverão ser aceitos em qualquer maquininha habilitada a partir deste sábado (7)",
-   "link": "https://fenacon.org.br/noticias/va-e-vr-deverao-ser-aceitos-em-qualquer-maquininha-habilitada-a-partir-deste-sabado-7/",
-   "resumo": "Interoperabilidade entre cartões de vale-alimentação e vale-refeição está prevista para entrar em vigor integralmente em 7 de novembro, ampliando as possibilidades de uso dos benefícios; estabelecimentos precisam estar habilitados no PAT Por Comunicação Fenacon Os cartões de…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-06T04:12:49.000Z",
-   "categorias": [
-    "trabalhista"
-   ],
-   "relevancia": 3,
    "vistaEm": "2026-11-09T15:43:00.130Z"
   }
  ]
