@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-18T17:35:19.795Z",
+ "atualizadoEm": "2026-11-18T18:05:20.121Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T17:35:19.795Z"
+   "ultimaVez": "2026-11-18T18:05:20.121Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-18T17:35:19.795Z"
+   "ultimaVez": "2026-11-18T18:05:20.121Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T17:35:19.795Z"
+   "ultimaVez": "2026-11-18T18:05:20.121Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-18T17:35:19.795Z"
+   "ultimaVez": "2026-11-18T18:05:20.121Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-18T17:35:19.795Z"
+   "ultimaVez": "2026-11-18T18:05:20.121Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-18T17:35:19.795Z"
+   "ultimaVez": "2026-11-18T18:05:20.121Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-18T17:35:19.795Z"
+   "ultimaVez": "2026-11-18T18:05:20.121Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-18T17:35:19.795Z"
+   "ultimaVez": "2026-11-18T18:05:20.121Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-18T17:35:19.795Z"
+   "quantas": 0,
+   "ultimaVez": "2026-11-18T18:05:20.121Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-18T17:35:19.795Z"
+   "ultimaVez": "2026-11-18T18:05:20.121Z"
   },
   {
    "id": "govbr",
@@ -134,11 +134,26 @@
    "nome": "Agência Gov (governo federal)",
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
-   "quantas": 0,
-   "ultimaVez": "2026-11-18T17:35:19.795Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-18T18:05:20.121Z"
   }
  ],
  "noticias": [
+  {
+   "id": "q1qmf5",
+   "titulo": "Número de pessoas que contribuem para a Previdência pública é o maior desde 2012",
+   "link": "https://agenciagov.ebc.com.br/noticias/202611/numero-de-pessoas-que-contribuem-para-a-previdencia-publica-e-o-maior-desde-2012",
+   "resumo": "Segundo a Pesquisa Nacional por Amostra de Domicílios Contínua, do IBGE, total de contribuintes chegou a 68,7 milhões, entre trabalhadores por conta própria e celetistas",
+   "fonte": "govbr",
+   "fonteNome": "Agência Gov (governo federal)",
+   "sigla": "Gov",
+   "publicadoEm": "2026-11-18T17:51:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-18T18:05:20.121Z"
+  },
   {
    "id": "1u7o5qb",
    "titulo": "CFC fortalece diálogo com Embaixada do Brasil na Coreia do Sul e amplia perspectivas de cooperação internacional",
@@ -2978,22 +2993,6 @@
     "tributos"
    ],
    "relevancia": 1,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "sjlgig",
-   "titulo": "Projeto do CFC fortalece a governança e promove melhorias na gestão do CRCAP",
-   "link": "https://cfc.org.br/noticias/projeto-do-cfc-fortalece-a-governanca-e-promove-melhorias-na-gestao-do-crcap/",
-   "resumo": "Para fortalecer a Política de Governança do Conselho Regional de Contabilidade do Amapá (CRCAP), a Comissão Nacional de Governança Aplicada e Gestão Estratégica do Sistema CFC/CRCs realizou dois dias de atividades na sede do regional. A iniciativa integra o trabalho da…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-06T14:10:31.000Z",
-   "categorias": [
-    "trabalhista",
-    "contabil"
-   ],
-   "relevancia": 3,
    "vistaEm": "2026-11-09T15:43:00.130Z"
   }
  ]
