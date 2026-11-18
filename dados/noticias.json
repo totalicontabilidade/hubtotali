@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-18T01:34:11.925Z",
+ "atualizadoEm": "2026-11-18T10:05:21.109Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T01:34:11.925Z"
+   "ultimaVez": "2026-11-18T10:05:21.109Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-18T01:34:11.925Z"
+   "ultimaVez": "2026-11-18T10:05:21.109Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T01:34:11.925Z"
+   "ultimaVez": "2026-11-18T10:05:21.109Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-18T01:34:11.925Z"
+   "ultimaVez": "2026-11-18T10:05:21.109Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-18T01:34:11.925Z"
+   "ultimaVez": "2026-11-18T10:05:21.109Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-18T01:34:11.925Z"
+   "ultimaVez": "2026-11-18T10:05:21.109Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-18T01:34:11.925Z"
+   "ultimaVez": "2026-11-18T10:05:21.109Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-18T01:34:11.925Z"
+   "ultimaVez": "2026-11-18T10:05:21.109Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-18T01:34:11.925Z"
+   "ultimaVez": "2026-11-18T10:05:21.109Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 5,
-   "ultimaVez": "2026-11-18T01:34:11.925Z"
+   "ultimaVez": "2026-11-18T10:05:21.109Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,126 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-18T01:34:11.925Z"
+   "ultimaVez": "2026-11-18T10:05:21.109Z"
   }
  ],
  "noticias": [
+  {
+   "id": "iwgmm",
+   "titulo": "Durigan defende início da Reforma Tributária em 2027 e prevê alíquota média de 8,5% para a CBS",
+   "link": "https://fenacon.org.br/noticias/durigan-defende-inicio-da-reforma-tributaria-em-2027-e-preve-aliquota-media-de-85-para-a-cbs/",
+   "resumo": "Em audiência no Senado, ministro da Fazenda afirmou que a transição não será adiada, reconheceu possível impacto inicial na inflação e defendeu a redução dos encargos sobre a folha de pagamento Por Comunicação Fenacon O ministro da Fazenda, Dario Durigan, defendeu a…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-18T05:14:26.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "trabalhista"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-18T10:05:21.109Z"
+  },
+  {
+   "id": "1hc1v9p",
+   "titulo": "PL 5854/26 – Fenacon alerta que aumento da tributação sobre dividendos pode inviabilizar pequenas e médias empresas",
+   "link": "https://fenacon.org.br/noticias/pl-5854-26-fenacon-alerta-que-aumento-da-tributacao-sobre-dividendos-pode-inviabilizar-pequenas-e-medias-empresas/",
+   "resumo": "Em nota pública, Federação manifesta preocupação e alerta para impactos sobre o empreendedorismo, os investimentos e a geração de empregos",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-18T05:13:00.000Z",
+   "categorias": [
+    "tributos",
+    "trabalhista",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-17T13:35:20.223Z"
+  },
+  {
+   "id": "18datzy",
+   "titulo": "Receita Federal disponibiliza API para emissão do Recolhimento como Adquirente (RAD)",
+   "link": "https://fenacon.org.br/reforma-tributaria/virando-a-chave-na-reforma-tributaria-api-do-rad-documentacao-tecnica-ja-esta-disponivel/",
+   "resumo": "A solução viabiliza a automação dos processos relacionados ao RAD, reduzindo etapas operacionais e ampliando a eficiência na apropriação de créditos tributários A Receita Federal disponibilizou nesta terça-feira (17/11) a API (Application Programming Interface, ou interface…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-18T04:48:02.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-18T10:05:21.109Z"
+  },
+  {
+   "id": "1j2fr42",
+   "titulo": "Exclusão de IBS e CBS da base do ISS ganha força como ‘filhote’ de discussão do ICMS",
+   "link": "https://fenacon.org.br/noticias/exclusao-de-ibs-e-cbs-da-base-do-iss-ganha-forca-como-filhote-de-discussao-do-icms/",
+   "resumo": "Na Justiça, contribuintes argumentam que IBS e CBS não constituem receita, apenas transitam pelo caixa das empresas até serem repassados ao Fisco Por Silvia Pimentel A disputa judicial para impedir a incidência de “tributo sobre tributo”, considerada por muitos como uma…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-18T03:45:49.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-18T10:05:21.109Z"
+  },
+  {
+   "id": "1yqj7xe",
+   "titulo": "Reforma tributária: Receita descarta punição a erros de boa-fé",
+   "link": "https://fenacon.org.br/reforma-tributaria/reforma-tributaria-receita-descarta-punicao-a-erros-de-boa-fe/",
+   "resumo": "Secretário diz que riscos foram mapeados e empresas terão orientação O secretário da Receita Federal, Robinson Barreirinhas, afirmou nesta terça-feira (17) que os riscos e desafios da implementação da reforma tributária já foram identificados e que o governo pretende orientar…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-18T03:35:36.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-18T10:05:21.109Z"
+  },
+  {
+   "id": "1smt9pb",
+   "titulo": "Comitê Gestor da NFS-e realiza nova etapa de homologação de funcionalidades para a Reforma Tributária em Belo Horizonte/MG",
+   "link": "https://fenacon.org.br/reforma-tributaria/comite-gestor-da-nfs-e-realiza-nova-etapa-de-homologacao-de-funcionalidades-para-a-reforma-tributaria-em-belo-horizonte-mg/",
+   "resumo": "Entre os dias 16 e 19 de novembro de 2026, o Comitê Gestor da Nota Fiscal de Serviço Eletrônica de Padrão Nacional (CGNFS-e) promove, nas instalações do Serviço Federal de Processamento de Dados (Serpro), em Belo Horizonte/MG, mais uma rodada de homologações de…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-18T03:31:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "empresas"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-18T10:05:21.109Z"
+  },
+  {
+   "id": "13tnzuh",
+   "titulo": "Conheça a diferença entre nanoempreendedor e microempreendedor individual",
+   "link": "https://fenacon.org.br/reforma-tributaria/conheca-a-diferenca-entre-nanoempreendedor-e-microempreendedor-individual/",
+   "resumo": "Sebrae esclarece as principais dúvidas sobre as regras de transição da Reforma Tributária A nova categoria criada pela regulamentação da Reforma Tributária, a do nanoempreendedor, substitui o Microempreendedor Individual (MEI)? Para ajudar empreendedores a tirar essa e outras…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-18T03:08:00.000Z",
+   "categorias": [
+    "reforma",
+    "simples",
+    "tributos",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-18T10:05:21.109Z"
+  },
   {
    "id": "g82ha1",
    "titulo": "Maria Clara Bugarim recebe maior honraria da IFAC e destaca protagonismo da contabilidade brasileira no cenário mundial",
@@ -328,22 +444,6 @@
    "vistaEm": "2026-11-17T17:35:19.360Z"
   },
   {
-   "id": "z9yo6f",
-   "titulo": "Reforma tributária: Receita descarta punição a erros de boa-fé",
-   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/reforma-tributaria-receita-descarta-punicao-erros-de-boa-fe",
-   "resumo": "O secretário da Receita Federal, Robinson Barreirinhas, afirmou nesta terça-feira (17) que os riscos e desafios da implementação da reforma tributária já foram identificados e que o governo pretende orientar os contribuintes durante a transição para o novo sistema. Em…",
-   "fonte": "ebc",
-   "fonteNome": "Agência Brasil (Economia)",
-   "sigla": "EBC",
-   "publicadoEm": "2026-11-17T15:30:00.000Z",
-   "categorias": [
-    "reforma",
-    "tributos"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-17T15:35:19.419Z"
-  },
-  {
    "id": "1s99o2b",
    "titulo": "Receita Federal induz autorregularização de R$ 1,95 bilhão de grande contribuinte",
    "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-induz-autorregularizacao-de-r-1-95-bilhao-de-grande-contribuinte",
@@ -361,22 +461,6 @@
    "vistaEm": "2026-11-17T19:02:11.187Z"
   },
   {
-   "id": "vnujtn",
-   "titulo": "Receita Federal disponibiliza API para emissão do Recolhimento como Adquirente (RAD)",
-   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/receita-federal-disponibiliza-api-para-emissao-do-recolhimento-como-adquirente-rad",
-   "resumo": "A solução viabiliza a automação dos processos relacionados ao RAD, reduzindo etapas operacionais e ampliando a eficiência na apropriação de créditos tributários",
-   "fonte": "fazenda",
-   "fonteNome": "Ministério da Fazenda",
-   "sigla": "MF",
-   "publicadoEm": "2026-11-17T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-17T18:05:28.942Z"
-  },
-  {
    "id": "17oo9dw",
    "titulo": "Virando a Chave na Reforma Tributária: API do RAD - documentação técnica já está disponível",
    "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/virando-a-chave-para-a-reforma-tributaria-api-para-emissao-do-rad-ja-esta-disponivel",
@@ -392,23 +476,6 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-17T14:35:19.116Z"
-  },
-  {
-   "id": "1hc1v9p",
-   "titulo": "PL 5854/26 – Fenacon alerta que aumento da tributação sobre dividendos pode inviabilizar pequenas e médias empresas",
-   "link": "https://fenacon.org.br/noticias/pl-5854-26-fenacon-alerta-que-aumento-da-tributacao-sobre-dividendos-pode-inviabilizar-pequenas-e-medias-empresas/",
-   "resumo": "Em nota pública, Federação manifesta preocupação e alerta para impactos sobre o empreendedorismo, os investimentos e a geração de empregos",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-17T13:19:49.000Z",
-   "categorias": [
-    "tributos",
-    "trabalhista",
-    "legislacao"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-17T13:35:20.223Z"
   },
   {
    "id": "9du0c3",
@@ -2923,70 +2990,6 @@
     "sergipe"
    ],
    "relevancia": 2,
-   "vistaEm": "2026-11-10T13:54:36.165Z"
-  },
-  {
-   "id": "1is7i45",
-   "titulo": "Reforma Tributária: Ibracon abre pesquisa para avaliar desafios da Auditoria Independente",
-   "link": "https://cfc.org.br/noticias/reforma-tributaria-ibracon-abre-pesquisa-para-avaliar-desafios-da-auditoria-independente/",
-   "resumo": "Os profissionais da Contabilidade podem colaborar na identificação dos principais impactos, desafios e necessidades percebidos pelo setor de auditorias diante das mudanças trazidas pelo novo cenário tributário. Eles podem participar da pesquisa que o Instituto de Auditoria…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-05T18:41:43.000Z",
-   "categorias": [
-    "reforma",
-    "tributos",
-    "contabil"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "ud3411",
-   "titulo": "Projetos de Lei que criam Refis para ICMS, IPVA e ITCMD são aprovados na Alese",
-   "link": "https://www.sefaz.se.gov.br/Lists/Noticias/DispForm.aspx?ID=2877",
-   "resumo": "Title: Projetos de Lei que criam Refis para ICMS, IPVA e ITCMD são aprovados na Alese Publicacao: 05/11/2026 14:20 Foto: https://www.sefaz.se.gov.br/Imagens/noticias/05-11-2026/6.jpeg Visibilidade: Intranet, Internet",
-   "fonte": "sefaz-se",
-   "fonteNome": "Secretaria da Fazenda de Sergipe",
-   "sigla": "SEFAZ/SE",
-   "publicadoEm": "2026-11-05T17:21:24.000Z",
-   "categorias": [
-    "sergipe",
-    "legislacao"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-10T13:54:36.165Z"
-  },
-  {
-   "id": "ud3410",
-   "titulo": "Operações de crédito vão ampliar investimentos e modernizar a gestão em Sergipe",
-   "link": "https://www.sefaz.se.gov.br/Lists/Noticias/DispForm.aspx?ID=2876",
-   "resumo": "Title: Operações de crédito vão ampliar investimentos e modernizar a gestão em Sergipe Publicacao: 05/11/2026 14:15 Foto: https://www.sefaz.se.gov.br/Imagens/noticias/05-11-2026/4.jpeg Visibilidade: Intranet, Internet",
-   "fonte": "sefaz-se",
-   "fonteNome": "Secretaria da Fazenda de Sergipe",
-   "sigla": "SEFAZ/SE",
-   "publicadoEm": "2026-11-05T17:19:18.000Z",
-   "categorias": [
-    "sergipe"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-10T13:54:36.165Z"
-  },
-  {
-   "id": "ud340z",
-   "titulo": "Iniciativa do Governo de Sergipe garante isenção de taxas administrativas para taxistas",
-   "link": "https://www.sefaz.se.gov.br/Lists/Noticias/DispForm.aspx?ID=2875",
-   "resumo": "Title: Iniciativa do Governo de Sergipe garante isenção de taxas administrativas para taxistas Publicacao: 05/11/2026 14:15 Foto: https://www.sefaz.se.gov.br/Imagens/noticias/05-11-2026/2.jpeg Visibilidade: Intranet, Internet",
-   "fonte": "sefaz-se",
-   "fonteNome": "Secretaria da Fazenda de Sergipe",
-   "sigla": "SEFAZ/SE",
-   "publicadoEm": "2026-11-05T17:16:23.000Z",
-   "categorias": [
-    "tributos",
-    "sergipe"
-   ],
-   "relevancia": 3,
    "vistaEm": "2026-11-10T13:54:36.165Z"
   }
  ]
