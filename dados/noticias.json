@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-18T21:05:20.638Z",
+ "atualizadoEm": "2026-11-18T21:35:20.801Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T21:05:20.638Z"
+   "ultimaVez": "2026-11-18T21:35:20.801Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-18T21:05:20.638Z"
+   "ultimaVez": "2026-11-18T21:35:20.801Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T21:05:20.638Z"
+   "ultimaVez": "2026-11-18T21:35:20.801Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 11,
-   "ultimaVez": "2026-11-18T21:05:20.638Z"
+   "ultimaVez": "2026-11-18T21:35:20.801Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-18T21:05:20.638Z"
+   "ultimaVez": "2026-11-18T21:35:20.801Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-18T21:05:20.638Z"
+   "ultimaVez": "2026-11-18T21:35:20.801Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-18T21:05:20.638Z"
+   "ultimaVez": "2026-11-18T21:35:20.801Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-18T21:05:20.638Z"
+   "ultimaVez": "2026-11-18T21:35:20.801Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-18T21:05:20.638Z"
+   "ultimaVez": "2026-11-18T21:35:20.801Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 5,
-   "ultimaVez": "2026-11-18T21:05:20.638Z"
+   "ultimaVez": "2026-11-18T21:35:20.801Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,27 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-18T21:05:20.638Z"
+   "ultimaVez": "2026-11-18T21:35:20.801Z"
   }
  ],
  "noticias": [
+  {
+   "id": "aadlry",
+   "titulo": "No Senado, CFC defende transparência no cálculo da alíquota da CBS",
+   "link": "https://cfc.org.br/noticias/no-senado-cfc-defende-transparencia-no-calculo-da-aliquota-da-cbs/",
+   "resumo": "O vice-presidente do Conselho Federal de Contabilidade (CFC), Márcio Schuch, defendeu transparência e segurança técnica na definição da alíquota de referência da Contribuição Social sobre Bens e Serviços (CBS) para 2027. A manifestação ocorreu nesta quarta-feira (18), em…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-18T21:22:35.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-18T21:35:20.801Z"
+  },
   {
    "id": "1epa3kp",
    "titulo": "CFC, Fenacon, Receita Federal e Sebrae anunciam apoio direto a contadores e lançam canal para esclarecer dúvidas",
@@ -2980,21 +2997,6 @@
     "simples",
     "trabalhista",
     "empresas"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "18cfhps",
-   "titulo": "CNC esclarece impactos do fim da escala 6×1 e alerta para prazo curto de adaptação das empresas",
-   "link": "https://fenacon.org.br/noticias/cnc-esclarece-impactos-do-fim-da-escala-6x1-e-alerta-para-prazo-curto-de-adaptacao-das-empresas/",
-   "resumo": "Em live com especialistas da Diretoria Jurídica e Sindical, Confederação detalhou as novas regras da jornada de trabalho, respondeu a dúvidas de empresários de todo o País e destacou os desafios para reorganizar escalas, preservar empregos e adequar negociações coletivas A…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-09T05:02:18.000Z",
-   "categorias": [
-    "trabalhista"
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-09T15:43:00.130Z"
