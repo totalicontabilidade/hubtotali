@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-19T20:05:18.715Z",
+ "atualizadoEm": "2026-11-19T20:35:17.113Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-19T20:05:18.715Z"
+   "ultimaVez": "2026-11-19T20:35:17.113Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-19T20:05:18.715Z"
+   "ultimaVez": "2026-11-19T20:35:17.113Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-19T20:05:18.715Z"
+   "ultimaVez": "2026-11-19T20:35:17.113Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 12,
-   "ultimaVez": "2026-11-19T20:05:18.715Z"
+   "ultimaVez": "2026-11-19T20:35:17.113Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-19T20:05:18.715Z"
+   "ultimaVez": "2026-11-19T20:35:17.113Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-19T20:05:18.715Z"
+   "ultimaVez": "2026-11-19T20:35:17.113Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-19T20:05:18.715Z"
+   "ultimaVez": "2026-11-19T20:35:17.113Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-19T20:05:18.715Z"
+   "ultimaVez": "2026-11-19T20:35:17.113Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-19T20:05:18.715Z"
+   "ultimaVez": "2026-11-19T20:35:17.113Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-19T20:05:18.715Z"
+   "ultimaVez": "2026-11-19T20:35:17.113Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,27 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-19T20:05:18.715Z"
+   "ultimaVez": "2026-11-19T20:35:17.113Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1x6pnc6",
+   "titulo": "Especialistas debatem perspectivas para 2027 em etapa da Reforma Tributária pelo Brasil no Rio Grande do Sul",
+   "link": "https://cfc.org.br/noticias/especialistas-debatem-perspectivas-para-2027-em-etapa-da-reforma-tributaria-pelo-brasil-no-rio-grande-do-sul/",
+   "resumo": "O Conselho Federal de Contabilidade (CFC) deu continuidade nesta semana ao programa Reforma Tributária pelo Brasil promovendo mais uma edição da iniciativa, desta vez em Porto Alegre. Em parceria com a Federação Nacional das Empresas de Serviços Contábeis e das Empresas de…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-19T20:07:38.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-19T20:35:17.113Z"
+  },
   {
    "id": "e30c0a",
    "titulo": "Durigan defende novo imposto no Senado",
@@ -2982,22 +2999,6 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-10T11:56:06.122Z"
-  },
-  {
-   "id": "cund1z",
-   "titulo": "Presidente da Fenacon concede entrevista à Jovem Pan News sobre o início da CBS em 2027",
-   "link": "https://fenacon.org.br/noticias/presidente-da-fenacon-concede-entrevista-a-jovem-pan-news-sobre-o-inicio-da-cbs-em-2027/",
-   "resumo": "A Contribuição sobre Bens e Serviços (CBS), criada pela reforma tributária para substituir o PIS e a Cofins, começa a ser cobrada em 2027. O tema foi destaque de entrevista concedida pelo presidente da Fenacon, Reynaldo Lima Jr., à Jovem Pan News, no domingo (8). Durante a…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-10T05:50:17.000Z",
-   "categorias": [
-    "reforma",
-    "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-10T11:01:42.402Z"
   }
  ]
 }
