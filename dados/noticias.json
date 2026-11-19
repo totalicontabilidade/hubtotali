@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-19T19:35:20.205Z",
+ "atualizadoEm": "2026-11-19T20:05:18.715Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-19T19:35:20.205Z"
+   "ultimaVez": "2026-11-19T20:05:18.715Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-19T19:35:20.205Z"
+   "ultimaVez": "2026-11-19T20:05:18.715Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-19T19:35:20.205Z"
+   "ultimaVez": "2026-11-19T20:05:18.715Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 12,
-   "ultimaVez": "2026-11-19T19:35:20.205Z"
+   "ultimaVez": "2026-11-19T20:05:18.715Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-19T19:35:20.205Z"
+   "ultimaVez": "2026-11-19T20:05:18.715Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-19T19:35:20.205Z"
+   "ultimaVez": "2026-11-19T20:05:18.715Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-19T19:35:20.205Z"
+   "ultimaVez": "2026-11-19T20:05:18.715Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-19T19:35:20.205Z"
+   "ultimaVez": "2026-11-19T20:05:18.715Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 0,
-   "ultimaVez": "2026-11-19T19:35:20.205Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-19T20:05:18.715Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-19T19:35:20.205Z"
+   "ultimaVez": "2026-11-19T20:05:18.715Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,41 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-19T19:35:20.205Z"
+   "ultimaVez": "2026-11-19T20:05:18.715Z"
   }
  ],
  "noticias": [
+  {
+   "id": "e30c0a",
+   "titulo": "Durigan defende novo imposto no Senado",
+   "link": "https://www12.senado.leg.br/noticias/infomaterias/2026/11/durigan-defende-novo-imposto-no-senado",
+   "resumo": "",
+   "fonte": "senado",
+   "fonteNome": "Agência Senado",
+   "sigla": "Senado",
+   "publicadoEm": "2026-11-19T20:02:26.000Z",
+   "categorias": [
+    "legislacao",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-19T20:05:18.715Z"
+  },
+  {
+   "id": "e24qt1",
+   "titulo": "Veja como será o cálculo da hora extra com a escala de trabalho 5x2",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/veja-como-sera-o-calculo-da-hora-extra-com-escala-de-trabalho-5x2",
+   "resumo": "O ministro do Trabalho e Emprego, Luiz Marinho, explicou, nesta quinta-feira (19), que a gradual redução da jornada semanal de trabalho e a garantia de dois dias de descanso remunerado vão elevar o valor da hora trabalhada, aumentando o custo das horas extras, mesmo que sem…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-19T19:39:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-19T20:05:18.715Z"
+  },
   {
    "id": "1c3r5p9",
    "titulo": "Comissão debate participação das mulheres na previdência complementar; participe",
@@ -215,6 +246,40 @@
    "categorias": [],
    "relevancia": 1,
    "vistaEm": "2026-11-19T16:05:18.925Z"
+  },
+  {
+   "id": "1rvqi6x",
+   "titulo": "Receita Federal, CGIBS e CFC vão orientar mais de 25 mil profissionais da contabilidade sobre destaque de CBS/IBS em documentos fiscais",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-cgibs-e-cfc-vao-orientar-mais-de-25-mil-profissionais-da-contabilidade-sobre-destaque-de-cbs-ibs-em-documentos-fiscais",
+   "resumo": "Profissionais de contabilidade têm papel relevante na promoção da conformidade tributária.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-19T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "reforma",
+    "tributos",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-19T20:05:18.715Z"
+  },
+  {
+   "id": "19z7y3p",
+   "titulo": "Atuação integrada da Alfândega de Viracopos garante entrega de insumos essenciais ao tratamento de idosa",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/atuacao-integrada-da-alfandega-de-viracopos-garante-entrega-de-insumos-essenciais-ao-tratamento-de-idosa",
+   "resumo": "Atuação integrada das equipes permitiu a liberação de remessa internacional com seringas destinadas ao tratamento de uma idosa diabética.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-19T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-19T20:05:18.715Z"
   },
   {
    "id": "1i6f5kf",
@@ -2933,67 +2998,6 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-10T11:01:42.402Z"
-  },
-  {
-   "id": "pzh3g8",
-   "titulo": "Classe C: número de famílias sem dinheiro guardado cai de 61% para 29%",
-   "link": "https://fenacon.org.br/noticias/classe-c-numero-de-familias-sem-dinheiro-guardado-cai-de-61-para-29/",
-   "resumo": "Pesquisa revela ainda que esse grupo triplicou intenção de investir A parcela de famílias da classe C sem nenhuma reserva financeira caiu de 61% (em 2016) para 29% (neste ano), conforme revelou uma pesquisa divulgada nesta segunda (6) pelo Instituto Locomotiva. Embora mais…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-10T03:33:00.000Z",
-   "categorias": [],
-   "relevancia": 2,
-   "vistaEm": "2026-11-10T11:01:42.402Z"
-  },
-  {
-   "id": "h80c0x",
-   "titulo": "Receita Federal esclarece data correta para registro de despesas no Livro Caixa do produtor rural",
-   "link": "https://fenacon.org.br/noticias/receita-federal-esclarece-data-correta-para-registro-de-despesas-no-livro-caixa-do-produtor-rural/",
-   "resumo": "Solução de consulta orienta que os lançamentos devem considerar a data do pagamento, e não a emissão da nota fiscal Por Comunicação Fenacon A Receita Federal esclareceu que, para fins de apuração do Imposto sobre a Renda da Pessoa Física (IRPF) sobre o resultado da atividade…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-10T03:22:00.000Z",
-   "categorias": [
-    "tributos",
-    "empresas"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-10T11:01:42.402Z"
-  },
-  {
-   "id": "qlcwrb",
-   "titulo": "Inscreva-se no webinar do Ibracon sobre os impactos da Reforma Tributária na Auditoria Independente",
-   "link": "https://fenacon.org.br/noticias/inscreva-se-no-webinar-do-ibracon-sobre-os-impactos-da-reforma-tributaria-na-auditoria-independente/",
-   "resumo": "Encontro gratuito e online será realizado em 24 de novembro, das 14h às 15h30 Estão abertas as inscrições para o webinar “Reforma Tributária: impactos para a Auditoria Independente”, que o Ibracon – Instituto de Auditoria Independente do Brasil realizará no dia 24 de…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-10T02:40:44.000Z",
-   "categorias": [
-    "reforma",
-    "tributos",
-    "contabil"
-   ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-10T11:01:42.402Z"
-  },
-  {
-   "id": "1m7m1p8",
-   "titulo": "CFC, Tesouro Nacional e CRCCE realizam a Semana Contábil e Fiscal para Estados e Municípios em Fortaleza",
-   "link": "https://cfc.org.br/noticias/cfc-tesouro-nacional-e-crcce-realizam-a-semana-contabil-e-fiscal-para-estados-e-municipios-em-fortaleza/",
-   "resumo": "A XXXV Secofem reúne cerca de 500 participantes até 13 de novembro, com 39 módulos de capacitação em Contabilidade Pública Um dos maiores eventos voltados para o fortalecimento da Contabilidade Pública começou nesta segunda-feira (9). A XXXV Semana Contábil e Fiscal para…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-09T21:32:15.000Z",
-   "categorias": [
-    "contabil"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-10T00:14:14.000Z"
   }
  ]
 }
