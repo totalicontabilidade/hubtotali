@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-19T20:35:17.113Z",
+ "atualizadoEm": "2026-11-19T21:35:19.810Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-19T20:35:17.113Z"
+   "ultimaVez": "2026-11-19T21:35:19.810Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-19T20:35:17.113Z"
+   "ultimaVez": "2026-11-19T21:35:19.810Z"
   },
   {
    "id": "esocial",
@@ -62,15 +62,15 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-19T20:35:17.113Z"
+   "ultimaVez": "2026-11-19T21:35:19.810Z"
   },
   {
    "id": "fazenda",
    "sigla": "MF",
    "nome": "Ministério da Fazenda",
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
-   "ok": true,
-   "quantas": 12,
+   "ok": false,
+   "erro": "This operation was aborted",
    "ultimaVez": "2026-11-19T20:35:17.113Z"
   },
   {
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-19T20:35:17.113Z"
+   "ultimaVez": "2026-11-19T21:35:19.810Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-19T20:35:17.113Z"
+   "ultimaVez": "2026-11-19T21:35:19.810Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-19T20:35:17.113Z"
+   "ultimaVez": "2026-11-19T21:35:19.810Z"
   },
   {
    "id": "camara",
@@ -107,8 +107,8 @@
    "nome": "Agência Câmara",
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
-   "quantas": 2,
-   "ultimaVez": "2026-11-19T20:35:17.113Z"
+   "quantas": 3,
+   "ultimaVez": "2026-11-19T21:35:19.810Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-19T20:35:17.113Z"
+   "ultimaVez": "2026-11-19T21:35:19.810Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-19T20:35:17.113Z"
+   "ultimaVez": "2026-11-19T21:35:19.810Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,42 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-19T20:35:17.113Z"
+   "ultimaVez": "2026-11-19T21:35:19.810Z"
   }
  ],
  "noticias": [
+  {
+   "id": "mc1ivj",
+   "titulo": "Comissão aprova fim de carência para salário-maternidade de três categorias",
+   "link": "https://www.camara.leg.br/noticias/1321151-comissao-aprova-fim-de-carencia-para-salario-maternidade-de-tres-categorias",
+   "resumo": "O projeto continua em análise na Câmara dos Deputados",
+   "fonte": "camara",
+   "fonteNome": "Agência Câmara",
+   "sigla": "Câmara",
+   "publicadoEm": "2026-11-19T21:23:00.000Z",
+   "categorias": [
+    "trabalhista",
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-19T21:35:19.810Z"
+  },
+  {
+   "id": "ja3s",
+   "titulo": "'Estamos humanizando o mundo do trabalho', diz Lula ao regulamentar o fim da escala 6x1",
+   "link": "https://agenciagov.ebc.com.br/noticias/202611/estamos-humanizanso-o-mundo-do-trabalho-diz-lula-ao-regulamentar-o-fim-da-escala-6x1",
+   "resumo": "Medida regulamenta a Emenda Constitucional nº 141/2026, estabelece duas folgas semanais sem redução salarial e prevê jornada máxima de 40 horas semanais a partir de dezembro de 2027",
+   "fonte": "govbr",
+   "fonteNome": "Agência Gov (governo federal)",
+   "sigla": "Gov",
+   "publicadoEm": "2026-11-19T21:00:00.000Z",
+   "categorias": [
+    "trabalhista",
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-19T17:05:28.585Z"
+  },
   {
    "id": "1x6pnc6",
    "titulo": "Especialistas debatem perspectivas para 2027 em etapa da Reforma Tributária pelo Brasil no Rio Grande do Sul",
@@ -218,22 +250,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-19T18:35:20.328Z"
-  },
-  {
-   "id": "ja3s",
-   "titulo": "'Estamos humanizando o mundo do trabalho', diz Lula ao regulamentar o fim da escala 6x1",
-   "link": "https://agenciagov.ebc.com.br/noticias/202611/estamos-humanizanso-o-mundo-do-trabalho-diz-lula-ao-regulamentar-o-fim-da-escala-6x1",
-   "resumo": "Medida regulamenta a Emenda Constitucional nº 141/2026, estabelece duas folgas semanais sem redução salarial e prevê jornada máxima de 40 horas semanais a partir de dezembro de 2027",
-   "fonte": "govbr",
-   "fonteNome": "Agência Gov (governo federal)",
-   "sigla": "Gov",
-   "publicadoEm": "2026-11-19T16:39:00.000Z",
-   "categorias": [
-    "trabalhista",
-    "legislacao"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-19T17:05:28.585Z"
   },
   {
    "id": "ud341v",
@@ -2978,23 +2994,6 @@
    "publicadoEm": "2026-11-10T12:30:09.456Z",
    "semHora": true,
    "categorias": [
-    "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-10T11:56:06.122Z"
-  },
-  {
-   "id": "1el94bm",
-   "titulo": "Reforma Tributária: Atualização do Ambiente Beta da DeRE",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/reforma-tributaria-atualizacao-do-ambiente-beta-da-dere",
-   "resumo": "A atualização será realizada sem interrupção dos serviços.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-10T12:30:09.456Z",
-   "semHora": true,
-   "categorias": [
-    "reforma",
     "tributos"
    ],
    "relevancia": 3,
