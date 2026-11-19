@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-19T10:05:20.731Z",
+ "atualizadoEm": "2026-11-19T11:35:20.188Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-19T10:05:20.731Z"
+   "ultimaVez": "2026-11-19T11:35:20.188Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-19T10:05:20.731Z"
+   "ultimaVez": "2026-11-19T11:35:20.188Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-19T10:05:20.731Z"
+   "ultimaVez": "2026-11-19T11:35:20.188Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 11,
-   "ultimaVez": "2026-11-19T10:05:20.731Z"
+   "ultimaVez": "2026-11-19T11:35:20.188Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-19T10:05:20.731Z"
+   "ultimaVez": "2026-11-19T11:35:20.188Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-19T10:05:20.731Z"
+   "ultimaVez": "2026-11-19T11:35:20.188Z"
   },
   {
    "id": "sefaz-se",
@@ -97,9 +97,9 @@
    "nome": "Secretaria da Fazenda de Sergipe",
    "site": "https://www.sefaz.se.gov.br/",
    "ok": true,
-   "quantas": 4,
+   "quantas": 5,
    "via": "ponte",
-   "ultimaVez": "2026-11-19T10:05:20.731Z"
+   "ultimaVez": "2026-11-19T11:35:20.188Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-19T10:05:20.731Z"
+   "ultimaVez": "2026-11-19T11:35:20.188Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-19T10:05:20.731Z"
+   "ultimaVez": "2026-11-19T11:35:20.188Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 5,
-   "ultimaVez": "2026-11-19T10:05:20.731Z"
+   "ultimaVez": "2026-11-19T11:35:20.188Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,25 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-19T10:05:20.731Z"
+   "ultimaVez": "2026-11-19T11:35:20.188Z"
   }
  ],
  "noticias": [
+  {
+   "id": "ud341u",
+   "titulo": "Operação Foco Fiscal da Sefaz recupera quase R$ 400 mil para os cofres de Sergipe",
+   "link": "https://www.sefaz.se.gov.br/Lists/Noticias/DispForm.aspx?ID=2883",
+   "resumo": "Title: Operação Foco Fiscal da Sefaz recupera quase R$ 400 mil para os cofres de Sergipe Publicacao: 19/11/2026 08:30 Foto: https://www.sefaz.se.gov.br/Imagens/noticias/19-11-2026/1.jpg Visibilidade: Intranet, Internet",
+   "fonte": "sefaz-se",
+   "fonteNome": "Secretaria da Fazenda de Sergipe",
+   "sigla": "SEFAZ/SE",
+   "publicadoEm": "2026-11-19T11:35:04.000Z",
+   "categorias": [
+    "sergipe"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-19T11:35:20.188Z"
+  },
   {
    "id": "p42bci",
    "titulo": "Senado pede explicações a TCU sobre alíquota de 11,3% da CBS",
@@ -2972,22 +2987,6 @@
    "titulo": "Em seis dias, Operação Fronteira Receita Federal apreendeu mais de 3,5 toneladas de drogas",
    "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/em-seis-dias-operacao-fronteira-receita-federal-apreendeu-mais-de-3-5-toneladas-de-drogas",
    "resumo": "Mais de 60 pessoas já foram presas em ações conjuntas com órgãos de segurança e fiscalização em todo o país.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-09T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-10T00:14:14.000Z"
-  },
-  {
-   "id": "s9l9xo",
-   "titulo": "Operação Fronteira: Receita Federal apreende anabolizantes, cabelo humano e mais de 12 kg de drogas em Viracopos",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-receita-federal-apreende-anabolizantes-cabelo-humano-e-mais-de-12-kg-de-drogas-em-viracopos",
-   "resumo": "As encomendas vieram dos Estados Unidos e seguiam para diferentes destinos no Brasil.",
    "fonte": "receita",
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
