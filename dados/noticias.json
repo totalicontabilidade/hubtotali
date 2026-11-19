@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-19T18:56:15.853Z",
+ "atualizadoEm": "2026-11-19T19:05:18.092Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-19T18:56:15.853Z"
+   "ultimaVez": "2026-11-19T19:05:18.092Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-19T18:56:15.853Z"
+   "ultimaVez": "2026-11-19T19:05:18.092Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-19T18:56:15.853Z"
+   "ultimaVez": "2026-11-19T19:05:18.092Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 12,
-   "ultimaVez": "2026-11-19T18:56:15.853Z"
+   "ultimaVez": "2026-11-19T19:05:18.092Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-19T18:56:15.853Z"
+   "ultimaVez": "2026-11-19T19:05:18.092Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-19T18:56:15.853Z"
+   "ultimaVez": "2026-11-19T19:05:18.092Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-19T18:56:15.853Z"
+   "ultimaVez": "2026-11-19T19:05:18.092Z"
   },
   {
    "id": "camara",
@@ -107,8 +107,8 @@
    "nome": "Agência Câmara",
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-19T18:56:15.853Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-19T19:05:18.092Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-19T18:56:15.853Z"
+   "ultimaVez": "2026-11-19T19:05:18.092Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 5,
-   "ultimaVez": "2026-11-19T18:56:15.853Z"
+   "ultimaVez": "2026-11-19T19:05:18.092Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-19T18:56:15.853Z"
+   "ultimaVez": "2026-11-19T19:05:18.092Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1c3r5p9",
+   "titulo": "Comissão debate participação das mulheres na previdência complementar; participe",
+   "link": "https://www.camara.leg.br/noticias/1320986-comissao-debate-participacao-das-mulheres-na-previdencia-complementar-participe",
+   "resumo": "Audiência pública será realizada na terça-feira (24), às 10 horas, com participação do público",
+   "fonte": "camara",
+   "fonteNome": "Agência Câmara",
+   "sigla": "Câmara",
+   "publicadoEm": "2026-11-19T18:54:00.000Z",
+   "categorias": [
+    "legislacao",
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-19T19:05:18.092Z"
+  },
   {
    "id": "14u07qj",
    "titulo": "Comissão especial pode votar parecer sobre ampliação do limite de faturamento para o MEI",
@@ -2975,21 +2991,6 @@
    "publicadoEm": "2026-11-09T21:32:15.000Z",
    "categorias": [
     "contabil"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-10T00:14:14.000Z"
-  },
-  {
-   "id": "bxe9mk",
-   "titulo": "Confira o calendário de pagamento do IPVA de 2027 em São Paulo",
-   "link": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-11/confira-o-calendario-de-pagamento-do-ipva-de-2027-em-sao-paulo",
-   "resumo": "O Governo do Estado de São Paulo divulgou nesta segunda-feira (9) o calendário de pagamento do Imposto sobre a Propriedade de Veículos Automotores (IPVA) de 2027. Em janeiro, os contribuintes poderão quitar o imposto em cota única, com 3% de desconto , ou optar pelo…",
-   "fonte": "ebc",
-   "fonteNome": "Agência Brasil (Economia)",
-   "sigla": "EBC",
-   "publicadoEm": "2026-11-09T15:57:00.000Z",
-   "categorias": [
-    "tributos"
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-10T00:14:14.000Z"
