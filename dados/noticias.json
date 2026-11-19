@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-19T01:02:17.751Z",
+ "atualizadoEm": "2026-11-19T10:05:20.731Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-19T01:02:17.751Z"
+   "ultimaVez": "2026-11-19T10:05:20.731Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-19T01:02:17.751Z"
+   "ultimaVez": "2026-11-19T10:05:20.731Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-19T01:02:17.751Z"
+   "ultimaVez": "2026-11-19T10:05:20.731Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 11,
-   "ultimaVez": "2026-11-19T01:02:17.751Z"
+   "ultimaVez": "2026-11-19T10:05:20.731Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-19T01:02:17.751Z"
+   "ultimaVez": "2026-11-19T10:05:20.731Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-19T01:02:17.751Z"
+   "ultimaVez": "2026-11-19T10:05:20.731Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-19T01:02:17.751Z"
+   "ultimaVez": "2026-11-19T10:05:20.731Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-19T01:02:17.751Z"
+   "ultimaVez": "2026-11-19T10:05:20.731Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-19T01:02:17.751Z"
+   "ultimaVez": "2026-11-19T10:05:20.731Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 5,
-   "ultimaVez": "2026-11-19T01:02:17.751Z"
+   "ultimaVez": "2026-11-19T10:05:20.731Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,120 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-19T01:02:17.751Z"
+   "ultimaVez": "2026-11-19T10:05:20.731Z"
   }
  ],
  "noticias": [
+  {
+   "id": "p42bci",
+   "titulo": "Senado pede explicações a TCU sobre alíquota de 11,3% da CBS",
+   "link": "https://fenacon.org.br/reforma-tributaria/senado-pede-explicacoes-a-tcu-sobre-aliquota-de-113-da-cbs/",
+   "resumo": "CAE quer obter cálculos; especialistas defendem percentual menor Após dois dias de audiência pública, a Comissão de Assuntos Econômicos (CAE) do Senado aprovou nesta quarta-feira (18) um requerimento para pedir explicações ao Tribunal de Contas da União (TCU) sobre a alíquota…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-19T06:14:10.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-19T10:05:20.731Z"
+  },
+  {
+   "id": "13d4nn5",
+   "titulo": "Fenacon participa de reunião da Diretoria da CNC com pautas estratégicas para o setor produtivo",
+   "link": "https://fenacon.org.br/noticias/fenacon-participa-de-reuniao-da-diretoria-da-cnc-com-pautas-estrategicas-para-o-setor-produtivo/",
+   "resumo": "Encontro em Brasília reuniu lideranças empresariais e parlamentares para debater o ambiente de negócios, a agenda legislativa, a qualificação profissional e iniciativas de interesse do setor O presidente da Fenacon, Reynaldo Lima Jr., participou, nesta quarta-feira (18), da…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-19T06:04:32.000Z",
+   "categorias": [],
+   "relevancia": 2,
+   "vistaEm": "2026-11-19T10:05:20.731Z"
+  },
+  {
+   "id": "vfbcok",
+   "titulo": "Reforma Tributária pelo Brasil promove debate sobre tecnologia e o papel do contador em São Luís",
+   "link": "https://fenacon.org.br/noticias/reforma-tributaria-pelo-brasil-promove-debate-sobre-tecnologia-e-o-papel-do-contador-em-sao-luis/",
+   "resumo": "Seminário realizado na OAB/MA reuniu profissionais das áreas contábil, fiscal e jurídica para discutir os impactos da Reforma Tributária e as oportunidades para a profissão São Luís (MA) recebeu, nesta terça-feira (17), mais uma etapa do projeto Reforma Tributária pelo…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-19T05:24:12.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-19T10:05:20.731Z"
+  },
+  {
+   "id": "u86t8v",
+   "titulo": "Seminário reúne profissionais da contabilidade no Vale do Taquari (RS)",
+   "link": "https://fenacon.org.br/noticias/seminario-reune-profissionais-da-contabilidade-no-vale-do-taquari-rs/",
+   "resumo": "Evento contou com cinco palestras de especialistas sobre os impactos, desafios e oportunidades do novo sistema tributário para profissionais, escritórios e empresas Na última quinta-feira (12), a região foi palco de mais uma edição do projeto, reunindo profissionais da…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-19T05:00:16.000Z",
+   "categorias": [
+    "tributos",
+    "contabil"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-19T10:05:20.731Z"
+  },
+  {
+   "id": "vno32w",
+   "titulo": "Palmas reúne 150 especialistas e empresários para debater os impactos da Reforma",
+   "link": "https://fenacon.org.br/noticias/palmas-reune-150-especialistas-e-empresarios-para-debater-os-impactos-da-reforma/",
+   "resumo": "Seminário Reforma Tributária pelo Brasil abordou o novo papel da contabilidade, os reflexos tributários no mercado imobiliário, mudanças na Nota Fiscal e os impactos práticos para as empresas, com debate técnico para esclarecimento de dúvidas Em Tocantins também teve Reforma…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-19T04:52:53.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "contabil",
+    "empresas"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-19T10:05:20.731Z"
+  },
+  {
+   "id": "8fk25i",
+   "titulo": "Senado completa votação, e ajuste fiscal segue para a Câmara",
+   "link": "https://fenacon.org.br/noticias/senado-completa-votacao-e-ajuste-fiscal-segue-para-a-camara/",
+   "resumo": "O Senado completou, nesta quarta-feira (18), a votação do projeto do ajuste fiscal (PLP 299/2026). O texto principal já havia sido aprovado na última quinta-feira (12). A matéria, aprovada em turno suplementar com 69 votos a favor e dois contrários, segue agora para a análise…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-19T03:36:00.000Z",
+   "categorias": [
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-19T10:05:20.731Z"
+  },
+  {
+   "id": "bil4fi",
+   "titulo": "Projeto prevê parcelamento de dívidas e perdão de débitos para entidades sem fins lucrativos",
+   "link": "https://fenacon.org.br/noticias/projeto-preve-parcelamento-de-dividas-e-perdao-de-debitos-para-entidades-sem-fins-lucrativos/",
+   "resumo": "Proposta prevê descontos de até 100% em juros e multas e parcelamento em até 240 meses O Projeto de Lei 3088/26 cria o Programa Nacional de Regularização e Fortalecimento das Entidades do Terceiro Setor, chamado Refis Social do Terceiro Setor. A proposta prevê descontos de…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-19T03:28:00.000Z",
+   "categorias": [
+    "tributos",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-19T10:05:20.731Z"
+  },
   {
    "id": "180u26q",
    "titulo": "Debate na CAE aponta formas de reduzir alíquota de novo tributo, a CBS",
@@ -190,22 +300,6 @@
    "vistaEm": "2026-11-18T21:05:20.638Z"
   },
   {
-   "id": "sq4d5d",
-   "titulo": "Projeto prevê parcelamento de dívidas e perdão de débitos para entidades sem fins lucrativos",
-   "link": "https://www.camara.leg.br/noticias/1311401-projeto-preve-parcelamento-de-dividas-e-perdao-de-debitos-para-entidades-sem-fins-lucrativos",
-   "resumo": "Proposta prevê descontos de até 100% em juros e multas e parcelamento em até 240 meses",
-   "fonte": "camara",
-   "fonteNome": "Agência Câmara",
-   "sigla": "Câmara",
-   "publicadoEm": "2026-11-18T20:54:00.000Z",
-   "categorias": [
-    "legislacao",
-    "tributos"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-18T21:05:20.638Z"
-  },
-  {
    "id": "t8z95u",
    "titulo": "CTFC vai apurar possíveis fraudes na Previdência e no crédito consignado",
    "link": "https://www12.senado.leg.br/noticias/materias/2026/11/18/ctfc-vai-apurar-possiveis-fraudes-na-previdencia-e-no-credito-consignado",
@@ -232,22 +326,6 @@
    "publicadoEm": "2026-11-18T20:20:25.000Z",
    "categorias": [
     "legislacao",
-    "reforma",
-    "tributos"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-18T20:35:18.899Z"
-  },
-  {
-   "id": "ozn0nr",
-   "titulo": "Senado pede explicações a TCU sobre alíquota de 11,3% da CBS",
-   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/senado-pede-explicacoes-tcu-sobre-aliquota-de-113-da-cbs",
-   "resumo": "Após dois dias de audiência pública, a Comissão de Assuntos Econômicos (CAE) do Senado aprovou nesta quarta-feira (18) um requerimento para pedir explicações ao Tribunal de Contas da União (TCU) sobre a alíquota de referência de 11,3% da Contribuição sobre Bens e Serviços…",
-   "fonte": "ebc",
-   "fonteNome": "Agência Brasil (Economia)",
-   "sigla": "EBC",
-   "publicadoEm": "2026-11-18T20:07:00.000Z",
-   "categorias": [
     "reforma",
     "tributos"
    ],
@@ -2920,86 +2998,6 @@
    ],
    "relevancia": 1,
    "vistaEm": "2026-11-10T00:14:14.000Z"
-  },
-  {
-   "id": "cmg9bp",
-   "titulo": "Receita Federal divulga portaria para concurso público das carreiras tributárias",
-   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/receita-federal-divulga-portaria-para-concurso-publico-das-carreiras-tributarias",
-   "resumo": "Comissão e grupo de trabalho são criados para fortalecer a gestão do concurso público e aperfeiçoar o conteúdo das provas",
-   "fonte": "fazenda",
-   "fonteNome": "Ministério da Fazenda",
-   "sigla": "MF",
-   "publicadoEm": "2026-11-09T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos",
-    "trabalhista",
-    "legislacao"
-   ],
-   "relevancia": 0,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "i3upxc",
-   "titulo": "Mercado eleva projeção da Selic para 13,75% em 2026",
-   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/mercado-eleva-projecao-da-selic-para-1375-em-2026",
-   "resumo": "O mercado financeiro elevou de 13,5% para 13,75% ao ano a projeção para a taxa básica de juros (Selic) ao final de 2026, segundo o Boletim Focus divulgado nesta segunda-feira (9) pelo Banco Central. Com a revisão, a expectativa dos analistas passou a coincidir com o atual…",
-   "fonte": "ebc",
-   "fonteNome": "Agência Brasil (Economia)",
-   "sigla": "EBC",
-   "publicadoEm": "2026-11-09T13:26:00.000Z",
-   "categorias": [],
-   "relevancia": 1,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "1ev4njd",
-   "titulo": "CFC abre audiência pública para revisão de quatro normas de auditoria",
-   "link": "https://cfc.org.br/noticias/cfc-abre-audiencia-publica-para-revisao-de-quatro-normas-de-auditoria/",
-   "resumo": "O Conselho Federal de Contabilidade (CFC) abriu audiência pública para receber contribuições sobre a revisão de quatro Normas Brasileiras de Contabilidade (NBCs) relacionadas à auditoria e a outros trabalhos contábeis. As propostas, reunidas nas Revisões NBCs nº 50 a 53,…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-09T12:42:39.000Z",
-   "categorias": [
-    "trabalhista",
-    "contabil"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "11mzlz5",
-   "titulo": "Artesão de baixa renda pode se tornar segurado especial da Previdência",
-   "link": "https://www12.senado.leg.br/noticias/audios/2026/11/artesao-de-baixa-renda-pode-se-tornar-segurado-especial-da-previdencia",
-   "resumo": "",
-   "fonte": "senado",
-   "fonteNome": "Agência Senado",
-   "sigla": "Senado",
-   "publicadoEm": "2026-11-09T12:34:36.000Z",
-   "categorias": [
-    "legislacao",
-    "trabalhista"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "vabqa6",
-   "titulo": "Conquistou a aprovação no Exame de Suficiência? Confira os próximos passos para exercer a profissão",
-   "link": "https://cfc.org.br/noticias/conquistou-a-aprovacao-no-exame-de-suficiencia-confira-os-proximos-passos-para-exercer-a-profissao/",
-   "resumo": "O registro no Conselho Regional de Contabilidade é necessário para exercer a profissão e permite aproveitar oportunidades no mercado de trabalho A aprovação na segunda edição de 2026 do Exame de Suficiência representa uma conquista importante para quem deseja ingressar na…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-09T12:03:04.000Z",
-   "categorias": [
-    "trabalhista",
-    "contabil",
-    "legislacao"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
   }
  ]
 }
