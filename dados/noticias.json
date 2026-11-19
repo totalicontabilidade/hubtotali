@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-19T18:35:20.328Z",
+ "atualizadoEm": "2026-11-19T18:56:15.853Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-19T18:35:20.328Z"
+   "ultimaVez": "2026-11-19T18:56:15.853Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-19T18:35:20.328Z"
+   "ultimaVez": "2026-11-19T18:56:15.853Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-19T18:35:20.328Z"
+   "ultimaVez": "2026-11-19T18:56:15.853Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 12,
-   "ultimaVez": "2026-11-19T18:35:20.328Z"
+   "ultimaVez": "2026-11-19T18:56:15.853Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-19T18:35:20.328Z"
+   "ultimaVez": "2026-11-19T18:56:15.853Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-19T18:35:20.328Z"
+   "ultimaVez": "2026-11-19T18:56:15.853Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-19T18:35:20.328Z"
+   "ultimaVez": "2026-11-19T18:56:15.853Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-19T18:35:20.328Z"
+   "ultimaVez": "2026-11-19T18:56:15.853Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-19T18:35:20.328Z"
+   "ultimaVez": "2026-11-19T18:56:15.853Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 5,
-   "ultimaVez": "2026-11-19T18:35:20.328Z"
+   "ultimaVez": "2026-11-19T18:56:15.853Z"
   },
   {
    "id": "govbr",
@@ -135,7 +135,7 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-19T18:35:20.328Z"
+   "ultimaVez": "2026-11-19T18:56:15.853Z"
   }
  ],
  "noticias": [
@@ -374,6 +374,21 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-19T01:02:17.751Z"
+  },
+  {
+   "id": "b77jgp",
+   "titulo": "Prazo para contribuir com normas contábeis termina nesta quinta-feira (19)",
+   "link": "https://cfc.org.br/noticias/prazo-para-contribuir-com-normas-contabeis-termina-nesta-quinta-feira-19/",
+   "resumo": "Termina amanhã, 19 de novembro, o prazo para que profissionais de contabilidade e demais interessados enviem contribuições às minutas em audiência pública da Revisão da Norma Brasileira de Contabilidade (NBC) 50 a 53 e do Pronunciamento Técnico CPC 52 - Divulgações Para…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-18T21:39:00.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-19T18:56:15.853Z"
   },
   {
    "id": "aadlry",
@@ -2978,21 +2993,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-10T00:14:14.000Z"
-  },
-  {
-   "id": "d2y2fx",
-   "titulo": "CFC, CPC e CVM abrem consulta pública sobre novas regras para informações financeiras",
-   "link": "https://cfc.org.br/noticias/cfc-cpc-e-cvm-abrem-consulta-publica-sobre-novas-regras-para-informacoes-financeiras/",
-   "resumo": "Profissionais da contabilidade e demais interessados têm até 7 de dezembro de 2026 para apresentar sugestões à proposta de revisão da Orientação Técnica OCPC 06 (R1), que trata da elaboração e apresentação de informações financeiras pro forma. A consulta pública conjunta é…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-09T15:38:49.000Z",
-   "categorias": [
-    "contabil"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
   }
  ]
 }
