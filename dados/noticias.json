@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-18T22:35:20.704Z",
+ "atualizadoEm": "2026-11-19T01:02:17.751Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T22:35:20.704Z"
+   "ultimaVez": "2026-11-19T01:02:17.751Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-18T22:35:20.704Z"
+   "ultimaVez": "2026-11-19T01:02:17.751Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-18T22:35:20.704Z"
+   "ultimaVez": "2026-11-19T01:02:17.751Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 11,
-   "ultimaVez": "2026-11-18T22:35:20.704Z"
+   "ultimaVez": "2026-11-19T01:02:17.751Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-18T22:35:20.704Z"
+   "ultimaVez": "2026-11-19T01:02:17.751Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-18T22:35:20.704Z"
+   "ultimaVez": "2026-11-19T01:02:17.751Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-18T22:35:20.704Z"
+   "ultimaVez": "2026-11-19T01:02:17.751Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-18T22:35:20.704Z"
+   "ultimaVez": "2026-11-19T01:02:17.751Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 2,
-   "ultimaVez": "2026-11-18T22:35:20.704Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-19T01:02:17.751Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 5,
-   "ultimaVez": "2026-11-18T22:35:20.704Z"
+   "ultimaVez": "2026-11-19T01:02:17.751Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,27 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-18T22:35:20.704Z"
+   "ultimaVez": "2026-11-19T01:02:17.751Z"
   }
  ],
  "noticias": [
+  {
+   "id": "180u26q",
+   "titulo": "Debate na CAE aponta formas de reduzir alíquota de novo tributo, a CBS",
+   "link": "https://www12.senado.leg.br/noticias/audios/2026/11/debate-na-cae-aponta-formas-de-reduzir-aliquota-de-novo-tributo-a-cbs",
+   "resumo": "",
+   "fonte": "senado",
+   "fonteNome": "Agência Senado",
+   "sigla": "Senado",
+   "publicadoEm": "2026-11-18T22:36:00.000Z",
+   "categorias": [
+    "legislacao",
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-19T01:02:17.751Z"
+  },
   {
    "id": "aadlry",
    "titulo": "No Senado, CFC defende transparência no cálculo da alíquota da CBS",
@@ -2980,22 +2997,6 @@
     "trabalhista",
     "contabil",
     "legislacao"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "1b4brfw",
-   "titulo": "Conheça as regras sobre perdão de dívidas tributárias para MEIs",
-   "link": "https://fenacon.org.br/noticias/conheca-as-regras-sobre-perdao-de-dividas-tributarias-para-meis/",
-   "resumo": "Procuradoria-Geral da Fazenda Nacional detalha as regras sobre o perdão total das dívidas da contribuição mensal dos MEIs. O benefício será aplicado aos débitos federais, mas não aos impostos estaduais e municipais A Procuradoria-Geral da Fazenda Nacional (PGFN), em conjunto…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-09T05:19:38.000Z",
-   "categorias": [
-    "tributos",
-    "trabalhista"
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-09T15:43:00.130Z"
