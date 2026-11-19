@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-19T13:05:19.312Z",
+ "atualizadoEm": "2026-11-19T13:35:26.422Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-19T13:05:19.312Z"
+   "ultimaVez": "2026-11-19T13:35:26.422Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-19T13:05:19.312Z"
+   "ultimaVez": "2026-11-19T13:35:26.422Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-19T13:05:19.312Z"
+   "ultimaVez": "2026-11-19T13:35:26.422Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 11,
-   "ultimaVez": "2026-11-19T13:05:19.312Z"
+   "ultimaVez": "2026-11-19T13:35:26.422Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-19T13:05:19.312Z"
+   "ultimaVez": "2026-11-19T13:35:26.422Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-19T13:05:19.312Z"
+   "ultimaVez": "2026-11-19T13:35:26.422Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 5,
    "via": "ponte",
-   "ultimaVez": "2026-11-19T13:05:19.312Z"
+   "ultimaVez": "2026-11-19T13:35:26.422Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-19T13:05:19.312Z"
+   "ultimaVez": "2026-11-19T13:35:26.422Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-19T13:05:19.312Z"
+   "ultimaVez": "2026-11-19T13:35:26.422Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 5,
-   "ultimaVez": "2026-11-19T13:05:19.312Z"
+   "ultimaVez": "2026-11-19T13:35:26.422Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,43 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-19T13:05:19.312Z"
+   "ultimaVez": "2026-11-19T13:35:26.422Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1i6f5kf",
+   "titulo": "RFB aplica perdimento de carga de ouro avaliada em R$ 46,5 milhões após identificar fraudes em exportações",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/rfb-aplica-perdimento-de-carga-de-ouro-avaliada-em-r-46-5-milhoes-apos-identificar-fraudes-em-exportacoes",
+   "resumo": "Procedimento conduzido pela Alfândega da Receita Federal em Brasília identificou irregularidades em operações de exportação de ouro realizadas por grupo econômico sediado em Cuiabá (MT).",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-19T13:35:28.486Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-19T13:35:26.422Z"
+  },
+  {
+   "id": "15eqluc",
+   "titulo": "Classe contábil ganha novo canal para esclarecer dúvidas sobre a Reforma Tributária",
+   "link": "https://cfc.org.br/noticias/novo-canal-de-atendimento-orienta-profissionais-da-contabilidade-sobre-a-reforma-tributaria/",
+   "resumo": "O profissional da contabilidade passa a contar com um novo canal para encaminhar dúvidas sobre a reforma tributária e acompanhar os esclarecimentos relacionados à implementação das novas regras. O Conselho Federal de Contabilidade (CFC), em parceria com a Federação Nacional…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-19T13:10:23.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-19T13:35:26.422Z"
+  },
   {
    "id": "ud341u",
    "titulo": "Operação Foco Fiscal da Sefaz recupera quase R$ 400 mil para os cofres de Sergipe",
@@ -2965,38 +2998,6 @@
    ],
    "relevancia": 1,
    "vistaEm": "2026-11-09T15:43:00.130Z"
-  },
-  {
-   "id": "10qeobw",
-   "titulo": "Operação Fronteira registra oito prisões e R$ 3 milhões em apreensões na primeira semana em Santana do Livramento (RS)",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-registra-oito-prisoes-e-r-3-milhoes-em-apreensoes-na-primeira-semana-em-santana-do-livramento-rs",
-   "resumo": "Ações da Receita Federal incluem apreensão de drogas, retenção de mercadorias e veículos e operações integradas com forças de segurança no combate aos ilícitos na fronteira com o Uruguai.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-09T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-10T00:14:14.000Z"
-  },
-  {
-   "id": "9uoxpy",
-   "titulo": "Em seis dias, Operação Fronteira Receita Federal apreendeu mais de 3,5 toneladas de drogas",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/em-seis-dias-operacao-fronteira-receita-federal-apreendeu-mais-de-3-5-toneladas-de-drogas",
-   "resumo": "Mais de 60 pessoas já foram presas em ações conjuntas com órgãos de segurança e fiscalização em todo o país.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-09T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-10T00:14:14.000Z"
   }
  ]
 }
