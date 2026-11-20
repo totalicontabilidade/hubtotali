@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-19T22:05:17.432Z",
+ "atualizadoEm": "2026-11-20T01:09:02.901Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-19T22:05:17.432Z"
+   "ultimaVez": "2026-11-20T01:09:02.901Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-19T22:05:17.432Z"
+   "ultimaVez": "2026-11-20T01:09:02.901Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-19T22:05:17.432Z"
+   "ultimaVez": "2026-11-20T01:09:02.901Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 12,
-   "ultimaVez": "2026-11-19T22:05:17.432Z"
+   "ultimaVez": "2026-11-20T01:09:02.901Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-19T22:05:17.432Z"
+   "ultimaVez": "2026-11-20T01:09:02.901Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-19T22:05:17.432Z"
+   "ultimaVez": "2026-11-20T01:09:02.901Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-19T22:05:17.432Z"
+   "ultimaVez": "2026-11-20T01:09:02.901Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-19T22:05:17.432Z"
+   "ultimaVez": "2026-11-20T01:09:02.901Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-19T22:05:17.432Z"
+   "ultimaVez": "2026-11-20T01:09:02.901Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 4,
-   "ultimaVez": "2026-11-19T22:05:17.432Z"
+   "quantas": 3,
+   "ultimaVez": "2026-11-20T01:09:02.901Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,25 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-19T22:05:17.432Z"
+   "ultimaVez": "2026-11-20T01:09:02.901Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1qwu0fk",
+   "titulo": "CMN amplia controle sobre recolhimentos de tributos dos bancos",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/cmn-amplia-controle-sobre-recolhimentos-de-tributos-dos-bancos",
+   "resumo": "O Conselho Monetário Nacional (CMN) aprovou uma nova regra para ampliar o acompanhamento das informações tributárias das instituições financeiras que operam no Brasil. A partir de 1º de janeiro de 2028, bancos e demais entidades autorizadas pelo Banco Central (BC) deverão…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-19T23:33:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-20T01:09:02.901Z"
+  },
   {
    "id": "mc1ivj",
    "titulo": "Comissão aprova fim de carência para salário-maternidade de três categorias",
@@ -2982,22 +2997,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-10T13:54:36.165Z"
-  },
-  {
-   "id": "19atsnu",
-   "titulo": "Receita Federal participa da Operação Recycling",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-participa-da-operacao-recycling",
-   "resumo": "Investigação conjunta da Receita Federal e da Polícia Federal identificou estrutura suspeita de lavagem de dinheiro oriunda do tráfico internacional de drogas que operava no litoral catarinense.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-10T12:30:09.456Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-10T11:56:06.122Z"
   }
  ]
 }
