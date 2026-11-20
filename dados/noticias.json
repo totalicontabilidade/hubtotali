@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-20T13:35:19.519Z",
+ "atualizadoEm": "2026-11-20T14:35:17.731Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-20T13:35:19.519Z"
+   "ultimaVez": "2026-11-20T14:35:17.731Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-20T13:35:19.519Z"
+   "ultimaVez": "2026-11-20T14:35:17.731Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-20T13:35:19.519Z"
+   "ultimaVez": "2026-11-20T14:35:17.731Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 12,
-   "ultimaVez": "2026-11-20T13:35:19.519Z"
+   "ultimaVez": "2026-11-20T14:35:17.731Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-20T13:35:19.519Z"
+   "ultimaVez": "2026-11-20T14:35:17.731Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-20T13:35:19.519Z"
+   "ultimaVez": "2026-11-20T14:35:17.731Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-20T13:35:19.519Z"
+   "ultimaVez": "2026-11-20T14:35:17.731Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-20T13:35:19.519Z"
+   "ultimaVez": "2026-11-20T14:35:17.731Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-20T13:35:19.519Z"
+   "ultimaVez": "2026-11-20T14:35:17.731Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-20T13:35:19.519Z"
+   "ultimaVez": "2026-11-20T14:35:17.731Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,27 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-20T13:35:19.519Z"
+   "ultimaVez": "2026-11-20T14:35:17.731Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1smfevf",
+   "titulo": "Receita Federal amplia acesso ao Ambiente de Produção Restrita do Piloto da CBS",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-amplia-acesso-ao-ambiente-de-producao-restrita-do-piloto-da-cbs",
+   "resumo": "Empresas de todo o Brasil poderão acessar o ambiente Piloto e conhecer as funcionalidades desenvolvidas para a Contribuição sobre Bens e Serviços (CBS).",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-20T14:35:19.278Z",
+   "semHora": true,
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-20T14:35:17.731Z"
+  },
   {
    "id": "1kwjggv",
    "titulo": "Brasil tem 15,8 milhões de pessoas negras à frente do empreendedorismo",
@@ -2980,19 +2997,6 @@
    ],
    "relevancia": 1,
    "vistaEm": "2026-11-10T19:05:18.124Z"
-  },
-  {
-   "id": "shzo1b",
-   "titulo": "Ata do Copom indica que desaceleração da economia não conteve inflação",
-   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/ata-do-copom-indica-que-desaceleracao-da-economia-nao-conteve-inflacao",
-   "resumo": "A ata do Comitê de Política Monetária (Copom) divulgada nesta terça-feira (10) indica que a atividade econômica brasileira dá sinais mais claros de desaceleração, enquanto a inflação continua pressionada. Nesse cenário, o Banco Central reforçou a avaliação de que a Selic…",
-   "fonte": "ebc",
-   "fonteNome": "Agência Brasil (Economia)",
-   "sigla": "EBC",
-   "publicadoEm": "2026-11-10T14:20:00.000Z",
-   "categorias": [],
-   "relevancia": 1,
-   "vistaEm": "2026-11-10T15:05:14.972Z"
   }
  ]
 }
