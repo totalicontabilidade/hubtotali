@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-20T13:05:18.320Z",
+ "atualizadoEm": "2026-11-20T13:35:19.519Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-20T13:05:18.320Z"
+   "ultimaVez": "2026-11-20T13:35:19.519Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 381,
-   "ultimaVez": "2026-11-20T13:05:18.320Z"
+   "ultimaVez": "2026-11-20T13:35:19.519Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-20T13:05:18.320Z"
+   "ultimaVez": "2026-11-20T13:35:19.519Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 12,
-   "ultimaVez": "2026-11-20T13:05:18.320Z"
+   "ultimaVez": "2026-11-20T13:35:19.519Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-20T13:05:18.320Z"
+   "ultimaVez": "2026-11-20T13:35:19.519Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-20T13:05:18.320Z"
+   "ultimaVez": "2026-11-20T13:35:19.519Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-20T13:05:18.320Z"
+   "ultimaVez": "2026-11-20T13:35:19.519Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-20T13:05:18.320Z"
+   "ultimaVez": "2026-11-20T13:35:19.519Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-20T13:05:18.320Z"
+   "ultimaVez": "2026-11-20T13:35:19.519Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-20T13:05:18.320Z"
+   "ultimaVez": "2026-11-20T13:35:19.519Z"
   },
   {
    "id": "govbr",
@@ -134,11 +134,24 @@
    "nome": "Agência Gov (governo federal)",
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
-   "quantas": 0,
-   "ultimaVez": "2026-11-20T13:05:18.320Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-20T13:35:19.519Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1kwjggv",
+   "titulo": "Brasil tem 15,8 milhões de pessoas negras à frente do empreendedorismo",
+   "link": "https://agenciagov.ebc.com.br/noticias/202611/brasil-tem-15-8-milhoes-de-empreendedores-negros-a-frente-de-pequenos-negocios",
+   "resumo": "No Dia da Consciência Negra, o Governo Federal destaca iniciativas de qualificação, geração de renda e valorização da cultura afro-brasileira e dos saberes indígenas",
+   "fonte": "govbr",
+   "fonteNome": "Agência Gov (governo federal)",
+   "sigla": "Gov",
+   "publicadoEm": "2026-11-20T13:15:00.000Z",
+   "categorias": [],
+   "relevancia": 1,
+   "vistaEm": "2026-11-20T13:35:19.519Z"
+  },
   {
    "id": "1qwu0fk",
    "titulo": "CMN amplia controle sobre recolhimentos de tributos dos bancos",
@@ -2980,23 +2993,6 @@
    "categorias": [],
    "relevancia": 1,
    "vistaEm": "2026-11-10T15:05:14.972Z"
-  },
-  {
-   "id": "lmph4l",
-   "titulo": "Governo Federal prorroga até 9 de dezembro a desoneração da gasolina e do etanol",
-   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/governo-federal-prorroga-ate-9-de-dezembro-a-desoneracao-da-gasolina-e-do-etanol",
-   "resumo": "Decreto mantém zerados por mais 30 dias os tributos federais sobre a gasolina e etanol hidratado. Medida busca conter os efeitos da alta dos preços internacionais do petróleo sobre os combustíveis e proteger os consumidores brasileiros",
-   "fonte": "fazenda",
-   "fonteNome": "Ministério da Fazenda",
-   "sigla": "MF",
-   "publicadoEm": "2026-11-10T13:54:36.497Z",
-   "semHora": true,
-   "categorias": [
-    "tributos",
-    "legislacao"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-10T13:54:36.165Z"
   }
  ]
 }
