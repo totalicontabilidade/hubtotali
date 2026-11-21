@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-20T20:35:20.549Z",
+ "atualizadoEm": "2026-11-21T18:00:04.911Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,15 +44,15 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-20T20:35:20.549Z"
+   "ultimaVez": "2026-11-21T18:00:04.911Z"
   },
   {
    "id": "simples",
    "sigla": "SN",
    "nome": "Simples Nacional",
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
-   "ok": true,
-   "quantas": 381,
+   "ok": false,
+   "erro": "fetch failed",
    "ultimaVez": "2026-11-20T20:35:20.549Z"
   },
   {
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-20T20:35:20.549Z"
+   "ultimaVez": "2026-11-21T18:00:04.911Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 12,
-   "ultimaVez": "2026-11-20T20:35:20.549Z"
+   "ultimaVez": "2026-11-21T18:00:04.911Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-20T20:35:20.549Z"
+   "ultimaVez": "2026-11-21T18:00:04.911Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-20T20:35:20.549Z"
+   "ultimaVez": "2026-11-21T18:00:04.911Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-20T20:35:20.549Z"
+   "ultimaVez": "2026-11-21T18:00:04.911Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-20T20:35:20.549Z"
+   "ultimaVez": "2026-11-21T18:00:04.911Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-20T20:35:20.549Z"
+   "ultimaVez": "2026-11-21T18:00:04.911Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-20T20:35:20.549Z"
+   "ultimaVez": "2026-11-21T18:00:04.911Z"
   },
   {
    "id": "govbr",
@@ -134,11 +134,27 @@
    "nome": "Agência Gov (governo federal)",
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-20T20:35:20.549Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-21T18:00:04.911Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1g3y381",
+   "titulo": "Programa Semana Gov destaca o início da escala 5x2 e a devolução de impostos",
+   "link": "https://agenciagov.ebc.com.br/noticias/202611/programa-semana-gov-destaca-o-inicio-da-escala-5x2-e-a-devolucao-de-impostos",
+   "resumo": "Programa do Canal Gov/EBC traz o resumo das principais ações do Governo do Brasil. Além do fim da escala 6X1, edição fala do cashback, mecanismo de devolução de impostos que começará a vigorar no ano que vem com a Reforma Tributária",
+   "fonte": "govbr",
+   "fonteNome": "Agência Gov (governo federal)",
+   "sigla": "Gov",
+   "publicadoEm": "2026-11-21T12:15:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-21T18:00:04.911Z"
+  },
   {
    "id": "1smfevf",
    "titulo": "Receita Federal amplia acesso ao Ambiente de Produção Restrita do Piloto da CBS",
@@ -2971,22 +2987,6 @@
    "titulo": "Operação Fronteira Receita Federal supera R$ 139 milhões em apreensões em Mato Grosso do Sul",
    "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-receita-federal-supera-r-139-milhoes-em-apreensoes-em-mato-grosso-do-sul",
    "resumo": "Em sua primeira semana, a Operação Fronteira Receita Federal já resultou em mais de R$ 139 milhões em apreensões e 31 prisões em Mato Grosso do Sul, reforçando o combate ao crime organizado, ao tráfico de drogas e à entrada de mercadorias irregulares no país.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-10T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-10T19:05:18.124Z"
-  },
-  {
-   "id": "11szx20",
-   "titulo": "Operação Fronteira: Receita Federal apreende 24,20 kg de haxixe e 60 ml de cocaína líquida em Viracopos",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-receita-federal-apreende-24-20-kg-de-haxixe-e-60-ml-de-cocaina-liquida-em-viracopos",
-   "resumo": "Fiscalização identificou drogas ocultas em caixas e equipamentos eletrônicos durante inspeção de remessas internacionais, com apoio de cães farejadores e análise de risco.",
    "fonte": "receita",
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
