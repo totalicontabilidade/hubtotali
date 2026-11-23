@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-23T21:05:19.742Z",
+ "atualizadoEm": "2026-11-23T21:35:19.040Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T21:05:19.742Z"
+   "ultimaVez": "2026-11-23T21:35:19.040Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-23T21:05:19.742Z"
+   "ultimaVez": "2026-11-23T21:35:19.040Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T21:05:19.742Z"
+   "ultimaVez": "2026-11-23T21:35:19.040Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 14,
-   "ultimaVez": "2026-11-23T21:05:19.742Z"
+   "ultimaVez": "2026-11-23T21:35:19.040Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-23T21:05:19.742Z"
+   "ultimaVez": "2026-11-23T21:35:19.040Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-23T21:05:19.742Z"
+   "ultimaVez": "2026-11-23T21:35:19.040Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 3,
    "via": "ponte",
-   "ultimaVez": "2026-11-23T21:05:19.742Z"
+   "ultimaVez": "2026-11-23T21:35:19.040Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-23T21:05:19.742Z"
+   "ultimaVez": "2026-11-23T21:35:19.040Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-23T21:05:19.742Z"
+   "ultimaVez": "2026-11-23T21:35:19.040Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-23T21:05:19.742Z"
+   "ultimaVez": "2026-11-23T21:35:19.040Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,27 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-23T21:05:19.742Z"
+   "ultimaVez": "2026-11-23T21:35:19.040Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1y35moi",
+   "titulo": "Fenacon e CFC disponibilizam canal para esclarecer dúvidas sobre a Reforma Tributária",
+   "link": "https://fenacon.org.br/noticias/fenacon-e-cfc-disponibilizam-canal-para-esclarecer-duvidas-sobre-a-reforma-tributaria/",
+   "resumo": "Iniciativa conjunta com a Receita Federal e o Sebrae fortalece o diálogo com os profissionais da contabilidade e busca oferecer mais segurança durante a transição para o novo sistema tributário Os profissionais da contabilidade passam a contar com um novo canal de atendimento…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-23T21:07:56.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-23T21:35:19.040Z"
+  },
   {
    "id": "1p24zfd",
    "titulo": "Comissão aprova proposta que equipara enteado a filho em plano de saúde e na Previdência Social",
@@ -2966,22 +2983,6 @@
    ],
    "relevancia": 1,
    "vistaEm": "2026-11-11T19:05:24.718Z"
-  },
-  {
-   "id": "1o44tf0",
-   "titulo": "Operação conjunta apreende carga milionária de celulares e medicamentos emagrecedores no Paraná",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-conjunta-apreende-carga-milionaria-de-celulares-e-medicamentos-emagrecedores-no-parana",
-   "resumo": "Fiscalização realizada em São Miguel do Iguaçu resultou na apreensão de 1.900 celulares, 20 mil ampolas medicamentos emagrecedores e uma pistola com acessórios e munições.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-11T14:03:29.899Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-11T14:03:29.300Z"
   }
  ]
 }
