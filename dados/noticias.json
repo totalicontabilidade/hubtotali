@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-23T17:05:22.954Z",
+ "atualizadoEm": "2026-11-23T17:35:23.013Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T17:05:22.954Z"
+   "ultimaVez": "2026-11-23T17:35:23.013Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-23T17:05:22.954Z"
+   "ultimaVez": "2026-11-23T17:35:23.013Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T17:05:22.954Z"
+   "ultimaVez": "2026-11-23T17:35:23.013Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 13,
-   "ultimaVez": "2026-11-23T17:05:22.954Z"
+   "ultimaVez": "2026-11-23T17:35:23.013Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-23T17:05:22.954Z"
+   "ultimaVez": "2026-11-23T17:35:23.013Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-23T17:05:22.954Z"
+   "ultimaVez": "2026-11-23T17:35:23.013Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-23T17:05:22.954Z"
+   "ultimaVez": "2026-11-23T17:35:23.013Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-23T17:05:22.954Z"
+   "ultimaVez": "2026-11-23T17:35:23.013Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-23T17:05:22.954Z"
+   "ultimaVez": "2026-11-23T17:35:23.013Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-23T17:05:22.954Z"
+   "ultimaVez": "2026-11-23T17:35:23.013Z"
   },
   {
    "id": "govbr",
@@ -135,7 +135,7 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-23T17:05:22.954Z"
+   "ultimaVez": "2026-11-23T17:35:23.013Z"
   }
  ],
  "noticias": [
@@ -154,6 +154,22 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-23T17:05:22.954Z"
+  },
+  {
+   "id": "6poenb",
+   "titulo": "Receita Federal apreende mais de 700 ampolas de medicamentos emagrecedores em motocicleta na Aduana da Ponte da Amizade",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-apreende-mais-de-700-ampolas-de-medicamentos-emagrecedores-em-motocicleta-na-aduana-da-ponte-da-amizade",
+   "resumo": "Motorista brasileiro foi detido com 720 ampolas de medicamento emagrecedor de comercialização proibida no Brasil.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-23T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-23T17:35:23.013Z"
   },
   {
    "id": "1gstltu",
@@ -2967,22 +2983,6 @@
    "fonteNome": "Fenacon",
    "sigla": "Fenacon",
    "publicadoEm": "2026-11-11T04:55:45.000Z",
-   "categorias": [
-    "reforma",
-    "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-11T10:05:19.467Z"
-  },
-  {
-   "id": "19zz49g",
-   "titulo": "Senado recebe acórdão do TCU que propõe alíquota de 11,3% para a CBS",
-   "link": "https://fenacon.org.br/reforma-tributaria/senado-recebe-acordao-do-tcu-que-propoe-aliquota-de-113-para-a-cbs/",
-   "resumo": "O presidente do Tribunal de Contas da União (TCU), ministro Vital do Rêgo, entregou nesta terça-feira (10) ao presidente do Senado, Davi Alcolumbre, o acórdão da decisão que recomenda uma alíquota de 11,3% para a Contribuição Social sobre Bens e Serviços (CBS). Esse tributo…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-11T04:47:09.000Z",
    "categorias": [
     "reforma",
     "tributos"
