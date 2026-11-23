@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-23T19:35:23.257Z",
+ "atualizadoEm": "2026-11-23T20:05:23.003Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T19:35:23.257Z"
+   "ultimaVez": "2026-11-23T20:05:23.003Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-23T19:35:23.257Z"
+   "ultimaVez": "2026-11-23T20:05:23.003Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T19:35:23.257Z"
+   "ultimaVez": "2026-11-23T20:05:23.003Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 14,
-   "ultimaVez": "2026-11-23T19:35:23.257Z"
+   "ultimaVez": "2026-11-23T20:05:23.003Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-23T19:35:23.257Z"
+   "ultimaVez": "2026-11-23T20:05:23.003Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-23T19:35:23.257Z"
+   "ultimaVez": "2026-11-23T20:05:23.003Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 3,
    "via": "ponte",
-   "ultimaVez": "2026-11-23T19:35:23.257Z"
+   "ultimaVez": "2026-11-23T20:05:23.003Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-23T19:35:23.257Z"
+   "ultimaVez": "2026-11-23T20:05:23.003Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-23T19:35:23.257Z"
+   "ultimaVez": "2026-11-23T20:05:23.003Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 4,
-   "ultimaVez": "2026-11-23T19:35:23.257Z"
+   "quantas": 3,
+   "ultimaVez": "2026-11-23T20:05:23.003Z"
   },
   {
    "id": "govbr",
@@ -135,7 +135,7 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-23T19:35:23.257Z"
+   "ultimaVez": "2026-11-23T20:05:23.003Z"
   }
  ],
  "noticias": [
@@ -1731,6 +1731,22 @@
    "vistaEm": "2026-11-16T16:05:20.118Z"
   },
   {
+   "id": "fb9j7l",
+   "titulo": "Aviso de Pauta - Coletiva de Imprensa",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/aviso-de-pauta-coletiva-de-imprensa-1",
+   "resumo": "Ministério da Fazenda e a Receita Federal realizam nesta segunda-feira (16/11), às 10h30, entrevista coletiva para divulgar os resultados finais da Operação Fronteira Receita Federal.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-16T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-23T20:05:23.003Z"
+  },
+  {
    "id": "1pr8j0z",
    "titulo": "Operação Fronteira Receita Federal 2026: Alfândega de Santos realiza quatro apreensões simultâneas no Porto de Santos",
    "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-receita-federal-2026-alfandega-de-santos-realiza-quatro-apreensoes-simultaneas-no-porto-de-santos",
@@ -2971,22 +2987,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-11T13:05:19.478Z"
-  },
-  {
-   "id": "s14n9v",
-   "titulo": "Receita Federal e Polícia Federal apreendem 15 mil litros de acetato de etila destinados à exportação ilegal para a Bolívia",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-e-policia-federal-apreendem-15-mil-litros-de-acetato-de-etila-destinados-a-exportacao-ilegal-para-a-bolivia",
-   "resumo": "Ação conjunta em Corumbá/MS impediu o envio clandestino de produto químico controlado com potencial para refinar cerca de 34 toneladas de cocaína.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-11T12:35:21.363Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-11T12:35:19.386Z"
   }
  ]
 }
