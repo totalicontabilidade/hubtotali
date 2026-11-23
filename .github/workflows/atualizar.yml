@@ -7,7 +7,7 @@
 # dados/*.json e faz um commit. O GitHub Pages republica sozinho.
 #
 # Quem dispara: a função "relogio" no Google Cloud (funcoes/
-# index.js), pontual, de meia em meia hora em dia útil, das 7h05 às
+# index.js), pontual, de meia em meia hora todo dia, das 7h05 às
 # 19h35 de Brasília. O schedule abaixo é só reserva, porque o
 # GitHub atrasa e pula rodadas agendadas. Também pode ser disparado
 # à mão em Actions → "Atualizar notícias e agenda".
@@ -16,11 +16,10 @@ name: Atualizar notícias e agenda
 
 on:
   schedule:
-    # De meia em meia hora em dia útil (07:05 às 19:35 em Brasília) e uma vez
-    # no sábado. O GitHub não garante a hora: em dia cheio atrasa ou pula
-    # rodadas, por isso duas chances por hora — só grava quando algo mudou.
-    - cron: "5,35 10-22 * * 1-5"
-    - cron: "15 11 * * 6"
+    # De meia em meia hora todo dia, fim de semana e feriado também (07:05
+    # às 19:35 em Brasília). O GitHub não garante a hora: em dia cheio atrasa
+    # ou pula rodadas, por isso duas chances por hora — só grava quando algo mudou.
+    - cron: "5,35 10-22 * * *"
   workflow_dispatch:
 
 permissions:

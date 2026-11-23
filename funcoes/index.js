@@ -83,7 +83,8 @@ exports.ponte = onRequest(
 /* ============================================================
    relogio — dispara o robô de notícias no GitHub
    ------------------------------------------------------------
-   De meia em meia hora em dia útil, das 7h05 às 19h35 de Brasília,
+   De meia em meia hora, todo dia (fim de semana e feriado também),
+   das 7h05 às 19h35 de Brasília,
    pede ao GitHub para rodar o workflow "Atualizar notícias e
    agenda" (o mesmo botão "Run workflow" da aba Actions). O robô
    continua sendo o do GitHub; aqui é só o despertador.
@@ -99,7 +100,7 @@ const GITHUB_DISPARO = defineSecret("GITHUB_DISPARO");
 const WORKFLOW = "https://api.github.com/repos/totalicontabilidade/hubtotali/actions/workflows/atualizar.yml/dispatches";
 
 exports.relogio = onSchedule(
-  { region: "southamerica-east1", schedule: "5,35 7-19 * * 1-5", timeZone: "America/Sao_Paulo",
+  { region: "southamerica-east1", schedule: "5,35 7-19 * * *", timeZone: "America/Sao_Paulo",
     secrets: [GITHUB_DISPARO], timeoutSeconds: 30, memory: "256MiB", maxInstances: 1, retryCount: 1 },
   async () => {
     const r = await fetch(WORKFLOW, {
