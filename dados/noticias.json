@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-23T20:35:17.663Z",
+ "atualizadoEm": "2026-11-23T21:05:19.742Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T20:35:17.663Z"
+   "ultimaVez": "2026-11-23T21:05:19.742Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-23T20:35:17.663Z"
+   "ultimaVez": "2026-11-23T21:05:19.742Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T20:35:17.663Z"
+   "ultimaVez": "2026-11-23T21:05:19.742Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 14,
-   "ultimaVez": "2026-11-23T20:35:17.663Z"
+   "ultimaVez": "2026-11-23T21:05:19.742Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-23T20:35:17.663Z"
+   "ultimaVez": "2026-11-23T21:05:19.742Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-23T20:35:17.663Z"
+   "ultimaVez": "2026-11-23T21:05:19.742Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 3,
    "via": "ponte",
-   "ultimaVez": "2026-11-23T20:35:17.663Z"
+   "ultimaVez": "2026-11-23T21:05:19.742Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-23T20:35:17.663Z"
+   "ultimaVez": "2026-11-23T21:05:19.742Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-23T20:35:17.663Z"
+   "ultimaVez": "2026-11-23T21:05:19.742Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-23T20:35:17.663Z"
+   "ultimaVez": "2026-11-23T21:05:19.742Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-23T20:35:17.663Z"
+   "ultimaVez": "2026-11-23T21:05:19.742Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1p24zfd",
+   "titulo": "Comissão aprova proposta que equipara enteado a filho em plano de saúde e na Previdência Social",
+   "link": "https://www.camara.leg.br/noticias/1321955-comissao-aprova-proposta-que-equipara-enteado-a-filho-em-plano-de-saude-e-na-previdencia-social",
+   "resumo": "Texto segue em análise na Câmara dos Deputados",
+   "fonte": "camara",
+   "fonteNome": "Agência Câmara",
+   "sigla": "Câmara",
+   "publicadoEm": "2026-11-23T20:41:00.000Z",
+   "categorias": [
+    "trabalhista",
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-23T21:05:19.742Z"
+  },
   {
    "id": "2gn26z",
    "titulo": "Presidente da Fenacon, Reynaldo Lima Jr., toma posse na nova diretoria da CNC para o mandato 2026–2030",
@@ -2966,23 +2982,6 @@
    ],
    "relevancia": 1,
    "vistaEm": "2026-11-11T14:03:29.300Z"
-  },
-  {
-   "id": "u48brr",
-   "titulo": "CFC e Fenacon entregam à Receita nove propostas para a reforma tributária",
-   "link": "https://cfc.org.br/noticias/cfc-e-fenacon-entregam-a-receita-nove-propostas-para-a-reforma-tributaria/",
-   "resumo": "O Conselho Federal de Contabilidade (CFC) entregou nesta terça-feira (10) ao secretário especial da Receita Federal, Robinson Barreirinhas, uma manifestação técnica conjunta com a Fenacon, federação que representa empresas de contabilidade e assessoramento. O documento…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-11T13:00:30.000Z",
-   "categorias": [
-    "reforma",
-    "tributos",
-    "contabil"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-11T13:05:19.478Z"
   }
  ]
 }
