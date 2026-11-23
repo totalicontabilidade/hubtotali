@@ -980,3 +980,11 @@ a{color:inherit;text-decoration:none}
   .rel{order:3;flex-basis:100%;margin-left:0;justify-content:flex-start}
   .cab__marca{order:1}
 }
+
+/* A barra lateral do quadro ("Minhas pendências") rola por conta
+   própria: presa no alto, com a altura da área visível. Antes ela só
+   rolava depois de rolar todos os cartões até o fim. A conta tira o
+   cabeçalho do Hub (--cab-h, medido em js/pendencias/app.js) e o respiro da vista. */
+@media (min-width:900px){
+  .pend .lado{max-height:calc(100dvh - var(--cab-h, 64px) - 46px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+}

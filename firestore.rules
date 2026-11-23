@@ -325,10 +325,13 @@ service cloud.firestore {
     //
     // DUAS PORTAS ALÉM DO DONO, e só essas:
     //
-    //  · O ADMINISTRADOR LÊ (não escreve). É o que permite a cópia
-    //    de segurança da administração trazer o trabalho de todo
-    //    mundo. Favorito é preferência e ninguém olha; pendência é
-    //    trabalho da casa, e a casa precisa poder guardar cópia.
+    //  · O ADMINISTRADOR E A GERÊNCIA LEEM (não escrevem). É o que
+    //    permite a cópia de segurança trazer o trabalho de todo mundo
+    //    e, desde 23/11/2026, a aba "Equipe" do quadro mostrar as
+    //    pendências de todos. Favorito é preferência e ninguém olha;
+    //    pendência é trabalho da casa. A exceção é o que a pessoa
+    //    marca "só para mim": mora em quadros/{uid}/pessoais, que só
+    //    o dono abre.
     //
     //  · UM COLEGA (ou uma integração, que entra com conta da
     //    equipe) pode CRIAR uma pendência no quadro de alguém,
@@ -375,11 +378,14 @@ service cloud.firestore {
       // pendência antes de criar outra. Para listar, a consulta
       // precisa filtrar por criadoPorUid == o próprio uid, senão o
       // banco recusa inteira — e é assim que o receber.gs pergunta.
-      // Lê: o dono, o administrador, quem mandou e quem acompanha.
-      // Para LISTAR, a consulta precisa filtrar pelo mesmo critério
+      // Lê: o dono, o administrador, a Gerência (desde 23/11/2026 os
+      // dois veem as pendências da equipe inteira, na aba "Equipe"),
+      // quem mandou e quem acompanha. Para LISTAR, a consulta de quem
+      // mandou ou acompanha precisa filtrar pelo mesmo critério
       // (criadoPorUid == eu, ou envolvidos contém eu), senão o banco
-      // recusa inteira.
-      allow read:   if daEquipe() && (meuUid(uid) || ehAdmin() || meuUid(resource.data.criadoPorUid) || acompanha(resource.data));
+      // recusa inteira. O que a pessoa marcou "só para mim" não mora
+      // aqui: mora em quadros/{uid}/pessoais, logo abaixo.
+      allow read:   if daEquipe() && (meuUid(uid) || ehAdmin() || ehGerencia() || meuUid(resource.data.criadoPorUid) || acompanha(resource.data));
       allow create: if daEquipe()
                     && (meuUid(uid) || meuUid(request.resource.data.criadoPorUid))
                     && formaDeTarefa();
@@ -399,6 +405,21 @@ service cloud.firestore {
                     && (meuUid(uid)
                         || (meuUid(resource.data.criadoPorUid)
                             && (!('vistoEm' in resource.data) || resource.data.vistoEm == null)));
+    }
+
+    // ---------- as pendências "só para mim" (desde 23/11/2026) ----------
+    // A administração e a Gerência veem o quadro de todo mundo; o que a
+    // pessoa marca "só para mim" é pessoal e fica fora disso. Mora numa
+    // gaveta própria, e não num campo dentro de tarefas, por um motivo
+    // do banco: regra não é filtro. Com um campo, a listagem da
+    // administração teria de filtrar por ele, e as pendências antigas
+    // (sem o campo) sumiriam da consulta. Aqui é simples: SÓ O DONO
+    // lê e escreve — nem administrador, nem Gerência, nem colega, nem
+    // integração. A cópia de segurança da administração também não
+    // as leva; a cópia que a própria pessoa baixa, sim.
+    match /quadros/{uid}/pessoais/{id} {
+      allow read, delete: if daEquipe() && meuUid(uid);
+      allow create, update: if daEquipe() && meuUid(uid) && formaDeTarefa();
     }
 
     match /quadros/{uid}/config/{nome} {

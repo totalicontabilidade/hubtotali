@@ -102,6 +102,7 @@ Um quadro por pessoa, no Firestore, identificado pelo uid da conta:
 
 ```
 quadros/{uid}/tarefas/{id}      uma pendência por documento, campo a campo
+quadros/{uid}/pessoais/{id}     as marcadas "Só para mim" (só o dono abre)
 quadros/{uid}/config/setores    { json: "{ lista: [...] }" }
 quadros/{uid}/config/clientes   idem
 Storage: quadros/{uid}/{id}     os PDFs
@@ -301,7 +302,8 @@ Documentos:
 | `hub/departamentos` | os setores da casa | administrador |
 | `equipe/{uid}` | quem pode entrar | administrador |
 | `favoritos/{uid}` | os favoritos de cada um | só a pessoa |
-| `quadros/{uid}/…` | o quadro de pendências de cada um | a pessoa; colega cria; administrador lê |
+| `quadros/{uid}/tarefas` | o quadro de pendências de cada um | a pessoa; colega cria; administrador e Gerência leem |
+| `quadros/{uid}/pessoais` | as pendências "Só para mim" | só a pessoa |
 | `pendencias`, `pendencias_reservadas` | o quadro antigo do escritório, só leitura | ninguém mais escreve pela tela |
 
 Sobre a `apiKey` ficar visível na página: é assim mesmo. No Firebase ela não é
@@ -319,6 +321,24 @@ isso exige a política de CORS do balde (`cors.json`, `STORAGE-CORS.md`) — ela
 já está aplicada para os endereços do Hub.
 
 ---
+
+## A aba Equipe e o "Só para mim"
+
+Desde 23/11/2026 o **administrador e a Gerência** (setor "Gerência" no
+cadastro) têm no quadro a aba **Equipe**: as pendências de todo mundo, por
+pessoa, atrasadas primeiro, só para ler — mexer continua sendo do dono.
+
+A exceção é o que a pessoa marca **🔒 Só para mim** (na caixa de nova
+pendência ou na edição do cartão). Essa é pessoal: mora em
+`quadros/{uid}/pessoais`, que a regra do banco só abre para o dono. Não vai
+para colega, não tem quem acompanhe, não entra na aba Equipe nem na cópia de
+segurança da administração (entra na cópia que a própria pessoa baixa).
+Gaveta separada, e não um campo, porque regra do Firestore não filtra: com um
+campo, a listagem da administração recusaria ou perderia as pendências
+antigas, que não têm o campo.
+
+Cada cartão também pode ser **minimizado** (fica uma linha só); o cabeçalho de
+cada bloco minimiza ou abre todos. Isso fica lembrado no navegador.
 
 ## Pendências entre pessoas
 

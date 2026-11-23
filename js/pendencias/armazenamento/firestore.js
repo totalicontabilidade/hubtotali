@@ -10,6 +10,11 @@
      quadros/{uid}/tarefas/{id}     uma pendência por documento,
                                     campo a campo (é o que permite
                                     gravar só o que mudou)
+     quadros/{uid}/pessoais/{id}    as marcadas "só para mim": a
+                                    mesma forma, numa gaveta que só o
+                                    dono abre (nem a administração
+                                    nem a Gerência). Na tela elas vêm
+                                    com soParaMim: true.
      quadros/{uid}/config/setores   { json: "{ lista: [...] }" }
      quadros/{uid}/config/clientes  idem
      Storage: quadros/{uid}/{id}    os PDFs anexados
@@ -53,6 +58,9 @@
     function meuUid() { return sessao().uid; }
     function colecao() { return base() + "/quadros/" + encodeURIComponent(meuUid()) + "/tarefas"; }
     function colecaoDe(uid) { return base() + "/quadros/" + encodeURIComponent(uid) + "/tarefas"; }
+    function pessoais() { return base() + "/quadros/" + encodeURIComponent(meuUid()) + "/pessoais"; }
+    /* Onde a pendência mora: as "só para mim" na gaveta pessoal. */
+    function gavetaDe(t) { return t && t.soParaMim ? pessoais() : colecao(); }
     function cabecalhos(extra) {
       var h = { "Authorization": "Bearer " + sessao().idToken };
       Object.keys(extra || {}).forEach(function (k) { h[k] = extra[k]; });
@@ -135,21 +143,31 @@
     function avisarErro(e) { ouvErro.forEach(function (f) { try { f(e); } catch (x) {} }); }
 
     /* ---------- listar: todas as páginas ---------- */
-    function buscarTarefas() {
+    function listarColecao(url0, marcar) {
       var tudo = [];
       function pagina(token) {
-        var url = colecao() + "?pageSize=300" + (token ? "&pageToken=" + encodeURIComponent(token) : "");
+        var url = url0 + "?pageSize=300" + (token ? "&pageToken=" + encodeURIComponent(token) : "");
         return fetch(url, { headers: cabecalhos(), cache: "no-store" })
           .then(function (r) {
             if (r.status === 404) return {};      /* quadro ainda vazio */
             return conferir(r);
           })
           .then(function (j) {
-            (j && j.documents || []).forEach(function (d) { tudo.push(deDocumento(d)); });
+            (j && j.documents || []).forEach(function (d) { var t = deDocumento(d); if (marcar) marcar(t); tudo.push(t); });
             if (j && j.nextPageToken) return pagina(j.nextPageToken);
           });
       }
-      return pagina(null).then(function () {
+      return pagina(null).then(function () { return tudo; });
+    }
+    function buscarTarefas() {
+      return Promise.all([
+        listarColecao(colecao(), function (t) { delete t.soParaMim; }),
+        /* A gaveta pessoal não derruba o quadro: se a regra dela ainda
+           não foi publicada (403), o quadro abre sem as pessoais. */
+        listarColecao(pessoais(), function (t) { t.soParaMim = true; })
+          .catch(function (e) { console.warn("Pendências: gaveta 'só para mim' sem leitura", e); return []; }),
+      ]).then(function (r) {
+        var tudo = r[0].concat(r[1]);
         cache = new Map(tudo.map(function (t) { return [t.id, t]; }));
         ultimaListagem = Date.now();
         emitirTarefas();
@@ -190,6 +208,39 @@
           })
           .catch(function () { return []; });
       })).then(function (listas) { return [].concat.apply([], listas); });
+    }
+
+    /* ---------- "só para mim": de uma gaveta para a outra ----------
+       Cria na gaveta nova com o mesmo id e só então apaga na antiga.
+       Se o apagamento falhar, desfaz a criação: a pendência nunca
+       fica em dois lugares, nem some. */
+    function mudarDeGaveta(antes, campos) {
+      var id = antes.id;
+      var depois = Object.assign({}, antes, campos);
+      var doc = Object.assign({}, depois);
+      delete doc.id; delete doc.donoUid;
+      if (depois.soParaMim) { doc.soParaMim = true; doc.envolvidos = []; depois.envolvidos = []; depois.soParaMim = true; }
+      else { delete doc.soParaMim; delete depois.soParaMim; }
+      var origem = gavetaDe(antes), destino = gavetaDe(depois);
+      cache.set(id, depois); emitirTarefas();
+      return fetch(destino + "?documentId=" + encodeURIComponent(id), {
+        method: "POST", headers: cabecalhos({ "Content-Type": "application/json" }),
+        body: JSON.stringify({ fields: paraCampos(doc) }),
+      })
+        .then(conferir)
+        .then(function () {
+          return fetch(origem + "/" + encodeURIComponent(id), { method: "DELETE", headers: cabecalhos() })
+            .then(function (r) { if (r.status === 404) return null; return conferir(r); })
+            .catch(function (e) {
+              return fetch(destino + "/" + encodeURIComponent(id), { method: "DELETE", headers: cabecalhos() })
+                .catch(function () {}).then(function () { throw e; });
+            });
+        })
+        .then(function () {})
+        .catch(function (e) {
+          cache.set(id, antes); emitirTarefas();
+          return buscarTarefas().catch(function () {}).then(function () { throw e; });
+        });
     }
 
     var atualizando = null;
@@ -258,9 +309,10 @@
         delete doc.id;
         /* Quem é dono do quadro assina: a regra do banco exige. */
         doc.criadoPorUid = meuUid();
+        if (doc.soParaMim) { doc.soParaMim = true; doc.envolvidos = []; } else delete doc.soParaMim;
         cache.set(id, Object.assign({}, doc, { id: id }));
         emitirTarefas();
-        return fetch(colecao() + "?documentId=" + encodeURIComponent(id), {
+        return fetch(gavetaDe(doc) + "?documentId=" + encodeURIComponent(id), {
           method: "POST", headers: cabecalhos({ "Content-Type": "application/json" }),
           body: JSON.stringify({ fields: paraCampos(doc) }),
         })
@@ -271,13 +323,15 @@
 
       alterarTarefa: function (id, campos) {
         var antes = cache.get(id);
+        /* Marcar ou desmarcar "só para mim" muda a pendência de gaveta. */
+        if (antes && "soParaMim" in campos && !!campos.soParaMim !== !!antes.soParaMim) return mudarDeGaveta(antes, campos);
         if (antes) { cache.set(id, Object.assign({}, antes, campos)); emitirTarefas(); }
-        var chaves = Object.keys(campos).filter(function (k) { return k !== "id"; });
+        var chaves = Object.keys(campos).filter(function (k) { return k !== "id" && k !== "soParaMim"; });
         if (!chaves.length) return Promise.resolve();
         var mask = chaves.map(function (k) { return "updateMask.fieldPaths=" + encodeURIComponent(k); }).join("&");
         var limpos = {};
         chaves.forEach(function (k) { limpos[k] = campos[k]; });
-        return fetch(colecao() + "/" + encodeURIComponent(id) + "?" + mask + "&currentDocument.exists=true", {
+        return fetch(gavetaDe(antes) + "/" + encodeURIComponent(id) + "?" + mask + "&currentDocument.exists=true", {
           method: "PATCH", headers: cabecalhos({ "Content-Type": "application/json" }),
           body: JSON.stringify({ fields: paraCampos(limpos) }),
         })
@@ -327,10 +381,17 @@
         return consultarVarios(uids.filter(function (u) { return u !== eu; }),
           { fieldFilter: { field: { fieldPath: "envolvidos" }, op: "ARRAY_CONTAINS", value: { stringValue: eu } } });
       },
+      /* O quadro inteiro de um colega, para a aba "Equipe" da
+         administração e da Gerência. Só lê tarefas: a gaveta "só para
+         mim" nem é pedida, e o banco recusaria se fosse. */
+      listarQuadroDe: function (uid) {
+        return listarColecao(colecaoDe(uid), function (t) { t.donoUid = uid; });
+      },
 
       apagarTarefa: function (id) {
+        var antes = cache.get(id);
         cache.delete(id); emitirTarefas();
-        return fetch(colecao() + "/" + encodeURIComponent(id), { method: "DELETE", headers: cabecalhos() })
+        return fetch(gavetaDe(antes) + "/" + encodeURIComponent(id), { method: "DELETE", headers: cabecalhos() })
           .then(function (r) { if (r.status === 404) return null; return conferir(r); })
           .then(function () {})
           .catch(function (e) { return buscarTarefas().catch(function () {}).then(function () { throw e; }); });

@@ -25,6 +25,13 @@
      criadoPorNome, envolvidos, vistoEm e loteId, e a regra do
      banco decide quem lê e quem mexe.
 
+   · A EQUIPE E O "SÓ PARA MIM" (desde 23/11/2026): administrador e
+     Gerência ganham a aba "Equipe", com as pendências de todo
+     mundo, só para ler. O que a pessoa marca "Só para mim" é
+     pessoal: mora noutra gaveta do quadro (quadros/{uid}/pessoais),
+     que o banco só abre para o dono — não vai para colega, não tem
+     quem acompanhe e não aparece na aba "Equipe".
+
    O mapa dos blocos está no README, em "O quadro de pendências".
    ============================================================ */
 (function(){
@@ -44,12 +51,22 @@ let comentando=null; const notasAbertas=new Set(); const feitasAbertas=new Set()
 let setorAtivo='todos', busca='', editando=null, novaStatus='hoje', colMobile='hoje';
 // pessoas: a equipe do Hub, para quem a nova pendência vai, quem acompanha, e as listas de fora do meu quadro
 let equipe=[], novaPara=[], novaAcomp=[], enviadas=[], acompanho=[], abaQ='quadro', comentandoFora=null;
+// administrador e Gerência veem a equipe inteira (aba "Equipe"); "só para mim" fica de fora
+let veEquipe=false, daEquipe=[], novaSoMim=false;
+// cartões minimizados (uma linha só), lembrados neste navegador
+const minimizados=new Set();
+try{ (JSON.parse(localStorage.getItem('pend.min')||'[]')||[]).forEach(id=>minimizados.add(id)); }catch(e){}
+function guardarMinimizados(){ try{ localStorage.setItem('pend.min',JSON.stringify(Array.from(minimizados).slice(-500))); }catch(e){} }
+function minimizar(ids,sim){ ids.forEach(id=>sim?minimizados.add(id):minimizados.delete(id)); guardarMinimizados(); render(); }
 const meuUid=()=>(store&&store.usuario&&store.usuario.uid)||'';
 const meuNome=()=>(store&&store.usuario&&(store.usuario.nome||store.usuario.email))||'';
 const pessoa=uid=>equipe.find(p=>p.uid===uid)||null;
 const nomeDe=uid=>{ const p=pessoa(uid); return p?(p.nome||p.email):(uid?'alguém que saiu da equipe':''); };
 const primeiroNome=uid=>String(nomeDe(uid)||'').split(/\s+/)[0];
 const deOutro=t=>!!(t.criadoPorUid&&t.criadoPorUid!==meuUid());
+// pode virar "só para mim": a que eu mesmo anotei (ou que veio do quadro antigo); a que um colega mandou, não — ele deixaria de vê-la
+const podeSerPessoal=t=>!deOutro(t)||t.origemSistema==='hub-antigo';
+const CADEADO='🔒';
 // o robô do Atos está na equipe (precisa estar, para gravar), mas não é colega para quem se manda pendência
 const ehRobo=p=>/^atos@/i.test(p.email||'')||/^rob[oô]/i.test(p.nome||'');
 const colegas=()=>equipe.filter(p=>p.uid!==meuUid()&&p.ativo!==false&&!ehRobo(p));
@@ -308,6 +325,7 @@ function colunaDe(t,agora){
 }
 
 function render(){
+  medirCabecalho();
   const agora=Date.now();
   const abertas=tarefas.filter(t=>!t.feito);
 
@@ -384,11 +402,14 @@ function render(){
         :(a,b)=>(b.importante?1:0)-(a.importante?1:0)||(a.criadoEm||0)-(b.criadoEm||0));
     const riscadasCol=tarefas.filter(t=>t.feito&&ehHoje(t.feitoEm)&&colDe(t)===s.id&&naVista(t))
       .sort((a,b)=>(a.feitoEm||0)-(b.feitoEm||0));
+    const idsCol=abertasCol.map(t=>t.id);
+    const algumAberto=idsCol.some(id=>!minimizados.has(id));
+    const btnMin=idsCol.length?el('button',{class:'col-foco ic col-min',type:'button',title:algumAberto?'Minimizar todos deste bloco':'Abrir todos deste bloco','aria-label':(algumAberto?'Minimizar':'Abrir')+' todos os cartões de '+s.titulo,html:algumAberto?ICON.up:ICON.down,onclick:()=>minimizar(idsCol,algumAberto)}):null;
     const btnFoco=blocoFoco
       ?el('button',{class:'col-foco',type:'button',title:'Voltar a ver todos os blocos',onclick:()=>focar(null)},['Ver todos os blocos'])
       :el('button',{class:'col-foco ic',type:'button',title:'Ver só este bloco','aria-label':'Ver só o bloco '+s.titulo,html:ICAL.ampliar,onclick:()=>focar(s.id)});
     const col=el('section',{class:'col st-'+s.id,'aria-label':s.titulo},[
-      el('div',{class:'col-h'},[el('span',{class:'dot'}),el('h2',{text:blocoFoco?s.titulo:s.cab,title:s.titulo+(blocoFoco?'':' · clique para ver só este bloco'),onclick:()=>{ if(!blocoFoco) focar(s.id); },style:blocoFoco?'':'cursor:pointer'}),el('span',{class:'q',text:String(abertasCol.length)}),btnFoco])
+      el('div',{class:'col-h'},[el('span',{class:'dot'}),el('h2',{text:blocoFoco?s.titulo:s.cab,title:s.titulo+(blocoFoco?'':' · clique para ver só este bloco'),onclick:()=>{ if(!blocoFoco) focar(s.id); },style:blocoFoco?'':'cursor:pointer'}),el('span',{class:'q',text:String(abertasCol.length)}),btnMin,btnFoco])
     ]);
     if(!carregado) col.appendChild(el('div',{class:'pvazio',text:'Carregando…'}));
     else if(!abertasCol.length&&!riscadasCol.length) col.appendChild(el('div',{class:'pvazio',text:q?'Nada encontrado aqui.':'Nada pendente aqui.'}));
@@ -464,6 +485,20 @@ function refrescarPessoas(){
     if(JSON.stringify([enviadas,acompanho])!==a) agendar();
   }).catch(()=>{});
 }
+/* A aba "Equipe": o quadro de cada colega, inteiro, menos o que ele
+   marcou "só para mim" (isso nem vem do banco). Só para ler. */
+let equipeLidaEm=0;
+function refrescarEquipe(forcar){
+  if(!db||!veEquipe||!store.listarQuadroDe||!equipe.length) return Promise.resolve();
+  if(!forcar&&abaQ!=='equipe'&&Date.now()-equipeLidaEm<5*60000) return Promise.resolve();
+  equipeLidaEm=Date.now();
+  const outros=equipe.filter(p=>p.uid!==meuUid()&&p.ativo!==false&&!ehRobo(p));
+  return Promise.all(outros.map(p=>store.listarQuadroDe(p.uid).catch(()=>[]))).then(r=>{
+    const a=JSON.stringify(daEquipe);
+    daEquipe=[].concat(...r);
+    if(JSON.stringify(daEquipe)!==a) agendar();
+  }).catch(()=>{});
+}
 function renderAbas(){
   const box=$('abasQ'); if(!box) return;
   box.textContent='';
@@ -476,7 +511,9 @@ function renderAbas(){
     {id:'enviadas',rot:'Enviadas',n:abertasEnv,alerta:0,dica:semVisto?semVisto+' ainda não vista'+(semVisto>1?'s':''):''},
     {id:'acompanho',rot:'Acompanho',n:acompanho.filter(t=>!t.feito).length,alerta:0}
   ];
-  abas.forEach(a=>box.appendChild(el('button',{type:'button',class:'aba-q','aria-pressed':String(abaQ===a.id),title:a.dica||'',onclick:()=>{ abaQ=a.id; render(); }},[a.rot,el('span',{class:'n',text:String(a.n)}),a.alerta?el('span',{class:'novo',text:a.alerta+' nova'+(a.alerta>1?'s':'')}):null])));
+  if(veEquipe) abas.push({id:'equipe',rot:'Equipe',n:daEquipe.filter(t=>!t.feito).length,alerta:0,dica:'As pendências de toda a equipe, menos as marcadas "só para mim". Só para ler.'});
+  else if(abaQ==='equipe') abaQ='quadro';
+  abas.forEach(a=>box.appendChild(el('button',{type:'button',class:'aba-q','aria-pressed':String(abaQ===a.id),title:a.dica||'',onclick:()=>{ abaQ=a.id; if(a.id==='equipe') refrescarEquipe(true); render(); }},[a.rot,el('span',{class:'n',text:String(a.n)}),a.alerta?el('span',{class:'novo',text:a.alerta+' nova'+(a.alerta>1?'s':'')}):null])));
 }
 function statusCurto(t){
   if(t.feito) return 'riscada'+(t.feitoEm?' em '+ddmm(t.feitoEm):'');
@@ -484,6 +521,7 @@ function statusCurto(t){
   return (STATUS.find(s=>s.id===t.status)||{}).curto||'';
 }
 function itemFora(t,modo){
+  if(modo==='equipe') return itemEquipe(t);
   const dono=nomeDe(t.donoUid);
   const podeRiscar=modo==='enviadas';
   const acoes=[el('button',{class:'ic',title:'Comentar','aria-label':'Comentar',html:ICON.nota,onclick:()=>{ comentandoFora=comentandoFora===t.id?null:t.id; render(); }})];
@@ -500,6 +538,21 @@ function itemFora(t,modo){
     txtEl('txt',t),
     ultima?el('div',{class:'fora-nota'},[el('span',{html:ICON.nota}),el('span',{class:'nt'},[ultima.por&&ultima.porUid!==meuUid()?el('b',{class:'por',text:ultima.por+': '}):null,ultima.t]),el('span',{class:'nd',text:quandoNota(ultima.em)}),notas.length>1?el('span',{class:'nd',text:'· '+notas.length+' comentários'}):null]):null,
     comentandoFora===t.id?caixaNotaFora(t):null
+  ]);
+}
+// na aba "Equipe": só leitura — o banco não deixa administrador nem Gerência mexer no quadro alheio
+function itemEquipe(t){
+  const notas=(t.notas||[]), ultima=notas.length?notas[notas.length-1]:null;
+  const atrasada=!t.feito&&t.status==='data'&&t.prazo&&t.prazo<diaISO(Date.now());
+  const deQuem=t.criadoPorUid&&t.criadoPorUid!==t.donoUid
+    ?(t.origemSistema==='hub-antigo'?'do quadro antigo':t.origemSistema==='atos'?'do Atos Societários':'de '+(t.criadoPorNome||nomeDe(t.criadoPorUid)||'colega')+(t.vistoEm?'':' · ainda não vista'))
+    :'';
+  const nA=(t.anexos||[]).length;
+  const extra=[deQuem,nA?(nA+(nA===1?' anexo':' anexos')):'',t.criadoEm?'criada em '+ddmm(t.criadoEm):''].filter(Boolean).join(' · ');
+  return el('article',{class:'fora'+(t.feito?' feita':'')+(atrasada?' atrasada':''),'data-id':t.id},[
+    el('div',{class:'fora-cab'},[t.importante?el('span',{class:'fora-imp',title:'Importante',html:ICON.star(true)}):null,el('span',{class:'fora-st'+(atrasada?' atr':''),text:statusCurto(t)}),el('span',{class:'fora-visto',text:extra})]),
+    txtEl('txt',t),
+    ultima?el('div',{class:'fora-nota'},[el('span',{html:ICON.nota}),el('span',{class:'nt'},[ultima.por?el('b',{class:'por',text:ultima.por+': '}):null,ultima.t]),el('span',{class:'nd',text:quandoNota(ultima.em)}),notas.length>1?el('span',{class:'nd',text:'· '+notas.length+' comentários'}):null]):null
   ]);
 }
 function mudarFora(t,campos){
@@ -527,11 +580,21 @@ function caixaNotaFora(t){
 function renderFora(){
   const box=$('listaPessoas'); if(!box) return;
   box.textContent='';
-  const lista=(abaQ==='enviadas'?enviadas:acompanho).slice().sort((a,b)=>(a.feito?1:0)-(b.feito?1:0)||(b.criadoEm||0)-(a.criadoEm||0));
+  const eq=abaQ==='equipe';
+  const hojeISO=diaISO(Date.now());
+  const pz=t=>t.status==='data'&&t.prazo?t.prazo:(t.status==='hoje'?hojeISO:'9');
+  // na Equipe: as abertas (atrasadas e de hoje primeiro) e as riscadas dos últimos sete dias
+  const base=eq?daEquipe.filter(t=>!t.feito||(t.feitoEm||0)>=Date.now()-SEMANA_MS):(abaQ==='enviadas'?enviadas:acompanho);
+  const lista=base.slice().sort(eq
+    ?(a,b)=>(a.feito?1:0)-(b.feito?1:0)||pz(a).localeCompare(pz(b))||(b.importante?1:0)-(a.importante?1:0)||(a.criadoEm||0)-(b.criadoEm||0)
+    :(a,b)=>(a.feito?1:0)-(b.feito?1:0)||(b.criadoEm||0)-(a.criadoEm||0));
   const q=busca.trim().toLowerCase();
   const vis=lista.filter(t=>!q||(t.texto||'').toLowerCase().includes(q)||nomeDe(t.donoUid).toLowerCase().includes(q));
+  if(eq) box.appendChild(el('div',{class:'dica eq-dica',text:'As pendências de toda a equipe, para acompanhar. Só leitura: quem mexe é o dono do quadro. O que cada um marca "'+CADEADO+' Só para mim" é pessoal e não aparece aqui. Para ver uma pessoa só, busque pelo nome.'}));
   if(!vis.length){
-    box.appendChild(el('div',{class:'pvazio grande',text:abaQ==='enviadas'
+    box.appendChild(el('div',{class:'pvazio grande',text:eq
+      ?(q?'Nada encontrado.':'Ninguém da equipe tem pendência aberta agora.')
+      :abaQ==='enviadas'
       ?'Você ainda não mandou pendência para ninguém. Em "Para quem", na caixa de nova pendência, escolha quem recebe.'
       :'Ninguém pôs você para acompanhar uma pendência ainda.'}));
     return;
@@ -578,6 +641,7 @@ function card(t,st,agora){
       el('div',{class:'meta'},[setorAtivo==='todos'?tagSetor(t):null,el('span',{text:'riscada hoje'}),el('div',{class:'acoes'},[botaoExcluir(t)])])
     ]);
   }
+  if(minimizados.has(t.id)) return cardMinimizado(t,st,agora);
   let desde=null;
   if(st==='hoje' && t.statusEm && diaISO(t.statusEm)<diaISO(agora)) desde='para hoje desde '+ddmm(t.statusEm);
   if(st==='semana' && t.statusEm && t.statusEm<segunda(agora)) desde='vem da semana de '+ddmm(segunda(t.statusEm));
@@ -600,14 +664,37 @@ function card(t,st,agora){
       t.prazo?chipPrazo(t.prazo,agora):null,
       desde?el('span',{class:'desde',text:desde}):null,
       chipAcompanham(t),
+      t.soParaMim?el('span',{class:'somim',title:'Só para mim: pessoal, nem a administração nem a Gerência veem'},[CADEADO+' só para mim']):null,
       el('div',{class:'acoes'},[
         el('button',{class:'ic',title:'Comentar (ex.: esperando retorno)','aria-label':'Comentar',html:ICON.nota,onclick:()=>abrirNota(t.id)}),
         el('button',{class:'ic'+(t.importante?' on':''),title:t.importante?'Tirar do topo':'Importante (fica no topo)','aria-label':'Importante','aria-pressed':String(!!t.importante),html:ICON.star(!!t.importante),onclick:()=>mudar(t.id,{importante:!t.importante})}),
         el('button',{class:'ic',title:'Editar','aria-label':'Editar',html:ICON.edit,onclick:()=>abrirEdicao(t.id)}),
-        botaoExcluir(t)
+        botaoExcluir(t),
+        el('button',{class:'ic',title:'Minimizar (fica só uma linha)','aria-label':'Minimizar',html:ICON.up,onclick:()=>minimizar([t.id],true)})
       ])
     ]),
     el('div',{class:'mover'},[el('span',{class:'mvl',text:'Mover para'}),...mover])
+  ]);
+}
+/* O cartão minimizado: uma linha, com o que avisa (atrasada, nova,
+   importante, prazo) e o botão de abrir. Riscar continua à mão. */
+function cardMinimizado(t,st,agora){
+  const atrasada=st==='data'&&t.prazo&&t.prazo<diaISO(agora);
+  const urg=st==='data'&&t.prazo===diaISO(agora);
+  const abrir=()=>minimizar([t.id],false);
+  const nN=(t.notas||[]).length, nA=(t.anexos||[]).length;
+  return el('article',{class:'card minimizado'+(t.importante?' imp':'')+(urg?' urg':'')+(atrasada?' atrasada':'')+(deOutro(t)&&!t.vistoEm?' nova':''),'data-id':t.id},[
+    el('button',{class:'chk',title:'Riscar (feito)','aria-label':'Riscar como feito',html:ICON.check,onclick:()=>mudar(t.id,{feito:true,feitoEm:Date.now(),revisadoEm:null})}),
+    el('div',{class:'txt mini-txt',title:'Abrir o cartão',text:String(t.texto||textoPuro(limpar(t.html||''))).replace(/\s*\n+\s*/g,' · '),onclick:abrir}),
+    el('div',{class:'mini-lado'},[
+      deOutro(t)&&!t.vistoEm?el('span',{class:'de-nova',text:'nova'}):null,
+      t.importante?el('span',{class:'mini-imp',title:'Importante',html:ICON.star(true)}):null,
+      t.soParaMim?el('span',{class:'mini-ic',title:'Só para mim',text:CADEADO}):null,
+      nN?el('span',{class:'mini-ic',title:nN+(nN===1?' comentário':' comentários'),html:ICON.nota}):null,
+      nA?el('span',{class:'mini-ic',title:nA+(nA===1?' anexo':' anexos'),html:ICON.clip}):null,
+      t.prazo?chipPrazo(t.prazo,agora):null,
+      el('button',{class:'ic',type:'button',title:'Abrir o cartão','aria-label':'Abrir o cartão',html:ICON.down,onclick:abrir})
+    ])
   ]);
 }
 /* ---------- de quem veio, quem acompanha, visto ----------
@@ -719,6 +806,8 @@ function cardEdicao(t){
   const arq=el('input',{type:'file',accept:'application/pdf,.pdf',multiple:true,hidden:true});
   arq.addEventListener('change',()=>{ enviarPdfs(arq.files,ea.lista,pintarAnexos); arq.value=''; });
   const btnPdf=assets?el('button',{class:'fb pdf',type:'button',title:'Anexar PDF',html:ICON.clip+'PDF',onclick:()=>arq.click()}):null;
+  if(ea.soMim===undefined) ea.soMim=!!t.soParaMim;
+  const btnSoMim=podeSerPessoal(t)?botaoSoMim(()=>ea.soMim,v=>{ ea.soMim=v; }):null;
   const salvar=()=>{
     const st=ea.st;
     if(st==='data'&&!data.value){ aviso('Escolha até que dia resolver.'); data.focus(); return; }
@@ -733,6 +822,10 @@ function cardEdicao(t){
     if(st!==t.status){ mud.status=st; mud.statusEm=Date.now(); }
     if(temGrifo(html)&&!temGrifo(t.html)) mud.grifadoEm=Date.now();
     if(!temGrifo(html)) mud.grifadoEm=null;
+    if(btnSoMim&&ea.soMim!==!!t.soParaMim){
+      mud.soParaMim=ea.soMim;
+      if(ea.soMim&&(t.envolvidos||[]).length){ mud.envolvidos=[]; aviso('Virou só sua: quem acompanhava deixa de ver.'); }
+    }
     gravar(t.id,async()=>{ await ref(t.id).update(mud); tirados.forEach(soltarAsset); });
     edAnexos=null; editando=null; render();
   };
@@ -741,7 +834,7 @@ function cardEdicao(t){
     area,
     boxAnexos,
     arq,
-    el('div',{class:'linha'},[barraFormatacao(area),btnPdf,el('span',{class:'esp'}),data,sel,seg]),
+    el('div',{class:'linha'},[barraFormatacao(area),btnPdf,el('span',{class:'esp'}),btnSoMim,data,sel,seg]),
     el('div',{class:'linha'},[el('span',{class:'esp'}),el('button',{class:'sec',onclick:fecharEdicao},['Cancelar']),el('button',{class:'prim',onclick:salvar},['Salvar'])])
   ]);
 }
@@ -753,6 +846,18 @@ function segmento(get,set){
   pintar();
   box.pintar=pintar;
   return box;
+}
+
+/* ---------- "Só para mim" ----------
+   Pendência pessoal: fica no meu quadro e mais ninguém vê — nem a
+   aba "Equipe" da administração e da Gerência. Não combina com
+   mandar para alguém nem com quem acompanha. */
+function botaoSoMim(get,set){
+  const b=el('button',{class:'fb para somim-b',type:'button',title:'Só para mim: pessoal. Nem a administração nem a Gerência veem.'});
+  const pintar=()=>{ const on=!!get(); b.textContent=''; b.append(el('span',{class:'ico',text:CADEADO}),'Só para mim'); b.classList.toggle('on',on); b.setAttribute('aria-pressed',String(on)); };
+  b.addEventListener('click',()=>{ set(!get()); pintar(); });
+  b.pintar=pintar; pintar();
+  return b;
 }
 
 /* ---------- nova pendência ---------- */
@@ -779,11 +884,15 @@ function rotuloPara(){
   return 'Para '+novaPara.length+' pessoas';
 }
 function pintarPara(){
+  if(btnSoMimNova) btnSoMimNova.pintar();
   const b=$('novaPara'); if(!b) return;
   b.textContent=''; b.append(el('span',{class:'ico',text:'👤'}),rotuloPara()+(novaAcomp.length?' · '+novaAcomp.length+' acompanha'+(novaAcomp.length>1?'m':''):''));
   b.classList.toggle('on',!!(novaPara.length||novaAcomp.length));
   b.hidden=!colegas().length;
 }
+// o botão "Só para mim" da caixa de nova pendência: ligar tira quem recebe e quem acompanha
+const btnSoMimNova=$('novaSoMim')?botaoSoMim(()=>novaSoMim,v=>{ novaSoMim=v; if(v){ novaPara=[]; novaAcomp=[]; const pop=$('pessoasPop'); if(pop) pop.hidden=true; } pintarPara(); }):null;
+if(btnSoMimNova) $('novaSoMim').replaceWith(btnSoMimNova);
 function listaPessoas(selecionadas,aoMudar,excluir){
   const box=el('div',{class:'pp-lista'});
   colegas().filter(p=>!excluir||!excluir.includes(p.uid)).forEach(p=>{
@@ -798,10 +907,10 @@ function abrirPara(){
   const pop=$('pessoasPop'); if(!pop) return;
   if(!pop.hidden){ pop.hidden=true; return; }
   pop.textContent='';
-  const refazer=()=>{ pintarPara(); };
+  const refazer=()=>{ if(novaPara.length||novaAcomp.length) novaSoMim=false; pintarPara(); };
   pop.appendChild(el('div',{class:'pp-col'},[el('h4',{text:'Quem recebe'}),el('div',{class:'dica',text:'Ganha a pendência no próprio quadro. Sem ninguém marcado, fica no seu.'}),listaPessoas(novaPara,refazer)]));
   pop.appendChild(el('div',{class:'pp-col'},[el('h4',{text:'Quem acompanha'}),el('div',{class:'dica',text:'Vê a pendência em "Acompanho" e pode comentar.'}),listaPessoas(novaAcomp,refazer)]));
-  pop.appendChild(el('div',{class:'linha pp-pe'},[el('button',{class:'sec',type:'button',onclick:()=>{ novaPara=[]; novaAcomp=[]; pintarPara(); pop.hidden=true; }},['Só para mim']),el('span',{class:'esp'}),el('button',{class:'prim',type:'button',onclick:()=>{ pop.hidden=true; novaTxt.focus(); }},['Pronto'])]));
+  pop.appendChild(el('div',{class:'linha pp-pe'},[el('button',{class:'sec',type:'button',title:'Desmarcar todos: a pendência fica no seu quadro',onclick:()=>{ novaPara=[]; novaAcomp=[]; pintarPara(); pop.hidden=true; }},['Ninguém, fica comigo']),el('span',{class:'esp'}),el('button',{class:'prim',type:'button',onclick:()=>{ pop.hidden=true; novaTxt.focus(); }},['Pronto'])]));
   pop.hidden=false;
 }
 if($('novaPara')) $('novaPara').addEventListener('click',abrirPara);
@@ -813,6 +922,9 @@ document.addEventListener('click',e=>{ const pop=$('pessoasPop'); if(pop&&!pop.h
 function criarOnde(doc,para,acomp){
   const base=Object.assign({},doc,{envolvidos:(acomp||[]).filter(u=>u!==meuUid()),criadoPorNome:meuNome()||null,vistoEm:null,loteId:null});
   const destinos=(para||[]).filter(u=>u&&u!==meuUid());
+  // "só para mim" é do meu quadro e de mais ninguém
+  if(base.soParaMim&&!destinos.length) base.envolvidos=[];
+  else delete base.soParaMim;
   if(!destinos.length) return gravar('nova',()=>store.criarTarefa(base)).then(()=>({onde:'eu'}));
   const lote=destinos.length>1?('l'+Date.now().toString(36)):null;
   return gravar('nova',async()=>{
@@ -977,7 +1089,8 @@ function adicionar(){
   if(autoSetor) $('novaSetor').dataset.escolhido='';
   zerarEntendimento();
   const para=novaPara.slice(), acomp=novaAcomp.slice();
-  novaPara=[]; novaAcomp=[]; pintarPara();
+  if(novaSoMim) doc.soParaMim=true;
+  novaPara=[]; novaAcomp=[]; novaSoMim=false; pintarPara();
   criarOnde(doc,para,acomp);
   if(colMobile!==novaStatus){ colMobile=novaStatus; try{localStorage.setItem('pend.col',novaStatus)}catch(e){} }
   novaTxt.focus();
@@ -1510,6 +1623,7 @@ window.PendenciasHub={
     if(status!=='data') prazo=null;
     const setor=d.setor!==undefined&&d.setor!==null?d.setor:(r.setor||'');
     const doc={html,texto,setor,status,importante:!!d.importante,feito:false,feitoEm:null,criadoEm:agora,statusEm:agora,grifadoEm:null,revisadoEm:null,prazo,anexos:[],criadoPor:(store&&store.usuario&&store.usuario.email)||null};
+    if(d.soParaMim) doc.soParaMim=true;
     return criarOnde(doc,d.para||[],d.envolvidos||[]).then(x=>({status,prazo,setor,rotulo:rotuloPrazo({status,prazo})||'Hoje',onde:x.onde}));
   },
   entender:frase=>entender(String(frase||'')),
@@ -1533,9 +1647,15 @@ window.PendenciasHub={
     if((novaTxt.textContent||'').trim()||novosAnexos.length) return true;
     return false;
   },
-  atualizar(){ return Promise.all([(store&&store.atualizar)?store.atualizar():Promise.resolve(),refrescarPessoas()]); },
+  atualizar(){ return Promise.all([(store&&store.atualizar)?store.atualizar():Promise.resolve(),refrescarPessoas(),refrescarEquipe()]); },
   tarefas:()=>tarefas.slice(), setores:()=>setores.slice()
 };
+
+/* A barra lateral rola por conta própria (css/styles.css): a altura
+   dela desconta o cabeçalho do Hub, que muda com a largura da tela. */
+function medirCabecalho(){ const c=document.querySelector('.cab'); if(c&&c.offsetHeight) document.documentElement.style.setProperty('--cab-h',c.offsetHeight+'px'); }
+medirCabecalho(); window.addEventListener('resize',medirCabecalho);
+if(window.ResizeObserver&&document.querySelector('.cab')) new ResizeObserver(medirCabecalho).observe(document.querySelector('.cab'));
 
 /* ---------- data e arranque ---------- */
 let diaAtual=diaISO(Date.now());
@@ -1550,9 +1670,15 @@ render();
   if(!db){ $('semDb').hidden=false; carregado=true; render(); return; }
   assets=store.arquivos||null; $('btnPdf').hidden=!assets;
   // a equipe: para quem mandar, quem acompanha, e o nome de quem mandou
-  const carregarEquipe=()=>(typeof Dados!=='undefined'&&Dados.listarEquipe?Dados.listarEquipe():Promise.resolve([])).then(l=>{ equipe=(l||[]).filter(p=>p&&p.uid); pintarPara(); return refrescarPessoas(); }).catch(()=>{});
+  // administrador ou Gerência? (a mesma conta que o banco faz em ehAdmin() e ehGerencia())
+  const conferirAlcada=()=>(typeof Dados==='undefined'||!Dados.souAdministrador)?Promise.resolve(false)
+    :Promise.all([Dados.souAdministrador().catch(()=>false),Dados.meuCadastro?Dados.meuCadastro().catch(()=>null):null])
+      .then(r=>!!r[0]||!!(r[1]&&r[1].ativo===true&&Array.isArray(r[1].setores)&&r[1].setores.includes('Gerência')));
+  // o cadastro na lista da equipe também diz (e é o único que diz no modo de teste, sem sessão)
+  const alcadaNaLista=()=>{ const eu=equipe.find(p=>p.uid===meuUid()); return !!eu&&eu.ativo!==false&&(eu.papel==='admin'||(Array.isArray(eu.setores)&&eu.setores.includes('Gerência'))); };
+  const carregarEquipe=()=>Promise.all([(typeof Dados!=='undefined'&&Dados.listarEquipe?Dados.listarEquipe():Promise.resolve([])),conferirAlcada()]).then(([l,alcada])=>{ equipe=(l||[]).filter(p=>p&&p.uid); veEquipe=alcada||alcadaNaLista(); if(!veEquipe) daEquipe=[]; pintarPara(); return Promise.all([refrescarPessoas(),refrescarEquipe(true)]); }).catch(()=>{});
   carregarEquipe().then(()=>agendar());
-  setInterval(()=>{ if(!document.hidden) refrescarPessoas(); },60000);
+  setInterval(()=>{ if(!document.hidden){ refrescarPessoas(); refrescarEquipe(); } },60000);
   window.addEventListener('pendencias:equipe-mudou',carregarEquipe);
   store.ouvirTarefas(lista=>{ tarefas=lista.map(t=>Object.assign({},t)); carregado=true; agendar(); trazerAnexosAntigos(); },e=>aviso(msgErro(e)));
   store.ouvirConfig('clientes',d=>{

@@ -118,6 +118,10 @@
         return Promise.resolve([].concat(...uids.filter(u => u !== meuUid).map(uid =>
           Object.entries(lerDe(uid, 'tarefas') || {}).filter(([, t]) => Array.isArray(t.envolvidos) && t.envolvidos.includes(meuUid)).map(([id, t]) => Object.assign({}, t, { id, donoUid: uid })))));
       },
+      // o quadro de um colega (aba "Equipe"), sem as marcadas "só para mim", como no banco
+      listarQuadroDe(uid) {
+        return Promise.resolve(Object.entries(lerDe(uid, 'tarefas') || {}).filter(([, t]) => !t.soParaMim).map(([id, t]) => Object.assign({}, t, { id, donoUid: uid })));
+      },
 
       ouvirConfig(nome, cb) {
         (ouvConfig[nome] = ouvConfig[nome] || new Set()).add(cb);
