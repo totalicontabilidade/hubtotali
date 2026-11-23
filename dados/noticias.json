@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-21T18:00:04.911Z",
+ "atualizadoEm": "2026-11-23T10:05:18.483Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,16 +44,16 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-21T18:00:04.911Z"
+   "ultimaVez": "2026-11-23T10:05:18.483Z"
   },
   {
    "id": "simples",
    "sigla": "SN",
    "nome": "Simples Nacional",
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
-   "ok": false,
-   "erro": "fetch failed",
-   "ultimaVez": "2026-11-20T20:35:20.549Z"
+   "ok": true,
+   "quantas": 382,
+   "ultimaVez": "2026-11-23T10:05:18.483Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-21T18:00:04.911Z"
+   "ultimaVez": "2026-11-23T10:05:18.483Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 12,
-   "ultimaVez": "2026-11-21T18:00:04.911Z"
+   "ultimaVez": "2026-11-23T10:05:18.483Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-21T18:00:04.911Z"
+   "ultimaVez": "2026-11-23T10:05:18.483Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-21T18:00:04.911Z"
+   "ultimaVez": "2026-11-23T10:05:18.483Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-21T18:00:04.911Z"
+   "ultimaVez": "2026-11-23T10:05:18.483Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-21T18:00:04.911Z"
+   "ultimaVez": "2026-11-23T10:05:18.483Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-21T18:00:04.911Z"
+   "ultimaVez": "2026-11-23T10:05:18.483Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-21T18:00:04.911Z"
+   "ultimaVez": "2026-11-23T10:05:18.483Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,107 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-21T18:00:04.911Z"
+   "ultimaVez": "2026-11-23T10:05:18.483Z"
   }
  ],
  "noticias": [
+  {
+   "id": "ufwv4z",
+   "titulo": "Reforma Tributária pelo Brasil reúne 200 profissionais em Natal",
+   "link": "https://fenacon.org.br/noticias/reforma-tributaria-pelo-brasil-reune-200-profissionais-em-natal/",
+   "resumo": "Edição no Rio Grande do Norte promoveu atualização sobre as mudanças no sistema tributário, planejamento para 2027 e impactos para empresas e profissionais da contabilidade Natal (RN) recebeu, no dia 13 de novembro, mais uma edição do projeto Reforma Tributária pelo Brasil,…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-23T05:38:04.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-23T10:05:18.483Z"
+  },
+  {
+   "id": "1tnq4c5",
+   "titulo": "Pleito atendido: profissionais da contabilidade já podem acessar o ambiente de teste da CBS",
+   "link": "https://fenacon.org.br/reforma-tributaria/pleito-atendido-profissionais-da-contabilidade-ja-podem-acessar-o-ambiente-de-teste-da-cbs/",
+   "resumo": "Contadores de todo o Brasil já podem acessar o Ambiente de Produção Restrita do Piloto da Contribuição sobre Bens e Serviços (CBS), desde que possuam procuração dos clientes. A medida dispensa a indicação por entidades representativas ou a solicitação prévia de participação.…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-23T05:16:11.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-23T10:05:18.483Z"
+  },
+  {
+   "id": "102oa99",
+   "titulo": "Empresários pedem mais tempo para adaptação à escala 5×2 com 42 horas semanais",
+   "link": "https://fenacon.org.br/noticias/empresarios-pedem-mais-tempo-para-adaptacao-a-escala-5x2-com-42-horas-semanais/",
+   "resumo": "O início da vigência da escala 5×2, assim como a carga de trabalho de 42 horas semanais, está previsto para 16 de dezembro próximo Empresários que participaram de seminário na Câmara dos Deputados sobre o fim da escala 6×1 disseram que, a princípio, não são contrários às…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-23T04:50:20.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-23T10:05:18.483Z"
+  },
+  {
+   "id": "vdvihx",
+   "titulo": "Senado aprova PLP nº 299/2026 e CNC mantém atuação para aperfeiçoar texto na Câmara",
+   "link": "https://fenacon.org.br/noticias/senado-aprova-plp-no-299-2026-e-cnc-mantem-atuacao-para-aperfeicoar-texto-na-camara/",
+   "resumo": "Entidade defendeu mudanças em dispositivos relacionados à compensação tributária e à redução de benefícios fiscais; proposta segue agora para análise dos deputados O Plenário do Senado Federal aprovou, em 18 de novembro, o Projeto de Lei Complementar (PLP) nº 299/2026, que…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-23T03:17:00.000Z",
+   "categorias": [
+    "tributos",
+    "trabalhista",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-23T10:05:18.483Z"
+  },
+  {
+   "id": "nmu20l",
+   "titulo": "Governo do Brasil regulamenta jornada de trabalho na escala 5×2",
+   "link": "https://fenacon.org.br/noticias/governo-do-brasil-regulamenta-jornada-de-trabalho-na-escala-5x2/",
+   "resumo": "Decreto estabelece regras para a transição das jornadas, garante a manutenção dos salários e prevê normas complementares do MTE O governo anunciou, nesta quinta-feira (19), a publicação do decreto que regulamenta a Emenda Constitucional nº 141/2026, responsável por instituir…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-23T03:16:00.000Z",
+   "categorias": [
+    "trabalhista",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-23T10:05:18.483Z"
+  },
+  {
+   "id": "1ush6ap",
+   "titulo": "Nota orientativa simplifica recolhimento do FGTS sobre o 13º salário nas rescisões",
+   "link": "https://fenacon.org.br/noticias/nota-orientativa-simplifica-recolhimento-do-fgts-sobre-o-13o-salario-nas-rescisoes/",
+   "resumo": "A Nota Orientativa FGTS Digital nº 13/2026 substitui a orientação anterior e dispensa ajustes na folha anual do eSocial para antecipação do vencimento do FGTS A Secretaria de Inspeção do Trabalho publicou a Nota Orientativa FGTS Digital nº 13/2026, que substitui e revoga…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-23T03:07:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-23T10:05:18.483Z"
+  },
   {
    "id": "1g3y381",
    "titulo": "Programa Semana Gov destaca o início da escala 5x2 e a devolução de impostos",
@@ -2902,101 +2999,6 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-10T22:35:17.759Z"
-  },
-  {
-   "id": "4ghk42",
-   "titulo": "Trabalhador poderá autorizar bancos a consultar extrato do FGTS",
-   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/trabalhador-podera-autorizar-bancos-consultar-extrato-do-fgts",
-   "resumo": "A Caixa Econômica Federal passou a permitir nesta terça-feira (10) que trabalhadores autorizem instituições financeiras a consultar informações do extrato do Fundo de Garantia do Tempo de Serviço (FGTS). O serviço pode ser usado para comprovar renda ou vínculo empregatício em…",
-   "fonte": "ebc",
-   "fonteNome": "Agência Brasil (Economia)",
-   "sigla": "EBC",
-   "publicadoEm": "2026-11-10T20:49:00.000Z",
-   "categorias": [
-    "trabalhista"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-10T21:05:18.013Z"
-  },
-  {
-   "id": "km8sxs",
-   "titulo": "Receita Federal realiza coletiva de imprensa sobre a Operação Fronteira Receita Federal no Rio Grande do Sul",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/aviso-de-pauta-receita-federal-realiza-coletiva-de-imprensa-sobre-a-operacao-fronteira-receita-federal-no-rio-grande-do-sul",
-   "resumo": "A coletiva contará com a presença do secretário especial Robinson Barreirinhas.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-10T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-10T21:05:18.013Z"
-  },
-  {
-   "id": "1o3t9lm",
-   "titulo": "Ministérios da Fazenda da Espanha e do Brasil assinam Memorando de Entendimento para impulsionar a tributação dos super-ricos",
-   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/ministerios-da-fazenda-da-espanha-e-do-brasil-assinam-memorando-de-entendimento-para-impulsionar-a-tributacao-dos-super-ricos",
-   "resumo": "Documento prevê aumentar colaboração entre os países em matéria de progressividade fiscal. Objetivo é impulsionar uma coligação internacional que avance na tributação efetiva dos grandes patrimónios como medida necessária para combater a desigualdade global e reforçar a…",
-   "fonte": "fazenda",
-   "fonteNome": "Ministério da Fazenda",
-   "sigla": "MF",
-   "publicadoEm": "2026-11-10T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-10T17:35:19.877Z"
-  },
-  {
-   "id": "v4rwg2",
-   "titulo": "Unidade da PGFN, em Maringá, retoma atendimento presencial",
-   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/unidade-da-pgfn-em-maringa-retoma-atendimento-presencial",
-   "resumo": "Serviço havia sido suspenso devido às chuvas na região",
-   "fonte": "fazenda",
-   "fonteNome": "Ministério da Fazenda",
-   "sigla": "MF",
-   "publicadoEm": "2026-11-10T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-10T18:05:41.382Z"
-  },
-  {
-   "id": "6iqemd",
-   "titulo": "Operação Fronteira em Piumhi: Receita Federal apreende 2,4 milhões em mercadorias",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-em-piumhi-receita-federal-apreende-2-4-milhoes-em-mercadorias",
-   "resumo": "Fiscalização foi realizada em quatro estabelecimentos comerciais e um galpão.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-10T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-10T17:05:22.518Z"
-  },
-  {
-   "id": "1jnor5h",
-   "titulo": "Operação Fronteira Receita Federal supera R$ 139 milhões em apreensões em Mato Grosso do Sul",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-receita-federal-supera-r-139-milhoes-em-apreensoes-em-mato-grosso-do-sul",
-   "resumo": "Em sua primeira semana, a Operação Fronteira Receita Federal já resultou em mais de R$ 139 milhões em apreensões e 31 prisões em Mato Grosso do Sul, reforçando o combate ao crime organizado, ao tráfico de drogas e à entrada de mercadorias irregulares no país.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-10T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-10T19:05:18.124Z"
   }
  ]
 }
