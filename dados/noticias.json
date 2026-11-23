@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-23T20:05:23.003Z",
+ "atualizadoEm": "2026-11-23T20:35:17.663Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T20:05:23.003Z"
+   "ultimaVez": "2026-11-23T20:35:17.663Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-23T20:05:23.003Z"
+   "ultimaVez": "2026-11-23T20:35:17.663Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T20:05:23.003Z"
+   "ultimaVez": "2026-11-23T20:35:17.663Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 14,
-   "ultimaVez": "2026-11-23T20:05:23.003Z"
+   "ultimaVez": "2026-11-23T20:35:17.663Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-23T20:05:23.003Z"
+   "ultimaVez": "2026-11-23T20:35:17.663Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-23T20:05:23.003Z"
+   "ultimaVez": "2026-11-23T20:35:17.663Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 3,
    "via": "ponte",
-   "ultimaVez": "2026-11-23T20:05:23.003Z"
+   "ultimaVez": "2026-11-23T20:35:17.663Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-23T20:05:23.003Z"
+   "ultimaVez": "2026-11-23T20:35:17.663Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-23T20:05:23.003Z"
+   "ultimaVez": "2026-11-23T20:35:17.663Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-23T20:05:23.003Z"
+   "ultimaVez": "2026-11-23T20:35:17.663Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,23 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-23T20:05:23.003Z"
+   "ultimaVez": "2026-11-23T20:35:17.663Z"
   }
  ],
  "noticias": [
+  {
+   "id": "2gn26z",
+   "titulo": "Presidente da Fenacon, Reynaldo Lima Jr., toma posse na nova diretoria da CNC para o mandato 2026–2030",
+   "link": "https://fenacon.org.br/noticias/presidente-da-fenacon-reynaldo-lima-jr-toma-posse-na-nova-diretoria-da-cnc-para-o-mandato-2026-2030/",
+   "resumo": "Solenidade marcou o início de uma nova gestão da Confederação, sob a presidência de José Roberto Tadros, e reforçou a representatividade do setor de serviços contábeis no cenário nacional O presidente da Federação Nacional das Empresas de Serviços Contábeis e das Empresas de…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-23T20:28:30.000Z",
+   "categorias": [],
+   "relevancia": 2,
+   "vistaEm": "2026-11-23T20:35:17.663Z"
+  },
   {
    "id": "1o1cwey",
    "titulo": "Paim defende mudança na contribuição das empresas para financiar Previdência",
@@ -2969,23 +2982,6 @@
     "contabil"
    ],
    "relevancia": 3,
-   "vistaEm": "2026-11-11T13:05:19.478Z"
-  },
-  {
-   "id": "xyozfk",
-   "titulo": "TCU apresenta ao Senado proposta de alíquota de 11,3% para CBS, novo tributo",
-   "link": "https://www12.senado.leg.br/noticias/videos/2026/11/tcu-apresenta-ao-senado-proposta-de-aliquota-de-11-3-para-cbs-novo-tributo",
-   "resumo": "",
-   "fonte": "senado",
-   "fonteNome": "Agência Senado",
-   "sigla": "Senado",
-   "publicadoEm": "2026-11-11T12:58:42.000Z",
-   "categorias": [
-    "legislacao",
-    "reforma",
-    "tributos"
-   ],
-   "relevancia": 2,
    "vistaEm": "2026-11-11T13:05:19.478Z"
   }
  ]
