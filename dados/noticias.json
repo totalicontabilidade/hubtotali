@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-23T16:35:27.252Z",
+ "atualizadoEm": "2026-11-23T17:05:22.954Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T16:35:27.252Z"
+   "ultimaVez": "2026-11-23T17:05:22.954Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-23T16:35:27.252Z"
+   "ultimaVez": "2026-11-23T17:05:22.954Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T16:35:27.252Z"
+   "ultimaVez": "2026-11-23T17:05:22.954Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 13,
-   "ultimaVez": "2026-11-23T16:35:27.252Z"
+   "ultimaVez": "2026-11-23T17:05:22.954Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-23T16:35:27.252Z"
+   "ultimaVez": "2026-11-23T17:05:22.954Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-23T16:35:27.252Z"
+   "ultimaVez": "2026-11-23T17:05:22.954Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-23T16:35:27.252Z"
+   "ultimaVez": "2026-11-23T17:05:22.954Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-23T16:35:27.252Z"
+   "ultimaVez": "2026-11-23T17:05:22.954Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-23T16:35:27.252Z"
+   "ultimaVez": "2026-11-23T17:05:22.954Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-23T16:35:27.252Z"
+   "ultimaVez": "2026-11-23T17:05:22.954Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-23T16:35:27.252Z"
+   "ultimaVez": "2026-11-23T17:05:22.954Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1a46b1q",
+   "titulo": "Receita Federal comenta nesta terça-feira (24/11) a arrecadação do mês de outubro",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-comenta-nesta-terca-feira-24-11-a-arrecadacao-do-mes-de-outubro",
+   "resumo": "Coletiva sobre a arrecadação de setembro será realizada nesta terça-feira, às 11h, com transmissão ao vivo pelo YouTube.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-23T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-23T17:05:22.954Z"
+  },
   {
    "id": "1gstltu",
    "titulo": "Começa nesta terça (24) o pagamento do 13º salário e de benefícios e auxílios referentes ao mês de novembro",
@@ -2970,23 +2986,6 @@
    "categorias": [
     "reforma",
     "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-11T10:05:19.467Z"
-  },
-  {
-   "id": "1cvxcc7",
-   "titulo": "CNPJ Técnico: o que é e quem precisará da inscrição com a Reforma Tributária",
-   "link": "https://fenacon.org.br/reforma-tributaria/cnpj-tecnico-o-que-e-e-quem-precisara-da-inscricao-com-a-reforma-tributaria/",
-   "resumo": "Instrumento não cria nova empresa, mas exigirá atenção de produtores rurais e locadores de imóveis A partir de 1º de janeiro de 2027, pessoas físicas que exercem atividades econômicas habituais com operações de bens ou prestação de serviços e que não se enquadrem nos limites…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-11T03:38:50.000Z",
-   "categorias": [
-    "reforma",
-    "tributos",
-    "empresas"
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-11T10:05:19.467Z"
