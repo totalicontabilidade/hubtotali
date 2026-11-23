@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-23T11:35:19.077Z",
+ "atualizadoEm": "2026-11-23T12:05:17.907Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T11:35:19.077Z"
+   "ultimaVez": "2026-11-23T12:05:17.907Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-23T11:35:19.077Z"
+   "ultimaVez": "2026-11-23T12:05:17.907Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T11:35:19.077Z"
+   "ultimaVez": "2026-11-23T12:05:17.907Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 12,
-   "ultimaVez": "2026-11-23T11:35:19.077Z"
+   "ultimaVez": "2026-11-23T12:05:17.907Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-23T11:35:19.077Z"
+   "ultimaVez": "2026-11-23T12:05:17.907Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-23T11:35:19.077Z"
+   "ultimaVez": "2026-11-23T12:05:17.907Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-23T11:35:19.077Z"
+   "ultimaVez": "2026-11-23T12:05:17.907Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-23T11:35:19.077Z"
+   "ultimaVez": "2026-11-23T12:05:17.907Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-23T11:35:19.077Z"
+   "ultimaVez": "2026-11-23T12:05:17.907Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-23T11:35:19.077Z"
+   "ultimaVez": "2026-11-23T12:05:17.907Z"
   },
   {
    "id": "govbr",
@@ -134,11 +134,61 @@
    "nome": "Agência Gov (governo federal)",
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
-   "quantas": 3,
-   "ultimaVez": "2026-11-23T11:35:19.077Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-23T12:05:17.907Z"
   }
  ],
  "noticias": [
+  {
+   "id": "qz9gdy",
+   "titulo": "Receita Federal retém 1 tonelada de maconha oculta em carga de milho em Ponta Grossa",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-retem-1-tonelada-de-maconha-oculta-em-carga-de-milho-em-ponta-grossa",
+   "resumo": "Destino do entorpecente seria o estado de Santa Catarina.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-23T12:05:19.681Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-23T12:05:17.907Z"
+  },
+  {
+   "id": "15o2mmr",
+   "titulo": "Comissão debate alíquota-base da Contribuição sobre Bens e Serviços",
+   "link": "https://www.camara.leg.br/noticias/1320994-comissao-debate-aliquota-base-da-contribuicao-sobre-bens-e-servicos",
+   "resumo": "Alíquota foi fixada em 11,3%",
+   "fonte": "camara",
+   "fonteNome": "Agência Câmara",
+   "sigla": "Câmara",
+   "publicadoEm": "2026-11-23T11:55:00.000Z",
+   "categorias": [
+    "legislacao",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-23T12:05:17.907Z"
+  },
+  {
+   "id": "17q7uyb",
+   "titulo": "Receita amplia participação em piloto da CBS para todas as empresas",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/receita-amplia-participacao-em-piloto-da-cbs-para-todas-empresas",
+   "resumo": "Qualquer empresa inscrita no Cadastro Nacional da Pessoa Jurídica (CNPJ) poderá participar do ambiente de testes do piloto da Reforma Tributária referente à Contribuição sobre Bens e Serviços (CBS) . De acordo com portaria da Receita Federal publicada nesta segunda-feira…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-23T11:40:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "empresas",
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-23T12:05:17.907Z"
+  },
   {
    "id": "1e9qabl",
    "titulo": "Receita Federal abre consulta ao lote residual de restituição do IRPF 2026 nesta segunda-feira (23)",
@@ -2940,57 +2990,6 @@
     "tributos",
     "contabil",
     "sergipe"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-11T10:05:19.467Z"
-  },
-  {
-   "id": "1gh5jge",
-   "titulo": "Deputados admitem rever isenções se IVA superar 26,5%",
-   "link": "https://fenacon.org.br/reforma-tributaria/deputados-admitem-rever-isencoes-se-iva-superar-265/",
-   "resumo": "Parlamentares descartam adiar regulamentação da reforma tributária Os deputados que participam da regulamentação da reforma tributária admitem rever benefícios fiscais concedidos a determinados setores caso a alíquota de referência do novo Imposto sobre Valor Agregado (IVA)…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-11T03:05:31.000Z",
-   "categorias": [
-    "reforma",
-    "tributos",
-    "trabalhista",
-    "legislacao"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-11T10:05:19.467Z"
-  },
-  {
-   "id": "q43lfd",
-   "titulo": "Correios põe à venda mais 15 bens imóveis, com parcelamento e uso do FGTS",
-   "link": "https://agenciagov.ebc.com.br/noticias/202611/correios-licita-15-imoveis-com-possibilidade-de-parcelamento-em-ate-12x-financiamento-e-uso-do-fgts",
-   "resumo": "Nesta quinta, dia 12, e no dia 26, a empresa licita terrenos e prédios comerciais em 11 estados; lances já estão abertos pela VIP Leilões",
-   "fonte": "govbr",
-   "fonteNome": "Agência Gov (governo federal)",
-   "sigla": "Gov",
-   "publicadoEm": "2026-11-11T03:00:00.000Z",
-   "categorias": [
-    "tributos",
-    "trabalhista"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-11T16:05:21.106Z"
-  },
-  {
-   "id": "akemkl",
-   "titulo": "CFC e Sistema Fenacon unem esforços para apresentar contribuições técnicas à Receita Federal sobre a Reforma Tributária",
-   "link": "https://fenacon.org.br/noticias/cfc-e-sistema-fenacon-unem-esforcos-para-apresentar-contribuicoes-tecnicas-a-receita-federal-sobre-a-reforma-tributaria/",
-   "resumo": "O Conselho Federal de Contabilidade (CFC) e o Sistema Fenacon estão reunindo contribuições dos profissionais, entidades e empresas de tecnologia para construir uma manifestação técnica conjunta à Receita Federal sobre os desafios da implementação da Reforma Tributária. O…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-11T02:17:50.000Z",
-   "categorias": [
-    "reforma",
-    "tributos",
-    "contabil"
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-11T10:05:19.467Z"
