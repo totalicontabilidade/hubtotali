@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-23T21:35:19.040Z",
+ "atualizadoEm": "2026-11-23T22:35:20.987Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T21:35:19.040Z"
+   "ultimaVez": "2026-11-23T22:35:20.987Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-23T21:35:19.040Z"
+   "ultimaVez": "2026-11-23T22:35:20.987Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T21:35:19.040Z"
+   "ultimaVez": "2026-11-23T22:35:20.987Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 14,
-   "ultimaVez": "2026-11-23T21:35:19.040Z"
+   "ultimaVez": "2026-11-23T22:35:20.987Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-23T21:35:19.040Z"
+   "ultimaVez": "2026-11-23T22:35:20.987Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-23T21:35:19.040Z"
+   "ultimaVez": "2026-11-23T22:35:20.987Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 3,
    "via": "ponte",
-   "ultimaVez": "2026-11-23T21:35:19.040Z"
+   "ultimaVez": "2026-11-23T22:35:20.987Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-23T21:35:19.040Z"
+   "ultimaVez": "2026-11-23T22:35:20.987Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-23T21:35:19.040Z"
+   "ultimaVez": "2026-11-23T22:35:20.987Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-23T21:35:19.040Z"
+   "ultimaVez": "2026-11-23T22:35:20.987Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-23T21:35:19.040Z"
+   "ultimaVez": "2026-11-23T22:35:20.987Z"
   }
  ],
  "noticias": [
+  {
+   "id": "c4rghx",
+   "titulo": "Governo publica portaria com regras complementares para a escala 5x2. Confira",
+   "link": "https://agenciagov.ebc.com.br/noticias/202611/governo-federal-publica-portaria-com-regras-complementares-para-aplicacao-da-escala-5x2-1",
+   "resumo": "Norma detalha aplicação dos novos limites de jornada, dois dias de descanso semanal, cálculo do salário-hora, regras para negociação coletiva e segurança e saúde no trabalho",
+   "fonte": "govbr",
+   "fonteNome": "Agência Gov (governo federal)",
+   "sigla": "Gov",
+   "publicadoEm": "2026-11-23T21:54:00.000Z",
+   "categorias": [
+    "trabalhista",
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-23T22:35:20.987Z"
+  },
   {
    "id": "1y35moi",
    "titulo": "Fenacon e CFC disponibilizam canal para esclarecer dúvidas sobre a Reforma Tributária",
@@ -2967,22 +2983,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-11T15:35:18.403Z"
-  },
-  {
-   "id": "ve9v4p",
-   "titulo": "Receita Federal participa de apreensão de quase 8 toneladas de maconha avaliadas em R$ 78 milhões",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-participa-de-apreensao-de-quase-8-toneladas-de-maconha-avaliadas-em-r-78-milhoes",
-   "resumo": "Ação integrada entre a Receita Federal e órgãos de segurança resultou na apreensão de aproximadamente 7,8 toneladas de maconha no Paraná.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-11T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-11T19:05:24.718Z"
   }
  ]
 }
