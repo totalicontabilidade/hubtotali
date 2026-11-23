@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-23T14:35:20.288Z",
+ "atualizadoEm": "2026-11-23T15:35:16.473Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T14:35:20.288Z"
+   "ultimaVez": "2026-11-23T15:35:16.473Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-23T14:35:20.288Z"
+   "ultimaVez": "2026-11-23T15:35:16.473Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T14:35:20.288Z"
+   "ultimaVez": "2026-11-23T15:35:16.473Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 13,
-   "ultimaVez": "2026-11-23T14:35:20.288Z"
+   "ultimaVez": "2026-11-23T15:35:16.473Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-23T14:35:20.288Z"
+   "ultimaVez": "2026-11-23T15:35:16.473Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-23T14:35:20.288Z"
+   "ultimaVez": "2026-11-23T15:35:16.473Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-23T14:35:20.288Z"
+   "ultimaVez": "2026-11-23T15:35:16.473Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-23T14:35:20.288Z"
+   "ultimaVez": "2026-11-23T15:35:16.473Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-23T14:35:20.288Z"
+   "ultimaVez": "2026-11-23T15:35:16.473Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-23T14:35:20.288Z"
+   "ultimaVez": "2026-11-23T15:35:16.473Z"
   },
   {
    "id": "govbr",
@@ -134,11 +134,26 @@
    "nome": "Agência Gov (governo federal)",
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-23T14:35:20.288Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-23T15:35:16.473Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1gstltu",
+   "titulo": "Começa nesta terça (24) o pagamento do 13º salário e de benefícios e auxílios referentes ao mês de novembro",
+   "link": "https://agenciagov.ebc.com.br/noticias/202611/comeca-nesta-terca-24-o-pagamento-do-13o-salario-e-de-beneficios-e-auxilios-referentes-ao-mes-de-novembro",
+   "resumo": "Para conferir a data de pagamento, o cidadão deve considerar o número final do cartão de benefício",
+   "fonte": "govbr",
+   "fonteNome": "Agência Gov (governo federal)",
+   "sigla": "Gov",
+   "publicadoEm": "2026-11-23T13:38:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-23T15:35:16.473Z"
+  },
   {
    "id": "qz9gdy",
    "titulo": "Receita Federal retém 1 tonelada de maconha oculta em carga de milho em Ponta Grossa",
@@ -2972,24 +2987,6 @@
     "reforma",
     "tributos",
     "empresas"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-11T10:05:19.467Z"
-  },
-  {
-   "id": "1v1iwzl",
-   "titulo": "Seminário Reforma Tributária pelo Brasil reúne profissionais da contabilidade em Aracaju",
-   "link": "https://fenacon.org.br/noticias/seminario-reforma-tributaria-pelo-brasil-reune-profissionais-da-contabilidade-em-aracaju/",
-   "resumo": "Nesta segunda-feira (9 de novembro), Aracaju recebeu o Seminário Reforma Tributária pelo Brasil, iniciativa nacional da Federação Nacional das Empresas de Serviços Contábeis e das Empresas de Assessoramento, Perícias, Informações e Pesquisas (Fenacon) e do Conselho Federal de…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-11T03:07:00.000Z",
-   "categorias": [
-    "reforma",
-    "tributos",
-    "contabil",
-    "sergipe"
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-11T10:05:19.467Z"
