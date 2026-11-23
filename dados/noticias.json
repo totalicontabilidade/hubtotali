@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-23T10:05:18.483Z",
+ "atualizadoEm": "2026-11-23T10:35:21.152Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T10:05:18.483Z"
+   "ultimaVez": "2026-11-23T10:35:21.152Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-23T10:05:18.483Z"
+   "ultimaVez": "2026-11-23T10:35:21.152Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T10:05:18.483Z"
+   "ultimaVez": "2026-11-23T10:35:21.152Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 12,
-   "ultimaVez": "2026-11-23T10:05:18.483Z"
+   "ultimaVez": "2026-11-23T10:35:21.152Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-23T10:05:18.483Z"
+   "ultimaVez": "2026-11-23T10:35:21.152Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-23T10:05:18.483Z"
+   "ultimaVez": "2026-11-23T10:35:21.152Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 6,
    "via": "ponte",
-   "ultimaVez": "2026-11-23T10:05:18.483Z"
+   "ultimaVez": "2026-11-23T10:35:21.152Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-23T10:05:18.483Z"
+   "ultimaVez": "2026-11-23T10:35:21.152Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-23T10:05:18.483Z"
+   "ultimaVez": "2026-11-23T10:35:21.152Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 3,
-   "ultimaVez": "2026-11-23T10:05:18.483Z"
+   "quantas": 4,
+   "ultimaVez": "2026-11-23T10:35:21.152Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,39 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-23T10:05:18.483Z"
+   "ultimaVez": "2026-11-23T10:35:21.152Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1e9qabl",
+   "titulo": "Receita Federal abre consulta ao lote residual de restituição do IRPF 2026 nesta segunda-feira (23)",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-abre-consulta-ao-lote-residual-de-restituicao-do-irpf-2026-nesta-segunda-feira-23",
+   "resumo": "Lote é composto por 223.793 restituições, destinadas a contribuintes prioritários e não prioritários, com valor total de R$ 666.285.077,46. Crédito bancário será realizado ao longo do dia 30 de novembro.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-23T10:35:22.986Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-23T10:35:21.152Z"
+  },
+  {
+   "id": "14gw5gb",
+   "titulo": "Sebrae abre inscrições para empreendedores negros",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/sebrae-abre-inscricoes-para-empreendedores-negros",
+   "resumo": "O Serviço Brasileiro de Apoio às Micro e Pequenas Empresas (Sebrae) está com inscrições abertas para formar um grupo de empreendedores para atuar numa plataforma digital de negócios entre os mercados brasileiro e africano. A ideia é selecionar 100 empreendedores negros, que…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-23T10:00:00.000Z",
+   "categorias": [],
+   "relevancia": 1,
+   "vistaEm": "2026-11-23T10:35:21.152Z"
+  },
   {
    "id": "ufwv4z",
    "titulo": "Reforma Tributária pelo Brasil reúne 200 profissionais em Natal",
@@ -2965,40 +2994,6 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-11T10:05:19.467Z"
-  },
-  {
-   "id": "mfkzmi",
-   "titulo": "SESCAP-LDR recebe edição do Seminário Reforma Tributária pelo Brasil",
-   "link": "https://fenacon.org.br/noticias/sescap-ldr-recebe-edicao-do-seminario-reforma-tributaria-pelo-brasil/",
-   "resumo": "Nesta terça-feira, 10 de novembro de 2026, a cidade de Londrina recebeu o Seminário Reforma Tributária pelo Brasil. O evento reuniu profissionais da contabilidade, empresários e especialistas no setor para discutir as profundas transformações no sistema tributário nacional. A…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-11T01:42:12.000Z",
-   "categorias": [
-    "reforma",
-    "tributos",
-    "contabil"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-11T10:05:19.467Z"
-  },
-  {
-   "id": "1mw4m0x",
-   "titulo": "AVISO DE PAUTA",
-   "link": "https://cfc.org.br/noticias/aviso-de-pauta/",
-   "resumo": "A Receita Federal, o Conselho Federal de Contabilidade (CFC), o Comitê Gestor do Imposto sobre Bens e Serviços (CGIBS), o Serviço Brasileiro de Apoio às Micro e Pequenas Empresas (Sebrae) e a Federação Nacional das Empresas de Serviços Contábeis e das Empresas de…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-10T21:19:00.000Z",
-   "categorias": [
-    "reforma",
-    "tributos",
-    "contabil"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-10T22:35:17.759Z"
   }
  ]
 }
