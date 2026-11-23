@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-23T17:35:23.013Z",
+ "atualizadoEm": "2026-11-23T18:35:19.578Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T17:35:23.013Z"
+   "ultimaVez": "2026-11-23T18:35:19.578Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-23T17:35:23.013Z"
+   "ultimaVez": "2026-11-23T18:35:19.578Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T17:35:23.013Z"
+   "ultimaVez": "2026-11-23T18:35:19.578Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 13,
-   "ultimaVez": "2026-11-23T17:35:23.013Z"
+   "ultimaVez": "2026-11-23T18:35:19.578Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-23T17:35:23.013Z"
+   "ultimaVez": "2026-11-23T18:35:19.578Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-23T17:35:23.013Z"
+   "ultimaVez": "2026-11-23T18:35:19.578Z"
   },
   {
    "id": "sefaz-se",
@@ -97,9 +97,9 @@
    "nome": "Secretaria da Fazenda de Sergipe",
    "site": "https://www.sefaz.se.gov.br/",
    "ok": true,
-   "quantas": 6,
+   "quantas": 3,
    "via": "ponte",
-   "ultimaVez": "2026-11-23T17:35:23.013Z"
+   "ultimaVez": "2026-11-23T18:35:19.578Z"
   },
   {
    "id": "camara",
@@ -107,8 +107,8 @@
    "nome": "Agência Câmara",
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
-   "quantas": 2,
-   "ultimaVez": "2026-11-23T17:35:23.013Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-23T18:35:19.578Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-23T17:35:23.013Z"
+   "ultimaVez": "2026-11-23T18:35:19.578Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-23T17:35:23.013Z"
+   "ultimaVez": "2026-11-23T18:35:19.578Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,25 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-23T17:35:23.013Z"
+   "ultimaVez": "2026-11-23T18:35:19.578Z"
   }
  ],
  "noticias": [
+  {
+   "id": "ud341w",
+   "titulo": "Contribuintes já podem aderir ao Regulariza Sergipe com descontos de até 95% em juros e multas para ICMS, IPVA e ITCMD",
+   "link": "https://www.sefaz.se.gov.br/Lists/Noticias/DispForm.aspx?ID=2885",
+   "resumo": "Title: Contribuintes já podem aderir ao Regulariza Sergipe com descontos de até 95% em juros e multas para ICMS, IPVA e ITCMD Publicacao: 23/11/2026 15:05 Foto: https://www.sefaz.se.gov.br/Imagens/noticias/23-11-2026/1.jpg Visibilidade: Intranet, Internet",
+   "fonte": "sefaz-se",
+   "fonteNome": "Secretaria da Fazenda de Sergipe",
+   "sigla": "SEFAZ/SE",
+   "publicadoEm": "2026-11-23T18:10:00.000Z",
+   "categorias": [
+    "sergipe"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-23T18:35:19.578Z"
+  },
   {
    "id": "1a46b1q",
    "titulo": "Receita Federal comenta nesta terça-feira (24/11) a arrecadação do mês de outubro",
@@ -2970,22 +2985,6 @@
     "reforma",
     "tributos",
     "contabil"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-11T10:05:19.467Z"
-  },
-  {
-   "id": "ylr3l0",
-   "titulo": "Receita Federal atualiza Ambiente Beta da DeRE",
-   "link": "https://fenacon.org.br/reforma-tributaria/receita-federal-atualiza-ambiente-beta-da-dere/",
-   "resumo": "A Receita Federal do Brasil (RFB) e o Comitê Gestor do IBS (CGIBS) informam que o ambiente de Produção Beta da Declaração de Regimes Específicos (DeRE) será atualizado em 11 de novembro de 2026, às 7h. Informações importantes Disponibilidade do ambiente A atualização será…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-11T04:55:45.000Z",
-   "categorias": [
-    "reforma",
-    "tributos"
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-11T10:05:19.467Z"
