@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-23T18:35:19.578Z",
+ "atualizadoEm": "2026-11-23T19:05:19.710Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T18:35:19.578Z"
+   "ultimaVez": "2026-11-23T19:05:19.710Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-23T18:35:19.578Z"
+   "ultimaVez": "2026-11-23T19:05:19.710Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T18:35:19.578Z"
+   "ultimaVez": "2026-11-23T19:05:19.710Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 13,
-   "ultimaVez": "2026-11-23T18:35:19.578Z"
+   "ultimaVez": "2026-11-23T19:05:19.710Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-23T18:35:19.578Z"
+   "ultimaVez": "2026-11-23T19:05:19.710Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-23T18:35:19.578Z"
+   "ultimaVez": "2026-11-23T19:05:19.710Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 3,
    "via": "ponte",
-   "ultimaVez": "2026-11-23T18:35:19.578Z"
+   "ultimaVez": "2026-11-23T19:05:19.710Z"
   },
   {
    "id": "camara",
@@ -107,8 +107,8 @@
    "nome": "Agência Câmara",
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-23T18:35:19.578Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-23T19:05:19.710Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 0,
-   "ultimaVez": "2026-11-23T18:35:19.578Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-23T19:05:19.710Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-23T18:35:19.578Z"
+   "ultimaVez": "2026-11-23T19:05:19.710Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,43 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-23T18:35:19.578Z"
+   "ultimaVez": "2026-11-23T19:05:19.710Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1o1cwey",
+   "titulo": "Paim defende mudança na contribuição das empresas para financiar Previdência",
+   "link": "https://www12.senado.leg.br/noticias/materias/2026/11/23/paim-defende-mudanca-na-contribuicao-das-empresas-para-financiar-previdencia",
+   "resumo": "",
+   "fonte": "senado",
+   "fonteNome": "Agência Senado",
+   "sigla": "Senado",
+   "publicadoEm": "2026-11-23T18:56:11.000Z",
+   "categorias": [
+    "legislacao",
+    "tributos",
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-23T19:05:19.710Z"
+  },
+  {
+   "id": "na5vvd",
+   "titulo": "Comissão aprova desconto no Imposto de Renda para doações a entidades de assistência social",
+   "link": "https://www.camara.leg.br/noticias/1321945-comissao-aprova-desconto-no-imposto-de-renda-para-doacoes-a-entidades-de-assistencia-social",
+   "resumo": "Proposta segue em análise na Câmara dos Deputados",
+   "fonte": "camara",
+   "fonteNome": "Agência Câmara",
+   "sigla": "Câmara",
+   "publicadoEm": "2026-11-23T18:44:00.000Z",
+   "categorias": [
+    "tributos",
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-23T19:05:19.710Z"
+  },
   {
    "id": "ud341w",
    "titulo": "Contribuintes já podem aderir ao Regulariza Sergipe com descontos de até 95% em juros e multas para ICMS, IPVA e ITCMD",
@@ -2955,39 +2988,6 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-11T11:35:21.797Z"
-  },
-  {
-   "id": "6gmyym",
-   "titulo": "Receita Federal apreende drogas e medicamentos irregulares em ações de combate aos ilícitos no Acre e em Rondônia",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-apreende-drogas-e-medicamentos-irregulares-em-acoes-de-combate-aos-ilicitos-no-acre-e-em-rondonia",
-   "resumo": "Operações realizadas pela Receita Federal no Acre e em Rondônia resultaram na apreensão de drogas e medicamentos de comercialização irregular, reforçando a atuação do órgão no combate ao tráfico e à circulação ilícita de mercadorias nas regiões de fronteira.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-11T11:05:19.052Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-11T11:05:17.690Z"
-  },
-  {
-   "id": "1fb5r8u",
-   "titulo": "Fenacon, CFC, Receita Federal, CGIBS e Sebrae realizam entrevista coletiva sobre a Reforma Tributária do Consumo",
-   "link": "https://fenacon.org.br/noticias/fenacon-cfc-receita-federal-cgibs-e-sebrae-realizam-entrevista-coletiva-sobre-a-reforma-tributaria-do-consumo/",
-   "resumo": "A Receita Federal, o Conselho Federal de Contabilidade (CFC), o Comitê Gestor do Imposto sobre Bens e Serviços (CGIBS), o Serviço Brasileiro de Apoio às Micro e Pequenas Empresas (Sebrae) e a Federação Nacional das Empresas de Serviços Contábeis e das Empresas de…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-11T05:10:33.000Z",
-   "categorias": [
-    "reforma",
-    "tributos",
-    "contabil"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-11T10:05:19.467Z"
   }
  ]
 }
