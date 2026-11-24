@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-24T21:35:19.991Z",
+ "atualizadoEm": "2026-11-24T22:05:18.436Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-24T21:35:19.991Z"
+   "ultimaVez": "2026-11-24T22:05:18.436Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-24T21:35:19.991Z"
+   "ultimaVez": "2026-11-24T22:05:18.436Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-24T21:35:19.991Z"
+   "ultimaVez": "2026-11-24T22:05:18.436Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 15,
-   "ultimaVez": "2026-11-24T21:35:19.991Z"
+   "ultimaVez": "2026-11-24T22:05:18.436Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-24T21:35:19.991Z"
+   "ultimaVez": "2026-11-24T22:05:18.436Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-24T21:35:19.991Z"
+   "ultimaVez": "2026-11-24T22:05:18.436Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-24T21:35:19.991Z"
+   "ultimaVez": "2026-11-24T22:05:18.436Z"
   },
   {
    "id": "camara",
@@ -107,8 +107,8 @@
    "nome": "Agência Câmara",
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
-   "quantas": 3,
-   "ultimaVez": "2026-11-24T21:35:19.991Z"
+   "quantas": 4,
+   "ultimaVez": "2026-11-24T22:05:18.436Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-24T21:35:19.991Z"
+   "ultimaVez": "2026-11-24T22:05:18.436Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-24T21:35:19.991Z"
+   "ultimaVez": "2026-11-24T22:05:18.436Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-24T21:35:19.991Z"
+   "ultimaVez": "2026-11-24T22:05:18.436Z"
   }
  ],
  "noticias": [
+  {
+   "id": "15jqyp9",
+   "titulo": "Especialistas defendem aumento do número de mulheres em cargos de direção do sistema de previdência",
+   "link": "https://www.camara.leg.br/noticias/1322513-especialistas-defendem-aumento-do-numero-de-mulheres-em-cargos-de-direcao-do-sistema-de-previdencia",
+   "resumo": "Assunto foi debatido nesta terça-feira pela Comissão de Direitos Humanos da Câmara",
+   "fonte": "camara",
+   "fonteNome": "Agência Câmara",
+   "sigla": "Câmara",
+   "publicadoEm": "2026-11-24T21:59:00.000Z",
+   "categorias": [
+    "legislacao",
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-24T22:05:18.436Z"
+  },
   {
    "id": "1jfbmzd",
    "titulo": "Câmara aprova pensão especial para parentes das vítimas da chacina de Acari",
@@ -2971,21 +2987,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-12T23:31:45.580Z"
-  },
-  {
-   "id": "12hyhvx",
-   "titulo": "Boulos: 'Encontro com a sociedade na COP31 é um tributo à participação social'",
-   "link": "https://agenciagov.ebc.com.br/noticias/202611/ministro-boulos-201cencontro-de-hoje-na-cop31-e-um-tributo-a-participacao-social201d",
-   "resumo": "Encontro do presidente Lula com representantes da sociedade civil lotou auditório reservado para o Brasil",
-   "fonte": "govbr",
-   "fonteNome": "Agência Gov (governo federal)",
-   "sigla": "Gov",
-   "publicadoEm": "2026-11-12T21:50:00.000Z",
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-12T20:35:19.840Z"
   }
  ]
 }
