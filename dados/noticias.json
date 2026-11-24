@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-24T12:35:19.113Z",
+ "atualizadoEm": "2026-11-24T13:05:19.441Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-24T12:35:19.113Z"
+   "ultimaVez": "2026-11-24T13:05:19.441Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-24T12:35:19.113Z"
+   "ultimaVez": "2026-11-24T13:05:19.441Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-24T12:35:19.113Z"
+   "ultimaVez": "2026-11-24T13:05:19.441Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 14,
-   "ultimaVez": "2026-11-24T12:35:19.113Z"
+   "ultimaVez": "2026-11-24T13:05:19.441Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-24T12:35:19.113Z"
+   "ultimaVez": "2026-11-24T13:05:19.441Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-24T12:35:19.113Z"
+   "ultimaVez": "2026-11-24T13:05:19.441Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 3,
    "via": "ponte",
-   "ultimaVez": "2026-11-24T12:35:19.113Z"
+   "ultimaVez": "2026-11-24T13:05:19.441Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-24T12:35:19.113Z"
+   "ultimaVez": "2026-11-24T13:05:19.441Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 2,
-   "ultimaVez": "2026-11-24T12:35:19.113Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-24T13:05:19.441Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 3,
-   "ultimaVez": "2026-11-24T12:35:19.113Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-24T13:05:19.441Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,23 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-24T12:35:19.113Z"
+   "ultimaVez": "2026-11-24T13:05:19.441Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1mb7fec",
+   "titulo": "Revista Fenacon está de volta com nova edição disponível para leitura",
+   "link": "https://fenacon.org.br/noticias/revista-fenacon-esta-de-volta-com-nova-edicao-disponivel-para-leitura/",
+   "resumo": "Publicação retoma sua circulação e reforça o compromisso da Federação com a informação, o conhecimento e o diálogo sobre os principais desafios do setor empresarial brasileiro A Revista Fenacon está de volta! Após um período sem circulação, a publicação retoma sua trajetória…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-24T12:41:46.000Z",
+   "categorias": [],
+   "relevancia": 2,
+   "vistaEm": "2026-11-24T13:05:19.441Z"
+  },
   {
    "id": "14u07qj",
    "titulo": "Comissão especial pode votar parecer sobre ampliação do limite de faturamento para o MEI",
@@ -2975,22 +2988,6 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-12T12:35:17.797Z"
-  },
-  {
-   "id": "er4q9",
-   "titulo": "Fenacon reforça compromisso com a segurança jurídica e a preparação das empresas para a Reforma Tributária",
-   "link": "https://fenacon.org.br/noticias/fenacon-reforca-compromisso-com-a-seguranca-juridica-e-a-preparacao-das-empresas-para-a-reforma-tributaria/",
-   "resumo": "Durante coletiva de imprensa da Receita Federal, presidente Reynaldo Lima Jr. destacou o diálogo institucional, a necessidade de solucionar entraves técnicos e a importância de apoiar micro e pequenas empresas na transição para o novo sistema tributário A Federação Nacional…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-12T03:43:36.000Z",
-   "categorias": [
-    "reforma",
-    "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-12T10:05:18.793Z"
   }
  ]
 }
