@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-24T02:31:32.475Z",
+ "atualizadoEm": "2026-11-24T10:05:21.598Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-24T02:31:32.475Z"
+   "ultimaVez": "2026-11-24T10:05:21.598Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-24T02:31:32.475Z"
+   "ultimaVez": "2026-11-24T10:05:21.598Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-24T02:31:32.475Z"
+   "ultimaVez": "2026-11-24T10:05:21.598Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 14,
-   "ultimaVez": "2026-11-24T02:31:32.475Z"
+   "ultimaVez": "2026-11-24T10:05:21.598Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-24T02:31:32.475Z"
+   "ultimaVez": "2026-11-24T10:05:21.598Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-24T02:31:32.475Z"
+   "ultimaVez": "2026-11-24T10:05:21.598Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 3,
    "via": "ponte",
-   "ultimaVez": "2026-11-24T02:31:32.475Z"
+   "ultimaVez": "2026-11-24T10:05:21.598Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-24T02:31:32.475Z"
+   "ultimaVez": "2026-11-24T10:05:21.598Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-24T02:31:32.475Z"
+   "ultimaVez": "2026-11-24T10:05:21.598Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-24T02:31:32.475Z"
+   "ultimaVez": "2026-11-24T10:05:21.598Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,139 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-24T02:31:32.475Z"
+   "ultimaVez": "2026-11-24T10:05:21.598Z"
   }
  ],
  "noticias": [
+  {
+   "id": "2gn26z",
+   "titulo": "Presidente da Fenacon, Reynaldo Lima Jr., toma posse na nova diretoria da CNC para o mandato 2026–2030",
+   "link": "https://fenacon.org.br/noticias/presidente-da-fenacon-reynaldo-lima-jr-toma-posse-na-nova-diretoria-da-cnc-para-o-mandato-2026-2030/",
+   "resumo": "Solenidade marcou o início de uma nova gestão da Confederação, sob a presidência de José Roberto Tadros, e reforçou a representatividade do setor de serviços contábeis no cenário nacional O presidente da Federação Nacional das Empresas de Serviços Contábeis e das Empresas de…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-24T06:03:56.000Z",
+   "categorias": [],
+   "relevancia": 2,
+   "vistaEm": "2026-11-23T20:35:17.663Z"
+  },
+  {
+   "id": "11epjwt",
+   "titulo": "Câmara aprova ajuste fiscal sem alterações; projeto segue para sanção presidencial",
+   "link": "https://fenacon.org.br/noticias/camara-aprova-ajuste-fiscal-sem-alteracoes-projeto-segue-para-sancao-presidencial/",
+   "resumo": "Projeto permite ao governo limitar a execução de despesas para alcançar as metas de superávit primário a partir de 2027 A Câmara dos Deputados aprovou o projeto de lei do ajuste fiscal, que muda as regras fiscais para permitir ao Executivo limitar a execução de despesas a fim…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-24T05:23:43.000Z",
+   "categorias": [
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-24T10:05:21.598Z"
+  },
+  {
+   "id": "rszsch",
+   "titulo": "Receita amplia participação em piloto da CBS para todas as empresas",
+   "link": "https://fenacon.org.br/reforma-tributaria/receita-amplia-participacao-em-piloto-da-cbs-para-todas-as-empresas/",
+   "resumo": "Portaria abre acesso a ambiente de testes da Reforma Tributária Qualquer empresa inscrita no Cadastro Nacional da Pessoa Jurídica (CNPJ) poderá participar do ambiente de testes do piloto da Reforma Tributária referente à Contribuição sobre Bens e Serviços (CBS). De acordo com…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-24T05:10:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "empresas",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-24T10:05:21.598Z"
+  },
+  {
+   "id": "1pjumf8",
+   "titulo": "Governo publica portaria com regras complementares para a escala 5×2",
+   "link": "https://fenacon.org.br/noticias/governo-publica-portaria-com-regras-complementares-para-a-escala-5x2-confira/",
+   "resumo": "Norma detalha aplicação dos novos limites de jornada, dois dias de descanso semanal, cálculo do salário-hora, regras para negociação coletiva e segurança e saúde no trabalho O Governo Federal publicou, nesta segunda-feira, 23 de novembro, uma portaria que estabelece regras…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-24T04:29:15.000Z",
+   "categorias": [
+    "trabalhista",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-24T10:05:21.598Z"
+  },
+  {
+   "id": "gx7jz8",
+   "titulo": "Projeto limita repasses da Lei Kandir e despesas com exportações e previdência",
+   "link": "https://www.camara.leg.br/noticias/1322175-projeto-limita-repasses-da-lei-kandir-e-despesas-com-exportacoes-e-previdencia",
+   "resumo": "Texto também altera regras para incentivos da reforma tributária, seguro rural e restos a pagar",
+   "fonte": "camara",
+   "fonteNome": "Agência Câmara",
+   "sigla": "Câmara",
+   "publicadoEm": "2026-11-24T03:57:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "trabalhista",
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-24T10:05:21.598Z"
+  },
+  {
+   "id": "1819fwo",
+   "titulo": "Comissão aprova desconto no Imposto de Renda para doações a entidades de assistência social",
+   "link": "https://fenacon.org.br/noticias/comissao-aprova-desconto-no-imposto-de-renda-para-doacoes-a-entidades-de-assistencia-social/",
+   "resumo": "Proposta segue em análise na Câmara dos Deputados A Comissão de Previdência, Assistência Social, Infância, Adolescência e Família da Câmara dos Deputados aprovou proposta que cria a Lei de Incentivo Fiscal à Assistência Social (LIAS). A medida permite que pessoas físicas…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-24T03:12:00.000Z",
+   "categorias": [
+    "tributos",
+    "trabalhista",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-24T10:05:21.598Z"
+  },
+  {
+   "id": "1c9s9cy",
+   "titulo": "FGTS Digital: atualizadas regras para recolhimento em processos trabalhistas",
+   "link": "https://fenacon.org.br/noticias/fgts-digital-atualizadas-regras-para-recolhimento-em-processos-trabalhistas/",
+   "resumo": "Valores reconhecidos em decisões judiciais e acordos devem ser depositados na conta vinculada do trabalhador O Ministério do Trabalho e Emprego, por meio da Secretaria de Inspeção do Trabalho (SIT), publicou, no dia 16 de novembro, a Nota Orientativa nº 12/2026, com…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-24T03:09:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-24T10:05:21.598Z"
+  },
+  {
+   "id": "1ct535a",
+   "titulo": "Reforma Tributária e Simples Nacional: saiba quais as novidades o empreendedor terá ao gerar a guia de novembro",
+   "link": "https://fenacon.org.br/reforma-tributaria/reforma-tributaria-e-simples-nacional-saiba-quais-as-novidades-o-empreendedor-tera-ao-gerar-a-guia-de-novembro/",
+   "resumo": "Alterações têm o objetivo de garantir cálculos corretos dos tributos. As informações serão utilizadas para definir as alíquotas a partir de janeiro de 2027 As microempresas (ME) e as empresas de pequeno porte (EPP) que estão no Simples Nacional e que forem apurar os tributos…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-24T03:00:00.000Z",
+   "categorias": [
+    "reforma",
+    "simples",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-24T10:05:21.598Z"
+  },
   {
    "id": "jrpaie",
    "titulo": "Às vésperas da reforma tributária, escritórios contábeis têm apagão de mão de obra",
@@ -204,22 +333,6 @@
    "vistaEm": "2026-11-24T02:31:32.475Z"
   },
   {
-   "id": "c4rghx",
-   "titulo": "Governo publica portaria com regras complementares para a escala 5x2. Confira",
-   "link": "https://agenciagov.ebc.com.br/noticias/202611/governo-federal-publica-portaria-com-regras-complementares-para-aplicacao-da-escala-5x2-1",
-   "resumo": "Norma detalha aplicação dos novos limites de jornada, dois dias de descanso semanal, cálculo do salário-hora, regras para negociação coletiva e segurança e saúde no trabalho",
-   "fonte": "govbr",
-   "fonteNome": "Agência Gov (governo federal)",
-   "sigla": "Gov",
-   "publicadoEm": "2026-11-23T21:54:00.000Z",
-   "categorias": [
-    "trabalhista",
-    "legislacao"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-23T22:35:20.987Z"
-  },
-  {
    "id": "1y35moi",
    "titulo": "Fenacon e CFC disponibilizam canal para esclarecer dúvidas sobre a Reforma Tributária",
    "link": "https://fenacon.org.br/noticias/fenacon-e-cfc-disponibilizam-canal-para-esclarecer-duvidas-sobre-a-reforma-tributaria/",
@@ -253,19 +366,6 @@
    "vistaEm": "2026-11-23T21:05:19.742Z"
   },
   {
-   "id": "2gn26z",
-   "titulo": "Presidente da Fenacon, Reynaldo Lima Jr., toma posse na nova diretoria da CNC para o mandato 2026–2030",
-   "link": "https://fenacon.org.br/noticias/presidente-da-fenacon-reynaldo-lima-jr-toma-posse-na-nova-diretoria-da-cnc-para-o-mandato-2026-2030/",
-   "resumo": "Solenidade marcou o início de uma nova gestão da Confederação, sob a presidência de José Roberto Tadros, e reforçou a representatividade do setor de serviços contábeis no cenário nacional O presidente da Federação Nacional das Empresas de Serviços Contábeis e das Empresas de…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-23T20:28:30.000Z",
-   "categorias": [],
-   "relevancia": 2,
-   "vistaEm": "2026-11-23T20:35:17.663Z"
-  },
-  {
    "id": "1o1cwey",
    "titulo": "Paim defende mudança na contribuição das empresas para financiar Previdência",
    "link": "https://www12.senado.leg.br/noticias/materias/2026/11/23/paim-defende-mudanca-na-contribuicao-das-empresas-para-financiar-previdencia",
@@ -278,22 +378,6 @@
     "legislacao",
     "tributos",
     "trabalhista"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-23T19:05:19.710Z"
-  },
-  {
-   "id": "na5vvd",
-   "titulo": "Comissão aprova desconto no Imposto de Renda para doações a entidades de assistência social",
-   "link": "https://www.camara.leg.br/noticias/1321945-comissao-aprova-desconto-no-imposto-de-renda-para-doacoes-a-entidades-de-assistencia-social",
-   "resumo": "Proposta segue em análise na Câmara dos Deputados",
-   "fonte": "camara",
-   "fonteNome": "Agência Câmara",
-   "sigla": "Câmara",
-   "publicadoEm": "2026-11-23T18:44:00.000Z",
-   "categorias": [
-    "tributos",
-    "legislacao"
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-23T19:05:19.710Z"
@@ -420,24 +504,6 @@
    "categorias": [
     "legislacao",
     "tributos"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-23T12:05:17.907Z"
-  },
-  {
-   "id": "17q7uyb",
-   "titulo": "Receita amplia participação em piloto da CBS para todas as empresas",
-   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/receita-amplia-participacao-em-piloto-da-cbs-para-todas-empresas",
-   "resumo": "Qualquer empresa inscrita no Cadastro Nacional da Pessoa Jurídica (CNPJ) poderá participar do ambiente de testes do piloto da Reforma Tributária referente à Contribuição sobre Bens e Serviços (CBS) . De acordo com portaria da Receita Federal publicada nesta segunda-feira…",
-   "fonte": "ebc",
-   "fonteNome": "Agência Brasil (Economia)",
-   "sigla": "EBC",
-   "publicadoEm": "2026-11-23T11:40:00.000Z",
-   "categorias": [
-    "reforma",
-    "tributos",
-    "empresas",
-    "legislacao"
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-23T12:05:17.907Z"
@@ -2920,68 +2986,6 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-12T10:05:18.793Z"
-  },
-  {
-   "id": "nhbme8",
-   "titulo": "O contrato que ninguém lê: o risco invisível da contabilidade terceirizada",
-   "link": "https://fenacon.org.br/noticias/o-contrato-que-ninguem-le-o-risco-invisivel-da-contabilidade-terceirizada/",
-   "resumo": "Durante anos, a contratação de um escritório de contabilidade foi tratada, na maioria das empresas brasileiras, como uma decisão de preço. Por Junior Rozante Durante anos, a contratação de um escritório de contabilidade foi tratada, na maioria das empresas brasileiras, como…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-12T01:39:26.000Z",
-   "categorias": [
-    "contabil"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-12T10:05:18.793Z"
-  },
-  {
-   "id": "12pxvpr",
-   "titulo": "Pacote fiscal prevê 120 dias para Congresso discutir supersalários",
-   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/pacote-fiscal-preve-120-dias-para-congresso-discutir-supersalarios",
-   "resumo": "O pacote de ajuste fiscal apresentado pelo governo federal ao Congresso Nacional prevê prazo de até 120 dias para que os parlamentares analisem uma proposta de regulamentação dos chamados supersalários no funcionalismo público. O projeto de lei complementar, protocolado nesta…",
-   "fonte": "ebc",
-   "fonteNome": "Agência Brasil (Economia)",
-   "sigla": "EBC",
-   "publicadoEm": "2026-11-11T22:40:00.000Z",
-   "categorias": [
-    "trabalhista",
-    "legislacao"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-12T00:25:46.510Z"
-  },
-  {
-   "id": "f0nmri",
-   "titulo": "Receita retém R$ 35 milhões em itens irregulares no Porto de Vitória",
-   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/receita-retem-r-35-milhoes-em-itens-irregulares-no-porto-de-vitoria",
-   "resumo": "Cerca de 400 mil itens irregulares avaliados em R$ 35 milhões foram retidos pela Receita Federal desde o início de novembro do Porto de Vitória. O órgão divulgou nesta quarta-feira (11) um balanço parcial da Operação Fronteira na capital capixaba. Segundo a Receita, foram…",
-   "fonte": "ebc",
-   "fonteNome": "Agência Brasil (Economia)",
-   "sigla": "EBC",
-   "publicadoEm": "2026-11-11T22:10:00.000Z",
-   "categorias": [
-    "tributos",
-    "contabil"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-11T22:35:18.176Z"
-  },
-  {
-   "id": "1w9f78",
-   "titulo": "Parlamentares e representante do Tesouro Nacional recebem homenagem pelos 80 anos do Sistema CFC/CRCs",
-   "link": "https://cfc.org.br/noticias/parlamentares-e-representante-do-tesouro-nacional-recebem-homenagem-pelos-80-anos-do-sistema-cfc-crcs/",
-   "resumo": "O reconhecimento à atuação em defesa dos profissionais da contabilidade, ao fortalecimento da representação da classe no Congresso Nacional e aos avanços da contabilidade pública marcou a 1.138ª Reunião Plenária Ordinária do Conselho Federal de Contabilidade (CFC), realizada…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-11T19:49:49.000Z",
-   "categorias": [
-    "contabil"
-   ],
-   "relevancia": 0,
-   "vistaEm": "2026-11-11T20:05:19.016Z"
   }
  ]
 }
