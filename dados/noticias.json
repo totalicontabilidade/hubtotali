@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-24T11:05:20.748Z",
+ "atualizadoEm": "2026-11-24T11:35:17.758Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-24T11:05:20.748Z"
+   "ultimaVez": "2026-11-24T11:35:17.758Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-24T11:05:20.748Z"
+   "ultimaVez": "2026-11-24T11:35:17.758Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-24T11:05:20.748Z"
+   "ultimaVez": "2026-11-24T11:35:17.758Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 14,
-   "ultimaVez": "2026-11-24T11:05:20.748Z"
+   "ultimaVez": "2026-11-24T11:35:17.758Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-24T11:05:20.748Z"
+   "ultimaVez": "2026-11-24T11:35:17.758Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-24T11:05:20.748Z"
+   "ultimaVez": "2026-11-24T11:35:17.758Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 3,
    "via": "ponte",
-   "ultimaVez": "2026-11-24T11:05:20.748Z"
+   "ultimaVez": "2026-11-24T11:35:17.758Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-24T11:05:20.748Z"
+   "ultimaVez": "2026-11-24T11:35:17.758Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-24T11:05:20.748Z"
+   "ultimaVez": "2026-11-24T11:35:17.758Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 4,
-   "ultimaVez": "2026-11-24T11:05:20.748Z"
+   "ultimaVez": "2026-11-24T11:35:17.758Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,42 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-24T11:05:20.748Z"
+   "ultimaVez": "2026-11-24T11:35:17.758Z"
   }
  ],
  "noticias": [
+  {
+   "id": "10tn0gc",
+   "titulo": "Sistema CFC/CRCs atua no Congresso para evitar aumento da carga tributária e preservar direitos dos contribuintes",
+   "link": "https://cfc.org.br/noticias/sistema-cfc-crcs-atua-no-congresso-para-evitar-aumento-da-carga-tributaria-e-preservar-direitos-dos-contribuintes/",
+   "resumo": "Com o objetivo de garantir maior segurança jurídica, previsibilidade tributária e melhores condições para o planejamento econômico-financeiro das empresas brasileiras, o Conselho Federal de Contabilidade (CFC), em conjunto com os 27 Conselhos Regionais de Contabilidade…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-24T11:20:04.000Z",
+   "categorias": [
+    "tributos",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-24T11:35:17.758Z"
+  },
+  {
+   "id": "1c3r5p9",
+   "titulo": "Comissão debate participação das mulheres na previdência complementar; participe",
+   "link": "https://www.camara.leg.br/noticias/1320986-comissao-debate-participacao-das-mulheres-na-previdencia-complementar-participe",
+   "resumo": "Audiência pública será realizada nesta terça-feira (24), às 10 horas, com participação do público",
+   "fonte": "camara",
+   "fonteNome": "Agência Câmara",
+   "sigla": "Câmara",
+   "publicadoEm": "2026-11-24T11:20:00.000Z",
+   "categorias": [
+    "legislacao",
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-19T19:05:18.092Z"
+  },
   {
    "id": "urtc69",
    "titulo": "Empresas têm até 30 de novembro para pagar primeira parcela do 13º",
@@ -789,22 +821,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-19T20:05:18.715Z"
-  },
-  {
-   "id": "1c3r5p9",
-   "titulo": "Comissão debate participação das mulheres na previdência complementar; participe",
-   "link": "https://www.camara.leg.br/noticias/1320986-comissao-debate-participacao-das-mulheres-na-previdencia-complementar-participe",
-   "resumo": "Audiência pública será realizada na terça-feira (24), às 10 horas, com participação do público",
-   "fonte": "camara",
-   "fonteNome": "Agência Câmara",
-   "sigla": "Câmara",
-   "publicadoEm": "2026-11-19T18:54:00.000Z",
-   "categorias": [
-    "legislacao",
-    "trabalhista"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-19T19:05:18.092Z"
   },
   {
    "id": "14u07qj",
@@ -2971,19 +2987,6 @@
     "legislacao"
    ],
    "relevancia": 3,
-   "vistaEm": "2026-11-12T10:05:18.793Z"
-  },
-  {
-   "id": "1lqaps9",
-   "titulo": "Setor de serviços varia -0,1% em setembro, impactado pelos transportes",
-   "link": "https://fenacon.org.br/noticias/setor-de-servicos-varia-01-em-setembro-impactado-pelos-transportes/",
-   "resumo": "Em 12 meses, atividades crescem 1,9%, revela o IBGE O setor de serviços, o que mais emprega na economia, variou -0,1% na passagem em setembro, na comparação com agosto. O resultado foi impactado negativamente principalmente pelas atividades de transportes e de informação e…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-12T03:15:00.000Z",
-   "categorias": [],
-   "relevancia": 2,
    "vistaEm": "2026-11-12T10:05:18.793Z"
   }
  ]
