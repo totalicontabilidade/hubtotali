@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-24T12:05:25.655Z",
+ "atualizadoEm": "2026-11-24T12:35:19.113Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-24T12:05:25.655Z"
+   "ultimaVez": "2026-11-24T12:35:19.113Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-24T12:05:25.655Z"
+   "ultimaVez": "2026-11-24T12:35:19.113Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-24T12:05:25.655Z"
+   "ultimaVez": "2026-11-24T12:35:19.113Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 14,
-   "ultimaVez": "2026-11-24T12:05:25.655Z"
+   "ultimaVez": "2026-11-24T12:35:19.113Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-24T12:05:25.655Z"
+   "ultimaVez": "2026-11-24T12:35:19.113Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-24T12:05:25.655Z"
+   "ultimaVez": "2026-11-24T12:35:19.113Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 3,
    "via": "ponte",
-   "ultimaVez": "2026-11-24T12:05:25.655Z"
+   "ultimaVez": "2026-11-24T12:35:19.113Z"
   },
   {
    "id": "camara",
@@ -107,8 +107,8 @@
    "nome": "Agência Câmara",
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
-   "quantas": 3,
-   "ultimaVez": "2026-11-24T12:05:25.655Z"
+   "quantas": 4,
+   "ultimaVez": "2026-11-24T12:35:19.113Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-24T12:05:25.655Z"
+   "ultimaVez": "2026-11-24T12:35:19.113Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-24T12:05:25.655Z"
+   "ultimaVez": "2026-11-24T12:35:19.113Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-24T12:05:25.655Z"
+   "ultimaVez": "2026-11-24T12:35:19.113Z"
   }
  ],
  "noticias": [
+  {
+   "id": "14u07qj",
+   "titulo": "Comissão especial pode votar parecer sobre ampliação do limite de faturamento para o MEI",
+   "link": "https://www.camara.leg.br/noticias/1321031-comissao-especial-pode-votar-parecer-sobre-ampliacao-do-limite-de-faturamento-para-o-mei",
+   "resumo": "Vinicius Loures / Câmara dos Deputados Audiência pública da comissão especial A comissão especial da Câmara dos Deputados que analisa o projeto sobre o aumento do limite anual de faturamento do Microempreendedor Individual ( MEI ) reúne-se nesta terça-feira (24) para a…",
+   "fonte": "camara",
+   "fonteNome": "Agência Câmara",
+   "sigla": "Câmara",
+   "publicadoEm": "2026-11-24T12:07:00.000Z",
+   "categorias": [
+    "legislacao",
+    "simples"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-19T18:35:20.328Z"
+  },
   {
    "id": "ca47nr",
    "titulo": "Comitê Gestor do Simples Nacional publica novas regras para o Simples Nacional e para a transição da Reforma Tributária",
@@ -872,22 +888,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-19T20:05:18.715Z"
-  },
-  {
-   "id": "14u07qj",
-   "titulo": "Comissão especial pode votar parecer sobre ampliação do limite de faturamento para o MEI",
-   "link": "https://www.camara.leg.br/noticias/1321031-comissao-especial-pode-votar-parecer-sobre-ampliacao-do-limite-de-faturamento-para-o-mei",
-   "resumo": "Vinicius Loures / Câmara dos Deputados Audiência pública da comissão especial A comissão especial da Câmara dos Deputados que analisa o projeto sobre o aumento do limite anual de faturamento do Microempreendedor Individual ( MEI ) reúne-se na terça-feira (24) para a discussão…",
-   "fonte": "camara",
-   "fonteNome": "Agência Câmara",
-   "sigla": "Câmara",
-   "publicadoEm": "2026-11-19T18:07:00.000Z",
-   "categorias": [
-    "legislacao",
-    "simples"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-19T18:35:20.328Z"
   },
   {
    "id": "ud341v",
