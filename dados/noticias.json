@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-24T13:35:19.945Z",
+ "atualizadoEm": "2026-11-24T14:05:20.196Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-24T13:35:19.945Z"
+   "ultimaVez": "2026-11-24T14:05:20.196Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-24T13:35:19.945Z"
+   "ultimaVez": "2026-11-24T14:05:20.196Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-24T13:35:19.945Z"
+   "ultimaVez": "2026-11-24T14:05:20.196Z"
   },
   {
    "id": "fazenda",
@@ -70,8 +70,8 @@
    "nome": "Ministério da Fazenda",
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
-   "quantas": 15,
-   "ultimaVez": "2026-11-24T13:35:19.945Z"
+   "quantas": 16,
+   "ultimaVez": "2026-11-24T14:05:20.196Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-24T13:35:19.945Z"
+   "ultimaVez": "2026-11-24T14:05:20.196Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-24T13:35:19.945Z"
+   "ultimaVez": "2026-11-24T14:05:20.196Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 3,
    "via": "ponte",
-   "ultimaVez": "2026-11-24T13:35:19.945Z"
+   "ultimaVez": "2026-11-24T14:05:20.196Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-24T13:35:19.945Z"
+   "ultimaVez": "2026-11-24T14:05:20.196Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-24T13:35:19.945Z"
+   "ultimaVez": "2026-11-24T14:05:20.196Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 2,
-   "ultimaVez": "2026-11-24T13:35:19.945Z"
+   "quantas": 3,
+   "ultimaVez": "2026-11-24T14:05:20.196Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,25 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-24T13:35:19.945Z"
+   "ultimaVez": "2026-11-24T14:05:20.196Z"
   }
  ],
  "noticias": [
+  {
+   "id": "7rcb3h",
+   "titulo": "INSS começa a pagar décimo terceiro salário nesta terça-feira (24)",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/inss-comeca-pagar-decimo-terceiro-salario-nesta-terca-feira-24",
+   "resumo": "O Instituto Nacional do Seguro Social (INSS) começa a depositar, nesta terça-feira (24), os benefícios e auxílios referentes a novembro, além da parcela única do décimo terceiro salário para quem passou a receber o abono anual depois de abril deste ano. Os depósitos seguem…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-24T13:54:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-24T14:05:20.196Z"
+  },
   {
    "id": "5sn1h5",
    "titulo": "COMUNICADO - Receita Federal avança na contratação da FGV para organização de novo concurso da Carreira Tributária e Aduaneira",
@@ -173,7 +188,7 @@
   },
   {
    "id": "1r500v",
-   "titulo": "Ao vivo: CAE vota alíquota especial para bolsistas - 24/11/26",
+   "titulo": "CAE vota alíquota especial para bolsistas - 24/11/26",
    "link": "https://www12.senado.leg.br/noticias/videos/2026/11/ao-vivo-cae-vota-aliquota-especial-para-bolsistas-24-11-26",
    "resumo": "",
    "fonte": "senado",
@@ -2972,24 +2987,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-12T14:05:20.746Z"
-  },
-  {
-   "id": "1qtz48e",
-   "titulo": "CFC e Receita Federal instalam sala de situação um dia após anúncio de Joaquim Bezerra",
-   "link": "https://cfc.org.br/noticias/cfc-e-receita-federal-instalam-sala-de-situacao-um-dia-apos-anuncio-de-joaquim-bezerra/",
-   "resumo": "Apenas um dia após o anúncio da criação de uma sala de situação para acompanhar os desafios da reforma tributária, o Conselho Federal de Contabilidade (CFC) e a Receita Federal deram início aos trabalhos. A primeira reunião ocorreu nesta quinta-feira (12), na sede do CFC, em…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-12T13:23:00.000Z",
-   "categorias": [
-    "reforma",
-    "tributos",
-    "trabalhista",
-    "contabil"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-12T18:35:20.928Z"
   }
  ]
 }
