@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-23T22:35:20.987Z",
+ "atualizadoEm": "2026-11-24T02:31:32.475Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T22:35:20.987Z"
+   "ultimaVez": "2026-11-24T02:31:32.475Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-23T22:35:20.987Z"
+   "ultimaVez": "2026-11-24T02:31:32.475Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-23T22:35:20.987Z"
+   "ultimaVez": "2026-11-24T02:31:32.475Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 14,
-   "ultimaVez": "2026-11-23T22:35:20.987Z"
+   "ultimaVez": "2026-11-24T02:31:32.475Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-23T22:35:20.987Z"
+   "ultimaVez": "2026-11-24T02:31:32.475Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-23T22:35:20.987Z"
+   "ultimaVez": "2026-11-24T02:31:32.475Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 3,
    "via": "ponte",
-   "ultimaVez": "2026-11-23T22:35:20.987Z"
+   "ultimaVez": "2026-11-24T02:31:32.475Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-23T22:35:20.987Z"
+   "ultimaVez": "2026-11-24T02:31:32.475Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-23T22:35:20.987Z"
+   "ultimaVez": "2026-11-24T02:31:32.475Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-23T22:35:20.987Z"
+   "ultimaVez": "2026-11-24T02:31:32.475Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,74 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-23T22:35:20.987Z"
+   "ultimaVez": "2026-11-24T02:31:32.475Z"
   }
  ],
  "noticias": [
+  {
+   "id": "jrpaie",
+   "titulo": "Às vésperas da reforma tributária, escritórios contábeis têm apagão de mão de obra",
+   "link": "https://fenacon.org.br/reforma-tributaria/as-vesperas-da-reforma-tributaria-escritorios-contabeis-tem-apagao-de-mao-de-obra/",
+   "resumo": "A coluna Painel S.A., da Folha de S.Paulo, repercutiu a Sondagem de RH Contábil, realizada pela Omie em parceria com o Sescon-SP. O levantamento aponta que 87% dos escritórios contábeis paulistas enfrentam dificuldades para contratar, em meio às demandas da reforma…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-24T02:31:01.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-24T02:31:32.475Z"
+  },
+  {
+   "id": "pufjs6",
+   "titulo": "Presidente da Fenacon participa do 8º Congresso de Direito Tributário do Codecon",
+   "link": "https://fenacon.org.br/noticias/presidente-da-fenacon-participa-do-8o-congresso-de-direito-tributario-do-codecon/",
+   "resumo": "Reynaldo Lima Jr. estará entre os especialistas que debaterão os rumos e desafios do cenário tributário atual, em evento realizado em 25 de novembro, na sede da FecomercioSP, em São Paulo. O presidente da Fenacon, Reynaldo Lima Jr., participará do 8º Congresso de Direito…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-24T01:52:52.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-24T02:31:32.475Z"
+  },
+  {
+   "id": "1fm77wc",
+   "titulo": "Reforma Tributária pelo Brasil promove debate e capacitação em Teresina",
+   "link": "https://fenacon.org.br/noticias/reforma-tributaria-pelo-brasil-promove-debate-e-capacitacao-em-teresina/",
+   "resumo": "Seminário reuniu profissionais da contabilidade e especialistas para discutir os impactos, desafios e oportunidades do novo sistema tributário para empresas e escritórios contábeis Teresina (PI) recebeu, na quarta-feira (18), mais uma edição do seminário Reforma Tributária…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-24T00:57:38.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "contabil"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-24T02:31:32.475Z"
+  },
+  {
+   "id": "19d5ap2",
+   "titulo": "Jornada 5x2: veja como ficam regras de salário, folgas e horas extras",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/jornada-5x2-veja-como-ficam-regras-de-salario-folgas-e-horas-extras",
+   "resumo": "O ministério do Trabalho publicou, nesta segunda-feira (23), uma portaria com regras complementares ao decreto assinado na última quinta-feira (19), que regulamentou a jornada de trabalho 5x2, com cinco dias de trabalho e dois de descanso , a partir de 16 de dezembro. Entenda…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-23T23:40:00.000Z",
+   "categorias": [
+    "trabalhista",
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-24T02:31:32.475Z"
+  },
   {
    "id": "c4rghx",
    "titulo": "Governo publica portaria com regras complementares para a escala 5x2. Confira",
@@ -2918,71 +2982,6 @@
    ],
    "relevancia": 0,
    "vistaEm": "2026-11-11T20:05:19.016Z"
-  },
-  {
-   "id": "15b1x77",
-   "titulo": "CFC propõe medidas para garantir segurança aos profissionais da contabilidade na transição da reforma tributária",
-   "link": "https://cfc.org.br/noticias/cfc-propoe-medidas-para-garantir-seguranca-aos-profissionais-da-contabilidade-na-transicao-da-reforma-tributaria/",
-   "resumo": "A segurança jurídica, a preparação dos profissionais da contabilidade e a redução dos riscos para as empresas estiveram no centro das propostas apresentadas pelo Conselho Federal de Contabilidade (CFC) durante coletiva de imprensa, nesta quarta-feira (11), sobre a…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-11T18:22:23.000Z",
-   "categorias": [
-    "reforma",
-    "tributos",
-    "contabil"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-11T18:35:19.518Z"
-  },
-  {
-   "id": "1t4ihqp",
-   "titulo": "Reforma tributária: governo apresentará texto para facilitar adaptação",
-   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/reforma-tributaria-governo-apresentara-texto-para-facilitar-adaptacao",
-   "resumo": "O governo federal vai encaminhar ao Congresso Nacional uma proposta para criar uma regra de transição na cobrança da Contribuição sobre Bens e Serviços (CBS), novo tributo federal da reforma tributária . A medida permitirá que as empresas façam um cálculo estimado do imposto…",
-   "fonte": "ebc",
-   "fonteNome": "Agência Brasil (Economia)",
-   "sigla": "EBC",
-   "publicadoEm": "2026-11-11T16:32:00.000Z",
-   "categorias": [
-    "reforma",
-    "tributos"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-11T17:05:19.067Z"
-  },
-  {
-   "id": "1l5ltfa",
-   "titulo": "Prevbarco amplia atendimento previdenciário no sul do Amapá",
-   "link": "https://agenciagov.ebc.com.br/noticias/202611/prevbarco-amplia-atendimento-previdenciario-no-sul-do-amapa",
-   "resumo": "Ação do INSS atenderá moradores de Laranjal do Jari, Vitória do Jari e Jarilândia entre os dias 10 e 20 de novembro",
-   "fonte": "govbr",
-   "fonteNome": "Agência Gov (governo federal)",
-   "sigla": "Gov",
-   "publicadoEm": "2026-11-11T15:35:00.000Z",
-   "categorias": [
-    "trabalhista"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-11T16:35:20.014Z"
-  },
-  {
-   "id": "fzi8du",
-   "titulo": "Receita Federal e órgãos parceiros detalham próximos passos da Reforma Tributária",
-   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/receita-federal-e-orgaos-parceiros-detalham-proximos-passos-da-reforma-tributaria",
-   "resumo": "O foco é promover transparência na divulgação das ações que dão prosseguimento à migração do país para o novo modelo de tributação do consumo",
-   "fonte": "fazenda",
-   "fonteNome": "Ministério da Fazenda",
-   "sigla": "MF",
-   "publicadoEm": "2026-11-11T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "reforma",
-    "tributos"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-11T15:35:18.403Z"
   }
  ]
 }
