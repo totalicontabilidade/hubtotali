@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-24T18:05:24.548Z",
+ "atualizadoEm": "2026-11-24T18:35:20.975Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-24T18:05:24.548Z"
+   "ultimaVez": "2026-11-24T18:35:20.975Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-24T18:05:24.548Z"
+   "ultimaVez": "2026-11-24T18:35:20.975Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-24T18:05:24.548Z"
+   "ultimaVez": "2026-11-24T18:35:20.975Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 15,
-   "ultimaVez": "2026-11-24T18:05:24.548Z"
+   "ultimaVez": "2026-11-24T18:35:20.975Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-24T18:05:24.548Z"
+   "ultimaVez": "2026-11-24T18:35:20.975Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-24T18:05:24.548Z"
+   "ultimaVez": "2026-11-24T18:35:20.975Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-24T18:05:24.548Z"
+   "ultimaVez": "2026-11-24T18:35:20.975Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-24T18:05:24.548Z"
+   "ultimaVez": "2026-11-24T18:35:20.975Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-24T18:05:24.548Z"
+   "ultimaVez": "2026-11-24T18:35:20.975Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-24T18:05:24.548Z"
+   "ultimaVez": "2026-11-24T18:35:20.975Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,25 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-24T18:05:24.548Z"
+   "ultimaVez": "2026-11-24T18:35:20.975Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1rfjorb",
+   "titulo": "Enciclopédia inédita de perícia contábil é lançada em evento nacional",
+   "link": "https://cfc.org.br/noticias/enciclopedia-inedita-de-pericia-contabil-e-lancada-em-evento-nacional/",
+   "resumo": "A Conferência Nacional de Perícia Contábil (CNPC) terá um momento estratégico para o fortalecimento das Ciências Contábeis no país. Durante o evento, será lançada a Enciclopédia da Perícia Contábil. Iniciativa inédita no Brasil, a coleção de livros foi desenvolvida com o…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-24T18:31:57.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-24T18:35:20.975Z"
+  },
   {
    "id": "2pcptz",
    "titulo": "Adequação de acordos e convenções à nova jornada de trabalho é prioridade do MTE",
@@ -2968,22 +2983,6 @@
    "publicadoEm": "2026-11-12T17:57:22.000Z",
    "categorias": [
     "contabil"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-12T18:04:19.714Z"
-  },
-  {
-   "id": "1fxlh94",
-   "titulo": "Previdência e Bolsa Família terão crédito de R$ 149 bi após aval do Congresso",
-   "link": "https://www12.senado.leg.br/noticias/materias/2026/11/12/previdencia-e-bolsa-familia-terao-credito-de-r-149-bi-apos-aval-do-congresso",
-   "resumo": "",
-   "fonte": "senado",
-   "fonteNome": "Agência Senado",
-   "sigla": "Senado",
-   "publicadoEm": "2026-11-12T17:41:35.000Z",
-   "categorias": [
-    "legislacao",
-    "trabalhista"
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-12T18:04:19.714Z"
