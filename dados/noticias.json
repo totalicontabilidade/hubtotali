@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-24T14:05:20.196Z",
+ "atualizadoEm": "2026-11-24T14:35:20.454Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-24T14:05:20.196Z"
+   "ultimaVez": "2026-11-24T14:35:20.454Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-24T14:05:20.196Z"
+   "ultimaVez": "2026-11-24T14:35:20.454Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-24T14:05:20.196Z"
+   "ultimaVez": "2026-11-24T14:35:20.454Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 16,
-   "ultimaVez": "2026-11-24T14:05:20.196Z"
+   "ultimaVez": "2026-11-24T14:35:20.454Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-24T14:05:20.196Z"
+   "ultimaVez": "2026-11-24T14:35:20.454Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-24T14:05:20.196Z"
+   "ultimaVez": "2026-11-24T14:35:20.454Z"
   },
   {
    "id": "sefaz-se",
@@ -97,9 +97,9 @@
    "nome": "Secretaria da Fazenda de Sergipe",
    "site": "https://www.sefaz.se.gov.br/",
    "ok": true,
-   "quantas": 3,
+   "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-24T14:05:20.196Z"
+   "ultimaVez": "2026-11-24T14:35:20.454Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-24T14:05:20.196Z"
+   "ultimaVez": "2026-11-24T14:35:20.454Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-24T14:05:20.196Z"
+   "ultimaVez": "2026-11-24T14:35:20.454Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-24T14:05:20.196Z"
+   "ultimaVez": "2026-11-24T14:35:20.454Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,25 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-24T14:05:20.196Z"
+   "ultimaVez": "2026-11-24T14:35:20.454Z"
   }
  ],
  "noticias": [
+  {
+   "id": "ud341x",
+   "titulo": "Sefaz divulga calendário do IPVA para 2027",
+   "link": "https://www.sefaz.se.gov.br/Lists/Noticias/DispForm.aspx?ID=2886",
+   "resumo": "Title: Sefaz divulga calendário do IPVA para 2027 Publicacao: 24/11/2026 11:25 Foto: https://www.sefaz.se.gov.br/Imagens/noticias/24-11-2026/1.jpg Visibilidade: Intranet, Internet",
+   "fonte": "sefaz-se",
+   "fonteNome": "Secretaria da Fazenda de Sergipe",
+   "sigla": "SEFAZ/SE",
+   "publicadoEm": "2026-11-24T14:26:48.000Z",
+   "categorias": [
+    "sergipe"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-24T14:35:20.454Z"
+  },
   {
    "id": "7rcb3h",
    "titulo": "INSS começa a pagar décimo terceiro salário nesta terça-feira (24)",
@@ -2972,21 +2987,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-12T15:05:20.892Z"
-  },
-  {
-   "id": "1urnajc",
-   "titulo": "Penúltimo módulo da capacitação em Contabilidade Imobiliária é liberado pelo CFC",
-   "link": "https://cfc.org.br/noticias/penultimo-modulo-da-capacitacao-em-contabilidade-imobiliaria-e-liberado-pelo-cfc/",
-   "resumo": "Os profissionais da contabilidade têm acesso a mais uma aula da Qualificação Avançada em Contabilidade Imobiliária e Construtoras – Aspectos Relevantes e Modelagem. Disponível por meio da Plataforma EduCont do Sistema CFC/CRCs, o módulo liberado esta semana é sobre…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-12T13:47:46.000Z",
-   "categorias": [
-    "contabil"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-12T14:05:20.746Z"
   }
  ]
 }
