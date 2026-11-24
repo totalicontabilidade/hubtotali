@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-24T21:05:20.006Z",
+ "atualizadoEm": "2026-11-24T21:35:19.991Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-24T21:05:20.006Z"
+   "ultimaVez": "2026-11-24T21:35:19.991Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-24T21:05:20.006Z"
+   "ultimaVez": "2026-11-24T21:35:19.991Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-24T21:05:20.006Z"
+   "ultimaVez": "2026-11-24T21:35:19.991Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 15,
-   "ultimaVez": "2026-11-24T21:05:20.006Z"
+   "ultimaVez": "2026-11-24T21:35:19.991Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-24T21:05:20.006Z"
+   "ultimaVez": "2026-11-24T21:35:19.991Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-24T21:05:20.006Z"
+   "ultimaVez": "2026-11-24T21:35:19.991Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-24T21:05:20.006Z"
+   "ultimaVez": "2026-11-24T21:35:19.991Z"
   },
   {
    "id": "camara",
@@ -107,8 +107,8 @@
    "nome": "Agência Câmara",
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
-   "quantas": 2,
-   "ultimaVez": "2026-11-24T21:05:20.006Z"
+   "quantas": 3,
+   "ultimaVez": "2026-11-24T21:35:19.991Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-24T21:05:20.006Z"
+   "ultimaVez": "2026-11-24T21:35:19.991Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-24T21:05:20.006Z"
+   "ultimaVez": "2026-11-24T21:35:19.991Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-24T21:05:20.006Z"
+   "ultimaVez": "2026-11-24T21:35:19.991Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1jfbmzd",
+   "titulo": "Câmara aprova pensão especial para parentes das vítimas da chacina de Acari",
+   "link": "https://www.camara.leg.br/noticias/1322494-camara-aprova-pensao-especial-para-parentes-das-vitimas-da-chacina-de-acari",
+   "resumo": "Benefício de um salário mínimo será pago a familiares das 11 vítimas de 1990; texto inscreve Mães de Acari no Livro dos Heróis e vai ao Senado",
+   "fonte": "camara",
+   "fonteNome": "Agência Câmara",
+   "sigla": "Câmara",
+   "publicadoEm": "2026-11-24T21:16:00.000Z",
+   "categorias": [
+    "trabalhista",
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-24T21:35:19.991Z"
+  },
   {
    "id": "fw722o",
    "titulo": "TCU convida sociedade a definir prioridades de fiscalização para 2027",
@@ -2970,21 +2986,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-12T20:35:19.840Z"
-  },
-  {
-   "id": "1foo7sl",
-   "titulo": "Mutirão de atendimentos do INSS oferece quase 8 mil vagas neste fim de semana",
-   "link": "https://agenciagov.ebc.com.br/noticias/202611/mutirao-de-atendimentos-do-inss-oferece-quase-8-mil-vagas-neste-fim-de-semana-14-e-15",
-   "resumo": "Cidadãos podem agendar pelo Meu INSS ou pela Central 135",
-   "fonte": "govbr",
-   "fonteNome": "Agência Gov (governo federal)",
-   "sigla": "Gov",
-   "publicadoEm": "2026-11-12T20:26:00.000Z",
-   "categorias": [
-    "trabalhista"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-12T21:05:19.624Z"
   }
  ]
 }
