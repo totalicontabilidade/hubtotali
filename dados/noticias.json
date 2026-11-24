@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-24T15:05:21.470Z",
+ "atualizadoEm": "2026-11-24T16:05:19.925Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-24T15:05:21.470Z"
+   "ultimaVez": "2026-11-24T16:05:19.925Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-24T15:05:21.470Z"
+   "ultimaVez": "2026-11-24T16:05:19.925Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-24T15:05:21.470Z"
+   "ultimaVez": "2026-11-24T16:05:19.925Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 15,
-   "ultimaVez": "2026-11-24T15:05:21.470Z"
+   "ultimaVez": "2026-11-24T16:05:19.925Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-24T15:05:21.470Z"
+   "ultimaVez": "2026-11-24T16:05:19.925Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-24T15:05:21.470Z"
+   "ultimaVez": "2026-11-24T16:05:19.925Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-24T15:05:21.470Z"
+   "ultimaVez": "2026-11-24T16:05:19.925Z"
   },
   {
    "id": "camara",
@@ -107,8 +107,8 @@
    "nome": "Agência Câmara",
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
-   "quantas": 3,
-   "ultimaVez": "2026-11-24T15:05:21.470Z"
+   "quantas": 4,
+   "ultimaVez": "2026-11-24T16:05:19.925Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-24T15:05:21.470Z"
+   "ultimaVez": "2026-11-24T16:05:19.925Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 3,
-   "ultimaVez": "2026-11-24T15:05:21.470Z"
+   "quantas": 4,
+   "ultimaVez": "2026-11-24T16:05:19.925Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,41 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-24T15:05:21.470Z"
+   "ultimaVez": "2026-11-24T16:05:19.925Z"
   }
  ],
  "noticias": [
+  {
+   "id": "14b3mnv",
+   "titulo": "Arrecadação federal atinge R$ 294 bilhões e bate recorde para outubro",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/arrecadacao-federal-atinge-r-294-bilhoes-e-bate-recorde-para-outubro",
+   "resumo": "A arrecadação das receitas federais somou R$ 293,975 bilhões em outubro deste ano, informou a Receita Federal. O valor representa aumento real de 7,28% em relação ao mesmo mês de 2025 e é o maior já registrado para meses de outubro desde o início da série histórica, em 1995.…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-24T15:57:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-24T16:05:19.925Z"
+  },
+  {
+   "id": "gm80i3",
+   "titulo": "Projeto garante salário 25% maior para professor com ensino superior",
+   "link": "https://www.camara.leg.br/noticias/1313229-projeto-garante-salario-25-maior-para-professor-com-ensino-superior",
+   "resumo": "Proposta está em análise na Câmara dos Deputados",
+   "fonte": "camara",
+   "fonteNome": "Agência Câmara",
+   "sigla": "Câmara",
+   "publicadoEm": "2026-11-24T15:56:00.000Z",
+   "categorias": [
+    "legislacao",
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-24T16:05:19.925Z"
+  },
   {
    "id": "ud341x",
    "titulo": "Sefaz divulga calendário do IPVA para 2027",
@@ -2957,36 +2988,6 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-12T17:05:19.498Z"
-  },
-  {
-   "id": "k3smm7",
-   "titulo": "CFC Mulher ganha novo reforço",
-   "link": "https://cfc.org.br/noticias/cfc-mulher-ganha-novo-reforco/",
-   "resumo": "O CFC Mulher ganhou um reforço em sua nova missão de inserir as profissionais da contabilidade em posições estratégicas por meio da capacitação. A coordenadora do projeto, Welynádia Pereira, e o presidente do Conselho Federal de Contabilidade (CFC), Joaquim Bezerra,…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-12T15:15:29.000Z",
-   "categorias": [
-    "contabil"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-12T15:35:19.326Z"
-  },
-  {
-   "id": "3quvzc",
-   "titulo": "Revisão de Pronunciamentos Técnicos nº 31 traz alterações com vigência para 2027",
-   "link": "https://cfc.org.br/noticias/revisao-de-pronunciamentos-tecnicos-no-31-traz-alteracoes-com-vigencia-para-2027/",
-   "resumo": "O Conselho Federal de Contabilidade (CFC), o Comitê de Pronunciamentos Contábeis (CPC) e a Comissão de Valores Mobiliários (CVM) oferecem à consulta pública conjunta a minuta de Revisão de Pronunciamentos Técnicos nº 31. Profissionais da contabilidade e demais interessados…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-12T14:54:23.000Z",
-   "categorias": [
-    "contabil"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-12T15:05:20.892Z"
   }
  ]
 }
