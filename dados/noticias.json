@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-25T17:35:18.365Z",
+ "atualizadoEm": "2026-11-25T18:05:18.628Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T17:35:18.365Z"
+   "ultimaVez": "2026-11-25T18:05:18.628Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-25T17:35:18.365Z"
+   "ultimaVez": "2026-11-25T18:05:18.628Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T17:35:18.365Z"
+   "ultimaVez": "2026-11-25T18:05:18.628Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 14,
-   "ultimaVez": "2026-11-25T17:35:18.365Z"
+   "ultimaVez": "2026-11-25T18:05:18.628Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-25T17:35:18.365Z"
+   "ultimaVez": "2026-11-25T18:05:18.628Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-25T17:35:18.365Z"
+   "ultimaVez": "2026-11-25T18:05:18.628Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-25T17:35:18.365Z"
+   "ultimaVez": "2026-11-25T18:05:18.628Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-25T17:35:18.365Z"
+   "ultimaVez": "2026-11-25T18:05:18.628Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-25T17:35:18.365Z"
+   "ultimaVez": "2026-11-25T18:05:18.628Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-25T17:35:18.365Z"
+   "ultimaVez": "2026-11-25T18:05:18.628Z"
   },
   {
    "id": "govbr",
@@ -135,7 +135,7 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-25T17:35:18.365Z"
+   "ultimaVez": "2026-11-25T18:05:18.628Z"
   }
  ],
  "noticias": [
@@ -169,6 +169,39 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-25T17:35:18.365Z"
+  },
+  {
+   "id": "e9sohn",
+   "titulo": "Brazil’s Federal Revenue Service and His Majesty’s Revenue and Customs (HMRC) signed a new customs cooperation agreement today in Fortaleza",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/brazil2019s-federal-revenue-service-and-his-majesty2019s-revenue-and-customs-hmrc-signed-a-new-customs-cooperation-agreement-today-in-fortaleza",
+   "resumo": "The initiative strengthens the strategic partnership between the two countries, expands information sharing, and reinforces efforts to combat fraud and illicit activities in international trade.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-25T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos",
+    "trabalhista"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-25T18:05:18.628Z"
+  },
+  {
+   "id": "dxddz5",
+   "titulo": "A RFB e a Receita e Alfândega de Sua Majestade (HMRC), do Reino Unido, assinaram hoje, em Fortaleza, um novo acordo de cooperação aduaneira",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/a-rfb-e-a-receita-e-alfandega-de-sua-majestade-hmrc-do-reino-unido-assinaram-hoje-em-fortaleza-um-novo-acordo-de-cooperacao-aduaneira",
+   "resumo": "A iniciativa fortalece a parceria estratégica entre os dois países, amplia a troca de informações e reforça o combate a fraudes e ilícitos no comércio internacional.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-25T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-25T18:05:18.628Z"
   },
   {
    "id": "1p5lfq7",
@@ -2903,6 +2936,22 @@
    "vistaEm": "2026-11-13T20:35:18.415Z"
   },
   {
+   "id": "drhne1",
+   "titulo": "Processamento final das solicitações de Opção pelo Simples Nacional para 2027",
+   "link": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/NoticiaCompleta.aspx?id=2f46cb8f-2825-49da-944e-0724653d3391",
+   "resumo": "Contribuintes poderão acessar o serviço \"Acompanhamento da Solicitação da Opção pelo Simples Nacional\" no Portal do Simples Nacional a partir de 20/11/2026",
+   "fonte": "simples",
+   "fonteNome": "Simples Nacional",
+   "sigla": "SN",
+   "publicadoEm": "2026-11-13T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "simples"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-25T18:05:18.628Z"
+  },
+  {
    "id": "1q2iwre",
    "titulo": "Operação Fronteira: Receita Federal apreende drogas e cigarros contrabandeados em Corumbá e Mundo Novo",
    "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-receita-federal-apreende-drogas-e-cigarros-contrabandeados-em-corumba-e-mundo-novo",
@@ -2932,53 +2981,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-13T16:05:18.995Z"
-  },
-  {
-   "id": "lnimwv",
-   "titulo": "Benefício tributário a entidades filantrópicas é aprovado pela CAS",
-   "link": "https://www12.senado.leg.br/noticias/audios/2026/11/beneficio-tributario-a-entidades-filantropicas-e-aprovado-pela-cas",
-   "resumo": "",
-   "fonte": "senado",
-   "fonteNome": "Agência Senado",
-   "sigla": "Senado",
-   "publicadoEm": "2026-11-13T14:28:47.000Z",
-   "categorias": [
-    "tributos",
-    "trabalhista",
-    "legislacao"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-13T14:35:18.156Z"
-  },
-  {
-   "id": "ud341t",
-   "titulo": "Sefaz lança sistema Sauros para combater fraudes fiscais",
-   "link": "https://www.sefaz.se.gov.br/Lists/Noticias/DispForm.aspx?ID=2882",
-   "resumo": "Title: Sefaz lança sistema Sauros para combater fraudes fiscais Publicacao: 13/11/2026 10:20 Foto: https://www.sefaz.se.gov.br/Imagens/noticias/13-11-2026/2%20(2).jpeg Visibilidade: Intranet, Internet",
-   "fonte": "sefaz-se",
-   "fonteNome": "Secretaria da Fazenda de Sergipe",
-   "sigla": "SEFAZ/SE",
-   "publicadoEm": "2026-11-13T13:21:07.000Z",
-   "categorias": [
-    "sergipe"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-13T13:35:18.132Z"
-  },
-  {
-   "id": "ud341s",
-   "titulo": "Governo de Sergipe divulga calendário de pagamento dos servidores do Executivo para o mês de novembro",
-   "link": "https://www.sefaz.se.gov.br/Lists/Noticias/DispForm.aspx?ID=2881",
-   "resumo": "Title: Governo de Sergipe divulga calendário de pagamento dos servidores do Executivo para o mês de novembro Publicacao: 13/11/2026 09:40 Foto: https://www.sefaz.se.gov.br/Imagens/noticias/13-11-2026/1.jpeg Visibilidade: Intranet, Internet",
-   "fonte": "sefaz-se",
-   "fonteNome": "Secretaria da Fazenda de Sergipe",
-   "sigla": "SEFAZ/SE",
-   "publicadoEm": "2026-11-13T12:40:18.000Z",
-   "categorias": [
-    "sergipe"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-13T13:05:17.514Z"
   }
  ]
 }
