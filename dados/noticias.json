@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-25T13:05:23.351Z",
+ "atualizadoEm": "2026-11-25T13:35:19.619Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T13:05:23.351Z"
+   "ultimaVez": "2026-11-25T13:35:19.619Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-25T13:05:23.351Z"
+   "ultimaVez": "2026-11-25T13:35:19.619Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T13:05:23.351Z"
+   "ultimaVez": "2026-11-25T13:35:19.619Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 15,
-   "ultimaVez": "2026-11-25T13:05:23.351Z"
+   "ultimaVez": "2026-11-25T13:35:19.619Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-25T13:05:23.351Z"
+   "ultimaVez": "2026-11-25T13:35:19.619Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-25T13:05:23.351Z"
+   "ultimaVez": "2026-11-25T13:35:19.619Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-25T13:05:23.351Z"
+   "ultimaVez": "2026-11-25T13:35:19.619Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-25T13:05:23.351Z"
+   "ultimaVez": "2026-11-25T13:35:19.619Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-25T13:05:23.351Z"
+   "ultimaVez": "2026-11-25T13:35:19.619Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 3,
-   "ultimaVez": "2026-11-25T13:05:23.351Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-25T13:35:19.619Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-25T13:05:23.351Z"
+   "ultimaVez": "2026-11-25T13:35:19.619Z"
   }
  ],
  "noticias": [
+  {
+   "id": "19fgz8e",
+   "titulo": "Cancelada reunião para votar parecer sobre ampliação do limite de faturamento de MEIs",
+   "link": "https://www.camara.leg.br/noticias/1321031-cancelada-reuniao-para-votar-parecer-sobre-ampliacao-do-limite-de-faturamento-de-meis",
+   "resumo": "Foi cancelada a reunião desta quarta-feira (25) da comissão especial da Câmara dos Deputados que analisa o aumento do limite anual de faturamento do Microempreendedor Individual ( MEI ). A expectativa era discutir o parecer do relator, deputado Jorge Goetten…",
+   "fonte": "camara",
+   "fonteNome": "Agência Câmara",
+   "sigla": "Câmara",
+   "publicadoEm": "2026-11-25T13:15:00.000Z",
+   "categorias": [
+    "legislacao",
+    "simples"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-25T13:35:19.619Z"
+  },
   {
    "id": "brpmdv",
    "titulo": "Confaz divulga preços médios de combustíveis para cálculo do ICMS",
@@ -2966,19 +2982,6 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-12T20:05:19.298Z"
-  },
-  {
-   "id": "1udxl6q",
-   "titulo": "Ministério do Empreendedorismo lança Cartilha de Emendas Parlamentares 2027 para impulsionar pequenos negócios nos municípios",
-   "link": "https://fenacon.org.br/noticias/ministerio-do-empreendedorismo-lanca-cartilha-de-emendas-parlamentares-2027-para-impulsionar-pequenos-negocios-nos-municipios/",
-   "resumo": "Publicação orienta deputados e senadores sobre como destinar recursos ao PLOA 2027 em projetos de empreendedorismo feminino, inclusão socioprodutiva, artesanato e melhoria do ambiente de negócios O Ministério do Empreendedorismo, da Microempresa e da Empresa de Pequeno Porte…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-13T05:12:36.000Z",
-   "categorias": [],
-   "relevancia": 2,
-   "vistaEm": "2026-11-13T10:05:20.389Z"
   }
  ]
 }
