@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-25T21:35:17.924Z",
+ "atualizadoEm": "2026-11-25T22:05:18.108Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T21:35:17.924Z"
+   "ultimaVez": "2026-11-25T22:05:18.108Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-25T21:35:17.924Z"
+   "ultimaVez": "2026-11-25T22:05:18.108Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T21:35:17.924Z"
+   "ultimaVez": "2026-11-25T22:05:18.108Z"
   },
   {
    "id": "fazenda",
@@ -70,8 +70,8 @@
    "nome": "Ministério da Fazenda",
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
-   "quantas": 15,
-   "ultimaVez": "2026-11-25T21:35:17.924Z"
+   "quantas": 16,
+   "ultimaVez": "2026-11-25T22:05:18.108Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-25T21:35:17.924Z"
+   "ultimaVez": "2026-11-25T22:05:18.108Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-25T21:35:17.924Z"
+   "ultimaVez": "2026-11-25T22:05:18.108Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-25T21:35:17.924Z"
+   "ultimaVez": "2026-11-25T22:05:18.108Z"
   },
   {
    "id": "camara",
@@ -107,8 +107,8 @@
    "nome": "Agência Câmara",
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
-   "quantas": 2,
-   "ultimaVez": "2026-11-25T21:35:17.924Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-25T22:05:18.108Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-25T21:35:17.924Z"
+   "quantas": 0,
+   "ultimaVez": "2026-11-25T22:05:18.108Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-25T21:35:17.924Z"
+   "ultimaVez": "2026-11-25T22:05:18.108Z"
   },
   {
    "id": "govbr",
@@ -135,7 +135,7 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-25T21:35:17.924Z"
+   "ultimaVez": "2026-11-25T22:05:18.108Z"
   }
  ],
  "noticias": [
@@ -301,6 +301,22 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-25T19:52:13.154Z"
+  },
+  {
+   "id": "1gb4a8j",
+   "titulo": "PGFN prorroga vencimentos de dívidas e suspende cobranças em Tupanciretã/RS por calamidade pública",
+   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/pgfn-prorroga-vencimentos-de-dividas-e-suspende-cobrancas-em-tupancireta-rs-por-calamidade-publica",
+   "resumo": "Medidas valem para contribuintes domiciliados no município gaúcho e incluem adiamento de parcelas para 2027 e suspensão de protestos por 90 dias",
+   "fonte": "fazenda",
+   "fonteNome": "Ministério da Fazenda",
+   "sigla": "MF",
+   "publicadoEm": "2026-11-25T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-25T22:05:18.108Z"
   },
   {
    "id": "dxddz5",
@@ -2970,22 +2986,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-13T19:35:24.995Z"
-  },
-  {
-   "id": "1q5qw73",
-   "titulo": "Para onde vai a legislação trabalhista?",
-   "link": "https://www12.senado.leg.br/noticias/infomaterias/2026/11/para-onde-vai-a-legislacao-trabalhista",
-   "resumo": "",
-   "fonte": "senado",
-   "fonteNome": "Agência Senado",
-   "sigla": "Senado",
-   "publicadoEm": "2026-11-13T18:48:00.000Z",
-   "categorias": [
-    "legislacao",
-    "trabalhista"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-13T19:05:20.591Z"
   }
  ]
 }
