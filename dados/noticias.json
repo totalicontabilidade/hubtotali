@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-25T04:04:47.663Z",
+ "atualizadoEm": "2026-11-25T10:05:20.718Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T04:04:47.663Z"
+   "ultimaVez": "2026-11-25T10:05:20.718Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-25T04:04:47.663Z"
+   "ultimaVez": "2026-11-25T10:05:20.718Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T04:04:47.663Z"
+   "ultimaVez": "2026-11-25T10:05:20.718Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 15,
-   "ultimaVez": "2026-11-25T04:04:47.663Z"
+   "ultimaVez": "2026-11-25T10:05:20.718Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-25T04:04:47.663Z"
+   "ultimaVez": "2026-11-25T10:05:20.718Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-25T04:04:47.663Z"
+   "ultimaVez": "2026-11-25T10:05:20.718Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-25T04:04:47.663Z"
+   "ultimaVez": "2026-11-25T10:05:20.718Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-25T04:04:47.663Z"
+   "ultimaVez": "2026-11-25T10:05:20.718Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-25T04:04:47.663Z"
+   "ultimaVez": "2026-11-25T10:05:20.718Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-25T04:04:47.663Z"
+   "ultimaVez": "2026-11-25T10:05:20.718Z"
   },
   {
    "id": "govbr",
@@ -135,25 +135,10 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-25T04:04:47.663Z"
+   "ultimaVez": "2026-11-25T10:05:20.718Z"
   }
  ],
  "noticias": [
-  {
-   "id": "14q7mxe",
-   "titulo": "Arrecadação federal atinge R$ 294 bilhões e bate recorde para outubro",
-   "link": "https://fenacon.org.br/noticias/arrecadacao-federal-atinge-r-294-bilhoes-e-bate-recorde-para-outubro/",
-   "resumo": "Resultado cresceu 7,28% acima da inflação e acumula R$ 2,6 trilhões A arrecadação das receitas federais somou R$ 293,975 bilhões em outubro deste ano, informou a Receita Federal. O valor representa aumento real de 7,28% em relação ao mesmo mês de 2025 e é o maior já…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-25T03:57:00.000Z",
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-25T04:04:47.663Z"
-  },
   {
    "id": "1g1bhbs",
    "titulo": "Empresas têm até 30 de novembro para pagar primeira parcela do 13º",
@@ -184,6 +169,19 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-25T04:04:47.663Z"
+  },
+  {
+   "id": "1pn693w",
+   "titulo": "Confiança das micro e pequenas empresas volta a crescer em outubro, impulsionada pelo Comércio e Indústria",
+   "link": "https://fenacon.org.br/noticias/confianca-das-micro-e-pequenas-empresas-volta-a-crescer-em-outubro-impulsionada-pelo-comercio-e-industria/",
+   "resumo": "Pesquisa do Sebrae em parceria com a FGV aponta boas expectativas em relação às vendas de final de ano A confiança das micro e pequenas empresas brasileiras voltou a crescer no último mês de outubro e alcançou 86,9 pontos, registrando um avanço de 1,3 ponto em relação a…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-25T03:12:00.000Z",
+   "categorias": [],
+   "relevancia": 2,
+   "vistaEm": "2026-11-25T10:05:20.718Z"
   },
   {
    "id": "5cczx8",
@@ -228,6 +226,21 @@
     "legislacao"
    ],
    "relevancia": 2,
+   "vistaEm": "2026-11-25T04:04:47.663Z"
+  },
+  {
+   "id": "14q7mxe",
+   "titulo": "Arrecadação federal atinge R$ 294 bilhões e bate recorde para outubro",
+   "link": "https://fenacon.org.br/noticias/arrecadacao-federal-atinge-r-294-bilhoes-e-bate-recorde-para-outubro/",
+   "resumo": "Resultado cresceu 7,28% acima da inflação e acumula R$ 2,6 trilhões A arrecadação das receitas federais somou R$ 293,975 bilhões em outubro deste ano, informou a Receita Federal. O valor representa aumento real de 7,28% em relação ao mesmo mês de 2025 e é o maior já…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-25T03:01:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
    "vistaEm": "2026-11-25T04:04:47.663Z"
   },
   {
@@ -2964,24 +2977,6 @@
    "categorias": [
     "reforma",
     "tributos",
-    "legislacao"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-13T10:05:20.389Z"
-  },
-  {
-   "id": "jqa16x",
-   "titulo": "CGIBS aprova ajustes ao Regulamento do Imposto Sobre Bens e Serviços e prorroga a DeRE em Reunião Ordinária",
-   "link": "https://fenacon.org.br/reforma-tributaria/cgibs-aprova-ajustes-ao-regulamento-do-imposto-sobre-bens-e-servicos-e-prorroga-a-dere-em-reuniao-ordinaria/",
-   "resumo": "Conselho Superior também aprovou ato sobre CNPJ do produtor rural e do transportador autônomo O Conselho Superior do Comitê Gestor do IBS (CGIBS) aprovou, nesta terça-feira (10), em Joinville (SC), os ajustes à versão 2 do Regulamento do IBS e a prorrogação da Declaração de…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-13T03:24:00.000Z",
-   "categorias": [
-    "reforma",
-    "tributos",
-    "empresas",
     "legislacao"
    ],
    "relevancia": 3,
