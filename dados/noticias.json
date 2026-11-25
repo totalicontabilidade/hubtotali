@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-25T19:05:20.570Z",
+ "atualizadoEm": "2026-11-25T19:35:18.657Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T19:05:20.570Z"
+   "ultimaVez": "2026-11-25T19:35:18.657Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-25T19:05:20.570Z"
+   "ultimaVez": "2026-11-25T19:35:18.657Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T19:05:20.570Z"
+   "ultimaVez": "2026-11-25T19:35:18.657Z"
   },
   {
    "id": "fazenda",
@@ -70,8 +70,8 @@
    "nome": "Ministério da Fazenda",
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
-   "quantas": 14,
-   "ultimaVez": "2026-11-25T19:05:20.570Z"
+   "quantas": 15,
+   "ultimaVez": "2026-11-25T19:35:18.657Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-25T19:05:20.570Z"
+   "ultimaVez": "2026-11-25T19:35:18.657Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-25T19:05:20.570Z"
+   "ultimaVez": "2026-11-25T19:35:18.657Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-25T19:05:20.570Z"
+   "ultimaVez": "2026-11-25T19:35:18.657Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-25T19:05:20.570Z"
+   "ultimaVez": "2026-11-25T19:35:18.657Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-25T19:05:20.570Z"
+   "ultimaVez": "2026-11-25T19:35:18.657Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-25T19:05:20.570Z"
+   "ultimaVez": "2026-11-25T19:35:18.657Z"
   },
   {
    "id": "govbr",
@@ -134,11 +134,27 @@
    "nome": "Agência Gov (governo federal)",
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
-   "quantas": 0,
-   "ultimaVez": "2026-11-25T19:05:20.570Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-25T19:35:18.657Z"
   }
  ],
  "noticias": [
+  {
+   "id": "11nwbqs",
+   "titulo": "22,4 milhões de aposentados e pensionistas fizeram prova de vida ao votar nas eleições",
+   "link": "https://agenciagov.ebc.com.br/noticias/202611/aposentadorias-representaram-a-maior-parte-dos-beneficios-do-inss-que-comprovaram-vida-durante-as-eleicoes-de-2026",
+   "resumo": "A maior parte do grupo era de aposentados: 34,65% com aposentadorias por idade e 17,7% aposentadorias por tempo de contribuição. As pensões vêm em seguida: representaram 17% dos eleitores beneficiários do INSS",
+   "fonte": "govbr",
+   "fonteNome": "Agência Gov (governo federal)",
+   "sigla": "Gov",
+   "publicadoEm": "2026-11-25T18:37:00.000Z",
+   "categorias": [
+    "tributos",
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-25T19:35:18.657Z"
+  },
   {
    "id": "i0ppvb",
    "titulo": "Comissão de Orçamento aprova relatório que eleva em R$ 37,1 bilhões a previsão de receita para 2027",
@@ -2964,25 +2980,6 @@
     "legislacao"
    ],
    "relevancia": 2,
-   "vistaEm": "2026-11-13T15:05:19.869Z"
-  },
-  {
-   "id": "vjk72z",
-   "titulo": "PGDAS-D é atualizado para atender à Reforma Tributária a partir de novembro de 2026",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/pgdas-d-e-atualizado-para-atender-a-reforma-tributaria-a-partir-de-novembro-de-2026",
-   "resumo": "Mudanças na apuração do Simples Nacional incluem o fim da escolha do regime de caixa ou competência e a obrigatoriedade de informar a folha de salários dos últimos 12 meses.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-13T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "reforma",
-    "simples",
-    "tributos",
-    "trabalhista"
-   ],
-   "relevancia": 3,
    "vistaEm": "2026-11-13T15:05:19.869Z"
   }
  ]
