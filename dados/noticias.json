@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-25T15:05:20.132Z",
+ "atualizadoEm": "2026-11-25T15:35:24.856Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T15:05:20.132Z"
+   "ultimaVez": "2026-11-25T15:35:24.856Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-25T15:05:20.132Z"
+   "ultimaVez": "2026-11-25T15:35:24.856Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T15:05:20.132Z"
+   "ultimaVez": "2026-11-25T15:35:24.856Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 14,
-   "ultimaVez": "2026-11-25T15:05:20.132Z"
+   "ultimaVez": "2026-11-25T15:35:24.856Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-25T15:05:20.132Z"
+   "ultimaVez": "2026-11-25T15:35:24.856Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-25T15:05:20.132Z"
+   "ultimaVez": "2026-11-25T15:35:24.856Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-25T15:05:20.132Z"
+   "ultimaVez": "2026-11-25T15:35:24.856Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-25T15:05:20.132Z"
+   "ultimaVez": "2026-11-25T15:35:24.856Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-25T15:05:20.132Z"
+   "ultimaVez": "2026-11-25T15:35:24.856Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-25T15:05:20.132Z"
+   "ultimaVez": "2026-11-25T15:35:24.856Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,25 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-25T15:05:20.132Z"
+   "ultimaVez": "2026-11-25T15:35:24.856Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1ccihw6",
+   "titulo": "CFC disponibiliza capacitação completa sobre Contabilidade Imobiliária e de Construtoras",
+   "link": "https://cfc.org.br/noticias/cfc-disponibiliza-capacitacao-completa-sobre-contabilidade-imobiliaria-e-de-construtoras/",
+   "resumo": "O último módulo da Qualificação Avançada em Contabilidade Imobiliária e Construtoras – Aspectos Relevantes e Modelagem está liberado na Plataforma EduCont do Sistema CFC/CRCs. Composta de sete aulas, a formação completa soma 7 pontos no Programa de Educação Profissional…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-25T15:12:49.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-25T15:35:24.856Z"
+  },
   {
    "id": "1p5lfq7",
    "titulo": "CFC assina recomendação para implementação do Guia de Custos para o Setor Público no Brasil",
@@ -2965,22 +2980,6 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-13T12:35:18.872Z"
-  },
-  {
-   "id": "njo8ou",
-   "titulo": "Receita Federal conquista primeiro e segundo lugares no 30º Concurso de Inovação da Enap",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-conquista-primeiro-e-segundo-lugares-no-30o-concurso-de-inovacao-da-enap",
-   "resumo": "Conquistas ganham ainda mais relevância diante da participação de centenas de iniciativas das administrações públicas federal, estadual e municipal.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-13T11:05:19.719Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-13T11:05:17.957Z"
   }
  ]
 }
