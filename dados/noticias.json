@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-25T18:05:18.628Z",
+ "atualizadoEm": "2026-11-25T18:35:23.406Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T18:05:18.628Z"
+   "ultimaVez": "2026-11-25T18:35:23.406Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-25T18:05:18.628Z"
+   "ultimaVez": "2026-11-25T18:35:23.406Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T18:05:18.628Z"
+   "ultimaVez": "2026-11-25T18:35:23.406Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 14,
-   "ultimaVez": "2026-11-25T18:05:18.628Z"
+   "ultimaVez": "2026-11-25T18:35:23.406Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-25T18:05:18.628Z"
+   "ultimaVez": "2026-11-25T18:35:23.406Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-25T18:05:18.628Z"
+   "ultimaVez": "2026-11-25T18:35:23.406Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-25T18:05:18.628Z"
+   "ultimaVez": "2026-11-25T18:35:23.406Z"
   },
   {
    "id": "camara",
@@ -107,8 +107,8 @@
    "nome": "Agência Câmara",
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-25T18:05:18.628Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-25T18:35:23.406Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-25T18:05:18.628Z"
+   "ultimaVez": "2026-11-25T18:35:23.406Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-25T18:05:18.628Z"
+   "ultimaVez": "2026-11-25T18:35:23.406Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,41 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-25T18:05:18.628Z"
+   "ultimaVez": "2026-11-25T18:35:23.406Z"
   }
  ],
  "noticias": [
+  {
+   "id": "i0ppvb",
+   "titulo": "Comissão de Orçamento aprova relatório que eleva em R$ 37,1 bilhões a previsão de receita para 2027",
+   "link": "https://www.camara.leg.br/noticias/1322856-comissao-de-orcamento-aprova-relatorio-que-eleva-em-r-371-bilhoes-a-previsao-de-receita-para-2027",
+   "resumo": "Relatório prevê redução dos recursos administrados pela Receita Federal e aumento da receita com royalties de petróleo",
+   "fonte": "camara",
+   "fonteNome": "Agência Câmara",
+   "sigla": "Câmara",
+   "publicadoEm": "2026-11-25T18:27:00.000Z",
+   "categorias": [
+    "tributos",
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-25T18:35:23.406Z"
+  },
+  {
+   "id": "1vqq2dx",
+   "titulo": "Falta uma semana para evento nacional de perícia contábil",
+   "link": "https://cfc.org.br/noticias/falta-uma-semana-para-evento-nacional-de-pericia-contabil/",
+   "resumo": "Na próxima quarta-feira (2), acontece a Conferência Nacional de Perícia Contábil (CNPC). Realizado na modalidade híbrida, com atividades presenciais em Brasília/DF, o evento gera 13 pontos para o Programa de Educação Profissional Continuada (PEPC) para peritos. Ao todo, a…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-25T18:06:44.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-25T18:35:23.406Z"
+  },
   {
    "id": "1ccihw6",
    "titulo": "CFC disponibiliza capacitação completa sobre Contabilidade Imobiliária e de Construtoras",
@@ -2950,37 +2981,6 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-25T18:05:18.628Z"
-  },
-  {
-   "id": "1q2iwre",
-   "titulo": "Operação Fronteira: Receita Federal apreende drogas e cigarros contrabandeados em Corumbá e Mundo Novo",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-receita-federal-apreende-drogas-e-cigarros-contrabandeados-em-corumba-e-mundo-novo",
-   "resumo": "Ações realizadas nesta quinta-feira (12) resultaram em apreensões avaliadas em mais de R$ 416 mil e contaram com o apoio de cães de faro e da integração com forças de segurança.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-13T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-13T19:35:24.995Z"
-  },
-  {
-   "id": "11gcjk6",
-   "titulo": "INSS orienta trabalhadores domésticos em Campo Grande (MS)",
-   "link": "https://agenciagov.ebc.com.br/noticias/202611/inss-orienta-trabalhadores-domesticos-em-campo-grande-ms",
-   "resumo": "Evento ocorrerá neste sábado (14) e reunirá informações sobre benefícios, contribuições previdenciárias e acesso aos serviços digitais.",
-   "fonte": "govbr",
-   "fonteNome": "Agência Gov (governo federal)",
-   "sigla": "Gov",
-   "publicadoEm": "2026-11-13T14:39:00.000Z",
-   "categorias": [
-    "trabalhista"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-13T16:05:18.995Z"
   }
  ]
 }
