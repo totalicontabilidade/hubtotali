@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-25T18:35:23.406Z",
+ "atualizadoEm": "2026-11-25T19:05:20.570Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T18:35:23.406Z"
+   "ultimaVez": "2026-11-25T19:05:20.570Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-25T18:35:23.406Z"
+   "ultimaVez": "2026-11-25T19:05:20.570Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T18:35:23.406Z"
+   "ultimaVez": "2026-11-25T19:05:20.570Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 14,
-   "ultimaVez": "2026-11-25T18:35:23.406Z"
+   "ultimaVez": "2026-11-25T19:05:20.570Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-25T18:35:23.406Z"
+   "ultimaVez": "2026-11-25T19:05:20.570Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-25T18:35:23.406Z"
+   "ultimaVez": "2026-11-25T19:05:20.570Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-25T18:35:23.406Z"
+   "ultimaVez": "2026-11-25T19:05:20.570Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-25T18:35:23.406Z"
+   "ultimaVez": "2026-11-25T19:05:20.570Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-25T18:35:23.406Z"
+   "ultimaVez": "2026-11-25T19:05:20.570Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-25T18:35:23.406Z"
+   "ultimaVez": "2026-11-25T19:05:20.570Z"
   },
   {
    "id": "govbr",
@@ -135,7 +135,7 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-25T18:35:23.406Z"
+   "ultimaVez": "2026-11-25T19:05:20.570Z"
   }
  ],
  "noticias": [
@@ -217,6 +217,23 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-25T18:05:18.628Z"
+  },
+  {
+   "id": "1mumafp",
+   "titulo": "Delegacia de Maiores Contribuintes no Rio de Janeiro recebe liderança global da Shell e reforça avanços do Programa Confia",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/delegacia-de-maiores-contribuintes-no-rio-de-janeiro-recebe-lideranca-global-da-shell-e-reforca-avancos-do-programa-confia",
+   "resumo": "Encontro destacou os benefícios da conformidade cooperativa, a segurança jurídica e o fortalecimento da relação de confiança entre a Receita Federal e grandes contribuintes.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-25T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos",
+    "trabalhista"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-25T19:05:20.570Z"
   },
   {
    "id": "dxddz5",
@@ -446,6 +463,24 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-24T22:05:18.436Z"
+  },
+  {
+   "id": "18pof1i",
+   "titulo": "Reforma Tributária: CFC debate desafios e impactos na gestão dos conselhos profissionais",
+   "link": "https://cfc.org.br/noticias/reforma-tributaria-cfc-debate-desafios-e-impactos-na-gestao-dos-conselhos-profissionais/",
+   "resumo": "O Conselho Federal de Contabilidade (CFC) realizou nesta terça-feira (24), na sede da entidade em Brasília (DF), o Seminário “Reforma Tributária e seus Impactos nos Conselhos de Profissões Regulamentadas”. A iniciativa é promovida pela Escola de Governança e Gestão dos…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-24T21:30:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "contabil",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-25T19:05:20.570Z"
   },
   {
    "id": "1jfbmzd",
@@ -2949,38 +2984,6 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-13T15:05:19.869Z"
-  },
-  {
-   "id": "1berbil",
-   "titulo": "Operação Fronteira Receita Federal realiza encerramento operacional em Rio Grande (RS)",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-receita-federal-realiza-encerramento-operacional-em-rio-grande-rs",
-   "resumo": "Quinta edição da operação anual mobilizou mais de 500 servidores do órgão no combate à entrada de produtos irregulares no País",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-13T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-13T20:35:18.415Z"
-  },
-  {
-   "id": "drhne1",
-   "titulo": "Processamento final das solicitações de Opção pelo Simples Nacional para 2027",
-   "link": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/NoticiaCompleta.aspx?id=2f46cb8f-2825-49da-944e-0724653d3391",
-   "resumo": "Contribuintes poderão acessar o serviço \"Acompanhamento da Solicitação da Opção pelo Simples Nacional\" no Portal do Simples Nacional a partir de 20/11/2026",
-   "fonte": "simples",
-   "fonteNome": "Simples Nacional",
-   "sigla": "SN",
-   "publicadoEm": "2026-11-13T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "simples"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-25T18:05:18.628Z"
   }
  ]
 }
