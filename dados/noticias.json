@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-25T14:35:22.722Z",
+ "atualizadoEm": "2026-11-25T15:05:20.132Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T14:35:22.722Z"
+   "ultimaVez": "2026-11-25T15:05:20.132Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-25T14:35:22.722Z"
+   "ultimaVez": "2026-11-25T15:05:20.132Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T14:35:22.722Z"
+   "ultimaVez": "2026-11-25T15:05:20.132Z"
   },
   {
    "id": "fazenda",
@@ -70,8 +70,8 @@
    "nome": "Ministério da Fazenda",
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
-   "quantas": 15,
-   "ultimaVez": "2026-11-25T14:35:22.722Z"
+   "quantas": 14,
+   "ultimaVez": "2026-11-25T15:05:20.132Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-25T14:35:22.722Z"
+   "ultimaVez": "2026-11-25T15:05:20.132Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-25T14:35:22.722Z"
+   "ultimaVez": "2026-11-25T15:05:20.132Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-25T14:35:22.722Z"
+   "ultimaVez": "2026-11-25T15:05:20.132Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-25T14:35:22.722Z"
+   "ultimaVez": "2026-11-25T15:05:20.132Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-25T14:35:22.722Z"
+   "ultimaVez": "2026-11-25T15:05:20.132Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-25T14:35:22.722Z"
+   "ultimaVez": "2026-11-25T15:05:20.132Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,25 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-25T14:35:22.722Z"
+   "ultimaVez": "2026-11-25T15:05:20.132Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1p5lfq7",
+   "titulo": "CFC assina recomendação para implementação do Guia de Custos para o Setor Público no Brasil",
+   "link": "https://cfc.org.br/destaque/cfc-assina-recomendacao-para-implementacao-do-guia-de-custos-para-o-setor-publico/",
+   "resumo": "A contabilidade pública brasileira avança na adoção de instrumentos que permitem mensurar os custos dos serviços prestados à sociedade e aprimorar a aplicação dos recursos públicos. Nesta quarta-feira (25), o Conselho Federal de Contabilidade (CFC) assinou recomendação…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-25T14:02:41.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-25T15:05:20.132Z"
+  },
   {
    "id": "19fgz8e",
    "titulo": "Cancelada reunião para votar parecer sobre ampliação do limite de faturamento de MEIs",
@@ -2966,22 +2981,6 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-13T11:05:17.957Z"
-  },
-  {
-   "id": "15pg1iz",
-   "titulo": "Fenacon alerta para impactos do PLP 299/2026 e defende revisão de medidas que ampliam a carga tributária",
-   "link": "https://fenacon.org.br/noticias/fenacon-alerta-para-impactos-do-plp-299-2026-e-defende-revisao-de-medidas-que-ampliam-a-carga-tributaria/",
-   "resumo": "Entidade alerta para os riscos do aumento da carga tributária sobre o setor produtivo",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-13T05:53:59.000Z",
-   "categorias": [
-    "tributos",
-    "legislacao"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-12T20:05:19.298Z"
   }
  ]
 }
