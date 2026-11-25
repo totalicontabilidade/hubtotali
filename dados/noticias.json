@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-25T19:52:13.154Z",
+ "atualizadoEm": "2026-11-25T21:35:17.924Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T19:52:13.154Z"
+   "ultimaVez": "2026-11-25T21:35:17.924Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-25T19:52:13.154Z"
+   "ultimaVez": "2026-11-25T21:35:17.924Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T19:52:13.154Z"
+   "ultimaVez": "2026-11-25T21:35:17.924Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 15,
-   "ultimaVez": "2026-11-25T19:52:13.154Z"
+   "ultimaVez": "2026-11-25T21:35:17.924Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-25T19:52:13.154Z"
+   "ultimaVez": "2026-11-25T21:35:17.924Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-25T19:52:13.154Z"
+   "ultimaVez": "2026-11-25T21:35:17.924Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-25T19:52:13.154Z"
+   "ultimaVez": "2026-11-25T21:35:17.924Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-25T19:52:13.154Z"
+   "ultimaVez": "2026-11-25T21:35:17.924Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-25T19:52:13.154Z"
+   "ultimaVez": "2026-11-25T21:35:17.924Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-25T19:52:13.154Z"
+   "ultimaVez": "2026-11-25T21:35:17.924Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-25T19:52:13.154Z"
+   "ultimaVez": "2026-11-25T21:35:17.924Z"
   }
  ],
  "noticias": [
+  {
+   "id": "pll08f",
+   "titulo": "Conselhos federais e ministros do TCU discutem regras de fiscalização em mesa-redonda na FGV",
+   "link": "https://cfc.org.br/noticias/conselhos-federais-e-ministros-do-tcu-discutem-regras-de-fiscalizacao-em-mesa-redonda-na-fgv/",
+   "resumo": "Promovido pela FGV Conhecimento em parceria com o CFC, encontro debateu diretrizes de controle externo, governança e segurança jurídica dos conselhos profissionais. Presidentes de conselhos federais de profissões regulamentadas e ministros do Tribunal de Contas da União (TCU)…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-25T21:25:04.000Z",
+   "categorias": [
+    "contabil",
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-25T21:35:17.924Z"
+  },
   {
    "id": "1pvkeg2",
    "titulo": "Paim volta a defender mudança na contribuição previdenciária das empresas",
@@ -2970,21 +2986,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-13T19:05:20.591Z"
-  },
-  {
-   "id": "ntp817",
-   "titulo": "MTE resgata 45 trabalhadores em condições degradantes em garimpo na Bahia",
-   "link": "https://agenciagov.ebc.com.br/noticias/202611/mte-resgata-45-trabalhadores-submetidos-a-condicoes-degradantes-em-garimpo-de-quartzo-na-bahia",
-   "resumo": "Garimpeiros desciam por poços de mais de 30 metros sem segurança e trabalhavam sem salário fixo, água potável ou instalações sanitárias.",
-   "fonte": "govbr",
-   "fonteNome": "Agência Gov (governo federal)",
-   "sigla": "Gov",
-   "publicadoEm": "2026-11-13T18:48:00.000Z",
-   "categorias": [
-    "trabalhista"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-13T19:35:24.995Z"
   }
  ]
 }
