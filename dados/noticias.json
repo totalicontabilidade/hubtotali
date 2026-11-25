@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-25T11:05:19.040Z",
+ "atualizadoEm": "2026-11-25T11:35:18.280Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T11:05:19.040Z"
+   "ultimaVez": "2026-11-25T11:35:18.280Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-25T11:05:19.040Z"
+   "ultimaVez": "2026-11-25T11:35:18.280Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T11:05:19.040Z"
+   "ultimaVez": "2026-11-25T11:35:18.280Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 15,
-   "ultimaVez": "2026-11-25T11:05:19.040Z"
+   "ultimaVez": "2026-11-25T11:35:18.280Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-25T11:05:19.040Z"
+   "ultimaVez": "2026-11-25T11:35:18.280Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-25T11:05:19.040Z"
+   "ultimaVez": "2026-11-25T11:35:18.280Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-25T11:05:19.040Z"
+   "ultimaVez": "2026-11-25T11:35:18.280Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-25T11:05:19.040Z"
+   "ultimaVez": "2026-11-25T11:35:18.280Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-25T11:05:19.040Z"
+   "ultimaVez": "2026-11-25T11:35:18.280Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-25T11:05:19.040Z"
+   "ultimaVez": "2026-11-25T11:35:18.280Z"
   },
   {
    "id": "govbr",
@@ -135,7 +135,7 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-25T11:05:19.040Z"
+   "ultimaVez": "2026-11-25T11:35:18.280Z"
   }
  ],
  "noticias": [
@@ -1127,6 +1127,21 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-20T01:09:02.901Z"
+  },
+  {
+   "id": "jr1pqj",
+   "titulo": "Plataforma Crescimento Sustentável facilita a elaboração de relatórios de sustentabilidade para pequenos negócios",
+   "link": "https://cfc.org.br/noticias/plataforma-crescimento-sustentavel-facilita-a-elaboracao-de-relatorios-de-sustentabilidade-para-pequenos-negocios/",
+   "resumo": "Os profissionais da contabilidade contam com uma ferramenta tecnológica para auxiliar micro, pequenas e médias empresas na organização e na divulgação de informações de sustentabilidade. A Plataforma Crescimento Sustentável, iniciativa do Sebrae Nacional, desenvolvida em…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-19T22:09:00.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-25T11:35:18.280Z"
   },
   {
    "id": "mc1ivj",
@@ -2962,21 +2977,6 @@
    "categorias": [
     "tributos",
     "legislacao"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-13T10:05:20.389Z"
-  },
-  {
-   "id": "1vmnnfb",
-   "titulo": "Pesquisa inédita identifica fatores que afetam saúde mental e qualidade de vida no trabalho",
-   "link": "https://fenacon.org.br/noticias/pesquisa-inedita-identifica-fatores-que-afetam-saude-mental-e-qualidade-de-vida-no-trabalho/",
-   "resumo": "Levantamento pioneiro entre agências reguladoras aponta desafios de segurança ocupacional; resultados vão orientar plano de ação em cinco eixos Como parte do compromisso com a saúde, a qualidade de vida e a valorização das pessoas, a Agência Nacional de Mineração (ANM)…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-13T03:56:57.000Z",
-   "categorias": [
-    "trabalhista"
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-13T10:05:20.389Z"
