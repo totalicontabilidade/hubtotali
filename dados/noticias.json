@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-25T12:05:21.561Z",
+ "atualizadoEm": "2026-11-25T12:35:19.232Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T12:05:21.561Z"
+   "ultimaVez": "2026-11-25T12:35:19.232Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-25T12:05:21.561Z"
+   "ultimaVez": "2026-11-25T12:35:19.232Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T12:05:21.561Z"
+   "ultimaVez": "2026-11-25T12:35:19.232Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 15,
-   "ultimaVez": "2026-11-25T12:05:21.561Z"
+   "ultimaVez": "2026-11-25T12:35:19.232Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-25T12:05:21.561Z"
+   "ultimaVez": "2026-11-25T12:35:19.232Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-25T12:05:21.561Z"
+   "ultimaVez": "2026-11-25T12:35:19.232Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-25T12:05:21.561Z"
+   "ultimaVez": "2026-11-25T12:35:19.232Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-25T12:05:21.561Z"
+   "ultimaVez": "2026-11-25T12:35:19.232Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-25T12:05:21.561Z"
+   "ultimaVez": "2026-11-25T12:35:19.232Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-25T12:05:21.561Z"
+   "ultimaVez": "2026-11-25T12:35:19.232Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,27 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-25T12:05:21.561Z"
+   "ultimaVez": "2026-11-25T12:35:19.232Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1ag873k",
+   "titulo": "Ao Correio Braziliense, presidente do CFC destaca protagonismo da contabilidade na transformação econômica do País",
+   "link": "https://cfc.org.br/noticias/ao-correio-braziliense-presidente-do-cfc-destaca-protagonismo-da-contabilidade-na-transformacao-economica-do-pais/",
+   "resumo": "A atuação dos profissionais da contabilidade será decisiva para o sucesso da reforma tributária brasileira e para a construção de um ambiente de negócios mais eficiente, seguro e transparente. Essa foi uma das principais mensagens do presidente do Conselho Federal de…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-25T12:18:36.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-25T12:35:19.232Z"
+  },
   {
    "id": "14u07qj",
    "titulo": "Comissão especial pode votar parecer sobre ampliação do limite de faturamento para o MEI",
@@ -2963,22 +2980,6 @@
     "legislacao"
    ],
    "relevancia": 2,
-   "vistaEm": "2026-11-13T10:05:20.389Z"
-  },
-  {
-   "id": "1y1e6gd",
-   "titulo": "Fenacon critica ajuste fiscal e diz que empresas não podem pagar a conta",
-   "link": "https://fenacon.org.br/noticias/fenacon-critica-ajuste-fiscal-e-diz-que-empresas-nao-podem-pagar-a-conta/",
-   "resumo": "Correio Braziliense destaca nota pública da entidade, que alerta para os impactos do aumento da carga tributária sobre o setor produtivo e defende a revisão de medidas previstas no PLP 299/2026 Por Raphael Pati A proposta de ajuste fiscal enviada pelo governo federal nesta…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-13T04:03:00.000Z",
-   "categorias": [
-    "tributos",
-    "legislacao"
-   ],
-   "relevancia": 3,
    "vistaEm": "2026-11-13T10:05:20.389Z"
   }
  ]
