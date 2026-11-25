@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-24T22:05:18.436Z",
+ "atualizadoEm": "2026-11-25T04:04:47.663Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-24T22:05:18.436Z"
+   "ultimaVez": "2026-11-25T04:04:47.663Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-24T22:05:18.436Z"
+   "ultimaVez": "2026-11-25T04:04:47.663Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-24T22:05:18.436Z"
+   "ultimaVez": "2026-11-25T04:04:47.663Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 15,
-   "ultimaVez": "2026-11-24T22:05:18.436Z"
+   "ultimaVez": "2026-11-25T04:04:47.663Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-24T22:05:18.436Z"
+   "ultimaVez": "2026-11-25T04:04:47.663Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-24T22:05:18.436Z"
+   "ultimaVez": "2026-11-25T04:04:47.663Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-24T22:05:18.436Z"
+   "ultimaVez": "2026-11-25T04:04:47.663Z"
   },
   {
    "id": "camara",
@@ -107,8 +107,8 @@
    "nome": "Agência Câmara",
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
-   "quantas": 4,
-   "ultimaVez": "2026-11-24T22:05:18.436Z"
+   "quantas": 3,
+   "ultimaVez": "2026-11-25T04:04:47.663Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-24T22:05:18.436Z"
+   "ultimaVez": "2026-11-25T04:04:47.663Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 3,
-   "ultimaVez": "2026-11-24T22:05:18.436Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-25T04:04:47.663Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,101 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-24T22:05:18.436Z"
+   "ultimaVez": "2026-11-25T04:04:47.663Z"
   }
  ],
  "noticias": [
+  {
+   "id": "14q7mxe",
+   "titulo": "Arrecadação federal atinge R$ 294 bilhões e bate recorde para outubro",
+   "link": "https://fenacon.org.br/noticias/arrecadacao-federal-atinge-r-294-bilhoes-e-bate-recorde-para-outubro/",
+   "resumo": "Resultado cresceu 7,28% acima da inflação e acumula R$ 2,6 trilhões A arrecadação das receitas federais somou R$ 293,975 bilhões em outubro deste ano, informou a Receita Federal. O valor representa aumento real de 7,28% em relação ao mesmo mês de 2025 e é o maior já…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-25T03:57:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-25T04:04:47.663Z"
+  },
+  {
+   "id": "1g1bhbs",
+   "titulo": "Empresas têm até 30 de novembro para pagar primeira parcela do 13º",
+   "link": "https://fenacon.org.br/noticias/empresas-tem-ate-30-de-novembro-para-pagar-primeira-parcela-do-13o/",
+   "resumo": "Benefício corresponde à metade do valor devido e não tem descontos Empresas e órgãos públicos têm até a próxima segunda-feira (30) para pagar a primeira parcela do décimo terceiro salário de 2026 aos trabalhadores que têm direito ao benefício. A gratificação natalina pode ser…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-25T03:31:23.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-25T04:04:47.663Z"
+  },
+  {
+   "id": "1fsj81w",
+   "titulo": "Parlamentares vão à Fazenda na quinta-feira destravar impasses da reforma tributária",
+   "link": "https://fenacon.org.br/reforma-tributaria/parlamentares-vao-a-fazenda-na-quinta-feira-destravar-impasses-da-reforma-tributaria/",
+   "resumo": "Em reunião da Frente Parlamentar do Empreendedorismo nesta terça-feira, 24, tributaristas defenderam que a alíquota da CBS seja de no máximo 10% para manter a neutralidade Parlamentares de frentes representativas do empreendedorismo e do setor de comércio e serviços vão se…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-25T03:30:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-25T04:04:47.663Z"
+  },
+  {
+   "id": "5cczx8",
+   "titulo": "Mensagens atingidas por falha em Caixa Postal da Receita Federal serão reenviadas",
+   "link": "https://fenacon.org.br/noticias/mensagens-atingidas-por-falha-em-caixa-postal-da-receita-federal-serao-reenviadas/",
+   "resumo": "Problema foi identificado entre 9 e 11 de novembro; demais comunicações não foram afetadas A Receita Federal identificou uma falha que afetou o envio de algumas mensagens por meio da Caixa Postal, no período de 9/11, às 11h29, a 11/11, às 16h20. Em razão dessa falha, algumas…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-25T03:09:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-25T04:04:47.663Z"
+  },
+  {
+   "id": "1qnp9xg",
+   "titulo": "Receita Federal esclarece regras de compensação de tributos no RET e em sociedades em conta de participação",
+   "link": "https://fenacon.org.br/noticias/receita-federal-esclarece-regras-de-compensacao-de-tributos-no-ret-e-em-sociedades-em-conta-de-participacao/",
+   "resumo": "Solução de Consulta Cosit nº 184/2026 permite o uso de créditos próprios da incorporadora para quitar débitos do Regime Especial de Tributação, mas veda a compensação de débitos de SCP com créditos da sócia ostensiva Por Comunicação Fenacon A Receita Federal publicou, no…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-25T03:09:00.000Z",
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-25T04:04:47.663Z"
+  },
+  {
+   "id": "1tqwxq0",
+   "titulo": "Lei do ajuste fiscal é sancionada sem vetos e já está em vigor",
+   "link": "https://fenacon.org.br/noticias/lei-do-ajuste-fiscal-e-sancionada-sem-vetos-e-ja-esta-em-vigor/",
+   "resumo": "Norma permite ao governo limitar a execução de despesas para alcançar as metas de superávit primário a partir de 2027 O Projeto de Lei Complementar (PLP) 299/26, aprovado na madrugada desta terça-feira (24) pela Câmara, foi sancionado sem vetos pelo presidente Luiz Inácio…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-25T03:08:00.000Z",
+   "categorias": [
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-25T04:04:47.663Z"
+  },
   {
    "id": "15jqyp9",
    "titulo": "Especialistas defendem aumento do número de mulheres em cargos de direção do sistema de previdência",
@@ -232,21 +323,6 @@
    "vistaEm": "2026-11-24T18:05:24.548Z"
   },
   {
-   "id": "14b3mnv",
-   "titulo": "Arrecadação federal atinge R$ 294 bilhões e bate recorde para outubro",
-   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/arrecadacao-federal-atinge-r-294-bilhoes-e-bate-recorde-para-outubro",
-   "resumo": "A arrecadação das receitas federais somou R$ 293,975 bilhões em outubro deste ano, informou a Receita Federal. O valor representa aumento real de 7,28% em relação ao mesmo mês de 2025 e é o maior já registrado para meses de outubro desde o início da série histórica, em 1995.…",
-   "fonte": "ebc",
-   "fonteNome": "Agência Brasil (Economia)",
-   "sigla": "EBC",
-   "publicadoEm": "2026-11-24T15:57:00.000Z",
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-24T16:05:19.925Z"
-  },
-  {
    "id": "gm80i3",
    "titulo": "Projeto garante salário 25% maior para professor com ensino superior",
    "link": "https://www.camara.leg.br/noticias/1313229-projeto-garante-salario-25-maior-para-professor-com-ensino-superior",
@@ -322,22 +398,6 @@
     "tributos"
    ],
    "relevancia": 1,
-   "vistaEm": "2026-11-24T13:35:19.945Z"
-  },
-  {
-   "id": "1jlf3bn",
-   "titulo": "Mensagens atingidas por falha em Caixa Postal da Receita Federal serão reenviadas",
-   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/mensagens-atingidas-por-falha-em-caixa-postal-da-receita-federal-serao-reenviadas",
-   "resumo": "Problema foi identificado entre 9 e 11 de novembro; demais comunicações não foram afetadas",
-   "fonte": "fazenda",
-   "fonteNome": "Ministério da Fazenda",
-   "sigla": "MF",
-   "publicadoEm": "2026-11-24T13:35:21.154Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 2,
    "vistaEm": "2026-11-24T13:35:19.945Z"
   },
   {
@@ -498,21 +558,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-19T19:05:18.092Z"
-  },
-  {
-   "id": "urtc69",
-   "titulo": "Empresas têm até 30 de novembro para pagar primeira parcela do 13º",
-   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/empresas-tem-ate-30-de-novembro-para-pagar-primeira-parcela-do-13o",
-   "resumo": "Empresas e órgãos públicos têm até a próxima segunda-feira (30) para pagar a primeira parcela do décimo terceiro salário de 2026 aos trabalhadores que têm direito ao benefício. A gratificação natalina pode ser antecipada, mas não deve ultrapassar o prazo previsto na…",
-   "fonte": "ebc",
-   "fonteNome": "Agência Brasil (Economia)",
-   "sigla": "EBC",
-   "publicadoEm": "2026-11-24T10:37:00.000Z",
-   "categorias": [
-    "trabalhista"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-24T11:05:20.748Z"
   },
   {
    "id": "2gn26z",
@@ -2941,52 +2986,6 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-13T10:05:20.389Z"
-  },
-  {
-   "id": "1fl2spf",
-   "titulo": "Reforma tributária: CNC reforça pedido por ajustes no cronograma de implementação",
-   "link": "https://fenacon.org.br/reforma-tributaria/reforma-tributaria-cnc-reforca-pedido-por-ajustes-no-cronograma-de-implementacao/",
-   "resumo": "É necessário mais tempo para compreender as regras, adaptar os sistemas, realizar testes sem multas e incorporar os novos procedimentos com segurança A Confederação Nacional do Comércio de Bens, Serviços e Turismo (CNC) reconhece os esforços da Receita Federal na condução da…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-13T03:19:00.000Z",
-   "categorias": [
-    "reforma",
-    "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-13T10:05:20.389Z"
-  },
-  {
-   "id": "pi9vq0",
-   "titulo": "Fenacon e Sescon-MT participam da apresentação do programa Integra MT",
-   "link": "https://fenacon.org.br/noticias/fenacon-e-sescon-mt-participam-da-apresentacao-do-programa-integra-mt/",
-   "resumo": "A Fenacon e o Sescon-MT representaram as empresas de contabilidade na apresentação do novo modelo de autorregularização da Sefaz-MT, realizada nesta quarta-feira (11.11), na sede da secretaria em Cuiabá. A reunião contou com a participação do vice-presidente da Região…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-13T01:32:30.000Z",
-   "categorias": [
-    "contabil"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-13T10:05:20.389Z"
-  },
-  {
-   "id": "6mpph",
-   "titulo": "Caixa Seguridade informa ataque cibernético e vazamento de dados",
-   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/caixa-seguridade-informa-ataque-cibernetico-e-vazamento-de-dados",
-   "resumo": "A Caixa Seguridade informou, nesta quinta-feira (12), em comunicado ao mercado, que sua subsidiária Caixa Vida e Previdência identificou um ataque cibernético ocorrido em 6 de novembro, que resultou no vazamento de dados dos 7,6 milhões de clientes ativos da companhia.…",
-   "fonte": "ebc",
-   "fonteNome": "Agência Brasil (Economia)",
-   "sigla": "EBC",
-   "publicadoEm": "2026-11-12T23:06:00.000Z",
-   "categorias": [
-    "trabalhista"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-12T23:31:45.580Z"
   }
  ]
 }
