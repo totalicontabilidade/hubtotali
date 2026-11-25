@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-25T19:35:18.657Z",
+ "atualizadoEm": "2026-11-25T19:52:13.154Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T19:35:18.657Z"
+   "ultimaVez": "2026-11-25T19:52:13.154Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-25T19:35:18.657Z"
+   "ultimaVez": "2026-11-25T19:52:13.154Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-25T19:35:18.657Z"
+   "ultimaVez": "2026-11-25T19:52:13.154Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 15,
-   "ultimaVez": "2026-11-25T19:35:18.657Z"
+   "ultimaVez": "2026-11-25T19:52:13.154Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-25T19:35:18.657Z"
+   "ultimaVez": "2026-11-25T19:52:13.154Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-25T19:35:18.657Z"
+   "ultimaVez": "2026-11-25T19:52:13.154Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-25T19:35:18.657Z"
+   "ultimaVez": "2026-11-25T19:52:13.154Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-25T19:35:18.657Z"
+   "ultimaVez": "2026-11-25T19:52:13.154Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 0,
-   "ultimaVez": "2026-11-25T19:35:18.657Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-25T19:52:13.154Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-25T19:35:18.657Z"
+   "ultimaVez": "2026-11-25T19:52:13.154Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,27 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-25T19:35:18.657Z"
+   "ultimaVez": "2026-11-25T19:52:13.154Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1pvkeg2",
+   "titulo": "Paim volta a defender mudança na contribuição previdenciária das empresas",
+   "link": "https://www12.senado.leg.br/noticias/materias/2026/11/25/paim-volta-a-defender-mudanca-na-contribuicao-previdenciaria-das-empresas",
+   "resumo": "",
+   "fonte": "senado",
+   "fonteNome": "Agência Senado",
+   "sigla": "Senado",
+   "publicadoEm": "2026-11-25T19:39:02.000Z",
+   "categorias": [
+    "legislacao",
+    "tributos",
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-25T19:52:13.154Z"
+  },
   {
    "id": "11nwbqs",
    "titulo": "22,4 milhões de aposentados e pensionistas fizeram prova de vida ao votar nas eleições",
@@ -250,6 +267,24 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-25T19:05:20.570Z"
+  },
+  {
+   "id": "1gl55t1",
+   "titulo": "Receita Federal realiza live sobre o novo PGDAS no contexto da Reforma Tributária",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/receita-federal-realiza-live-sobre-o-novo-pgdas-no-contexto-da-reforma-tributaria",
+   "resumo": "Transmissão ao vivo nesta quinta-feira (26), às 15h, abordará a implementação do sistema, os impactos para optantes pelo Simples Nacional e as adequações necessárias nos sistemas contábeis e fiscais.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-25T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "reforma",
+    "simples",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-25T19:52:13.154Z"
   },
   {
    "id": "dxddz5",
@@ -2950,37 +2985,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-13T19:35:24.995Z"
-  },
-  {
-   "id": "1xyzxj4",
-   "titulo": "Partiu São Paulo: Governo Federal garante verba para modernizar transporte",
-   "link": "https://agenciagov.ebc.com.br/noticias/202611/novo-pac-proposta-de-r-81-9-milhoes-visa-modernizar-transporte-publico-de-sao-paulo",
-   "resumo": "Projeto prevê qualificação de terminais e estações do Corredor Expresso Tiradentes para oferecer mais conforto e segurança aos passageiros; investimento terá recursos do FGTS",
-   "fonte": "govbr",
-   "fonteNome": "Agência Gov (governo federal)",
-   "sigla": "Gov",
-   "publicadoEm": "2026-11-13T18:34:00.000Z",
-   "categorias": [
-    "trabalhista"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-13T19:35:24.995Z"
-  },
-  {
-   "id": "1bg4z5a",
-   "titulo": "Comissão aprova isenção de imposto para bebidas à base de frutos regionais da Amazônia",
-   "link": "https://www.camara.leg.br/noticias/1319232-comissao-aprova-isencao-de-imposto-para-bebidas-a-base-de-frutos-regionais-da-amazonia",
-   "resumo": "Isenção limita-se ao Imposto sobre Produtos Industrializados; a Câmara dos Deputados continua discutindo o assunto",
-   "fonte": "camara",
-   "fonteNome": "Agência Câmara",
-   "sigla": "Câmara",
-   "publicadoEm": "2026-11-13T15:02:00.000Z",
-   "categorias": [
-    "tributos",
-    "legislacao"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-13T15:05:19.869Z"
   }
  ]
 }
