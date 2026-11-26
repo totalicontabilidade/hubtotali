@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-26T20:05:18.821Z",
+ "atualizadoEm": "2026-11-26T20:35:20.406Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-26T20:05:18.821Z"
+   "ultimaVez": "2026-11-26T20:35:20.406Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-26T20:05:18.821Z"
+   "ultimaVez": "2026-11-26T20:35:20.406Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-26T20:05:18.821Z"
+   "ultimaVez": "2026-11-26T20:35:20.406Z"
   },
   {
    "id": "fazenda",
@@ -70,8 +70,8 @@
    "nome": "Ministério da Fazenda",
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
-   "quantas": 16,
-   "ultimaVez": "2026-11-26T20:05:18.821Z"
+   "quantas": 17,
+   "ultimaVez": "2026-11-26T20:35:20.406Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-26T20:05:18.821Z"
+   "ultimaVez": "2026-11-26T20:35:20.406Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-26T20:05:18.821Z"
+   "ultimaVez": "2026-11-26T20:35:20.406Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-26T20:05:18.821Z"
+   "ultimaVez": "2026-11-26T20:35:20.406Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T20:05:18.821Z"
+   "ultimaVez": "2026-11-26T20:35:20.406Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-26T20:05:18.821Z"
+   "ultimaVez": "2026-11-26T20:35:20.406Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T20:05:18.821Z"
+   "ultimaVez": "2026-11-26T20:35:20.406Z"
   },
   {
    "id": "govbr",
@@ -135,7 +135,7 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T20:05:18.821Z"
+   "ultimaVez": "2026-11-26T20:35:20.406Z"
   }
  ],
  "noticias": [
@@ -201,6 +201,23 @@
    "vistaEm": "2026-11-26T15:35:19.249Z"
   },
   {
+   "id": "15kfvfc",
+   "titulo": "Receita prepara programa para afastar punições a empresas de boa-fé na transição da Reforma Tributária",
+   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/receita-prepara-programa-para-afastar-punicoes-a-empresas-de-boa-fe-na-transicao-da-reforma-tributaria",
+   "resumo": "Secretário Robinson Barreirinhas diz que empresas com sistemas atrasados terão alternativas, como corrigir a declaração pré-preenchida",
+   "fonte": "fazenda",
+   "fonteNome": "Ministério da Fazenda",
+   "sigla": "MF",
+   "publicadoEm": "2026-11-26T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-26T20:35:20.406Z"
+  },
+  {
    "id": "pkb3xg",
    "titulo": "Receita Federal e Polícia Civil apreendem 700 kg de skunk ocultos em carga de sucata plástica em Fortaleza",
    "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-e-policia-civil-apreendem-700-kg-de-skunk-ocultos-em-carga-de-sucata-plastica-em-fortaleza",
@@ -231,6 +248,22 @@
    ],
    "relevancia": 1,
    "vistaEm": "2026-11-26T20:05:18.821Z"
+  },
+  {
+   "id": "1hdpppu",
+   "titulo": "Sem surpresas na alfândega: Receita Federal publica quadro inédito de bagagem e esclarece limites de compras na chegada ao Brasil",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/sem-surpresas-na-alfandega-receita-federal-publica-quadro-inedito-de-bagagem-e-esclarece-limites-de-compras-na-chegada-ao-brasil",
+   "resumo": "Nova versão do Guia do Viajante traz passo a passo para todas as situações com bagagens, consolida regras para equipamentos de mobilidade e embarcações recreativas, renova a versão em inglês (Traveller's Guide) e anuncia futura Inteligência Artificial.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-26T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-26T20:35:20.406Z"
   },
   {
    "id": "40fl6l",
@@ -2963,37 +2996,6 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-16T13:05:25.681Z"
-  },
-  {
-   "id": "1t5lr18",
-   "titulo": "Receita Federal apreende mais de 400 aparelhos celulares em fundo falso",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-apreende-mais-de-400-aparelhos-celulares-em-fundo-falso",
-   "resumo": "Mercadorias foram avaliadas em R$ 2,8 milhões. Ação foi no âmbito da Operação Fronteira Receita Federal.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-16T13:05:27.238Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-16T13:05:25.681Z"
-  },
-  {
-   "id": "l22gr8",
-   "titulo": "Esqueceu a senha Gov.br? Veja como recuperar o acesso",
-   "link": "https://agenciagov.ebc.com.br/noticias/202611/saiba-como-recuperar-o-acesso-da-senha-gov.br",
-   "resumo": "A conta é necessária para utilizar diversos serviços digitais do Governo Federal, como consultas e solicitações pelo Meu INSS",
-   "fonte": "govbr",
-   "fonteNome": "Agência Gov (governo federal)",
-   "sigla": "Gov",
-   "publicadoEm": "2026-11-16T13:00:00.000Z",
-   "categorias": [
-    "trabalhista"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-16T14:05:19.533Z"
   }
  ]
 }
