@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-26T13:35:19.106Z",
+ "atualizadoEm": "2026-11-26T14:35:19.478Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-26T13:35:19.106Z"
+   "ultimaVez": "2026-11-26T14:35:19.478Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-26T13:35:19.106Z"
+   "ultimaVez": "2026-11-26T14:35:19.478Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-26T13:35:19.106Z"
+   "ultimaVez": "2026-11-26T14:35:19.478Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 17,
-   "ultimaVez": "2026-11-26T13:35:19.106Z"
+   "ultimaVez": "2026-11-26T14:35:19.478Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-26T13:35:19.106Z"
+   "ultimaVez": "2026-11-26T14:35:19.478Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-26T13:35:19.106Z"
+   "ultimaVez": "2026-11-26T14:35:19.478Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-26T13:35:19.106Z"
+   "ultimaVez": "2026-11-26T14:35:19.478Z"
   },
   {
    "id": "camara",
@@ -107,8 +107,8 @@
    "nome": "Agência Câmara",
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-26T13:35:19.106Z"
+   "quantas": 0,
+   "ultimaVez": "2026-11-26T14:35:19.478Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T13:35:19.106Z"
+   "ultimaVez": "2026-11-26T14:35:19.478Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-26T13:35:19.106Z"
+   "ultimaVez": "2026-11-26T14:35:19.478Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-26T13:35:19.106Z"
+   "ultimaVez": "2026-11-26T14:35:19.478Z"
   }
  ],
  "noticias": [
+  {
+   "id": "40fl6l",
+   "titulo": "CFC defende regulamentação do Conselho de Gestão Fiscal para aprimorar a qualidade do gasto público",
+   "link": "https://cfc.org.br/noticias/cfc-defende-regulamentacao-do-conselho-de-gestao-fiscal-para-aprimorar-a-qualidade-do-gasto-publico/",
+   "resumo": "A regulamentação do Conselho de Gestão Fiscal (CGF) foi tema da audiência pública realizada na manhã desta quinta-feira (26), no Senado Federal. O Conselho Federal de Contabilidade (CFC) foi representado pelo conselheiro José Luiz Marques Barreto. Promovida pela Comissão de…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-26T14:22:03.000Z",
+   "categorias": [
+    "contabil",
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-26T14:35:19.478Z"
+  },
   {
    "id": "1fhszvh",
    "titulo": "CFC publica resultado do Prêmio Olivio Koliver e destaca pesquisa sobre hedge no agronegócio",
@@ -2972,22 +2988,6 @@
    "publicadoEm": "2026-11-16T04:36:09.000Z",
    "categorias": [],
    "relevancia": 2,
-   "vistaEm": "2026-11-16T10:05:19.321Z"
-  },
-  {
-   "id": "iu26h1",
-   "titulo": "Vale-transporte em dinheiro integra cálculo do FGTS, decide STJ",
-   "link": "https://fenacon.org.br/noticias/vale-transporte-em-dinheiro-integra-calculo-do-fgts-decide-stj/",
-   "resumo": "Para 1ª seção, pagamento em dinheiro não atende, em regra, à forma legal de concessão que permite excluir o benefício do cálculo do FGTS. A 1ª seção do STJ decidiu que o vale-transporte pago em dinheiro integra, em regra, a base de cálculo da contribuição para o FGTS. Ao…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-16T02:44:42.000Z",
-   "categorias": [
-    "tributos",
-    "trabalhista"
-   ],
-   "relevancia": 3,
    "vistaEm": "2026-11-16T10:05:19.321Z"
   }
  ]
