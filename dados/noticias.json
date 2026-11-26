@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-26T17:35:20.789Z",
+ "atualizadoEm": "2026-11-26T18:05:20.165Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-26T17:35:20.789Z"
+   "ultimaVez": "2026-11-26T18:05:20.165Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-26T17:35:20.789Z"
+   "ultimaVez": "2026-11-26T18:05:20.165Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-26T17:35:20.789Z"
+   "ultimaVez": "2026-11-26T18:05:20.165Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 16,
-   "ultimaVez": "2026-11-26T17:35:20.789Z"
+   "ultimaVez": "2026-11-26T18:05:20.165Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-26T17:35:20.789Z"
+   "ultimaVez": "2026-11-26T18:05:20.165Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-26T17:35:20.789Z"
+   "ultimaVez": "2026-11-26T18:05:20.165Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-26T17:35:20.789Z"
+   "ultimaVez": "2026-11-26T18:05:20.165Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T17:35:20.789Z"
+   "ultimaVez": "2026-11-26T18:05:20.165Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 0,
-   "ultimaVez": "2026-11-26T17:35:20.789Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-26T18:05:20.165Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T17:35:20.789Z"
+   "ultimaVez": "2026-11-26T18:05:20.165Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,27 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T17:35:20.789Z"
+   "ultimaVez": "2026-11-26T18:05:20.165Z"
   }
  ],
  "noticias": [
+  {
+   "id": "cyreov",
+   "titulo": "IFI entrega estudo sobre alíquota da CBS para Eduardo Braga",
+   "link": "https://www12.senado.leg.br/noticias/materias/2026/11/26/ifi-entrega-estudo-sobre-aliquota-da-cbs-para-eduardo-braga",
+   "resumo": "",
+   "fonte": "senado",
+   "fonteNome": "Agência Senado",
+   "sigla": "Senado",
+   "publicadoEm": "2026-11-26T17:38:09.000Z",
+   "categorias": [
+    "legislacao",
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-26T18:05:20.165Z"
+  },
   {
    "id": "1b86rk6",
    "titulo": "Black Friday da 22ª Conescap oferece condições especiais para grupos e descontos para ingressos individuais",
@@ -2974,19 +2991,6 @@
    ],
    "relevancia": 1,
    "vistaEm": "2026-11-16T11:35:18.439Z"
-  },
-  {
-   "id": "15fiola",
-   "titulo": "Caminhos da Reportagem mostra negócios de impacto social",
-   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/caminhos-da-reportagem-mostra-negocios-de-impacto-social",
-   "resumo": "O que são negócios de impacto social e como essas iniciativas podem transformar realidades? Diferentemente de uma organização sem fins lucrativos e das ações de responsabilidade social de empresas, esse modelo de empreendedorismo une geração de lucro à solução de problemas…",
-   "fonte": "ebc",
-   "fonteNome": "Agência Brasil (Economia)",
-   "sigla": "EBC",
-   "publicadoEm": "2026-11-16T10:27:00.000Z",
-   "categorias": [],
-   "relevancia": 1,
-   "vistaEm": "2026-11-16T10:35:19.515Z"
   }
  ]
 }
