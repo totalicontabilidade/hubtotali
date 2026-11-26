@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-26T18:35:17.748Z",
+ "atualizadoEm": "2026-11-26T19:05:18.080Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-26T18:35:17.748Z"
+   "ultimaVez": "2026-11-26T19:05:18.080Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-26T18:35:17.748Z"
+   "ultimaVez": "2026-11-26T19:05:18.080Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-26T18:35:17.748Z"
+   "ultimaVez": "2026-11-26T19:05:18.080Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 16,
-   "ultimaVez": "2026-11-26T18:35:17.748Z"
+   "ultimaVez": "2026-11-26T19:05:18.080Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-26T18:35:17.748Z"
+   "ultimaVez": "2026-11-26T19:05:18.080Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-26T18:35:17.748Z"
+   "ultimaVez": "2026-11-26T19:05:18.080Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-26T18:35:17.748Z"
+   "ultimaVez": "2026-11-26T19:05:18.080Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T18:35:17.748Z"
+   "ultimaVez": "2026-11-26T19:05:18.080Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-26T18:35:17.748Z"
+   "ultimaVez": "2026-11-26T19:05:18.080Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T18:35:17.748Z"
+   "ultimaVez": "2026-11-26T19:05:18.080Z"
   },
   {
    "id": "govbr",
@@ -135,7 +135,7 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T18:35:17.748Z"
+   "ultimaVez": "2026-11-26T19:05:18.080Z"
   }
  ],
  "noticias": [
@@ -2183,6 +2183,22 @@
    "vistaEm": "2026-11-18T22:35:20.704Z"
   },
   {
+   "id": "1i3cjcz",
+   "titulo": "Receita Federal apreende mais de R$ 1,5 milhão em mercadorias na BR-101, em Santa Catarina",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-apreende-mais-de-r-1-5-milhao-em-mercadorias-na-br-101-em-santa-catarina",
+   "resumo": "Ação de combate ao contrabando e ao descaminho resultou na retenção de eletrônicos, perfumes, cigarros eletrônicos e cigarros transportados em ônibus de turismo .",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-18T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-26T19:05:18.080Z"
+  },
+  {
    "id": "1ltj6ih",
    "titulo": "Receita Federal, Ministério Público e Polícia Federal miram grupo que movimentou R$ 11 bilhões em 2025",
    "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/receita-federal-ministerio-publico-e-policia-federal-miram-grupo-que-movimentou-r-11-bilhoes-em-2025",
@@ -2976,19 +2992,6 @@
     "contabil"
    ],
    "relevancia": 0,
-   "vistaEm": "2026-11-16T13:05:25.681Z"
-  },
-  {
-   "id": "9jv8dd",
-   "titulo": "Mercado reduz projeções para inflação e crescimento econômico em 2026",
-   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/mercado-reduz-projecoes-para-inflacao-e-crescimento-da-economia-em-202",
-   "resumo": "O mercado financeiro reduziu as projeções para a inflação e o crescimento da economia brasileira em 2026. Ao mesmo tempo, elevou a estimativa para a cotação do dólar no fim do próximo ano. A previsão para a taxa básica de juros (Selic) permaneceu estável. As estimativas das…",
-   "fonte": "ebc",
-   "fonteNome": "Agência Brasil (Economia)",
-   "sigla": "EBC",
-   "publicadoEm": "2026-11-16T12:12:00.000Z",
-   "categorias": [],
-   "relevancia": 1,
    "vistaEm": "2026-11-16T13:05:25.681Z"
   }
  ]
