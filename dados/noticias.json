@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-26T16:05:19.955Z",
+ "atualizadoEm": "2026-11-26T16:35:20.558Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-26T16:05:19.955Z"
+   "ultimaVez": "2026-11-26T16:35:20.558Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-26T16:05:19.955Z"
+   "ultimaVez": "2026-11-26T16:35:20.558Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-26T16:05:19.955Z"
+   "ultimaVez": "2026-11-26T16:35:20.558Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 17,
-   "ultimaVez": "2026-11-26T16:05:19.955Z"
+   "ultimaVez": "2026-11-26T16:35:20.558Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-26T16:05:19.955Z"
+   "ultimaVez": "2026-11-26T16:35:20.558Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-26T16:05:19.955Z"
+   "ultimaVez": "2026-11-26T16:35:20.558Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-26T16:05:19.955Z"
+   "ultimaVez": "2026-11-26T16:35:20.558Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T16:05:19.955Z"
+   "ultimaVez": "2026-11-26T16:35:20.558Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T16:05:19.955Z"
+   "ultimaVez": "2026-11-26T16:35:20.558Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T16:05:19.955Z"
+   "ultimaVez": "2026-11-26T16:35:20.558Z"
   },
   {
    "id": "govbr",
@@ -135,7 +135,7 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T16:05:19.955Z"
+   "ultimaVez": "2026-11-26T16:35:20.558Z"
   }
  ],
  "noticias": [
@@ -154,6 +154,22 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-26T15:35:19.249Z"
+  },
+  {
+   "id": "pkb3xg",
+   "titulo": "Receita Federal e Polícia Civil apreendem 700 kg de skunk ocultos em carga de sucata plástica em Fortaleza",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-e-policia-civil-apreendem-700-kg-de-skunk-ocultos-em-carga-de-sucata-plastica-em-fortaleza",
+   "resumo": "A Operação Rotas Amazônicas resulta em apreensão de drogas do tipo skunk, em ação integrada da Receita Federal e Polícia Civil do Estado do Ceará.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-26T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-26T16:35:20.558Z"
   },
   {
    "id": "40fl6l",
@@ -2972,23 +2988,6 @@
     "reforma",
     "tributos",
     "contabil"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-16T10:05:19.321Z"
-  },
-  {
-   "id": "gwt5yg",
-   "titulo": "Ato Conjunto RFB/CGIBS nº 7/2026 atualiza o cronograma de obrigatoriedade de emissão da NFS-e para IBS e CBS",
-   "link": "https://fenacon.org.br/reforma-tributaria/ato-conjunto-rfb-cgibs-no-7-2026-atualiza-o-cronograma-de-obrigatoriedade-de-emissao-da-nfs-e-para-ibs-e-cbs/",
-   "resumo": "O Comitê Gestor da Nota Fiscal de Serviço Eletrônica de padrão nacional (CGNFS-e) comunica aos municípios, contribuintes prestadores de serviços e desenvolvedores de sistemas que foi publicado, na edição de sexta (13 de novembro de 2026) do Diário Oficial da União (DOU), o…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-16T05:19:29.000Z",
-   "categorias": [
-    "reforma",
-    "empresas",
-    "legislacao"
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-16T10:05:19.321Z"
