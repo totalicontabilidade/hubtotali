@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-26T10:05:20.813Z",
+ "atualizadoEm": "2026-11-26T12:35:19.009Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-26T10:05:20.813Z"
+   "ultimaVez": "2026-11-26T12:35:19.009Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-26T10:05:20.813Z"
+   "ultimaVez": "2026-11-26T12:35:19.009Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-26T10:05:20.813Z"
+   "ultimaVez": "2026-11-26T12:35:19.009Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 17,
-   "ultimaVez": "2026-11-26T10:05:20.813Z"
+   "ultimaVez": "2026-11-26T12:35:19.009Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-26T10:05:20.813Z"
+   "ultimaVez": "2026-11-26T12:35:19.009Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-26T10:05:20.813Z"
+   "ultimaVez": "2026-11-26T12:35:19.009Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-26T10:05:20.813Z"
+   "ultimaVez": "2026-11-26T12:35:19.009Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-26T10:05:20.813Z"
+   "ultimaVez": "2026-11-26T12:35:19.009Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T10:05:20.813Z"
+   "ultimaVez": "2026-11-26T12:35:19.009Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-26T10:05:20.813Z"
+   "ultimaVez": "2026-11-26T12:35:19.009Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,25 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-26T10:05:20.813Z"
+   "ultimaVez": "2026-11-26T12:35:19.009Z"
   }
  ],
  "noticias": [
+  {
+   "id": "gjhbx5",
+   "titulo": "Evento debate desafios e perspectivas da contabilidade regulatória no Brasil",
+   "link": "https://cfc.org.br/noticias/evento-debate-desafios-e-perspectivas-da-contabilidade-regulatoria-no-brasil/",
+   "resumo": "Os profissionais da contabilidade que atuam em empresas com atividades sujeitas à regulação tarifária terão a oportunidade de aprofundar seus conhecimentos sobre a IFRS 20 e os desafios relacionados à sua implementação. No dia 1º de dezembro de 2026, a Fundação de Apoio aos…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-26T12:12:18.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-26T12:35:19.009Z"
+  },
   {
    "id": "lyceyc",
    "titulo": "CGNFS-e informa: disponibilizado no ambiente de testes o Release 2 das evoluções da Nota Técnica 009",
@@ -2975,21 +2990,6 @@
    ],
    "relevancia": 1,
    "vistaEm": "2026-11-16T10:05:19.321Z"
-  },
-  {
-   "id": "1lnwyfw",
-   "titulo": "XXXV Secofem é finalizada com cerca de 500 participantes capacitados",
-   "link": "https://cfc.org.br/noticias/xxxv-secofem-e-finalizada-com-cerca-de-500-participantes-capacitados/",
-   "resumo": "“Nosso objetivo principal é aumentar a qualidade da informação contábil”, afirmou o coordenador-geral de Normas de Contabilidade Aplicadas à Federação da Secretaria do Tesouro Nacional, Alex Fabiane. A XXXV Semana Contábil e Fiscal para Estados e Municípios (Secofem)…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-14T13:30:00.000Z",
-   "categorias": [
-    "contabil"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-14T17:10:30.203Z"
   }
  ]
 }
