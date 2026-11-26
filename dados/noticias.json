@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-26T15:05:23.278Z",
+ "atualizadoEm": "2026-11-26T15:35:19.249Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-26T15:05:23.278Z"
+   "ultimaVez": "2026-11-26T15:35:19.249Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-26T15:05:23.278Z"
+   "ultimaVez": "2026-11-26T15:35:19.249Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-26T15:05:23.278Z"
+   "ultimaVez": "2026-11-26T15:35:19.249Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 17,
-   "ultimaVez": "2026-11-26T15:05:23.278Z"
+   "ultimaVez": "2026-11-26T15:35:19.249Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-26T15:05:23.278Z"
+   "ultimaVez": "2026-11-26T15:35:19.249Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-26T15:05:23.278Z"
+   "ultimaVez": "2026-11-26T15:35:19.249Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-26T15:05:23.278Z"
+   "ultimaVez": "2026-11-26T15:35:19.249Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T15:05:23.278Z"
+   "ultimaVez": "2026-11-26T15:35:19.249Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T15:05:23.278Z"
+   "ultimaVez": "2026-11-26T15:35:19.249Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-26T15:05:23.278Z"
+   "ultimaVez": "2026-11-26T15:35:19.249Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T15:05:23.278Z"
+   "ultimaVez": "2026-11-26T15:35:19.249Z"
   }
  ],
  "noticias": [
+  {
+   "id": "113mxw6",
+   "titulo": "Receita Federal e Polícia Militar de Minas Gerais flagram fábrica clandestina de cigarros em Capinópolis/MG",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-e-policia-militar-de-minas-gerais-flagram-fabrica-clandestina-de-cigarros-em-capinopolis-mg",
+   "resumo": "Ação conjunta é realizada na zona rural do município para desarticular a estrutura e interromper a fabricação ilegal de cigarros.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-26T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-26T15:35:19.249Z"
+  },
   {
    "id": "40fl6l",
    "titulo": "CFC defende regulamentação do Conselho de Gestão Fiscal para aprimorar a qualidade do gasto público",
@@ -2975,19 +2991,6 @@
     "legislacao"
    ],
    "relevancia": 3,
-   "vistaEm": "2026-11-16T10:05:19.321Z"
-  },
-  {
-   "id": "18fg01r",
-   "titulo": "Após pleito do Sescon-SP, prazo da DeRE é prorrogado; notas fiscais também têm novas datas",
-   "link": "https://fenacon.org.br/noticias/apos-pleito-do-sescon-sp-prazo-da-dere-e-prorrogado-notas-fiscais-tambem-tem-novas-datas/",
-   "resumo": "A primeira entrega dos eventos periódicos mensais, referente à competência novembro de 2026, foi adiada de 15 de novembro para 15 de dezembro, conforme o Ato Conjunto RFB/CGIBS nº 7 Uma conquista para as empresas contábeis que enfrentam dificuldades na adaptação à Declaração…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-16T04:36:09.000Z",
-   "categorias": [],
-   "relevancia": 2,
    "vistaEm": "2026-11-16T10:05:19.321Z"
   }
  ]
