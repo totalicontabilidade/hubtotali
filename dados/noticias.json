@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-26T20:35:20.406Z",
+ "atualizadoEm": "2026-11-26T21:05:23.524Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-26T20:35:20.406Z"
+   "ultimaVez": "2026-11-26T21:05:23.524Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-26T20:35:20.406Z"
+   "ultimaVez": "2026-11-26T21:05:23.524Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-26T20:35:20.406Z"
+   "ultimaVez": "2026-11-26T21:05:23.524Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 17,
-   "ultimaVez": "2026-11-26T20:35:20.406Z"
+   "ultimaVez": "2026-11-26T21:05:23.524Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-26T20:35:20.406Z"
+   "ultimaVez": "2026-11-26T21:05:23.524Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-26T20:35:20.406Z"
+   "ultimaVez": "2026-11-26T21:05:23.524Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-26T20:35:20.406Z"
+   "ultimaVez": "2026-11-26T21:05:23.524Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T20:35:20.406Z"
+   "ultimaVez": "2026-11-26T21:05:23.524Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-26T20:35:20.406Z"
+   "ultimaVez": "2026-11-26T21:05:23.524Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T20:35:20.406Z"
+   "ultimaVez": "2026-11-26T21:05:23.524Z"
   },
   {
    "id": "govbr",
@@ -134,11 +134,42 @@
    "nome": "Agência Gov (governo federal)",
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
-   "quantas": 0,
-   "ultimaVez": "2026-11-26T20:35:20.406Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-26T21:05:23.524Z"
   }
  ],
  "noticias": [
+  {
+   "id": "rxmu7t",
+   "titulo": "Reforma Tributária: entenda regras que passam a valer a partir de 2027",
+   "link": "https://agenciagov.ebc.com.br/noticias/202611/reforma-tributaria-entenda-as-regras-que-passam-a-valer-a-partir-de-2027-1",
+   "resumo": "Medidas incluem imposto zero para cesta básica e remédios, devolução de tributos para famílias de baixa renda e apuração automática para empresas",
+   "fonte": "govbr",
+   "fonteNome": "Agência Gov (governo federal)",
+   "sigla": "Gov",
+   "publicadoEm": "2026-11-26T20:05:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-26T21:05:23.524Z"
+  },
+  {
+   "id": "3rapwc",
+   "titulo": "Reforma de 2019 traz mudanças para se aposentar no ano que vem. Veja as novas regras",
+   "link": "https://agenciagov.ebc.com.br/noticias/202611/inss-2027-conheca-as-novas-regras-para-se-aposentar",
+   "resumo": "As medidas levam em consideração o cronograma de transição previsto na Reforma da Previdência. Há mais de uma modalidade para contagem de tempo. A plataforma Meu INSS faz simulação",
+   "fonte": "govbr",
+   "fonteNome": "Agência Gov (governo federal)",
+   "sigla": "Gov",
+   "publicadoEm": "2026-11-26T19:46:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-26T21:05:23.524Z"
+  },
   {
    "id": "xrwn3g",
    "titulo": "Conselho Federal de Contabilidade prestigia posse da nova diretoria da FEA/USP",
@@ -2962,40 +2993,6 @@
    ],
    "relevancia": 1,
    "vistaEm": "2026-11-16T19:05:19.147Z"
-  },
-  {
-   "id": "3bam4e",
-   "titulo": "RFB prorroga prazo da consulta pública que altera a IN do Adicional da CSLL com o objetivo de introduzir elementos do Side-by-Side Package",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/rfb-prorroga-prazo-da-consulta-publica-que-altera-a-in-do-adicional-da-csll-com-o-objetivo-de-introduzir-elementos-do-side-by-side-package",
-   "resumo": "As submissões poderão ser enviadas até 22 de novembro de 2026.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-16T14:35:27.012Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-16T14:35:25.043Z"
-  },
-  {
-   "id": "19bwsuv",
-   "titulo": "Perdão das dívidas do MEI será automático: não é preciso fazer pedido",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/perdao-das-dividas-do-mei-sera-automatico-nao-e-preciso-fazer-pedido",
-   "resumo": "A Receita Federal vai cancelar de ofício as dívidas de contribuição previdenciária do Microempreendedor Individual (MEI) vencidas até 13 de outubro de 2026. Para manter o perdão, quem continuar na condição de MEI deverá pagar em dia o DAS de janeiro a junho de 2027.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-16T13:05:27.238Z",
-   "semHora": true,
-   "categorias": [
-    "simples",
-    "tributos",
-    "trabalhista"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-16T13:05:25.681Z"
   }
  ]
 }
