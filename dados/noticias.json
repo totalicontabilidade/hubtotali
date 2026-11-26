@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-26T16:35:20.558Z",
+ "atualizadoEm": "2026-11-26T17:05:18.558Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-26T16:35:20.558Z"
+   "ultimaVez": "2026-11-26T17:05:18.558Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-26T16:35:20.558Z"
+   "ultimaVez": "2026-11-26T17:05:18.558Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-26T16:35:20.558Z"
+   "ultimaVez": "2026-11-26T17:05:18.558Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 17,
-   "ultimaVez": "2026-11-26T16:35:20.558Z"
+   "ultimaVez": "2026-11-26T17:05:18.558Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-26T16:35:20.558Z"
+   "ultimaVez": "2026-11-26T17:05:18.558Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-26T16:35:20.558Z"
+   "ultimaVez": "2026-11-26T17:05:18.558Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-26T16:35:20.558Z"
+   "ultimaVez": "2026-11-26T17:05:18.558Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T16:35:20.558Z"
+   "ultimaVez": "2026-11-26T17:05:18.558Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T16:35:20.558Z"
+   "ultimaVez": "2026-11-26T17:05:18.558Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T16:35:20.558Z"
+   "ultimaVez": "2026-11-26T17:05:18.558Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,23 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T16:35:20.558Z"
+   "ultimaVez": "2026-11-26T17:05:18.558Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1b86rk6",
+   "titulo": "Black Friday da 22ª Conescap oferece condições especiais para grupos e descontos para ingressos individuais",
+   "link": "https://fenacon.org.br/noticias/black-friday-22a-conescap-condicoes-especiais-grupos-descontos-ingressos-individuais/",
+   "resumo": "Promoção é por tempo limitado e duram até esta sexta-feira (27) para compras em grupo e até domingo (29) para compras individuais",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-26T16:56:13.000Z",
+   "categorias": [],
+   "relevancia": 2,
+   "vistaEm": "2026-11-26T17:05:18.558Z"
+  },
   {
    "id": "113mxw6",
    "titulo": "Receita Federal e Polícia Militar de Minas Gerais flagram fábrica clandestina de cigarros em Capinópolis/MG",
@@ -2974,23 +2987,6 @@
    "categorias": [],
    "relevancia": 1,
    "vistaEm": "2026-11-16T10:35:19.515Z"
-  },
-  {
-   "id": "18z5o34",
-   "titulo": "CFC, Fenacon e Receita Federal instalam sala de situação para acompanhar desafios da reforma tributária",
-   "link": "https://fenacon.org.br/noticias/cfc-fenacon-e-receita-federal-instalam-sala-de-situacao-para-acompanhar-desafios-da-reforma-tributaria/",
-   "resumo": "Proposta apresentada pelo presidente do Conselho, Joaquim Bezerra, durante coletiva de imprensa já está em prática. Primeira reunião ocorreu na quinta-feira (12), com foco em soluções para os desafios da reforma tributária Apenas um dia após o anúncio da criação de uma sala…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-16T05:44:46.000Z",
-   "categorias": [
-    "reforma",
-    "tributos",
-    "contabil"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-16T10:05:19.321Z"
   }
  ]
 }
