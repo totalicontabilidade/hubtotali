@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-26T02:44:30.181Z",
+ "atualizadoEm": "2026-11-26T10:05:20.813Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-26T02:44:30.181Z"
+   "ultimaVez": "2026-11-26T10:05:20.813Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-26T02:44:30.181Z"
+   "ultimaVez": "2026-11-26T10:05:20.813Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-26T02:44:30.181Z"
+   "ultimaVez": "2026-11-26T10:05:20.813Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 17,
-   "ultimaVez": "2026-11-26T02:44:30.181Z"
+   "ultimaVez": "2026-11-26T10:05:20.813Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-26T02:44:30.181Z"
+   "ultimaVez": "2026-11-26T10:05:20.813Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-26T02:44:30.181Z"
+   "ultimaVez": "2026-11-26T10:05:20.813Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-26T02:44:30.181Z"
+   "ultimaVez": "2026-11-26T10:05:20.813Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-26T02:44:30.181Z"
+   "ultimaVez": "2026-11-26T10:05:20.813Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T02:44:30.181Z"
+   "ultimaVez": "2026-11-26T10:05:20.813Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-26T02:44:30.181Z"
+   "ultimaVez": "2026-11-26T10:05:20.813Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,107 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-26T02:44:30.181Z"
+   "ultimaVez": "2026-11-26T10:05:20.813Z"
   }
  ],
  "noticias": [
+  {
+   "id": "lyceyc",
+   "titulo": "CGNFS-e informa: disponibilizado no ambiente de testes o Release 2 das evoluções da Nota Técnica 009",
+   "link": "https://fenacon.org.br/reforma-tributaria/cgnfs-e-informa-disponibilizado-no-ambiente-de-testes-o-release-2-das-evolucoes-da-nota-tecnica-009/",
+   "resumo": "A Secretaria-Executiva do Comitê Gestor da NFS-e (SE/CGNFS-e) informa que foi disponibilizado, em ambiente de Produção Restrita (homologação/testes), o Release 2 das evoluções previstas na Nota Técnica nº 009, versão 1.01, dando continuidade à implementação das adequações da…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-26T05:18:47.000Z",
+   "categorias": [
+    "reforma",
+    "empresas"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-26T10:05:20.813Z"
+  },
+  {
+   "id": "1pibh2l",
+   "titulo": "CCJ confirma aprovação de crime de fraude contábil no mercado de capitais",
+   "link": "https://fenacon.org.br/noticias/ccj-confirma-aprovacao-de-crime-de-fraude-contabil-no-mercado-de-capitais/",
+   "resumo": "A Comissão de Constituição e Justiça (CCJ) confirmou em turno suplementar, nesta quarta-feira (25), a aprovação do projeto que cria crime específico para a fraude contábil no mercado de valores mobiliários (como a bolsa de valores), com pena de dois a seis anos de reclusão, e…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-26T04:46:24.000Z",
+   "categorias": [
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-26T10:05:20.813Z"
+  },
+  {
+   "id": "1gji6io",
+   "titulo": "CNC alerta para impactos da alíquota de 11,3% da CBS no setor de serviços",
+   "link": "https://fenacon.org.br/reforma-tributaria/cnc-alerta-para-impactos-da-aliquota-de-113-da-cbs-no-setor-de-servicos/",
+   "resumo": "Em audiência pública na Câmara dos Deputados, Confederação questionou critérios utilizados no cálculo da alíquota de referência para 2027 e defendeu maior segurança jurídica na implementação da reforma tributária Os possíveis impactos da reforma tributária no setor de…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-26T03:49:23.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-26T10:05:20.813Z"
+  },
+  {
+   "id": "t6l19z",
+   "titulo": "Susep apresenta orientações ao mercado sobre impactos da Reforma Tributária",
+   "link": "https://fenacon.org.br/reforma-tributaria/susep-apresenta-orientacoes-ao-mercado-sobre-impactos-da-reforma-tributaria/",
+   "resumo": "Grupo de Trabalho analisou efeitos das novas regras sobre os mercados supervisionados e definiu medidas para orientar a adaptação das entidades A Superintendência de Seguros Privados (Susep) concluiu os trabalhos do Grupo de Trabalho (GT) instituído para analisar os impactos…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-26T03:22:33.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "trabalhista"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-26T10:05:20.813Z"
+  },
+  {
+   "id": "1odi47n",
+   "titulo": "Reforma Tributária pelo Brasil encerra agenda na Região Sul com encontro em Capivari de Baixo",
+   "link": "https://fenacon.org.br/noticias/reforma-tributaria-pelo-brasil-encerra-agenda-na-regiao-sul-com-encontro-em-capivari-de-baixo/",
+   "resumo": "Evento em Santa Catarina reuniu profissionais e empresários contábeis para discutir os impactos práticos das mudanças tributárias e os desafios para empresas e escritórios A última etapa do projeto Reforma Tributária pelo Brasil na Região Sul foi realizada nesta terça-feira…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-26T03:11:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-26T10:05:20.813Z"
+  },
+  {
+   "id": "1lxbd78",
+   "titulo": "Vice-presidente da Fenacon analisa os riscos do aumento da carga tributária para o futuro do Brasil",
+   "link": "https://fenacon.org.br/noticias/vice-presidente-da-fenacon-analisa-os-riscos-do-aumento-da-carga-tributaria-para-o-futuro-do-brasil/",
+   "resumo": "O vice-presidente institucional da Fenacon, Diogo Chamun, assina o artigo “Brasil: um futuro em risco”, publicado no caderno Contab, do Jornal do Comércio. No texto, ele analisa o cenário de ampliação da carga tributária e seus possíveis efeitos sobre empresas, trabalhadores…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-26T03:00:30.000Z",
+   "categorias": [
+    "tributos",
+    "trabalhista",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-26T10:05:20.813Z"
+  },
   {
    "id": "j9hcxz",
    "titulo": "Presidente da Fenacon assina capítulo em livro da Academia Paulista de Contabilidade",
@@ -2893,99 +2990,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-14T17:10:30.203Z"
-  },
-  {
-   "id": "ojbny7",
-   "titulo": "Receita cancelará dívidas de MEIs vencidas até esta sexta-feira",
-   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/receita-cancelara-dividas-de-meis-vencidas-ate-esta-sexta-feira",
-   "resumo": "As dívidas de contribuição previdenciária dos Microempreendedores Individuais (MEIs) com vencimento até esta sexta-feira (13) serão perdoadas automaticamente pela Receita Federal , informou o órgão. O procedimento não exige pedido do contribuinte. Para manter o benefício,…",
-   "fonte": "ebc",
-   "fonteNome": "Agência Brasil (Economia)",
-   "sigla": "EBC",
-   "publicadoEm": "2026-11-13T23:08:00.000Z",
-   "categorias": [
-    "simples",
-    "tributos",
-    "trabalhista"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-13T23:26:32.843Z"
-  },
-  {
-   "id": "hqfsks",
-   "titulo": "CFC e Conselhos Regionais se posicionam contra aumento da carga tributária e restrições à compensação de tributos",
-   "link": "https://cfc.org.br/noticias/cfc-e-conselhos-regionais-se-posicionam-contra-aumento-da-carga-tributaria-e-restricoes-a-compensacao-de-tributos/",
-   "resumo": "Em ofício ao Senado, Sistema CFC/CRCs pede mudanças no PLP 299/2026 e alerta para riscos à segurança jurídica, à competitividade das empresas e ao planejamento tributário O Conselho Federal de Contabilidade (CFC) e os 27 Conselhos Regionais de Contabilidade (CRCs)…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-13T20:52:37.000Z",
-   "categorias": [
-    "tributos",
-    "contabil",
-    "legislacao"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-13T21:05:19.880Z"
-  },
-  {
-   "id": "1bf7wtx",
-   "titulo": "Escala 6×1: STF mantém cronograma e define regras de transição para acordos e convenções",
-   "link": "https://fenacon.org.br/noticias/escala-6x1-stf-mantem-cronograma-define-regras-transicao-acordos-convencoes/",
-   "resumo": "Cautelares da CNC e da CNI foram parcialmente acolhidas e trazem flexibilizações para as empresas na transição",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-13T20:46:02.000Z",
-   "categorias": [],
-   "relevancia": 2,
-   "vistaEm": "2026-11-13T21:05:19.880Z"
-  },
-  {
-   "id": "x80pc7",
-   "titulo": "Montadoras podem reduzir imposto sobre carro zero km com reciclagem de veículos velhos",
-   "link": "https://agenciagov.ebc.com.br/noticias/202611/mdic-incentiva-a-reciclagem-de-veiculos-com-reducao-de-ipi-para-carros-novos-elegiveis",
-   "resumo": "Nova portaria do Ministério Desenvolvimento, Indústria, Comércio e Serviços, como parte do Programa Mover, quer estimular destinação adequada e facilita a verificação da origem de peças usadas. Veja como aderir",
-   "fonte": "govbr",
-   "fonteNome": "Agência Gov (governo federal)",
-   "sigla": "Gov",
-   "publicadoEm": "2026-11-13T19:42:00.000Z",
-   "categorias": [
-    "tributos",
-    "legislacao"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-13T20:35:18.415Z"
-  },
-  {
-   "id": "1gdqzm3",
-   "titulo": "Oportunidade: Conferência Nacional de Perícia Contábil abre inscrições para modalidade on-line",
-   "link": "https://cfc.org.br/noticias/oportunidade-conferencia-nacional-de-pericia-contabil-abre-inscricoes-para-modalidade-on-line/",
-   "resumo": "Os profissionais da contabilidade que não puderem vir a Brasília nos dias 2 e 3 de dezembro terão a chance de participar da Conferência Nacional de Perícia Contábil (CNPC) a distância. A decisão atende aos pedidos de peritos de todo o país que solicitaram a abertura de…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-13T19:36:27.000Z",
-   "categorias": [
-    "contabil"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-13T20:05:18.748Z"
-  },
-  {
-   "id": "u8wyy8",
-   "titulo": "Último módulo do curso sobre Contabilidade Eleitoral e Partidária é disponibilizado pelo CFC",
-   "link": "https://cfc.org.br/noticias/ultimo-modulo-do-curso-sobre-contabilidade-eleitoral-e-partidaria-e-disponibilizado-pelo-cfc/",
-   "resumo": "Os profissionais da contabilidade têm à sua disposição um curso completo de Contabilidade Eleitoral. Gratuita e on-line, a formação está disponível na Plataforma EduCont do Sistema CFC/CRCs e soma pontos no Programa de Educação Profissional Continuada do Conselho Federal de…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-13T19:29:28.000Z",
-   "categorias": [
-    "contabil"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-13T19:35:24.995Z"
   }
  ]
 }
