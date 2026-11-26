@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-26T12:35:19.009Z",
+ "atualizadoEm": "2026-11-26T13:35:19.106Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-26T12:35:19.009Z"
+   "ultimaVez": "2026-11-26T13:35:19.106Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-26T12:35:19.009Z"
+   "ultimaVez": "2026-11-26T13:35:19.106Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-26T12:35:19.009Z"
+   "ultimaVez": "2026-11-26T13:35:19.106Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 17,
-   "ultimaVez": "2026-11-26T12:35:19.009Z"
+   "ultimaVez": "2026-11-26T13:35:19.106Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-26T12:35:19.009Z"
+   "ultimaVez": "2026-11-26T13:35:19.106Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-26T12:35:19.009Z"
+   "ultimaVez": "2026-11-26T13:35:19.106Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-26T12:35:19.009Z"
+   "ultimaVez": "2026-11-26T13:35:19.106Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-26T12:35:19.009Z"
+   "ultimaVez": "2026-11-26T13:35:19.106Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-26T12:35:19.009Z"
+   "ultimaVez": "2026-11-26T13:35:19.106Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-26T12:35:19.009Z"
+   "ultimaVez": "2026-11-26T13:35:19.106Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-26T12:35:19.009Z"
+   "ultimaVez": "2026-11-26T13:35:19.106Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1fhszvh",
+   "titulo": "CFC publica resultado do Prêmio Olivio Koliver e destaca pesquisa sobre hedge no agronegócio",
+   "link": "https://cfc.org.br/noticias/cfc-publica-resultado-do-premio-olivio-koliver-e-destaca-pesquisa-sobre-hedge-no-agronegocio/",
+   "resumo": "“Estratégias de proteção do resultado no agronegócio: prática do hedge econômico e adoção do hedge accounting” é o artigo vencedor da edição 2025 do Prêmio Olivio Koliver, promovido pelo Conselho Federal de Contabilidade (CFC). O resultado foi publicado no Diário Oficial da…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-26T13:14:48.000Z",
+   "categorias": [
+    "contabil",
+    "legislacao"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-26T13:35:19.106Z"
+  },
   {
    "id": "gjhbx5",
    "titulo": "Evento debate desafios e perspectivas da contabilidade regulatória no Brasil",
@@ -2972,23 +2988,6 @@
     "trabalhista"
    ],
    "relevancia": 3,
-   "vistaEm": "2026-11-16T10:05:19.321Z"
-  },
-  {
-   "id": "1il4tsq",
-   "titulo": "Maceió recebe o seminário Reforma Tributária pelo Brasil",
-   "link": "https://fenacon.org.br/reforma-tributaria/maceio-recebe-o-seminario-reforma-tributaria-pelo-brasil/",
-   "resumo": "No dia 10 de novembro, a capital alagoana foi palco da Edição Alagoas do projeto, reunindo profissionais da contabilidade e especialistas para debater os impactos e os desafios do novo sistema tributário brasileiro. O seminário foi promovido pela Fenacon e pelo CFC, com…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-16T01:21:21.000Z",
-   "categorias": [
-    "reforma",
-    "tributos",
-    "contabil"
-   ],
-   "relevancia": 1,
    "vistaEm": "2026-11-16T10:05:19.321Z"
   }
  ]
