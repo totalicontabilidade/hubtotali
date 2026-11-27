@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-27T21:35:19.349Z",
+ "atualizadoEm": "2026-11-27T22:05:22.490Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T21:35:19.349Z"
+   "ultimaVez": "2026-11-27T22:05:22.490Z"
   },
   {
    "id": "simples",
@@ -52,8 +52,8 @@
    "nome": "Simples Nacional",
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
-   "quantas": 382,
-   "ultimaVez": "2026-11-27T21:35:19.349Z"
+   "quantas": 383,
+   "ultimaVez": "2026-11-27T22:05:22.490Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T21:35:19.349Z"
+   "ultimaVez": "2026-11-27T22:05:22.490Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 17,
-   "ultimaVez": "2026-11-27T21:35:19.349Z"
+   "ultimaVez": "2026-11-27T22:05:22.490Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-27T21:35:19.349Z"
+   "ultimaVez": "2026-11-27T22:05:22.490Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-27T21:35:19.349Z"
+   "ultimaVez": "2026-11-27T22:05:22.490Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-27T21:35:19.349Z"
+   "ultimaVez": "2026-11-27T22:05:22.490Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-27T21:35:19.349Z"
+   "ultimaVez": "2026-11-27T22:05:22.490Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-27T21:35:19.349Z"
+   "ultimaVez": "2026-11-27T22:05:22.490Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-27T21:35:19.349Z"
+   "ultimaVez": "2026-11-27T22:05:22.490Z"
   },
   {
    "id": "govbr",
@@ -135,7 +135,7 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-27T21:35:19.349Z"
+   "ultimaVez": "2026-11-27T22:05:22.490Z"
   }
  ],
  "noticias": [
@@ -264,6 +264,23 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-27T17:05:19.379Z"
+  },
+  {
+   "id": "35pz8t",
+   "titulo": "Prorrogados os prazos de vencimento do Simples e Simei em Tupanciretã/RS",
+   "link": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/NoticiaCompleta.aspx?id=16abb122-4ee3-46c9-b12d-a019b94833bf",
+   "resumo": "Alterados os vencimentos do Simples e MEI dos períodos de apuração outubro, novembro e Dezembro de 2026 e das parcelas de parcelamento de novembro e dezembro de 2026 e janeiro/2027",
+   "fonte": "simples",
+   "fonteNome": "Simples Nacional",
+   "sigla": "SN",
+   "publicadoEm": "2026-11-27T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "simples",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-27T22:05:22.490Z"
   },
   {
    "id": "1ai9q9s",
@@ -2971,23 +2988,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-17T19:02:11.187Z"
-  },
-  {
-   "id": "1szcmaq",
-   "titulo": "Durigan defende alíquota da reforma e estima média efetiva de 8,5%",
-   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/durigan-defende-aliquota-da-reforma-e-estima-media-efetiva-de-85",
-   "resumo": "O ministro da Fazenda, Dario Durigan, afirmou que a reforma tributária trará ganhos permanentes de responsabilidade fiscal, justiça social e transparência ao sistema tributário brasileiro. Ao defender o modelo aprovado, o ministro reiterou que a alíquota máxima estimada para…",
-   "fonte": "ebc",
-   "fonteNome": "Agência Brasil (Economia)",
-   "sigla": "EBC",
-   "publicadoEm": "2026-11-17T17:26:00.000Z",
-   "categorias": [
-    "reforma",
-    "tributos",
-    "legislacao"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-17T17:35:19.360Z"
   }
  ]
 }
