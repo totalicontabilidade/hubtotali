@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-27T02:22:31.114Z",
+ "atualizadoEm": "2026-11-27T10:05:17.684Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T02:22:31.114Z"
+   "ultimaVez": "2026-11-27T10:05:17.684Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-27T02:22:31.114Z"
+   "ultimaVez": "2026-11-27T10:05:17.684Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T02:22:31.114Z"
+   "ultimaVez": "2026-11-27T10:05:17.684Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 16,
-   "ultimaVez": "2026-11-27T02:22:31.114Z"
+   "ultimaVez": "2026-11-27T10:05:17.684Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-27T02:22:31.114Z"
+   "ultimaVez": "2026-11-27T10:05:17.684Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-27T02:22:31.114Z"
+   "ultimaVez": "2026-11-27T10:05:17.684Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-27T02:22:31.114Z"
+   "ultimaVez": "2026-11-27T10:05:17.684Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-27T02:22:31.114Z"
+   "ultimaVez": "2026-11-27T10:05:17.684Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-27T02:22:31.114Z"
+   "ultimaVez": "2026-11-27T10:05:17.684Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-27T02:22:31.114Z"
+   "ultimaVez": "2026-11-27T10:05:17.684Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,114 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-27T02:22:31.114Z"
+   "ultimaVez": "2026-11-27T10:05:17.684Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1b86rk6",
+   "titulo": "Black Friday da 22ª Conescap oferece condições especiais para grupos e descontos para ingressos individuais",
+   "link": "https://fenacon.org.br/noticias/black-friday-22a-conescap-condicoes-especiais-grupos-descontos-ingressos-individuais/",
+   "resumo": "Promoção é por tempo limitado e duram até esta sexta-feira (27) para compras em grupo e até domingo (29) para compras individuais",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-27T05:09:23.000Z",
+   "categorias": [],
+   "relevancia": 2,
+   "vistaEm": "2026-11-26T17:05:18.558Z"
+  },
+  {
+   "id": "odd3fw",
+   "titulo": "Pix: mecanismo amplia prazo para contestação de devoluções fraudulentas",
+   "link": "https://fenacon.org.br/noticias/pix-mecanismo-amplia-prazo-para-contestacao-de-devolucoes-fraudulentas/",
+   "resumo": "Em funcionamento desde setembro, atualização do Mecanismo Especial de Devolução (MED) amplia de 30 para 80 dias o prazo para contestar estornos e proteger pequenos negócios contra golpes Por Comunicação Fenacon O Mecanismo Especial de Devolução (MED), ferramenta do Banco…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-27T05:02:03.000Z",
+   "categorias": [],
+   "relevancia": 2,
+   "vistaEm": "2026-11-27T10:05:17.684Z"
+  },
+  {
+   "id": "2wbrwo",
+   "titulo": "CNC, CNA e CNT vão ao STF pedir adiamento da cobrança de novos tributos da reforma tributária por falta de regras",
+   "link": "https://fenacon.org.br/reforma-tributaria/cnc-cna-e-cnt-vao-ao-stf-pedir-adiamento-da-cobranca-de-novos-tributos-da-reforma-tributaria-por-falta-de-regras/",
+   "resumo": "Ação protocolada nesta quarta (25) aponta atrasos na regulamentação e alerta que cobrança sem definições claras pode reter R$ 42,7 bilhões por mês do caixa das empresas A Confederação Nacional do Comércio de Bens, Serviços e Turismo (CNC), a Confederação da Agricultura e…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-27T03:33:53.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-27T10:05:17.684Z"
+  },
+  {
+   "id": "17rqui1",
+   "titulo": "IFI entrega estudo sobre alíquota da CBS para Eduardo Braga",
+   "link": "https://fenacon.org.br/reforma-tributaria/ifi-entrega-estudo-sobre-aliquota-da-cbs-para-eduardo-braga/",
+   "resumo": "A Instituição Fiscal Independente (IFI) entregou nesta quinta-feira (26) à assessoria do senador Eduardo Braga (MDB-AM) uma Nota Técnica sobre a alíquota da Contribuição sobre Bens e Serviços (CBS), instituída pela Reforma Tributária. O texto tem o objetivo de aumentar a…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-27T03:23:01.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-27T10:05:17.684Z"
+  },
+  {
+   "id": "1sx16yk",
+   "titulo": "Trabuco aceita convite de Lula para comandar a Fazenda, diz Planalto",
+   "link": "https://fenacon.org.br/noticias/trabuco-aceita-convite-de-lula-para-comandar-a-fazenda-diz-planalto/",
+   "resumo": "Presidente do conselho do Bradesco assume pasta no 4º mandato de Lula O Palácio do Planalto confirmou, em nota, que o banqueiro Luiz Carlos Trabuco Cappi, de 75 anos, aceitou o convite do presidente Luiz Inácio Lula da Silva para comandar o Ministério da Fazenda no próximo…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-27T03:07:04.000Z",
+   "categorias": [],
+   "relevancia": 2,
+   "vistaEm": "2026-11-27T10:05:17.684Z"
+  },
+  {
+   "id": "wv9xb3",
+   "titulo": "STJ instala Observatório da Reforma Tributária sobre o Consumo",
+   "link": "https://fenacon.org.br/reforma-tributaria/stj-instala-observatorio-da-reforma-tributaria-sobre-o-consumo/",
+   "resumo": "O Superior Tribunal de Justiça (STJ) instalou, nesta quinta-feira (26), o Observatório da Reforma Tributária sobre o Consumo. O colegiado vai acompanhar os efeitos do novo sistema tributário nos setores econômicos e no contencioso judicial. Instituído pela Instrução Normativa…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-27T03:07:00.000Z",
+   "categorias": [
+    "reforma",
+    "tributos",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-27T10:05:17.684Z"
+  },
+  {
+   "id": "jrwzs1",
+   "titulo": "Desenrola 3.0: renegociação de dívidas não resolve dificuldades financeiras dos MEIs",
+   "link": "https://fenacon.org.br/noticias/desenrola-3-0-renegociacao-de-dividas-nao-resolve-dificuldades-financeiras-dos-meis/",
+   "resumo": "Especialistas destacam que a renegociação pode aliviar um problema do passado, mas não garante a recuperação dos negócios nem a manutenção da adimplência Por Rebeca Ribeiro Cerca de 6,2 milhões de microempreendedores individuais (MEIs) estão inadimplentes no Brasil, segundo…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-27T03:04:31.000Z",
+   "categorias": [
+    "simples"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-27T10:05:17.684Z"
+  },
   {
    "id": "1deh7e9",
    "titulo": "Receita apreende 58 toneladas de roupas e tênis não declarados",
@@ -199,36 +303,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-26T18:35:17.748Z"
-  },
-  {
-   "id": "cyreov",
-   "titulo": "IFI entrega estudo sobre alíquota da CBS para Eduardo Braga",
-   "link": "https://www12.senado.leg.br/noticias/materias/2026/11/26/ifi-entrega-estudo-sobre-aliquota-da-cbs-para-eduardo-braga",
-   "resumo": "",
-   "fonte": "senado",
-   "fonteNome": "Agência Senado",
-   "sigla": "Senado",
-   "publicadoEm": "2026-11-26T17:38:09.000Z",
-   "categorias": [
-    "legislacao",
-    "reforma",
-    "tributos"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-26T18:05:20.165Z"
-  },
-  {
-   "id": "1b86rk6",
-   "titulo": "Black Friday da 22ª Conescap oferece condições especiais para grupos e descontos para ingressos individuais",
-   "link": "https://fenacon.org.br/noticias/black-friday-22a-conescap-condicoes-especiais-grupos-descontos-ingressos-individuais/",
-   "resumo": "Promoção é por tempo limitado e duram até esta sexta-feira (27) para compras em grupo e até domingo (29) para compras individuais",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-26T16:56:13.000Z",
-   "categorias": [],
-   "relevancia": 2,
-   "vistaEm": "2026-11-26T17:05:18.558Z"
   },
   {
    "id": "113mxw6",
@@ -2913,85 +2987,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-16T21:35:20.197Z"
-  },
-  {
-   "id": "1so6fwe",
-   "titulo": "Presidente da Fenacon concede entrevista à Jovem Pan News sobre o PLP 299/2026 em discussão no Senado",
-   "link": "https://fenacon.org.br/noticias/presidente-fenacon-concede-entrevista-jovem-pan-news-plp-299-2026/",
-   "resumo": "Para o dirigente, as medidas do Governo se acumularam no final do ano e deixam as empresas numa situação difícil para se adequarem à todas as exigências.",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-16T17:13:21.000Z",
-   "categorias": [
-    "legislacao"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-16T17:35:19.371Z"
-  },
-  {
-   "id": "4sjlze",
-   "titulo": "Sistema CFC/CRCs orienta profissionais da contabilidade sobre regularização de pendências financeiras",
-   "link": "https://cfc.org.br/noticias/sistema-cfc-crcs-orienta-profissionais-da-contabilidade-sobre-regularizacao-de-pendencias-financeiras/",
-   "resumo": "O Sistema CFC/CRCs promove campanha de regularização de pendências financeiras, com orientações aos profissionais da contabilidade sobre a consulta de débitos e as opções disponíveis para pagamento. A campanha busca incentivar a solução das pendências e reforçar a importância…",
-   "fonte": "cfc",
-   "fonteNome": "Conselho Federal de Contabilidade",
-   "sigla": "CFC",
-   "publicadoEm": "2026-11-16T15:28:07.000Z",
-   "categorias": [
-    "contabil"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-16T15:35:18.205Z"
-  },
-  {
-   "id": "1l0prc4",
-   "titulo": "Receita Federal publica primeiro código-fonte aberto no GitHub e amplia transparência da Reforma Tributária",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-publica-primeiro-codigo-fonte-aberto-no-github-e-amplia-transparencia-da-reforma-tributaria",
-   "resumo": "Iniciativa fortalece a transparência, a segurança jurídica e a previsibilidade na implementação dos novos tributos sobre o consumo.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-16T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "reforma",
-    "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-16T16:05:20.118Z"
-  },
-  {
-   "id": "fb9j7l",
-   "titulo": "Aviso de Pauta - Coletiva de Imprensa",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/aviso-de-pauta-coletiva-de-imprensa-1",
-   "resumo": "Ministério da Fazenda e a Receita Federal realizam nesta segunda-feira (16/11), às 10h30, entrevista coletiva para divulgar os resultados finais da Operação Fronteira Receita Federal.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-16T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-23T20:05:23.003Z"
-  },
-  {
-   "id": "1pr8j0z",
-   "titulo": "Operação Fronteira Receita Federal 2026: Alfândega de Santos realiza quatro apreensões simultâneas no Porto de Santos",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/operacao-fronteira-receita-federal-2026-alfandega-de-santos-realiza-quatro-apreensoes-simultaneas-no-porto-de-santos",
-   "resumo": "As apreensões ocorreram no dia 13 de novembro e incluem cigarros eletrônicos, cocaína, rolamentos e suplementos. Valores superam os R$ 27 milhões.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-16T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-16T15:05:26.747Z"
   }
  ]
 }
