@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-27T19:05:21.903Z",
+ "atualizadoEm": "2026-11-27T19:25:11.354Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T19:05:21.903Z"
+   "ultimaVez": "2026-11-27T19:25:11.354Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-27T19:05:21.903Z"
+   "ultimaVez": "2026-11-27T19:25:11.354Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T19:05:21.903Z"
+   "ultimaVez": "2026-11-27T19:25:11.354Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 17,
-   "ultimaVez": "2026-11-27T19:05:21.903Z"
+   "ultimaVez": "2026-11-27T19:25:11.354Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-27T19:05:21.903Z"
+   "ultimaVez": "2026-11-27T19:25:11.354Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-27T19:05:21.903Z"
+   "ultimaVez": "2026-11-27T19:25:11.354Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-27T19:05:21.903Z"
+   "ultimaVez": "2026-11-27T19:25:11.354Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-27T19:05:21.903Z"
+   "ultimaVez": "2026-11-27T19:25:11.354Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 2,
-   "ultimaVez": "2026-11-27T19:05:21.903Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-27T19:25:11.354Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-27T19:05:21.903Z"
+   "ultimaVez": "2026-11-27T19:25:11.354Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-27T19:05:21.903Z"
+   "ultimaVez": "2026-11-27T19:25:11.354Z"
   }
  ],
  "noticias": [
+  {
+   "id": "777dud",
+   "titulo": "Anuidade 2027: saiba como garantir até 15% de desconto com a adesão ao Domicílio Eletrônico",
+   "link": "https://cfc.org.br/noticias/anuidade-2027-saiba-como-garantir-ate-15-de-desconto-com-a-adesao-ao-domicilio-eletronico/",
+   "resumo": "Profissionais da contabilidade e organizações contábeis têm até 4 de dezembro de 2026 para aderir ao Domicílio Eletrônico (D-e) e garantir 5% de desconto na anuidade de 2027. O benefício pode ser acumulado com os descontos por antecipação do pagamento, permitindo uma redução…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-27T19:17:33.000Z",
+   "categorias": [
+    "trabalhista",
+    "contabil"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-27T19:25:11.354Z"
+  },
   {
    "id": "12djc08",
    "titulo": "Comissão debate riscos de aposentados e pensionistas em face da portabilidade digital",
@@ -2977,21 +2993,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-17T13:35:20.223Z"
-  },
-  {
-   "id": "132n6gn",
-   "titulo": "Novembro Azul: INSS apoia homens durante tratamento de câncer",
-   "link": "https://agenciagov.ebc.com.br/noticias/202611/novembro-azul-inss-apoia-homens-durante-tratamento-de-cancer",
-   "resumo": "Neste Dia Mundial de Combate ao Câncer de Próstata, confira os benefícios que pessoas com câncer podem receber",
-   "fonte": "govbr",
-   "fonteNome": "Agência Gov (governo federal)",
-   "sigla": "Gov",
-   "publicadoEm": "2026-11-17T12:51:00.000Z",
-   "categorias": [
-    "trabalhista"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-17T16:05:18.974Z"
   }
  ]
 }
