@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-27T13:35:18.365Z",
+ "atualizadoEm": "2026-11-27T14:35:23.423Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T13:35:18.365Z"
+   "ultimaVez": "2026-11-27T14:35:23.423Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-27T13:35:18.365Z"
+   "ultimaVez": "2026-11-27T14:35:23.423Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T13:35:18.365Z"
+   "ultimaVez": "2026-11-27T14:35:23.423Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 16,
-   "ultimaVez": "2026-11-27T13:35:18.365Z"
+   "ultimaVez": "2026-11-27T14:35:23.423Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-27T13:35:18.365Z"
+   "ultimaVez": "2026-11-27T14:35:23.423Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-27T13:35:18.365Z"
+   "ultimaVez": "2026-11-27T14:35:23.423Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-27T13:35:18.365Z"
+   "ultimaVez": "2026-11-27T14:35:23.423Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-27T13:35:18.365Z"
+   "ultimaVez": "2026-11-27T14:35:23.423Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-27T13:35:18.365Z"
+   "ultimaVez": "2026-11-27T14:35:23.423Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-27T13:35:18.365Z"
+   "ultimaVez": "2026-11-27T14:35:23.423Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-27T13:35:18.365Z"
+   "ultimaVez": "2026-11-27T14:35:23.423Z"
   }
  ],
  "noticias": [
+  {
+   "id": "11ow1tg",
+   "titulo": "COMUNICADO - Receita Federal divulga versões provisórias dos conteúdos programáticos do concurso público",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/comunicado-receita-federal-divulga-versoes-provisorias-dos-conteudos-programaticos-do-concurso-publico",
+   "resumo": "Documentos apresentam a atualização dos conteúdos programáticos para os cargos de Auditor-Fiscal e Analista-Tributário e têm caráter exclusivamente informativo, podendo sofrer alterações até a publicação do edital de abertura.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-27T14:35:24.626Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-27T14:35:23.423Z"
+  },
   {
    "id": "1rus5ri",
    "titulo": "Receita Federal e Força Nacional retêm mais de 200 kg de maconha na Ponte da Amizade",
@@ -2970,22 +2986,6 @@
    "publicadoEm": "2026-11-17T03:14:00.000Z",
    "categorias": [
     "reforma",
-    "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-17T10:05:20.641Z"
-  },
-  {
-   "id": "1brl1xc",
-   "titulo": "Receita Federal esclarece quando a alocação de profissional contábil caracteriza cessão de mão de obra",
-   "link": "https://fenacon.org.br/noticias/receita-federal-esclarece-quando-a-alocacao-de-profissional-contabil-caracteriza-cessao-de-mao-de-obra/",
-   "resumo": "Solução de Consulta Cosit nº 182/2026 informa que a manutenção não eventual de contador nas dependências da contratante para atender demandas rotineiras impede a opção ou a permanência da empresa prestadora no Simples Nacional Por Comunicação Fenacon A Receita Federal…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-17T03:12:00.000Z",
-   "categorias": [
-    "simples",
     "tributos"
    ],
    "relevancia": 3,
