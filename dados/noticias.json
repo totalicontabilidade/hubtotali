@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-27T19:35:21.877Z",
+ "atualizadoEm": "2026-11-27T20:05:19.086Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T19:35:21.877Z"
+   "ultimaVez": "2026-11-27T20:05:19.086Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-27T19:35:21.877Z"
+   "ultimaVez": "2026-11-27T20:05:19.086Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T19:35:21.877Z"
+   "ultimaVez": "2026-11-27T20:05:19.086Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 17,
-   "ultimaVez": "2026-11-27T19:35:21.877Z"
+   "ultimaVez": "2026-11-27T20:05:19.086Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-27T19:35:21.877Z"
+   "ultimaVez": "2026-11-27T20:05:19.086Z"
   },
   {
    "id": "fenacon",
@@ -89,16 +89,15 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-27T19:35:21.877Z"
+   "ultimaVez": "2026-11-27T20:05:19.086Z"
   },
   {
    "id": "sefaz-se",
    "sigla": "SEFAZ/SE",
    "nome": "Secretaria da Fazenda de Sergipe",
    "site": "https://www.sefaz.se.gov.br/",
-   "ok": true,
-   "quantas": 4,
-   "via": "ponte",
+   "ok": false,
+   "erro": "fetch failed",
    "ultimaVez": "2026-11-27T19:35:21.877Z"
   },
   {
@@ -108,7 +107,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-27T19:35:21.877Z"
+   "ultimaVez": "2026-11-27T20:05:19.086Z"
   },
   {
    "id": "senado",
@@ -117,7 +116,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-27T19:35:21.877Z"
+   "ultimaVez": "2026-11-27T20:05:19.086Z"
   },
   {
    "id": "ebc",
@@ -126,7 +125,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-27T19:35:21.877Z"
+   "ultimaVez": "2026-11-27T20:05:19.086Z"
   },
   {
    "id": "govbr",
@@ -135,10 +134,25 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-27T19:35:21.877Z"
+   "ultimaVez": "2026-11-27T20:05:19.086Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1roonfw",
+   "titulo": "Fim da escala 6x1: empregador doméstico precisa atualizar o contrato de todos os empregados no eSocial",
+   "link": "https://www.gov.br/esocial/pt-br/noticias/fim-da-escala-6x1-empregador-domestico-precisa-atualizar-o-contrato-de-todos-os-empregados-no-esocial",
+   "resumo": "As novas regras valem a partir de 16 de dezembro. A atualização é obrigatória para todos os trabalhadores cadastrados, inclusive para quem já folgava dois dias por semana.",
+   "fonte": "esocial",
+   "fonteNome": "Portal eSocial",
+   "sigla": "eSocial",
+   "publicadoEm": "2026-11-27T19:53:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-27T20:05:19.086Z"
+  },
   {
    "id": "2z6tb7",
    "titulo": "Ibracon promove Hackathon para promover desafios entre alunos e professores de Ciências Contábeis",
@@ -2974,23 +2988,6 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-17T19:02:11.187Z"
-  },
-  {
-   "id": "17oo9dw",
-   "titulo": "Virando a Chave na Reforma Tributária: API do RAD - documentação técnica já está disponível",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/virando-a-chave-para-a-reforma-tributaria-api-para-emissao-do-rad-ja-esta-disponivel",
-   "resumo": "Na prática, a solução viabiliza a automação dos processos relacionados ao RAD, reduzindo etapas operacionais e ampliando a eficiência na apropriação de créditos tributários.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-17T14:35:20.599Z",
-   "semHora": true,
-   "categorias": [
-    "reforma",
-    "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-17T14:35:19.116Z"
   }
  ]
 }
