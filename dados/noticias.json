@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-27T13:05:20.714Z",
+ "atualizadoEm": "2026-11-27T13:35:18.365Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T13:05:20.714Z"
+   "ultimaVez": "2026-11-27T13:35:18.365Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-27T13:05:20.714Z"
+   "ultimaVez": "2026-11-27T13:35:18.365Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T13:05:20.714Z"
+   "ultimaVez": "2026-11-27T13:35:18.365Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 16,
-   "ultimaVez": "2026-11-27T13:05:20.714Z"
+   "ultimaVez": "2026-11-27T13:35:18.365Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-27T13:05:20.714Z"
+   "ultimaVez": "2026-11-27T13:35:18.365Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-27T13:05:20.714Z"
+   "ultimaVez": "2026-11-27T13:35:18.365Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-27T13:05:20.714Z"
+   "ultimaVez": "2026-11-27T13:35:18.365Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-27T13:05:20.714Z"
+   "ultimaVez": "2026-11-27T13:35:18.365Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-27T13:05:20.714Z"
+   "ultimaVez": "2026-11-27T13:35:18.365Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 0,
-   "ultimaVez": "2026-11-27T13:05:20.714Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-27T13:35:18.365Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,41 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-27T13:05:20.714Z"
+   "ultimaVez": "2026-11-27T13:35:18.365Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1rus5ri",
+   "titulo": "Receita Federal e Força Nacional retêm mais de 200 kg de maconha na Ponte da Amizade",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-e-forca-nacional-retem-mais-de-200-kg-de-maconha-na-ponte-da-amizade",
+   "resumo": "Condutor, de nacionalidade paraguaia, tentou escapar da fiscalização mas foi contido pelas equipes de fiscalização.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-27T13:35:19.786Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 1,
+   "vistaEm": "2026-11-27T13:35:18.365Z"
+  },
+  {
+   "id": "1pcbv4h",
+   "titulo": "Famílias mais pobres são 21,7%, mas ficam com apenas 4,7% da renda",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/familias-mais-pobres-sao-217-mas-ficam-com-apenas-47-da-renda",
+   "resumo": "A concentração dos rendimentos no Brasil é uma das constatações da Pesquisa de Orçamentos Familiares (POF) 2024-2025, divulgada nesta sexta-feira (27), pelo Instituto Brasileiro de Geografia e Estatística (IBGE). Os dados mostram que as famílias com renda até dois salários…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-27T13:05:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-27T13:35:18.365Z"
+  },
   {
    "id": "1faco99",
    "titulo": "Não perca o prazo: profissionais têm até 31 de dezembro para completar 40 pontos no PEPC",
@@ -2958,37 +2989,6 @@
     "tributos"
    ],
    "relevancia": 3,
-   "vistaEm": "2026-11-17T10:05:20.641Z"
-  },
-  {
-   "id": "yw0dvx",
-   "titulo": "A CBS em 2027 e a tributação dos serviços: Os reflexos nos escritórios de advocacia",
-   "link": "https://fenacon.org.br/reforma-tributaria/a-cbs-em-2027-e-a-tributacao-dos-servicos-os-reflexos-nos-escritorios-de-advocacia/",
-   "resumo": "A nova contribuição exigirá dos escritórios a revisão de custos, créditos e honorários para adequar a gestão à mudança no sistema tributário. Por Juliana Dias Guerra Nelson Ferreira Cruz A tributação do consumo no Brasil reúne tributos federais, estaduais e municipais, cujas…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-17T03:03:00.000Z",
-   "categorias": [
-    "reforma",
-    "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-17T03:05:10.312Z"
-  },
-  {
-   "id": "1069abj",
-   "titulo": "Projeto proíbe uso da imagem de empregado em redes sociais da empresa sem previsão contratual",
-   "link": "https://fenacon.org.br/noticias/projeto-proibe-uso-da-imagem-de-empregado-em-redes-sociais-da-empresa-sem-previsao-contratual/",
-   "resumo": "Proposta enquadra a prática como desvio de função quando a atividade for incompatível com as atribuições do cargo contratado O Projeto de Lei 3655/26 proíbe a utilização da imagem do empregado nas mídias sociais do empregador quando a atividade for incompatível com o cargo…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-17T03:02:00.000Z",
-   "categorias": [
-    "legislacao"
-   ],
-   "relevancia": 2,
    "vistaEm": "2026-11-17T10:05:20.641Z"
   }
  ]
