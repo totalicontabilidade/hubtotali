@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-27T17:05:19.379Z",
+ "atualizadoEm": "2026-11-27T17:35:19.149Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T17:05:19.379Z"
+   "ultimaVez": "2026-11-27T17:35:19.149Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-27T17:05:19.379Z"
+   "ultimaVez": "2026-11-27T17:35:19.149Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T17:05:19.379Z"
+   "ultimaVez": "2026-11-27T17:35:19.149Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 16,
-   "ultimaVez": "2026-11-27T17:05:19.379Z"
+   "ultimaVez": "2026-11-27T17:35:19.149Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-27T17:05:19.379Z"
+   "ultimaVez": "2026-11-27T17:35:19.149Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-27T17:05:19.379Z"
+   "ultimaVez": "2026-11-27T17:35:19.149Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-27T17:05:19.379Z"
+   "ultimaVez": "2026-11-27T17:35:19.149Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-27T17:05:19.379Z"
+   "ultimaVez": "2026-11-27T17:35:19.149Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-27T17:05:19.379Z"
+   "ultimaVez": "2026-11-27T17:35:19.149Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-27T17:05:19.379Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-27T17:35:19.149Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,42 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-27T17:05:19.379Z"
+   "ultimaVez": "2026-11-27T17:35:19.149Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1l7mddm",
+   "titulo": "Presidente da Fenacon debate split payment e os desafios da Reforma Tributária no 8º Congresso de Direito Tributário do Codecon/SP",
+   "link": "https://fenacon.org.br/noticias/56709/",
+   "resumo": "Os desafios da implementação da Reforma Tributária e os impactos dos novos mecanismos de arrecadação sobre o ambiente de negócios estiveram no centro da programação do 8º Congresso de Direito Tributário do Conselho Estadual de Defesa do Contribuinte (Codecon/SP), realizado na…",
+   "fonte": "fenacon",
+   "fonteNome": "Fenacon",
+   "sigla": "Fenacon",
+   "publicadoEm": "2026-11-27T17:32:05.000Z",
+   "categorias": [
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-27T17:35:19.149Z"
+  },
+  {
+   "id": "1sg6jdb",
+   "titulo": "Ferramenta gratuita reúne mudanças para MEIs e pequenos negócios",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/ferramenta-gratuita-reune-mudancas-para-meis-e-pequenos-negocios",
+   "resumo": "Microempreendedores individuais (MEIs) e donos de pequenos negócios podem consultar gratuitamente as mudanças previstas nas regras de faturamento, tributação e regularização de dívidas. O Radar das Mudanças para Pequenos Negócios reúne 11 medidas relacionadas à reforma…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-27T17:26:00.000Z",
+   "categorias": [
+    "simples",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-27T17:35:19.149Z"
+  },
   {
    "id": "dzqzdp",
    "titulo": "Receita Federal e CGIBS esclarecem emissão de documento fiscal por condomínios",
@@ -2960,37 +2992,6 @@
    ],
    "relevancia": 1,
    "vistaEm": "2026-11-17T11:35:24.082Z"
-  },
-  {
-   "id": "1g26s9g",
-   "titulo": "Durigan vai ao Senado explicar alíquota de 11,3% da CBS",
-   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/durigan-vai-ao-senado-explicar-aliquota-de-113-da-cbs",
-   "resumo": "Em meio a questionamentos sobre a reforma tributária, o ministro da Fazenda, Dario Durigan, participa nesta terça-feira (17), às 10h, de audiência pública na Comissão de Assuntos Econômicos (CAE) do Senado para discutir a alíquota de referência da Contribuição sobre Bens e…",
-   "fonte": "ebc",
-   "fonteNome": "Agência Brasil (Economia)",
-   "sigla": "EBC",
-   "publicadoEm": "2026-11-17T10:15:00.000Z",
-   "categorias": [
-    "reforma",
-    "tributos"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-17T10:35:19.329Z"
-  },
-  {
-   "id": "pjxn6w",
-   "titulo": "Folha de S.Paulo repercute alerta da Fenacon sobre pacote fiscal",
-   "link": "https://fenacon.org.br/noticias/folha-de-s-paulo-repercute-alerta-da-fenacon-sobre-pacote-fiscal/",
-   "resumo": "Nota da Federação alerta para o aumento da carga tributária das médias empresas e os impactos das mudanças propostas nas regras do lucro presumido A Folha de S.Paulo destacou, nesta segunda-feira (16) o posicionamento da Fenacon sobre o pacote fiscal em tramitação no Senado,…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-17T05:01:02.000Z",
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-17T10:05:20.641Z"
   }
  ]
 }
