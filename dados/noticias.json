@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-27T20:35:19.606Z",
+ "atualizadoEm": "2026-11-27T21:05:18.154Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T20:35:19.606Z"
+   "ultimaVez": "2026-11-27T21:05:18.154Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-27T20:35:19.606Z"
+   "ultimaVez": "2026-11-27T21:05:18.154Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T20:35:19.606Z"
+   "ultimaVez": "2026-11-27T21:05:18.154Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 17,
-   "ultimaVez": "2026-11-27T20:35:19.606Z"
+   "ultimaVez": "2026-11-27T21:05:18.154Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-27T20:35:19.606Z"
+   "ultimaVez": "2026-11-27T21:05:18.154Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-27T20:35:19.606Z"
+   "ultimaVez": "2026-11-27T21:05:18.154Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-27T20:35:19.606Z"
+   "ultimaVez": "2026-11-27T21:05:18.154Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-27T20:35:19.606Z"
+   "ultimaVez": "2026-11-27T21:05:18.154Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-27T20:35:19.606Z"
+   "quantas": 0,
+   "ultimaVez": "2026-11-27T21:05:18.154Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-27T20:35:19.606Z"
+   "ultimaVez": "2026-11-27T21:05:18.154Z"
   },
   {
    "id": "govbr",
@@ -135,7 +135,7 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-27T20:35:19.606Z"
+   "ultimaVez": "2026-11-27T21:05:18.154Z"
   }
  ],
  "noticias": [
@@ -282,8 +282,24 @@
    "vistaEm": "2026-11-27T18:35:18.876Z"
   },
   {
+   "id": "11umwue",
+   "titulo": "Receita Federal divulga versões provisórias dos conteúdos programáticos do concurso para auditor fiscal e analista tributário",
+   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/receita-federal-divulga-versoes-provisorias-dos-conteudos-programaticos-do-concurso-para-auditor-fiscal-e-analista-tributario",
+   "resumo": "Documentos apresentam a atualização dos conteúdos programáticos para os cargos de auditor-fiscal e analista-tributário e têm caráter exclusivamente informativo, podendo sofrer alterações até a publicação do edital de abertura",
+   "fonte": "fazenda",
+   "fonteNome": "Ministério da Fazenda",
+   "sigla": "MF",
+   "publicadoEm": "2026-11-27T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 0,
+   "vistaEm": "2026-11-27T21:05:18.154Z"
+  },
+  {
    "id": "11ow1tg",
-   "titulo": "COMUNICADO - Receita Federal divulga versões provisórias dos conteúdos programáticos do concurso público",
+   "titulo": "COMUNICADO - [RETIFICADO} Receita Federal divulga versões provisórias dos conteúdos programáticos do concurso público",
    "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/comunicado-receita-federal-divulga-versoes-provisorias-dos-conteudos-programaticos-do-concurso-publico",
    "resumo": "Documentos apresentam a atualização dos conteúdos programáticos para os cargos de auditor-fiscal e analista-tributário e têm caráter exclusivamente informativo, podendo sofrer alterações até a publicação do edital de abertura.",
    "fonte": "receita",
@@ -2972,23 +2988,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-17T17:35:19.360Z"
-  },
-  {
-   "id": "1s99o2b",
-   "titulo": "Receita Federal induz autorregularização de R$ 1,95 bilhão de grande contribuinte",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-induz-autorregularizacao-de-r-1-95-bilhao-de-grande-contribuinte",
-   "resumo": "Monitoramento contínuo, diálogo e presença fiscal levaram ao recolhimento espontâneo de tributos sem necessidade de nova autuação. O valor equivale a cerca de 2,5 milhões de benefícios médios mensais do Bolsa Família.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-17T15:00:00.000Z",
-   "semHora": true,
-   "categorias": [
-    "tributos",
-    "trabalhista"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-17T19:02:11.187Z"
   }
  ]
 }
