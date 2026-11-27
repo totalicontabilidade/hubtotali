@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-27T19:25:11.354Z",
+ "atualizadoEm": "2026-11-27T19:35:21.877Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T19:25:11.354Z"
+   "ultimaVez": "2026-11-27T19:35:21.877Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-27T19:25:11.354Z"
+   "ultimaVez": "2026-11-27T19:35:21.877Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T19:25:11.354Z"
+   "ultimaVez": "2026-11-27T19:35:21.877Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 17,
-   "ultimaVez": "2026-11-27T19:25:11.354Z"
+   "ultimaVez": "2026-11-27T19:35:21.877Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-27T19:25:11.354Z"
+   "ultimaVez": "2026-11-27T19:35:21.877Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-27T19:25:11.354Z"
+   "ultimaVez": "2026-11-27T19:35:21.877Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-27T19:25:11.354Z"
+   "ultimaVez": "2026-11-27T19:35:21.877Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-27T19:25:11.354Z"
+   "ultimaVez": "2026-11-27T19:35:21.877Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-27T19:25:11.354Z"
+   "ultimaVez": "2026-11-27T19:35:21.877Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-27T19:25:11.354Z"
+   "ultimaVez": "2026-11-27T19:35:21.877Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,25 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-27T19:25:11.354Z"
+   "ultimaVez": "2026-11-27T19:35:21.877Z"
   }
  ],
  "noticias": [
+  {
+   "id": "2z6tb7",
+   "titulo": "Ibracon promove Hackathon para promover desafios entre alunos e professores de Ciências Contábeis",
+   "link": "https://cfc.org.br/noticias/ibracon-promove-hackathon-para-desafiar-estudantes-de-ciencias-contabeis/",
+   "resumo": "Instituições de Ensino Superior já podem inscrever suas equipes na competição Transformar ideias em soluções para os desafios da Auditoria Independente é a proposta da 5ª edição do Hackathon do Ibracon, que está com inscrições abertas para Instituições de Ensino Superior…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-27T19:27:36.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-27T19:35:21.877Z"
+  },
   {
    "id": "777dud",
    "titulo": "Anuidade 2027: saiba como garantir até 15% de desconto com a adesão ao Domicílio Eletrônico",
@@ -2976,23 +2991,6 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-17T14:35:19.116Z"
-  },
-  {
-   "id": "9du0c3",
-   "titulo": "Durigan fala em comissão sobre alíquota da CBS – 17/11/26",
-   "link": "https://www12.senado.leg.br/noticias/videos/2026/11/ao-vivo-durigan-fala-em-comissao-sobre-aliquota-da-cbs-2013-17-11-26",
-   "resumo": "",
-   "fonte": "senado",
-   "fonteNome": "Agência Senado",
-   "sigla": "Senado",
-   "publicadoEm": "2026-11-17T13:00:07.000Z",
-   "categorias": [
-    "legislacao",
-    "reforma",
-    "tributos"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-17T13:35:20.223Z"
   }
  ]
 }
