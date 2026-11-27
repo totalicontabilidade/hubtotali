@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-27T18:35:18.876Z",
+ "atualizadoEm": "2026-11-27T19:05:21.903Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T18:35:18.876Z"
+   "ultimaVez": "2026-11-27T19:05:21.903Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-27T18:35:18.876Z"
+   "ultimaVez": "2026-11-27T19:05:21.903Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T18:35:18.876Z"
+   "ultimaVez": "2026-11-27T19:05:21.903Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 17,
-   "ultimaVez": "2026-11-27T18:35:18.876Z"
+   "ultimaVez": "2026-11-27T19:05:21.903Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-27T18:35:18.876Z"
+   "ultimaVez": "2026-11-27T19:05:21.903Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-27T18:35:18.876Z"
+   "ultimaVez": "2026-11-27T19:05:21.903Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-27T18:35:18.876Z"
+   "ultimaVez": "2026-11-27T19:05:21.903Z"
   },
   {
    "id": "camara",
@@ -107,8 +107,8 @@
    "nome": "Agência Câmara",
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
-   "quantas": 0,
-   "ultimaVez": "2026-11-27T18:35:18.876Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-27T19:05:21.903Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-27T18:35:18.876Z"
+   "ultimaVez": "2026-11-27T19:05:21.903Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-27T18:35:18.876Z"
+   "ultimaVez": "2026-11-27T19:05:21.903Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,26 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-27T18:35:18.876Z"
+   "ultimaVez": "2026-11-27T19:05:21.903Z"
   }
  ],
  "noticias": [
+  {
+   "id": "12djc08",
+   "titulo": "Comissão debate riscos de aposentados e pensionistas em face da portabilidade digital",
+   "link": "https://www.camara.leg.br/noticias/1323174-comissao-debate-riscos-de-aposentados-e-pensionistas-em-face-da-portabilidade-digital",
+   "resumo": "Depositphotos Audiência vai discutir portabilidade bancária A Comissão de Previdência, Assistência Social, Infância, Adolescência e Família da Câmara dos Deputados debate, nesta terça-feira (1º), os riscos da portabilidade digital para aposentados e pensionistas. A audiência…",
+   "fonte": "camara",
+   "fonteNome": "Agência Câmara",
+   "sigla": "Câmara",
+   "publicadoEm": "2026-11-27T18:39:00.000Z",
+   "categorias": [
+    "legislacao",
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-27T19:05:21.903Z"
+  },
   {
    "id": "1ntk1s6",
    "titulo": "Fim da escala 6x1: empregadores devem informar as mudanças nas jornadas de trabalho no eSocial até 15 de janeiro",
@@ -2976,19 +2992,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-17T16:05:18.974Z"
-  },
-  {
-   "id": "b34rgk",
-   "titulo": "Mulheres lideram 63% dos negócios na Rocinha, diz pesquisa",
-   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/mulheres-lideram-63-dos-negocios-da-rocinha-diz-pesquisa",
-   "resumo": "Pesquisa feita com 1.670 empreendedores da Favela da Rocinha, na zona sudoeste do Rio de Janeiro, revela que as mulheres representam 63% dos responsáveis pelos empreendimentos analisados, enquanto pessoas negras, considerando pretas e pardas, correspondem a 70%. Para 74% dos…",
-   "fonte": "ebc",
-   "fonteNome": "Agência Brasil (Economia)",
-   "sigla": "EBC",
-   "publicadoEm": "2026-11-17T12:20:00.000Z",
-   "categorias": [],
-   "relevancia": 1,
-   "vistaEm": "2026-11-17T12:35:19.206Z"
   }
  ]
 }
