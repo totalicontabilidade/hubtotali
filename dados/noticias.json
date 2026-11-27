@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-27T12:35:18.128Z",
+ "atualizadoEm": "2026-11-27T13:05:20.714Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T12:35:18.128Z"
+   "ultimaVez": "2026-11-27T13:05:20.714Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-27T12:35:18.128Z"
+   "ultimaVez": "2026-11-27T13:05:20.714Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T12:35:18.128Z"
+   "ultimaVez": "2026-11-27T13:05:20.714Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 16,
-   "ultimaVez": "2026-11-27T12:35:18.128Z"
+   "ultimaVez": "2026-11-27T13:05:20.714Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-27T12:35:18.128Z"
+   "ultimaVez": "2026-11-27T13:05:20.714Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-27T12:35:18.128Z"
+   "ultimaVez": "2026-11-27T13:05:20.714Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-27T12:35:18.128Z"
+   "ultimaVez": "2026-11-27T13:05:20.714Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-27T12:35:18.128Z"
+   "ultimaVez": "2026-11-27T13:05:20.714Z"
   },
   {
    "id": "senado",
@@ -116,8 +116,8 @@
    "nome": "Agência Senado",
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
-   "quantas": 1,
-   "ultimaVez": "2026-11-27T12:35:18.128Z"
+   "quantas": 2,
+   "ultimaVez": "2026-11-27T13:05:20.714Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-27T12:35:18.128Z"
+   "ultimaVez": "2026-11-27T13:05:20.714Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,42 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-27T12:35:18.128Z"
+   "ultimaVez": "2026-11-27T13:05:20.714Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1faco99",
+   "titulo": "Não perca o prazo: profissionais têm até 31 de dezembro para completar 40 pontos no PEPC",
+   "link": "https://cfc.org.br/noticias/nao-perca-o-prazo-profissionais-tem-ate-31-de-dezembro-para-completar-40-pontos-no-pepc/",
+   "resumo": "Os profissionais obrigados ao Programa de Educação Profissional Continuada (PEPC) têm até o dia 31 de dezembro de 2026 para alcançar os 40 pontos anuais. As capacitações finalizadas ou realizadas após essa data não geram pontuação para o exercício. As orientações sobre esse…",
+   "fonte": "cfc",
+   "fonteNome": "Conselho Federal de Contabilidade",
+   "sigla": "CFC",
+   "publicadoEm": "2026-11-27T12:54:45.000Z",
+   "categorias": [
+    "contabil"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-27T13:05:20.714Z"
+  },
+  {
+   "id": "1h2np8e",
+   "titulo": "IFI analisa cenários para alíquota da CBS e impacto de isenções fiscais no tributo",
+   "link": "https://www12.senado.leg.br/noticias/audios/2026/11/ifi-analisa-cenarios-para-aliquota-da-cbs-e-impacto-de-isencoes-fiscais-no-tributo",
+   "resumo": "",
+   "fonte": "senado",
+   "fonteNome": "Agência Senado",
+   "sigla": "Senado",
+   "publicadoEm": "2026-11-27T12:52:39.000Z",
+   "categorias": [
+    "legislacao",
+    "reforma",
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-27T13:05:20.714Z"
+  },
   {
    "id": "1ilyrc7",
    "titulo": "IFI apresenta projeções para cálculo da alíquota da CBS na reforma tributária",
@@ -2958,37 +2990,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-17T10:05:20.641Z"
-  },
-  {
-   "id": "1ou1r65",
-   "titulo": "INSS realiza 45 atendimentos à população em situação de rua em São José do Rio Preto (SP)",
-   "link": "https://agenciagov.ebc.com.br/noticias/202611/inss-realiza-45-atendimentos-a-populacao-em-situacao-de-rua-em-sao-jose-do-rio-preto-sp",
-   "resumo": "Equipe da Previdência Social ofereceu orientações sobre benefícios, registrou requerimentos de BPC e aposentadorias e emitiu extratos durante o Pop Rua Jud",
-   "fonte": "govbr",
-   "fonteNome": "Agência Gov (governo federal)",
-   "sigla": "Gov",
-   "publicadoEm": "2026-11-16T19:30:00.000Z",
-   "categorias": [
-    "trabalhista"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-16T20:35:19.547Z"
-  },
-  {
-   "id": "1e57xh5",
-   "titulo": "INSS realiza 315 perícias médicas em mutirões no Paraná",
-   "link": "https://agenciagov.ebc.com.br/noticias/202611/inss-realiza-315-pericias-medicas-em-mutiroes-no-parana",
-   "resumo": "Mobilização realizada no último sábado (14) ampliou o atendimento nas agências do INSS em Colombo, São José dos Pinhais e Paranaguá com a antecipação de avaliações médico-periciais.",
-   "fonte": "govbr",
-   "fonteNome": "Agência Gov (governo federal)",
-   "sigla": "Gov",
-   "publicadoEm": "2026-11-16T19:18:00.000Z",
-   "categorias": [
-    "trabalhista",
-    "contabil"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-16T20:05:21.842Z"
   }
  ]
 }
