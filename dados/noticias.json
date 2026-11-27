@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-27T14:35:23.423Z",
+ "atualizadoEm": "2026-11-27T15:35:18.211Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T14:35:23.423Z"
+   "ultimaVez": "2026-11-27T15:35:18.211Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-27T14:35:23.423Z"
+   "ultimaVez": "2026-11-27T15:35:18.211Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T14:35:23.423Z"
+   "ultimaVez": "2026-11-27T15:35:18.211Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 16,
-   "ultimaVez": "2026-11-27T14:35:23.423Z"
+   "ultimaVez": "2026-11-27T15:35:18.211Z"
   },
   {
    "id": "cfc",
@@ -80,15 +80,15 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-27T14:35:23.423Z"
+   "ultimaVez": "2026-11-27T15:35:18.211Z"
   },
   {
    "id": "fenacon",
    "sigla": "Fenacon",
    "nome": "Fenacon",
    "site": "https://fenacon.org.br/noticias/",
-   "ok": true,
-   "quantas": 9,
+   "ok": false,
+   "erro": "This operation was aborted",
    "ultimaVez": "2026-11-27T14:35:23.423Z"
   },
   {
@@ -99,15 +99,15 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-27T14:35:23.423Z"
+   "ultimaVez": "2026-11-27T15:35:18.211Z"
   },
   {
    "id": "camara",
    "sigla": "Câmara",
    "nome": "Agência Câmara",
    "site": "https://www.camara.leg.br/noticias",
-   "ok": true,
-   "quantas": 0,
+   "ok": false,
+   "erro": "fetch failed",
    "ultimaVez": "2026-11-27T14:35:23.423Z"
   },
   {
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-27T14:35:23.423Z"
+   "ultimaVez": "2026-11-27T15:35:18.211Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-27T14:35:23.423Z"
+   "ultimaVez": "2026-11-27T15:35:18.211Z"
   },
   {
    "id": "govbr",
@@ -135,7 +135,7 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-27T14:35:23.423Z"
+   "ultimaVez": "2026-11-27T15:35:18.211Z"
   }
  ],
  "noticias": [
