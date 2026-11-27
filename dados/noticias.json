@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-27T16:05:17.345Z",
+ "atualizadoEm": "2026-11-27T17:05:19.379Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T16:05:17.345Z"
+   "ultimaVez": "2026-11-27T17:05:19.379Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-27T16:05:17.345Z"
+   "ultimaVez": "2026-11-27T17:05:19.379Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T16:05:17.345Z"
+   "ultimaVez": "2026-11-27T17:05:19.379Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 16,
-   "ultimaVez": "2026-11-27T16:05:17.345Z"
+   "ultimaVez": "2026-11-27T17:05:19.379Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-27T16:05:17.345Z"
+   "ultimaVez": "2026-11-27T17:05:19.379Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-27T16:05:17.345Z"
+   "ultimaVez": "2026-11-27T17:05:19.379Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-27T16:05:17.345Z"
+   "ultimaVez": "2026-11-27T17:05:19.379Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-27T16:05:17.345Z"
+   "ultimaVez": "2026-11-27T17:05:19.379Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-27T16:05:17.345Z"
+   "ultimaVez": "2026-11-27T17:05:19.379Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-27T16:05:17.345Z"
+   "ultimaVez": "2026-11-27T17:05:19.379Z"
   },
   {
    "id": "govbr",
@@ -135,15 +135,32 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-27T16:05:17.345Z"
+   "ultimaVez": "2026-11-27T17:05:19.379Z"
   }
  ],
  "noticias": [
   {
+   "id": "dzqzdp",
+   "titulo": "Receita Federal e CGIBS esclarecem emissão de documento fiscal por condomínios",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-e-cgibs-esclarecem-emissao-de-documento-fiscal-por-condominios",
+   "resumo": "A emissão de documento fiscal será exigida apenas em situações específicas previstas em lei e será realizada por meio de um processo simplificado, desenvolvido em diálogo com as entidades representativas do setor.",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-27T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-27T17:05:19.379Z"
+  },
+  {
    "id": "11ow1tg",
    "titulo": "COMUNICADO - Receita Federal divulga versões provisórias dos conteúdos programáticos do concurso público",
    "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/comunicado-receita-federal-divulga-versoes-provisorias-dos-conteudos-programaticos-do-concurso-publico",
-   "resumo": "Documentos apresentam a atualização dos conteúdos programáticos para os cargos de Auditor-Fiscal e Analista-Tributário e têm caráter exclusivamente informativo, podendo sofrer alterações até a publicação do edital de abertura.",
+   "resumo": "Documentos apresentam a atualização dos conteúdos programáticos para os cargos de auditor-fiscal e analista-tributário e têm caráter exclusivamente informativo, podendo sofrer alterações até a publicação do edital de abertura.",
    "fonte": "receita",
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
@@ -2970,22 +2987,6 @@
    "sigla": "Fenacon",
    "publicadoEm": "2026-11-17T05:01:02.000Z",
    "categorias": [
-    "tributos"
-   ],
-   "relevancia": 3,
-   "vistaEm": "2026-11-17T10:05:20.641Z"
-  },
-  {
-   "id": "18dslfw",
-   "titulo": "Receita abre código-fonte para empresas usarem no cálculo de tributos de consumo",
-   "link": "https://fenacon.org.br/reforma-tributaria/receita-abre-codigo-fonte-para-empresas-usarem-no-calculo-de-tributos-de-consumo/",
-   "resumo": "A Calculadora de Tributos é uma ferramenta que materializa as regras de cálculo da Contribuição sobre Bens e Serviços. Ao abrir o código-fonte para empresas e desenvolvedores, a Receita pretende consolidar transparência e simplificar a transição na Reforma Tributária A…",
-   "fonte": "fenacon",
-   "fonteNome": "Fenacon",
-   "sigla": "Fenacon",
-   "publicadoEm": "2026-11-17T03:14:00.000Z",
-   "categorias": [
-    "reforma",
     "tributos"
    ],
    "relevancia": 3,
