@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-27T18:05:20.717Z",
+ "atualizadoEm": "2026-11-27T18:35:18.876Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T18:05:20.717Z"
+   "ultimaVez": "2026-11-27T18:35:18.876Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 382,
-   "ultimaVez": "2026-11-27T18:05:20.717Z"
+   "ultimaVez": "2026-11-27T18:35:18.876Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T18:05:20.717Z"
+   "ultimaVez": "2026-11-27T18:35:18.876Z"
   },
   {
    "id": "fazenda",
@@ -70,8 +70,8 @@
    "nome": "Ministério da Fazenda",
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
-   "quantas": 16,
-   "ultimaVez": "2026-11-27T18:05:20.717Z"
+   "quantas": 17,
+   "ultimaVez": "2026-11-27T18:35:18.876Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-27T18:05:20.717Z"
+   "ultimaVez": "2026-11-27T18:35:18.876Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-27T18:05:20.717Z"
+   "ultimaVez": "2026-11-27T18:35:18.876Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-27T18:05:20.717Z"
+   "ultimaVez": "2026-11-27T18:35:18.876Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-27T18:05:20.717Z"
+   "ultimaVez": "2026-11-27T18:35:18.876Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-27T18:05:20.717Z"
+   "ultimaVez": "2026-11-27T18:35:18.876Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 2,
-   "ultimaVez": "2026-11-27T18:05:20.717Z"
+   "ultimaVez": "2026-11-27T18:35:18.876Z"
   },
   {
    "id": "govbr",
@@ -135,7 +135,7 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-27T18:05:20.717Z"
+   "ultimaVez": "2026-11-27T18:35:18.876Z"
   }
  ],
  "noticias": [
@@ -202,6 +202,22 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-27T17:05:19.379Z"
+  },
+  {
+   "id": "1ai9q9s",
+   "titulo": "Receita Federal publica quadro de bagagem e de limite de compras para o Guia do Viajante",
+   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/receita-federal-publica-quadro-de-bagagem-e-de-limite-de-compras-para-o-guia-do-viajante",
+   "resumo": "Atualização do Guia do Viajante traz passo a passo para todas as situações com bagagens, consolida regras para equipamentos de mobilidade e embarcações recreativas, renova a versão em inglês (Traveller's Guide) e anuncia futura Inteligência Artificial",
+   "fonte": "fazenda",
+   "fonteNome": "Ministério da Fazenda",
+   "sigla": "MF",
+   "publicadoEm": "2026-11-27T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-27T18:35:18.876Z"
   },
   {
    "id": "11ow1tg",
@@ -2973,22 +2989,6 @@
    "categorias": [],
    "relevancia": 1,
    "vistaEm": "2026-11-17T12:35:19.206Z"
-  },
-  {
-   "id": "g459rs",
-   "titulo": "Receita Federal retém mais de 830 kg de substância análoga à maconha durante abordagem de rotina",
-   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-retem-mais-de-830-kg-de-substancia-analoga-a-maconha-durante-abordagem-de-rotina-2",
-   "resumo": "Motorista, de nacionalidade paraguaia, também transportava 2,2 kg de substância análoga ao capulho e afirmou ser reincidente no tráfico de drogas.",
-   "fonte": "receita",
-   "fonteNome": "Receita Federal",
-   "sigla": "RFB",
-   "publicadoEm": "2026-11-17T12:05:20.551Z",
-   "semHora": true,
-   "categorias": [
-    "tributos"
-   ],
-   "relevancia": 1,
-   "vistaEm": "2026-11-17T12:05:18.674Z"
   }
  ]
 }
