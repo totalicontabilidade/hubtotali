@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-28T10:05:22.424Z",
+ "atualizadoEm": "2026-11-28T11:35:17.656Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-28T10:05:22.424Z"
+   "ultimaVez": "2026-11-28T11:35:17.656Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 383,
-   "ultimaVez": "2026-11-28T10:05:22.424Z"
+   "ultimaVez": "2026-11-28T11:35:17.656Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-28T10:05:22.424Z"
+   "ultimaVez": "2026-11-28T11:35:17.656Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 17,
-   "ultimaVez": "2026-11-28T10:05:22.424Z"
+   "ultimaVez": "2026-11-28T11:35:17.656Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-28T10:05:22.424Z"
+   "ultimaVez": "2026-11-28T11:35:17.656Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-28T10:05:22.424Z"
+   "ultimaVez": "2026-11-28T11:35:17.656Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-28T10:05:22.424Z"
+   "ultimaVez": "2026-11-28T11:35:17.656Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-28T10:05:22.424Z"
+   "ultimaVez": "2026-11-28T11:35:17.656Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-28T10:05:22.424Z"
+   "ultimaVez": "2026-11-28T11:35:17.656Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-28T10:05:22.424Z"
+   "ultimaVez": "2026-11-28T11:35:17.656Z"
   },
   {
    "id": "govbr",
@@ -135,7 +135,7 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-28T10:05:22.424Z"
+   "ultimaVez": "2026-11-28T11:35:17.656Z"
   }
  ],
  "noticias": [
@@ -350,7 +350,7 @@
    "id": "11ow1tg",
    "titulo": "COMUNICADO - [RETIFICADO] Receita Federal divulga versões provisórias dos conteúdos programáticos do concurso público",
    "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/comunicado-receita-federal-divulga-versoes-provisorias-dos-conteudos-programaticos-do-concurso-publico",
-   "resumo": "Documentos apresentam a atualização dos conteúdos programáticos para os cargos de auditor-fiscal e analista-tributário e têm caráter exclusivamente informativo, podendo sofrer alterações até a publicação do edital de abertura.",
+   "resumo": "Documentos apresentam a atualização dos conteúdos programáticos para os cargos de auditor-fiscal e analista-tributário e têm caráter exclusivamente informativo, podendo sofrer alterações até a publicação do edital de abertura do concurso.",
    "fonte": "receita",
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
@@ -1417,7 +1417,7 @@
    "id": "5sn1h5",
    "titulo": "COMUNICADO - Receita Federal avança na contratação da FGV para organização de novo concurso da Carreira Tributária e Aduaneira",
    "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/comunicado-receita-federal-avanca-na-contratacao-da-fgv-para-organizacao-de-novo-concurso-da-carreira-tributaria-e-aduaneira",
-   "resumo": "Publicação de ato no PNCP autoriza a contratação direta da Fundação Getulio Vargas e marca mais uma etapa do processo que antecede a divulgação do edital.",
+   "resumo": "Publicação de ato no PNCP autoriza a contratação direta da Fundação Getulio Vargas e marca mais uma etapa do processo que antecede a divulgação do edital do concurso.",
    "fonte": "receita",
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
