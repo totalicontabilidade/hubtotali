@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-28T11:35:17.656Z",
+ "atualizadoEm": "2026-11-28T12:05:18.246Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-28T11:35:17.656Z"
+   "ultimaVez": "2026-11-28T12:05:18.246Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 383,
-   "ultimaVez": "2026-11-28T11:35:17.656Z"
+   "ultimaVez": "2026-11-28T12:05:18.246Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-28T11:35:17.656Z"
+   "ultimaVez": "2026-11-28T12:05:18.246Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 17,
-   "ultimaVez": "2026-11-28T11:35:17.656Z"
+   "ultimaVez": "2026-11-28T12:05:18.246Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-28T11:35:17.656Z"
+   "ultimaVez": "2026-11-28T12:05:18.246Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-28T11:35:17.656Z"
+   "ultimaVez": "2026-11-28T12:05:18.246Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-28T11:35:17.656Z"
+   "ultimaVez": "2026-11-28T12:05:18.246Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-28T11:35:17.656Z"
+   "ultimaVez": "2026-11-28T12:05:18.246Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-28T11:35:17.656Z"
+   "ultimaVez": "2026-11-28T12:05:18.246Z"
   },
   {
    "id": "ebc",
@@ -126,7 +126,7 @@
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
    "quantas": 3,
-   "ultimaVez": "2026-11-28T11:35:17.656Z"
+   "ultimaVez": "2026-11-28T12:05:18.246Z"
   },
   {
    "id": "govbr",
@@ -134,11 +134,26 @@
    "nome": "Agência Gov (governo federal)",
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
-   "quantas": 0,
-   "ultimaVez": "2026-11-28T11:35:17.656Z"
+   "quantas": 1,
+   "ultimaVez": "2026-11-28T12:05:18.246Z"
   }
  ],
  "noticias": [
+  {
+   "id": "1bpgqqk",
+   "titulo": "Mutirão de atendimentos do INSS oferece 18 mil vagas neste fim de semana",
+   "link": "https://agenciagov.ebc.com.br/noticias/202611/mutirao-de-atendimentos-do-inss-oferece-mais-de-18-mil-vagas-neste-fim-de-semana-28-e-29-de-novembro",
+   "resumo": "Cidadãos podem agendar pelo Meu INSS ou pela Central 135",
+   "fonte": "govbr",
+   "fonteNome": "Agência Gov (governo federal)",
+   "sigla": "Gov",
+   "publicadoEm": "2026-11-28T10:25:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-28T12:05:18.246Z"
+  },
   {
    "id": "esj4se",
    "titulo": "Distribuidoras de energia oferecem descontos para renegociar dívidas",
@@ -1384,6 +1399,22 @@
    "vistaEm": "2026-11-24T17:35:20.496Z"
   },
   {
+   "id": "7ttmoe",
+   "titulo": "Receita Federal avança na contratação da FGV para organização do concurso da Carreira Tributária e Aduaneira",
+   "link": "https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/novembro/receita-federal-avanca-na-contratacao-da-fgv-para-organizacao-do-concurso-da-carreira-tributaria-e-aduaneira",
+   "resumo": "Publicação de ato no Portal Nacional de Contratações Públicas autoriza a contratação direta da Fundação Getúlio Vargas e marca mais uma etapa do processo que antecede a divulgação do edital",
+   "fonte": "fazenda",
+   "fonteNome": "Ministério da Fazenda",
+   "sigla": "MF",
+   "publicadoEm": "2026-11-24T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos"
+   ],
+   "relevancia": 0,
+   "vistaEm": "2026-11-28T12:05:18.246Z"
+  },
+  {
    "id": "ud341x",
    "titulo": "Sefaz divulga calendário do IPVA para 2027",
    "link": "https://www.sefaz.se.gov.br/Lists/Noticias/DispForm.aspx?ID=2886",
@@ -1415,9 +1446,9 @@
   },
   {
    "id": "5sn1h5",
-   "titulo": "COMUNICADO - Receita Federal avança na contratação da FGV para organização de novo concurso da Carreira Tributária e Aduaneira",
+   "titulo": "COMUNICADO",
    "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/comunicado-receita-federal-avanca-na-contratacao-da-fgv-para-organizacao-de-novo-concurso-da-carreira-tributaria-e-aduaneira",
-   "resumo": "Publicação de ato no PNCP autoriza a contratação direta da Fundação Getulio Vargas e marca mais uma etapa do processo que antecede a divulgação do edital do concurso.",
+   "resumo": "Receita Federal avança na contratação da FGV para organização de novo concurso da Carreira Tributária e Aduaneira.",
    "fonte": "receita",
    "fonteNome": "Receita Federal",
    "sigla": "RFB",
@@ -2956,38 +2987,6 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-17T19:02:11.187Z"
-  },
-  {
-   "id": "b0cwaa",
-   "titulo": "Durigan prevê impacto inicial da reforma tributária sobre inflação",
-   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/durigan-preve-impacto-inicial-da-reforma-tributaria-sobre-inflacao",
-   "resumo": "O ministro da Fazenda, Dario Durigan, afirmou, nesta terça-feira (17), que a implementação da reforma tributária pode gerar pequeno impacto inicial sobre a inflação. A observação foi em resposta à preocupação manifestada por senadores com uma eventual alta do índice. Segundo…",
-   "fonte": "ebc",
-   "fonteNome": "Agência Brasil (Economia)",
-   "sigla": "EBC",
-   "publicadoEm": "2026-11-17T18:56:00.000Z",
-   "categorias": [
-    "reforma",
-    "tributos"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-17T19:02:11.187Z"
-  },
-  {
-   "id": "ayf0oq",
-   "titulo": "Paim relembra comissão que propôs política de valorização do salário mínimo",
-   "link": "https://www12.senado.leg.br/noticias/materias/2026/11/17/paim-relembra-comissao-que-propos-politica-de-valorizacao-do-salario-minimo",
-   "resumo": "",
-   "fonte": "senado",
-   "fonteNome": "Agência Senado",
-   "sigla": "Senado",
-   "publicadoEm": "2026-11-17T18:28:54.000Z",
-   "categorias": [
-    "legislacao",
-    "trabalhista"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-17T18:35:19.215Z"
   }
  ]
 }
