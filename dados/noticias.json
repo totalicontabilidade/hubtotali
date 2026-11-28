@@ -1,7 +1,7 @@
 {
  "formato": "hub-totali-noticias",
  "versao": 1,
- "atualizadoEm": "2026-11-27T22:05:22.490Z",
+ "atualizadoEm": "2026-11-28T02:07:57.782Z",
  "categorias": [
   {
    "id": "reforma",
@@ -44,7 +44,7 @@
    "site": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T22:05:22.490Z"
+   "ultimaVez": "2026-11-28T02:07:57.782Z"
   },
   {
    "id": "simples",
@@ -53,7 +53,7 @@
    "site": "https://www8.receita.fazenda.gov.br/SimplesNacional/Noticias/TodasNoticias.aspx",
    "ok": true,
    "quantas": 383,
-   "ultimaVez": "2026-11-27T22:05:22.490Z"
+   "ultimaVez": "2026-11-28T02:07:57.782Z"
   },
   {
    "id": "esocial",
@@ -62,7 +62,7 @@
    "site": "https://www.gov.br/esocial/pt-br/noticias",
    "ok": true,
    "quantas": 30,
-   "ultimaVez": "2026-11-27T22:05:22.490Z"
+   "ultimaVez": "2026-11-28T02:07:57.782Z"
   },
   {
    "id": "fazenda",
@@ -71,7 +71,7 @@
    "site": "https://www.gov.br/fazenda/pt-br/assuntos/noticias",
    "ok": true,
    "quantas": 17,
-   "ultimaVez": "2026-11-27T22:05:22.490Z"
+   "ultimaVez": "2026-11-28T02:07:57.782Z"
   },
   {
    "id": "cfc",
@@ -80,7 +80,7 @@
    "site": "https://cfc.org.br/noticias/",
    "ok": true,
    "quantas": 10,
-   "ultimaVez": "2026-11-27T22:05:22.490Z"
+   "ultimaVez": "2026-11-28T02:07:57.782Z"
   },
   {
    "id": "fenacon",
@@ -89,7 +89,7 @@
    "site": "https://fenacon.org.br/noticias/",
    "ok": true,
    "quantas": 9,
-   "ultimaVez": "2026-11-27T22:05:22.490Z"
+   "ultimaVez": "2026-11-28T02:07:57.782Z"
   },
   {
    "id": "sefaz-se",
@@ -99,7 +99,7 @@
    "ok": true,
    "quantas": 4,
    "via": "ponte",
-   "ultimaVez": "2026-11-27T22:05:22.490Z"
+   "ultimaVez": "2026-11-28T02:07:57.782Z"
   },
   {
    "id": "camara",
@@ -108,7 +108,7 @@
    "site": "https://www.camara.leg.br/noticias",
    "ok": true,
    "quantas": 1,
-   "ultimaVez": "2026-11-27T22:05:22.490Z"
+   "ultimaVez": "2026-11-28T02:07:57.782Z"
   },
   {
    "id": "senado",
@@ -117,7 +117,7 @@
    "site": "https://www12.senado.leg.br/noticias",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-27T22:05:22.490Z"
+   "ultimaVez": "2026-11-28T02:07:57.782Z"
   },
   {
    "id": "ebc",
@@ -125,8 +125,8 @@
    "nome": "Agência Brasil (Economia)",
    "site": "https://agenciabrasil.ebc.com.br/economia",
    "ok": true,
-   "quantas": 2,
-   "ultimaVez": "2026-11-27T22:05:22.490Z"
+   "quantas": 3,
+   "ultimaVez": "2026-11-28T02:07:57.782Z"
   },
   {
    "id": "govbr",
@@ -135,10 +135,25 @@
    "site": "https://agenciagov.ebc.com.br/",
    "ok": true,
    "quantas": 0,
-   "ultimaVez": "2026-11-27T22:05:22.490Z"
+   "ultimaVez": "2026-11-28T02:07:57.782Z"
   }
  ],
  "noticias": [
+  {
+   "id": "esj4se",
+   "titulo": "Distribuidoras de energia oferecem descontos para renegociar dívidas",
+   "link": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-11/distribuidoras-de-energia-oferecem-descontos-para-renegociar-dividas",
+   "resumo": "As distribuidoras de energia elétrica iniciaram campanhas de renegociação de dívidas, com condições especiais para consumidores que buscam regularizar débitos com os recursos do décimo terceiro salário. A primeira parcela do benefício deve ser paga até a próxima segunda-feira…",
+   "fonte": "ebc",
+   "fonteNome": "Agência Brasil (Economia)",
+   "sigla": "EBC",
+   "publicadoEm": "2026-11-27T22:40:00.000Z",
+   "categorias": [
+    "trabalhista"
+   ],
+   "relevancia": 2,
+   "vistaEm": "2026-11-28T02:07:57.782Z"
+  },
   {
    "id": "1roonfw",
    "titulo": "Fim da escala 6x1: empregador doméstico precisa atualizar o contrato de todos os empregados no eSocial",
@@ -281,6 +296,23 @@
    ],
    "relevancia": 3,
    "vistaEm": "2026-11-27T22:05:22.490Z"
+  },
+  {
+   "id": "11pqnpk",
+   "titulo": "Receita Federal abre consulta pública sobre regulamentação da tributação mínima das altas rendas e da tributação dos lucros e dividendos distribuídos",
+   "link": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026/novembro/receita-federal-abre-consulta-publica-sobre-regulamentacao-da-tributacao-minima-das-altas-rendas-e-da-tributacao-dos-lucros-e-dividendos-distribuidos",
+   "resumo": "As contribuições poderão ser enviadas até 9 de dezembro de 2026",
+   "fonte": "receita",
+   "fonteNome": "Receita Federal",
+   "sigla": "RFB",
+   "publicadoEm": "2026-11-27T15:00:00.000Z",
+   "semHora": true,
+   "categorias": [
+    "tributos",
+    "legislacao"
+   ],
+   "relevancia": 3,
+   "vistaEm": "2026-11-28T02:07:57.782Z"
   },
   {
    "id": "1ai9q9s",
@@ -2956,38 +2988,6 @@
    ],
    "relevancia": 2,
    "vistaEm": "2026-11-17T18:35:19.215Z"
-  },
-  {
-   "id": "1ya2gys",
-   "titulo": "Reforma Tributária: alíquota da CBS divide opiniões em debate na CAE",
-   "link": "https://www12.senado.leg.br/noticias/videos/2026/11/reforma-tributaria-aliquota-da-cbs-divide-opinioes-em-debate-na-cae",
-   "resumo": "",
-   "fonte": "senado",
-   "fonteNome": "Agência Senado",
-   "sigla": "Senado",
-   "publicadoEm": "2026-11-17T18:16:00.000Z",
-   "categorias": [
-    "legislacao",
-    "reforma",
-    "tributos"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-17T18:35:19.215Z"
-  },
-  {
-   "id": "1w050vy",
-   "titulo": "INSS oferece serviços previdenciários e assistenciais a moradores de Pacaraima e imigrantes venezuelanos",
-   "link": "https://agenciagov.ebc.com.br/noticias/202611/inss-oferece-servicos-previdenciarios-e-assistenciais-a-moradores-de-pacaraima-e-imigrantes-venezuelanos",
-   "resumo": "Atendimento segue até quinta-feira (19), com requerimentos de aposentadoria, pedidos de salário-maternidade e outros",
-   "fonte": "govbr",
-   "fonteNome": "Agência Gov (governo federal)",
-   "sigla": "Gov",
-   "publicadoEm": "2026-11-17T17:43:00.000Z",
-   "categorias": [
-    "trabalhista"
-   ],
-   "relevancia": 2,
-   "vistaEm": "2026-11-17T19:02:11.187Z"
   }
  ]
 }
